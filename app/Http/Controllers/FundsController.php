@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Fund;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Fund;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class FundsController extends Controller
 {
@@ -20,26 +21,106 @@ class FundsController extends Controller
     }
     
     /**
-     * Funds View.
+     * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         return view('funds.index', [
-            'title' => 'Ubezpieczeniowe Fundusze Kapitałowe'
+            'title' => 'Ubezpieczeniowe Fundusze Kapitałowe',
+            'funds' => Fund::all(),
         ]);
     }
-    
+
     /**
-     * Fund detail View.
+     * Show the form for creating a new resource.
      *
-     * @param  int  $id
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function create()
+    {
+        $this->authorize('create', Fund::class);
+        
+        return view('funds.create', [
+            'title' => 'Nowy fundusz UFK',
+            'description' => 'Uzupełnij dane funduszu i kliknij Zapisz',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('create', Fund::class);
+        
+        $fund = new Fund($request->all());
+        Auth::user()->funds()->save($fund);
+
+        return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Nowy fundusz UFK został dodany!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Fund  $fund
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Fund $fund)
+    {
         return view('funds.show', [
             'title' => 'Szczegóły',
-            'fund' => Investment::findOrFail($id),
+            'fund' => $fund,
         ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Fund  $fund
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Fund $fund)
+    {
+        $this->authorize('update', $fund);
+
+        return view('funds.edit', [
+            'title' => 'Edycja funduszu UFK',
+            'description' => 'Zaktualizuj dane funduszu i kliknij Zapisz',
+            'fund' => $fund,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Fund  $fund
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Fund $fund)
+    {
+        $this->authorize('update', $fund);
+        $fund->update($request->all());
+
+        return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Dane funduszu UFK zostały zaktualizowane!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Fund  $fund
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Fund $fund)
+    {
+        $this->authorize('delete', $fund);
+        $fund->delete();
+
+        return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został usunięty!');
     }
 }
