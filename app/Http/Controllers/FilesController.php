@@ -2,22 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
+use App\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
     /**
-     * Show File
+     * Create a new controller instance.
      *
-     * @param  int  $id
-     * @return View
+     * @return void
      */
-    public function show($id) {
-        $file = File::findOrFail($id);
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show', 'download']);
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->authorize('files-viewany', File::class);
 
+        return view('admin.files.index', [
+            'title' => 'Dokumenty',
+            'files' => File::all(),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $this->authorize('create', File::class);
+        
+        return view('admin.files.create', [
+            'title' => 'Nowy dokument',
+            'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('create', File::class);
+        
+        $file = new File($request->all());
+        Auth::user()->files()->save($file);
+
+        return redirect()->route('admin.files.show', $file->id)->with('notify_success', 'Nowy dokument został dodany!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function show(File $file)
+    {
         if($file->extension == 'pdf') {
             return Storage::download(
                 $file->path, 
@@ -35,10 +92,10 @@ class FilesController extends Controller
     }
 
     /**
-     * Download File
+     * Download the specified resource.
      *
-     * @param  int  $id
-     * @return View
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
      */
     public function download($id) {
         $file = File::findOrFail($id);
@@ -46,4 +103,49 @@ class FilesController extends Controller
         return Storage::download($file->path, $file->name . '.' . $file->extension);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(File $file)
+    {
+        $this->authorize('update', $file);
+
+        return view('admin.files.edit', [
+            'title' => 'Edycja dokumentu',
+            'description' => 'Zaktualizuj dane dokumentu i kliknij Zapisz',
+            'file' => $file,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, File $file)
+    {
+        $this->authorize('update', $file);
+        $file->update($request->all());
+
+        return redirect()->route('admin.files.index')->with('notify_success', 'Dane dokumentu zostały zaktualizowane!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(File $file)
+    {
+        $this->authorize('delete', $file);
+        $file->delete();
+
+        return redirect()->route('admin.files.index')->with('notify_danger', 'Dokument został usunięty!');
+    }
 }
