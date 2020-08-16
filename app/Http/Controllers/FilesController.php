@@ -132,7 +132,7 @@ class FilesController extends Controller
         $this->authorize('update', $file);
         $file->update($request->all());
 
-        return redirect()->route('admin.files.index')->with('notify_success', 'Dane dokumentu zostały zaktualizowane!');
+        return redirect()->route('admin.files.index')->with('notify_success', 'Dokument został zaktualizowany!');
     }
 
     /**
