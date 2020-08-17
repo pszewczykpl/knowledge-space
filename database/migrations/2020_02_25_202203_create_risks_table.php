@@ -14,14 +14,12 @@ class CreateRisksTable extends Migration
     public function up()
     {
         Schema::create('risks', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('code')->comment('Kod ryzyka ubezpieczeniowego');
-            $table->string('name')->comment('Nazwa ryzyka ubezpieczeniowego');
-            $table->string('category')->comment('Kategoria');
-            $table->integer('group')->comment('Grupa');
-            $table->string('grace_period')->comment('Okres karencji');
+            $table->id();
+            $table->string('code');
+            $table->string('name');
+            $table->string('category');
+            $table->integer('group');
+            $table->string('grace_period');
             $table->timestamps();
         });
     }

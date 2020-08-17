@@ -14,10 +14,8 @@ class CreateFileCategoriesTable extends Migration
     public function up()
     {
         Schema::create('file_categories', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->autoIncrement()->comment('Klucz główny tabeli');
-            $table->string('name')->comment('Nazwa kategorii pliku');
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

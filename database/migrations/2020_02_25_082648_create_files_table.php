@@ -14,16 +14,12 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('path')->nullable()->comment('Pełna ścieżka do pliku w folderze uploads/');
-            $table->unsignedBigInteger('file_category_id')->nullable()->comment('Klucz obcy tabeli file_categories');
-            $table->foreign('file_category_id')->references('id')->on('file_categories');
-            $table->string('name')->nullable()->comment('Nazwa wyświetlana pliku');
-            $table->string('extension')->nullable()->comment('Rozszerzenie pliku');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->string('path');
+            $table->string('name')->nullable();
+            $table->string('extension');
+            $table->foreignId('file_category_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

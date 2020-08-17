@@ -15,10 +15,8 @@ class CreateFileablesTable extends Migration
     {
         Schema::create('fileables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('file_id')->comment('Klucz obcy tabeli files');
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
-            $table->unsignedBigInteger('fileable_id')->comment('Klucz obcy');
-            $table->string('fileable_type');
+            $table->foreignId('file_id')->constrained()->onDelete('cascade');
+            $table->morphs('fileable');
             $table->timestamps();
         });
     }

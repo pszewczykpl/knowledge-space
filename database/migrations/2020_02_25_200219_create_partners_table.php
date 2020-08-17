@@ -14,17 +14,14 @@ class CreatePartnersTable extends Migration
     public function up()
     {
         Schema::create('partners', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('name')->comment('Nazwa partnera');
-            $table->string('number_rau')->comment('Numer RAU/P')->nullable($value = true);
-            $table->string('code')->comment('Kod partnera');
-            $table->string('nip')->nullable()->comment('Numer NIP')->nullable($value = true);
-            $table->string('regon')->nullable()->comment('Numer REGON')->nullable($value = true);
-            $table->string('type')->nullable()->comment('Typ partnera')->nullable($value = true);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->string('name');
+            $table->string('number_rau')->nullable();
+            $table->string('code');
+            $table->string('nip')->nullable();
+            $table->string('regon')->nullable();
+            $table->string('type')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

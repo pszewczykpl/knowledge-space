@@ -14,14 +14,10 @@ class CreateRepliesTable extends Migration
     public function up()
     {
         Schema::create('replies', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->id()->comment('Klucz główny tabeli');
-            $table->text('content')->comment('Treść odpowiedzi');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('news_id');
-            $table->foreign('news_id')->references('id')->on('news');
+            $table->id();
+            $table->text('content');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('news_id')->constrained();
             $table->timestamps();
         });
     }

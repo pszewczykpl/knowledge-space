@@ -15,10 +15,8 @@ class CreateNoteablesTable extends Migration
     {
         Schema::create('noteables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('note_id')->comment('Klucz obcy tabeli notes');
-            $table->foreign('note_id')->references('id')->on('notes')->onDelete('cascade');
-            $table->unsignedBigInteger('noteable_id')->comment('Klucz obcy');
-            $table->string('noteable_type');
+            $table->foreignId('note_id')->constrained()->onDelete('cascade');
+            $table->morphs('noteable');
             $table->timestamps();
         });
     }

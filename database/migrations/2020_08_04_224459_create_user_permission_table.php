@@ -15,10 +15,8 @@ class CreateUserPermissionTable extends Migration
     {
         Schema::create('user_permission', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->comment('Klucz obcy tabeli users');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('permission_id')->comment('Klucz obcy tabeli permissions');
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

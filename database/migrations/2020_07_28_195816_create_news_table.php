@@ -14,12 +14,9 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->id()->comment('Klucz główny tabeli');
-            $table->text('content')->comment('Treść aktualności');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->text('content');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

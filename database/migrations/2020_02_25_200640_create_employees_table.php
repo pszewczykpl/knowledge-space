@@ -14,15 +14,12 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('name')->comment('Nazwa produktu');
-            $table->string('code_owu')->comment('Kod OWU');
-            $table->date('edit_date')->comment('Początek obowiązywania kompletu dokumentów');
-            $table->string('status')->comment('Status kompletu dokumentów');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->string('name');
+            $table->string('code_owu');
+            $table->date('edit_date');
+            $table->string('status');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

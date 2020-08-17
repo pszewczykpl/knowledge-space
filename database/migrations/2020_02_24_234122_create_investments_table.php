@@ -14,21 +14,18 @@ class CreateInvestmentsTable extends Migration
     public function up()
     {
         Schema::create('investments', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('group')->comment('Grupa produktowa');
-            $table->string('name')->comment('Nazwa produktu');
-            $table->integer('code')->comment('Kod produktu');
-            $table->string('dist_short')->comment('Kod dystrybutora');
-            $table->string('dist')->comment('Nazwa dystrybutora');
-            $table->string('code_owu')->comment('Kod OWU');
-            $table->string('code_toil')->comment('Kod TOiL');
-            $table->date('edit_date')->comment('Początek obowiązywania kompletu dokumentów');
-            $table->string('type')->comment('Typ produktu');
-            $table->string('status')->comment('Status kompletu dokumentów');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->string('group');
+            $table->string('name');
+            $table->integer('code');
+            $table->string('dist_short');
+            $table->string('dist');
+            $table->string('code_owu');
+            $table->string('code_toil');
+            $table->date('edit_date');
+            $table->string('type');
+            $table->string('status');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

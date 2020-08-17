@@ -14,17 +14,15 @@ class CreateFundsTable extends Migration
     public function up()
     {
         Schema::create('funds', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->string('code')->comment('Kod funduszu');
-            $table->string('name')->comment('Nazwa funduszu');
-            $table->string('status')->comment('Status');
-            $table->string('type')->comment('Typ funduszu');
-            $table->string('currency')->comment('Waluta');
-            $table->date('cancel_date')->comment('Data anulowania funduszu')->nullable($value = true);
-            $table->date('start_date')->comment('Data początku obowiązywania funduszu')->nullable($value = true);
-            $table->string('cancel_reason')->comment('Powód anulowania funduszu')->nullable($value = true);
+            $table->id();
+            $table->string('code');
+            $table->string('name');
+            $table->string('status');
+            $table->string('type');
+            $table->string('currency');
+            $table->date('cancel_date')->nullable();
+            $table->date('start_date')->nullable();
+            $table->string('cancel_reason')->nullable();
             $table->timestamps();
         });
     }

@@ -14,13 +14,10 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->bigIncrements('id')->comment('Klucz główny tabeli');
-            $table->text('content')->nullable()->comment('Pełna treść notatki');
-            $table->string('title')->nullable()->comment('Tytuł notatki');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id();
+            $table->text('content')->nullable();
+            $table->string('title')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
