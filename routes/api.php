@@ -257,53 +257,6 @@ Route::post('datatables/partners', function (Request $request) {
 });
 
 /**
- * API datatables for investment_groups table
- */
-Route::post('datatables/investment-groups', function (Request $request) {
-    $records = InvestmentGroup::where(function ($query) {
-            if($_POST['search']['value'] != null) {
-                foreach($_POST['columns'] as $column) {
-                    if($column['searchable'] == 'true') {
-                        if(!isset($i)) {
-                            $query->where($column['data'], 'like', '%' . trim($_POST['search']['value']) . '%');
-                            $i = 1;
-                        }
-                        else {
-                            $query->orWhere($column['data'], 'like', '%' . trim($_POST['search']['value']) . '%');
-                        }
-                    }
-                }
-            }
-        })
-
-        ->where(function ($query) {
-            foreach($_POST['columns'] as $column) {
-                if($column['searchable'] == 'true' && $column['search']['value'] != null) {
-                    $query->where($column['data'], 'like', '%' . trim($column['search']['value']) . '%');
-                }
-            }
-        })
-
-        ->orderBy($_POST['columns'][$_POST['order'][0]['column']]['data'], $_POST['order'][0]['dir']);
-
-    $filtered = $records->count();
-
-    $records = $records
-        ->limit($_POST['length'])
-        ->offset($_POST['start'])
-        ->get();
-
-    $json_data = array(
-        "draw"            => intval($_POST['draw']),
-        "recordsTotal"    => InvestmentGroup::count(),
-        "recordsFiltered" => $filtered,
-        "data"            => $records
-    );
-
-    return $json_data;
-});
-
-/**
  * API datatables for risks table
  */
 Route::post('datatables/risks', function (Request $request) {

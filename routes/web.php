@@ -57,13 +57,6 @@ Route::resource('funds', 'FundsController')->except([
 Route::resource('partners', 'PartnersController');
 
 /**
- * Investment Groups Routes
- */
-Route::resource('investment-groups', 'InvestmentGroupsController')->except([
-    'create', 'store', 'edit', 'update', 'destroy'
-]);
-
-/**
  * Risks Routes
  */
 Route::resource('risks', 'RisksController')->except([
