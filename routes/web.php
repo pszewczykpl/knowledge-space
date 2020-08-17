@@ -74,7 +74,7 @@ Route::resource('files', 'FilesController')->except([
 /**
  * Notes Routes
  */
-Route::resource('notes', 'NotesController')->except(['show']);
+Route::resource('notes', 'NotesController');
 
 /**
  * News Routes
