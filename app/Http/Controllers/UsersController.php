@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+
+use App\Http\Requests\StoreUserRequest;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Controllers\Controller;
-
-use App\User;
 
 class UsersController extends Controller
 {
@@ -19,7 +20,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
     }
 
     /**
@@ -42,18 +43,28 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', User::class);
+        
+        return view('admin.users.create', [
+            'title' => 'Nowy użytkownik',
+            'description' => 'Uzupełnij dane użytkownika i kliknij Zapisz',
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $this->authorize('create', User::class);
+        
+        $user = new User($request->all());
+        Auth::user()->users()->save($user);
+
+        return redirect()->route('admin.users.show', $user->id)->with('notify_success', 'Nowy użytkownik został dodany!');
     }
 
     /**
@@ -67,7 +78,7 @@ class UsersController extends Controller
         return view('admin.users.show', [
             'title' => 'Szczegóły',
             'description' => $user->first_name . ' ' . $user->last_name,
-            'user' => User::findOrFail($user->id),
+            'user' => $user,
         ]);
     }
 
@@ -79,26 +90,28 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
+
         return view('admin.users.edit', [
-            'title' => 'Edytuj',
-            'description' => 'Użytkownik',
-            'user' => User::findOrFail($user->id),
+            'title' => 'Edycja użytkownika',
+            'description' => 'Zaktualizuj dane użytkownika i kliknij Zapisz',
+            'user' => $user,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUserRequest  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(StoreUserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $user->update($request->all());
 
-        Session::flash('notify_success', 'Zmiany na użytkowniku zostały zapisane poprawnie!');
-        return redirect()->route('users.index');
+        return redirect()->route('users.show', $user->id)->with('notify_success', 'Dane użytkownika zostały zaktualizowane!');
     }
 
     /**
@@ -109,6 +122,9 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('notify_danger', 'Użytkownik został usunięty!');
     }
 }

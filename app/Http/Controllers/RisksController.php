@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Risk;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RisksController extends Controller
 {
@@ -18,26 +22,106 @@ class RisksController extends Controller
     }
     
     /**
-     * Risks View.
+     * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         return view('risks.index', [
-            'title' => 'Ryzyka ubezpieczeniowe'
+            'title' => 'Ubezpieczenia Pracownicze',
+            'risks' => Risk::all(),
         ]);
     }
-    
+
     /**
-     * Risk detail View.
+     * Show the form for creating a new resource.
      *
-     * @param  int  $id
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function create()
+    {
+        $this->authorize('create', Risk::class);
+        
+        return view('risks.create', [
+            'title' => 'Nowy produkt pracowniczy',
+            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('create', Risk::class);
+        
+        $risk = new Risk($request->all());
+        Auth::user()->risks()->save($risk);
+
+        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Nowy produkt pracowniczy został dodany!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Risk  $risk
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Risk $risk)
+    {
         return view('risks.show', [
             'title' => 'Szczegóły',
-            'fund' => Risk::findOrFail($id),
+            'risk' => $risk,
         ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Risk  $risk
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Risk $risk)
+    {
+        $this->authorize('update', $risk);
+
+        return view('risks.edit', [
+            'title' => 'Edycja produktu pracowniczego',
+            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
+            'risk' => $risk,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Risk  $risk
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Risk $risk)
+    {
+        $this->authorize('update', $risk);
+        $risk->update($request->all());
+
+        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Dane produktu pracowniczego zostały zaktualizowane!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Risk  $risk
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Risk $risk)
+    {
+        $this->authorize('delete', $risk);
+        $risk->delete();
+
+        return redirect()->route('risks.index')->with('notify_danger', 'Produkt pracowniczy został usunięty!');
     }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Middleware\Permissions;
-
 use App\Note;
 use App\Investment;
 use App\Protective;
 use App\Employee;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class NotesController extends Controller
 {
@@ -50,8 +49,8 @@ class NotesController extends Controller
         $this->authorize('create', Note::class);
         
         return view('admin.notes.create', [
-            'title' => 'Dodaj nowy',
-            'description' => 'Notatka',
+            'title' => 'Nowa notatka',
+            'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
@@ -75,13 +74,27 @@ class NotesController extends Controller
         $note->protectives()->attach($request->protective_id);
         $note->employees()->attach($request->employee_id);
 
-        return redirect()->back()->with('notify_success', 'Udało się! Nowy komentarz został dodany!');
+        return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Note $note)
+    {
+        return view('admin.notes.show', [
+            'title' => 'Szczegóły',
+            'note' => $note,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\note  $note
+     * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function edit(Note $note)
@@ -89,9 +102,9 @@ class NotesController extends Controller
         $this->authorize('update', $note);
 
         return view('admin.notes.edit', [
-            'title' => 'Edytuj',
-            'description' => 'Komentarz',
-            'comment' => Note::findOrFail($note->id),
+            'title' => 'Edycja notatki',
+            'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
+            'comment' => $note,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
@@ -102,37 +115,32 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\note  $note
+     * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Note $note)
     {
         $this->authorize('update', $note);
-
-        $user = Note::findOrFail($note->id)
-            ->update($request->all());
+        $note->update($request->all());
 
         $note->investments()->sync($request->investment_id);
         $note->protectives()->sync($request->protective_id);
         $note->employees()->sync($request->employee_id);
 
-        Session::flash('notify_success', 'Zmiany na użytkowniku zostały zapisane poprawnie!');
-        return redirect()->route('notes.index');
+        return redirect()->route('notes.show', $note->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\note  $note
+     * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function destroy(Note $note)
     {
         $this->authorize('delete', $note);
-
         $note->delete();
 
-        Session::flash('notify_danger', 'Usunięto! Oby nie przypadkowo... :-)');
-        return redirect()->back();
+        return redirect()->route('notes.index')->with('notify_danger', 'Notatka została usunięta!');
     }
 }

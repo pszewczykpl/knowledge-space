@@ -43,6 +43,11 @@ class NewsController extends Controller
     public function create()
     {
         $this->authorize('create', News::class);
+
+        return view('news.create', [
+            'title' => 'Nowa aktualność',
+            'description' => 'Uzupełnij dane aktualności i kliknij Zapisz',
+        ]);
     }
 
     /**
@@ -58,8 +63,7 @@ class NewsController extends Controller
         $news = new News($request->all());
         Auth::user()->news()->save($news);
 
-        Session::flash('notify_success', 'Udało się! Nowa aktualność została dodana!');
-        return redirect()->back();
+        return redirect()->back()->with('notify_success', 'Nowa aktualność została dodana!');
     }
 
     /**
@@ -70,7 +74,10 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        return view('news.show', [
+            'title' => 'Szczegóły',
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -82,6 +89,12 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $this->authorize('update', $news);
+
+        return view('news.edit', [
+            'title' => 'Edycja aktualności',
+            'description' => 'Zaktualizuj dane aktualności i kliknij Zapisz',
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -94,6 +107,9 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $this->authorize('update', $news);
+        $news->update($request->all());
+
+        return redirect()->route('news.show', $news->id)->with('notify_success', 'Dane aktualności zostały zaktualizowane!');
     }
 
     /**
@@ -105,5 +121,8 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         $this->authorize('delete', $news);
+        $news->delete();
+
+        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została usunięta!');
     }
 }

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use App\Protective;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProtectiveRequest;
-
-use App\Protective;
-use App\FileCategory;
-use App\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProtectivesController extends Controller
 {
@@ -25,89 +22,106 @@ class ProtectivesController extends Controller
     }
     
     /**
-     * Protectives.
+     * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         return view('products.protectives.index', [
-            'title' => 'Produkty Ochronne'
+            'title' => 'Ubezpieczenia Ochronne',
+            'protectives' => Protective::all(),
         ]);
     }
-    
+
     /**
-     * New Protective.
+     * Show the form for creating a new resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
+        $this->authorize('create', Protective::class);
+        
         return view('products.protectives.create', [
-            'title' => 'Dodaj nowy'
+            'title' => 'Nowy produkt ochronny',
+            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
-    
+
     /**
-     * Store new Protective.
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(StoreProtectiveRequest $request) {
+    public function store(Request $request)
+    {
+        $this->authorize('create', Protective::class);
+        
         $protective = new Protective($request->all());
         Auth::user()->protectives()->save($protective);
 
-        Session::flash('notify_success', 'Udało się! Nowy komplet dokumentów został dodany!');
-        return redirect()->route('protectives.show', $protective->id);
+        return redirect()->route('protectives.show', $protective->id)->with('notify_success', 'Nowy produkt ochronny został dodany!');
     }
 
     /**
-     * Protective details.
+     * Display the specified resource.
      *
-     * @param  int  $id
-     * @return View
+     * @param  \App\Protective  $protective
+     * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show(Protective $protective)
+    {
         return view('products.protectives.show', [
             'title' => 'Szczegóły',
-            'protective' => Protective::findOrFail($id),
+            'protective' => $protective,
         ]);
     }
-    
+
     /**
-     * Edit Protectives View.
+     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return View
+     * @param  \App\Protective  $protective
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit(Protective $protective)
+    {
+        $this->authorize('update', $protective);
+
         return view('products.protectives.edit', [
-            'title' => 'Edytuj',
-            'protective' => Protective::findOrFail($id)
+            'title' => 'Edycja produktu ochronnego',
+            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
+            'protective' => $protective,
         ]);
     }
 
     /**
-     * Update Investment.
+     * Update the specified resource in storage.
      *
-     * @param  int  $id
-     * @return View
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Protective  $protective
+     * @return \Illuminate\Http\Response
      */
-    public function update(StoreProtectiveRequest $request, $id) {
-        $protective = Protective::findOrFail($id)
-            ->update($request->all());
+    public function update(Request $request, Protective $protective)
+    {
+        $this->authorize('update', $protective);
+        $protective->update($request->all());
 
-        Session::flash('notify_success', 'Zmiany w komplecie dokumentów zostały zapisane poprawnie!');
-        return redirect()->route('protectives.show', $id);
+        return redirect()->route('protectives.show', $protective->id)->with('notify_success', 'Dane produktu ochronnego zostały zaktualizowane!');
     }
 
     /**
-     * Delete Protective.
+     * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return View
+     * @param  \App\Protective  $protective
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        $protective = Protective::findOrFail($id)
-            ->delete();
+    public function destroy(Protective $protective)
+    {
+        $this->authorize('delete', $protective);
+        $protective->delete();
 
-        Session::flash('notify_danger', 'Usunięto! Oby nie przypadkowo... :-)');
-        return redirect()->route('protectives.index');
+        return redirect()->route('protectives.index')->with('notify_danger', 'Produkt ochronny został usunięty!');
     }
 }

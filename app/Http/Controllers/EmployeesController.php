@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class EmployeesController extends Controller
         $this->authorize('create', Employee::class);
         
         return view('products.employees.create', [
-            'title' => 'Nowy produkt inwestycyjny',
+            'title' => 'Nowy produkt pracowniczy',
             'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
@@ -61,7 +62,7 @@ class EmployeesController extends Controller
         $employee = new Employee($request->all());
         Auth::user()->employees()->save($employee);
 
-        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Nowy produkt inwestycyjny został dodany!');
+        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Nowy produkt pracowniczy został dodany!');
     }
 
     /**
@@ -89,7 +90,7 @@ class EmployeesController extends Controller
         $this->authorize('update', $employee);
 
         return view('products.employees.edit', [
-            'title' => 'Edycja produktu inwestycyjnego',
+            'title' => 'Edycja produktu pracowniczego',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
             'employee' => $employee,
         ]);
@@ -107,7 +108,7 @@ class EmployeesController extends Controller
         $this->authorize('update', $employee);
         $employee->update($request->all());
 
-        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
+        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Dane produktu pracowniczego zostały zaktualizowane!');
     }
 
     /**
@@ -121,6 +122,6 @@ class EmployeesController extends Controller
         $this->authorize('delete', $employee);
         $employee->delete();
 
-        return redirect()->route('employees.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
+        return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został usunięty!');
     }
 }

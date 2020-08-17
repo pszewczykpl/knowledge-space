@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Investment;
+
+use App\Http\Requests\StoreInvestmentRequest;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreInvestmentRequest;
-use App\Http\Controllers\Controller;
-
-use App\Investment;
-use App\FileCategory;
-use App\File;
 
 class InvestmentsController extends Controller
 {
@@ -32,7 +31,7 @@ class InvestmentsController extends Controller
     public function index()
     {
         return view('products.investments.index', [
-            'title' => 'Produkty Inwestycyjne',
+            'title' => 'Ubezpieczenia Inwestycyjne',
             'investments' => Investment::all(),
         ]);
     }
@@ -42,7 +41,8 @@ class InvestmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create() 
+    {
         $this->authorize('create', Investment::class);
 
         return view('products.investments.create', [
@@ -54,16 +54,17 @@ class InvestmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreInvestmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInvestmentRequest $request) {
+    public function store(StoreInvestmentRequest $request) 
+    {
         $this->authorize('create', Investment::class);
 
         $investment = new Investment($request->all());
         Auth::user()->investments()->save($investment);
 
-        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Udało się! Nowy komplet dokumentów został dodany!');
+        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Nowy produkt inwestycyjny został dodany!');
     }
 
     /**
@@ -86,12 +87,13 @@ class InvestmentsController extends Controller
      * @param  \App\Investment  $investment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Investment $investment) {
+    public function edit(Investment $investment) 
+    {
         $this->authorize('update', $investment);
 
         return view('products.investments.edit', [
-            'title' => 'Edytuj',
-            'description' => 'Produkt Inwestycyjny',
+            'title' => 'Edycja produktu inwestycyjnego',
+            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
             'investment' => $investment,
         ]);
     }
@@ -103,12 +105,12 @@ class InvestmentsController extends Controller
      * @param  \App\Investment  $investment
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreInvestmentRequest $request, Investment $investment) {
+    public function update(StoreInvestmentRequest $request, Investment $investment) 
+    {
         $this->authorize('update', $investment);
-
         $investment->update($request->all());
 
-        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Zmiany w komplecie dokumentów zostały zapisane poprawnie!');
+        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
     }
 
     /**
@@ -117,11 +119,11 @@ class InvestmentsController extends Controller
      * @param  \App\Investment  $investment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Investment $investment) {
+    public function destroy(Investment $investment) 
+    {
         $this->authorize('delete', $investment);
-
         $investment->delete();
 
-        return redirect()->route('investments.index')->with('notify_danger', 'Usunięto! Oby nie przypadkowo... :-)');
+        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }
 }

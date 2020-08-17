@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\File;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +98,8 @@ class FilesController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function download($id) {
+    public function download($id) 
+    {
         $file = File::findOrFail($id);
 
         return Storage::download($file->path, $file->name . '.' . $file->extension);
