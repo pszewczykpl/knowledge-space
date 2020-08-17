@@ -34,9 +34,9 @@ class NotesController extends Controller
     {
         $this->authorize('viewAny', Note::class);
 
-        return view('admin.comments.index', [
+        return view('admin.notes.index', [
             'title' => 'Notatki',
-            'comments' => Note::all(),
+            'notes' => Note::all(),
         ]);
     }
 
@@ -49,7 +49,7 @@ class NotesController extends Controller
     {
         $this->authorize('create', Note::class);
         
-        return view('admin.comments.create', [
+        return view('admin.notes.create', [
             'title' => 'Dodaj nowy',
             'description' => 'Notatka',
             'investments' => Investment::all(),
@@ -88,7 +88,7 @@ class NotesController extends Controller
     {
         $this->authorize('update', $note);
 
-        return view('admin.comments.edit', [
+        return view('admin.notes.edit', [
             'title' => 'Edytuj',
             'description' => 'Komentarz',
             'comment' => Note::findOrFail($note->id),

@@ -20,7 +20,7 @@
 			<i class="la la-arrow-left"></i>Anuluj
 		</a>
 
-        <input type="submit" class="btn btn-light-primary btn-icon-sm ml-1" form="comment_store_form" value="Zapisz">
+        <input type="submit" class="btn btn-light-primary btn-icon-sm ml-1" form="note_update_form" value="Zapisz">
 
 	</div>
 </div>
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            {!! Form::open(['route' => 'notes.store', 'method' => 'post', 'id' => 'comment_store_form']) !!}
+                            {!! Form::open(['route' => ['notes.update', $note->id], 'method' => 'PUT', 'id' => 'note_update_form']) !!}
                             {!! Form::token() !!}
 
                                 <div class="tab-content">
@@ -95,7 +95,7 @@
 
                                                 <div class="form-group">
                                                     <label>Treść komentarza:</label>
-                                                    <textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Treść komentarza"></textarea>
+                                                    <textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Treść komentarza">{{ $note->content }}</textarea>
                                                 </div>
                                                         
                                             </div>
@@ -124,9 +124,10 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Inwestycyjne</label>
                                                     <div class="col-8">
+                                                        <?php $note_investments_id = array(); foreach($note->investments as $invest) { array_push($note_investments_id, $invest->id); } ?>
                                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                                             @foreach($investments as $investment)
-                                                            <option value="{{ $investment->id }}">{{ $investment->name }} ({{ $investment->code_toil }}) od {{ $investment->edit_date }}</option>
+                                                            <option value="{{ $investment->id }}" {{ in_array($investment->id, $note_investments_id ?: []) ? "selected": "" }} >{{ $investment->name }} ({{ $investment->code_toil }}) od {{ $investment->edit_date }}</option>
                                                             @endforeach
                                                         </select>
                                                         <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>
@@ -136,9 +137,10 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Ochronne</label>
                                                     <div class="col-8">
+                                                        <?php $note_protectives_id = array(); foreach($note->protectives as $invest) { array_push($note_protectives_id, $invest->id); } ?>
                                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true">
                                                             @foreach($protectives as $protective)
-                                                            <option value="{{ $protective->id }}">{{ $protective->name }} ({{ $protective->edit_date }})</option>
+                                                            <option value="{{ $protective->id }}" {{ in_array($protective->id, $note_protectives_id ?: []) ? "selected": "" }} >{{ $protective->name }} ({{ $protective->edit_date }})</option>
                                                             @endforeach
                                                         </select>
                                                         <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się komentarz.</span>
@@ -148,9 +150,10 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze</label>
                                                     <div class="col-8">
+                                                        <?php $note_employees_id = array(); foreach($note->employees as $invest) { array_push($note_employees_id, $invest->id); } ?>
                                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">
                                                             @foreach($employees as $employee)
-                                                            <option value="{{ $employee->id }}">{{ $employee->name }} ({{ $employee->edit_date }})</option>
+                                                            <option value="{{ $employee->id }}" {{ in_array($employee->id, $note_employees_id ?: []) ? "selected": "" }} >{{ $employee->name }} ({{ $employee->edit_date }})</option>
                                                             @endforeach
                                                         </select>
                                                         <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się komentarz.</span>
@@ -173,5 +176,5 @@
 @stop
 
 @section('additional_scripts')
-<script src="{{ asset('js/pages/admin/users/create.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/pages/admin/users/edit.js') }}" type="text/javascript"></script>
 @stop

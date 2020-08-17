@@ -77,14 +77,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($comments as $comment)
+							@foreach($notes as $note)
 							<tr>
-								<td>{{ $comment->content }}</td>
-								<td><a href="{{ route('users.show', $comment->user->id) }}">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</a></td>
-								<td>{{ $comment->created_at }}</td>
+								<td>{{ $note->content }}</td>
+								<td><a href="{{ route('users.show', $note->user->id) }}">{{ $note->user->first_name }} {{ $note->user->last_name }}</a></td>
+								<td>{{ $note->created_at }}</td>
 								<td>
-									@can('update', $comment)
-									<a href="{{ route('notes.edit', $comment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>
+									@can('update', $note)
+									<a href="{{ route('notes.edit', $note->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>
 									@endcan
 								</td>
 							</tr>
@@ -101,5 +101,5 @@
 @stop
 
 @section('additional_scripts')
-<script src="{{ asset('js/pages/admin/comments/index.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/pages/admin/notes/index.js') }}" type="text/javascript"></script>
 @stop
