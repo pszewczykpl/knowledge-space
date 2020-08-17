@@ -103,10 +103,5 @@
 - update (news-update)
 - destroy (news-delete)
 ## Replies
-+ index
-+ show
-- create (replies-create)
 - store (replies-create)
-- edit (replies-update)
-- update (replies-update)
 - destroy (replies-delete)

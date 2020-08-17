@@ -84,4 +84,4 @@ Route::resource('news', 'NewsController');
 /**
  * Replies Routes
  */
-Route::resource('replies', 'RepliesController');
+Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
