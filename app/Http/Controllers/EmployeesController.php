@@ -52,10 +52,10 @@ class EmployeesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreEmployee  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEmployee $request)
     {
         $this->authorize('create', Employee::class);
         
@@ -99,11 +99,11 @@ class EmployeesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreEmployee  $request
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(StoreEmployee $request, Employee $employee)
     {
         $this->authorize('update', $employee);
         $employee->update($request->all());

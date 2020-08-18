@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Protective;
 
+use App\Http\Requests\StoreProtective;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

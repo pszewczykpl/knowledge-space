@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Investment;
 
-use App\Http\Requests\StoreInvestmentRequest;
+use App\Http\Requests\StoreInvestment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -54,10 +54,10 @@ class InvestmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreInvestmentRequest  $request
+     * @param  \Illuminate\Http\StoreInvestment  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInvestmentRequest $request) 
+    public function store(StoreInvestment $request) 
     {
         $this->authorize('create', Investment::class);
 
@@ -101,11 +101,11 @@ class InvestmentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\StoreInvestmentRequest  $request
+     * @param  \Illuminate\Http\StoreInvestment  $request
      * @param  \App\Investment  $investment
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreInvestmentRequest $request, Investment $investment) 
+    public function update(StoreInvestment $request, Investment $investment) 
     {
         $this->authorize('update', $investment);
         $investment->update($request->all());

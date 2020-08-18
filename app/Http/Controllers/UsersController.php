@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreUser;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -54,10 +54,10 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreUserRequest  $request
+     * @param  \Illuminate\Http\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUser $request)
     {
         $this->authorize('create', User::class);
         
@@ -102,11 +102,11 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\StoreUserRequest  $request
+     * @param  \Illuminate\Http\StoreUser  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUserRequest $request, User $user)
+    public function update(StoreUser $request, User $user)
     {
         $this->authorize('update', $user);
         $user->update($request->all());

@@ -104,7 +104,7 @@ class NotesController extends Controller
         return view('admin.notes.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
-            'comment' => $note,
+            'note' => $note,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
