@@ -38,38 +38,63 @@
 					
 					<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder text-dark">Komplety dokumentów</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów pracowniczych</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów inwestycyjnych</span>
 					</h3>
-					@auth
-						<div class="card-toolbar">
-							<div class="dropdown dropdown-inline">
-								<a class="btn btn-primary font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dodaj nowy</a>
-								<div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-									<ul class="navi navi-hover py-5">
-										<li class="navi-item">
-											<a href="{{ route('employees.create') }}" class="navi-link">
-												<span class="navi-icon">
-													<i class="flaticon2-drop"></i>
-												</span>
-												<span class="navi-text">Komplet dokumentów</span>
-											</a>
-										</li>
-										<li class="navi-item">
-											<a href="{{ route('files.create') }}" class="navi-link">
-												<span class="navi-icon">
-													<i class="flaticon2-list-3"></i>
-												</span>
-												<span class="navi-text">Dokument</span>
-											</a>
-										</li>
-									</ul>
-								</div>
+					
+					@canany(['create'], [App\Employee::class, App\File::class])
+					<div class="card-toolbar">
+						<div class="dropdown dropdown-inline">
+							<a class="btn btn-primary font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dodaj</a>
+							<div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
+								<ul class="navi navi-hover py-5">
+
+									@can('create', App\Employee::class)
+									<li class="navi-item">
+										<a href="{{ route('employees.create') }}" class="navi-link">
+											<span class="svg-icon navi-icon">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+														<rect x="0" y="0" width="24" height="24"/>
+														<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
+														<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
+														<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+														<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+													</g>
+												</svg>
+											</span>
+											<span class="navi-text">Ubezpieczenie Pracownicze</span>
+										</a>
+									</li>
+									@endcan
+
+									@can('create', App\File::class)
+									<li class="navi-item">
+										<a href="{{ route('files.create') }}" class="navi-link">
+											<span class="svg-icon navi-icon">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+														<polygon points="0 0 24 0 24 24 0 24"/>
+														<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+														<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+														<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+													</g>
+												</svg>
+											</span>
+											<span class="navi-text">Dokument</span>
+										</a>
+									</li>
+									@endcan
+
+								</ul>
 							</div>
 						</div>
-					@endauth
+					</div>
+					@endcanany
+					
 				</div>
 				<div class="card-body">
 					<div class="mb-1">
+						
 						<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">
 							<div class="alert-icon">
 								<i class="flaticon-info"></i>
@@ -85,6 +110,7 @@
 								</button>
 							</div>
 						</div>
+
 						<div class="row align-items-center">
 							<div class="col-12">
 								<div class="row align-items-center">
@@ -128,6 +154,7 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
 
 					<table class="table table-separate table-head-custom collapsed" id="table">
