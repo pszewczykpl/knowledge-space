@@ -47,9 +47,7 @@ Route::resource('protectives', 'ProtectivesController');
 /**
  * Funds Routes
  */
-Route::resource('funds', 'FundsController')->except([
-    'create', 'store', 'edit', 'update', 'destroy'
-]);
+Route::resource('funds', 'FundsController');
 
 /**
  * Partners Routes
@@ -59,17 +57,13 @@ Route::resource('partners', 'PartnersController');
 /**
  * Risks Routes
  */
-Route::resource('risks', 'RisksController')->except([
-    'create', 'store', 'edit', 'update', 'destroy'
-]);
+Route::resource('risks', 'RisksController');
 
 /**
  * Files Routes
  */
 Route::get('files/download/{id}', 'FilesController@download')->name('files.download');
-Route::resource('files', 'FilesController')->except([
-    'index'
-]);
+Route::resource('files', 'FilesController');
 
 /**
  * Notes Routes
