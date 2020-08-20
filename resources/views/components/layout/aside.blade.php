@@ -62,15 +62,15 @@
                 <li class="menu-item {{ (request()->routeIs('investments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('investments.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"/>
-                                <rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-                                <rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-                                <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-                                <rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
-                            </g>
-                        </svg>
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
+									<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
+									<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+									<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+								</g>
+							</svg>
 						</span>
 						<span class="menu-text font-weight-light">Ubezpieczenia Inwestycyjne</span>
 					</a>
@@ -79,12 +79,12 @@
                 <li class="menu-item {{ (request()->routeIs('protectives.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('protectives.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <polygon points="0 0 24 0 24 24 0 24"/>
-                                <path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
-                            </g>
-                        </svg>
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24"/>
+									<path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
+								</g>
+							</svg>
 						</span>
 						<span class="menu-text font-weight-light">Ubezpieczenia Ochronne</span>
 					</a>
@@ -93,13 +93,13 @@
                 <li class="menu-item {{ (request()->routeIs('employees.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('employees.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <polygon points="0 0 24 0 24 24 0 24"/>
-                                <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
-                            </g>
-                        </svg>
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24"/>
+									<path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+									<path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+								</g>
+							</svg>
 						</span>
 						<span class="menu-text font-weight-light">Ubezpieczenia Pracownicze</span>
 					</a>
