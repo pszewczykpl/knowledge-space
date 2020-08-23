@@ -37,8 +37,8 @@
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
 					
 					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">Komplety dokumentów</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów inwestycyjnych</span>
+						<span class="card-label font-weight-bolder text-dark">Dokumenty</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów ubezpieczeń ochronnych</span>
 					</h3>
 					
 					@canany(['create'], [App\Protective::class, App\File::class])
@@ -54,11 +54,8 @@
 											<span class="svg-icon navi-icon">
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24"/>
-														<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-														<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-														<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-														<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+														<polygon points="0 0 24 0 24 24 0 24"/>
+														<path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
 													</g>
 												</svg>
 											</span>
@@ -100,7 +97,9 @@
 								<i class="flaticon-info"></i>
 							</div>
 							<div class="alert-text">
-								Poniżej przedstawiono wszystkie dostępne komplety dokumentów dla produktów ochronnych.
+								<b>Wskazówka!</b><br>
+								Ubezpieczenie Ochronne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
+								Jeśli chcesz przeglądać tylko aktualnie obowiązujące dokumenty, kliknij Pokaż tylko Aktualne.<br>
 							</div>
 							<div class="alert-close">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -154,15 +153,6 @@
 									<div class="col-md-3 pb-3 my-2 my-md-0">
 										<div class="input-icon" id="filter_col7" data-column="7">
 											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa dystrybutora" id="col7_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col8" data-column="8">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Numer subskrypcji" id="col8_filter" />
 											<span>
 												<i class="flaticon2-search-1 text-muted"></i>
 											</span>

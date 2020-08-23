@@ -31,7 +31,7 @@ $(document).ready(function() {
                 data: 'edit_date',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: false
             }, {
                 data: 'status',
                 visible: true,
@@ -88,7 +88,7 @@ $(document).ready(function() {
                 data: 'subscription',
                 visible: false,
                 orderable: false,
-                searchable: true
+                searchable: false
             }, {
                 data: 'id',
                 visible: false,
