@@ -26,11 +26,11 @@ $(document).ready(function() {
                 data: 'edit_date',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: false
             }, {
                 data: 'status',
                 visible: true,
-                orderable: true,
+                orderable: false,
                 searchable: true,
                 render: function (data, type, row) {
                     if(data=='N') {
