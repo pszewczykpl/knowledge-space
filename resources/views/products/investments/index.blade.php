@@ -38,7 +38,7 @@
 					
 					<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder text-dark">Dokumenty</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów inwestycyjnych</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów ubezpieczeń inwestycyjnych</span>
 					</h3>
 					
 					@canany(['create'], [App\Investment::class, App\File::class])
