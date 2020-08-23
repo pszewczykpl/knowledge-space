@@ -37,7 +37,7 @@
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
 					
 					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">Komplety dokumentów</span>
+						<span class="card-label font-weight-bolder text-dark">Dokumenty</span>
 						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów inwestycyjnych</span>
 					</h3>
 					
@@ -100,8 +100,10 @@
 								<i class="flaticon-info"></i>
 							</div>
 							<div class="alert-text">
-							Poniżej przedstawiono wszystkie dostępne komplety dokumentów dla produktów inwestycyjnych.<br>
-							Dla wielu produktów, nawet po zakończeniu sprzedaży, pojawiają się nowe komplety dokumentów np. ze względu na aktualizowane strategie inwestycyjne.</div>
+								<b>Wskazówka!</b><br>
+								Ubezpieczenie Inwestycyjne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
+								Jeśli chcesz przeglądać tylko aktualnie obowiązujące dokumenty, kliknij Pokaż tylko Aktualne.<br>
+							</div>
 							<div class="alert-close">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">
