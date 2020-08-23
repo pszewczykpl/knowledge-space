@@ -26,7 +26,7 @@ $(document).ready(function() {
                 data: 'type',
                 visible: true,
                 orderable: true,
-                searchable: true,
+                searchable: false,
                 render: function (data, type, row) {
                     if(data=='D') {
                         return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Depozytowy</span>';
@@ -54,11 +54,11 @@ $(document).ready(function() {
                 data: 'start_date',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: false
             },{
                 data: 'status',
                 visible: true,
-                orderable: true,
+                orderable: false,
                 searchable: true,
                 render: function (data, type, row) {
                     if(data=='N') {
@@ -163,7 +163,7 @@ $("#active_or_all").click(function() {
         $(this).html('Pokaż Wszystkie')
 
         $.notify({
-            message: 'Widzisz tylko aktualne fundusze',
+            message: 'Widzisz tylko aktywne fundusze',
         },{
             type: 'success',
             allow_dismiss: false,
@@ -176,7 +176,7 @@ $("#active_or_all").click(function() {
 
         $(this).removeClass('btn-primary');
         $(this).addClass('btn-success');
-        $(this).html('Pokaż tylko Aktualne')
+        $(this).html('Pokaż tylko Aktywne')
 
         $.notify({
             message: 'Widzisz wzystkie fundusze',

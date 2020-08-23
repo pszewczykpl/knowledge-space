@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="ml-3">
-			<button type="button" class="btn btn-sm btn-success" id="active_or_all">Pokaż tylko Aktualne</button>
+			<button type="button" class="btn btn-sm btn-success" id="active_or_all">Pokaż tylko Aktywne</button>
 		</div>
 	</div>
 	<div class="d-flex align-items-center">
@@ -37,8 +37,8 @@
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
 					
 					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">Komplety dokumentów</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów produktów inwestycyjnych</span>
+						<span class="card-label font-weight-bolder text-dark">Dokumenty</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów ubezpieczeniowych funduszy kapitałowych</span>
 					</h3>
 					
 					@canany(['create'], [App\Fund::class, App\File::class])
@@ -55,10 +55,8 @@
 												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 														<rect x="0" y="0" width="24" height="24"/>
-														<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-														<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-														<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-														<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+														<path d="M4.00246329,12.2004927 L13,14 L13,4.06189375 C16.9463116,4.55399184 20,7.92038235 20,12 C20,16.418278 16.418278,20 12,20 C7.64874861,20 4.10886412,16.5261253 4.00246329,12.2004927 Z" fill="#000000" opacity="0.3"/>
+														<path d="M3.0603968,10.0120794 C3.54712466,6.05992157 6.91622084,3 11,3 L11,11.6 L3.0603968,10.0120794 Z" fill="#000000"/>
 													</g>
 												</svg>
 											</span>
@@ -100,8 +98,10 @@
 								<i class="flaticon-info"></i>
 							</div>
 							<div class="alert-text">
-							Poniżej przedstawiono wszystkie dostępne komplety dokumentów dla produktów inwestycyjnych.<br>
-							Dla wielu produktów, nawet po zakończeniu sprzedaży, pojawiają się nowe komplety dokumentów np. ze względu na aktualizowane strategie inwestycyjne.</div>
+								<b>Wskazówka!</b><br>
+								Poniżej znajdują się ubezpieczeniowe fundusze kapitałowe, które mogą być już nieaktywne.<br>
+								Jeśli chcesz przeglądać tylko aktywne fundusze, kliknij Pokaż tylko Aktywne.<br>
+							</div>
 							<div class="alert-close">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">
@@ -117,7 +117,7 @@
 									
 									<div class="col-md-3 pb-3 my-2 my-md-0">
 										<div class="input-icon" id="filter_col0" data-column="0">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa produktu" id="col0_filter" />
+											<input type="text" class="form-control form-control-solid column_filter" placeholder="Symbol" id="col0_filter" />
 											<span>
 												<i class="flaticon2-search-1 text-muted"></i>
 											</span>
@@ -126,7 +126,7 @@
 
 									<div class="col-md-3 pb-3 my-2 my-md-0">
 										<div class="input-icon" id="filter_col1" data-column="1">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod TOiL" id="col1_filter" />
+											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa" id="col1_filter" />
 											<span>
 												<i class="flaticon2-search-1 text-muted"></i>
 											</span>
@@ -134,53 +134,8 @@
 									</div>
 
 									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col2" data-column="2">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod produktu" id="col2_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col7" data-column="7">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa dystrybutora" id="col7_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col8" data-column="8">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod dystrybutora" id="col8_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col9" data-column="9">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod OWU" id="col9_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col10" data-column="10">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Grupa produktowa" id="col10_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col11" data-column="11">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Typ produktu" id="col11_filter" />
+										<div class="input-icon" id="filter_col6" data-column="6">
+											<input type="text" class="form-control form-control-solid column_filter" placeholder="Waluta" id="col6_filter" />
 											<span>
 												<i class="flaticon2-search-1 text-muted"></i>
 											</span>
