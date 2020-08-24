@@ -29,7 +29,7 @@ class RisksController extends Controller
     public function index()
     {
         return view('risks.index', [
-            'title' => 'Ubezpieczenia Pracownicze',
+            'title' => 'Ryzyka ubezpieczeniowe',
             'risks' => Risk::all(),
         ]);
     }
@@ -44,8 +44,8 @@ class RisksController extends Controller
         $this->authorize('create', Risk::class);
         
         return view('risks.create', [
-            'title' => 'Nowy produkt pracowniczy',
-            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
+            'title' => 'Nowe ryzyko ubezpieczeniowe',
+            'description' => 'Uzupełnij dane ryzyka i kliknij Zapisz',
         ]);
     }
 
@@ -62,7 +62,7 @@ class RisksController extends Controller
         $risk = new Risk($request->all());
         Auth::user()->risks()->save($risk);
 
-        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Nowy produkt pracowniczy został dodany!');
+        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Nowe ryzyko ubezpieczeniowe zostało dodane!');
     }
 
     /**
@@ -90,8 +90,8 @@ class RisksController extends Controller
         $this->authorize('update', $risk);
 
         return view('risks.edit', [
-            'title' => 'Edycja produktu pracowniczego',
-            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
+            'title' => 'Edycja ryzyka ubezpieczeniowego',
+            'description' => 'Zaktualizuj dane ryzyka i kliknij Zapisz',
             'risk' => $risk,
         ]);
     }
@@ -108,7 +108,7 @@ class RisksController extends Controller
         $this->authorize('update', $risk);
         $risk->update($request->all());
 
-        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Dane produktu pracowniczego zostały zaktualizowane!');
+        return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Dane ryzyka ubezpieczeniowego zostały zaktualizowane!');
     }
 
     /**
@@ -122,6 +122,6 @@ class RisksController extends Controller
         $this->authorize('delete', $risk);
         $risk->delete();
 
-        return redirect()->route('risks.index')->with('notify_danger', 'Produkt pracowniczy został usunięty!');
+        return redirect()->route('risks.index')->with('notify_danger', 'Ryzyko ubezpieczeniowe zostało usunięte!');
     }
 }
