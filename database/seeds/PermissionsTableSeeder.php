@@ -252,19 +252,19 @@ class PermissionsTableSeeder extends Seeder
         $user->save();
 
         $user = new App\Permission;
-        $user->code = 'distributors-create';
+        $user->code = 'partners-create';
         $user->name = 'Może dodawać dystrybutorów';
         $user->description = 'Użytkownik może dodawać dystrybutorów oraz edytować i usuwać utworzonych przez siebie dystrybutorów';
         $user->save();
 
         $user = new App\Permission;
-        $user->code = 'distributors-update';
+        $user->code = 'partners-update';
         $user->name = 'Może edytować wszystkich dystrybutorów';
         $user->description = 'Użytkownik może edytować wszystkich dystrybutorów';
         $user->save();
 
         $user = new App\Permission;
-        $user->code = 'distributors-delete';
+        $user->code = 'partners-delete';
         $user->name = 'Może usuwać wszystkich dystrybutorów';
         $user->description = 'Użytkownik może usuwać wszystkich dystrybutorów';
         $user->save();
