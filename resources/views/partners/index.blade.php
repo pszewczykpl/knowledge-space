@@ -34,18 +34,17 @@
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
 					
 					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">Słownik</span>
+						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
 						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj partnerów oraz dystrybutorów Towarzystwa Ubezpieczeń</span>
 					</h3>
 					
-					@canany(['create'], App\Partner::class)
+					@can('create', App\Partner::class)
 					<div class="card-toolbar">
 						<div class="dropdown dropdown-inline">
 							<a class="btn btn-primary font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dodaj</a>
 							<div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
 								<ul class="navi navi-hover py-5">
 
-									@can('create', App\Partner::class)
 									<li class="navi-item">
 										<a href="{{ route('partners.create') }}" class="navi-link">
 											<span class="svg-icon navi-icon">
@@ -60,13 +59,12 @@
 											<span class="navi-text">Partnera/Dystrybutora</span>
 										</a>
 									</li>
-									@endcan
 
 								</ul>
 							</div>
 						</div>
 					</div>
-					@endcanany
+					@endcan
 					
 				</div>
 				<div class="card-body">
