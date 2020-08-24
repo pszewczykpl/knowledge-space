@@ -13,7 +13,8 @@
 						<div class="menu-submenu menu-submenu-classic menu-submenu-left">
 							<ul class="menu-subnav">
                                 
-                                <li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                @can('viewany', App\User::class)
+								<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('users.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -27,6 +28,7 @@
 										<span class="menu-text">Użytkownicy</span>
 									</a>
 								</li>
+								@endcan
 								
 								@can('viewany', App\Note::class)
 								<li class="menu-item {{ (request()->routeIs('notes.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
@@ -43,8 +45,28 @@
 										<span class="menu-text">Notatki</span>
 									</a>
 								</li>
-								@endif
+								@endcan
+
+								@can('viewany', App\Permission::class)
+								<li class="menu-item {{ (request()->routeIs('permissions.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+									<a href="{{ route('permissions.index') }}" class="menu-link">
+										<span class="svg-icon menu-icon">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<mask fill="white">
+														<use xlink:href="#path-1"/>
+													</mask>
+													<g/>
+													<path d="M15.6274517,4.55882251 L14.4693753,6.2959371 C13.9280401,5.51296885 13.0239252,5 12,5 C10.3431458,5 9,6.34314575 9,8 L9,10 L14,10 L17,10 L18,10 C19.1045695,10 20,10.8954305 20,12 L20,18 C20,19.1045695 19.1045695,20 18,20 L6,20 C4.8954305,20 4,19.1045695 4,18 L4,12 C4,10.8954305 4.8954305,10 6,10 L7,10 L7,8 C7,5.23857625 9.23857625,3 12,3 C13.4280904,3 14.7163444,3.59871093 15.6274517,4.55882251 Z" fill="#000000"/>
+												</g>
+											</svg>
+										</span>
+										<span class="menu-text">Uprawnienia</span>
+									</a>
+								</li>
+								@endcan
 								
+								@can('viewany', App\FileCategory::class)
 								<li class="menu-item" aria-haspopup="true">
 									<a href="#" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -59,6 +81,7 @@
 										<span class="menu-text">Kategorie dokumentów</span>
 									</a>
 								</li>
+								@endcan
 								
 							</ul>
 						</div>
