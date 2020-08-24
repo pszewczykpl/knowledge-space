@@ -44,16 +44,16 @@
 					<table class="table table-separate table-head-custom collapsed" id="table">
 						<thead>
 							<tr>
-								<td>Kod</td>
 								<td>Nazwa</td>
+								<td>Kod</td>
 								<td>Opis</td>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($permissions as $permission)
 							<tr>
-								<td>{{ $permission->code }}</td>
 								<td>{{ $permission->name }}</td>
+								<td>{{ $permission->code }}</td>
 								<td>{{ $permission->description }}</td>
 							</tr>
 							@endforeach

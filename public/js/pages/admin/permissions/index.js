@@ -8,8 +8,7 @@ $(document).ready(function() {
             { 
                 visible: true
             }, {
-                visible: true,
-                orderable: false
+                visible: true
             }, {
                 visible: true,
                 orderable: false,
@@ -36,7 +35,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [0, "asc"]
+        "order": [1, "asc"]
     });
 
     function filterGlobal () {
