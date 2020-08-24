@@ -4,6 +4,19 @@ $(document).ready(function() {
         dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
+        "columns": [
+            { 
+                visible: true
+            }, {
+                visible: true
+            }, {
+                visible: true
+            },
+            {
+                visible: true,
+                orderable: false
+            }
+        ],
         language: {
             "decimal":        "",
             "emptyTable":     "Brak danych do wyświetlenia",
@@ -24,7 +37,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [0, "desc"]
+        "order": [0, "asc"]
     });
 
     function filterGlobal () {

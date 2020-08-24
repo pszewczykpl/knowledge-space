@@ -5,10 +5,18 @@ $(document).ready(function() {
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
         "columns": [
-            { "width": "60%" },
-            null,
-            null,
-            {orderable: false}
+            { 
+                visible: true,
+                "width": "60%" 
+            }, {
+                visible: true
+            }, {
+                visible: true
+            },
+            {
+                visible: true,
+                orderable: false
+            }
         ],
         language: {
             "decimal":        "",
