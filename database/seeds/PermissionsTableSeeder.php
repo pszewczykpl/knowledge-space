@@ -180,24 +180,6 @@ class PermissionsTableSeeder extends Seeder
         $user->save();
 
         $user = new App\Permission;
-        $user->code = 'investment-groups-create';
-        $user->name = 'Może dodawać grupy produktów inwestycyjnych';
-        $user->description = 'Użytkownik może dodawać grupy produktów inwestycyjnych oraz edytować i usuwać utworzone przez siebie grupy produktów inwestycyjnych';
-        $user->save();
-
-        $user = new App\Permission;
-        $user->code = 'investment-groups-update';
-        $user->name = 'Może edytować wszystkie grupy produktów inwestycyjnych';
-        $user->description = 'Użytkownik może edytować wszystkie grupy produktów inwestycyjnych';
-        $user->save();
-
-        $user = new App\Permission;
-        $user->code = 'investment-groups-delete';
-        $user->name = 'Może usuwać wszystkie grupy produktów inwestycyjnych';
-        $user->description = 'Użytkownik może usuwać wszystkie grupy produktów inwestycyjnych';
-        $user->save();
-
-        $user = new App\Permission;
         $user->code = 'protectives-create';
         $user->name = 'Może dodawać produkty ochronne';
         $user->description = 'Użytkownik może dodawać produkty ochronne oraz edytować i usuwać utworzone przez siebie produkty ochronne';
