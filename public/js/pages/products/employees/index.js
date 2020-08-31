@@ -130,7 +130,7 @@ $("#active_or_all").click(function() {
         $(this).html('Pokaż Wszystkie')
 
         $.notify({
-            message: 'Widzisz tylko najnowsze komplety dokumentów dla danego kodu produktu',
+            message: 'Widzisz tylko aktualnie obowiązujące komplety dokumentów',
         },{
             type: 'success',
             allow_dismiss: false,
