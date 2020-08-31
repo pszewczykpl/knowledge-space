@@ -143,7 +143,6 @@
 								<td>Numer RAU</td>
 								<td>NIP</td>
 								<td>REGON</td>
-								<td>Akcje</td>
 							</tr>
 						</thead>
 					</table>
