@@ -144,7 +144,6 @@
 								<td>Kategoria</td>
 								<td>Grupa</td>
 								<td>Okres karencji</td>
-								<td>Akcje</td>
 							</tr>
 						</thead>
 					</table>
