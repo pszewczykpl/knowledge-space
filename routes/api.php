@@ -5,12 +5,12 @@ use Illuminate\Http\Request;
 use App\Investment;
 use App\Employee;
 use App\Protective;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\File;
 use App\Risk;
 use App\Fund;
 use App\Partner;
-use App\InvestmentGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -304,10 +304,14 @@ Route::post('datatables/risks', function (Request $request) {
 });
 
 /**
- * API datatables for surgeries table
+ * API datatables for files table
  */
-Route::post('datatables/surgeries', function (Request $request) {
-    $records = Surgeries::where(function ($query) {
+Route::post('datatables/files', function (Request $request) {
+    $records = File::with('file_category')
+
+        ->select('id', 'name', 'path', 'file_category_id')
+        
+        ->where(function ($query) {
             if($_POST['search']['value'] != null) {
                 foreach($_POST['columns'] as $column) {
                     if($column['searchable'] == 'true') {
@@ -342,7 +346,7 @@ Route::post('datatables/surgeries', function (Request $request) {
 
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Surgeries::count(),
+            "recordsTotal"    => File::count(),
             "recordsFiltered" => $filtered,
             "data"            => $records
         );
@@ -370,10 +374,11 @@ Route::get('1/{file_type}/{code_toil}/{start_date}', function ($file_type, $code
     ->orderByDesc('edit_date')
     ->firstOrFail();
 
-    $file = File::join('file_investment', 'file_investment.file_id', '=', 'files.id')
+    $file = File::join('fileables', 'fileables.file_id', '=', 'files.id')
         ->where([
             ['path', 'like', '%/' . $file_type . '.%'],
-            ['file_investment.investment_id', '=', $investment->id]
+            ['fileables.fileable_id', '=', $investment->id],
+            ['fileable_type', '=', 'App\Investment'],
         ])->firstOrFail();
 
     return Storage::download($file->path, $file->name . '.' . $file->extension);
@@ -398,10 +403,11 @@ Route::get('2/{file_type}/{code}/{dist_short}/{start_date}', function ($file_typ
     ->orderByDesc('edit_date')
     ->firstOrFail();
 
-    $file = File::join('file_protective', 'file_protective.file_id', '=', 'files.id')
+    $file = File::join('fileables', 'fileables.file_id', '=', 'files.id')
         ->where([
             ['path', 'like', '%/' . $file_type . '.%'],
-            ['file_protective.protective_id', '=', $protective->id]
+            ['fileables.fileable_id', '=', $protective->id],
+            ['fileable_type', '=', 'App\Protective'],
         ])->firstOrFail();
 
     return Storage::download($file->path, $file->name . '.' . $file->extension);
@@ -415,9 +421,10 @@ Route::get('investments/{id}/files/zip', function ($id) {
     $tmp_file = 'storage/uploads/tmp.zip';
 
     $files = File::select('files.*')
-        ->join('file_investment', 'file_investment.file_id', '=', 'files.id')
+        ->join('fileables', 'fileables.file_id', '=', 'files.id')
         ->where([
-            ['file_investment.investment_id', '=', $id],
+            ['fileables.fileable_id', '=', $id],
+            ['fileable_type', '=', 'App\Investment'],
             ['files.extension', '=', 'pdf'],
         ])
         ->where(function($query) {
@@ -452,4 +459,103 @@ Route::get('investments/{id}/files/zip', function ($id) {
     $investment = Investment::findOrFail($id);
 
     return Storage::download('tmp.zip', $investment->name . ' (' . $investment->dist_short . ') od ' . $investment->edit_date . '.zip');
+});
+
+/**
+ * Generowanie plików ZIP
+ */
+Route::get('protectives/{id}/files/zip', function ($id) {
+
+    $tmp_file = 'storage/uploads/tmp.zip';
+
+    $files = File::select('files.*')
+        ->join('fileables', 'fileables.file_id', '=', 'files.id')
+        ->where([
+            ['fileables.fileable_id', '=', $id],
+            ['fileable_type', '=', 'App\Protective'],
+            ['files.extension', '=', 'pdf'],
+        ])
+        ->where(function($query) {
+            $query->orWhere('files.file_category_id', 1)
+                  ->orWhere('files.file_category_id', 2)
+                  ->orWhere('files.file_category_id', 3)
+                  ->orWhere('files.file_category_id', 4)
+                  ->orWhere('files.file_category_id', 5);
+        })
+        ->get();
+
+    if(file_exists($tmp_file)) {
+        unlink($tmp_file);
+    }
+
+    $zip = new ZipArchive;
+
+    if ($zip->open($tmp_file, ZipArchive::CREATE) === TRUE) {
+
+        foreach($files as $file) {
+            if($file->file_category_id == 4) {
+                $zip->addFile('storage/uploads/' . $file->path, 'Strategia Inwestycyjna ' . $file->name . '.' . $file->extension);
+            }
+            else {
+                $zip->addFile('storage/uploads/' . $file->path, $file->name . '.' . $file->extension);
+            }
+        }
+
+        $zip->close();
+
+    }
+
+    $protective = Protective::findOrFail($id);
+
+    return Storage::download('tmp.zip', $protective->name . ' (' . $protective->dist_short . ') od ' . $protective->edit_date . '.zip');
+});
+
+/**
+ * Generowanie plików ZIP
+ */
+Route::get('employees/{id}/files/zip', function ($id) {
+
+    $tmp_file = 'storage/uploads/tmp.zip';
+
+    $files = File::select('files.*')
+        ->join('fileables', 'fileables.file_id', '=', 'files.id')
+        ->where([
+            ['fileables.fileable_id', '=', $id],
+            ['fileable_type', '=', 'App\Employee'],
+            ['files.extension', '=', 'pdf'],
+        ])
+        ->where(function($query) {
+            $query->orWhere('files.file_category_id', 1)
+                  ->orWhere('files.file_category_id', 2)
+                  ->orWhere('files.file_category_id', 3)
+                  ->orWhere('files.file_category_id', 4)
+                  ->orWhere('files.file_category_id', 5)
+                  ->orWhere('files.file_category_id', 6);
+        })
+        ->get();
+
+    if(file_exists($tmp_file)) {
+        unlink($tmp_file);
+    }
+
+    $zip = new ZipArchive;
+
+    if ($zip->open($tmp_file, ZipArchive::CREATE) === TRUE) {
+
+        foreach($files as $file) {
+            if($file->file_category_id == 4) {
+                $zip->addFile('storage/uploads/' . $file->path, 'Strategia Inwestycyjna ' . $file->name . '.' . $file->extension);
+            }
+            else {
+                $zip->addFile('storage/uploads/' . $file->path, $file->name . '.' . $file->extension);
+            }
+        }
+
+        $zip->close();
+
+    }
+
+    $employee = Employee::findOrFail($id);
+
+    return Storage::download('tmp.zip', $employee->name . ' od ' . $employee->edit_date . '.zip');
 });

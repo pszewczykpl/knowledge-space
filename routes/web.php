@@ -52,12 +52,12 @@ Route::resource('funds', 'FundsController');
 /**
  * Partners Routes
  */
-Route::resource('partners', 'PartnersController');
+Route::resource('partners', 'PartnersController')->except(['show']);
 
 /**
  * Risks Routes
  */
-Route::resource('risks', 'RisksController');
+Route::resource('risks', 'RisksController')->except(['show']);
 
 /**
  * Files Routes
@@ -79,3 +79,8 @@ Route::resource('news', 'NewsController');
  * Replies Routes
  */
 Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
+
+/**
+ * File Categories Routes
+ */
+Route::resource('file-categories', 'FileCategoriesController');
