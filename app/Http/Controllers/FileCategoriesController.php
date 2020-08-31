@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Note;
-use App\Investment;
-use App\Protective;
-use App\Employee;
-use App\Fund;
+use App\FileCategory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class NotesController extends Controller
+class FileCategoriesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -32,11 +28,11 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Note::class);
+        $this->authorize('viewAny', FileCategory::class);
 
-        return view('admin.notes.index', [
-            'title' => 'Notatki',
-            'notes' => Note::all(),
+        return view('admin.file-categories.index', [
+            'title' => 'Kategorie dokumentów',
+            'fileCategories' => FileCategory::all(),
         ]);
     }
 
@@ -49,13 +45,10 @@ class NotesController extends Controller
     {
         $this->authorize('create', Note::class);
         
-        return view('admin.notes.create', [
+        return view('admin.file-categories.create', [
             'title' => 'Nowa notatka',
             'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
-            'investments' => Investment::all(),
-            'protectives' => Protective::all(),
-            'employees' => Employee::all(),
-            'funds' => Fund::all(),
+            'file-categories' => FileCategory::all()
         ]);
     }
 
@@ -69,13 +62,8 @@ class NotesController extends Controller
     {
         $this->authorize('create', Note::class);
         
-        $note = new Note($request->all());
-        Auth::user()->notes()->save($note);
-        
-        $note->investments()->attach($request->investment_id);
-        $note->protectives()->attach($request->protective_id);
-        $note->employees()->attach($request->employee_id);
-        $note->funds()->attach($request->fund_id);
+        $fileCategory = new Note($request->all());
+        Auth::user()->notes()->save($fileCategory);
 
         return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
     }
@@ -83,35 +71,31 @@ class NotesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Note  $note
+     * @param  \App\FileCategory  $fileCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show(FileCategory $fileCategory)
     {
-        return view('admin.notes.show', [
+        return view('admin.file-categories.show', [
             'title' => 'Szczegóły',
-            'note' => $note,
+            'file-category' => $fileCategory,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Note  $note
+     * @param  \App\FileCategory  $fileCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Note $note)
+    public function edit(FileCategory $fileCategory)
     {
-        $this->authorize('update', $note);
+        $this->authorize('update', $fileCategory);
 
-        return view('admin.notes.edit', [
+        return view('admin.file-categories.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
-            'note' => $note,
-            'investments' => Investment::all(),
-            'protectives' => Protective::all(),
-            'employees' => Employee::all(),
-            'funds' => Fund::all(),
+            'file-category' => $fileCategory,
         ]);
     }
 
@@ -119,32 +103,27 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Note  $note
+     * @param  \App\FileCategory  $fileCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update(Request $request, FileCategory $fileCategory)
     {
-        $this->authorize('update', $note);
-        $note->update($request->all());
+        $this->authorize('update', $fileCategory);
+        $fileCategory->update($request->all());
 
-        $note->investments()->sync($request->investment_id);
-        $note->protectives()->sync($request->protective_id);
-        $note->employees()->sync($request->employee_id);
-        $note->funds()->sync($request->fund_id);
-
-        return redirect()->route('notes.show', $note->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');
+        return redirect()->route('notes.show', $fileCategory->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Note  $note
+     * @param  \App\FileCategory  $fileCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy(FileCategory $fileCategory)
     {
-        $this->authorize('delete', $note);
-        $note->delete();
+        $this->authorize('delete', $fileCategory);
+        $fileCategory->delete();
 
         return redirect()->route('notes.index')->with('notify_danger', 'Notatka została usunięta!');
     }

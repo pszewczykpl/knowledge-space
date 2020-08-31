@@ -18,7 +18,7 @@ class PartnersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index']);
     }
     
     /**
@@ -63,20 +63,6 @@ class PartnersController extends Controller
         Auth::user()->partners()->save($partner);
 
         return redirect()->route('partners.show', $partner->id)->with('notify_success', 'Nowy partner został dodany!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Partner $partner)
-    {
-        return view('partners.show', [
-            'title' => 'Szczegóły',
-            'partner' => $partner,
-        ]);
     }
 
     /**

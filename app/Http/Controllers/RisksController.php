@@ -18,7 +18,7 @@ class RisksController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index']);
     }
     
     /**
@@ -63,20 +63,6 @@ class RisksController extends Controller
         Auth::user()->risks()->save($risk);
 
         return redirect()->route('risks.show', $risk->id)->with('notify_success', 'Nowe ryzyko ubezpieczeniowe zostało dodane!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Risk  $risk
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Risk $risk)
-    {
-        return view('risks.show', [
-            'title' => 'Szczegóły',
-            'risk' => $risk,
-        ]);
     }
 
     /**

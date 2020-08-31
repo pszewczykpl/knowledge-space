@@ -28,6 +28,11 @@ class File extends Model
         return $this->morphedByMany('App\Protective', 'fileable')->withTimestamps();
     }
 
+    public function funds()
+    {
+        return $this->morphedByMany('App\Fund', 'fileable')->withTimestamps();
+    }
+
     public function file_category()
     {
         return $this->belongsTo('App\FileCategory');

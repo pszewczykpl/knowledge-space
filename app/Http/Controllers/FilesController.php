@@ -29,7 +29,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $this->authorize('files-viewany', File::class);
+        $this->authorize('viewany', File::class);
 
         return view('admin.files.index', [
             'title' => 'Dokumenty',

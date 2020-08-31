@@ -21,4 +21,19 @@ class Fund extends Model
     {
         return $this->belongsToMany('App\Investment')->withTimestamps();
     }
+
+    public function files()
+    {
+        return $this->morphToMany('App\File', 'fileable')->withTimestamps();
+    }
+
+    public function notes()
+    {
+        return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
