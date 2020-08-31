@@ -107,15 +107,15 @@
                                                 <span class="navi-text">Udostępnij</span>
                                             </a>
                                         </li>
-                                        @auth
+                                        @can('update', $file)
                                             <div class="dropdown-divider"></div>
                                             <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <i class="navi-icon flaticon2-trash"></i>
-                                                    <span class="navi-text">Usuń</span>
+                                                <a href="{{ route('files.edit', $file->id) }}" class="navi-link">
+                                                    <i class="navi-icon flaticon2-edit"></i>
+                                                    <span class="navi-text">Edytuj</span>
                                                 </a>
                                             </li>
-                                        @endauth
+                                        @endcan
                                     </ul>
                                 </div>
                             </div>
@@ -178,15 +178,15 @@
                                                 <span class="navi-text">Udostępnij</span>
                                             </a>
                                         </li>
-                                        @auth
+                                        @can('update', $file)
                                             <div class="dropdown-divider"></div>
                                             <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <i class="navi-icon flaticon2-trash"></i>
-                                                    <span class="navi-text">Usuń</span>
+                                                <a href="{{ route('files.edit', $file->id) }}" class="navi-link">
+                                                    <i class="navi-icon flaticon2-edit"></i>
+                                                    <span class="navi-text">Edytuj</span>
                                                 </a>
                                             </li>
-                                        @endauth
+                                        @endcan
                                     </ul>
                                 </div>
                             </div>
