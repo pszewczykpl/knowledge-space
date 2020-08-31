@@ -28,15 +28,17 @@
             <i class="la la-share-alt"></i>Udostępnij
         </a>
 
-		@auth
+		@can('update', $investment)
 			<a href="{{ route('investments.edit', $investment->id) }}" class="btn btn-light-primary btn-icon-sm ml-1">
 				<i class="la la-edit"></i>Edytuj
 			</a>
+		@endcan
 
+		@can('delete', $investment)
 			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'investments.destroy', $investment->id ] ]) }}
 				{{ Form::submit('Usuń', ['class' => 'btn btn-light-danger btn-icon-sm ml-1']) }}
 			{{ Form::close() }}
-		@endauth
+		@endcan
 
 	</div>
 </div>
@@ -58,7 +60,7 @@
 					</div>
 				</div>
 				<div class="card-body pt-2">
-					<p class="text-dark-50"><span class="font-weight-bold">Pamiętaj!</span> Dla wybranego kodu TOiL istnieje nowszy komplet dokumentów.</p>
+					<p class="text-dark-50"><span class="font-weight-bold">Pamiętaj!</span> Dla wybranego prdouktu istnieje nowszy komplet dokumentów.</p>
 				</div>
 			</div>
 		@else
@@ -69,7 +71,7 @@
 					</div>
 				</div>
 				<div class="card-body pt-2">
-					<p class="text-dark-50">To najnowszy komplet dokumentów dla wybranego kodu TOiL.</p>
+					<p class="text-dark-50">To najnowszy komplet dokumentów dla wybranego produktu.</p>
 				</div>
 			</div>
 		@endif
@@ -174,7 +176,7 @@
 				<div class="form-group row my-sm-0">
 					<label class="col-6 col-form-label text-right">Utworzone przez:</label>
 					<div class="col-6">
-						<span class="form-control-plaintext font-weight-bolder">{{ $investment->user->username }}</span>
+						<span class="form-control-plaintext font-weight-bolder">{{ $investment->user->first_name }} {{ $investment->user->last_name }}</span>
 					</div>
 				</div>
 			</div>
@@ -198,20 +200,21 @@
                                         </svg>
                                     </span>
                                 </span>
-                                <span class="nav-text">Komentarze</span>
+                                <span class="nav-text">Notatki</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#files" role="tab" aria-selected="true">
                                 <span class="nav-icon mr-2">
 								    <span class="svg-icon mr-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"/>
-                                                <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
-                                                <path d="M14.8875071,12.8306874 L12.9310336,12.8306874 L12.9310336,10.8230161 C12.9310336,10.5468737 12.707176,10.3230161 12.4310336,10.3230161 L11.4077349,10.3230161 C11.1315925,10.3230161 10.9077349,10.5468737 10.9077349,10.8230161 L10.9077349,12.8306874 L8.9512614,12.8306874 C8.67511903,12.8306874 8.4512614,13.054545 8.4512614,13.3306874 C8.4512614,13.448999 8.49321518,13.5634776 8.56966458,13.6537723 L11.5377874,17.1594334 C11.7162223,17.3701835 12.0317191,17.3963802 12.2424692,17.2179453 C12.2635563,17.2000915 12.2831273,17.1805206 12.3009811,17.1594334 L15.2691039,13.6537723 C15.4475388,13.4430222 15.4213421,13.1275254 15.210592,12.9490905 C15.1202973,12.8726411 15.0058187,12.8306874 14.8875071,12.8306874 Z" fill="#000000"/>
-                                            </g>
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<polygon points="0 0 24 0 24 24 0 24"></polygon>
+												<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+												<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
+												<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
+											</g>
+										</svg>
                                     </span>
                                 </span>
                                 <span class="nav-text">Dokumenty</span>
@@ -221,64 +224,65 @@
                 </div>
             </div>
             <div class="card-body px-0">
-                <div class="tab-content pt-2">
-                    <div class="tab-pane " id="notes" role="tabpanel">
-                        
-                    <div class="container">
-					@auth
-						{!! Form::open(['route' => 'notes.store', 'method' => 'post']) !!}
-							{!! Form::token() !!}
-							<div class="form-group">
-								<input type="hidden" id="investment_id" name="investment_id" value="{{ $investment->id }}">
-								<textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Treść komentarza"></textarea>
-							</div>
-							<div class="row">
-								<div class="col">
-									<input type="submit" class="btn btn-light-primary font-weight-bold" value="Dodaj komentarz">
+				<div class="tab-content pt-2">
+                    
+					<div class="tab-pane " id="notes" role="tabpanel">
+						<div class="container">
+
+						@can('create', App\Note::class)
+							{!! Form::open(['route' => 'notes.store', 'method' => 'post']) !!}
+								{!! Form::token() !!}
+								<div class="form-group">
+									<input type="hidden" id="investment_id" name="investment_id" value="{{ $investment->id }}">
+									<textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Treść komentarza"></textarea>
 								</div>
-							</div>
-						{!! Form::close() !!}
-						<div class="separator separator-dashed my-10"></div>
-					@endauth
-					<div class="timeline timeline-3">
-						<div class="timeline-items">
-							@foreach($investment->notes as $note)
-								<div class="timeline-item">
-									<div class="timeline-media">
-										<img alt="Pic" src="{{ asset('storage/uploads/avatars/') }}/{{ $note->user->avatar_filename }}">
+								<div class="row">
+									<div class="col">
+										<input type="submit" class="btn btn-light-primary font-weight-bold" value="Dodaj komentarz">
 									</div>
-									<div class="timeline-content">
-										<div class="d-flex align-items-center justify-content-between mb-3">
-											<div class="mr-2">
-												<a href="{{ route('users.show', $note->user->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
-													{{ $note->user->first_name }} {{ $note->user->last_name }}
-												</a>
-												<span class="text-muted font-weight-light ml-2">
-													{{ $note->updated_at }}
-												</span>
+								</div>
+							{!! Form::close() !!}
+							<div class="separator separator-dashed my-10"></div>
+						@endcan
+
+							<div class="timeline timeline-3">
+								<div class="timeline-items">
+									@foreach($investment->notes as $note)
+										<div class="timeline-item">
+											<div class="timeline-media">
+												<img alt="Pic" src="{{ asset('storage/uploads/avatars/') }}/{{ $note->user->avatar_filename }}">
 											</div>
-											@auth
-												{{ Form::open([ 'method'  => 'delete', 'route' => [ 'notes.destroy', $note->id ] ]) }}
-													{{ Form::button('<i class="flaticon2-trash text-danger" title="Usuń"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-clean btn-icon btn-icon-sm'] )  }}
-												{{ Form::close() }}
-											@endauth
+											<div class="timeline-content">
+												<div class="d-flex align-items-center justify-content-between mb-3">
+													<div class="mr-2">
+														<a href="{{ route('users.show', $note->user->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
+															{{ $note->user->first_name }} {{ $note->user->last_name }}
+														</a>
+														<span class="text-muted font-weight-light ml-2">
+															{{ $note->updated_at }}
+														</span>
+													</div>
+													@can('delete', $note)
+														{{ Form::open([ 'method'  => 'delete', 'route' => [ 'notes.destroy', $note->id ] ]) }}
+															{{ Form::button('<i class="flaticon2-trash text-danger" title="Usuń"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-clean btn-icon btn-icon-sm'] )  }}
+														{{ Form::close() }}
+													@endcan
+												</div>
+												<p class="p-0">
+													{{ $note->content }}
+												</p>
+											</div>
 										</div>
-										<p class="p-0">
-											{{ $note->content }}
-										</p>
-									</div>
+									@endforeach
 								</div>
-							@endforeach
+							</div>
 						</div>
 					</div>
+
+					<div class="tab-pane active" id="files" role="tabpanel">
+						<x-panels.files-panel :files="$investment->files" />
 					</div>
 
-                    </div>
-                    <div class="tab-pane active" id="files" role="tabpanel">
-                        
-                        <x-panels.files-panel :files="$investment->files" />
-                        
-                    </div>
                 </div>
             </div>
         </div>
