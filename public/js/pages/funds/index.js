@@ -88,10 +88,6 @@ $(document).ready(function() {
                                     '<li class="navi-item">' +
                                         '<a class="navi-link" onclick="ShareFunds(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
                                     '</li>' +
-                                    '<div class="dropdown-divider"></div>' +
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/funds/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>' +
-                                    '</li>' +
                                 '</ul>' +
                             '</div>' +
                         '</div>' +

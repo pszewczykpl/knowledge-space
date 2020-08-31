@@ -23,6 +23,7 @@ class CreateFundsTable extends Migration
             $table->date('cancel_date')->nullable();
             $table->date('start_date')->nullable();
             $table->string('cancel_reason')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
