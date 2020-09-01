@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         $user->position = 'Tester Oprogramowania';
         $user->description = 'Wdrażanie oprogramowania w zakresie systemów: Rejestrator, Pent@life, Pivotal CRM oraz Baza Wiedzy.';
         $user->location = 'Warszawa';
-        $user->avatar_filename = '1.png';
+        $user->avatar_filename = '1.jpg';
         $user->save();
         $user->permissions()->attach(App\Permission::all());
         
