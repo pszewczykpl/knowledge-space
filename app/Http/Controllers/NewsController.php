@@ -75,7 +75,7 @@ class NewsController extends Controller
     public function show(News $news)
     {
         return view('news.show', [
-            'title' => 'Szczegóły',
+            'title' => 'Aktualność',
             'news' => $news,
         ]);
     }

@@ -79,7 +79,7 @@
 										</div>
 										<div class="d-flex flex-column flex-grow-1">
 											<a href="{{ route('users.show', $new->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">{{ $new->user->first_name }} {{ $new->user->last_name }}</a>
-											<span class="text-muted font-weight-bold">{{ $new->created_at }}</span>
+											<a href="{{ route('news.show', $new->id) }}" class="text-muted font-weight-bold">{{ $new->created_at }}</a>
 										</div>
 									</div>
 									<style>.show-news p { margin-top: 0; margin-bottom: 0; }</style>
