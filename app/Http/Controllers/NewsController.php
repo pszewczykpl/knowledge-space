@@ -31,7 +31,7 @@ class NewsController extends Controller
     {
         return view('news.index', [
             'title' => 'Aktualności',
-            'news' => News::all(),
+            'news' => News::orderBy('created_at', 'desc')->paginate(10),
         ]);
     }
 
