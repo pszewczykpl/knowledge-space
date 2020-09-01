@@ -111,9 +111,9 @@
                                     <span class="svg-icon svg-icon-lg svg-icon-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
-                                                <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"/>
                                             </g>
                                         </svg>
                                     </span>
@@ -125,9 +125,9 @@
                                     <span class="svg-icon svg-icon-lg svg-icon-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
-                                                <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z M8,1 L16,1 C17.5187831,1 18.75,2.23121694 18.75,3.75 L18.75,20.25 C18.75,21.7687831 17.5187831,23 16,23 L8,23 C6.48121694,23 5.25,21.7687831 5.25,20.25 L5.25,3.75 C5.25,2.23121694 6.48121694,1 8,1 Z M9.5,1.75 L14.5,1.75 C14.7761424,1.75 15,1.97385763 15,2.25 L15,3.25 C15,3.52614237 14.7761424,3.75 14.5,3.75 L9.5,3.75 C9.22385763,3.75 9,3.52614237 9,3.25 L9,2.25 C9,1.97385763 9.22385763,1.75 9.5,1.75 Z" fill="#000000" fill-rule="nonzero"/>
                                             </g>
                                         </svg>
                                     </span>
@@ -140,8 +140,134 @@
 					</div>
 				</div>
 			</div>
+        </div>
+
+        <div class="col-12 col-md-8">
+            @if($user->id === Auth::user()->id)
+			<div class="card card-custom gutter-b">
+				<div class="card-body">
+					<div class="d-flex align-items-center">
+						<div class="symbol symbol-40 symbol-light-success mr-5">
+							<span class="symbol-label" style="background-image:url('{{ asset('storage/uploads/avatars/') }}/{{ $user->avatar_filename }}')"></span>
+						</div>
+						<span class="text-muted font-weight-bold font-size-lg">Coś nowego, <b>{{ $user->first_name }}</b>?</span>
+					</div>
+					{!! Form::open(['route' => 'news.store', 'method' => 'post', 'id' => 'kt_forms_widget_2_form', 'class' => 'pt-10 ql-quil ql-quil-plain']) !!}
+						{!! Form::token() !!}
+						<div id="editor" name="editor" class="font-size-lg"></div>
+						<textarea name="content" style="display:none" id="content"></textarea>
+						<div class="border-top my-5"></div>
+						<div id="kt_forms_widget_2_editor_toolbar" class="ql-toolbar d-flex align-items-center justify-content-between">
+							<div class="mr-2">
+								<span class="ql-formats ml-0">
+									<button class="ql-bold"></button>
+									<button class="ql-italic"></button>
+									<button class="ql-underline"></button>
+									<button class="ql-strike"></button>
+									<button class="ql-image"></button>
+									<button class="ql-link"></button>
+								</span>
+							</div>
+							<div class="">
+								<input type="submit" id="submit" name="submit" value="Wyślij" class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2 mr-2">
+									{{-- <span class="svg-icon svg-icon-md svg-icon-primary pr-0">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<rect x="0" y="0" width="24" height="24"/>
+												<path d="M3,13.5 L19,12 L3,10.5 L3,3.7732928 C3,3.70255344 3.01501031,3.63261921 3.04403925,3.56811047 C3.15735832,3.3162903 3.45336217,3.20401298 3.70518234,3.31733205 L21.9867539,11.5440392 C22.098181,11.5941815 22.1873901,11.6833905 22.2375323,11.7948177 C22.3508514,12.0466378 22.2385741,12.3426417 21.9867539,12.4559608 L3.70518234,20.6826679 C3.64067359,20.7116969 3.57073936,20.7267072 3.5,20.7267072 C3.22385763,20.7267072 3,20.5028496 3,20.2267072 L3,13.5 Z" fill="#000000"/>
+											</g>
+										</svg>
+									</span>
+									Wyślij --}}
+								{{-- </a> --}}
+							</div>
+						</div>
+					{!! Form::close() !!}
+				</div>
+			</div>
+			@endif
+
+            @if($user->news->count() == 0)
+            <div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
+                @if($user->id === Auth::user()->id)
+                <div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
+                @else
+                <div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+                @endif
+            </div>
+            @endif
+            
+            @foreach($user->news->sortByDesc('created_at')->take(10) as $new)
+		    <div class="card card-custom gutter-b">
+		    	<div class="card-body">
+		    		<div>
+		    			<div class="d-flex align-items-center pb-4">
+		    				<div class="symbol symbol-40 symbol-light-success mr-5">
+		    					<span class="symbol-label" style="background-image:url('{{ asset('storage/uploads/avatars/') }}/{{ $new->user->avatar_filename }}')"></span>
+		    				</div>
+		    				<div class="d-flex flex-column flex-grow-1">
+		    					<a href="{{ route('users.show', $new->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">{{ $new->user->first_name }} {{ $new->user->last_name }}</a>
+		    					<span class="text-muted font-weight-bold">{{ $new->created_at }}</span>
+		    				</div>
+		    			</div>
+		    			<style>.show-news p { margin-top: 0; margin-bottom: 0; }</style>
+		    			<div>
+		    				<div class="show-news text-dark-75 font-size-lg font-weight-normal">
+		    					{!! $new->content !!}
+		    				</div>
+		    				<div class="d-flex align-items-center pt-4">
+		    					<span class="btn btn-text-primary btn-icon-primary btn-sm btn-text-dark-50 bg-light-primary rounded font-weight-bolder font-size-sm p-2 pr-4 mr-2">
+		    					<span class="svg-icon svg-icon-md svg-icon-primary pr-2">
+		    						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		    							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		    								<rect x="0" y="0" width="24" height="24" />
+		    								<path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000" />
+		    								<path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3" />
+		    							</g>
+		    						</svg>
+		    					</span>{{ $new->replies->count() }}</span>
+		    				</div>
+    
+		    				@foreach($new->replies as $reply)
+		    					<div class="d-flex py-5">
+		    						<div class="symbol symbol-40 symbol-light-success mr-5 mt-1">
+		    							<span class="symbol-label" style="background-image:url('{{ asset('storage/uploads/avatars/') }}/{{ $reply->user->avatar_filename }}')"></span>
+		    						</div>
+		    						<div class="d-flex flex-column flex-row-fluid">
+		    							<div class="d-flex align-items-center flex-wrap">
+		    								<a href="{{ route('users.show', $reply->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">{{ $reply->user->first_name }} {{ $reply->user->last_name }}</a>
+		    								<span class="text-muted font-weight-normal flex-grow-1 font-size-sm">{{ $reply->created_at }}</span>
+		    								<span class="text-muted font-weight-normal font-size-sm">Odpowiedź</span>
+		    							</div>
+		    							<span class="text-dark-75 font-size-sm font-weight-normal pt-1">{{ $reply->content }}</span>
+		    						</div>
+		    					</div>
+		    				@endforeach
+
+		    			</div>
+		    		</div>
+
+		    		@auth
+		    		<div class="separator separator-solid mt-5 mb-4"></div>
+		    		{!! Form::open(['route' => 'replies.store', 'method' => 'post', 'class' => 'position-relative']) !!}
+		    			<input type="hidden" id="news_id" name="news_id" value="{{ $new->id }}">
+		    			<input id="content" name="content" class="form-control form-control-sm border-0 p-0 pr-10 resize-none" placeholder="Wpisz treść odpowiedzi...">
+		    			<div class="position-absolute top-0 right-0 mt-n0 mr-n2">
+		    				<input type="submit" value="Odpowiedz" class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2 mr-2 pr-4">
+		    			</div>
+		    		{!! Form::close() !!}
+		    		@endauth
+
+		    	</div>
+		    </div>
+		    @endforeach
+
+            <div class="text-center">
+				<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">Przejdź do aktualności</a>
+			</div>
 
         </div>
+
     </div>
 </div>
 @stop

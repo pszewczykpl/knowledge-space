@@ -28,9 +28,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex flex-row">
+    <div class="row">
 	    
-        <div class="flex-row-auto offcanvas-mobile w-300px w-xl-325px" id="kt_profile_aside">
+        <div class="col-12 col-md-4">
             <div class="card card-custom gutter-b">
 				<div class="card-body">
 					<div class="d-flex justify-content-between flex-column pt-4 h-100">
@@ -111,9 +111,9 @@
                                     <span class="svg-icon svg-icon-lg svg-icon-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
-                                                <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"/>
                                             </g>
                                         </svg>
                                     </span>
@@ -125,9 +125,9 @@
                                     <span class="svg-icon svg-icon-lg svg-icon-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
-                                                <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z M8,1 L16,1 C17.5187831,1 18.75,2.23121694 18.75,3.75 L18.75,20.25 C18.75,21.7687831 17.5187831,23 16,23 L8,23 C6.48121694,23 5.25,21.7687831 5.25,20.25 L5.25,3.75 C5.25,2.23121694 6.48121694,1 8,1 Z M9.5,1.75 L14.5,1.75 C14.7761424,1.75 15,1.97385763 15,2.25 L15,3.25 C15,3.52614237 14.7761424,3.75 14.5,3.75 L9.5,3.75 C9.22385763,3.75 9,3.52614237 9,3.25 L9,2.25 C9,1.97385763 9.22385763,1.75 9.5,1.75 Z" fill="#000000" fill-rule="nonzero"/>
                                             </g>
                                         </svg>
                                     </span>
@@ -145,203 +145,199 @@
 			</div>
         </div>
 
-        <div class="flex-row-fluid ml-lg-8">
-		    <div class="row">
-		    	<div class="col-12">
+        <div class="col-12 col-md-8">
 
-                    @if(count($errors) > 0)
-                    <div class="alert alert-custom alert-notice alert-light-danger fade show" role="alert">
-                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                        <div class="alert-text">
-                            @foreach($errors->all() as $error)
-                                {{ $error }} <br>
-                            @endforeach
-                        </div>
+            @if(count($errors) > 0)
+            <div class="alert alert-custom alert-notice alert-light-danger fade show" role="alert">
+                <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                <div class="alert-text">
+                    @foreach($errors->all() as $error)
+                        {{ $error }} <br>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+            <div class="card card-custom gutter-bs">
+                <div class="card-header card-header-tabs-line">
+                    <div class="card-toolbar">
+                        <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x" role="tablist">
+                            <li class="nav-item mr-3">
+                                <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
+                                    <span class="nav-icon mr-2">
+                                        <span class="svg-icon mr-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                    <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"/>
+                                                    <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"/>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <span class="nav-text font-weight-bold">Dane personalne</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mr-3">
+                                <a class="nav-link" data-toggle="tab" href="#files" role="tab">
+                                    <span class="nav-icon mr-2">
+                                        <span class="svg-icon mr-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                    <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
+                                                    <path d="M14.8875071,12.8306874 L12.9310336,12.8306874 L12.9310336,10.8230161 C12.9310336,10.5468737 12.707176,10.3230161 12.4310336,10.3230161 L11.4077349,10.3230161 C11.1315925,10.3230161 10.9077349,10.5468737 10.9077349,10.8230161 L10.9077349,12.8306874 L8.9512614,12.8306874 C8.67511903,12.8306874 8.4512614,13.054545 8.4512614,13.3306874 C8.4512614,13.448999 8.49321518,13.5634776 8.56966458,13.6537723 L11.5377874,17.1594334 C11.7162223,17.3701835 12.0317191,17.3963802 12.2424692,17.2179453 C12.2635563,17.2000915 12.2831273,17.1805206 12.3009811,17.1594334 L15.2691039,13.6537723 C15.4475388,13.4430222 15.4213421,13.1275254 15.210592,12.9490905 C15.1202973,12.8726411 15.0058187,12.8306874 14.8875071,12.8306874 Z" fill="#000000"/>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <span class="nav-text font-weight-bold">Konto</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    @endif
-
-                    <div class="card card-custom gutter-bs">
-                        <div class="card-header card-header-tabs-line">
-                            <div class="card-toolbar">
-                                <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x" role="tablist">
-                                    <li class="nav-item mr-3">
-                                        <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
-                                            <span class="nav-icon mr-2">
-                                                <span class="svg-icon mr-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24"/>
-                                                            <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"/>
-                                                            <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"/>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                            <span class="nav-text font-weight-bold">Dane personalne</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mr-3">
-                                        <a class="nav-link" data-toggle="tab" href="#files" role="tab">
-                                            <span class="nav-icon mr-2">
-                                                <span class="svg-icon mr-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24"/>
-                                                            <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
-                                                            <path d="M14.8875071,12.8306874 L12.9310336,12.8306874 L12.9310336,10.8230161 C12.9310336,10.5468737 12.707176,10.3230161 12.4310336,10.3230161 L11.4077349,10.3230161 C11.1315925,10.3230161 10.9077349,10.5468737 10.9077349,10.8230161 L10.9077349,12.8306874 L8.9512614,12.8306874 C8.67511903,12.8306874 8.4512614,13.054545 8.4512614,13.3306874 C8.4512614,13.448999 8.49321518,13.5634776 8.56966458,13.6537723 L11.5377874,17.1594334 C11.7162223,17.3701835 12.0317191,17.3963802 12.2424692,17.2179453 C12.2635563,17.2000915 12.2831273,17.1805206 12.3009811,17.1594334 L15.2691039,13.6537723 C15.4475388,13.4430222 15.4213421,13.1275254 15.210592,12.9490905 C15.1202973,12.8726411 15.0058187,12.8306874 14.8875071,12.8306874 Z" fill="#000000"/>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                            <span class="nav-text font-weight-bold">Konto</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'PUT', 'id' => 'user_update_form']) !!}
-                            {!! Form::token() !!}
-                                <div class="tab-content">
-                                    <div class="tab-pane active px-7" id="info" role="tabpanel">
-                                        <div class="row justify-content-center">
-                                            <div class="col-12 col-md-8">
-                                                
-                                                <div class="row">
-                                                    <label class="col-3"></label>
-                                                    <div class="col-9">
-                                                        <h6 class="text-dark font-weight-bold mb-10">Dane użytkownika:</h6>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-													<label class="col-xl-3 col-lg-3 text-right col-form-label">Avatar</label>
-													<div class="col-lg-9 col-xl-9">
-														<div class="image-input image-input-outline image-input-circle" id="kt_user_avatar">
-															<div class="image-input-wrapper" style="background-image: url({{ asset('storage/uploads/avatars/') }}/{{ $user->avatar_filename }})"></div>
-															<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Zmień avatar">
-																<i class="fa fa-pen icon-sm text-muted"></i>
-																<input type="file" name="profile_avatar" id="profile_avatar" accept=".png, .jpg, .jpeg" />
-																<input type="hidden" name="profile_avatar_remove" />
-															</label>
-															<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Usuń avatar">
-																<i class="ki ki-bold-close icon-xs text-muted"></i>
-															</span>
-															<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Usuń avatar">
-																<i class="ki ki-bold-close icon-xs text-muted"></i>
-															</span>
-														</div>
-													</div>
-												</div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Imię</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->first_name }}" name="first_name" id="first_name">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Nazwisko</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->last_name }}" name="last_name" id="last_name">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">E-mail</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->email }}" name="email" id="email">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Telefon</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->phone }}" name="phone" id="phone">
-                                                    </div>
-                                                </div>
-
-                                                <div class="separator separator-dashed my-10"></div>
-
-                                                <div class="row">
-                                                    <label class="col-3"></label>
-                                                    <div class="col-9">
-                                                        <h6 class="text-dark font-weight-bold mb-10">Praca:</h6>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Nazwa firmy</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->company }}" name="company" id="company">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Lokalizacja</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->location }}" name="location" id="location">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Departament</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->department }}" name="department" id="department">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Stanowisko</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->position }}" name="position" id="position">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Opis</label>
-                                                    <div class="col-9">
-                                                        <textarea class="form-control form-control-lg form-control-solid" rows="4" name="description" id="description">{{ $user->description }}</textarea>
-                                                    </div>
-                                                </div>
-                                                        
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane px-7" id="files" role="tabpanel">
+                </div>
+                <div class="card-body px-0">
+                    {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'PUT', 'id' => 'user_update_form']) !!}
+                    {!! Form::token() !!}
+                        <div class="tab-content">
+                            <div class="tab-pane active px-7" id="info" role="tabpanel">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-md-8">
+                                        
                                         <div class="row">
-                                            <div class="col-xl-2"></div>
-                                            <div class="col-xl-7 my-2">
-                                
-                                                <div class="row">
-                                                    <label class="col-3"></label>
-                                                    <div class="col-9">
-                                                        <h6 class="text-dark font-weight-bold mb-10">Dane konta:</h6>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Nazwa użytkownika</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="text" value="{{ $user->username }}" name="username" id="username">
-                                                    </div>
-                                                </div>
-
-                                                 <div class="form-group row">
-                                                    <label class="col-form-label col-3 text-lg-right text-left">Hasło</label>
-                                                    <div class="col-9">
-                                                        <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="password" value="{{ $user->password }}" name="password" id="password">
-                                                    </div>
-                                                </div>
-                                            
+                                            <label class="col-3"></label>
+                                            <div class="col-9">
+                                                <h6 class="text-dark font-weight-bold mb-10">Dane użytkownika:</h6>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+											<label class="col-xl-3 col-lg-3 text-right col-form-label">Avatar</label>
+											<div class="col-lg-9 col-xl-9">
+												<div class="image-input image-input-outline image-input-circle" id="kt_user_avatar">
+													<div class="image-input-wrapper" style="background-image: url({{ asset('storage/uploads/avatars/') }}/{{ $user->avatar_filename }})"></div>
+													<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Zmień avatar">
+														<i class="fa fa-pen icon-sm text-muted"></i>
+														<input type="file" name="profile_avatar" id="profile_avatar" accept=".png, .jpg, .jpeg" />
+														<input type="hidden" name="profile_avatar_remove" />
+													</label>
+													<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Usuń avatar">
+														<i class="ki ki-bold-close icon-xs text-muted"></i>
+													</span>
+													<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Usuń avatar">
+														<i class="ki ki-bold-close icon-xs text-muted"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Imię</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->first_name }}" name="first_name" id="first_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Nazwisko</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->last_name }}" name="last_name" id="last_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">E-mail</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->email }}" name="email" id="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Telefon</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->phone }}" name="phone" id="phone">
+                                            </div>
+                                        </div>
+
+                                        <div class="separator separator-dashed my-10"></div>
+
+                                        <div class="row">
+                                            <label class="col-3"></label>
+                                            <div class="col-9">
+                                                <h6 class="text-dark font-weight-bold mb-10">Praca:</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Nazwa firmy</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->company }}" name="company" id="company">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Lokalizacja</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->location }}" name="location" id="location">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Departament</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->department }}" name="department" id="department">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Stanowisko</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->position }}" name="position" id="position">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Opis</label>
+                                            <div class="col-9">
+                                                <textarea class="form-control form-control-lg form-control-solid" rows="4" name="description" id="description">{{ $user->description }}</textarea>
+                                            </div>
+                                        </div>
+                                                
                                     </div>
                                 </div>
-                            {!! Form::close() !!}
+                            </div>
+                            <div class="tab-pane px-7" id="files" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-xl-2"></div>
+                                    <div class="col-xl-7 my-2">
+                        
+                                        <div class="row">
+                                            <label class="col-3"></label>
+                                            <div class="col-9">
+                                                <h6 class="text-dark font-weight-bold mb-10">Dane konta:</h6>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Nazwa użytkownika</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="text" value="{{ $user->username }}" name="username" id="username">
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">Hasło</label>
+                                            <div class="col-9">
+                                                <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="password" value="{{ $user->password }}" name="password" id="password">
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
