@@ -82,6 +82,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Permission', 'user_permission')->withTimestamps();
     }
 
+    public function partners()
+    {
+        return $this->hasMany('App\Partner');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department');
+    }
+
     public function hasPermission($code)
     {
         foreach ($this->permissions()->get() as $role)

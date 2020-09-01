@@ -31,7 +31,7 @@ class UsersController extends Controller
     public function index()
     {
         return view('admin.users.index', [
-            'title' => 'Użytkownicy',
+            'title' => 'Pracownicy',
             'users' => User::all(),
         ]);
     }
@@ -46,8 +46,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         
         return view('admin.users.create', [
-            'title' => 'Nowy użytkownik',
-            'description' => 'Uzupełnij dane użytkownika i kliknij Zapisz',
+            'title' => 'Nowy pracownik',
+            'description' => 'Uzupełnij dane pracownika i kliknij Zapisz',
         ]);
     }
 
@@ -64,7 +64,7 @@ class UsersController extends Controller
         $user = new User($request->all());
         Auth::user()->users()->save($user);
 
-        return redirect()->route('admin.users.show', $user->id)->with('notify_success', 'Nowy użytkownik został dodany!');
+        return redirect()->route('admin.users.show', $user->id)->with('notify_success', 'Nowy pracownik został dodany!');
     }
 
     /**
@@ -93,8 +93,8 @@ class UsersController extends Controller
         $this->authorize('update', $user);
 
         return view('admin.users.edit', [
-            'title' => 'Edycja użytkownika',
-            'description' => 'Zaktualizuj dane użytkownika i kliknij Zapisz',
+            'title' => 'Edycja pracownika',
+            'description' => 'Zaktualizuj dane pracownika i kliknij Zapisz',
             'user' => $user,
         ]);
     }
@@ -111,7 +111,7 @@ class UsersController extends Controller
         $this->authorize('update', $user);
         $user->update($request->all());
 
-        return redirect()->route('users.show', $user->id)->with('notify_success', 'Dane użytkownika zostały zaktualizowane!');
+        return redirect()->route('users.show', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
 
     /**
@@ -125,6 +125,6 @@ class UsersController extends Controller
         $this->authorize('delete', $user);
         $user->delete();
 
-        return redirect()->route('users.index')->with('notify_danger', 'Użytkownik został usunięty!');
+        return redirect()->route('users.index')->with('notify_danger', 'Pracownik został usunięty!');
     }
 }

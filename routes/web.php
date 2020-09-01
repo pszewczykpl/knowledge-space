@@ -84,3 +84,8 @@ Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
  * File Categories Routes
  */
 Route::resource('file-categories', 'FileCategoriesController');
+
+/**
+ * File Categories Routes
+ */
+Route::resource('departments', 'DepartmentsController');

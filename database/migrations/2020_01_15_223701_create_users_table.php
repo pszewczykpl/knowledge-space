@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('password');
             $table->string('company')->default('Open Life TU Życie S.A.');
-            $table->string('department');
+            $table->foreignId('department_id')->constrained();
             $table->string('position')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->default('Warszawa');

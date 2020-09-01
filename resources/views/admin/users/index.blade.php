@@ -35,7 +35,7 @@
 					
 					<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj wszystkich użytkowników</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj wszystkich pracowników</span>
 					</h3>
 
 					@can('create', App\User::class)
@@ -56,7 +56,7 @@
 													</g>
 												</svg>
 											</span>
-											<span class="navi-text">Użytkownik</span>
+											<span class="navi-text">Pracownik</span>
 										</a>
 									</li>
 
@@ -85,7 +85,9 @@
 								<td>{{ $user->email }}</td>
 								<td>{{ $user->phone }}</td>
 								<td>
+									@can('update', $user)
 									<a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>
+									@endcan
 									<a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>
 								</td>
 							</tr>

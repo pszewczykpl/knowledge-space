@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
         $user->phone = '+48 723 315 543';
         $user->password = bcrypt('openlife8!@#');
         $user->company = 'Open Life TU Życie S.A.';
-        $user->department = 'DOK';
+        $user->department_id = 1;
         $user->position = 'Tester Oprogramowania';
         $user->description = 'Wdrażanie oprogramowania w zakresie systemów: Rejestrator, Pent@life, Pivotal CRM oraz Baza Wiedzy.';
         $user->location = 'Warszawa';

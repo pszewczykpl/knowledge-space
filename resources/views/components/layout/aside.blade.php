@@ -55,7 +55,7 @@
                 </li>
                 
 				<li class="menu-section">
-					<h4 class="menu-text">Dokumenty produktowe</h4>
+					<h4 class="menu-text">Archiwum produktowe</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 				
@@ -105,21 +105,6 @@
 					</a>
                 </li>
                 
-                <li class="menu-item {{ (request()->routeIs('funds.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-					<a href="{{ route('funds.index') }}" class="menu-link">
-						<span class="svg-icon menu-icon">
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24"/>
-									<path d="M4.00246329,12.2004927 L13,14 L13,4.06189375 C16.9463116,4.55399184 20,7.92038235 20,12 C20,16.418278 16.418278,20 12,20 C7.64874861,20 4.10886412,16.5261253 4.00246329,12.2004927 Z" fill="#000000" opacity="0.3"/>
-									<path d="M3.0603968,10.0120794 C3.54712466,6.05992157 6.91622084,3 11,3 L11,11.6 L3.0603968,10.0120794 Z" fill="#000000"/>
-								</g>
-							</svg>
-						</span>
-						<span class="menu-text font-weight-light">Fundusze UFK</span>
-					</a>
-                </li>
-                
 				<li class="menu-section">
 					<h4 class="menu-text">Słowniki</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -152,6 +137,56 @@
 							</svg>
 						</span>
 						<span class="menu-text font-weight-light">Ryzyka ubezpieczeniowe</span>
+					</a>
+                </li>
+                
+                <li class="menu-item {{ (request()->routeIs('funds.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+					<a href="{{ route('funds.index') }}" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M4.00246329,12.2004927 L13,14 L13,4.06189375 C16.9463116,4.55399184 20,7.92038235 20,12 C20,16.418278 16.418278,20 12,20 C7.64874861,20 4.10886412,16.5261253 4.00246329,12.2004927 Z" fill="#000000" opacity="0.3"/>
+									<path d="M3.0603968,10.0120794 C3.54712466,6.05992157 6.91622084,3 11,3 L11,11.6 L3.0603968,10.0120794 Z" fill="#000000"/>
+								</g>
+							</svg>
+						</span>
+						<span class="menu-text font-weight-light">Fundusze UFK</span>
+					</a>
+                </li>
+
+				<li class="menu-section">
+					<h4 class="menu-text">HR</h4>
+					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+				</li>
+
+				<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+					<a href="{{ route('users.index') }}" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24"/>
+									<path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+									<path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+								</g>
+							</svg>
+						</span>
+						<span class="menu-text font-weight-light">Pracownicy</span>
+					</a>
+                </li>
+
+				<li class="menu-item {{ (request()->routeIs('departments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+					<a href="{{ route('departments.index') }}" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24"/>
+									<path d="M5.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L5.5,11 C4.67157288,11 4,10.3284271 4,9.5 L4,5.5 C4,4.67157288 4.67157288,4 5.5,4 Z M11,6 C10.4477153,6 10,6.44771525 10,7 C10,7.55228475 10.4477153,8 11,8 L13,8 C13.5522847,8 14,7.55228475 14,7 C14,6.44771525 13.5522847,6 13,6 L11,6 Z" fill="#000000" opacity="0.3"/>
+									<path d="M5.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M11,15 C10.4477153,15 10,15.4477153 10,16 C10,16.5522847 10.4477153,17 11,17 L13,17 C13.5522847,17 14,16.5522847 14,16 C14,15.4477153 13.5522847,15 13,15 L11,15 Z" fill="#000000"/>
+								</g>
+							</svg>
+						</span>
+						<span class="menu-text font-weight-light">Departamenty</span>
 					</a>
                 </li>
 				
