@@ -14,7 +14,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->unique()->e164PhoneNumber,
         'password' => bcrypt('@FJpoywC00!'),
         'company' => 'Open Life TU Życie S.A.',
-        'department' => $faker->randomElement($array = array ('DOK','DWS','DIT')),
+        'department_id' => 1,
         'position' => $faker->jobTitle,
         'description' => $faker->catchPhrase,
         'location' => $faker->country,

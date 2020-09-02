@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
             PermissionsTableSeeder::class,
             DepartmentsTableSeeder::class,
             UsersTableSeeder::class,
-            // NewsTableSeeder::class,
-            // RepliesTableSeeder::class,
+            NewsTableSeeder::class,
+            RepliesTableSeeder::class,
         ]);
     }
 }
