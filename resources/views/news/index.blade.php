@@ -23,7 +23,7 @@
 	<div class="d-flex flex-row">
 		<div class="flex-row-fluid">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 
 					@auth
 						<div class="card card-custom gutter-b">
@@ -139,6 +139,21 @@
 					</div>
 
 				</div>
+
+				<div class="col-2">
+				<div class="card card-custom" style="background-color: #1B283F;">
+					<!--begin::Body-->
+					<div class="card-body" style="padding: 1.5rem !important;">
+						<div class="p-0">
+							<h3 class="text-white font-weight-bolder my-4 text-center">Bądź na bieżąco</h3>
+							<p class="text-muted font-size-lg mb-7 text-center">
+							Dzięki zakładce Aktualności jesteś na bierząco z najważniejszymi informacjami w spółce!</p>
+						</div>
+					</div>
+					<!--end::Body-->
+				</div>
+				</div>
+
 			</div>
 		</div>
 
