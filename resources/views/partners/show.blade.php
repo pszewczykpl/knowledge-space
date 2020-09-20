@@ -7,10 +7,10 @@
 		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
             <li class="breadcrumb-item">
-				<span class="text-muted">{{ $protective->code_owu }}</span>
+				<span class="text-muted">{{ $partner->name }}</span>
 			</li>
 			<li class="breadcrumb-item">
-				<span class="text-muted">{{ $protective->edit_date }}</span>
+				<span class="text-muted">{{ $partner->code }}</span>
 			</li>
 		</ul>
 	</div>
@@ -27,7 +27,7 @@
 			</span>
 			Powrót
 		</a>
-        <a onclick="ShareProtectives('{{ $protective->id }}')" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
+        <a onclick="SharePartners('{{ $partner->id }}')" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
 			<span class="svg-icon navi-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -41,8 +41,8 @@
 			</span>
 			Udostępnij
 		</a>
-		@can('update', $protective)
-			<a href="{{ route('protectives.edit', $protective->id) }}" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
+		@can('update', $partner)
+			<a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
 				<span class="svg-icon navi-icon">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -55,8 +55,8 @@
 				Edytuj
 			</a>
 		@endcan
-		@can('delete', $protective)
-			<a onclick='document.getElementById("protectives_destroy_{{ $protective->id }}").submit();' class="btn btn-md btn-light-danger btn-shadow font-weight-bold ml-1">
+		@can('delete', $partner)
+			<a onclick='document.getElementById("partners_destroy_{{ $partner->id }}").submit();' class="btn btn-md btn-light-danger btn-shadow font-weight-bold ml-1">
 				<span class="svg-icon navi-icon">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -68,7 +68,7 @@
 				</span>
 				Usuń
 			</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'protectives.destroy', $protective->id ], 'id' => 'protectives_destroy_' . $protective->id ]) }}{{ Form::close() }}
+			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'partners.destroy', $partner->id ], 'id' => 'partners_destroy_' . $partner->id ]) }}{{ Form::close() }}
 		@endcan
 	</div>
 </div>
@@ -78,43 +78,20 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
-			<div class="card card-custom gutter-b">
-				<div class="card-header h-auto py-sm-0 border-0">
-					@if($protective->status == 'N')
-					<div class="card-title">
-						<h3 class="card-label text-danger font-weight-bold"><b>Dokumenty Archiwalne</b></h3>
-					</div>
-					<div class="card-toolbar">
-						<span class="label font-weight-bold label label-inline label-light-danger">Ważne</span>
-					</div>
-					@else
-					<div class="card-title">
-						<h3 class="card-label text-success font-weight-bold"><b>Dokumenty aktualne</b></h3>
-					</div>
-					@endif
-				</div>
-				<div class="card-body pt-0 pb-6">
-					<p class="text-dark-50">
-					@if($protective->status == 'N')
-					<span class="font-weight-bold">Pamiętaj!</span> Dla wybranego prdouktu istnieje nowszy komplet dokumentów.
-					@else
-					To najnowszy komplet dokumentów dla wybranego produktu.
-					@endif
-					</p>
-				</div>
-			</div>
-			<x-cards.details --title="Szczegóły ubezpieczenia" --description="Dane ubezpieczenia ochronnego">
-				<x-cards.details-row --attribute="Nazwa produktu" :value="$protective->name" />
-				<x-cards.details-row --attribute="Kod produktu" :value="$protective->code" />
-				<x-cards.details-row --attribute="Kod OWU" :value="$protective->code_owu" />
-				<x-cards.details-row --attribute="Dystrybutor" :value="$protective->dist" />
-				<x-cards.details-row --attribute="Kod dystrybutora" :value="$protective->dist_short" />
-				<x-cards.details-row --attribute="Numer subskrypcji" :value="$protective->subscription" />
+			<x-cards.details --title="Szczegóły partnera" --description="Dane partnera Towarzysta Ubezpieczeń">
+				<x-cards.details-row --attribute="Nazwa" :value="$partner->name" />
+				<x-cards.details-row --attribute="Kod" :value="$partner->code" />
+				@if(isset($partner->type))
+				<x-cards.details-row --attribute="Typ" :value="$partner->type" />
+				@endif
+				<x-cards.details-row --attribute="NIP" :value="$partner->nip" />
+				<x-cards.details-row --attribute="REGON" :value="$partner->regon" />
+				<x-cards.details-row --attribute="Numer RAU" :value="$partner->number_rau" />
 			</x-cards.details>
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
-				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$protective->updated_at" />
-				<x-cards.details-row --attribute="Data utworzenia" :value="$protective->created_at" />
-				<x-cards.details-row --attribute="Nazwa produktu" :value="$protective->user->fullname()" />
+				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$partner->updated_at" />
+				<x-cards.details-row --attribute="Data utworzenia" :value="$partner->created_at" />
+				<x-cards.details-row --attribute="Nazwa produktu" :value="$partner->user->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">
@@ -123,7 +100,7 @@
 					<div class="card-toolbar">
 						<ul class="nav nav-tabs nav-tabs-space-sm nav-tabs-line nav-bold nav-tabs-line-3x" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#notes" role="tab" aria-selected="false">
+								<a class="nav-link active" data-toggle="tab" href="#notes" role="tab" aria-selected="false">
 									<span class="nav-icon mr-2">
 										<span class="svg-icon mr-2">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -138,33 +115,13 @@
 									<span class="nav-text">Notatki</span>
 								</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link active" data-toggle="tab" href="#files" role="tab" aria-selected="true">
-									<span class="nav-icon mr-2">
-										<span class="svg-icon mr-2">
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<polygon points="0 0 24 0 24 24 0 24"></polygon>
-													<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-													<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-													<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-												</g>
-											</svg>
-										</span>
-									</span>
-									<span class="nav-text">Dokumenty</span>
-								</a>
-							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
-						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$protective->notes" -type="protective" :id="$protective->id"  />
-						</div>
-						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$protective->files" :name="$protective->extended_name()" />
+						<div class="tab-pane active" id="notes" role="tabpanel">
+							<x-panels.notes :notes="$partner->notes" -type="partner" :id="$partner->id"  />
 						</div>
 					</div>
 				</div>
@@ -175,6 +132,5 @@
 @stop
 
 @section('additional_scripts')
-<script src="{{ asset('js/pages/products/protectives/show.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/components/panels/files.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/pages/partners/show.js') }}" type="text/javascript"></script>
 @stop
