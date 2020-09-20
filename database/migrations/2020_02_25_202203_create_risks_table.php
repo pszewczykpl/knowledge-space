@@ -20,6 +20,7 @@ class CreateRisksTable extends Migration
             $table->string('category');
             $table->integer('group');
             $table->string('grace_period');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

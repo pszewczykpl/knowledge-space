@@ -24,8 +24,8 @@
 			</span>
 			Anuluj
 		</a>
-        @can('create', App\Investment::class)
-        <a onclick='document.getElementById("investment_store_form").submit();' class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
+        @can('create', App\Employee::class)
+        <a onclick='document.getElementById("employee_store_form").submit();' class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
 			<span class="svg-icon navi-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -62,13 +62,11 @@
                         <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
                             <span class="nav-icon mr-2">
                                 <span class="svg-icon mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-                                            <rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-                                            <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-                                            <rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+                                            <polygon points="0 0 24 0 24 24 0 24"/>
+                                            <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                            <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
                                         </g>
                                     </svg>
                                 </span>
@@ -97,7 +95,7 @@
             </div>
         </div>
         <div class="card-body px-0">
-        {!! Form::open(['route' => 'investments.store', 'method' => 'post', 'files' => true, 'id' => 'investment_store_form']) !!}
+        {!! Form::open(['route' => 'employees.store', 'method' => 'post', 'files' => true, 'id' => 'employee_store_form']) !!}
         {!! Form::token() !!}
         <div class="tab-content">
             <div class="tab-pane active px-7" id="info" role="tabpanel">
@@ -117,55 +115,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Kod produktu:</label>
-                            <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="number" name="code" id="code" placeholder="Wpisz Kod produktu">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Kod OWU:</label>
                             <div class="col-9">
                                 <input class="form-control form-control-lg form-control-solid" type="text" name="code_owu" id="code_owu" placeholder="Wpisz Kod OWU">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Kod TOiL:</label>
-                            <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="code_toil" id="code_toil" placeholder="Wpisz Kod TOiL">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Grupa produktowa:</label>
-                            <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="group" id="group" placeholder="Wpisz Grupę produktową">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Typ produktu:</label>
-                            <div class="col-9">
-                                <select class="form-control form-control-lg form-control-solid" name="type" id="type">
-                                    <option value="indywidualny">Indywidualny</option>
-                                    <option value="grupowy">Grupowy</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-10"></div>
-                        <div class="row">
-							<label class="col-3"></label>
-							<div class="col-9">
-								<h6 class="text-dark font-weight-bold mb-10">Dane dystrybutora:</h6>
-							</div>
-						</div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Nazwa dystrybutora:</label>
-                            <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="dist" id="dist" placeholder="Wpisz Nazwę dystrybutora">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-3 text-lg-right text-left">Kod dystrybutora:</label>
-                            <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="dist_short" id="dist_short" placeholder="Wpisz Kod dystrybutora">
                             </div>
                         </div>
                     </div>
@@ -218,5 +170,5 @@
 @stop
 
 @section('additional_scripts')
-<script src="{{ asset('js/pages/products/investments/create.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/pages/products/employees/create.js') }}" type="text/javascript"></script>
 @stop

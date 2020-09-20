@@ -15,6 +15,7 @@ class CreateFileCategoriesTable extends Migration
     {
         Schema::create('file_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('prefix')->nullable();
             $table->string('name');
             $table->timestamps();
         });
