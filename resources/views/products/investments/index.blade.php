@@ -3,27 +3,26 @@
 @section('subheader')
 <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 	<div class="d-flex align-items-center flex-wrap mr-2">
-
 		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ $title }}</h5>
 		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-
-		<div class="input-icon" id="filter_global">
-			<input type="text" class="form-control form-control-solid form-control-sm global_filter" placeholder="Szukaj..." id="global_filter">
-			<span>
-				<i class="flaticon2-search-1 text-muted"></i>
-			</span>
-		</div>
-
+		<x-datatables.search-box-global />
 		<div class="ml-3">
 			<button type="button" class="btn btn-sm btn-success" id="active_or_all">Pokaż tylko Aktualne</button>
 		</div>
 	</div>
 	<div class="d-flex align-items-center">
-
-		<a href="{{ url()->previous() }}" class="btn btn-clean btn-icon-sm">
-			<i class="la la-arrow-left"></i>Powrót
+		<a href="{{ url()->previous() }}" class="btn btn-md btn-clean btn-shadow font-weight-bold ml-1">
+			<span class="svg-icon navi-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<polygon points="0 0 24 0 24 24 0 24"/>
+						<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-12.000000, -12.000000) " x="11" y="5" width="2" height="14" rx="1"/>
+						<path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997) "/>
+					</g>
+				</svg>
+			</span>
+			Powrót
 		</a>
-
 	</div>
 </div>
 @stop
@@ -31,70 +30,49 @@
 @section('content')
 <div class="container">
 	<div class="d-flex flex-column flex-md-row">
-		
 		<div class="flex-md-row-fluid">
 			<div class="card card-custom">
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
-					
 					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">Dokumenty</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj komplety dokumentów ubezpieczeń inwestycyjnych</span>
+						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj archiwum ubezpieczeń inwestycyjnych</span>
 					</h3>
-					
-					@canany(['create'], [App\Investment::class, App\File::class])
 					<div class="card-toolbar">
-						<div class="dropdown dropdown-inline">
-							<a class="btn btn-primary font-weight-bolder font-size-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dodaj</a>
-							<div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-								<ul class="navi navi-hover py-5">
-
-									@can('create', App\Investment::class)
-									<li class="navi-item">
-										<a href="{{ route('investments.create') }}" class="navi-link">
-											<span class="svg-icon navi-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24"/>
-														<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-														<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-														<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-														<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
-													</g>
-												</svg>
-											</span>
-											<span class="navi-text">Ubezpieczenie Inwestycyjne</span>
-										</a>
-									</li>
-									@endcan
-
-									@can('create', App\File::class)
-									<li class="navi-item">
-										<a href="{{ route('files.create') }}" class="navi-link">
-											<span class="svg-icon navi-icon">
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<polygon points="0 0 24 0 24 24 0 24"/>
-														<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-														<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
-														<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
-													</g>
-												</svg>
-											</span>
-											<span class="navi-text">Dokument</span>
-										</a>
-									</li>
-									@endcan
-
-								</ul>
-							</div>
-						</div>
+						@can('create', App\Investment::class)
+						<a href="{{ route('investments.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
+							<span class="svg-icon navi-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"/>
+										<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
+										<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
+										<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
+										<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
+									</g>
+								</svg>
+							</span>
+							Dodaj Ubezpieczenie
+						</a>
+						@endcan
+						@can('create', App\File::class)
+							<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold">
+								<span class="svg-icon navi-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<polygon points="0 0 24 0 24 24 0 24"/>
+											<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+											<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+											<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+										</g>
+									</svg>
+								</span>
+								Dodaj Dokument
+							</a>
+						@endcan
 					</div>
-					@endcanany
-					
 				</div>
 				<div class="card-body">
 					<div class="mb-1">
-						
 						<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">
 							<div class="alert-icon">
 								<i class="flaticon-info"></i>
@@ -112,98 +90,18 @@
 								</button>
 							</div>
 						</div>
-
 						<div class="row align-items-center">
-							<div class="col-12">
-								<div class="row align-items-center">
-									
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col0" data-column="0">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa produktu" id="col0_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col1" data-column="1">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod TOiL" id="col1_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col2" data-column="2">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod produktu" id="col2_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col7" data-column="7">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Nazwa dystrybutora" id="col7_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col8" data-column="8">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod dystrybutora" id="col8_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col9" data-column="9">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Kod OWU" id="col9_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col10" data-column="10">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Grupa produktowa" id="col10_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0">
-										<div class="input-icon" id="filter_col11" data-column="11">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Typ produktu" id="col11_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-									<div class="col-md-3 pb-3 my-2 my-md-0" style="display: none;">
-										<div class="input-icon" id="filter_col4" data-column="4">
-											<input type="text" class="form-control form-control-solid column_filter" placeholder="Status" id="col4_filter" />
-											<span>
-												<i class="flaticon2-search-1 text-muted"></i>
-											</span>
-										</div>
-									</div>
-
-								</div>
-							</div>
+							<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
+							<x-datatables.search-box --size="3" --number="1" --placeholder="Kod TOiL" />
+							<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
+							<x-datatables.search-box --size="3" --number="7" --placeholder="Nazwa dystrybutora" />
+							<x-datatables.search-box --size="3" --number="8" --placeholder="Kod dystrybutora" />
+							<x-datatables.search-box --size="3" --number="9" --placeholder="Kod OWU" />
+							<x-datatables.search-box --size="3" --number="10" --placeholder="Grupa produktowa" />
+							<x-datatables.search-box --size="3" --number="11" --placeholder="Typ produktu" />
+							<x-datatables.search-box --size="3" --number="4" --placeholder="Status" --hidden />
 						</div>
-
 					</div>
-
 					<table class="table table-separate table-head-custom collapsed" id="table">
 						<thead>
 							<tr>
@@ -216,10 +114,8 @@
 							</tr>
 						</thead>
 					</table>
-
 				</div>
 			</div>
-
 			<div class="card card-custom gutter-b mt-8" style="height: 150px">
 				<div class="card-body d-flex align-items-center justify-content-between flex-wrap">
 					<div class="mr-2">
@@ -228,8 +124,7 @@
 					</div>
 					<a href="mailto:piotr.szewczyk@openlife.pl" target="_blank" class="btn btn-primary font-weight-bold py-3 px-6">Kontakt</a>
 				</div>
-			</div>							
-
+			</div>
 		</div>
 	</div>
 </div>
