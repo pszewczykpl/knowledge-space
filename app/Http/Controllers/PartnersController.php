@@ -66,6 +66,20 @@ class PartnersController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Partner  $partner
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Partner $partner) 
+    {
+        return view('partners.show', [
+            'title' => 'Szczegóły',
+            'partner' => $partner,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Partner  $partner

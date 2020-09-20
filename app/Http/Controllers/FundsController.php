@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fund;
+use App\Investment;
+
+use App\Http\Requests\StoreFund;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -46,6 +49,7 @@ class FundsController extends Controller
         return view('funds.create', [
             'title' => 'Nowy fundusz UFK',
             'description' => 'Uzupełnij dane funduszu i kliknij Zapisz',
+            'investments' => Investment::all(),
         ]);
     }
 
@@ -55,12 +59,14 @@ class FundsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFund $request)
     {
         $this->authorize('create', Fund::class);
         
         $fund = new Fund($request->all());
         Auth::user()->funds()->save($fund);
+
+        $fund->investments()->attach($request->investment_id);
 
         return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Nowy fundusz UFK został dodany!');
     }
@@ -93,6 +99,7 @@ class FundsController extends Controller
             'title' => 'Edycja funduszu UFK',
             'description' => 'Zaktualizuj dane funduszu i kliknij Zapisz',
             'fund' => $fund,
+            'investments' => Investment::all(),
         ]);
     }
 
@@ -103,10 +110,12 @@ class FundsController extends Controller
      * @param  \App\Fund  $fund
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fund $fund)
+    public function update(StoreFund $request, Fund $fund)
     {
         $this->authorize('update', $fund);
         $fund->update($request->all());
+
+        $fund->investments()->sync($request->investment_id);
 
         return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Dane funduszu UFK zostały zaktualizowane!');
     }

@@ -28,7 +28,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        return view('admin.permissions.index', [
+        return view('permissions.index', [
             'title' => 'Uprawnienia systemowe',
             'permissions' => Permission::all(),
         ]);

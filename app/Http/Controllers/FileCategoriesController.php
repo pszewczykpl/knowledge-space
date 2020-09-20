@@ -30,7 +30,7 @@ class FileCategoriesController extends Controller
     {
         $this->authorize('viewAny', FileCategory::class);
 
-        return view('admin.file-categories.index', [
+        return view('file-categories.index', [
             'title' => 'Kategorie dokumentów',
             'fileCategories' => FileCategory::all(),
         ]);
@@ -45,7 +45,7 @@ class FileCategoriesController extends Controller
     {
         $this->authorize('create', Note::class);
         
-        return view('admin.file-categories.create', [
+        return view('file-categories.create', [
             'title' => 'Nowa notatka',
             'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
             'file-categories' => FileCategory::all()
@@ -76,7 +76,7 @@ class FileCategoriesController extends Controller
      */
     public function show(FileCategory $fileCategory)
     {
-        return view('admin.file-categories.show', [
+        return view('file-categories.show', [
             'title' => 'Szczegóły',
             'file-category' => $fileCategory,
         ]);
@@ -92,7 +92,7 @@ class FileCategoriesController extends Controller
     {
         $this->authorize('update', $fileCategory);
 
-        return view('admin.file-categories.edit', [
+        return view('file-categories.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
             'file-category' => $fileCategory,

@@ -7,6 +7,8 @@ use App\Investment;
 use App\Protective;
 use App\Employee;
 use App\Fund;
+use App\Partner;
+use App\Risk;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,7 +36,7 @@ class NotesController extends Controller
     {
         $this->authorize('viewAny', Note::class);
 
-        return view('admin.notes.index', [
+        return view('notes.index', [
             'title' => 'Notatki',
             'notes' => Note::all(),
         ]);
@@ -49,13 +51,15 @@ class NotesController extends Controller
     {
         $this->authorize('create', Note::class);
         
-        return view('admin.notes.create', [
+        return view('notes.create', [
             'title' => 'Nowa notatka',
             'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
             'funds' => Fund::all(),
+            'partners' => Partner::all(),
+            'risks' => Risk::all(),
         ]);
     }
 
@@ -76,6 +80,8 @@ class NotesController extends Controller
         $note->protectives()->attach($request->protective_id);
         $note->employees()->attach($request->employee_id);
         $note->funds()->attach($request->fund_id);
+        $note->partners()->attach($request->partner_id);
+        $note->risks()->attach($request->risk_id);
 
         return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
     }
@@ -88,7 +94,7 @@ class NotesController extends Controller
      */
     public function show(Note $note)
     {
-        return view('admin.notes.show', [
+        return view('notes.show', [
             'title' => 'Szczegóły',
             'note' => $note,
         ]);
@@ -104,7 +110,7 @@ class NotesController extends Controller
     {
         $this->authorize('update', $note);
 
-        return view('admin.notes.edit', [
+        return view('notes.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
             'note' => $note,

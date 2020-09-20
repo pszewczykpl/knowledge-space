@@ -16,7 +16,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'company', 'department', 'position', 'description', 'location'
+        'first_name', 
+        'last_name', 
+        'username', 
+        'email', 
+        'phone', 
+        'password', 
+        'company', 
+        'department', 
+        'position', 
+        'description', 
+        'location'
     ];
 
     /**
@@ -92,6 +102,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Department');
     }
 
+    public function risks()
+    {
+        return $this->hasMany('App\Risk');
+    }
+
     public function hasPermission($code)
     {
         foreach ($this->permissions()->get() as $role)
@@ -103,5 +118,10 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function fullname()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

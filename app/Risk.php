@@ -13,4 +13,14 @@ class Risk extends Model
         'group',
         'grace_period',
     ];
+
+    public function notes()
+    {
+        return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -10,8 +10,13 @@
                     <div class="text-dark-75">
 						<img src="{{ asset('/media/logos/logo-main.png') }}" class="max-h-75px">
 						<h3 class="mb-10 mt-10 font-weight-bold">Witaj w Bazie Wiedzy!</h3>
-						<p class="mb-10 text-muted font-weight-bold">Jeśli nie posiadasz konta w serwisie Baza Wiedzy - <a href="{{ route('register') }}">Zarejestruj się</a>. Możesz również <a href="{{ route('home.index') }}">Wejść jako użytkownik niezalogowany</a>.</p>
 						
+						<!-- Bez możliwości rejestracji (tymczasowo) -->
+						{{-- <p class="mb-10 text-muted font-weight-bold">Jeśli nie posiadasz konta w serwisie Baza Wiedzy - <a href="{{ route('home.index') }}">Wejdź bez logowania</a>.</p> --}}
+						{{-- <a href="{{ route('home.index') }}" class="btn btn-outline-primary btn-pill py-4 px-9 font-weight-bold">Wejdź bez logowania</a> --}}
+						
+						<!-- Z możliwością rejestracji -->
+						<p class="mb-10 text-muted font-weight-bold">Jeśli nie posiadasz konta w serwisie Baza Wiedzy - <a href="{{ route('register') }}">Zarejestruj się</a>. Możesz również <a href="{{ route('home.index') }}">Wejść jako użytkownik niezalogowany</a>.</p>
 						<a href="{{ route('register') }}" class="btn btn-outline-primary btn-pill py-4 px-9 font-weight-bold mr-3">Zarejestruj się</a>
 						<a href="{{ route('home.index') }}" class="btn btn-outline-primary btn-pill py-4 px-9 font-weight-bold">Wejdź bez logowania</a>
 						
@@ -52,9 +57,9 @@
                                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <span></span>Zapamiętaj mnie</label>
                                 </div>
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="text-muted text-hover-primary font-weight-bold">Zapomniałeś hasła?</a>
-                                @endif
+                                @endif --}}
                             </div>
 							
 							<div class="text-center mt-10">

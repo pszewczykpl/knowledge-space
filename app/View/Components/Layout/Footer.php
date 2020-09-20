@@ -7,12 +7,12 @@ use Illuminate\View\Component;
 class Footer extends Component
 {
     /**
-     * Year for Footer Copyright
+     * Year
      */
     public $year;
 
     /**
-     * App version for Footer
+     * App version
      */
     public $version;
 

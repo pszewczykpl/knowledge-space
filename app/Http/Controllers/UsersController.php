@@ -30,7 +30,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', [
+        $this->authorize('viewany', User::class);
+        
+        return view('users.index', [
             'title' => 'Pracownicy',
             'users' => User::all(),
         ]);
@@ -45,7 +47,7 @@ class UsersController extends Controller
     {
         $this->authorize('create', User::class);
         
-        return view('admin.users.create', [
+        return view('users.create', [
             'title' => 'Nowy pracownik',
             'description' => 'Uzupełnij dane pracownika i kliknij Zapisz',
         ]);
@@ -64,7 +66,7 @@ class UsersController extends Controller
         $user = new User($request->all());
         Auth::user()->users()->save($user);
 
-        return redirect()->route('admin.users.show', $user->id)->with('notify_success', 'Nowy pracownik został dodany!');
+        return redirect()->route('users.show', $user->id)->with('notify_success', 'Nowy pracownik został dodany!');
     }
 
     /**
@@ -75,7 +77,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', [
+        return view('users.show', [
             'title' => 'Szczegóły',
             'description' => $user->first_name . ' ' . $user->last_name,
             'user' => $user,
@@ -92,7 +94,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', $user);
 
-        return view('admin.users.edit', [
+        return view('users.edit', [
             'title' => 'Edycja pracownika',
             'description' => 'Zaktualizuj dane pracownika i kliknij Zapisz',
             'user' => $user,

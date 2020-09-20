@@ -31,4 +31,9 @@ class Protective extends Model
     {
         return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
     }
+
+    public function extended_name()
+    {
+        return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
+    }
 }

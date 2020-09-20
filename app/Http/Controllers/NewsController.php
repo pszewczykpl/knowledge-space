@@ -29,6 +29,8 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewany', News::class);
+
         return view('news.index', [
             'title' => 'Aktualności',
             'news' => News::orderBy('created_at', 'desc')->paginate(10),
@@ -74,6 +76,8 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
+        $this->authorize('view', $news);
+
         return view('news.show', [
             'title' => 'Aktualność',
             'news' => $news,

@@ -15,7 +15,7 @@ class DepartmentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['show']);
     }
     
     /**
@@ -25,6 +25,8 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Department::class);
+        
         return view('departments.index', [
             'title' => 'Departamenty',
             'department' => Department::all(),

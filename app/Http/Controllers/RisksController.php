@@ -66,6 +66,20 @@ class RisksController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Risk  $risk
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Risk $risk) 
+    {
+        return view('risks.show', [
+            'title' => 'Szczegóły',
+            'risk' => $risk,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Risk  $risk

@@ -38,4 +38,9 @@ class Investment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function extended_name()
+    {
+        return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
+    }
 }

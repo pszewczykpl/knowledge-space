@@ -30,6 +30,16 @@ class Note extends Model
         return $this->morphedByMany('App\Fund', 'noteable')->withTimestamps();
     }
 
+    public function partners()
+    {
+        return $this->morphedByMany('App\Partner', 'noteable')->withTimestamps();
+    }
+
+    public function risks()
+    {
+        return $this->morphedByMany('App\Risk', 'noteable')->withTimestamps();
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

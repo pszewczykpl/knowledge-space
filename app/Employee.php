@@ -27,4 +27,9 @@ class Employee extends Model
     {
         return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
     }
+
+    public function extended_name()
+    {
+        return $this->name . ' od ' . $this->edit_date;
+    }
 }

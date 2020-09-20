@@ -19,4 +19,9 @@ class Partner extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function notes()
+    {
+        return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
+    }
 }

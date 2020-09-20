@@ -31,7 +31,7 @@ class FilesController extends Controller
     {
         $this->authorize('viewany', File::class);
 
-        return view('admin.files.index', [
+        return view('files.index', [
             'title' => 'Dokumenty',
             'files' => File::all(),
         ]);
@@ -46,7 +46,7 @@ class FilesController extends Controller
     {
         $this->authorize('create', File::class);
         
-        return view('admin.files.create', [
+        return view('files.create', [
             'title' => 'Nowy dokument',
             'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
         ]);
@@ -65,7 +65,7 @@ class FilesController extends Controller
         $file = new File($request->all());
         Auth::user()->files()->save($file);
 
-        return redirect()->route('admin.files.show', $file->id)->with('notify_success', 'Nowy dokument został dodany!');
+        return redirect()->route('files.show', $file->id)->with('notify_success', 'Nowy dokument został dodany!');
     }
 
     /**
@@ -115,7 +115,7 @@ class FilesController extends Controller
     {
         $this->authorize('update', $file);
 
-        return view('admin.files.edit', [
+        return view('files.edit', [
             'title' => 'Edycja dokumentu',
             'description' => 'Zaktualizuj dane dokumentu i kliknij Zapisz',
             'file' => $file,
@@ -134,7 +134,7 @@ class FilesController extends Controller
         $this->authorize('update', $file);
         $file->update($request->all());
 
-        return redirect()->route('admin.files.index')->with('notify_success', 'Dokument został zaktualizowany!');
+        return redirect()->route('files.index')->with('notify_success', 'Dokument został zaktualizowany!');
     }
 
     /**
@@ -148,6 +148,6 @@ class FilesController extends Controller
         $this->authorize('delete', $file);
         $file->delete();
 
-        return redirect()->route('admin.files.index')->with('notify_danger', 'Dokument został usunięty!');
+        return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');
     }
 }

@@ -38,6 +38,7 @@
 					</a>
                 </li>
 
+				@can('viewany', App\News::class)
 				<li class="menu-item {{ (request()->routeIs('news.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('news.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -53,6 +54,7 @@
 						<span class="menu-text font-weight-light">Aktualności</span>
 					</a>
                 </li>
+				@endcan
                 
 				<li class="menu-section">
 					<h4 class="menu-text">Archiwum produktowe</h4>
@@ -155,11 +157,13 @@
 					</a>
                 </li>
 
+				@auth
 				<li class="menu-section">
 					<h4 class="menu-text">HR</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 
+				@can('viewany', App\User::class)
 				<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('users.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -174,7 +178,9 @@
 						<span class="menu-text font-weight-light">Pracownicy</span>
 					</a>
                 </li>
+				@endcan
 
+				@can('viewany', App\Department::class)
 				<li class="menu-item {{ (request()->routeIs('departments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('departments.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -189,6 +195,8 @@
 						<span class="menu-text font-weight-light">Departamenty</span>
 					</a>
                 </li>
+				@endcan
+				@endauth
 				
 			</ul>
 		</div>
