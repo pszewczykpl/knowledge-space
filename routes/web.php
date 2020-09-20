@@ -11,81 +11,24 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/home', 'HomeController@index')->name('home.index');
 
-/**
- * Auth Routes
- */
-Auth::routes();
-
-/**
- * Users Routes
- */
+Route::resource('departments', 'DepartmentsController');
+Route::resource('employees', 'EmployeesController');
+Route::resource('files', 'FilesController');
+Route::resource('file-categories', 'FileCategoriesController');
+Route::resource('funds', 'FundsController');
+Route::resource('investments', 'InvestmentsController');
+Route::resource('news', 'NewsController');
+Route::resource('notes', 'NotesController');
+Route::resource('partners', 'PartnersController');
+Route::resource('permissions', 'PermissionsController')->only(['index']);
+Route::resource('protectives', 'ProtectivesController');
+Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
+Route::resource('risks', 'RisksController');
 Route::resource('users', 'UsersController');
 
-/**
- * Permissions Routes
- */
-Route::resource('permissions', 'PermissionsController')->only(['index']);
-
-/**
- * Investments Routes
- */
-Route::resource('investments', 'InvestmentsController');
-
-/**
- * Employees Routes
- */
-Route::resource('employees', 'EmployeesController');
-
-/**
- * Protectives Routes
- */
-Route::resource('protectives', 'ProtectivesController');
-
-/**
- * Funds Routes
- */
-Route::resource('funds', 'FundsController');
-
-/**
- * Partners Routes
- */
-Route::resource('partners', 'PartnersController')->except(['show']);
-
-/**
- * Risks Routes
- */
-Route::resource('risks', 'RisksController')->except(['show']);
-
-/**
- * Files Routes
- */
 Route::get('files/download/{id}', 'FilesController@download')->name('files.download');
-Route::resource('files', 'FilesController');
-
-/**
- * Notes Routes
- */
-Route::resource('notes', 'NotesController');
-
-/**
- * News Routes
- */
-Route::resource('news', 'NewsController');
-
-/**
- * Replies Routes
- */
-Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
-
-/**
- * File Categories Routes
- */
-Route::resource('file-categories', 'FileCategoriesController');
-
-/**
- * File Categories Routes
- */
-Route::resource('departments', 'DepartmentsController');
