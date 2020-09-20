@@ -18,7 +18,11 @@ class DepartmentPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        if($user->hasPermission('departments-viewany')) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -30,7 +34,11 @@ class DepartmentPolicy
      */
     public function view(User $user, Department $department)
     {
-        return true;
+        if($user->hasPermission('departments-view')) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
