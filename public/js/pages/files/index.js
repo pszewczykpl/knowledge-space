@@ -7,40 +7,31 @@ $(document).ready(function() {
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
         ajax: {
-            url: HOST_URL + '/api/datatables/risks',
+            url: HOST_URL + '/api/datatables/files',
             type: 'POST',
             datatype: 'json'
         },
         columns: [
             {
-                data: 'code',
-                visible: true,
-                orderable: true,
-                searchable: true
-            },{
                 data: 'name',
                 visible: true,
                 orderable: true,
                 searchable: true,
-                "width": "45%"
-            },{
-                data: 'category',
+                "width": "30%"
+            }, {
+                data: 'path',
                 visible: true,
                 orderable: true,
                 searchable: true,
-                render: function(data) {
-                    return '<span class="label font-weight-bold label-lg label-light-primary label-inline">' + data + '</span>';
-                }
-            },{
-                data: 'group',
-                visible: true,
-                orderable: true,
-                searchable: true
-            },{
-                data: 'grace_period',
+                "width": "40%"
+            }, {
+                data: 'file_category.name',
                 visible: true,
                 orderable: false,
-                searchable: false
+                searchable: false,
+                render: function (data, type, row) {
+                    return '<span class="label font-weight-bold label-lg label-light-success label-inline">' + data +  '</span>';
+                }
             }, {
                 data: 'actions',
                 visible: true,
@@ -49,21 +40,10 @@ $(document).ready(function() {
                 defaultContent: '',
                 render: function (data, type, full, row) {
                     return '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareRisks(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' +
-                        '<a href="' + HOST_URL + '/risks/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
+                    '<a href="' + HOST_URL + '/files/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>' +
+                    '<a href="' + HOST_URL + '/files/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl" target="_blank"><i class="flaticon2-expand"></i></a>';
                 }
-            }, {
+            },{
                 data: 'id',
                 visible: false,
                 orderable: false,
@@ -90,7 +70,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [0, "asc"]
+        "order": [1, "asc"]
     });
 
     function filterGlobal () {
@@ -114,9 +94,9 @@ $(document).ready(function() {
     });
 });
 
-function ShareRisks(id) {
+function ShareFiles(id) {
     const el = document.createElement('textarea');
-    el.value = HOST_URL + '/risks/' + id;
+    el.value = HOST_URL + '/files/' + id;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');

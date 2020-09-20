@@ -7,30 +7,25 @@ $(document).ready(function() {
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
         ajax: {
-            url: HOST_URL + '/api/datatables/files',
+            url: HOST_URL + '/api/datatables/notes',
             type: 'POST',
             datatype: 'json'
         },
         columns: [
             {
-                data: 'name',
+                data: 'content',
                 visible: true,
                 orderable: true,
                 searchable: true,
-                "width": "30%"
+                "width": "60%"
             }, {
-                data: 'path',
-                visible: true,
-                orderable: true,
-                searchable: true,
-                "width": "40%"
-            }, {
-                data: 'file_category.name',
+                data: 'fullname',
                 visible: true,
                 orderable: false,
                 searchable: false,
-                render: function (data, type, row) {
-                    return '<span class="label font-weight-bold label-lg label-light-success label-inline">' + data +  '</span>';
+                defaultContent: '',
+                render: function (data, type, full, row) {
+                    return '<a href="' + HOST_URL + '/users/' + full.user.id + '">' + full.user.first_name + ' ' + full.user.last_name + '</a>';
                 }
             }, {
                 data: 'actions',
@@ -39,11 +34,9 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return '' +
-                    '<a href="' + HOST_URL + '/files/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>' +
-                    '<a href="' + HOST_URL + '/files/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl" target="_blank"><i class="flaticon2-expand"></i></a>';
+                    return '<a href="' + HOST_URL + '/notes/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>';
                 }
-            },{
+            }, {
                 data: 'id',
                 visible: false,
                 orderable: false,
@@ -70,7 +63,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [1, "asc"]
+        "order": [0, "asc"]
     });
 
     function filterGlobal () {
@@ -93,21 +86,3 @@ $(document).ready(function() {
         filterColumn($(this).parents('div').attr('data-column'));
     });
 });
-
-function ShareFiles(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/files/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }

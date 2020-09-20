@@ -1,20 +1,36 @@
 $(document).ready(function() {
     $('#table').DataTable( {
         responsive: true,
+        processing: true,
+        serverSide: true,
         dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
-        "columns": [
-            { 
-                visible: true
-            }, {
-                visible: true
-            }, {
-                visible: true
-            },
+        ajax: {
+            url: HOST_URL + '/api/datatables/file-categories',
+            type: 'POST',
+            datatype: 'json'
+        },
+        columns: [
             {
+                data: 'name',
                 visible: true,
-                orderable: false
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'actions',
+                visible: true,
+                orderable: false,
+                searchable: false,
+                defaultContent: '',
+                render: function (data, type, full, row) {
+                    return '<a href="' + HOST_URL + '/file-categories/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>';
+                }
+            }, {
+                data: 'id',
+                visible: false,
+                orderable: false,
+                searchable: false
             }
         ],
         language: {

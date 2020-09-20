@@ -1,20 +1,38 @@
 $(document).ready(function() {
     $('#table').DataTable( {
         responsive: true,
+        processing: true,
+        serverSide: true,
         dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
-        "columns": [
-            { 
-                visible: true
-            }, {
-                visible: true
-            }, {
-                visible: true
-            },
+        ajax: {
+            url: HOST_URL + '/api/datatables/permissions',
+            type: 'POST',
+            datatype: 'json'
+        },
+        columns: [
             {
+                data: 'name',
                 visible: true,
-                orderable: false
+                orderable: true,
+                searchable: true
+            },{
+                data: 'code',
+                visible: true,
+                orderable: true,
+                searchable: true
+            },{
+                data: 'description',
+                visible: true,
+                orderable: false,
+                searchable: true,
+                "width": "50%"
+            }, {
+                data: 'id',
+                visible: false,
+                orderable: false,
+                searchable: false
             }
         ],
         language: {
@@ -37,7 +55,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [0, "asc"]
+        "order": [1, "asc"]
     });
 
     function filterGlobal () {

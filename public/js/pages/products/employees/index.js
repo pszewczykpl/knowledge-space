@@ -16,7 +16,8 @@ $(document).ready(function() {
                 data: 'name',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: true,
+                width: '35%'
             }, {
                 data: 'code_owu',
                 visible: true,
@@ -62,7 +63,7 @@ $(document).ready(function() {
                                     '</li>' +
                                     '<div class="dropdown-divider"></div>' +
                                     '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/employees/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>' +
+                                        '<a href="' + HOST_URL + '/api/employees/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty PDF jako plik .zip">Pobierz jako zip</span></a>' +
                                     '</li>' +
                                 '</ul>' +
                             '</div>' +

@@ -7,53 +7,36 @@ $(document).ready(function() {
         lengthMenu: [5, 15, 25, 50],
         pageLength: 15,
         ajax: {
-            url: HOST_URL + '/api/datatables/protectives',
+            url: HOST_URL + '/api/datatables/users',
             type: 'POST',
             datatype: 'json'
         },
         columns: [
             {
-                data: 'name',
+                data: 'fullname',
                 visible: true,
                 orderable: true,
-                searchable: true
-            }, {
-                data: 'dist_short',
-                visible: true,
-                orderable: true,
-                searchable: true
-            }, {
-                data: 'code',
-                visible: true,
-                orderable: true,
-                searchable: true
-            }, {
-                data: 'edit_date',
-                visible: true,
-                orderable: true,
-                searchable: false
-            }, {
-                data: 'status',
-                visible: true,
-                orderable: false,
                 searchable: true,
-                render: function (data, type, row) {
-                    if(data=='N') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Archiwalne</span>';
-                    }
-                    else if(data=='A') {
-                        return '<span class="label font-weight-bold label-lg label-light-success label-inline">Aktualne</span>';
-                    }
-                    else {
-                        return 'brak danych'
-                    }
+                defaultContent: '',
+                render: function (data, type, full, row) {
+                    return full.first_name + ' ' + full.last_name;
                 }
+            },{
+                data: 'email',
+                visible: true,
+                orderable: true,
+                searchable: true
+            },{
+                data: 'phone',
+                visible: true,
+                orderable: true,
+                searchable: true
             }, {
                 data: 'actions',
                 visible: true,
                 orderable: false,
                 searchable: false,
-                defaultContent: "",
+                defaultContent: '',
                 render: function (data, type, full, row) {
                     return '' +
                         '<div class="dropdown dropdown-inline">' +
@@ -63,16 +46,12 @@ $(document).ready(function() {
                             '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
                                 '<ul class="navi navi-hover flex-column">' +
                                     '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareProtectives(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>' +
-                                    '<div class="dropdown-divider"></div>' +
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/protectives/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty PDF jako plik .zip">Pobierz jako zip</span></a>' +
+                                        '<a class="navi-link" onclick="ShareUsers(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
                                     '</li>' +
                                 '</ul>' +
                             '</div>' +
                         '</div>' +
-                        '<a href="' + HOST_URL + '/protectives/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
+                        '<a href="' + HOST_URL + '/users/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
                 }
             }, {
                 data: 'id',
@@ -80,20 +59,25 @@ $(document).ready(function() {
                 orderable: false,
                 searchable: false
             }, {
-                data: 'code_owu',
+                data: 'first_name',
                 visible: false,
                 orderable: false,
                 searchable: true
             }, {
-                data: 'dist',
+                data: 'last_name',
                 visible: false,
                 orderable: false,
                 searchable: true
             }, {
-                data: 'subscription',
+                data: 'username',
                 visible: false,
                 orderable: false,
-                searchable: false
+                searchable: true
+            }, {
+                data: 'position',
+                visible: false,
+                orderable: false,
+                searchable: true
             }
         ],
         language: {
@@ -116,7 +100,7 @@ $(document).ready(function() {
                 "previous":   "<"
             }
         },
-        "order": [2, "desc"]
+        "order": [1, "asc"]
     });
 
     function filterGlobal () {
@@ -140,52 +124,18 @@ $(document).ready(function() {
     });
 });
 
-$("#active_or_all").click(function() {
-    if ($(this).hasClass('btn-success')) {
-        $('#col4_filter').val('A');
-        $('#col4_filter').click();
-
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-primary');
-        $(this).html('Pokaż Wszystkie')
-
-        $.notify({
-            message: 'Widzisz tylko aktualnie obowiązujące komplety dokumentów',
-        },{
-            type: 'success',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
-    }
-    else if ($(this).hasClass('btn-primary')) {
-        $('#col4_filter').val('');
-        $('#col4_filter').click();
-
-        $(this).removeClass('btn-primary');
-        $(this).addClass('btn-success');
-        $(this).html('Pokaż tylko Aktualne')
-
-        $.notify({
-            message: 'Widzisz wzystkie komplety dokumentów',
-        },{
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
-    }
-});
-
-function ShareProtectives(id) {
+function ShareUsers(id) {
     const el = document.createElement('textarea');
-    el.value = HOST_URL + '/protectives/' + id;
+    el.value = HOST_URL + '/users/' + id;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
   
     $.notify({
-          message: 'Skopiowano link do schowka!',
+          message: 'Skopiowano do schowka!',
       },{
+          // settings
           type: 'primary',
           allow_dismiss: false,
           newest_on_top: true

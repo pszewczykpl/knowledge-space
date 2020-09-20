@@ -21,7 +21,8 @@ $(document).ready(function() {
                 data: 'name',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: true,
+                width: '40%'
             },{
                 data: 'type',
                 visible: true,

@@ -29,7 +29,11 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 render: function(data) {
-                    return '<span class="label font-weight-bold label-lg label-light-primary label-inline">' + data + '</span>';
+                    if(data) {
+                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">' + data + '</span>';
+                    } else {
+                        return '';
+                    }
                 }
             },{
                 data: 'number_rau',
@@ -46,6 +50,28 @@ $(document).ready(function() {
                 visible: true,
                 orderable: true,
                 searchable: true
+            }, {
+                data: 'actions',
+                visible: true,
+                orderable: false,
+                searchable: false,
+                defaultContent: '',
+                render: function (data, type, full, row) {
+                    return '' +
+                        '<div class="dropdown dropdown-inline">' +
+                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
+                                '<i class="flaticon-more-1"></i>' +
+                            '</a>' +
+                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
+                                '<ul class="navi navi-hover flex-column">' +
+                                    '<li class="navi-item">' +
+                                        '<a class="navi-link" onclick="SharePartners(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</div>' +
+                        '</div>' +
+                        '<a href="' + HOST_URL + '/partners/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
+                }
             }, {
                 data: 'id',
                 visible: false,
@@ -106,7 +132,7 @@ function SharePartners(id) {
     document.body.removeChild(el);
   
     $.notify({
-          message: 'Skopiowano do schowka!',
+          message: 'Skopiowano link do schowka!',
       },{
           // settings
           type: 'primary',
