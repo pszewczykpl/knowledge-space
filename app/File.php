@@ -10,7 +10,7 @@ class File extends Model
         'path',
         'name',
         'filename',
-        'extension'
+        'extension',
     ];
 
     public function investments()

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\File;
+use App\Investment;
+use App\Protective;
+use App\Employee;
+use App\FileCategory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,6 +53,10 @@ class FilesController extends Controller
         return view('files.create', [
             'title' => 'Nowy dokument',
             'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
+            'investments' => Investment::all(),
+            'protectives' => Protective::all(),
+            'employees' => Employee::all(),
+            'file_categories' => FileCategory::all(),
         ]);
     }
 
@@ -61,11 +69,20 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', File::class);
-        
+
+        $path = $request->file->store(date('Y') . '/' . date('m') . '/' . date('d'));
+
         $file = new File($request->all());
+        $file->path = $path;
+        $file->extension = $request->file('file')->extension();
+        $file->file_category()->associate(FileCategory::find($request->file_category_id));
         Auth::user()->files()->save($file);
 
-        return redirect()->route('files.show', $file->id)->with('notify_success', 'Nowy dokument został dodany!');
+        $file->investments()->sync($request->investment_id);
+        $file->protectives()->sync($request->protective_id);
+        $file->employees()->sync($request->employee_id);
+
+        return redirect()->route('files.index')->with('notify_success', 'Nowy dokument został dodany!');
     }
 
     /**
