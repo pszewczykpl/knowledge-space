@@ -5,7 +5,7 @@ namespace App\View\Components\Panels;
 use Illuminate\View\Component;
 use App\FileCategory;
 
-class FilesPanel extends Component
+class Files extends Component
 {
     /**
      * Files
@@ -16,23 +16,22 @@ class FilesPanel extends Component
      * File Categories
      */
     public $file_categories;
+
+    /**
+     * ZIP filename
+     */
+    public $name;
     
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($files)
+    public function __construct($files, $name)
     {
         $this->files = $files;
-        
-        $z = [];
-
-        foreach($files as $file) {
-            array_push($z, $file->file_category_id);
-        }
-
-        $this->file_categories = FileCategory::whereIn('id', $z)->get();
+        $this->file_categories = FileCategory::whereIn('id', $files->pluck('file_category_id')->toArray())->get();
+        $this->name =  $name;
     }
 
     /**
@@ -42,6 +41,6 @@ class FilesPanel extends Component
      */
     public function render()
     {
-        return view('components.panels.files-panel');
+        return view('components.panels.files');
     }
 }
