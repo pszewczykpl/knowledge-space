@@ -7,7 +7,7 @@
 	<div class="offcanvas-content pr-5 mr-n5">
 		<div class="d-flex mt-5">
 			<div class="symbol symbol-100 mr-5">
-				<div class="symbol-label" style="background-image:url('{{ asset('storage/uploads/avatars/') }}/{{ Auth::user()->avatar_filename }}')"></div>
+				<div class="symbol-label" style="background-image:url('{{ asset('storage/avatars/') }}/{{ Auth::user()->avatar_filename }}')"></div>
 				<i class="symbol-badge bg-success"></i>
 			</div>
 			<div class="d-flex flex-column">

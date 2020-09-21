@@ -17,13 +17,13 @@ $(document).ready(function() {
                 visible: true,
                 orderable: true,
                 searchable: true,
-                "width": "30%"
+                "width": "25%"
             }, {
                 data: 'path',
                 visible: true,
                 orderable: true,
                 searchable: true,
-                "width": "40%"
+                "width": "35%"
             }, {
                 data: 'file_category.name',
                 visible: true,

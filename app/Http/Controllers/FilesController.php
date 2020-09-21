@@ -70,17 +70,18 @@ class FilesController extends Controller
     {
         $this->authorize('create', File::class);
 
-        $path = $request->file->store(date('Y') . '/' . date('m') . '/' . date('d'));
+        $path = $request->file->store('files');
 
         $file = new File($request->all());
+
         $file->path = $path;
         $file->extension = $request->file('file')->extension();
         $file->file_category()->associate(FileCategory::find($request->file_category_id));
         Auth::user()->files()->save($file);
-
-        $file->investments()->sync($request->investment_id);
-        $file->protectives()->sync($request->protective_id);
-        $file->employees()->sync($request->employee_id);
+        
+        $file->investments()->attach($request->investment_id);
+        $file->protectives()->attach($request->protective_id);
+        $file->employees()->attach($request->employee_id);
 
         return redirect()->route('files.index')->with('notify_success', 'Nowy dokument został dodany!');
     }
@@ -136,6 +137,10 @@ class FilesController extends Controller
             'title' => 'Edycja dokumentu',
             'description' => 'Zaktualizuj dane dokumentu i kliknij Zapisz',
             'file' => $file,
+            'investments' => Investment::all(),
+            'protectives' => Protective::all(),
+            'employees' => Employee::all(),
+            'file_categories' => FileCategory::all(),
         ]);
     }
 
@@ -149,7 +154,22 @@ class FilesController extends Controller
     public function update(Request $request, File $file)
     {
         $this->authorize('update', $file);
+
         $file->update($request->all());
+
+        if ($request->hasFile('file')) {
+            Storage::delete($file->path);
+
+            $path = $request->file->store('files');
+            $file->path = $path;
+            $file->extension = $request->file('file')->extension();
+            $file->save();            
+        }
+        
+        $file->file_category()->associate(FileCategory::find($request->file_category_id));
+        $file->investments()->sync($request->investment_id);
+        $file->protectives()->sync($request->protective_id);
+        $file->employees()->sync($request->employee_id);
 
         return redirect()->route('files.index')->with('notify_success', 'Dokument został zaktualizowany!');
     }
@@ -164,6 +184,8 @@ class FilesController extends Controller
     {
         $this->authorize('delete', $file);
         $file->delete();
+
+        Storage::move($file->path, 'trash/' . $file->path);
 
         return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');
     }

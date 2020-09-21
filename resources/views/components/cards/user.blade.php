@@ -5,7 +5,7 @@
 				<div class="d-flex flex-column flex-center">
 					<div class="symbol symbol-120 symbol-circle symbol-white overflow-hidden">
 						<span class="symbol-label">
-							<img src="{{ asset('storage/uploads/avatars/') }}/{{ $user->avatar_filename }}" class="h-100" alt="" />
+							<img src="{{ asset('storage/avatars/') }}/{{ $user->avatar_filename }}" class="h-100" alt="" />
 						</span>
 					</div>
 					<div class="pt-2 text-center">

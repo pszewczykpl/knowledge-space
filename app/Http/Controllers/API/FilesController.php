@@ -87,11 +87,11 @@ class FilesController extends Controller
         $files = File::whereIn('id', $request->id)->get();
 
         $zip = new ZipArchive;
-        if ($zip->open('tmp.zip', ZipArchive::CREATE) === TRUE) {
+        if ($zip->open('storage/tmp.zip', ZipArchive::CREATE) === TRUE) {
             foreach($files as $file) {
                 
                 $zip->addFile(
-                    'storage/uploads/' . $file->path, 
+                    'storage/' . $file->path, 
                     $file->file_category->prefix . $file->name . '.' . $file->extension
                 );
                 
@@ -99,6 +99,6 @@ class FilesController extends Controller
             $zip->close();
         }
 
-        return response()->download('tmp.zip', $request->name . '.zip')->deleteFileAfterSend();
+        return response()->download('storage/tmp.zip', $request->name . '.zip')->deleteFileAfterSend();
     }
 }

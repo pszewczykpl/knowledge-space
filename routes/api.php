@@ -2,6 +2,17 @@
 
 use Illuminate\Http\Request;
 
+use App\Investment;
+use App\FileCategory;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
+
+use Illuminate\Http\File;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

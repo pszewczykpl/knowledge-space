@@ -85,7 +85,6 @@
                         </div>
                         <div class="card-body px-0">
                             {!! Form::open(['route' => ['notes.update', $note->id], 'method' => 'PUT', 'id' => 'note_update_form']) !!}
-                            {!! Form::token() !!}
 
                                 <div class="tab-content">
                                     <div class="tab-pane active px-7" id="content" role="tabpanel">
@@ -133,7 +132,6 @@
                                                         <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Ochronne</label>
                                                     <div class="col-8">
@@ -146,7 +144,6 @@
                                                         <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się komentarz.</span>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze</label>
                                                     <div class="col-8">
