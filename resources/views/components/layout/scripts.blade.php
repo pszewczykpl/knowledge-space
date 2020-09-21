@@ -4,7 +4,6 @@
 <script src="{{ asset('plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 <script src="{{ asset('js/scripts.bundle.js') }}"></script>
 <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
-
 @if (Session::has('notify_success'))
 <script>
 $.notify({
@@ -16,7 +15,6 @@ $.notify({
 });
 </script>
 @endif
-
 @if (Session::has('notify_danger'))
 <script>
 $.notify({

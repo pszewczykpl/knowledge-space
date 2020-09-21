@@ -1,8 +1,6 @@
 <div class="container">
-
     @can('create', App\Note::class)
     {!! Form::open(['route' => 'notes.store', 'method' => 'post']) !!}
-        {!! Form::token() !!}
         <div class="form-group">
             <input type="hidden" id="{{ $noteable_type }}_id" name="{{ $noteable_type }}_id" value="{{ $noteable_id }}">
             <textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Treść notatki"></textarea>
@@ -15,10 +13,8 @@
     {!! Form::close() !!}
     <div class="separator separator-dashed my-10"></div>
     @endcan
-    
     <div class="timeline timeline-3">
         <div class="timeline-items">
-            
             @foreach($notes as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
@@ -34,7 +30,6 @@
                                 {{ $note->updated_at }}
                             </span>
                         </div>
-                        
                         <div style="display: flex;">
                             @can('update', $note)
                             <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm"><i class="flaticon2-edit text-primary" title="Edytuj"></i></a>
@@ -45,7 +40,6 @@
                             {{ Form::close() }}
                             @endcan
                         </div>
-
                     </div>
                     <p class="p-0">
                         {{ $note->content }}
@@ -53,8 +47,6 @@
                 </div>
             </div>
             @endforeach
-
         </div>
     </div>
-
 </div>

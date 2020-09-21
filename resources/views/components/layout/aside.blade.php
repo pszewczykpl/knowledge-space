@@ -5,7 +5,6 @@
 		</a>
 		<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 			<span class="svg-icon svg-icon svg-icon-xl">
-				
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 						<polygon points="0 0 24 0 24 24 0 24" />
@@ -13,15 +12,12 @@
 						<path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)" />
 					</g>
 				</svg>
-				
 			</span>
 		</button>
 	</div>
-	
 	<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 		<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <ul class="menu-nav">
-                
                 <li class="menu-item {{ (request()->routeIs('home.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('home.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -37,7 +33,6 @@
 						<span class="menu-text font-weight-light">Strona Główna</span>
 					</a>
                 </li>
-
 				@can('viewany', App\News::class)
 				<li class="menu-item {{ (request()->routeIs('news.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('news.index') }}" class="menu-link">
@@ -55,12 +50,10 @@
 					</a>
                 </li>
 				@endcan
-                
 				<li class="menu-section">
 					<h4 class="menu-text">Archiwum produktowe</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
-				
                 <li class="menu-item {{ (request()->routeIs('investments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('investments.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -77,7 +70,6 @@
 						<span class="menu-text font-weight-light">Ubezpieczenia Inwestycyjne</span>
 					</a>
                 </li>
-                
                 <li class="menu-item {{ (request()->routeIs('protectives.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('protectives.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -91,7 +83,6 @@
 						<span class="menu-text font-weight-light">Ubezpieczenia Ochronne</span>
 					</a>
                 </li>
-                
                 <li class="menu-item {{ (request()->routeIs('employees.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('employees.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -106,12 +97,10 @@
 						<span class="menu-text font-weight-light">Ubezpieczenia Pracownicze</span>
 					</a>
                 </li>
-                
 				<li class="menu-section">
 					<h4 class="menu-text">Słowniki</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
-
 				<li class="menu-item {{ (request()->routeIs('partners.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('partners.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -126,7 +115,6 @@
 						<span class="menu-text font-weight-light">Partnerzy/Dystrybutorzy</span>
 					</a>
                 </li>
-                
                 <li class="menu-item {{ (request()->routeIs('risks.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('risks.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -141,7 +129,6 @@
 						<span class="menu-text font-weight-light">Ryzyka ubezpieczeniowe</span>
 					</a>
                 </li>
-                
                 <li class="menu-item {{ (request()->routeIs('funds.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('funds.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -156,13 +143,10 @@
 						<span class="menu-text font-weight-light">Fundusze UFK</span>
 					</a>
                 </li>
-
-				@auth
 				<li class="menu-section">
 					<h4 class="menu-text">HR</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
-
 				@can('viewany', App\User::class)
 				<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('users.index') }}" class="menu-link">
@@ -179,7 +163,6 @@
 					</a>
                 </li>
 				@endcan
-
 				@can('viewany', App\Department::class)
 				<li class="menu-item {{ (request()->routeIs('departments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('departments.index') }}" class="menu-link">
@@ -196,8 +179,6 @@
 					</a>
                 </li>
 				@endcan
-				@endauth
-				
 			</ul>
 		</div>
 	</div>

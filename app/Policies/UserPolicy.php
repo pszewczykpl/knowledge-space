@@ -64,7 +64,7 @@ class UserPolicy
             return true;
         }
 
-        return $user->id === $model->user_id;
+        return $user->id === $model->id;
     }
 
     /**
@@ -80,6 +80,6 @@ class UserPolicy
             return true;
         }
 
-        return $user->id === $model->user_id;
+        return $user->id === $model->id;
     }
 }

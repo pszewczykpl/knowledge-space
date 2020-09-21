@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,9 +54,9 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'department' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'department_id' => ['required'],
         ]);
     }
 
@@ -67,13 +68,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'department' => $data['department'],
+            'department_id' => $data['department_id'],
             'email' => $data['email'],
+            'avatar_filename' => '0.png',
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->permissions()->attach(Permission::whereIn('code',
+            [
+                'users-viewany',
+                'replies-create',
+                'permissions-viewany',
+                'notes-create',
+                'news-viewany',
+                'news-view',
+                'news-create',
+                'departments-viewany',
+                'departments-view',
+            ]
+        )->pluck('id')->toArray());
+
+        return $user;
     }
 }

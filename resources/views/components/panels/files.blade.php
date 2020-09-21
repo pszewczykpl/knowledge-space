@@ -64,17 +64,13 @@
         </div>
     </div>
 </div>
-
 <div class="row" style="margin-right: 0px; margin-left: 0px;">
-    
     @foreach ($file_categories->split(2) as $split)
     <div class="col-md-6" style="padding-right: 0px; padding-left: 0px;">
-
         @foreach($split as $category)
         <div class="card card-custom" style="box-shadow: 0px 0px 0px 0px; -webkit-box-shadow: 0px 0px 0px 0x;">
             <div class="card-header border-0">
                 <h3 class="card-title font-weight-bold text-dark">{{ $category->name }}</h3>
-
                 <div class="card-toolbar">
 					<a href="{{ route('files.zip', ['id' => $files->where('extension', 'pdf')->where('file_category_id', $category->id)->pluck('id')->toArray(), 'name' => $category->name]) }}" class="btn btn-link-primary font-weight-lighter btn-sm" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz poniższe dokumenty PDF jako <b>.zip</b>">
                         <span class="svg-icon navi-icon">
@@ -87,7 +83,6 @@
 						</span>Pobierz .zip
                     </a>
 				</div>
-
             </div>
             <div class="card-body pt-0 pb-0">
             @if($files->where('file_category_id', '=', $category->id)->count() == 0)
@@ -102,7 +97,6 @@
                     <div class="mr-3">
                         <a href="{{ route('files.show', $file->id) }}" target="_blank"><img src="{{ asset('/media/files/' . $file->extension . '.svg') }}" style="width: 35px;" alt="{{ $file->name }}"></a>
                     </div>
-
                     <div class="d-flex flex-column flex-grow-1">
                         <a href="{{ route('files.show', $file->id) }}" class="text-dark text-hover-primary mb-1 font-size-md font-weight-normal" target="_blank">
                             {{ $file->name }}
@@ -163,8 +157,6 @@
             </div>
         </div>
         @endforeach
-        
     </div>
     @endforeach
-
 </div>

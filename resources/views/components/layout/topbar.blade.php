@@ -1,7 +1,6 @@
 <div id="kt_header" class="header header-fixed">
 	<div class="container-fluid d-flex align-items-stretch justify-content-between">
 		<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
-			
 			@auth
 			<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 				<ul class="menu-nav">
@@ -12,7 +11,6 @@
 						</a>
 						<div class="menu-submenu menu-submenu-classic menu-submenu-left">
 							<ul class="menu-subnav">
-                                
                                 @can('viewany', App\Note::class)
 								<li class="menu-item {{ (request()->routeIs('notes.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('notes.index') }}" class="menu-link">
@@ -29,7 +27,6 @@
 									</a>
 								</li>
 								@endcan
-
 								@can('viewany', App\Permission::class)
 								<li class="menu-item {{ (request()->routeIs('permissions.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('permissions.index') }}" class="menu-link">
@@ -48,7 +45,6 @@
 									</a>
 								</li>
 								@endcan
-								
 								@can('viewany', App\FileCategory::class)
 								<li class="menu-item {{ (request()->routeIs('file-categories.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('file-categories.index') }}" class="menu-link">
@@ -65,7 +61,6 @@
 									</a>
 								</li>
 								@endcan
-
 								@can('viewany', App\File::class)
 								<li class="menu-item {{ (request()->routeIs('files.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('files.index') }}" class="menu-link">
@@ -83,21 +78,19 @@
 									</a>
 								</li>
 								@endcan
-								
 							</ul>
 						</div>
 					</li>
 				</ul>
 			</div>
 			@endauth
-
 		</div>
 		<div class="topbar">
 			<div class="topbar-item">
 				@auth
 				<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 					<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Witaj,</span>
-					<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+					<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->fullname() }}</span>
 					<div class="symbol symbol-35">
 						<div class="symbol-label" style="background-image:url('{{ asset('storage/avatars/') }}/{{ Auth::user()->avatar_filename }}')"></div>
 					</div>

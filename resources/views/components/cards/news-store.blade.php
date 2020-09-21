@@ -8,7 +8,6 @@
 			<span class="text-muted font-weight-bold font-size-lg">Coś nowego, <b>{{ Auth::user()->first_name }}</b>?</span>
 		</div>
 		{!! Form::open(['route' => 'news.store', 'method' => 'post', 'id' => 'kt_forms_widget_2_form', 'class' => 'pt-10 ql-quil ql-quil-plain']) !!}
-			{!! Form::token() !!}
 			<div id="editor" name="editor" class="font-size-lg"></div>
 			<textarea name="content" style="display:none" id="content"></textarea>
 			<div class="border-top my-5"></div>

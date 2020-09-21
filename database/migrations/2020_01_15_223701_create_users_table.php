@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('position')->nullable();
             $table->text('description')->nullable();
             $table->string('location')->default('Warszawa');
-            $table->string('avatar_filename')->default('1.jpg');
+            $table->string('avatar_filename')->default('0.png');
             $table->rememberToken();
             $table->timestamps();
         });

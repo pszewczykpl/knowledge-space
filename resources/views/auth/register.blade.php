@@ -6,7 +6,6 @@
 		<div class="d-flex flex-column flex-lg-row flex-row-fluid text-center" style="background-image: url({{ asset('/media/bg/bg-3.jpg') }});">
 			<div class="d-flex w-100 flex-center p-15">
 				<div class="login-wrapper">
-					
                     <div class="text-dark-75">
 						<img src="{{ asset('/media/logos/logo-main.png') }}" class="max-h-75px">
 						<h3 class="mb-10 mt-10 font-weight-bold">Witaj w Bazie Wiedzy!</h3>
@@ -30,7 +29,6 @@
 						</div>
 						<form method="POST" action="{{ route('register') }}" class="form text-left">
                             @csrf
-
                             <div class="form-group py-2 m-0">
 								<input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('username') is-invalid @enderror" placeholder="Nazwa użytkownika" id="username" type="username" name="username" value="{{ old('username') }}" required autocomplete="username">
                                 @error('username')
@@ -39,7 +37,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            
                             <div class="form-group py-2 m-0 border-top m-0">
 								<input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('first_name') is-invalid @enderror" placeholder="Imię" id="first_name" type="first_name" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name">
                                 @error('first_name')
@@ -48,7 +45,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            
                             <div class="form-group py-2 m-0 border-top m-0">
 								<input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('last_name') is-invalid @enderror" placeholder="Nazwisko" id="last_name" type="last_name" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
                                 @error('last_name')
@@ -59,14 +55,11 @@
                             </div>
                             
                             <div class="form-group py-2 m-0 border-top m-0">
-								<input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('department') is-invalid @enderror" placeholder="Departament" id="department" type="department" name="department" value="{{ old('department') }}" required autocomplete="department">
-                                @error('department')
-                                    <div class="fv-plugins-message-container">
-                                        <div class="fv-help-block">{{ $message }}</div>
-                                    </div>
-                                @enderror
+                                <select class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('department_id') is-invalid @enderror" name="department_id" id="department_id" value="{{ old('department_id') }}">
+                                    <option value="1">DOK</option>
+                                </select>
                             </div>
-							
+
                             <div class="form-group py-2 m-0 border-top m-0">
 								<input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('email') is-invalid @enderror" placeholder="E-mail (firmowy)" id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email">
                                 @error('email')
