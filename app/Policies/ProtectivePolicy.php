@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Protective;
-use App\User;
+use App\Models\Protective;
+use App\Models\User;
 
 class ProtectivePolicy
 {

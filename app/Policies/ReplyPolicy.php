@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Reply;
-use App\User;
+use App\Models\Reply;
+use App\Models\User;
 
 class ReplyPolicy
 {

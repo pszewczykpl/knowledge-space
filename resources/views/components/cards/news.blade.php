@@ -105,7 +105,7 @@
 				@endforeach
 			</div>
 		</div>
-		@can('create', App\Reply::class)
+		@can('create', App\Models\Reply::class)
 		<div class="separator separator-solid mt-5 mb-4"></div>
 		{!! Form::open(['route' => 'replies.store', 'method' => 'post', 'class' => 'position-relative']) !!}
 			<input type="hidden" id="news_id" name="news_id" value="{{ $news->id }}">

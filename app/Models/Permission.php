@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,7 +22,7 @@ class Permission extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_permission')->withTimestamps();
+        return $this->belongsToMany('App\Models\User', 'user_permission')->withTimestamps();
     }
 
 }

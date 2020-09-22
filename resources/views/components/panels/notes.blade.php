@@ -1,5 +1,5 @@
 <div class="container">
-    @can('create', App\Note::class)
+    @can('create', App\Models\Note::class)
     {!! Form::open(['route' => 'notes.store', 'method' => 'post']) !!}
         <div class="form-group">
             <input type="hidden" id="{{ $noteable_type }}_id" name="{{ $noteable_type }}_id" value="{{ $noteable_id }}">

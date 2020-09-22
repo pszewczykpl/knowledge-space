@@ -11,7 +11,7 @@
 						</a>
 						<div class="menu-submenu menu-submenu-classic menu-submenu-left">
 							<ul class="menu-subnav">
-                                @can('viewany', App\Note::class)
+                                @can('viewany', App\Models\Note::class)
 								<li class="menu-item {{ (request()->routeIs('notes.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('notes.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -27,7 +27,7 @@
 									</a>
 								</li>
 								@endcan
-								@can('viewany', App\Permission::class)
+								@can('viewany', App\Models\Permission::class)
 								<li class="menu-item {{ (request()->routeIs('permissions.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('permissions.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -45,7 +45,7 @@
 									</a>
 								</li>
 								@endcan
-								@can('viewany', App\FileCategory::class)
+								@can('viewany', App\Models\FileCategory::class)
 								<li class="menu-item {{ (request()->routeIs('file-categories.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('file-categories.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">
@@ -61,7 +61,7 @@
 									</a>
 								</li>
 								@endcan
-								@can('viewany', App\File::class)
+								@can('viewany', App\Models\File::class)
 								<li class="menu-item {{ (request()->routeIs('files.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 									<a href="{{ route('files.index') }}" class="menu-link">
 										<span class="svg-icon menu-icon">

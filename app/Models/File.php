@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,31 +18,31 @@ class File extends Model
 
     public function investments()
     {
-        return $this->morphedByMany('App\Investment', 'fileable')->withTimestamps();
+        return $this->morphedByMany('App\Models\Investment', 'fileable')->withTimestamps();
     }
 
     public function employees()
     {
-        return $this->morphedByMany('App\Employee', 'fileable')->withTimestamps();
+        return $this->morphedByMany('App\Models\Employee', 'fileable')->withTimestamps();
     }
 
     public function protectives()
     {
-        return $this->morphedByMany('App\Protective', 'fileable')->withTimestamps();
+        return $this->morphedByMany('App\Models\Protective', 'fileable')->withTimestamps();
     }
 
     public function funds()
     {
-        return $this->morphedByMany('App\Fund', 'fileable')->withTimestamps();
+        return $this->morphedByMany('App\Models\Fund', 'fileable')->withTimestamps();
     }
 
     public function file_category()
     {
-        return $this->belongsTo('App\FileCategory');
+        return $this->belongsTo('App\Models\FileCategory');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

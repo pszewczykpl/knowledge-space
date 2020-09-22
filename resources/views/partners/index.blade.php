@@ -35,7 +35,7 @@
 						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj partnerów Towarzystwa Ubezpieczeń</span>
 					</h3>
 					<div class="card-toolbar">
-						@can('create', App\Partner::class)
+						@can('create', App\Models\Partner::class)
 						<a href="{{ route('partners.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
 							<span class="svg-icon navi-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

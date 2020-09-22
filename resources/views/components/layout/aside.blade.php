@@ -33,7 +33,7 @@
 						<span class="menu-text font-weight-light">Strona Główna</span>
 					</a>
                 </li>
-				@can('viewany', App\News::class)
+				@can('viewany', App\Models\News::class)
 				<li class="menu-item {{ (request()->routeIs('news.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('news.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -145,8 +145,8 @@
                 </li>
 				@auth
 				@if(
-					Auth::user()->can('viewany', App\User::class) 
-					or Auth::user()->can('viewany', App\Department::class)
+					Auth::user()->can('viewany', App\Models\User::class) 
+					or Auth::user()->can('viewany', App\Models\Department::class)
 				)
 				<li class="menu-section">
 					<h4 class="menu-text">HR</h4>
@@ -154,7 +154,7 @@
 				</li>
 				@endif
 				@endauth
-				@can('viewany', App\User::class)
+				@can('viewany', App\Models\User::class)
 				<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('users.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">
@@ -170,7 +170,7 @@
 					</a>
                 </li>
 				@endcan
-				@can('viewany', App\Department::class)
+				@can('viewany', App\Models\Department::class)
 				<li class="menu-item {{ (request()->routeIs('departments.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('departments.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon">

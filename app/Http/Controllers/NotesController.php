@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Note;
-use App\Investment;
-use App\Protective;
-use App\Employee;
-use App\Fund;
-use App\Partner;
-use App\Risk;
+use App\Models\Note;
+use App\Models\Investment;
+use App\Models\Protective;
+use App\Models\Employee;
+use App\Models\Fund;
+use App\Models\Partner;
+use App\Models\Risk;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
-use App\Investment;
-use App\Protective;
-use App\Employee;
-use App\FileCategory;
+use App\Models\File;
+use App\Models\Investment;
+use App\Models\Protective;
+use App\Models\Employee;
+use App\Models\FileCategory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

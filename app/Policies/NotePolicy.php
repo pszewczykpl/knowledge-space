@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Note;
-use App\User;
+use App\Models\Note;
+use App\Models\User;
 
 class NotePolicy
 {

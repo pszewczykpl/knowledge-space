@@ -1,4 +1,4 @@
-@can('create', App\News::class)
+@can('create', App\Models\News::class)
 <div class="card card-custom gutter-b">
 	<div class="card-body">
 		<div class="d-flex align-items-center">

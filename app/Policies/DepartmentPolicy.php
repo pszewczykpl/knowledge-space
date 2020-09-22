@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Department;
-use App\User;
+use App\Models\Department;
+use App\Models\User;
 
 class DepartmentPolicy
 {

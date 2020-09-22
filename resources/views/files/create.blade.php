@@ -24,7 +24,7 @@
 			</span>
 			Anuluj
 		</a>
-        @can('create', App\File::class)
+        @can('create', App\Models\File::class)
         <a onclick='document.getElementById("file_store_form").submit();' class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
 			<span class="svg-icon navi-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

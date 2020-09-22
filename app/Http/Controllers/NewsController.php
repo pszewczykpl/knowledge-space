@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\News;
-use App\Replies;
+use App\Models\News;
+use App\Models\Replies;
 
 class NewsController extends Controller
 {

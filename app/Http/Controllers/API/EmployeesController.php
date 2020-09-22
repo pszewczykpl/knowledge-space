@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Employee;
-use App\File;
-use App\FileCategory;
+use App\Models\Employee;
+use App\Models\File;
+use App\Models\FileCategory;
 
 use ZipArchive;
 

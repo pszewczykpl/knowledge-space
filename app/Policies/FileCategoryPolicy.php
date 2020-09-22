@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\FileCategory;
-use App\User;
+use App\Models\FileCategory;
+use App\Models\User;
 
 class FileCategoryPolicy
 {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Reply;
-use App\News;
+use App\Models\Reply;
+use App\Models\News;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Protective;
+use App\Models\Protective;
 
 use App\Http\Requests\StoreProtective;
 

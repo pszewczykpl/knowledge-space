@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Employee;
-use App\User;
+use App\Models\Employee;
+use App\Models\User;
 
 class EmployeePolicy
 {

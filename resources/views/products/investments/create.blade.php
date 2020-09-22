@@ -24,7 +24,7 @@
 			</span>
 			Anuluj
 		</a>
-        @can('create', App\Investment::class)
+        @can('create', App\Models\Investment::class)
         <a onclick='document.getElementById("investment_store_form").submit();' class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
 			<span class="svg-icon navi-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -180,7 +180,7 @@
                                 <b>Wskazówka!</b><br>
                                 Podczas dodawania ubezpieczenia uzupełniasz podstawowe informację na temat kompletu dokumentów.<br>
                                 Aby dodać nowy dokument przejdź do zakładki <a href="{{ route('files.create') }}" 
-                                @cannot('create', App\File::class)
+                                @cannot('create', App\Models\File::class)
                                      data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="<b>Uwaga!</b> Nie posiadasz uprawnienia do dodawania dokumentów!"
                                 @endcannot
                                 ><b>Dodaj Dokument</b></a>.

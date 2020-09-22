@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Investment;
-use App\Fund;
-use App\File;
-use App\FileCategory;
+use App\Models\Investment;
+use App\Models\Fund;
+use App\Models\File;
+use App\Models\FileCategory;
 
 use ZipArchive;
 

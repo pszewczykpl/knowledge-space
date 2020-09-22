@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Investment;
-use App\User;
+use App\Models\Investment;
+use App\Models\User;
 
 class InvestmentPolicy
 {

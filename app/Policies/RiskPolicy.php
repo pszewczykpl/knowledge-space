@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Risk;
-use App\User;
+use App\Models\Risk;
+use App\Models\User;
 
 class RiskPolicy
 {

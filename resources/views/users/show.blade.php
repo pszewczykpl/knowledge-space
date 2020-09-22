@@ -65,7 +65,7 @@
         </div>
         <div class="col-12 col-md-8">
             @auth
-			@if(Auth::user()->can('create', App\News::class) and $user->id == Auth::user()->id)
+			@if(Auth::user()->can('create', App\Models\News::class) and $user->id == Auth::user()->id)
 				<x-cards.news-store />
 			@endif
 			@if($user->news->count() == 0)

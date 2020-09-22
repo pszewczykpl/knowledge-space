@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Fund;
-use App\Investment;
+use App\Models\Fund;
+use App\Models\Investment;
 
 use App\Http\Requests\StoreFund;
 

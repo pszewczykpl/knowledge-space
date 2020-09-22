@@ -38,7 +38,7 @@
 						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj archiwum ubezpieczeń ochronnych</span>
 					</h3>
 					<div class="card-toolbar">
-						@can('create', App\Protective::class)
+						@can('create', App\Models\Protective::class)
 						<a href="{{ route('protectives.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
 							<span class="svg-icon navi-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -51,7 +51,7 @@
 							Dodaj Ubezpieczenie
 						</a>
 						@endcan
-						@can('create', App\File::class)
+						@can('create', App\Models\File::class)
 							<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold">
 								<span class="svg-icon navi-icon">
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

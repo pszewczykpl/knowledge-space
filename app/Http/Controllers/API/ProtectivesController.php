@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Protective;
-use App\File;
-use App\FileCategory;
+use App\Models\Protective;
+use App\Models\File;
+use App\Models\FileCategory;
 
 use ZipArchive;
 

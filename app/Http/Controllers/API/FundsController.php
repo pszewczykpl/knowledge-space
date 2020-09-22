@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Fund;
+use App\Models\Fund;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

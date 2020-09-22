@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 
-use App\Investment;
-use App\FileCategory;
+use App\Models\Investment;
+use App\Models\FileCategory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

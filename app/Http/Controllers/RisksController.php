@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Risk;
+use App\Models\Risk;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

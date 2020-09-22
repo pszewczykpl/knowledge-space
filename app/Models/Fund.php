@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,21 +22,21 @@ class Fund extends Model
 
     public function investments()
     {
-        return $this->belongsToMany('App\Investment')->withTimestamps();
+        return $this->belongsToMany('App\Models\Investment')->withTimestamps();
     }
 
     public function files()
     {
-        return $this->morphToMany('App\File', 'fileable')->withTimestamps();
+        return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
     }
 
     public function notes()
     {
-        return $this->morphToMany('App\Note', 'noteable')->withTimestamps();
+        return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

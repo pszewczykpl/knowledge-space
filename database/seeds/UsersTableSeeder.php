@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         //     $user->permissions()->attach(App\Permission::all());
         // });
         
-        $user = new App\User;
+        $user = new App\Models\User;
         $user->first_name = 'Piotr';
         $user->last_name = 'Szewczyk';
         $user->username = 'pszewczyk';
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         $user->location = 'Warszawa';
         $user->avatar_filename = '1.jpg';
         $user->save();
-        $user->permissions()->attach(App\Permission::all());
+        $user->permissions()->attach(App\Models\Permission::all());
         
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Permission;
+use App\Models\Permission;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

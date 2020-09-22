@@ -131,7 +131,7 @@
                                 <b>Wskazówka!</b><br>
                                 Podczas edycji ubezpieczenia uzupełniasz podstawowe informację na temat kompletu dokumentów.<br>
                                 Aby dodać nowy dokument przejdź do zakładki <a href="{{ route('files.create') }}" 
-                                @cannot('create', App\File::class)
+                                @cannot('create', App\Models\File::class)
                                      data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="<b>Uwaga!</b> Nie posiadasz uprawnienia do dodawania dokumentów!"
                                 @endcannot
                                 ><b>Dodaj Dokument</b></a>.

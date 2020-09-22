@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,62 +51,62 @@ class User extends Authenticatable
 
     public function investments()
     {
-        return $this->hasMany('App\Investment');
+        return $this->hasMany('App\Models\Investment');
     }
 
     public function protectives()
     {
-        return $this->hasMany('App\Protective');
+        return $this->hasMany('App\Models\Protective');
     }
 
     public function employees()
     {
-        return $this->hasMany('App\Employee');
+        return $this->hasMany('App\Models\Employee');
     }
 
     public function funds()
     {
-        return $this->hasMany('App\Fund');
+        return $this->hasMany('App\Models\Fund');
     }
 
     public function files()
     {
-        return $this->hasMany('App\File');
+        return $this->hasMany('App\Models\File');
     }
 
     public function notes()
     {
-        return $this->hasMany('App\Note');
+        return $this->hasMany('App\Models\Note');
     }
 
     public function news()
     {
-        return $this->hasMany('App\News');
+        return $this->hasMany('App\Models\News');
     }
 
     public function replies()
     {
-        return $this->hasMany('App\Reply');
+        return $this->hasMany('App\Models\Reply');
     }
 
     public function permissions()
     {
-        return $this->belongsToMany('App\Permission', 'user_permission')->withTimestamps();
+        return $this->belongsToMany('App\Models\Permission', 'user_permission')->withTimestamps();
     }
 
     public function partners()
     {
-        return $this->hasMany('App\Partner');
+        return $this->hasMany('App\Models\Partner');
     }
 
     public function department()
     {
-        return $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Models\Department');
     }
 
     public function risks()
     {
-        return $this->hasMany('App\Risk');
+        return $this->hasMany('App\Models\Risk');
     }
 
     public function hasPermission($code)
