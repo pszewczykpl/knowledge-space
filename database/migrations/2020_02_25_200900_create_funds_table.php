@@ -25,6 +25,7 @@ class CreateFundsTable extends Migration
             $table->string('cancel_reason')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

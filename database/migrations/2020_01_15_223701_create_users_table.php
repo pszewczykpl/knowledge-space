@@ -23,12 +23,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('company')->default('Open Life TU Życie S.A.');
             $table->foreignId('department_id')->constrained();
-            $table->string('position')->nullable();
-            $table->text('description')->nullable();
+            $table->string('position')->default('Specjalista');
+            $table->text('description')->default('Opisz swoje stanowisko pracy :-)');
             $table->string('location')->default('Warszawa');
-            $table->string('avatar_filename')->default('0.png');
+            $table->string('avatar_filename')->default('1.jpg');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

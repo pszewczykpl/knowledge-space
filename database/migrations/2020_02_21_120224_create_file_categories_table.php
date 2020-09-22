@@ -18,6 +18,7 @@ class CreateFileCategoriesTable extends Migration
             $table->string('prefix')->nullable();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

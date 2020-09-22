@@ -143,10 +143,17 @@
 						<span class="menu-text font-weight-light">Fundusze UFK</span>
 					</a>
                 </li>
+				@auth
+				@if(
+					Auth::user()->can('viewany', App\User::class) 
+					or Auth::user()->can('viewany', App\Department::class)
+				)
 				<li class="menu-section">
 					<h4 class="menu-text">HR</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
+				@endif
+				@endauth
 				@can('viewany', App\User::class)
 				<li class="menu-item {{ (request()->routeIs('users.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('users.index') }}" class="menu-link">

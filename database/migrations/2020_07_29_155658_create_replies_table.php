@@ -19,6 +19,7 @@ class CreateRepliesTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('news_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

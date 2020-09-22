@@ -22,6 +22,7 @@ class CreateRisksTable extends Migration
             $table->string('grace_period');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

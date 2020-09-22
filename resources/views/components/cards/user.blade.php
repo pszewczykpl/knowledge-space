@@ -7,7 +7,7 @@
 						<span class="symbol-label">
 							<img src="{{ asset('storage/avatars/') }}/{{ $user->avatar_filename }}" class="h-100" alt="" />
 						</span>
-					</div>
+                    </div>
 					<div class="pt-2 text-center">
                         <span class="text-dark-75 text-primary card-title font-weight-bold font-size-h4">
                             {{ $user->first_name }} {{ $user->last_name }}
@@ -88,6 +88,7 @@
                             {{ $user->email }}
                         </span>
                     </div>
+                    @if(isset($user->phone))
                     <div class="pt-2 text-center">
                         <span class="svg-icon svg-icon-lg svg-icon-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -102,6 +103,7 @@
                             {{ $user->phone }}
                         </span>
                     </div>
+                    @endif
                 </div>
 			</div>
 		</div>

@@ -18,6 +18,7 @@ class CreateNoteablesTable extends Migration
             $table->foreignId('note_id')->constrained()->onDelete('cascade');
             $table->morphs('noteable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

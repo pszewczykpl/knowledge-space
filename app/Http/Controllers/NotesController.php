@@ -118,6 +118,8 @@ class NotesController extends Controller
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
             'funds' => Fund::all(),
+            'partners' => Partner::all(),
+            'risks' => Risk::all(),
         ]);
     }
 
@@ -131,6 +133,7 @@ class NotesController extends Controller
     public function update(Request $request, Note $note)
     {
         $this->authorize('update', $note);
+        
         $note->update($request->all());
 
         $note->investments()->sync($request->investment_id);

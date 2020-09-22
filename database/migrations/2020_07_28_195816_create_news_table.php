@@ -18,6 +18,7 @@ class CreateNewsTable extends Migration
             $table->text('content');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

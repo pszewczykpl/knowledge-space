@@ -25,6 +25,7 @@ class CreateProtectivesTable extends Migration
             $table->string('status');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

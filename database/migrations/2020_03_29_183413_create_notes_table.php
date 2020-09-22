@@ -19,6 +19,7 @@ class CreateNotesTable extends Migration
             $table->string('title')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

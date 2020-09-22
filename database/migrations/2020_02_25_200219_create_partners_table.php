@@ -23,6 +23,7 @@ class CreatePartnersTable extends Migration
             $table->string('type')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

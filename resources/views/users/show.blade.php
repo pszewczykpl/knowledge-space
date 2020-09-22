@@ -3,23 +3,56 @@
 @section('subheader')
 <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 	<div class="d-flex align-items-center flex-wrap mr-2">
-
 		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ $title }}</h5>
 		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-			
             <li class="breadcrumb-item">
 				<span class="text-muted">{{ $description }}</span>
 			</li>
-
 		</ul>
 	</div>
 	<div class="d-flex align-items-center">
-
-		<a href="{{ url()->previous() }}" class="btn btn-clean btn-icon-sm">
-			<i class="la la-arrow-left"></i>Powrót
+		<a href="{{ url()->previous() }}" class="btn btn-md btn-clean btn-shadow font-weight-bold ml-1">
+			<span class="svg-icon navi-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<polygon points="0 0 24 0 24 24 0 24"/>
+						<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-12.000000, -12.000000) " x="11" y="5" width="2" height="14" rx="1"/>
+						<path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997) "/>
+					</g>
+				</svg>
+			</span>
+			Powrót
 		</a>
-
+		@can('update', $user)
+			<a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
+				<span class="svg-icon navi-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"/>
+							<path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "/>
+							<rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"/>
+						</g>
+					</svg>
+				</span>
+				Edytuj
+			</a>
+		@endcan
+		@can('delete', $user)
+			<a onclick='document.getElementById("users_destroy_{{ $user->id }}").submit();' class="btn btn-md btn-light-danger btn-shadow font-weight-bold ml-1">
+				<span class="svg-icon navi-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"/>
+							<path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#000000" fill-rule="nonzero"/>
+							<path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
+						</g>
+					</svg>
+				</span>
+				Usuń
+			</a>
+			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'users.destroy', $user->id ], 'id' => 'users_destroy_' . $user->id ]) }}{{ Form::close() }}
+		@endcan
 	</div>
 </div>
 @stop
@@ -27,78 +60,37 @@
 @section('content')
 <div class="container">
     <div class="row">
-	    
         <div class="col-12 col-md-4">
 			<x-cards.user :user="$user" />
         </div>
-
         <div class="col-12 col-md-8">
             @auth
-			@if($user->id === Auth::user()->id)
-			<div class="card card-custom gutter-b">
-				<div class="card-body">
-					<div class="d-flex align-items-center">
-						<div class="symbol symbol-40 symbol-white mr-5">
-							<span class="symbol-label" style="background-image:url('{{ asset('storage/uploads/avatars/') }}/{{ $user->avatar_filename }}')"></span>
-						</div>
-						<span class="text-muted font-weight-bold font-size-lg">Coś nowego, <b>{{ $user->first_name }}</b>?</span>
-					</div>
-					{!! Form::open(['route' => 'news.store', 'method' => 'post', 'id' => 'kt_forms_widget_2_form', 'class' => 'pt-10 ql-quil ql-quil-plain']) !!}
-						{!! Form::token() !!}
-						<div id="editor" name="editor" class="font-size-lg"></div>
-						<textarea name="content" style="display:none" id="content"></textarea>
-						<div class="border-top my-5"></div>
-						<div id="kt_forms_widget_2_editor_toolbar" class="ql-toolbar d-flex align-items-center justify-content-between">
-							<div class="mr-2">
-								<span class="ql-formats ml-0">
-									<button class="ql-bold"></button>
-									<button class="ql-italic"></button>
-									<button class="ql-underline"></button>
-									<button class="ql-strike"></button>
-									<button class="ql-image"></button>
-									<button class="ql-link"></button>
-								</span>
-							</div>
-							<div class="">
-								<input type="submit" id="submit" name="submit" value="Wyślij" class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2 mr-2">
-									{{-- <span class="svg-icon svg-icon-md svg-icon-primary pr-0">
-										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24"/>
-												<path d="M3,13.5 L19,12 L3,10.5 L3,3.7732928 C3,3.70255344 3.01501031,3.63261921 3.04403925,3.56811047 C3.15735832,3.3162903 3.45336217,3.20401298 3.70518234,3.31733205 L21.9867539,11.5440392 C22.098181,11.5941815 22.1873901,11.6833905 22.2375323,11.7948177 C22.3508514,12.0466378 22.2385741,12.3426417 21.9867539,12.4559608 L3.70518234,20.6826679 C3.64067359,20.7116969 3.57073936,20.7267072 3.5,20.7267072 C3.22385763,20.7267072 3,20.5028496 3,20.2267072 L3,13.5 Z" fill="#000000"/>
-											</g>
-										</svg>
-									</span>
-									Wyślij --}}
-								{{-- </a> --}}
-							</div>
-						</div>
-					{!! Form::close() !!}
-				</div>
-			</div>
+			@if(Auth::user()->can('create', App\News::class) and $user->id == Auth::user()->id)
+				<x-cards.news-store />
 			@endif
-			@endauth
-
-            @if($user->news->count() == 0)
-            <div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
-                @if($user->id === Auth::user()->id)
-                <div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
-                @else
-                <div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
-                @endif
-            </div>
-            @endif
-            
-            @foreach($user->news->sortByDesc('created_at')->take(10) as $new)
-		    <x-cards.news :news="$new" />
-		    @endforeach
-
-            <div class="text-center">
-				<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">Przejdź do aktualności</a>
+			@if($user->news->count() == 0)
+			<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
+				@if($user->id == Auth::user()->id)
+				<div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
+				@else
+				<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+				@endif
 			</div>
-
+			@else
+				@foreach($user->news->sortByDesc('created_at')->take(10) as $new)
+				<x-cards.news :news="$new" />
+				@endforeach
+			@endif
+            <div class="text-center">
+				<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm mt-3 py-3 px-14">Przejdź do Aktualności</a>
+			</div>
+			@endauth
+			@guest
+			<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
+                <div class="alert-text">Aby przeglądać aktualności użytkowników <a href="{{ route('login') }}">Zaloguj się</a>.</div>
+			</div>
+			@endguest
         </div>
-
     </div>
 </div>
 @stop
