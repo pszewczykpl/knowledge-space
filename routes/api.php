@@ -2,16 +2,27 @@
 
 use Illuminate\Http\Request;
 
-use App\Models\Investment;
-use App\Models\FileCategory;
+use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\FileCategoryController;
+use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\FundController;
+use App\Http\Controllers\API\InvestmentByController;
+use App\Http\Controllers\API\InvestmentController;
+use App\Http\Controllers\API\InvestmentFundController;
+use App\Http\Controllers\API\NoteController;
+use App\Http\Controllers\API\PartnerController;
+use App\Http\Controllers\API\PermissionController;
+use App\Http\Controllers\API\ProtectiveController;
+use App\Http\Controllers\API\ProtectiveByController;
+use App\Http\Controllers\API\RiskController;
+use App\Http\Controllers\API\UserController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
-
-use Illuminate\Http\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,28 +38,28 @@ use Illuminate\Http\File;
 /*
 | Datatables.net POST controllers
 */
-Route::post('datatables/departments', 'API\DepartmentsController@datatables');
-Route::post('datatables/employees', 'API\EmployeesController@datatables');
-Route::post('datatables/files', 'API\FilesController@datatables');
-Route::post('datatables/file-categories', 'API\FileCategoriesController@datatables');
-Route::post('datatables/funds', 'API\FundsController@datatables');
-Route::post('datatables/investments', 'API\InvestmentsController@datatables');
-Route::post('datatables/investment/{id}/funds', 'API\InvestmentFundsController@datatables');
-Route::post('datatables/notes', 'API\NotesController@datatables');
-Route::post('datatables/partners', 'API\PartnersController@datatables');
-Route::post('datatables/permissions', 'API\PermissionsController@datatables');
-Route::post('datatables/protectives', 'API\ProtectivesController@datatables');
-Route::post('datatables/risks', 'API\RisksController@datatables');
-Route::post('datatables/users', 'API\UsersController@datatables');
+Route::post('datatables/departments', [DepartmentController::class, 'datatables']);
+Route::post('datatables/employees', [EmployeeController::class, 'datatables']);
+Route::post('datatables/files', [FileController::class, 'datatables']);
+Route::post('datatables/file-categories', [FileCategoryController::class, 'datatables']);
+Route::post('datatables/funds', [FundController::class, 'datatables']);
+Route::post('datatables/investments', [InvestmentController::class, 'datatables']);
+Route::post('datatables/investment/{id}/funds', [InvestmentFundController::class, 'datatables']);
+Route::post('datatables/notes', [NoteController::class, 'datatables']);
+Route::post('datatables/partners', [PartnerController::class, 'datatables']);
+Route::post('datatables/permissions', [PermissionController::class, 'datatables']);
+Route::post('datatables/protectives', [ProtectiveController::class, 'datatables']);
+Route::post('datatables/risks', [RiskController::class, 'datatables']);
+Route::post('datatables/users', [UserController::class, 'datatables']);
 
-Route::get('files/zip', 'API\FilesController@zip')->name('files.zip');
+Route::get('files/zip', [FileController::class, 'zip'])->name('files.zip');
 
-Route::get('investments/{id}/files/zip', 'API\InvestmentsController@zip_files');
-Route::get('protectives/{id}/files/zip', 'API\ProtectivesController@zip_files');
-Route::get('employees/{id}/files/zip', 'API\EmployeesController@zip_files');
+Route::get('investments/{id}/files/zip', [InvestmentController::class, 'zip_files']);
+Route::get('protectives/{id}/files/zip', [ProtectiveController::class, 'zip_files']);
+Route::get('employees/{id}/files/zip', [EmployeeController::class, 'zip_files']);
 
 /* OLAF Controllers */
-Route::get('1/{file_code}/{code_toil}/{start_date}', 'API\InvestmentsByController@file_by_toil');
-Route::get('2/{file_code}/{code}/{dist_short}/{start_date}', 'API\ProtectivesByController@file_by_code');
-Route::get('4/{category_id}/{code_toil}/{start_date}/zip', 'API\InvestmentsByController@files_category_by_toil_zip');
-Route::get('5/{category_id}/{code}/{dist_short}/{start_date}/zip', 'API\ProtectivesByController@files_category_by_code_zip');
+Route::get('1/{file_code}/{code_toil}/{start_date}', [InvestmentByController::class, 'file_by_toil']);
+Route::get('2/{file_code}/{code}/{dist_short}/{start_date}', [ProtectiveByController::class, 'file_by_code']);
+Route::get('4/{category_id}/{code_toil}/{start_date}/zip', [InvestmentByController::class, 'files_category_by_toil_zip']);
+Route::get('5/{category_id}/{code}/{dist_short}/{start_date}/zip', [ProtectiveByController::class, 'files_category_by_code_zip']);

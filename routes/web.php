@@ -1,5 +1,21 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FileCategoryController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FundController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProtectiveController;
+use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\RiskController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,22 +29,22 @@
 
 Auth::routes();
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::get('/home', 'HomeController@index')->name('home.index');
+Route::get('/', [Auth\LoginController::class, 'showLoginForm']);
+Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-Route::resource('departments', 'DepartmentsController');
-Route::resource('employees', 'EmployeesController');
-Route::resource('files', 'FilesController');
-Route::resource('file-categories', 'FileCategoriesController');
-Route::resource('funds', 'FundsController');
-Route::resource('investments', 'InvestmentsController');
-Route::resource('news', 'NewsController');
-Route::resource('notes', 'NotesController');
-Route::resource('partners', 'PartnersController');
-Route::resource('permissions', 'PermissionsController')->only(['index']);
-Route::resource('protectives', 'ProtectivesController');
-Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
-Route::resource('risks', 'RisksController');
-Route::resource('users', 'UsersController');
+Route::resource('departments', DepartmentController::class);
+Route::resource('employees', EmployeeController::class);
+Route::resource('files', FileController::class);
+Route::resource('file-categories', FileCategoryController::class);
+Route::resource('funds', FundController::class);
+Route::resource('investments', InvestmentController::class);
+Route::resource('news', NewsController::class);
+Route::resource('notes', NoteController::class);
+Route::resource('partners', PartnerController::class);
+Route::resource('permissions', PermissionController::class)->only(['index']);
+Route::resource('protectives', ProtectiveController::class);
+Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
+Route::resource('risks', RiskController::class);
+Route::resource('users', UserController::class);
 
-Route::get('files/download/{id}', 'FilesController@download')->name('files.download');
+Route::get('files/download/{id}', [FileController::class, 'download'])->name('files.download');
