@@ -30,7 +30,7 @@
 			<div class="d-flex mb-6">
 				<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 					<div class="symbol symbol-50 symbol-lg-120">
-						<img src="{{ asset('storage/avatars/') }}/{{ Auth::user()->avatar_filename }}" alt="image">
+						<img src="{{ asset('storage/') }}/{{ Auth::user()->avatar_path }}" alt="image">
 					</div>
 				</div>
 				<div class="flex-grow-1">

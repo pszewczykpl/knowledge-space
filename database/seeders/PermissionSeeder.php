@@ -16,27 +16,27 @@ class PermissionSeeder extends Seeder
     {
         Permission::create([
             'code' => 'departments-create',
-            'name' => 'Może dodawać ryzyka ubezpieczeniowe',
+            'name' => 'Może dodawać departamenty',
             'description' => 'Użytkownik może dodawać departamenty oraz edytować i usuwać utworzone przez siebie departamenty',
         ]);
         Permission::create([
             'code' => 'departments-update',
-            'name' => 'Może edytować wszystkie ryzyka ubezpieczeniowe',
+            'name' => 'Może edytować wszystkie departamenty',
             'description' => 'Użytkownik może edytować wszystkie departamenty',
         ]);
         Permission::create([
             'code' => 'departments-delete',
-            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'name' => 'Może usuwać wszystkie departamenty',
             'description' => 'Użytkownik może usuwać wszystkie departamenty',
         ]);
         Permission::create([
             'code' => 'departments-view',
-            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'name' => 'Może przeglądać szczegóły departamentu',
             'description' => 'Użytkownik może przeglądać szczegóły departamentu',
         ]);
         Permission::create([
             'code' => 'departments-viewany',
-            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'name' => 'Może przeglądać listę wszystkich departamentów',
             'description' => 'Użytkownik może przeglądać listę wszystkich departamentów (Zakładka HR -> Departamenty)',
         ]);
         Permission::create([
@@ -194,6 +194,11 @@ class PermissionSeeder extends Seeder
             'code' => 'permissions-viewany',
             'name' => 'Może przeglądać listę wszystkich uprawnień',
             'description' => 'Użytkownik może przeglądać listę wszystkich uprawnień (Zakładka Administracja -> Uprawnienia)',
+        ]);
+        Permission::create([
+            'code' => 'permissions-update',
+            'name' => 'Może edytować uprawnienia wszystkim pracownikom',
+            'description' => 'Użytkownik może edytować uprawnienia wszystkim pracownikom',
         ]);
         Permission::create([
             'code' => 'protectives-create',

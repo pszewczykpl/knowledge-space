@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Permission;
 
 use App\Http\Requests\StoreUser;
 
@@ -10,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -50,6 +53,8 @@ class UserController extends Controller
         return view('users.create', [
             'title' => 'Nowy pracownik',
             'description' => 'Uzupełnij dane pracownika i kliknij Zapisz',
+            'departments' => Department::all(),
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -62,9 +67,26 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $this->authorize('create', User::class);
-        
-        $user = new User($request->all());
-        Auth::user()->users()->save($user);
+
+        $user = User::create([
+            'username' => $request->username,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'company' => $request->company,
+            'location' => $request->location,
+            'position' => $request->position,
+            'description' => $request->description,
+            'department_id' => $request->department_id,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        if ($request->hasFile('avatar')) {
+            $path = $request->avatar->store('avatars');
+            $user->avatar_path = $path;
+        }
+        $user->save();
+        $user->permissions()->attach($request->permission_id);
 
         return redirect()->route('users.show', $user->id)->with('notify_success', 'Nowy pracownik został dodany!');
     }
@@ -98,6 +120,8 @@ class UserController extends Controller
             'title' => 'Edycja pracownika',
             'description' => 'Zaktualizuj dane pracownika i kliknij Zapisz',
             'user' => $user,
+            'departments' => Department::all(),
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -111,9 +135,18 @@ class UserController extends Controller
     public function update(StoreUser $request, User $user)
     {
         $this->authorize('update', $user);
+
         $user->update($request->all());
 
-        return redirect()->route('users.show', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
+        if ($request->hasFile('avatar')) {
+            $path = $request->avatar->store('avatars');
+            $user->avatar_path = $path;
+            $user->save();
+        }
+
+        $user->permissions()->sync($request->permission_id);
+
+        return redirect()->route('users.edit', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
 
     /**
@@ -125,8 +158,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
+
         $user->delete();
-        $user->news()->delete();
 
         return redirect()->route('users.index')->with('notify_danger', 'Pracownik został usunięty!');
     }

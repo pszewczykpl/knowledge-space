@@ -17,7 +17,7 @@ class CreateRepliesTable extends Migration
             $table->id();
             $table->text('content');
             $table->foreignId('news_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -31,7 +31,7 @@ class User extends Authenticatable
         'position', 
         'description', 
         'location',
-        'avatar_filename'
+        'avatar_path'
     ];
 
     /**

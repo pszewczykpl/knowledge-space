@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('position')->default('Specjalista');
             $table->text('description')->default('Opisz swoje stanowisko pracy :-)');
             $table->string('location')->default('Warszawa');
-            $table->string('avatar_filename')->default('1.jpg');
+            $table->string('avatar_path')->default('avatars/1.jpg');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

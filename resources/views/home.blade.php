@@ -32,6 +32,8 @@
         
 		<x-layout.toolbar />
         
+        <x-layout.modals />
+        
         <x-layout.scripts />
 
 		@yield('additional_scripts')
