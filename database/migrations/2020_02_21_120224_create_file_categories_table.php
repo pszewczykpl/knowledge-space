@@ -17,6 +17,7 @@ class CreateFileCategoriesTable extends Migration
             $table->id();
             $table->string('prefix')->nullable();
             $table->string('name');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

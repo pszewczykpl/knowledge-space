@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Risk;
 
 class RiskSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class RiskSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Risk::factory()
+            ->times(30)
+            ->hasNotes(12)
+            ->create();
     }
 }

@@ -16,8 +16,8 @@ class CreateRepliesTable extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->foreignId('user_id')->constrained();
             $table->foreignId('news_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

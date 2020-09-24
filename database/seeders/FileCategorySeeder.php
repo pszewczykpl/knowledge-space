@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\FileCategory;
 
 class FileCategorySeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class FileCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        FileCategory::factory()
+            ->times(5)
+            ->create();
     }
 }

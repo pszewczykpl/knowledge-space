@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Partner;
 
 class PartnerSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class PartnerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Partner::factory()
+            ->times(40)
+            ->hasNotes(12)
+            ->create();
     }
 }

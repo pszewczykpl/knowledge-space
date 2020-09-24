@@ -30,7 +30,8 @@ class User extends Authenticatable
         'department_id', 
         'position', 
         'description', 
-        'location'
+        'location',
+        'avatar_filename'
     ];
 
     /**
@@ -51,14 +52,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function investments()
+    public function department()
     {
-        return $this->hasMany('App\Models\Investment');
+        return $this->belongsTo('App\Models\Department');
     }
 
-    public function protectives()
+    public function departments()
     {
-        return $this->hasMany('App\Models\Protective');
+        return $this->hasMany('App\Models\Department');
     }
 
     public function employees()
@@ -66,19 +67,24 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Employee');
     }
 
-    public function funds()
-    {
-        return $this->hasMany('App\Models\Fund');
-    }
-
     public function files()
     {
         return $this->hasMany('App\Models\File');
     }
 
-    public function notes()
+    public function file_categories()
     {
-        return $this->hasMany('App\Models\Note');
+        return $this->hasMany('App\Models\FileCategory');
+    }
+
+    public function funds()
+    {
+        return $this->hasMany('App\Models\Fund');
+    }
+
+    public function investments()
+    {
+        return $this->hasMany('App\Models\Investment');
     }
 
     public function news()
@@ -86,14 +92,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\News');
     }
 
-    public function replies()
+    public function notes()
     {
-        return $this->hasMany('App\Models\Reply');
-    }
-
-    public function permissions()
-    {
-        return $this->belongsToMany('App\Models\Permission', 'user_permission')->withTimestamps();
+        return $this->hasMany('App\Models\Note');
     }
 
     public function partners()
@@ -101,9 +102,19 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Partner');
     }
 
-    public function department()
+    public function permissions()
     {
-        return $this->belongsTo('App\Models\Department');
+        return $this->belongsToMany('App\Models\Permission', 'user_permission')->withTimestamps();
+    }
+
+    public function protectives()
+    {
+        return $this->hasMany('App\Models\Protective');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
     }
 
     public function risks()

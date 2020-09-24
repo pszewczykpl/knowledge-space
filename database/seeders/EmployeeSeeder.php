@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Employee;
 
 class EmployeeSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Employee::factory()
+            ->times(30)
+            ->hasFiles(17)
+            ->hasNotes(12)
+            ->create();
     }
 }

@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+
 use App\Models\User;
+use App\Models\Department;
 use App\Models\Permission;
 
 class UserSeeder extends Seeder
@@ -15,21 +17,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User;
-        $user->first_name = 'Piotr';
-        $user->last_name = 'Szewczyk';
-        $user->username = 'pszewczyk';
-        $user->email = 'piotr.szewczyk@openlife.pl';
-        $user->phone = '+48 723 315 543';
-        $user->password = bcrypt('openlife8!@#');
-        $user->company = 'Open Life TU Życie S.A.';
-        $user->department_id = 1;
-        $user->position = 'Tester Oprogramowania';
-        $user->description = 'Wdrażanie oprogramowania w zakresie systemów: Rejestrator, Pent@life, Pivotal CRM oraz Baza Wiedzy.';
-        $user->location = 'Warszawa';
-        $user->avatar_filename = '1.jpg';
-        $user->save();
+        $user = User::create([
+            'first_name' => 'Piotr',
+            'last_name' => 'Szewczyk',
+            'username' => 'admin',
+            'email' => 'admin@admin.pl',
+            'phone' => '+481234567893',
+            'password' => bcrypt('admin'),
+            'department_id' => Department::all()->random()->id,
+            'position' => 'PHP Developer',
+            'description' => 'Tworzenie oprogramowania opartego o nowoczesne rozwiazania w języki PHP takie jak Laravel, Symphony czy Vue.js',
+        ]);
         $user->permissions()->attach(Permission::all());
         
+        User::factory()
+            ->times(23)
+            ->create();
     }
 }

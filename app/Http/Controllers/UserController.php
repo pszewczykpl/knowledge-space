@@ -126,6 +126,7 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
         $user->delete();
+        $user->news()->delete();
 
         return redirect()->route('users.index')->with('notify_danger', 'Pracownik został usunięty!');
     }

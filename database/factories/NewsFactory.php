@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 
-use App\Models\Note;
+use App\Models\News;
 use App\Models\User;
 
 class NewsFactory extends Factory
@@ -15,7 +15,7 @@ class NewsFactory extends Factory
      *
      * @var string
      */
-    protected $model = Note::class;
+    protected $model = News::class;
 
     /**
      * Define the model's default state.
@@ -28,7 +28,7 @@ class NewsFactory extends Factory
 
         return [
             'content' => $faker->text,
-            'user_id' => User::factory(),
+            'user_id' => User::all()->random(),
         ];
     }
 }

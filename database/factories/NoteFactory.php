@@ -25,10 +25,10 @@ class NoteFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
+
         return [
             'content' => $faker->text,
-            'title' => $faker->title,
-            'user_id' => User::factory(),
+            'user_id' => User::all()->random(),
         ];
     }
 }

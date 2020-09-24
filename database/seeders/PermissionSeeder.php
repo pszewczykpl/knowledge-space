@@ -14,293 +14,246 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-
-        $user = new Permission;
-        $user->code = 'departments-create';
-        $user->name = 'Może dodawać ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może dodawać departamenty oraz edytować i usuwać utworzone przez siebie departamenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'departments-update';
-        $user->name = 'Może edytować wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może edytować wszystkie departamenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'departments-delete';
-        $user->name = 'Może usuwać wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może usuwać wszystkie departamenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'departments-view';
-        $user->name = 'Może usuwać wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może przeglądać szczegóły departamentu';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'departments-viewany';
-        $user->name = 'Może usuwać wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich departamentów (Zakładka HR -> Departamenty)';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'employees-create';
-        $user->name = 'Może dodawać produkty pracownicze';
-        $user->description = 'Użytkownik może dodawać produkty pracownicze oraz edytować i usuwać utworzone przez siebie produkty pracownicze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'employees-update';
-        $user->name = 'Może edytować wszystkie produkty pracownicze';
-        $user->description = 'Użytkownik może edytować wszystkie produkty pracownicze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'employees-delete';
-        $user->name = 'Może usuwać wszystkie produkty pracownicze';
-        $user->description = 'Użytkownik może usuwać wszystkie produkty pracownicze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'file-categories-create';
-        $user->name = 'Może dodawać kategorie dokumentów';
-        $user->description = 'Użytkownik może dodawać kategorie dokumentów oraz edytować i usuwać utworzone przez siebie kategorie dokumentów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'file-categories-update';
-        $user->name = 'Może edytować wszystkie kategorie dokumentów';
-        $user->description = 'Użytkownik może edytować wszystkie kategorie dokumentów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'file-categories-delete';
-        $user->name = 'Może usuwać wszystkie kategorie dokumentów';
-        $user->description = 'Użytkownik może usuwać wszystkie kategorie dokumentów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'file-categories-view';
-        $user->name = 'Może przeglądać szczegóły kategorii dokumentów';
-        $user->description = 'Użytkownik może przeglądać szczegóły kategorii dokumentów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'file-categories-viewany';
-        $user->name = 'Może przeglądać listę wszystkich kategorii dokumentów';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich kategorii dokumentów (Zakładka Administracja -> Kategorie Dokumentów)';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'files-create';
-        $user->name = 'Może dodawać dokumenty';
-        $user->description = 'Użytkownik może dodawać dokumenty oraz edytować i usuwać utworzone przez siebie dokumenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'files-update';
-        $user->name = 'Może edytować wszystkie dokumenty';
-        $user->description = 'Użytkownik może edytować wszystkie dokumenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'files-delete';
-        $user->name = 'Może usuwać wszystkie dokumenty';
-        $user->description = 'Użytkownik może usuwać wszystkie dokumenty';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'files-viewany';
-        $user->name = 'Może przeglądać listę wszystkich dokumentów';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich dokumentów (Zakładka Administracja -> Dokumenty)';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'funds-create';
-        $user->name = 'Może dodawać fundusze';
-        $user->description = 'Użytkownik może dodawać fundusze oraz edytować i usuwać utworzone przez siebie fundusze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'funds-update';
-        $user->name = 'Może edytować wszystkie fundusze';
-        $user->description = 'Użytkownik może edytować wszystkie fundusze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'funds-delete';
-        $user->name = 'Może usuwać wszystkie fundusze';
-        $user->description = 'Użytkownik może usuwać wszystkie fundusze';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'investments-create';
-        $user->name = 'Może dodawać produkty inwestycyjne';
-        $user->description = 'Użytkownik może dodawać produkty inwestycyjne oraz edytować i usuwać utworzone przez siebie produkty inwestycyjne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'investments-update';
-        $user->name = 'Może edytować wszystkie produkty inwestycyjne';
-        $user->description = 'Użytkownik może edytować wszystkie produkty inwestycyjne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'investments-delete';
-        $user->name = 'Może usuwać wszystkie produkty inwestycyjne';
-        $user->description = 'Użytkownik może usuwać wszystkie produkty inwestycyjne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'news-create';
-        $user->name = 'Może dodawać aktualności';
-        $user->description = 'Użytkownik może dodawać aktualności oraz edytować i usuwać utworzone przez siebie aktualności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'news-update';
-        $user->name = 'Może edytować wszystkie aktualności';
-        $user->description = 'Użytkownik może edytować wszystkie aktualności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'news-delete';
-        $user->name = 'Może usuwać wszystkie aktualności';
-        $user->description = 'Użytkownik może usuwać wszystkie aktualności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'news-view';
-        $user->name = 'Może przeglądać szczegóły aktualności';
-        $user->description = 'Użytkownik może przeglądać szczegóły aktualności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'news-viewany';
-        $user->name = 'Może przeglądać listę wszystkich aktualności';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich aktualności (Zakładka Aktualności)';
-        $user->save();
-        
-        $user = new Permission;
-        $user->code = 'notes-create';
-        $user->name = 'Może dodawać notatki';
-        $user->description = 'Użytkownik może dodawać notatki oraz edytować i usuwać utworzone przez siebie notatki';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'notes-update';
-        $user->name = 'Może edytować wszystkie notatki';
-        $user->description = 'Użytkownik może edytować wszystkie notatki';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'notes-delete';
-        $user->name = 'Może usuwać wszystkie notatki';
-        $user->description = 'Użytkownik może usuwać wszystkie notatki';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'notes-viewany';
-        $user->name = 'Może przeglądać listę wszystkich notatek';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich notatek (Zakładka Administracja -> Notatki)';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'partners-create';
-        $user->name = 'Może dodawać dystrybutorów';
-        $user->description = 'Użytkownik może dodawać dystrybutorów oraz edytować i usuwać utworzonych przez siebie dystrybutorów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'partners-update';
-        $user->name = 'Może edytować wszystkich dystrybutorów';
-        $user->description = 'Użytkownik może edytować wszystkich dystrybutorów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'partners-delete';
-        $user->name = 'Może usuwać wszystkich dystrybutorów';
-        $user->description = 'Użytkownik może usuwać wszystkich dystrybutorów';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'permissions-viewany';
-        $user->name = 'Może przeglądać listę wszystkich uprawnień';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich uprawnień (Zakładka Administracja -> Uprawnienia)';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'protectives-create';
-        $user->name = 'Może dodawać produkty ochronne';
-        $user->description = 'Użytkownik może dodawać produkty ochronne oraz edytować i usuwać utworzone przez siebie produkty ochronne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'protectives-update';
-        $user->name = 'Może edytować wszystkie produkty ochronne';
-        $user->description = 'Użytkownik może edytować wszystkie produkty ochronne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'protectives-delete';
-        $user->name = 'Może usuwać wszystkie produkty ochronne';
-        $user->description = 'Użytkownik może usuwać wszystkie produkty ochronne';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'replies-create';
-        $user->name = 'Może dodawać odpowiedzi do aktualności';
-        $user->description = 'Użytkownik może dodawać odpowiedzi do aktulności oraz edytować i usuwać utworzone przez siebie odpowiedzi do aktulności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'replies-delete';
-        $user->name = 'Może usuwać wszystkie odpowiedzi do aktualności';
-        $user->description = 'Użytkownik może usuwać wszystkie odpowiedzi do aktualności';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'risks-create';
-        $user->name = 'Może dodawać ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może dodawać ryzyka ubezpieczeniowe oraz edytować i usuwać utworzone przez siebie ryzyka ubezpieczeniowe';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'risks-update';
-        $user->name = 'Może edytować wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może edytować wszystkie ryzyka ubezpieczeniowe';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'risks-delete';
-        $user->name = 'Może usuwać wszystkie ryzyka ubezpieczeniowe';
-        $user->description = 'Użytkownik może usuwać wszystkie ryzyka ubezpieczeniowe';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'users-create';
-        $user->name = 'Może dodawać pracowników';
-        $user->description = 'Użytkownik może dodawać pracowników oraz edytować i usuwać utworzonych przez siebie pracowników';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'users-update';
-        $user->name = 'Może edytować wszystkich pracowników';
-        $user->description = 'Użytkownik może edytować wszystkich pracowników';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'users-delete';
-        $user->name = 'Może usuwać wszystkich pracowników';
-        $user->description = 'Użytkownik może usuwać wszystkich pracowników';
-        $user->save();
-
-        $user = new Permission;
-        $user->code = 'users-viewany';
-        $user->name = 'Może przeglądać listę wszystkich pracowników';
-        $user->description = 'Użytkownik może przeglądać listę wszystkich pracowników (Zakładka HR -> Pracownicy)';
-        $user->save();
+        Permission::create([
+            'code' => 'departments-create',
+            'name' => 'Może dodawać ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może dodawać departamenty oraz edytować i usuwać utworzone przez siebie departamenty',
+        ]);
+        Permission::create([
+            'code' => 'departments-update',
+            'name' => 'Może edytować wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może edytować wszystkie departamenty',
+        ]);
+        Permission::create([
+            'code' => 'departments-delete',
+            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może usuwać wszystkie departamenty',
+        ]);
+        Permission::create([
+            'code' => 'departments-view',
+            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może przeglądać szczegóły departamentu',
+        ]);
+        Permission::create([
+            'code' => 'departments-viewany',
+            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może przeglądać listę wszystkich departamentów (Zakładka HR -> Departamenty)',
+        ]);
+        Permission::create([
+            'code' => 'employees-create',
+            'name' => 'Może dodawać produkty pracownicze',
+            'description' => 'Użytkownik może dodawać produkty pracownicze oraz edytować i usuwać utworzone przez siebie produkty pracownicze',
+        ]);
+        Permission::create([
+            'code' => 'employees-update',
+            'name' => 'Może edytować wszystkie produkty pracownicze',
+            'description' => 'Użytkownik może edytować wszystkie produkty pracownicze',
+        ]);
+        Permission::create([
+            'code' => 'employees-delete',
+            'name' => 'Może usuwać wszystkie produkty pracownicze',
+            'description' => 'Użytkownik może usuwać wszystkie produkty pracownicze',
+        ]);
+        Permission::create([
+            'code' => 'file-categories-create',
+            'name' => 'Może dodawać kategorie dokumentów',
+            'description' => 'Użytkownik może dodawać kategorie dokumentów oraz edytować i usuwać utworzone przez siebie kategorie dokumentów',
+        ]);
+        Permission::create([
+            'code' => 'file-categories-update',
+            'name' => 'Może edytować wszystkie kategorie dokumentów',
+            'description' => 'Użytkownik może edytować wszystkie kategorie dokumentów',
+        ]);
+        Permission::create([
+            'code' => 'file-categories-delete',
+            'name' => 'Może usuwać wszystkie kategorie dokumentów',
+            'description' => 'Użytkownik może usuwać wszystkie kategorie dokumentów',
+        ]);
+        Permission::create([
+            'code' => 'file-categories-view',
+            'name' => 'Może przeglądać szczegóły kategorii dokumentów',
+            'description' => 'Użytkownik może przeglądać szczegóły kategorii dokumentów',
+        ]);
+        Permission::create([
+            'code' => 'file-categories-viewany',
+            'name' => 'Może przeglądać listę wszystkich kategorii dokumentów',
+            'description' => 'Użytkownik może przeglądać listę wszystkich kategorii dokumentów (Zakładka Administracja -> Kategorie Dokumentów)',
+        ]);
+        Permission::create([
+            'code' => 'files-create',
+            'name' => 'Może dodawać dokumenty',
+            'description' => 'Użytkownik może dodawać dokumenty oraz edytować i usuwać utworzone przez siebie dokumenty',
+        ]);
+        Permission::create([
+            'code' => 'files-update',
+            'name' => 'Może edytować wszystkie dokumenty',
+            'description' => 'Użytkownik może edytować wszystkie dokumenty',
+        ]);
+        Permission::create([
+            'code' => 'files-delete',
+            'name' => 'Może usuwać wszystkie dokumenty',
+            'description' => 'Użytkownik może usuwać wszystkie dokumenty',
+        ]);
+        Permission::create([
+            'code' => 'files-viewany',
+            'name' => 'Może przeglądać listę wszystkich dokumentów',
+            'description' => 'Użytkownik może przeglądać listę wszystkich dokumentów (Zakładka Administracja -> Dokumenty)',
+        ]);
+        Permission::create([
+            'code' => 'funds-create',
+            'name' => 'Może dodawać fundusze',
+            'description' => 'Użytkownik może dodawać fundusze oraz edytować i usuwać utworzone przez siebie fundusze',
+        ]);
+        Permission::create([
+            'code' => 'funds-update',
+            'name' => 'Może edytować wszystkie fundusze',
+            'description' => 'Użytkownik może edytować wszystkie fundusze',
+        ]);
+        Permission::create([
+            'code' => 'funds-delete',
+            'name' => 'Może usuwać wszystkie fundusze',
+            'description' => 'Użytkownik może usuwać wszystkie fundusze',
+        ]);
+        Permission::create([
+            'code' => 'investments-create',
+            'name' => 'Może dodawać produkty inwestycyjne',
+            'description' => 'Użytkownik może dodawać produkty inwestycyjne oraz edytować i usuwać utworzone przez siebie produkty inwestycyjne',
+        ]);
+        Permission::create([
+            'code' => 'investments-update',
+            'name' => 'Może edytować wszystkie produkty inwestycyjne',
+            'description' => 'Użytkownik może edytować wszystkie produkty inwestycyjne',
+        ]);
+        Permission::create([
+            'code' => 'investments-delete',
+            'name' => 'Może usuwać wszystkie produkty inwestycyjne',
+            'description' => 'Użytkownik może usuwać wszystkie produkty inwestycyjne',
+        ]);
+        Permission::create([
+            'code' => 'news-create',
+            'name' => 'Może dodawać aktualności',
+            'description' => 'Użytkownik może dodawać aktualności oraz edytować i usuwać utworzone przez siebie aktualności',
+        ]);
+        Permission::create([
+            'code' => 'news-update',
+            'name' => 'Może edytować wszystkie aktualności',
+            'description' => 'Użytkownik może edytować wszystkie aktualności',
+        ]);
+        Permission::create([
+            'code' => 'news-delete',
+            'name' => 'Może usuwać wszystkie aktualności',
+            'description' => 'Użytkownik może usuwać wszystkie aktualności',
+        ]);
+        Permission::create([
+            'code' => 'news-view',
+            'name' => 'Może przeglądać szczegóły aktualności',
+            'description' => 'Użytkownik może przeglądać szczegóły aktualności',
+        ]);
+        Permission::create([
+            'code' => 'news-viewany',
+            'name' => 'Może przeglądać listę wszystkich aktualności',
+            'description' => 'Użytkownik może przeglądać listę wszystkich aktualności (Zakładka Aktualności)',
+    
+        ]);
+        Permission::create([
+            'code' => 'notes-create',
+            'name' => 'Może dodawać notatki',
+            'description' => 'Użytkownik może dodawać notatki oraz edytować i usuwać utworzone przez siebie notatki',
+        ]);
+        Permission::create([
+            'code' => 'notes-update',
+            'name' => 'Może edytować wszystkie notatki',
+            'description' => 'Użytkownik może edytować wszystkie notatki',
+        ]);
+        Permission::create([
+            'code' => 'notes-delete',
+            'name' => 'Może usuwać wszystkie notatki',
+            'description' => 'Użytkownik może usuwać wszystkie notatki',
+        ]);
+        Permission::create([
+            'code' => 'notes-viewany',
+            'name' => 'Może przeglądać listę wszystkich notatek',
+            'description' => 'Użytkownik może przeglądać listę wszystkich notatek (Zakładka Administracja -> Notatki)',
+        ]);
+        Permission::create([
+            'code' => 'partners-create',
+            'name' => 'Może dodawać dystrybutorów',
+            'description' => 'Użytkownik może dodawać dystrybutorów oraz edytować i usuwać utworzonych przez siebie dystrybutorów',
+        ]);
+        Permission::create([
+            'code' => 'partners-update',
+            'name' => 'Może edytować wszystkich dystrybutorów',
+            'description' => 'Użytkownik może edytować wszystkich dystrybutorów',
+        ]);
+        Permission::create([
+            'code' => 'partners-delete',
+            'name' => 'Może usuwać wszystkich dystrybutorów',
+            'description' => 'Użytkownik może usuwać wszystkich dystrybutorów',
+        ]);
+        Permission::create([
+            'code' => 'permissions-viewany',
+            'name' => 'Może przeglądać listę wszystkich uprawnień',
+            'description' => 'Użytkownik może przeglądać listę wszystkich uprawnień (Zakładka Administracja -> Uprawnienia)',
+        ]);
+        Permission::create([
+            'code' => 'protectives-create',
+            'name' => 'Może dodawać produkty ochronne',
+            'description' => 'Użytkownik może dodawać produkty ochronne oraz edytować i usuwać utworzone przez siebie produkty ochronne',
+        ]);
+        Permission::create([
+            'code' => 'protectives-update',
+            'name' => 'Może edytować wszystkie produkty ochronne',
+            'description' => 'Użytkownik może edytować wszystkie produkty ochronne',
+        ]);
+        Permission::create([
+            'code' => 'protectives-delete',
+            'name' => 'Może usuwać wszystkie produkty ochronne',
+            'description' => 'Użytkownik może usuwać wszystkie produkty ochronne',
+        ]);
+        Permission::create([
+            'code' => 'replies-create',
+            'name' => 'Może dodawać odpowiedzi do aktualności',
+            'description' => 'Użytkownik może dodawać odpowiedzi do aktulności oraz edytować i usuwać utworzone przez siebie odpowiedzi do aktulności',
+        ]);
+        Permission::create([
+            'code' => 'replies-delete',
+            'name' => 'Może usuwać wszystkie odpowiedzi do aktualności',
+            'description' => 'Użytkownik może usuwać wszystkie odpowiedzi do aktualności',
+        ]);
+        Permission::create([
+            'code' => 'risks-create',
+            'name' => 'Może dodawać ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może dodawać ryzyka ubezpieczeniowe oraz edytować i usuwać utworzone przez siebie ryzyka ubezpieczeniowe',
+        ]);
+        Permission::create([
+            'code' => 'risks-update',
+            'name' => 'Może edytować wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może edytować wszystkie ryzyka ubezpieczeniowe',
+        ]);
+        Permission::create([
+            'code' => 'risks-delete',
+            'name' => 'Może usuwać wszystkie ryzyka ubezpieczeniowe',
+            'description' => 'Użytkownik może usuwać wszystkie ryzyka ubezpieczeniowe',
+        ]);
+        Permission::create([
+            'code' => 'users-create',
+            'name' => 'Może dodawać pracowników',
+            'description' => 'Użytkownik może dodawać pracowników oraz edytować i usuwać utworzonych przez siebie pracowników',
+        ]);
+        Permission::create([
+            'code' => 'users-update',
+            'name' => 'Może edytować wszystkich pracowników',
+            'description' => 'Użytkownik może edytować wszystkich pracowników',
+        ]);
+        Permission::create([
+            'code' => 'users-delete',
+            'name' => 'Może usuwać wszystkich pracowników',
+            'description' => 'Użytkownik może usuwać wszystkich pracowników',
+        ]);
+        Permission::create([
+            'code' => 'users-viewany',
+            'name' => 'Może przeglądać listę wszystkich pracowników',
+            'description' => 'Użytkownik może przeglądać listę wszystkich pracowników (Zakładka HR -> Pracownicy)',
+        ]);
     }
 }

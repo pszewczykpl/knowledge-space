@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class AddUserIdToDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->string('code');
-            $table->string('name');
-            $table->text('description');
-            $table->timestamps();
+        Schema::table('departments', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable()->constrained()->after('description');
         });
     }
 
@@ -29,6 +25,8 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::table('departments', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }

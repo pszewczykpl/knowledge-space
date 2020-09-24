@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Protective;
 
 class ProtectiveSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class ProtectiveSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Protective::factory()
+            ->times(30)
+            ->hasFiles(17)
+            ->hasNotes(12)
+            ->create();
     }
 }

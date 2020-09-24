@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 
 use App\Models\User;
+use App\Models\Department;
 
 class UserFactory extends Factory
 {
@@ -24,19 +25,20 @@ class UserFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
+
         return [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
             'username' => $faker->unique()->userName,
             'email' => $faker->unique()->safeEmail,
             'phone' => $faker->unique()->e164PhoneNumber,
-            'password' => bcrypt('@FJpoywC00!'),
-            'company' => 'Open Life TU Życie S.A.',
-            'department_id' => 1,
+            'password' => bcrypt('admin'),
+            'company' => $faker->company,
+            'department_id' => Department::all()->random(),
             'position' => $faker->jobTitle,
             'description' => $faker->catchPhrase,
             'location' => $faker->country,
-            'avatar_filename' => '0.png',
+            'avatar_filename' => '1.jpg',
         ];
     }
 }

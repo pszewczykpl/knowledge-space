@@ -18,7 +18,6 @@ class CreateFileablesTable extends Migration
             $table->foreignId('file_id')->constrained()->onDelete('cascade');
             $table->morphs('fileable');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -18,7 +18,6 @@ class CreateFundInvestmentTable extends Migration
             $table->foreignId('investment_id')->constrained();
             $table->foreignId('fund_id')->constrained();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
