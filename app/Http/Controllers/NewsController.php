@@ -126,6 +126,7 @@ class NewsController extends Controller
     {
         $this->authorize('delete', $news);
         $news->delete();
+        $news->replies()->delete();
 
         return redirect()->route('news.index')->with('notify_danger', 'Aktualność została usunięta!');
     }

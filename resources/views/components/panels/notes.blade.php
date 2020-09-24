@@ -18,7 +18,7 @@
             @foreach($notes as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
-                    <img alt="Pic" src="{{ asset('storage/avatars/') }}/{{ $note->user->avatar_filename }}">
+                    <img alt="Pic" src="{{ asset('storage/') }}/{{ $note->user->avatar_path }}">
                 </div>
                 <div class="timeline-content">
                     <div class="d-flex align-items-center justify-content-between mb-3">
