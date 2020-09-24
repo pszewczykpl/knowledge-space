@@ -15,7 +15,7 @@
     @endcan
     <div class="timeline timeline-3">
         <div class="timeline-items">
-            @foreach($notes as $note)
+            @foreach($notes->sortByDesc('updated_at'); as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
                     <img alt="Pic" src="{{ asset('storage/') }}/{{ $note->user->avatar_path }}">

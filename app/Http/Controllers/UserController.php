@@ -144,7 +144,9 @@ class UserController extends Controller
             $user->save();
         }
 
-        $user->permissions()->sync($request->permission_id);
+        if(isset($request->permission_id)) {
+            $user->permissions()->sync($request->permission_id);
+        }
 
         return redirect()->route('users.edit', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
