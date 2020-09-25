@@ -121,7 +121,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$fund->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$fund->created_at" />
-				<x-cards.details-row --attribute="Nazwa produktu" :value="$fund->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$fund->user->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">

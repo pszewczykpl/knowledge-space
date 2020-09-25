@@ -110,7 +110,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$employee->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$employee->created_at" />
-				<x-cards.details-row --attribute="Nazwa produktu" :value="$employee->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$employee->user->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">

@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('company')->default('Open Life TU Życie S.A.');
             $table->foreignId('department_id')->constrained();
             $table->string('position')->default('Specjalista');
-            $table->text('description')->default('Opisz swoje stanowisko pracy :-)');
+            $table->text('description')->nullable();
             $table->string('location')->default('Warszawa');
             $table->string('avatar_path')->default('avatars/1.jpg');
             $table->rememberToken();

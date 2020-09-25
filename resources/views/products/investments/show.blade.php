@@ -111,12 +111,12 @@
 				<x-cards.details-row --attribute="Grupa produktowa" :value="$investment->group" />
 				<x-cards.details-row --attribute="Dystrybutor" :value="$investment->dist" />
 				<x-cards.details-row --attribute="Kod dystrybutora" :value="$investment->dist_short" />
-				<x-cards.details-row --attribute="Typ produktu" :value="$investment->code" />
+				<x-cards.details-row --attribute="Typ produktu" :value="$investment->type" />
 			</x-cards.details>
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$investment->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$investment->created_at" />
-				<x-cards.details-row --attribute="Nazwa produktu" :value="$investment->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$investment->user->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">
