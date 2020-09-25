@@ -18,7 +18,7 @@ class FileCategoryController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['show']);
+        $this->middleware('auth');
     }
     
     /**
@@ -32,7 +32,7 @@ class FileCategoryController extends Controller
 
         return view('file-categories.index', [
             'title' => 'Kategorie dokumentów',
-            'fileCategories' => FileCategory::all(),
+            'file_categories' => FileCategory::all(),
         ]);
     }
 
@@ -43,12 +43,12 @@ class FileCategoryController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Note::class);
+        $this->authorize('create', FileCategory::class);
         
         return view('file-categories.create', [
-            'title' => 'Nowa notatka',
-            'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
-            'file-categories' => FileCategory::all()
+            'title' => 'Nowa kategoria dokumentów',
+            'description' => 'Uzupełnij dane kategorii dokumentów i kliknij Zapisz',
+            'file_categories' => FileCategory::all()
         ]);
     }
 
@@ -60,12 +60,12 @@ class FileCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Note::class);
+        $this->authorize('create', FileCategory::class);
         
-        $fileCategory = new Note($request->all());
-        Auth::user()->notes()->save($fileCategory);
+        $fileCategory = new FileCategory($request->all());
+        Auth::user()->file_categories()->save($fileCategory);
 
-        return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
+        return redirect()->route('file-categories.show', $fileCategory->id)->with('notify_success', 'Nowa kategoria dokumentów została dodana!');
     }
 
     /**
@@ -78,7 +78,7 @@ class FileCategoryController extends Controller
     {
         return view('file-categories.show', [
             'title' => 'Szczegóły',
-            'file-category' => $fileCategory,
+            'file_category' => $fileCategory,
         ]);
     }
 
@@ -93,9 +93,9 @@ class FileCategoryController extends Controller
         $this->authorize('update', $fileCategory);
 
         return view('file-categories.edit', [
-            'title' => 'Edycja notatki',
-            'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
-            'file-category' => $fileCategory,
+            'title' => 'Edycja kategorii dokumentów',
+            'description' => 'Zaktualizuj dane kategorii dokumentów i kliknij Zapisz',
+            'file_category' => $fileCategory,
         ]);
     }
 
@@ -111,7 +111,7 @@ class FileCategoryController extends Controller
         $this->authorize('update', $fileCategory);
         $fileCategory->update($request->all());
 
-        return redirect()->route('notes.show', $fileCategory->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');
+        return redirect()->route('file-categories.show', $fileCategory->id)->with('notify_success', 'Dane kategrii dokumentów zaktualizowane!');
     }
 
     /**
@@ -125,6 +125,6 @@ class FileCategoryController extends Controller
         $this->authorize('delete', $fileCategory);
         $fileCategory->delete();
 
-        return redirect()->route('notes.index')->with('notify_danger', 'Notatka została usunięta!');
+        return redirect()->route('file-categories.index')->with('notify_danger', 'Kategria dokumentów usunięta!');
     }
 }
