@@ -12,7 +12,8 @@ class FileCategory extends Model
     use SoftDeletes;
     
     protected $fillable = [
-        'name'
+        'name',
+        'prefix',
     ];
 
     public function files()

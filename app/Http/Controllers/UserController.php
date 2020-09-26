@@ -77,7 +77,6 @@ class UserController extends Controller
             'location' => $request->location,
             'position' => $request->position,
             'description' => $request->description,
-            'department_id' => $request->department_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -85,6 +84,7 @@ class UserController extends Controller
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
         }
+        $user->department()->associate(Department::find($request->department_id));
         $user->save();
         $user->permissions()->attach($request->permission_id);
 
@@ -141,13 +141,14 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
-            $user->save();
         }
+        $user->department()->associate(Department::find($request->department_id));
+        $user->save();
 
         if(isset($request->permission_id)) {
             $user->permissions()->sync($request->permission_id);
         }
-
+        
         return redirect()->route('users.edit', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
 

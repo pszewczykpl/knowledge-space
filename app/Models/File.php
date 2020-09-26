@@ -14,7 +14,6 @@ class File extends Model
     protected $fillable = [
         'path',
         'name',
-        'filename',
         'extension',
     ];
 
@@ -31,11 +30,6 @@ class File extends Model
     public function protectives()
     {
         return $this->morphedByMany('App\Models\Protective', 'fileable')->withTimestamps();
-    }
-
-    public function funds()
-    {
-        return $this->morphedByMany('App\Models\Fund', 'fileable')->withTimestamps();
     }
 
     public function file_category()

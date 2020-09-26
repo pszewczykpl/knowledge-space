@@ -27,7 +27,6 @@ class User extends Authenticatable
         'phone', 
         'password', 
         'company', 
-        'department_id', 
         'position', 
         'description', 
         'location',
@@ -41,15 +40,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     public function department()
