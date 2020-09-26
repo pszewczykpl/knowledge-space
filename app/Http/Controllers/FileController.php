@@ -8,6 +8,9 @@ use App\Models\Protective;
 use App\Models\Employee;
 use App\Models\FileCategory;
 
+use App\Http\Requests\StoreFile;
+use App\Http\Requests\UpdateFile;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +69,7 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFile $request)
     {
         $this->authorize('create', File::class);
 
@@ -151,7 +154,7 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $file)
+    public function update(UpdateFile $request, File $file)
     {
         $this->authorize('update', $file);
 

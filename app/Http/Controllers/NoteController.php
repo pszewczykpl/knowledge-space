@@ -10,6 +10,9 @@ use App\Models\Fund;
 use App\Models\Partner;
 use App\Models\Risk;
 
+use App\Http\Requests\StoreNote;
+use App\Http\Requests\UpdateNote;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +72,7 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNote $request)
     {
         $this->authorize('create', Note::class);
         
@@ -130,7 +133,7 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update(UpdateNote $request, Note $note)
     {
         $this->authorize('update', $note);
         

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 
 use App\Http\Requests\StoreEmployee;
+use App\Http\Requests\UpdateEmployee;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -101,11 +102,11 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\StoreEmployee  $request
+     * @param  \Illuminate\Http\UpdateEmployee  $request
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreEmployee $request, Employee $employee)
+    public function update(UpdateEmployee $request, Employee $employee)
     {
         $this->authorize('update', $employee);
         $employee->update($request->all());

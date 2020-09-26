@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\FileCategory;
 
+use App\Http\Requests\StoreFileCategory;
+use App\Http\Requests\UpdateFileCategory;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +61,7 @@ class FileCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFileCategory $request)
     {
         $this->authorize('create', FileCategory::class);
         
@@ -106,7 +109,7 @@ class FileCategoryController extends Controller
      * @param  \App\FileCategory  $fileCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FileCategory $fileCategory)
+    public function update(UpdateFileCategory $request, FileCategory $fileCategory)
     {
         $this->authorize('update', $fileCategory);
         $fileCategory->update($request->all());

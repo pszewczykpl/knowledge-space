@@ -24,13 +24,14 @@ class StoreFund extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'code' => 'required|max:255',
-            'type' => 'required|max:1',
-            'currency' => 'required|max:255',
-            'start_date' => 'required|date',
-            'cancel_reason' => 'max:255',
+            'code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'status' => 'required|max:1',
+            'type' => 'required|max:1',
+            'currency' => 'required|string|max:255',
+            'start_date' => 'nullable|date',
+            'cancel_date' => 'nullable|date',
+            'cancel_reason' => 'nullable|string|max:255',
         ];
     }
 }

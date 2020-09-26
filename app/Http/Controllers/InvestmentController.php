@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Investment;
 
 use App\Http\Requests\StoreInvestment;
+use App\Http\Requests\UpdateInvestment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -105,7 +106,7 @@ class InvestmentController extends Controller
      * @param  \App\Investment  $investment
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreInvestment $request, Investment $investment) 
+    public function update(UpdateInvestment $request, Investment $investment) 
     {
         $this->authorize('update', $investment);
         $investment->update($request->all());

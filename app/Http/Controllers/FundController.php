@@ -6,6 +6,7 @@ use App\Models\Fund;
 use App\Models\Investment;
 
 use App\Http\Requests\StoreFund;
+use App\Http\Requests\UpdateFund;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -110,7 +111,7 @@ class FundController extends Controller
      * @param  \App\Fund  $fund
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreFund $request, Fund $fund)
+    public function update(UpdateFund $request, Fund $fund)
     {
         $this->authorize('update', $fund);
         $fund->update($request->all());

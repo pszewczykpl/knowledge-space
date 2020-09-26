@@ -24,8 +24,8 @@ class StoreEmployee extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'code_owu' => 'required|max:255',
+            'name' => 'required|string|max:255',
+            'code_owu' => 'required|string|max:255',
             'edit_date' => 'required|date',
             'status' => 'required|max:1',
         ];

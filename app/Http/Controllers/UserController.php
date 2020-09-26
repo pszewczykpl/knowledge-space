@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Permission;
 
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -132,7 +133,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, User $user)
+    public function update(UpdateUser $request, User $user)
     {
         $this->authorize('update', $user);
 

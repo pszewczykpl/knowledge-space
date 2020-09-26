@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Reply;
 use App\Models\News;
 
+use App\Http\Requests\StoreReply;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +30,7 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReply $request)
     {
         $this->authorize('create', Reply::class);
         

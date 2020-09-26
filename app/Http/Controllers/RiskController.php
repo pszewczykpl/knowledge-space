@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Risk;
 
+use App\Http\Requests\StoreRisk;
+use App\Http\Requests\UpdateRisk;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +58,7 @@ class RiskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRisk $request)
     {
         $this->authorize('create', Risk::class);
         
@@ -103,7 +106,7 @@ class RiskController extends Controller
      * @param  \App\Risk  $risk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Risk $risk)
+    public function update(UpdateRisk $request, Risk $risk)
     {
         $this->authorize('update', $risk);
         $risk->update($request->all());

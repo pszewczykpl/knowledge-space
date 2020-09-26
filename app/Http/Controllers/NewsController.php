@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Replies;
 
+use App\Http\Requests\StoreNews;
+use App\Http\Requests\UpdateNews;
+
 class NewsController extends Controller
 {
     /**
@@ -58,7 +61,7 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNews $request)
     {
         $this->authorize('create', News::class);
 
@@ -108,7 +111,7 @@ class NewsController extends Controller
      * @param  \App\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(UpdateNews $request, News $news)
     {
         $this->authorize('update', $news);
         $news->update($request->all());

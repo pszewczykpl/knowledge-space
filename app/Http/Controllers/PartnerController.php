@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 
+use App\Http\Requests\StorePartner;
+use App\Http\Requests\UpdatePartner;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +58,7 @@ class PartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePartner $request)
     {
         $this->authorize('create', Partner::class);
         
@@ -103,7 +106,7 @@ class PartnerController extends Controller
      * @param  \App\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(UpdatePartner $request, Partner $partner)
     {
         $this->authorize('update', $partner);
         $partner->update($request->all());

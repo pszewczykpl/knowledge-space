@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+
+use App\Http\Requests\StoreDepartment;
+use App\Http\Requests\UpdateDepartment;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -54,7 +58,7 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDepartment $request)
     {
         $this->authorize('create', Department::class);
         
@@ -102,7 +106,7 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(UpdateDepartment $request, Department $department)
     {
         $this->authorize('update', $department);
         $department->update($request->all());

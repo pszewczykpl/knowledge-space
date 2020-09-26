@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Protective;
 
 use App\Http\Requests\StoreProtective;
+use App\Http\Requests\UpdateProtective;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class ProtectiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProtective $request)
     {
         $this->authorize('create', Protective::class);
         
@@ -105,7 +106,7 @@ class ProtectiveController extends Controller
      * @param  \App\Protective  $protective
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Protective $protective)
+    public function update(UpdateProtective $request, Protective $protective)
     {
         $this->authorize('update', $protective);
         $protective->update($request->all());
