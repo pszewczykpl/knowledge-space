@@ -87,6 +87,8 @@ class RegisterController extends Controller
                 'news-viewany',
                 'news-view',
                 'news-create',
+                'departments-viewany',
+                'departments-view',
             ]
         )->pluck('id')->toArray());
 
