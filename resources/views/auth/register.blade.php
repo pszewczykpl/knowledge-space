@@ -56,7 +56,9 @@
                             
                             <div class="form-group py-2 m-0 border-top m-0">
                                 <select class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('department_id') is-invalid @enderror" name="department_id" id="department_id" value="{{ old('department_id') }}">
-                                    <option value="1">DOK</option>
+                                    @foreach(App\Models\Department::all() as $department)
+                                    <option value="{{ $department->id }}">{{ $department->code }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
