@@ -69,18 +69,17 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
 
-        $user = User::create([
-            'username' => $request->username,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone' => $request->phone,
-            'company' => $request->company,
-            'location' => $request->location,
-            'position' => $request->position,
-            'description' => $request->description,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User;
+        $user->username = $request->username;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+        $user->company = $request->company;
+        $user->location = $request->location;
+        $user->position = $request->position;
+        $user->description = $request->description;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
