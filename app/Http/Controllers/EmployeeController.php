@@ -69,6 +69,25 @@ class EmployeeController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\StoreEmployee  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Employee $employee)
+    {
+        $this->authorize('create', Employee::class);
+
+        $employee->load('user');
+        $clone = $employee->replicate();
+        $clone->save();
+        $clone->files()->attach($employee->files);
+        $clone->notes()->attach($employee->notes);
+
+        return redirect()->route('employees.show', $clone->id)->with('notify_success', 'Nowy produkt ochronny został zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Employee  $employee

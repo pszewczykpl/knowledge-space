@@ -69,6 +69,25 @@ class ProtectiveController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\StoreProtective  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Protective $protective)
+    {
+        $this->authorize('create', Protective::class);
+
+        $protective->load('user');
+        $clone = $protective->replicate();
+        $clone->save();
+        $clone->files()->attach($protective->files);
+        $clone->notes()->attach($protective->notes);
+
+        return redirect()->route('protectives.show', $clone->id)->with('notify_success', 'Nowy produkt ochronny został zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Protective  $protective

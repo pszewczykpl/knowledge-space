@@ -34,6 +34,7 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 Route::resource('departments', DepartmentController::class);
+Route::get('employees/duplicate/{employee}', [EmployeeController::class, 'duplicate'])->name('employees.duplicate');
 Route::resource('employees', EmployeeController::class);
 Route::get('files/download/{id}', [FileController::class, 'download'])->name('files.download');
 Route::resource('files', FileController::class);
@@ -45,6 +46,7 @@ Route::resource('news', NewsController::class);
 Route::resource('notes', NoteController::class);
 Route::resource('partners', PartnerController::class);
 Route::resource('permissions', PermissionController::class)->only(['index']);
+Route::get('protectives/duplicate/{protective}', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
 Route::resource('protectives', ProtectiveController::class);
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 Route::resource('risks', RiskController::class);
