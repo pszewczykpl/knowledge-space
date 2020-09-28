@@ -69,6 +69,26 @@ class InvestmentController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\StoreInvestment  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Investment $investment)
+    {
+        $this->authorize('create', Investment::class);
+
+        $investment->load('user');
+        $clone = $investment->replicate();
+        $clone->save();
+        $clone->files()->attach($investment->files);
+        $clone->notes()->attach($investment->notes);
+        $clone->funds()->attach($investment->funds);
+
+        return redirect()->route('investments.show', $clone->id)->with('notify_success', 'Nowy produkt inwestycyjny został zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Investment  $investment
