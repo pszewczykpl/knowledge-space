@@ -69,6 +69,24 @@ class PartnerController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Partner  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Partner $partner)
+    {
+        $this->authorize('create', Partner::class);
+
+        $partner->load('user');
+        $clone = $partner->replicate();
+        $clone->save();
+        $clone->notes()->attach($partner->notes);
+
+        return redirect()->route('partners.show', $clone->id)->with('notify_success', 'Nowy partner został zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Partner  $partner

@@ -73,6 +73,24 @@ class FundController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Fund  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Fund $fund)
+    {
+        $this->authorize('create', Fund::class);
+
+        $fund->load('user');
+        $clone = $fund->replicate();
+        $clone->save();
+        $clone->notes()->attach($fund->notes);
+
+        return redirect()->route('funds.show', $clone->id)->with('notify_success', 'Nowy fundusz został zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Fund  $fund

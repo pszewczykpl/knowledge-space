@@ -84,7 +84,7 @@ class EmployeeController extends Controller
         $clone->files()->attach($employee->files);
         $clone->notes()->attach($employee->notes);
 
-        return redirect()->route('employees.show', $clone->id)->with('notify_success', 'Nowy produkt ochronny został zduplikowany!');
+        return redirect()->route('employees.show', $clone->id)->with('notify_success', 'Nowy produkt pracowniczy został zduplikowany!');
     }
 
     /**

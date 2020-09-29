@@ -69,6 +69,24 @@ class RiskController extends Controller
     }
 
     /**
+     * Duplicate a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Risk  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function duplicate(Risk $risk)
+    {
+        $this->authorize('create', Risk::class);
+
+        $risk->load('user');
+        $clone = $risk->replicate();
+        $clone->save();
+        $clone->notes()->attach($risk->notes);
+
+        return redirect()->route('risks.show', $clone->id)->with('notify_success', 'Nowe ryzyko zostało zduplikowany!');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Risk  $risk
