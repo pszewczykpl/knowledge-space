@@ -142,10 +142,43 @@
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true" disabled>
                                         @foreach($note->employees as $employee)
-                                        <option value="{{ $employee->id }}" selected >{{ $employee->name }} ({{ $employee->edit_date }})</option>
+                                        <option value="{{ $employee->id }}" selected>{{ $employee->name }} ({{ $employee->edit_date }})</option>
                                         @endforeach
                                     </select>
                                     <span class="form-text text-muted">Ubezpieczenia pracownicze w których widoczny jest komentarz.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-4 text-left">Partnerzy:</label>
+                                <div class="col-8">
+                                    <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="partner_id[]" id="partner_id[]" data-actions-box="true" data-live-search="true" disabled>
+                                        @foreach($note->partners as $partner)
+                                        <option value="{{ $partner->id }}" selected>{{ $partner->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="form-text text-muted">Partnerzy w których widoczny jest komentarz.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-4 text-left">Ryzyka Ubezpieczeniowe:</label>
+                                <div class="col-8">
+                                    <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="risk_id[]" id="risk_id[]" data-actions-box="true" data-live-search="true" disabled>
+                                        @foreach($note->risks as $risk)
+                                        <option value="{{ $risk->id }}" selected>{{ $risk->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="form-text text-muted">Ryzyka ubezpieczeniowe w których widoczny jest komentarz.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-4 text-left">Fundusze UFK:</label>
+                                <div class="col-8">
+                                    <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="fund_id[]" id="fund_id[]" data-actions-box="true" data-live-search="true" disabled>
+                                        @foreach($note->funds as $fund)
+                                        <option value="{{ $fund->id }}" selected>{{ $fund->extended_name() }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="form-text text-muted">Fundusze UFK w których widoczny jest komentarz.</span>
                                 </div>
                             </div>
                                     

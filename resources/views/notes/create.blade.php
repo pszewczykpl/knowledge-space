@@ -155,6 +155,39 @@
                                         <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się komentarz.</span>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-4 text-left">Partnerzy:</label>
+                                    <div class="col-8">
+                                        <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="partner_id[]" id="partner_id[]" data-actions-box="true" data-live-search="true">
+                                            @foreach($partners as $partner)
+                                            <option value="{{ $partner->id }}">{{ $partner->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="form-text text-muted">Wskaż partnerów w których ma pojawić się komentarz.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-4 text-left">Ryzyka Ubezpieczeniowe:</label>
+                                    <div class="col-8">
+                                        <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="risk_id[]" id="risk_id[]" data-actions-box="true" data-live-search="true">
+                                            @foreach($risks as $risk)
+                                            <option value="{{ $risk->id }}">{{ $risk->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="form-text text-muted">Wskaż ryzyka ubezpieczeniowe w których ma pojawić się komentarz.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-4 text-left">Fundusze UFK:</label>
+                                    <div class="col-8">
+                                        <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="fund_id[]" id="fund_id[]" data-actions-box="true" data-live-search="true">
+                                            @foreach($funds as $fund)
+                                            <option value="{{ $fund->id }}">{{ $fund->extended_name() }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="form-text text-muted">Wskaż fundusze UFK w których ma pojawić się komentarz.</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

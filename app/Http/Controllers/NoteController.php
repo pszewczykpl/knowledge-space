@@ -82,9 +82,9 @@ class NoteController extends Controller
         $note->investments()->attach($request->investment_id);
         $note->protectives()->attach($request->protective_id);
         $note->employees()->attach($request->employee_id);
-        $note->funds()->attach($request->fund_id);
         $note->partners()->attach($request->partner_id);
         $note->risks()->attach($request->risk_id);
+        $note->funds()->attach($request->fund_id);
 
         return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
     }
@@ -142,6 +142,8 @@ class NoteController extends Controller
         $note->investments()->sync($request->investment_id);
         $note->protectives()->sync($request->protective_id);
         $note->employees()->sync($request->employee_id);
+        $note->partners()->sync($request->partner_id);
+        $note->risks()->sync($request->risk_id);
         $note->funds()->sync($request->fund_id);
 
         return redirect()->route('notes.show', $note->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');

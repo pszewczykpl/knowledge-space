@@ -36,4 +36,9 @@ class Fund extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function extended_name()
+    {
+        return $this->name . ' (' . $this->code . ')';
+    }
 }

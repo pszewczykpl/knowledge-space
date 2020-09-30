@@ -48,4 +48,9 @@ class Investment extends Model
     {
         return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
     }
+
+    public function fullname()
+    {
+        return $this->name . ' (' . $this->code_toil . ') od ' . $this->edit_date;
+    }
 }
