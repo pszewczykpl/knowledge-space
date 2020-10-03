@@ -92,7 +92,7 @@
 					<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Witaj,</span>
 					<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->fullname() }}</span>
 					<div class="symbol symbol-35">
-						<div class="symbol-label" style="background-image:url('{{ asset('storage/') }}/{{ Auth::user()->avatar_path }}')"></div>
+						<div class="symbol-label" style="background-image:url('@if(Auth::user()->avatar_path) {{ Storage::url(Auth::user()->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif')"></div>
 					</div>
 				</div>
 				@else

@@ -3,7 +3,7 @@
 	<div class="card-body">
 		<div class="d-flex align-items-center">
 			<div class="symbol symbol-40 symbol-light-success mr-5">
-				<span class="symbol-label" style="background-image:url('{{ asset('storage/') }}/{{ Auth::user()->avatar_path }}')"></span>
+				<span class="symbol-label" style="background-image:url('@if(Auth::user()->avatar_path) {{ Storage::url(Auth::user()->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif')"></span>
 			</div>
 			<span class="text-muted font-weight-bold font-size-lg">Coś nowego, <b>{{ Auth::user()->first_name }}</b>?</span>
 		</div>

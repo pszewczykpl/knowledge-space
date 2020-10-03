@@ -5,12 +5,12 @@
 				<div class="d-flex flex-column flex-center">
 					<div class="symbol symbol-120 symbol-circle symbol-white overflow-hidden">
 						<span class="symbol-label">
-							<img src="{{ asset('storage/') }}/{{ $user->avatar_path }}" class="h-100" alt="" />
+							<img src="@if($user->avatar_path) {{ Storage::url($user->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif" class="h-100" alt="" />
 						</span>
                     </div>
 					<div class="pt-2 text-center">
                         <span class="text-dark-75 text-primary card-title font-weight-bold font-size-h4">
-                            {{ $user->first_name }} {{ $user->last_name }}
+                            {{ $user->fullname() }}
                         </span>
                     </div>
                     <div class="pt-2 text-center">

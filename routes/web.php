@@ -17,6 +17,9 @@ use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

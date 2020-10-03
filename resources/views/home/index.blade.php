@@ -1,23 +1,23 @@
 @extends('home')
 
 @section('content')
-<div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('./media/bg/bg-9.jpg')">
+<div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('./media/bg/bg-1-home.jpg')">
 	<div class="container">
-		<div class="d-flex justify-content-between align-items-center border-bottom border-white py-7">
-			<h3 class="h4 text-dark mb-0">Baza Wiedzy</h3>
+		<div class="d-flex justify-content-between align-items-center border-bottom border-black py-7" style="border-bottom: 1.2px solid #425ba7!important;">
+			<h3 class="h3 text-black font-weight-bolder mb-0">Knowledge Space</h3>
 			<div class="d-flex">
-				<span class="font-size-h6 font-weight-bold ml-8">Poznaj funkcjonalności Bazy Wiedzy!</span>
+				<span class="font-size-h6 text-black font-weight-bolder ml-8">Strefa Wiedzy dla Towarzysta Ubezpieczeniowego</span>
 			</div>
-		</div>
-		<div class="py-15">
+        </div>
+        <div class="py-15">
 		</div>
 	</div>
 </div>
 <div class="container mt-n15">
     @guest
     <div class="card card-custom gutter-b">
-    	<div class="card-body pb-0">
-            <div class="alert alert-white pb-0" role="alert">
+    	<div class="card-body pb-0" style="box-shadow: 0px 0px 30px -20px;">
+            <div class="alert alert-white pb-2" role="alert">
                 <h4 class="alert-heading text-dark">Nie masz konta w Bazie Wiedzy? <a class="font-weight-bold text-primary" href="{{ route('register') }}">Zarejestruj się!</a></h4>
                 <p>Dzięki rejestracji w systemie Baza Wiedzy uzyskasz dostęp m.in. do tworzenia własnych notatek pod produktami czy przeglądania aktualności w BW! </p>
             </div>
@@ -26,11 +26,11 @@
     @endguest
     @auth
     <div class="card card-custom gutter-b pb-0">
-		<div class="card-body pb-0">
+		<div class="card-body pb-0" style="box-shadow: 0px 0px 30px -20px;">
 			<div class="d-flex mb-6">
 				<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 					<div class="symbol symbol-50 symbol-lg-120">
-						<img src="{{ asset('storage/') }}/{{ Auth::user()->avatar_path }}" alt="image">
+						<img src="@if(Auth::user()->avatar_path) {{ Storage::url(Auth::user()->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif" alt="image">
 					</div>
 				</div>
 				<div class="flex-grow-1">
