@@ -32,8 +32,8 @@ class InvestmentByController extends Controller
         ->firstOrFail();
 
         $file = $investment->files()->where([
-            ['path', 'like', '%/' . $file_code . '.%'],
-            ['extension', '=', 'pdf']
+            ['code', $file_code],
+            ['extension', 'pdf']
         ])->firstOrFail();
 
         return redirect()->route('files.download', $file->id);

@@ -33,7 +33,7 @@ class ProtectiveByController extends Controller
         ->firstOrFail();
     
         $file = $protective->files()->where([
-            ['path', 'like', '%/' . $file_code . '.%'],
+            ['code', $file_code],
             ['extension', '=', 'pdf']
         ])->firstOrFail();
 
