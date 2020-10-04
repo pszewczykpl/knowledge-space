@@ -30,8 +30,10 @@ class UserSeeder extends Seeder
         ]);
         $user->permissions()->attach(Permission::all());
         
-        User::factory()
+        if (!App::environment('production')) {
+            User::factory()
             ->times(23)
             ->create();
+        }
     }
 }
