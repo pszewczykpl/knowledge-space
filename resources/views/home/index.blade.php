@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('content')
-<div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('./media/bg/bg-1-home.jpg')">
+<div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('./media/bg/bg-1.jpg')">
 	<div class="container">
 		<div class="d-flex justify-content-between align-items-center border-bottom border-black py-7" style="border-bottom: 1.2px solid #425ba7!important;">
 			<h3 class="h3 text-black font-weight-bolder mb-0">Knowledge Space</h3>
