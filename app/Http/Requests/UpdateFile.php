@@ -25,6 +25,7 @@ class UpdateFile extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'code' => 'nullable|string|max:255',
         ];
     }
 }

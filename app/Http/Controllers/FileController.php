@@ -166,7 +166,7 @@ class FileController extends Controller
             $path = $request->file->store('files');
             $file->path = $path;
             $file->extension = $request->file('file')->extension();
-            $file->save();            
+            $file->save();
         }
         
         $file->file_category()->associate(FileCategory::find($request->file_category_id));

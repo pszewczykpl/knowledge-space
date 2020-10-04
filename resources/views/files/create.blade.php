@@ -129,6 +129,32 @@
                                 <input class="form-control form-control-lg form-control-solid" type="file" name="file" id="file" />
                             </div>
                         </div>
+                        <div class="separator separator-dashed my-10"></div>
+                        <div class="row">
+							<label class="col-3"></label>
+							<div class="col-9">
+								<h6 class="text-dark font-weight-bold mb-10">Dokument w API:</h6>
+							</div>
+						</div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">Kod dokumentu:</label>
+                            <div class="col-9">
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" placeholder="Wpisz Kod dokumentu">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-custom alert-light-primary mb-5" role="alert">
+									<div class="alert-icon">
+										<i class="flaticon-info"></i>
+									</div>
+									<div class="alert-text">
+                                        Kod dokumentu wykorzystywany jest w API systemu.<br>
+                                        Aby nadać poprawny kod dokumentu - zapoznaj się z Instrukcją systemu <b>Knowledge Space</b>.
+                                    </div>
+								</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
