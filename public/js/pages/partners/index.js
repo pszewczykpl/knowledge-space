@@ -42,12 +42,12 @@ $(document).ready(function() {
                 searchable: true
             },{
                 data: 'nip',
-                visible: true,
+                visible: false,
                 orderable: true,
                 searchable: true
             },{
                 data: 'regon',
-                visible: true,
+                visible: false,
                 orderable: true,
                 searchable: true
             }, {
