@@ -125,9 +125,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Inwestycyjne:</label>
                                     <div class="col-8">
+                                        @php $note_investment = $note->investments->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($investments as $investment)
-                                            <option value="{{ $investment->id }}" {{ in_array($investment->id, $note->investments->pluck('id')->toArray()) ? "selected": "" }}>{{ $investment->fullname() }}</option>
+                                            <option value="{{ $investment->id }}" {{ in_array($investment->id, $note_investment) ? "selected": "" }}>{{ $investment->fullname() }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>
@@ -136,9 +137,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Ochronne:</label>
                                     <div class="col-8">
+                                        @php $note_protective = $note->protectives->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($protectives as $protective)
-                                            <option value="{{ $protective->id }}" {{ in_array($protective->id, $note->protectives->pluck('id')->toArray()) ? "selected": "" }}>{{ $protective->extended_name() }}</option>
+                                            <option value="{{ $protective->id }}" {{ in_array($protective->id, $note_protective) ? "selected": "" }}>{{ $protective->extended_name() }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się komentarz.</span>
@@ -147,9 +149,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze:</label>
                                     <div class="col-8">
+                                        @php $note_employee = $note->employees->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($employees as $employee)
-                                            <option value="{{ $employee->id }}" {{ in_array($employee->id, $note->employees->pluck('id')->toArray()) ? "selected": "" }}>{{ $employee->extended_name() }}</option>
+                                            <option value="{{ $employee->id }}" {{ in_array($employee->id, $note_employee) ? "selected": "" }}>{{ $employee->extended_name() }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się komentarz.</span>
@@ -158,9 +161,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Partnerzy:</label>
                                     <div class="col-8">
+                                        @php $note_partner = $note->partners->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="partner_id[]" id="partner_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($partners as $partner)
-                                            <option value="{{ $partner->id }}" {{ in_array($partner->id, $note->partners->pluck('id')->toArray()) ? "selected": "" }}>{{ $partner->name }}</option>
+                                            <option value="{{ $partner->id }}" {{ in_array($partner->id, $note_partner) ? "selected": "" }}>{{ $partner->name }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż partnerów w których ma pojawić się komentarz.</span>
@@ -169,9 +173,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Ryzyka Ubezpieczeniowe:</label>
                                     <div class="col-8">
+                                        @php $note_risk = $note->risks->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="risk_id[]" id="risk_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($risks as $risk)
-                                            <option value="{{ $risk->id }}" {{ in_array($risk->id, $note->risks->pluck('id')->toArray()) ? "selected": "" }}>{{ $risk->name }}</option>
+                                            <option value="{{ $risk->id }}" {{ in_array($risk->id, $note_risk) ? "selected": "" }}>{{ $risk->name }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż ryzyka ubezpieczeniowe w których ma pojawić się komentarz.</span>
@@ -180,9 +185,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-left">Fundusze UFK:</label>
                                     <div class="col-8">
+                                        @php $note_fund = $note->funds->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="fund_id[]" id="fund_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($funds as $fund)
-                                            <option value="{{ $fund->id }}" {{ in_array($fund->id, $note->funds->pluck('id')->toArray()) ? "selected": "" }}>{{ $fund->extended_name() }}</option>
+                                            <option value="{{ $fund->id }}" {{ in_array($fund->id, $note_fund) ? "selected": "" }}>{{ $fund->extended_name() }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż fundusze UFK w których ma pojawić się komentarz.</span>

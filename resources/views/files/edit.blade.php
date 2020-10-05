@@ -189,10 +189,10 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4 text-left">Ubezpieczenia Inwestycyjne</label>
                             <div class="col-8">
-                                <?php $file_investments_id = array(); foreach($file->investments as $invest) { array_push($file_investments_id, $invest->id); } ?>
+                                @php $file_investment = $file->investments->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($investments as $investment)
-                                    <option value="{{ $investment->id }}" {{ in_array($investment->id, $file_investments_id ?: []) ? "selected": "" }} >{{ $investment->name }} ({{ $investment->code_toil }}) od {{ $investment->edit_date }}</option>
+                                    <option value="{{ $investment->id }}" {{ in_array($investment->id, $file_investment) ? "selected": "" }}>{{ $investment->fullname() }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>
@@ -201,10 +201,10 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4 text-left">Ubezpieczenia Ochronne</label>
                             <div class="col-8">
-                                <?php $file_protectives_id = array(); foreach($file->protectives as $invest) { array_push($file_protectives_id, $invest->id); } ?>
+                                @php $file_protective = $file->protectives->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($protectives as $protective)
-                                    <option value="{{ $protective->id }}" {{ in_array($protective->id, $file_protectives_id ?: []) ? "selected": "" }} >{{ $protective->name }} ({{ $protective->edit_date }})</option>
+                                    <option value="{{ $protective->id }}" {{ in_array($protective->id, $file_protective) ? "selected": "" }}>{{ $protective->extended_name() }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się komentarz.</span>
@@ -213,10 +213,10 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze</label>
                             <div class="col-8">
-                                <?php $file_employees_id = array(); foreach($file->employees as $invest) { array_push($file_employees_id, $invest->id); } ?>
+                                @php $file_employee = $file->employees->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, $file_employees_id ?: []) ? "selected": "" }} >{{ $employee->name }} ({{ $employee->edit_date }})</option>
+                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, $file_employee) ? "selected": "" }}>{{ $employee->extended_name() }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się komentarz.</span>
