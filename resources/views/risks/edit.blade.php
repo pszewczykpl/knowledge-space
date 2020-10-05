@@ -107,6 +107,7 @@
                             <div class="col-9">
                                 <select class="form-control form-control-lg form-control-solid" name="category" id="category" value="{{ $risk->category }}">
                                     <option value="WYPADKOWE" @if($risk->category == 'WYPADKOWE') selected @endif>Wypadkowe</option>
+                                    <option value="INNE" @if($risk->category == 'INNE') selected @endif>Inne</option>
                                     <option value="CHOROBOWE" @if($risk->category == 'CHOROBOWE') selected @endif>Chorobowe</option>
                                 </select>
                             </div>

@@ -107,6 +107,7 @@
                             <div class="col-9">
                                 <select class="form-control form-control-lg form-control-solid" name="category" id="category">
                                     <option value="WYPADKOWE">Wypadkowe</option>
+                                    <option value="INNE">Inne</option>
                                     <option value="CHOROBOWE">Chorobowe</option>
                                 </select>
                             </div>
