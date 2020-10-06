@@ -80,6 +80,6 @@ class UserPolicy
             return true;
         }
 
-        return $user->id === $model->id;
+        return false;
     }
 }
