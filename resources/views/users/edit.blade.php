@@ -263,9 +263,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if(Auth::user()->can('delete', $user))
                                     <div class="form-group row">    
                                         <div class="col-12 text-right">
+                                            @if(Auth::user()->can('delete', $user))
                                             <a onclick='document.getElementById("users_destroy_{{ $user->id }}").submit();' class="btn btn-md btn-light-danger btn-shadow font-weight-bold ml-1">
                                                 <span class="svg-icon navi-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -278,11 +278,7 @@
                                                 </span>
                                                 Usuń Konto
                                             </a>
-                                        </div>
-                                    </div>
-                                    @else
-                                    <div class="form-group row">    
-                                        <div class="col-12 text-right">
+                                            @else
                                             <a class="btn btn-md btn-light-danger btn-shadow font-weight-bold ml-1 disabled">
                                                 <span class="svg-icon navi-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -295,9 +291,9 @@
                                                 </span>
                                                 Usuń Konto
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
