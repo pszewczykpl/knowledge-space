@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('position');
             $table->text('description')->nullable();
             $table->string('location');
-            $table->string('avatar_path');
+            $table->string('avatar_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

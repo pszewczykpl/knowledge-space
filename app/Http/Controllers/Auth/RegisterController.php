@@ -76,6 +76,9 @@ class RegisterController extends Controller
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
         $user->department()->associate(Department::find($data['department_id']));
+        $user->company = 'Open Life TU Życie S.A.';
+        $user->location = 'Warszawa';
+        $user->position = 'Specjalista';
         $user->save();
 
         $user->permissions()->attach(Permission::whereIn('code',

@@ -26,14 +26,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('admin'),
             'department_id' => Department::all()->random()->id,
             'position' => 'PHP Developer',
+            'company' => 'Open Life TU Życie S.A.',
+            'location' => 'Warszawa',
             'description' => 'Tworzenie oprogramowania opartego o nowoczesne rozwiazania w języki PHP takie jak Laravel, Symphony czy Vue.js',
         ]);
         $user->permissions()->attach(Permission::all());
         
-        if (!App::environment('production')) {
-            User::factory()
-            ->times(23)
-            ->create();
-        }
+    //    User::factory()
+    //    ->times(23)
+    //    ->create();
     }
 }

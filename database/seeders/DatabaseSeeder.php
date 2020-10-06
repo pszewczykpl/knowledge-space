@@ -13,29 +13,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment('production')) {
-            $this->call([
-                PermissionSeeder::class,
-                DepartmentSeeder::class,
-                UserSeeder::class,
-            ]);
-        } else {
-            $this->call([
-                PermissionSeeder::class,
-                DepartmentSeeder::class,
-                UserSeeder::class,
-                FileCategorySeeder::class,
-                FileSeeder::class,
-                EmployeeSeeder::class,
-                InvestmentSeeder::class,
-                ProtectiveSeeder::class,
-                FundSeeder::class,
-                NewsSeeder::class,
-                NoteSeeder::class,
-                PartnerSeeder::class,
-                ReplySeeder::class,
-                RiskSeeder::class,
-            ]);
-        }
+        $this->call([
+            PermissionSeeder::class,
+            DepartmentSeeder::class,
+            UserSeeder::class,
+        ]);
+    
+        // $this->call([
+        //     PermissionSeeder::class,
+        //     DepartmentSeeder::class,
+        //     UserSeeder::class,
+        //     FileCategorySeeder::class,
+        //     FileSeeder::class,
+        //     EmployeeSeeder::class,
+        //     InvestmentSeeder::class,
+        //     ProtectiveSeeder::class,
+        //     FundSeeder::class,
+        //     NewsSeeder::class,
+        //     NoteSeeder::class,
+        //     PartnerSeeder::class,
+        //     ReplySeeder::class,
+        //     RiskSeeder::class,
+        // ]);
     }
 }

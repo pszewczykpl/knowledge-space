@@ -38,7 +38,6 @@ class UserFactory extends Factory
             'position' => $faker->jobTitle,
             'description' => $faker->catchPhrase,
             'location' => $faker->country,
-            'avatar_path' => 'avatars/1.jpg',
         ];
     }
 }
