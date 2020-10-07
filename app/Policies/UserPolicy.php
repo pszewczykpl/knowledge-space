@@ -82,4 +82,36 @@ class UserPolicy
 
         return false;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $model
+     * @return mixed
+     */
+    public function restore(User $user, User $model)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $model
+     * @return mixed
+     */
+    public function forceDelete(User $user, User $model)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

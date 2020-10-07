@@ -83,4 +83,36 @@ class FilePolicy
 
         return $user->id === $file->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return mixed
+     */
+    public function restore(User $user, File $file)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return mixed
+     */
+    public function forceDelete(User $user, File $file)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

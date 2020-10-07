@@ -34,4 +34,36 @@ class ReplyPolicy
 
         return $user->id === $reply->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Reply  $reply
+     * @return mixed
+     */
+    public function restore(User $user, Reply $reply)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Reply  $reply
+     * @return mixed
+     */
+    public function forceDelete(User $user, Reply $reply)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

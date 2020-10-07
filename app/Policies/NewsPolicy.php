@@ -87,4 +87,36 @@ class NewsPolicy
 
         return $user->id === $news->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\News  $news
+     * @return mixed
+     */
+    public function restore(User $user, News $news)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\News  $news
+     * @return mixed
+     */
+    public function forceDelete(User $user, News $news)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

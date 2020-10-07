@@ -24,10 +24,8 @@ class StoreFile extends FormRequest
     public function rules()
     {
         return [
-            'path' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'code' => 'nullable|string|max:255',
-            'extension' => 'required|string|max:255',
         ];
     }
 }

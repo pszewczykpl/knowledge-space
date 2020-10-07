@@ -87,4 +87,36 @@ class FileCategoryPolicy
 
         return $user->id === $fileCategory->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return mixed
+     */
+    public function restore(User $user, FileCategory $fileCategory)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return mixed
+     */
+    public function forceDelete(User $user, FileCategory $fileCategory)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

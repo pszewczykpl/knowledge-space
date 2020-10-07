@@ -79,4 +79,36 @@ class PartnerPolicy
 
         return $user->id === $partner->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Partner  $partner
+     * @return mixed
+     */
+    public function restore(User $user, Partner $partner)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Partner  $partner
+     * @return mixed
+     */
+    public function forceDelete(User $user, Partner $partner)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

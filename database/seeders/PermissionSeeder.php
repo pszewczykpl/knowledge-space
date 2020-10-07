@@ -77,7 +77,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'file-categories-viewany',
             'name' => 'Może przeglądać listę wszystkich kategorii dokumentów',
-            'description' => 'Użytkownik może przeglądać listę wszystkich kategorii dokumentów (Zakładka Administracja -> Kategorie Dokumentów)',
+            'description' => 'Użytkownik może przeglądać listę wszystkich kategorii dokumentów w zakładce Administracja',
         ]);
         Permission::create([
             'code' => 'files-create',
@@ -97,7 +97,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'files-viewany',
             'name' => 'Może przeglądać listę wszystkich dokumentów',
-            'description' => 'Użytkownik może przeglądać listę wszystkich dokumentów (Zakładka Administracja -> Dokumenty)',
+            'description' => 'Użytkownik może przeglądać listę wszystkich dokumentów w zakładce Administracja',
         ]);
         Permission::create([
             'code' => 'funds-create',
@@ -152,7 +152,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'news-viewany',
             'name' => 'Może przeglądać listę wszystkich aktualności',
-            'description' => 'Użytkownik może przeglądać listę wszystkich aktualności (Zakładka Aktualności)',
+            'description' => 'Użytkownik może przeglądać listę wszystkich aktualności w zakładce Aktualności',
     
         ]);
         Permission::create([
@@ -173,7 +173,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'notes-viewany',
             'name' => 'Może przeglądać listę wszystkich notatek',
-            'description' => 'Użytkownik może przeglądać listę wszystkich notatek (Zakładka Administracja -> Notatki)',
+            'description' => 'Użytkownik może przeglądać listę wszystkich notatek w zakładce Administracja',
         ]);
         Permission::create([
             'code' => 'partners-create',
@@ -193,7 +193,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'permissions-viewany',
             'name' => 'Może przeglądać listę wszystkich uprawnień',
-            'description' => 'Użytkownik może przeglądać listę wszystkich uprawnień (Zakładka Administracja -> Uprawnienia)',
+            'description' => 'Użytkownik może przeglądać listę wszystkich uprawnień w zakładce Administracja',
         ]);
         Permission::create([
             'code' => 'permissions-update',
@@ -259,6 +259,31 @@ class PermissionSeeder extends Seeder
             'code' => 'users-viewany',
             'name' => 'Może przeglądać listę wszystkich pracowników',
             'description' => 'Użytkownik może przeglądać listę wszystkich pracowników (Zakładka HR -> Pracownicy)',
+        ]);
+        Permission::create([
+            'code' => 'systems-create',
+            'name' => 'Może dodawać systemy TU',
+            'description' => 'Użytkownik może dodawać systemy TU oraz edytować i usuwać utworzone przez siebie systemy TU',
+        ]);
+        Permission::create([
+            'code' => 'systems-update',
+            'name' => 'Może edytować wszystkie systemy TU',
+            'description' => 'Użytkownik może edytować wszystkie systemy TU',
+        ]);
+        Permission::create([
+            'code' => 'systems-delete',
+            'name' => 'Może usuwać wszystkie systemy TU',
+            'description' => 'Użytkownik może usuwać wszystkie systemy TU',
+        ]);
+        Permission::create([
+            'code' => 'restore',
+            'name' => 'Może przywracać usunięte obiekty w systemie',
+            'description' => 'Użytkownik może przywracać usunięte obiekty w systemie',
+        ]);
+        Permission::create([
+            'code' => 'force-delete',
+            'name' => 'Może trwale usuwać obiekty w systemie',
+            'description' => 'Użytkownik może trwale usuwać obiekty w systemie',
         ]);
     }
 }

@@ -79,4 +79,36 @@ class RiskPolicy
 
         return $user->id === $risk->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return mixed
+     */
+    public function restore(User $user, Risk $risk)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return mixed
+     */
+    public function forceDelete(User $user, Risk $risk)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }

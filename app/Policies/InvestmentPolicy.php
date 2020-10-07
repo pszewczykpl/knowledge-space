@@ -79,4 +79,36 @@ class InvestmentPolicy
 
         return $user->id === $investment->user_id;
     }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Investment  $investment
+     * @return mixed
+     */
+    public function restore(User $user, Investment $investment)
+    {
+        if($user->hasPermission('restore')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Investment  $investment
+     * @return mixed
+     */
+    public function forceDelete(User $user, Investment $investment)
+    {
+        if($user->hasPermission('force-delete')) {
+            return true;
+        }
+
+        return false;
+    }
 }
