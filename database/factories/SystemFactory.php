@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 
 use App\Models\System;
+use App\Models\User;
 
 class SystemFactory extends Factory
 {
