@@ -33,6 +33,8 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Auth::routes();
+Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
+Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('password.index');
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
@@ -57,6 +59,4 @@ Route::resource('protectives', ProtectiveController::class);
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 Route::get('risks/duplicate/{risk}', [RiskController::class, 'duplicate'])->name('risks.duplicate');
 Route::resource('risks', RiskController::class);
-Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
-Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('password.index');
 Route::resource('users', UserController::class);
