@@ -234,7 +234,7 @@
                                     @if(Auth::user()->can('update', $user))
                                     <div class="form-group row">    
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('password.index') }}" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
+                                            <a href="{{ route('auth.password.index') }}" class="btn btn-md btn-light-primary btn-shadow font-weight-bold ml-1">
                                                 <span class="svg-icon navi-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

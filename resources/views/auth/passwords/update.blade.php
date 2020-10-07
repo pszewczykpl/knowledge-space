@@ -29,7 +29,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-						{!! Form::open(['route' => 'password.update', 'method' => 'PUT']) !!}
+						{!! Form::open(['route' => 'auth.password.update', 'method' => 'PUT']) !!}
                         <div class="form-group py-2 m-0 border-bottom">
                             <input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('password') is-invalid @enderror" placeholder="Wpisz nowe hasło" id="password" type="password" name="password" required>
                             @error('password')

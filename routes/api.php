@@ -17,6 +17,7 @@ use App\Http\Controllers\API\ProtectiveController;
 use App\Http\Controllers\API\ProtectiveByController;
 use App\Http\Controllers\API\RiskController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\SystemController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ Route::post('datatables/permissions', [PermissionController::class, 'datatables'
 Route::post('datatables/protectives', [ProtectiveController::class, 'datatables']);
 Route::post('datatables/risks', [RiskController::class, 'datatables']);
 Route::post('datatables/users', [UserController::class, 'datatables']);
+Route::post('datatables/systems', [SystemController::class, 'datatables']);
 
 Route::get('files/zip', [FileController::class, 'zip'])->name('files.zip');
 

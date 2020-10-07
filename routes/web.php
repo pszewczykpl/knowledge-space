@@ -15,6 +15,7 @@ use App\Http\Controllers\ProtectiveController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SystemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 
@@ -33,8 +34,8 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Auth::routes();
-Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
-Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('password.index');
+Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('auth.password.update');
+Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('auth.password.index');
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
@@ -60,3 +61,4 @@ Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 Route::get('risks/duplicate/{risk}', [RiskController::class, 'duplicate'])->name('risks.duplicate');
 Route::resource('risks', RiskController::class);
 Route::resource('users', UserController::class);
+Route::resource('systems', SystemController::class);

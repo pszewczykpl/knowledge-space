@@ -121,6 +121,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Risk');
     }
 
+    public function systems()
+    {
+        return $this->hasMany('App\Models\System');
+    }
+
     public function hasPermission($code)
     {
         foreach ($this->permissions()->get() as $role)
