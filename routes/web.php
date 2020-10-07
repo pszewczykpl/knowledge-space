@@ -16,6 +16,7 @@ use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -56,4 +57,6 @@ Route::resource('protectives', ProtectiveController::class);
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 Route::get('risks/duplicate/{risk}', [RiskController::class, 'duplicate'])->name('risks.duplicate');
 Route::resource('risks', RiskController::class);
+Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
+Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('password.index');
 Route::resource('users', UserController::class);

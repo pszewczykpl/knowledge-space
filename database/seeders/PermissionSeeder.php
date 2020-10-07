@@ -243,7 +243,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'users-create',
             'name' => 'Może dodawać pracowników',
-            'description' => 'Użytkownik może dodawać pracowników oraz edytować i usuwać utworzonych przez siebie pracowników',
+            'description' => 'Użytkownik może dodawać pracowników oraz edytować utworzonych przez siebie pracowników',
         ]);
         Permission::create([
             'code' => 'users-update',
