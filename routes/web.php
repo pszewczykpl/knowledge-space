@@ -48,7 +48,7 @@ Route::resource('files', FileController::class);
 Route::resource('file-categories', FileCategoryController::class);
 Route::get('funds/duplicate/{fund}', [FundController::class, 'duplicate'])->name('funds.duplicate');
 Route::resource('funds', FundController::class);
-Route::get('investments/duplicate/{investment}', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
+Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
 Route::resource('investments', InvestmentController::class);
 Route::resource('news', NewsController::class);
 Route::resource('notes', NoteController::class);

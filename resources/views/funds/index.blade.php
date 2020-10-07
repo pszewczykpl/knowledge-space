@@ -7,7 +7,7 @@
 		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
 		<x-datatables.search-box-global />
 		<div class="ml-3">
-			<button type="button" class="btn btn-sm btn-success" id="active_or_all">Pokaż tylko Aktualne</button>
+			<button type="button" class="btn btn-sm btn-success" id="active_or_all">Pokaż tylko Aktywne</button>
 		</div>
 	</div>
 	<div class="d-flex align-items-center">
