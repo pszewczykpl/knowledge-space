@@ -29,6 +29,7 @@ class SystemFactory extends Factory
             'name' => $faker->name,
             'url' => $faker->url,
             'description' => $faker->text,
+            'user_id' => User::all()->random(),
         ];
     }
 }

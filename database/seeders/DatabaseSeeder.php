@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PartnerSeeder::class,
             ReplySeeder::class,
             RiskSeeder::class,
+            SystemSeeder::class,
         ]);
     }
 }
