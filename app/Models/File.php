@@ -16,6 +16,7 @@ class File extends Model
         'name',
         'code',
         'extension',
+        'draft',
     ];
 
     public function investments()

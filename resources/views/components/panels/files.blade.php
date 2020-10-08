@@ -2,54 +2,26 @@
     <div class="col-12">
         <div class="card card-custom" style="box-shadow: 0px 0px 0px 0px; -webkit-box-shadow: 0px 0px 0px 0x;">
             <div class="card-body pt-0 pb-0">
-                <a class="btn btn-light-primary active"><i class="fa fa-file-pdf"></i> PDF</a>
-                <a name="non-active" class="btn btn-light-primary " 
-                    @if($files->where('extension', '=', 'docx')->count() < 1)
-                        data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak plików <b>DOCX</b>" 
+                <a name="non-active" class="btn btn-light-primary font-weight-bold " 
+                    @if($files->where('draft', 1)->count() < 1)
+                        data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak dokumentów roboczych" 
                     @else
-                        id="show-docx-files"
+                        id="show-draft-files"  data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pokaż robocze dokumenty"
                     @endif
                 >
-                    <i class="fa fa-file-word"></i> DOCX
-                </a>
-                <a name="non-active" class="btn btn-light-primary " 
-                    @if($files->where('extension', '=', 'doc')->count() < 1)
-                        data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak plików <b>DOC</b>" 
-                    @else
-                        id="show-doc-files"
-                    @endif
-                >
-                    <i class="fa fa-file-word"></i> DOC
-                </a>
-                <a name="non-active" class="btn btn-light-primary " 
-                    @if($files->where('extension', '=', 'pub')->count() < 1)
-                        data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak plików <b>PUB</b>" 
-                    @else
-                        id="show-pub-files"
-                    @endif
-                >
-                    <i class="fa fa-file-invoice"></i> PUB
-                </a>
-                <a   
-                    @if($files->where('extension', '=', 'pptx')->count() < 1)
-                        name="non-active" class="btn btn-light-primary" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak plików <b>PPTX</b>" 
-                    @else
-                        name="active" class="btn btn-light-primary active" id="show-pptx-files"
-                    @endif
-                >
-                    <i class="fa fa-file-powerpoint"></i> PPTX
-                </a>
-                <a 
-                    @if($files->where('extension', '=', 'xlsx')->count() < 1)
-                        name="non-active" class="btn btn-light-primary" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak plików <b>XLSX</b>" 
-                    @else
-                        name="active" class="btn btn-light-primary active" id="show-xlsx-files"
-                    @endif
-                >
-                    <i class="fa fa-file-excel"></i> XLSX
+                    <span class="svg-icon navi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M11,3 L11,11 C11,11.0862364 11.0109158,11.1699233 11.0314412,11.2497543 C10.4163437,11.5908673 10,12.2468125 10,13 C10,14.1045695 10.8954305,15 12,15 C13.1045695,15 14,14.1045695 14,13 C14,12.2468125 13.5836563,11.5908673 12.9685588,11.2497543 C12.9890842,11.1699233 13,11.0862364 13,11 L13,3 L17.7925828,12.5851656 C17.9241309,12.8482619 17.9331722,13.1559315 17.8173006,13.4262985 L15.1298744,19.6969596 C15.051085,19.8808016 14.870316,20 14.6703019,20 L9.32969808,20 C9.12968402,20 8.94891496,19.8808016 8.87012556,19.6969596 L6.18269936,13.4262985 C6.06682778,13.1559315 6.07586907,12.8482619 6.2074172,12.5851656 L11,3 Z" fill="#000000"/>
+                                <path d="M10,21 L14,21 C14.5522847,21 15,21.4477153 15,22 L15,23 L9,23 L9,22 C9,21.4477153 9.44771525,21 10,21 Z" fill="#000000" opacity="0.3"/>
+                            </g>
+                        </svg>
+                    </span>
+                    Pokaż robocze
                 </a>
 
-                <a href="{{ route('files.zip', ['id' => $files->where('extension', 'pdf')->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success btn-shadow font-weight-bold" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty PDF jako <b>.zip</b>">
+                <a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success btn-shadow font-weight-bold" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty jako <b>.zip</b>">
 					<span class="svg-icon navi-icon">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -72,7 +44,7 @@
             <div class="card-header border-0">
                 <h3 class="card-title font-weight-bold text-dark">{{ $category->name }}</h3>
                 <div class="card-toolbar">
-					<a href="{{ route('files.zip', ['id' => $files->where('extension', 'pdf')->where('file_category_id', $category->id)->pluck('id')->toArray(), 'name' => $category->name]) }}" class="btn btn-link-primary font-weight-lighter btn-sm" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz poniższe dokumenty PDF jako <b>.zip</b>">
+					<a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->where('file_category_id', $category->id)->pluck('id')->toArray(), 'name' => $category->name]) }}" class="btn btn-link-primary font-weight-lighter btn-sm" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz poniższe dokumenty jako <b>.zip</b>">
                         <span class="svg-icon navi-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -89,9 +61,9 @@
             Brak dokumentów w tej kategorii
             @endif
             @foreach($files->where('file_category_id', $category->id) as $file)
-                <div class="d-flex align-items-center mb-5" name="{{ $file->extension }}"
-                    @if($file->extension != 'pdf' and $file->extension != 'xlsx' and $file->extension != 'pptx')
-                        style="display: none !important;" 
+                <div class="d-flex align-items-center mb-5"
+                    @if($file->draft == 1)
+                        name="draft" style="display: none !important;" 
                     @endif
                 >
                     <div class="mr-3">
@@ -101,8 +73,8 @@
                         <a href="{{ route('files.show', $file->id) }}" class="text-dark text-hover-primary mb-1 font-size-md font-weight-normal" target="_blank">
                             {{ $file->name }}
                         </a>
-                        <a href="{{ route('files.show', $file->id) }}" class="font-size-xs font-weight-lighter text-dark-50">
-                            Data dodania: {{ date('Y-m-d', strtotime($file->created_at)) }}
+                        <a href="{{ route('files.show', $file->id) }}" class="font-size-xs font-weight-lighter text-dark-50" target="_blank">
+                            Data ostatniej edycji: {{ date('Y-m-d', strtotime($file->created_at)) }}
                         </a>
                     </div>
                     <div class="dropdown dropdown-inline ml-2">

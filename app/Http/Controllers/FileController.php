@@ -76,10 +76,15 @@ class FileController extends Controller
         $path = $request->file->store('files');
 
         $file = new File($request->all());
+        if(($request->draft_checkbox ?? null)) {
+            $file->draft = 1;
+        } else {
+            $file->draft = 0;
+        }
 
         $file->path = $path;
         $file->extension = $request->file('file')->extension();
-        $file->file_category()->associate(FileCategory::find($request->file_category_id));
+        $file->file_category()->associate($request->file_category_id);
         Auth::user()->files()->save($file);
         
         $file->investments()->attach($request->investment_id);
@@ -159,6 +164,13 @@ class FileController extends Controller
         $this->authorize('update', $file);
 
         $file->update($request->all());
+        
+        $file->file_category()->associate($request->file_category_id);
+        if(($request->draft_checkbox ?? null)) {
+            $file->draft = 1;
+        } else {
+            $file->draft = 0;
+        }
 
         if ($request->hasFile('file')) {
             Storage::delete($file->path);
@@ -166,10 +178,9 @@ class FileController extends Controller
             $path = $request->file->store('files');
             $file->path = $path;
             $file->extension = $request->file('file')->extension();
-            $file->save();
         }
-        
-        $file->file_category()->associate(FileCategory::find($request->file_category_id));
+        $file->save();
+
         $file->investments()->sync($request->investment_id);
         $file->protectives()->sync($request->protective_id);
         $file->employees()->sync($request->employee_id);

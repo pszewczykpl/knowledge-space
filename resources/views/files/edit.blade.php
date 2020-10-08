@@ -116,11 +116,21 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Kategoria dokumentu:</label>
                             <div class="col-9">
-                                <select class="form-control form-control-lg form-control-solid" name="file_category_id" id="file_category_id" value="{{ $file->file_category_id }}">
+                                <select class="form-control form-control-lg form-control-solid" name="file_category_id" id="file_category_id">
                                     @foreach($file_categories as $file_category)
                                     <option value="{{ $file_category->id }}" @if($file->file_category_id == $file_category->id) selected @endif>{{ $file_category->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">Dokument roboczy:</label>
+                            <div class="col-9">
+                                <label class="checkbox checkbox-lg mt-2">
+                                    <input type="checkbox" name="draft_checkbox" @if($file->draft) checked="checked" @endif id="draft_checkbox">
+                                    <span></span>
+                                </label>
+                                <span class="form-text text-muted">Czy to dokument roboczy?</span>
                             </div>
                         </div>
                         <div class="row">
