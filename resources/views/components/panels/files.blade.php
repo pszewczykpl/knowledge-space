@@ -20,7 +20,6 @@
                     </span>
                     Pokaż robocze
                 </a>
-
                 <a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success btn-shadow font-weight-bold" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty jako <b>.zip</b>">
 					<span class="svg-icon navi-icon">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -74,7 +73,7 @@
                             {{ $file->name }}
                         </a>
                         <a href="{{ route('files.show', $file->id) }}" class="font-size-xs font-weight-lighter text-dark-50" target="_blank">
-                            Data ostatniej edycji: {{ date('Y-m-d', strtotime($file->created_at)) }}
+                            Data ostatniej edycji: {{ date('Y-m-d', strtotime($file->updated_at)) }}
                         </a>
                     </div>
                     <div class="dropdown dropdown-inline ml-2">
@@ -109,6 +108,22 @@
                                         <a href="{{ route('files.edit', $file->id) }}" class="navi-link">
                                             <i class="navi-icon flaticon2-edit"></i>
                                             <span class="navi-text">Edytuj</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('create', App\Models\File::class)
+                                    <li class="navi-item">
+                                        <a href="{{ route('files.replace', ['file' => $file, 'fileable_type' => Route::current()->parameterNames[0], 'fileable_id' => Route::current()->parameters['investment']['id'] ?? Route::current()->parameters['protective']['id'] ?? Route::current()->parameters['employee']['id']]) }}" class="navi-link">
+                                            <i class="navi-icon flaticon2-refresh-1"></i>
+                                            <span class="navi-text">Zastąp</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('update', $file)
+                                    <li class="navi-item">
+                                        <a href="{{ route('files.detach', ['file' => $file, 'fileable_type' => Route::current()->parameterNames[0], 'fileable_id' => Route::current()->parameters['investment']['id'] ?? Route::current()->parameters['protective']['id'] ?? Route::current()->parameters['employee']['id']]) }}" class="navi-link">
+                                            <i class="navi-icon flaticon2-line"></i>
+                                            <span class="navi-text">Odepnij</span>
                                         </a>
                                     </li>
                                 @endcan

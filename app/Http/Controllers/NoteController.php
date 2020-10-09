@@ -150,6 +150,21 @@ class NoteController extends Controller
     }
 
     /**
+     * Detach the specified resource from storage.
+     *
+     * @param  \App\Note  $note
+     * @return \Illuminate\Http\Response
+     */
+    public function detach(Note $note, $noteable_type, $noteable_id)
+    {
+        $this->authorize('update', $note);
+        
+        $note->{$noteable_type . 's'}()->detach($noteable_id);
+
+        return redirect()->back()->with('notify_danger', 'Notatka została odpięta od produktu!');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Note  $note

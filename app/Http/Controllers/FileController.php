@@ -194,6 +194,41 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
+    public function replace(File $file, $fileable_type, $fileable_id)
+    {
+        $this->authorize('update', $file);
+        
+        $file->{$fileable_type . 's'}()->detach($fileable_id);
+
+        $file->load('user');
+        $clone = $file->replicate();
+        $clone->save();
+        $clone->{$fileable_type . 's'}()->attach($fileable_id);
+
+        return redirect()->route('files.edit', $clone)->with('notify_success', 'Dokument został zastąpiony!');
+    }
+
+    /**
+     * Detach the specified resource from storage.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function detach(File $file, $fileable_type, $fileable_id)
+    {
+        $this->authorize('update', $file);
+        
+        $file->{$fileable_type . 's'}()->detach($fileable_id);
+
+        return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(File $file)
     {
         $this->authorize('delete', $file);
