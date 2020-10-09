@@ -124,33 +124,6 @@
 		</div>
 	</div>
     @endauth
-    <div class="card card-custom gutter-b">
-        <div class="card-header" style="min-height: 50px !important; padding-left: 1.8rem !important;">
-            <div class="card-title">
-                <small>Systemy Towarzystwa Ubezpieczeniowego</small>
-            </h3>
-            </div>
-           </div>
-        <div class="card-body" style="padding: 1.2rem !important;">
-            <div class="row">
-                <div class="col-12">
-                    @foreach($systems as $system)
-                    <a href="{{ $system->url }}" class="btn btn-sm btn-light-primary mb-1 mt-1 mr-1 ml-1" target="_blank">
-                        <span class="svg-icon svg-icon-ms text-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"/>
-                                <path d="M3,13.5 L19,12 L3,10.5 L3,3.7732928 C3,3.70255344 3.01501031,3.63261921 3.04403925,3.56811047 C3.15735832,3.3162903 3.45336217,3.20401298 3.70518234,3.31733205 L21.9867539,11.5440392 C22.098181,11.5941815 22.1873901,11.6833905 22.2375323,11.7948177 C22.3508514,12.0466378 22.2385741,12.3426417 21.9867539,12.4559608 L3.70518234,20.6826679 C3.64067359,20.7116969 3.57073936,20.7267072 3.5,20.7267072 C3.22385763,20.7267072 3,20.5028496 3,20.2267072 L3,13.5 Z" fill="#000000"/>
-                            </g>
-                        </svg>
-                    </span>
-                    {{ $system->name }}
-                    </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
 	<div class="row text-center">
         <div class="col-lg-4">
             <a href="{{ route('investments.index') }}">
@@ -229,38 +202,32 @@
             </a>
         </div>
 	</div>
-</div>
-<div class="container mt-8">
-	<div class="card">
-		<div class="card-body">
-			<div class="p-3">
-				<div class="row">
-					<div class="col-12">
-						<div class="accordion accordion-light accordion-light-borderless accordion-svg-toggle" id="accordionExample7">
-                            <div class="card">
-								<div class="card-header" id="headingOne7">
-									<div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" role="button">
-										<span class="svg-icon svg-icon-primary">
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<polygon points="0 0 24 0 24 24 0 24" />
-													<path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-													<path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999)" />
-												</g>
-											</svg>
-										</span>
-										<div class="card-label text-dark pl-4">Czym jest Baza Wiedzy?</div>
-									</div>
-								</div>
-								<div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
-									<div class="card-body text-dark-50 font-size-lg pl-12">Baza Wiedzy jest systemem służącym jako repozytorium dokumentów/wiedzy spółki Open Life TU Życie S.A. Znajdziesz tu skatalogowane wszystkie dokumenty produktowe naszych ubezpieczeń inwestycyjnych, ochronnych oraz pracowniczych.</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="card card-custom gutter-b mt-8">
+        <div class="card-header" style="min-height: 50px !important; padding-left: 1.8rem !important;">
+            <div class="card-title">
+                <small>Systemy Towarzystwa Ubezpieczeniowego</small>
+            </h3>
+            </div>
+           </div>
+        <div class="card-body" style="padding: 1.2rem !important;">
+            <div class="row">
+                <div class="col-12">
+                    @foreach($systems as $system)
+                    <a href="{{ $system->url }}" class="btn btn-sm btn-light-primary mb-1 mt-1 mr-1 ml-1" target="_blank">
+                        <span class="svg-icon svg-icon-ms text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M3,13.5 L19,12 L3,10.5 L3,3.7732928 C3,3.70255344 3.01501031,3.63261921 3.04403925,3.56811047 C3.15735832,3.3162903 3.45336217,3.20401298 3.70518234,3.31733205 L21.9867539,11.5440392 C22.098181,11.5941815 22.1873901,11.6833905 22.2375323,11.7948177 C22.3508514,12.0466378 22.2385741,12.3426417 21.9867539,12.4559608 L3.70518234,20.6826679 C3.64067359,20.7116969 3.57073936,20.7267072 3.5,20.7267072 C3.22385763,20.7267072 3,20.5028496 3,20.2267072 L3,13.5 Z" fill="#000000"/>
+                            </g>
+                        </svg>
+                    </span>
+                    {{ $system->name }}
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @stop
