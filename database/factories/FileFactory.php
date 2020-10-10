@@ -31,6 +31,7 @@ class FileFactory extends Factory
             'path' => 'files/deleted.pdf',
             'name' => $faker->name,
             'extension' => $faker->randomElement($array = array ('pdf', 'docx', 'xlsx', 'pptx')),
+            'draft' => $faker->randomElement($array = array (0, 1)),
             'file_category_id' => FileCategory::all()->random(),
             'user_id' => User::all()->random(),
         ];
