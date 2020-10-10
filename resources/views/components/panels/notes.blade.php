@@ -35,7 +35,7 @@
                             <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm"><i class="flaticon2-edit text-primary" title="Edytuj"></i></a>
                             @endcan
                             @can('update', $note)
-                            <a href="{{ route('notes.detach', ['note' => $note, 'noteable_type' => Route::current()->parameterNames[0], 'noteable_id' => Route::current()->parameters['investment']['id'] ?? Route::current()->parameters['protective']['id'] ?? Route::current()->parameters['employee']['id']]) }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm"><i class="flaticon2-line text-danger" title="Odepnij"></i></a>
+                            <a href="{{ route('notes.detach', ['note' => $note, 'noteable_type' => $noteable_type, 'noteable_id' => $noteable_id]) }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm"><i class="flaticon2-line text-danger" title="Odepnij"></i></a>
                             @endcan
                             @can('delete', $note)
                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'notes.destroy', $note->id ] ]) }}

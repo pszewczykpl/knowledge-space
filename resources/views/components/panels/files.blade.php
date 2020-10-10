@@ -2,13 +2,8 @@
     <div class="col-12">
         <div class="card card-custom" style="box-shadow: 0px 0px 0px 0px; -webkit-box-shadow: 0px 0px 0px 0x;">
             <div class="card-body pt-0 pb-0">
-                <a name="non-active" class="btn btn-light-primary font-weight-bold " 
-                    @if($files->where('draft', 1)->count() < 1)
-                        data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Brak dokumentów roboczych" 
-                    @else
-                        id="show-draft-files"  data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pokaż robocze dokumenty"
-                    @endif
-                >
+                @if($files->where('draft', 1)->count() > 0)
+                <a name="non-active" class="btn btn-light-primary font-weight-bold " id="show-draft-files"  data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pokaż dokumenty robocze">
                     <span class="svg-icon navi-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -20,6 +15,7 @@
                     </span>
                     Pokaż robocze
                 </a>
+                @endif
                 <a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success btn-shadow font-weight-bold" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty jako <b>.zip</b>">
 					<span class="svg-icon navi-icon">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -30,7 +26,22 @@
                         </svg>
 					</span>
 					Pobierz jako .zip
-				</a>
+                </a>
+                @can('create', App\Models\File::class)
+                <a href="{{ route('files.create', ['fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="btn btn-light-primary font-weight-bold">
+                    <span class="svg-icon navi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+                                <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+                            </g>
+                        </svg>
+                    </span>
+                    Dodaj dokument
+                </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -56,9 +67,6 @@
 				</div>
             </div>
             <div class="card-body pt-0 pb-0">
-            @if($files->where('file_category_id', '=', $category->id)->count() == 0)
-            Brak dokumentów w tej kategorii
-            @endif
             @foreach($files->where('file_category_id', $category->id) as $file)
                 <div class="d-flex align-items-center mb-5"
                     @if($file->draft == 1)
@@ -113,7 +121,7 @@
                                 @endcan
                                 @can('create', App\Models\File::class)
                                     <li class="navi-item">
-                                        <a href="{{ route('files.replace', ['file' => $file, 'fileable_type' => Route::current()->parameterNames[0], 'fileable_id' => Route::current()->parameters['investment']['id'] ?? Route::current()->parameters['protective']['id'] ?? Route::current()->parameters['employee']['id']]) }}" class="navi-link">
+                                        <a href="{{ route('files.replace', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="navi-link">
                                             <i class="navi-icon flaticon2-refresh-1"></i>
                                             <span class="navi-text">Zastąp</span>
                                         </a>
@@ -121,7 +129,7 @@
                                 @endcan
                                 @can('update', $file)
                                     <li class="navi-item">
-                                        <a href="{{ route('files.detach', ['file' => $file, 'fileable_type' => Route::current()->parameterNames[0], 'fileable_id' => Route::current()->parameters['investment']['id'] ?? Route::current()->parameters['protective']['id'] ?? Route::current()->parameters['employee']['id']]) }}" class="navi-link">
+                                        <a href="{{ route('files.detach', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="navi-link">
                                             <i class="navi-icon flaticon2-line"></i>
                                             <span class="navi-text">Odepnij</span>
                                         </a>

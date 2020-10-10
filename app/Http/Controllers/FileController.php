@@ -49,7 +49,7 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', File::class);
         
@@ -60,6 +60,8 @@ class FileController extends Controller
             'protectives' => Protective::all(),
             'employees' => Employee::all(),
             'file_categories' => FileCategory::all(),
+            'fileable_type' => $request->fileable_type ?? null,
+            'fileable_id' => $request->fileable_id ?? null,
         ]);
     }
 

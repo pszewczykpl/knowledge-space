@@ -196,7 +196,7 @@
 							<x-panels.notes :notes="$investment->notes" -type="investment" :id="$investment->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$investment->files" :name="$investment->extended_name()" />
+							<x-panels.files :files="$investment->files" :name="$investment->extended_name()" -type="investment" :id="$investment->id" />
 						</div>
 						<div class="tab-pane" id="funds" role="tabpanel">
 							<x-panels.funds :investmentid="$investment->id" />
