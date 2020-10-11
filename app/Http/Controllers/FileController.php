@@ -175,8 +175,6 @@ class FileController extends Controller
         }
 
         if ($request->hasFile('file')) {
-            Storage::delete($file->path);
-
             $path = $request->file->store('files');
             $file->path = $path;
             $file->extension = $request->file('file')->extension();
@@ -191,7 +189,7 @@ class FileController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Replicate the specified resource from storage.
      *
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
