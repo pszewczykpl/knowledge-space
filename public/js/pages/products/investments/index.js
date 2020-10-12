@@ -55,7 +55,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return '' +
+                    return_string = '' +
                         '<div class="dropdown dropdown-inline">' +
                             '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
                                 '<i class="flaticon-more-1"></i>' +
@@ -65,14 +65,27 @@ $(document).ready(function() {
                                     '<li class="navi-item">' +
                                         '<a class="navi-link" onclick="ShareInvestments(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
                                     '</li>' +
-                                    '<div class="dropdown-divider"></div>' +
                                     '<li class="navi-item">' +
                                         '<a href="' + HOST_URL + '/api/investments/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty PDF jako plik .zip">Pobierz jako zip</span></a>' +
-                                    '</li>' +
+                                    '</li>';
+                        if(PERMISSIONS.includes('investments-update')) {
+                            return_string += '<div class="dropdown-divider"></div>' + 
+                                    '<li class="navi-item">' +
+                                        '<a href="' + HOST_URL + '/investments/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
+                                    '</li>';
+                        }
+                        if(PERMISSIONS.includes('investments-create')) {
+                            return_string += '' + 
+                                    '<li class="navi-item">' +
+                                        '<a href="' + HOST_URL + '/investments/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
+                                    '</li>';
+                        }
+                        return_string += '' +
                                 '</ul>' +
                             '</div>' +
-                        '</div>' +
+                        '</div>' + 
                         '<a href="' + HOST_URL + '/investments/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
+                        return return_string;
                 }
             }, {
                 data: 'id',

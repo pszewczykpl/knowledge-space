@@ -285,5 +285,10 @@ class PermissionSeeder extends Seeder
             'name' => 'Może trwale usuwać obiekty w systemie',
             'description' => 'Użytkownik może trwale usuwać obiekty w systemie',
         ]);
+        Permission::create([
+            'code' => 'view-deleted',
+            'name' => 'Może przeglądać usunięte obiekty w systemie',
+            'description' => 'Użytkownik może przeglądać usunięte obiekty w systemie',
+        ]);
     }
 }
