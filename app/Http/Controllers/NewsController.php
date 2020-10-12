@@ -36,7 +36,7 @@ class NewsController extends Controller
 
         return view('news.index', [
             'title' => 'Aktualności',
-            'news' => News::orderBy('created_at', 'desc')->paginate(10),
+            'news' => News::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->orderBy('created_at', 'desc')->paginate(10),
         ]);
     }
 
@@ -132,5 +132,41 @@ class NewsController extends Controller
         $news->replies()->delete();
 
         return redirect()->route('news.index')->with('notify_danger', 'Aktualność została usunięta!');
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $news = News::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $news);
+        
+        $news->restore();
+        $news->replies()->withTrashed()->restore();
+
+        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została przywrócona!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $news = News::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $news);
+        
+        $news->forceDelete();
+        $news->replies()->withTrashed()->forceDelete();
+
+        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została trwale usunięta!');
     }
 }
