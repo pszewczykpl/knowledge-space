@@ -44,7 +44,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 Route::resource('departments', DepartmentController::class);
 Route::get('employees/{employee}/duplicate', [EmployeeController::class, 'duplicate'])->name('employees.duplicate');
 Route::resource('employees', EmployeeController::class);
-Route::get('files/{id}/download', [FileController::class, 'download'])->name('files.download');
+Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/detach', [FileController::class, 'detach'])->name('files.detach');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/replace', [FileController::class, 'replace'])->name('files.replace');
 Route::resource('files', FileController::class);

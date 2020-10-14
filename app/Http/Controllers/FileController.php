@@ -126,10 +126,8 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function download($id) 
+    public function download(File $file) 
     {
-        $file = File::findOrFail($id);
-
         return Storage::download($file->path, $file->name . '.' . $file->extension);
     }
 
