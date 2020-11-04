@@ -19,10 +19,6 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,36 +31,48 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes();
-Route::put('password/update', [UpdatePasswordController::class, 'update'])->name('auth.password.update');
-Route::get('password/update', [UpdatePasswordController::class, 'index'])->name('auth.password.index');
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 Route::resource('departments', DepartmentController::class);
+
 Route::get('employees/{employee}/duplicate', [EmployeeController::class, 'duplicate'])->name('employees.duplicate');
 Route::resource('employees', EmployeeController::class);
+
 Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/detach', [FileController::class, 'detach'])->name('files.detach');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/replace', [FileController::class, 'replace'])->name('files.replace');
 Route::resource('files', FileController::class);
+
 Route::resource('file-categories', FileCategoryController::class);
+
 Route::get('funds/{fund}/duplicate', [FundController::class, 'duplicate'])->name('funds.duplicate');
 Route::resource('funds', FundController::class);
+
 Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
 Route::resource('investments', InvestmentController::class);
+
 Route::delete('news/{id}/forcedestroy', [NewsController::class, 'force_destroy'])->name('news.forceDestroy');
 Route::put('news/{id}/restore', [NewsController::class, 'restore'])->name('news.restore');
 Route::resource('news', NewsController::class);
+
 Route::get('notes/{note}/{noteable_type}/{noteable_id}/detach', [NoteController::class, 'detach'])->name('notes.detach');
 Route::resource('notes', NoteController::class);
+
 Route::get('partners/{partner}/duplicate', [PartnerController::class, 'duplicate'])->name('partners.duplicate');
 Route::resource('partners', PartnerController::class);
+
 Route::resource('permissions', PermissionController::class)->only(['index']);
+
 Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
 Route::resource('protectives', ProtectiveController::class);
+
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
+
 Route::get('risks/{risk}/duplicate', [RiskController::class, 'duplicate'])->name('risks.duplicate');
 Route::resource('risks', RiskController::class);
+
 Route::resource('users', UserController::class);
+
 Route::resource('systems', SystemController::class);

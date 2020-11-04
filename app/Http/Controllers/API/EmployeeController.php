@@ -20,11 +20,14 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource for datatables.net plugin
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return array
      */
     public function datatables(Request $request)
     {
-        $records = Employee::select('name', 'code_owu', 'edit_date', 'status', 'id')
+        $records = Employee::withTrashed(Auth::check() ? Auth::user()->hasPermission('view-deleted') : false)
+        
+        ->select('name', 'code_owu', 'edit_date', 'status', 'id')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

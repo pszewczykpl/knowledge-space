@@ -70,20 +70,12 @@ class UserController extends Controller
         $this->authorize('create', User::class);
 
         $user = new User;
-        $user->username = $request->username;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->phone = $request->phone;
-        $user->company = $request->company;
-        $user->location = $request->location;
-        $user->position = $request->position;
-        $user->description = $request->description;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->fill($request->all());
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
         }
+        $user->password = Hash::make($request->new_password);
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
         $user->permissions()->attach($request->permission_id);
@@ -142,6 +134,8 @@ class UserController extends Controller
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
         }
+
+        $user->password = Hash::make($request->new_password);
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
 

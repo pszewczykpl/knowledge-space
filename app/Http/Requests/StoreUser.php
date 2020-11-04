@@ -29,7 +29,7 @@ class StoreUser extends FormRequest
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'nullable|max:255',
-            'password' => 'required|string|min:8|max:255',
+            'new_password' => 'required|string|min:8|max:255',
             'company' => 'required|string|max:255',
             'department_id' => 'required',
             'position' => 'required|string|max:255',

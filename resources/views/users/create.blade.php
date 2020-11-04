@@ -229,7 +229,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-3 text-lg-right text-left">Hasło:</label>
                                 <div class="col-9">
-                                    <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="password" name="password" id="password" placeholder="Wpisz Hasło">
+                                    <input class="form-control form-control-lg form-control-solid" style="width: 100% !important;" type="password" name="new_password" id="new_password" placeholder="Wpisz Hasło">
                                 </div>
                             </div>
                         </div>
