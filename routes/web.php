@@ -68,6 +68,8 @@ Route::resource('permissions', PermissionController::class)->only(['index']);
 Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
 Route::resource('protectives', ProtectiveController::class);
 
+Route::delete('reply/{id}/forcedestroy', [ReplyController::class, 'force_destroy'])->name('replies.forceDestroy');
+Route::put('reply/{id}/restore', [ReplyController::class, 'restore'])->name('replies.restore');
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 
 Route::get('risks/{risk}/duplicate', [RiskController::class, 'duplicate'])->name('risks.duplicate');

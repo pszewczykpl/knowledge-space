@@ -54,4 +54,37 @@ class ReplyController extends Controller
 
         return redirect()->back()->with('notify_danger', 'Odpowiedź została usunięta!');
     }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $reply = Reply::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $reply);
+        
+        $reply->restore();
+
+        return redirect()->route('news.index')->with('notify_danger', 'Odpowiedź została przywrócona!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Reply  $reply
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $reply = Reply::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $reply);
+        $reply->forceDelete();
+
+        return redirect()->back()->with('notify_danger', 'Odpowiedź została trwale usunięta!');
+    }
 }

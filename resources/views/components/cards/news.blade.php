@@ -90,7 +90,7 @@
 							</ul>
                         </div>
                     </div>
-			</div>
+				</div>
 			<style>.show-news p { margin-top: 0; margin-bottom: 0; }</style>
 			<div>
 				<div class="show-news @if($news->trashed()) text-white @else text-dark-75 @endif font-size-lg font-weight-normal">
@@ -119,10 +119,10 @@
 						<div class="d-flex flex-column flex-row-fluid">
 							<div class="d-flex align-items-center flex-wrap">
 								<div class="d-flex">
-									<a href="{{ route('users.show', $reply->user->id) }}" class="@if($reply->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->user->fullname() }}</a>
+									<a href="{{ route('users.show', $reply->user->id) }}" class="@if($news->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->user->fullname() }}</a>
 								</div>
 								<div class="flex-grow-1">
-									<span class="svg-icon svg-icon-md @if($reply->trashed()) svg-icon-white @else svg-icon-primary @endif">
+									<span class="svg-icon svg-icon-md @if($news->trashed()) svg-icon-white @else svg-icon-primary @endif">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24"></rect>
@@ -131,11 +131,31 @@
 											</g>
 										</svg>
 									</span>
-									<span class="@if($reply->trashed()) text-white @else text-muted @endif font-weight-bold" title="{{ $reply->updated_at }}">{{ date('Y-m-d', strtotime($reply->updated_at)) }}</span>
+									<span class="@if($news->trashed()) text-white @else text-muted @endif font-weight-bold" title="{{ $reply->updated_at }}">{{ date('Y-m-d', strtotime($reply->updated_at)) }}</span>
+									@if($reply->trashed())<span class="text-danger font-weight-bold ml-1">Odpowiedź została usunięta</span>@endif
 								</div>
-								<span class="@if($reply->trashed()) text-white @else text-muted @endif font-weight-normal font-size-sm">Odpowiedź</span>
+								<div style="display: flex;">
+									@if($reply->trashed())
+									@can('restore', $reply)
+									{{ Form::open([ 'method'  => 'PUT', 'route' => [ 'replies.restore', $reply->id ] ]) }}
+										{{ Form::button('<i class="flaticon2-time icon-md text-primary" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Przywróć odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm'] )  }}
+									{{ Form::close() }}
+									@endcan
+									@can('forceDelete', $reply)
+									{{ Form::open([ 'method'  => 'delete', 'route' => [ 'replies.forceDestroy', $reply->id ] ]) }}
+										{{ Form::button('<i class="flaticon2-trash icon-md text-danger" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Usuń trwale odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm ml-1'] )  }}
+									{{ Form::close() }}
+									@endcan
+									@else
+									@can('delete', $reply)
+									{{ Form::open([ 'method'  => 'delete', 'route' => [ 'replies.destroy', $reply->id ] ]) }}
+										{{ Form::button('<i class="flaticon2-trash icon-md text-danger" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Usuń odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm'] )  }}
+									{{ Form::close() }}
+									@endcan
+									@endif
+								</div>
 							</div>
-							<span class="@if($reply->trashed()) text-white @else text-dark-75 @endif font-size-sm font-weight-normal pt-1">{{ $reply->content }}</span>
+							<span class="@if($news->trashed()) text-white @elseif($reply->trashed()) text-danger @else text-dark-75 @endif font-size-sm font-weight-normal pt-1">{{ $reply->content }}</span>
 						</div>
 					</div>
 				@endforeach

@@ -62,7 +62,7 @@
 				@endif
 			</div>
 			@else
-				@foreach($user->news->sortByDesc('created_at')->take(10) as $new)
+				@foreach($user->news()->orderBy('created_at', 'desc')->withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->get()->take(20) as $new)
 				<x-cards.news :news="$new" />
 				@endforeach
 			@endif
