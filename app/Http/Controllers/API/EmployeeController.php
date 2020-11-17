@@ -25,9 +25,7 @@ class EmployeeController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Employee::withTrashed(Auth::check() ? Auth::user()->hasPermission('view-deleted') : false)
-        
-        ->select('name', 'code_owu', 'edit_date', 'status', 'id')
+        $records = Employee::select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

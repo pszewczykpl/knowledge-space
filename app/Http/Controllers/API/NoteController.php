@@ -18,9 +18,7 @@ class NoteController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Note::with('user')
-        
-        ->select('*')
+        $records = Note::with('user')->select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

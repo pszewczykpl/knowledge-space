@@ -24,9 +24,7 @@ class FileController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = File::with('file_category')
-
-        ->select('id', 'name', 'path', 'file_category_id')
+        $records = File::with('file_category')->select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

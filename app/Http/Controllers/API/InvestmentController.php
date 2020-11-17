@@ -25,7 +25,7 @@ class InvestmentController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Investment::select('name', 'code_toil', 'code', 'edit_date', 'status', 'id', 'dist', 'dist_short', 'code_owu', 'group', 'type')
+        $records = Investment::select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

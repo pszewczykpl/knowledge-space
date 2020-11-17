@@ -24,7 +24,7 @@ class ProtectiveController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Protective::select('name', 'dist_short', 'code', 'edit_date', 'status', 'id', 'code_owu', 'dist', 'subscription')
+        $records = Protective::select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

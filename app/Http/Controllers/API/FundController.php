@@ -18,7 +18,7 @@ class FundController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Fund::select('code', 'name', 'type', 'start_date', 'status', 'id', 'currency')
+        $records = Fund::select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {

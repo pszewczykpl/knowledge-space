@@ -18,7 +18,7 @@ class PartnerController extends Controller
      */
     public function datatables(Request $request)
     {
-        $records = Partner::select('name', 'code', 'type', 'number_rau', 'nip', 'regon', 'id')
+        $records = Partner::select('*')
         
         ->where(function ($query) {
             if($_POST['search']['value'] != null) {
