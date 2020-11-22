@@ -136,11 +136,13 @@
 								</div>
 								<div style="display: flex;">
 									@if($reply->trashed())
-									@can('restore', $reply)
-									{{ Form::open([ 'method'  => 'PUT', 'route' => [ 'replies.restore', $reply->id ] ]) }}
-										{{ Form::button('<i class="flaticon2-time icon-md text-primary" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Przywróć odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm'] )  }}
-									{{ Form::close() }}
-									@endcan
+										@if(!$news->trashed())
+											@can('restore', $reply)
+											{{ Form::open([ 'method'  => 'PUT', 'route' => [ 'replies.restore', $reply->id ] ]) }}
+												{{ Form::button('<i class="flaticon2-time icon-md text-primary" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Przywróć odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm'] )  }}
+											{{ Form::close() }}
+											@endcan
+										@endif
 									@can('forceDelete', $reply)
 									{{ Form::open([ 'method'  => 'delete', 'route' => [ 'replies.forceDestroy', $reply->id ] ]) }}
 										{{ Form::button('<i class="flaticon2-trash icon-md text-danger" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Usuń trwale odpowiedź"></i>', ['type' => 'submit', 'class' => 'btn btn-xs @if($news->trashed()) btn-white @else btn-clean @endif btn-icon btn-icon-sm ml-1'] )  }}
