@@ -230,10 +230,26 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         $this->authorize('delete', $file);
-        $file->delete();
 
         Storage::move($file->path, 'trash/' . $file->path);
+        $file->delete();
 
         return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $file = File::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $file);
+        $file->restore();
+
+        return redirect()->route('files.index')->with('notify_danger', 'Dokument został przywrócony!');
     }
 }

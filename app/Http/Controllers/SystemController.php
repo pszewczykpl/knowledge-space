@@ -127,4 +127,20 @@ class SystemController extends Controller
 
         return redirect()->route('systems.index')->with('notify_danger', 'Dane systemu zostały usunięte!');
     }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $system = System::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $system);
+        $system->restore();
+
+        return redirect()->route('systems.index')->with('notify_danger', 'System został przywrócony!');
+    }
 }

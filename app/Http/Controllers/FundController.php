@@ -152,4 +152,20 @@ class FundController extends Controller
 
         return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został usunięty!');
     }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $fund = Fund::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $fund);
+        $fund->restore();
+
+        return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został przywrócony!');
+    }
 }

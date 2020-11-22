@@ -147,4 +147,20 @@ class InvestmentController extends Controller
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $investment = Investment::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $investment);
+        $investment->restore();
+
+        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został przywrócony!');
+    }
 }

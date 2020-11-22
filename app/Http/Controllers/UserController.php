@@ -135,7 +135,9 @@ class UserController extends Controller
             $user->avatar_path = $path;
         }
 
-        $user->password = Hash::make($request->new_password);
+        if($request->new_password) {
+            $user->password = Hash::make($request->new_password);
+        }
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
 
@@ -155,9 +157,24 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
-
         $user->delete();
 
         return redirect()->route('users.index')->with('notify_danger', 'Pracownik został usunięty!');
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+
+        $this->authorize('restore', $user);
+        $user->restore();
+
+        return redirect()->route('users.index')->with('notify_danger', 'Pracownik został przywrócony!');
     }
 }

@@ -66,7 +66,6 @@ class ReplyController extends Controller
         $reply = Reply::withTrashed()->findOrFail($id);
 
         $this->authorize('restore', $reply);
-        
         $reply->restore();
 
         return redirect()->route('news.index')->with('notify_danger', 'Odpowiedź została przywrócona!');
