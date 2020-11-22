@@ -163,4 +163,21 @@ class InvestmentController extends Controller
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został przywrócony!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $investment = Investment::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $investment);
+        
+        $investment->forceDelete();
+
+        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został trwale usunięty!');
+    }
 }

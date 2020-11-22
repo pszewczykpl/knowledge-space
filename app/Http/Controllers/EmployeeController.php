@@ -162,4 +162,21 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został przywrócony!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $employee = Employee::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $employee);
+        
+        $employee->forceDelete();
+
+        return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został trwale usunięty!');
+    }
 }

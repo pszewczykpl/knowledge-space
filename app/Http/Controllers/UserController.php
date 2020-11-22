@@ -177,4 +177,20 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('notify_danger', 'Pracownik został przywrócony!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $user);
+        $user->forceDelete();
+
+        return redirect()->route('users.index')->with('notify_danger', 'Użytkownik został trwale usunięty!');
+    }
 }

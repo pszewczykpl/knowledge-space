@@ -143,4 +143,20 @@ class SystemController extends Controller
 
         return redirect()->route('systems.index')->with('notify_danger', 'System został przywrócony!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $system = System::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $system);
+        $system->forceDelete();
+
+        return redirect()->route('systems.index')->with('notify_danger', 'System został trwale usunięty!');
+    }
 }

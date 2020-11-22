@@ -162,4 +162,21 @@ class ProtectiveController extends Controller
 
         return redirect()->route('protectives.index')->with('notify_danger', 'Produkt ochronny został przywrócony!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $protective = Protective::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $protective);
+        
+        $protective->forceDelete();
+
+        return redirect()->route('protectives.index')->with('notify_danger', 'Produkt ochronny został trwale usunięty!');
+    }
 }

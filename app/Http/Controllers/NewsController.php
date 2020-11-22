@@ -153,9 +153,9 @@ class NewsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Force remove the specified resource from storage.
      *
-     * @param  \App\News  $news
+     * @param  \App\  $id
      * @return \Illuminate\Http\Response
      */
     public function force_destroy($id)

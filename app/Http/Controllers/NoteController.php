@@ -193,4 +193,20 @@ class NoteController extends Controller
 
         return redirect()->route('notes.index')->with('notify_danger', 'Notatka została przywrócona!');
     }
+
+    /**
+     * Force remove the specified resource from storage.
+     *
+     * @param  id  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function force_destroy($id)
+    {
+        $note = Note::withTrashed()->findOrFail($id);
+
+        $this->authorize('forceDelete', $note);
+        $note->forceDelete();
+
+        return redirect()->route('notes.index')->with('notify_danger', 'Notatka została trwale usunięta!');
+    }
 }
