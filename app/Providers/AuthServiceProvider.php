@@ -15,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Department::class => DepartmentPolicy::class,
         Employee::class => EmployeePolicy::class,
-        File::class => FilePolicy::class,
         FileCategory::class => FileCategoryPolicy::class,
+        File::class => FilePolicy::class,
         Fund::class => FundPolicy::class,
         Investment::class => InvestmentPolicy::class,
         News::class => NewsPolicy::class,
@@ -26,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
         Protective::class => ProtectivePolicy::class,
         Reply::class => ReplyPolicy::class,
         Risk::class => RiskPolicy::class,
+        System::class => SystemPolicy::class,
+        Trash::class => TrashPolicy::class,
         User::class => UserPolicy::class,
     ];
 

@@ -16,6 +16,7 @@ use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\TrashController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 
@@ -102,3 +103,5 @@ Route::resource('users', UserController::class);
 Route::delete('systems/{id}/forcedestroy', [SystemController::class, 'force_destroy'])->name('systems.forceDestroy');
 Route::put('systems/{id}/restore', [SystemController::class, 'restore'])->name('systems.restore');
 Route::resource('systems', SystemController::class);
+
+Route::get('trash/{model}', [TrashController::class, 'index'])->name('trash.index');
