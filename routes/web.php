@@ -17,6 +17,8 @@ use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\TrashController;
+use App\Http\Controllers\PostCategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 
@@ -105,3 +107,11 @@ Route::put('systems/{id}/restore', [SystemController::class, 'restore'])->name('
 Route::resource('systems', SystemController::class);
 
 Route::get('trash/{model}', [TrashController::class, 'index'])->name('trash.index');
+
+Route::delete('post-categories/{id}/forcedestroy', [PostCategoryController::class, 'force_destroy'])->name('post-categories.forceDestroy');
+Route::put('post-categories/{id}/restore', [PostCategoryController::class, 'restore'])->name('post-categories.restore');
+Route::resource('post-categories', PostCategoryController::class);
+
+Route::delete('posts/{id}/forcedestroy', [PostController::class, 'force_destroy'])->name('posts.forceDestroy');
+Route::put('posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
+Route::resource('posts', PostController::class);

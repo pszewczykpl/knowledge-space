@@ -126,6 +126,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\System');
     }
 
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+
+    public function post_categories()
+    {
+        return $this->hasMany('App\Models\PostCategory');
+    }
+
     public function hasPermission($code)
     {
         foreach ($this->permissions()->get() as $role)

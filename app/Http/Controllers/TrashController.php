@@ -14,6 +14,7 @@ use App\Models\Protective;
 use App\Models\Risk;
 use App\Models\User;
 use App\Models\System;
+use App\Models\PostCategory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -202,6 +203,19 @@ class TrashController extends Controller
         return view('trash.systems', [
             'title' => 'Kosz',
             'systems' => System::onlyTrashed()->get(),
+        ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return PostCategory
+     */
+    public function post_categories()
+    {
+        return view('trash.post-categories', [
+            'title' => 'Kosz',
+            'postCategories' => PostCategory::onlyTrashed()->get(),
         ]);
     }
 }

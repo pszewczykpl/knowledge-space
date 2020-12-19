@@ -152,8 +152,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'code' => 'news-viewany',
             'name' => 'Może przeglądać listę wszystkich aktualności',
-            'description' => 'Użytkownik może przeglądać listę wszystkich aktualności w zakładce Aktualności',
-    
+            'description' => 'Użytkownik może przeglądać listę wszystkich aktualności w zakładce Aktualności'
         ]);
         Permission::create([
             'code' => 'notes-create',
@@ -289,6 +288,46 @@ class PermissionSeeder extends Seeder
             'code' => 'view-deleted',
             'name' => 'Może przeglądać usunięte obiekty w systemie',
             'description' => 'Użytkownik może przeglądać usunięte obiekty w systemie',
+        ]);
+        Permission::create([
+            'code' => 'posts-create',
+            'name' => 'Może dodawać artykuły',
+            'description' => 'Użytkownik może dodawać artykuły oraz edytować i usuwać utworzone przez siebie artykuły',
+        ]);
+        Permission::create([
+            'code' => 'posts-update',
+            'name' => 'Może edytować wszystkie artykuły',
+            'description' => 'Użytkownik może edytować wszystkie artykuły',
+        ]);
+        Permission::create([
+            'code' => 'posts-delete',
+            'name' => 'Może usuwać wszystkie artykuły',
+            'description' => 'Użytkownik może usuwać wszystkie artykuły',
+        ]);
+        Permission::create([
+            'code' => 'post-categories-create',
+            'name' => 'Może dodawać kategorie artykułów',
+            'description' => 'Użytkownik może dodawać kategorie artykułów oraz edytować i usuwać utworzone przez siebie kategorie artykułów',
+        ]);
+        Permission::create([
+            'code' => 'post-categories-update',
+            'name' => 'Może edytować wszystkie kategorie artykułów',
+            'description' => 'Użytkownik może edytować wszystkie kategorie artykułów',
+        ]);
+        Permission::create([
+            'code' => 'post-categories-delete',
+            'name' => 'Może usuwać wszystkie kategorie artykułów',
+            'description' => 'Użytkownik może usuwać wszystkie kategorie artykułów',
+        ]);
+        Permission::create([
+            'code' => 'post-categories-view',
+            'name' => 'Może przeglądać szczegóły kategorii artykułów',
+            'description' => 'Użytkownik może przeglądać szczegóły kategorii artykułów',
+        ]);
+        Permission::create([
+            'code' => 'post-categories-viewany',
+            'name' => 'Może przeglądać listę wszystkich kategorii artykułów',
+            'description' => 'Użytkownik może przeglądać listę wszystkich kategorii artykułów w zakładce Administracja',
         ]);
     }
 }
