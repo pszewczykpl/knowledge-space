@@ -15,6 +15,7 @@ use App\Models\Risk;
 use App\Models\User;
 use App\Models\System;
 use App\Models\PostCategory;
+use App\Models\Bancassurance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -164,6 +165,19 @@ class TrashController extends Controller
         return view('trash.protectives', [
             'title' => 'Kosz',
             'protectives' => Protective::onlyTrashed()->get(),
+        ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return Bancassurance
+     */
+    public function bancassurances()
+    {
+        return view('trash.bancassurances', [
+            'title' => 'Kosz',
+            'bancassurances' => Bancassurance::onlyTrashed()->get(),
         ]);
     }
 
