@@ -15,3 +15,8 @@
 	<link href="{{ asset('css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
 </head>
+<style>
+.aside-fixed.aside-minimize-hover .aside {
+	width: 285px !important;
+}
+</style>

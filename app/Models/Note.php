@@ -25,6 +25,11 @@ class Note extends Model
         return $this->morphedByMany('App\Models\Protective', 'noteable')->withTimestamps();
     }
 
+    public function bancassurances()
+    {
+        return $this->morphedByMany('App\Models\Bancassurance', 'noteable')->withTimestamps();
+    }
+
     public function employees()
     {
         return $this->morphedByMany('App\Models\Employee', 'noteable')->withTimestamps();

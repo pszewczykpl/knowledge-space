@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Investment;
 use App\Models\Protective;
+use App\Models\Bancassurance;
 use App\Models\Employee;
 use App\Models\Fund;
 use App\Models\Partner;
@@ -59,6 +60,7 @@ class NoteController extends Controller
             'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
+            'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
             'funds' => Fund::all(),
             'partners' => Partner::all(),
@@ -81,6 +83,7 @@ class NoteController extends Controller
         
         $note->investments()->attach($request->investment_id);
         $note->protectives()->attach($request->protective_id);
+        $note->bancassurances()->attach($request->bancassurance_id);
         $note->employees()->attach($request->employee_id);
         $note->partners()->attach($request->partner_id);
         $note->risks()->attach($request->risk_id);
@@ -119,6 +122,7 @@ class NoteController extends Controller
             'note' => $note,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
+            'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
             'funds' => Fund::all(),
             'partners' => Partner::all(),
@@ -141,6 +145,7 @@ class NoteController extends Controller
 
         $note->investments()->sync($request->investment_id);
         $note->protectives()->sync($request->protective_id);
+        $note->bancassurances()->sync($request->bancassurance_id);
         $note->employees()->sync($request->employee_id);
         $note->partners()->sync($request->partner_id);
         $note->risks()->sync($request->risk_id);

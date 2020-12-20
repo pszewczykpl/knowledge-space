@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SystemSeeder::class,
             PostCategorySeeder::class,
             PostSeeder::class,
+            BancassuranceSeeder::class,
         ]);
     }
 }

@@ -35,18 +35,18 @@
 				<div class="card-header flex-wrap border-0 pt-6 pb-0">
 					<h3 class="card-title align-items-start flex-column">
 						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj archiwum ubezpieczeń pracowniczych</span>
+						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj archiwum ubezpieczeń bancassurance</span>
 					</h3>
 					<div class="card-toolbar">
-						@can('create', App\Models\Employee::class)
-						<a href="{{ route('employees.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
+						@can('create', App\Models\Bancassurance::class)
+						<a href="{{ route('bancassurances.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
 							<span class="svg-icon navi-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 										<rect x="0" y="0" width="24" height="24"/>
-										<path d="M13.5,21 L13.5,18 C13.5,17.4477153 13.0522847,17 12.5,17 L11.5,17 C10.9477153,17 10.5,17.4477153 10.5,18 L10.5,21 L5,21 L5,4 C5,2.8954305 5.8954305,2 7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,21 L13.5,21 Z M9,4 C8.44771525,4 8,4.44771525 8,5 L8,6 C8,6.55228475 8.44771525,7 9,7 L10,7 C10.5522847,7 11,6.55228475 11,6 L11,5 C11,4.44771525 10.5522847,4 10,4 L9,4 Z M14,4 C13.4477153,4 13,4.44771525 13,5 L13,6 C13,6.55228475 13.4477153,7 14,7 L15,7 C15.5522847,7 16,6.55228475 16,6 L16,5 C16,4.44771525 15.5522847,4 15,4 L14,4 Z M9,8 C8.44771525,8 8,8.44771525 8,9 L8,10 C8,10.5522847 8.44771525,11 9,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,9 C11,8.44771525 10.5522847,8 10,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 L8,14 C8,14.5522847 8.44771525,15 9,15 L10,15 C10.5522847,15 11,14.5522847 11,14 L11,13 C11,12.4477153 10.5522847,12 10,12 L9,12 Z M14,12 C13.4477153,12 13,12.4477153 13,13 L13,14 C13,14.5522847 13.4477153,15 14,15 L15,15 C15.5522847,15 16,14.5522847 16,14 L16,13 C16,12.4477153 15.5522847,12 15,12 L14,12 Z" fill="#000000"/>
-										<rect fill="#FFFFFF" x="13" y="8" width="3" height="3" rx="1"/>
-										<path d="M4,21 L20,21 C20.5522847,21 21,21.4477153 21,22 L21,22.4 C21,22.7313708 20.7313708,23 20.4,23 L3.6,23 C3.26862915,23 3,22.7313708 3,22.4 L3,22 C3,21.4477153 3.44771525,21 4,21 Z" fill="#000000" opacity="0.3"/>
+										<circle fill="#000000" opacity="0.3" cx="20.5" cy="12.5" r="1.5"/>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 6.500000) rotate(-15.000000) translate(-12.000000, -6.500000) " x="3" y="3" width="18" height="7" rx="1"/>
+										<path d="M22,9.33681558 C21.5453723,9.12084552 21.0367986,9 20.5,9 C18.5670034,9 17,10.5670034 17,12.5 C17,14.4329966 18.5670034,16 20.5,16 C21.0367986,16 21.5453723,15.8791545 22,15.6631844 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,6 C2,4.8954305 2.8954305,4 4,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,9.33681558 Z" fill="#000000"/>
 									</g>
 								</svg>
 							</span>
@@ -69,7 +69,7 @@
 							</a>
 						@endcan
 						@can('viewAny', App\Models\Trash::class)
-							<a href="{{ route('trash.index', ['model' => 'employees']) }}" class="btn btn-light-danger btn-shadow font-weight-bold ml-2">
+							<a href="{{ route('trash.index', ['model' => 'bancassurances']) }}" class="btn btn-light-danger btn-shadow font-weight-bold ml-2">
 								<span class="svg-icon navi-icon">
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -92,7 +92,7 @@
 							</div>
 							<div class="alert-text">
 								<b>Wskazówka!</b><br>
-								Ubezpieczenie Pracownicze może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
+								Ubezpieczenie Bancassurance może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
 								Jeśli chcesz przeglądać tylko aktualnie obowiązujące dokumenty, kliknij Pokaż tylko Aktualne.<br>
 							</div>
 							<div class="alert-close">
@@ -105,15 +105,19 @@
 						</div>
 						<div class="row align-items-center">
 							<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
-							<x-datatables.search-box --size="3" --number="1" --placeholder="Kod OWU" />
-							<x-datatables.search-box --size="3" --number="3" --placeholder="Status" --hidden />
+							<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />
+							<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
+							<x-datatables.search-box --size="3" --number="7" --placeholder="Kod OWU" />
+							<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
+							<x-datatables.search-box --size="3" --number="4" --placeholder="Status" --hidden />
 						</div>
 					</div>
 					<table class="table table-separate table-head-custom collapsed" id="table">
 						<thead>
 							<tr>
 								<td>Nazwa produktu</td>
-								<td>Kod OWU</td>
+								<td>Kod dystrybutora</td>
+								<td>Kod produktu</td>
 								<td>Dokumenty ważne od</td>
 								<td>Status dokumentów</td>
 								<td>Akcje</td>
@@ -137,5 +141,5 @@
 @stop
 
 @section('additional_scripts')
-<script src="{{ asset('js/pages/products/employees/index.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/pages/products/bancassurances/index.js') }}" type="text/javascript"></script>
 @stop

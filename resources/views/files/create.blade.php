@@ -207,6 +207,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-form-label col-4 text-left">Ubezpieczenia Bancassurance</label>
+                            <div class="col-8">
+                                <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-actions-box="true" data-live-search="true">
+                                    @foreach($bancassurances as $bancassurance)
+                                    <option value="{{ $bancassurance->id }}" @if($fileable_type == 'bancassurance' and $fileable_id == $bancassurance->id) selected @endif>{{ $bancassurance->extended_name() }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="form-text text-muted">Wskaż ubezpieczenia bancassurance w których ma pojawić się dokument.</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze</label>
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">

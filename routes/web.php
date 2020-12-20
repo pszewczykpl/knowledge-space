@@ -12,6 +12,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProtectiveController;
+use App\Http\Controllers\BancassuranceController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
@@ -88,6 +89,11 @@ Route::delete('protectives/{id}/forcedestroy', [ProtectiveController::class, 'fo
 Route::put('protectives/{id}/restore', [ProtectiveController::class, 'restore'])->name('protectives.restore');
 Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
 Route::resource('protectives', ProtectiveController::class);
+
+Route::delete('bancassurances/{id}/forcedestroy', [BancassuranceController::class, 'force_destroy'])->name('bancassurances.forceDestroy');
+Route::put('bancassurances/{id}/restore', [BancassuranceController::class, 'restore'])->name('bancassurances.restore');
+Route::get('bancassurances/{bancassurance}/duplicate', [BancassuranceController::class, 'duplicate'])->name('bancassurances.duplicate');
+Route::resource('bancassurances', BancassuranceController::class);
 
 Route::delete('reply/{id}/forcedestroy', [ReplyController::class, 'force_destroy'])->name('replies.forceDestroy');
 Route::put('reply/{id}/restore', [ReplyController::class, 'restore'])->name('replies.restore');

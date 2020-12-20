@@ -138,6 +138,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-4 text-left">Ubezpieczenia Bancassurance:</label>
+                                <div class="col-8">
+                                    <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-actions-box="true" data-live-search="true" disabled>
+                                        @foreach($note->bancassurances as $bancassurance)
+                                        <option value="{{ $bancassurance->id }}" selected >{{ $bancassurance->name }} ({{ $bancassurance->edit_date }})</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="form-text text-muted">Ubezpieczenia bancassurance w których widoczny jest komentarz.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true" disabled>

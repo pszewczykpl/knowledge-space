@@ -34,6 +34,11 @@ class File extends Model
         return $this->morphedByMany('App\Models\Protective', 'fileable')->withTimestamps();
     }
 
+    public function bancassurances()
+    {
+        return $this->morphedByMany('App\Models\Bancassurance', 'fileable')->withTimestamps();
+    }
+
     public function file_category()
     {
         return $this->belongsTo('App\Models\FileCategory');

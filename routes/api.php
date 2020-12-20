@@ -19,6 +19,7 @@ use App\Http\Controllers\API\RiskController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\SystemController;
 use App\Http\Controllers\API\PostCategoryController;
+use App\Http\Controllers\API\BancassuranceController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ Route::post('datatables/notes', [NoteController::class, 'datatables']);
 Route::post('datatables/partners', [PartnerController::class, 'datatables']);
 Route::post('datatables/permissions', [PermissionController::class, 'datatables']);
 Route::post('datatables/protectives', [ProtectiveController::class, 'datatables']);
+Route::post('datatables/bancassurances', [BancassuranceController::class, 'datatables']);
 Route::post('datatables/risks', [RiskController::class, 'datatables']);
 Route::post('datatables/users', [UserController::class, 'datatables']);
 Route::post('datatables/systems', [SystemController::class, 'datatables']);
@@ -60,6 +62,7 @@ Route::get('files/zip', [FileController::class, 'zip'])->name('files.zip');
 
 Route::get('investments/{id}/files/zip', [InvestmentController::class, 'zip_files']);
 Route::get('protectives/{id}/files/zip', [ProtectiveController::class, 'zip_files']);
+Route::get('bancassurances/{id}/files/zip', [BancassuranceController::class, 'zip_files']);
 Route::get('employees/{id}/files/zip', [EmployeeController::class, 'zip_files']);
 
 /* OLAF Controllers */

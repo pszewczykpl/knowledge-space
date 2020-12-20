@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Investment;
 use App\Models\Protective;
+use App\Models\Bancassurance;
 use App\Models\Employee;
 use App\Models\FileCategory;
 
@@ -58,6 +59,7 @@ class FileController extends Controller
             'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
+            'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
             'file_categories' => FileCategory::all(),
             'fileable_type' => $request->fileable_type ?? null,
@@ -147,6 +149,7 @@ class FileController extends Controller
             'file' => $file,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
+            'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
             'file_categories' => FileCategory::all(),
         ]);

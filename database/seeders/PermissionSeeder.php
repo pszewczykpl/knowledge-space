@@ -215,6 +215,21 @@ class PermissionSeeder extends Seeder
             'description' => 'Użytkownik może usuwać wszystkie produkty ochronne',
         ]);
         Permission::create([
+            'code' => 'bancassurances-create',
+            'name' => 'Może dodawać produkty bancassurance',
+            'description' => 'Użytkownik może dodawać produkty bancassurance oraz edytować i usuwać utworzone przez siebie produkty bancassurance',
+        ]);
+        Permission::create([
+            'code' => 'bancassurances-update',
+            'name' => 'Może edytować wszystkie produkty bancassurance',
+            'description' => 'Użytkownik może edytować wszystkie produkty bancassurance',
+        ]);
+        Permission::create([
+            'code' => 'bancassurances-delete',
+            'name' => 'Może usuwać wszystkie produkty bancassurance',
+            'description' => 'Użytkownik może usuwać wszystkie produkty bancassurance',
+        ]);
+        Permission::create([
             'code' => 'replies-create',
             'name' => 'Może dodawać odpowiedzi do aktualności',
             'description' => 'Użytkownik może dodawać odpowiedzi do aktulności oraz edytować i usuwać utworzone przez siebie odpowiedzi do aktulności',

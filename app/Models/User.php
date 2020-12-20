@@ -110,6 +110,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Protective');
     }
+    
+    public function bancassurances()
+    {
+        return $this->hasMany('App\Models\Bancassurance');
+    }
 
     public function replies()
     {
