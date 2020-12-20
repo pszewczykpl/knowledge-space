@@ -255,6 +255,7 @@
                                                     Wraz z kontem pracownika zostaną również usunięte wszystkie obiekty utworzone przez pracownika tj.<br>
                                                     Produkty Inwestycyjne <b>({{ $user->investments->count() }})</b><br>
                                                     Produkty Ochronne <b>({{ $user->protectives->count() }})</b><br>
+                                                    Produkty Bancassurance <b>({{ $user->bancassurances->count() }})</b><br>
                                                     Produkty Pracownicze <b>({{ $user->employees->count() }})</b><br>
                                                     Partnerzy <b>({{ $user->partners->count() }})</b><br>
                                                     Ryzyka Ubezpieczeniowe <b>({{ $user->risks->count() }})</b><br>
@@ -266,6 +267,8 @@
                                                     Kategorie dokumentów <b>({{ $user->file_categories->count() }})</b><br>
                                                     Departamenty <b>({{ $user->file_categories->count() }})</b><br>
                                                     Systemy <b>({{ $user->systems->count() }})</b><br>
+                                                    Artykuły <b>({{ $user->posts->count() }})</b><br>
+                                                    Kategorie artykułów <b>({{ $user->post_categories->count() }})</b><br>
                                                 </div>
                                             </div>
                                         </div>

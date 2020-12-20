@@ -32,13 +32,12 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewany', Post::class);
-
+        $user = Auth::user();
         if(($request->category ?? null) === null) {
-            $posts = Post::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::withTrashed($user ? $user->hasPermission('view-deleted') : false)->orderBy('created_at', 'desc')->paginate(10);
         }
         else {
-            $posts = Post::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::withTrashed($user ? $user->hasPermission('view-deleted') : false)->where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('posts.index', [
@@ -89,8 +88,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $this->authorize('view', $post);
-
         return view('posts.show', [
             'title' => 'Artykuł',
             'post' => $post,

@@ -24,11 +24,14 @@ class AuthServiceProvider extends ServiceProvider
         Partner::class => PartnerPolicy::class,
         Permission::class => PermissionPolicy::class,
         Protective::class => ProtectivePolicy::class,
+        Banassurance::class => BanassurancePolicy::class,
         Reply::class => ReplyPolicy::class,
         Risk::class => RiskPolicy::class,
         System::class => SystemPolicy::class,
         Trash::class => TrashPolicy::class,
         User::class => UserPolicy::class,
+        Post::class => PostPolicy::class,
+        PostCategory::class => PostCategoryPolicy::class,
     ];
 
     /**

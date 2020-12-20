@@ -1,4 +1,3 @@
-@can('view', $post)
 <div class="card card-custom gutter-b @if($post->trashed()) bg-danger @endif">
 	<div class="card-body">
 		<div>
@@ -39,14 +38,12 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
                             <ul class="navi navi-hover flex-column">
 								@if(!$post->trashed())
-									@can('view', $post)
 									<li class="navi-item">
 										<a href="{{ route('posts.show', $post->id) }}" class="navi-link">
 											<i class="navi-icon flaticon2-expand"></i>
 											<span class="navi-text">Wyświetl</span>
 										</a>
 									</li>
-									@endcan
 									@can('update', $post)
 									<li class="navi-item">
 										<a href="{{ route('posts.edit', $post->id) }}" class="navi-link">
@@ -100,4 +97,3 @@
 		</div>
 	</div>
 </div>
-@endcan
