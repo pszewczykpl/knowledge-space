@@ -65,11 +65,11 @@
 								<div class="form-group row">
 									<div class="col-lg-6">
 										<label>Tytuł artykułu:</label>
-										<input type="text" id="title" name="title" class="form-control" placeholder="Wprowadź tytuł">
+										<input type="text" id="title" name="title" class="form-control form-control-solid" placeholder="Wprowadź tytuł">
 									</div>
 									<div class="col-lg-6">
 										<label>Kategoria artykułu:</label>
-										<select class="form-control" id="post_category_id" name="post_category_id">
+										<select class="form-control form-control-solid" id="post_category_id" name="post_category_id">
 											@foreach($postCategories as $postCategory)
 											<option value="{{ $postCategory->id }}">{{ $postCategory->name }}</option>
 											@endforeach

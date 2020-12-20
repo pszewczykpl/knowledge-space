@@ -15,7 +15,7 @@ class PostCategorySeeder extends Seeder
     public function run()
     {
         PostCategory::factory()
-            ->times(5)
+            ->times(7)
             ->create();
     }
 }
