@@ -20,6 +20,8 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\PostCategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AttachmentController;
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 
@@ -121,3 +123,5 @@ Route::resource('post-categories', PostCategoryController::class);
 Route::delete('posts/{id}/forcedestroy', [PostController::class, 'force_destroy'])->name('posts.forceDestroy');
 Route::put('posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
 Route::resource('posts', PostController::class);
+
+Route::resource('attachments', AttachmentController::class);

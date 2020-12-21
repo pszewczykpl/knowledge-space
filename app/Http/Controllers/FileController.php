@@ -251,6 +251,8 @@ class FileController extends Controller
         $file = File::withTrashed()->findOrFail($id);
 
         $this->authorize('restore', $file);
+
+        Storage::move('trash/' . $file->path, $file->path);
         $file->restore();
 
         return redirect()->route('files.index')->with('notify_danger', 'Dokument został przywrócony!');

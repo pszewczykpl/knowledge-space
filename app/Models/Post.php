@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'attachmentable');
+    }
 }

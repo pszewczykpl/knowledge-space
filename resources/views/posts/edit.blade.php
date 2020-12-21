@@ -54,7 +54,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card card-custom gutter-b">
-						{!! Form::open(['route' => ['posts.update', $post->id], 'method' => 'PUT', 'id' => 'kt_forms_widget_2_form', 'class' => 'ql-quil ql-quil-plain']) !!}
+						{!! Form::open(['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true, 'id' => 'kt_forms_widget_2_form', 'class' => 'ql-quil ql-quil-plain']) !!}
 						<div class="card-body" style="padding: 3.5rem 4rem !important;">
 							<div class="">
 								<div class="form-group row">
@@ -77,6 +77,12 @@
 								<div id="editor" name="editor" class="font-size-lg pt-5" style="font-family: Poppins,Helvetica,sans-serif !important;">{!! $post->content !!}</div>
 								<textarea name="content" style="display:none" id="content"></textarea>
 								<input type="submit" id="submit" name="submit" value="Aktualizuj" style="visibility: hidden;">
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label text-left pr-2">Załącznik:</label>
+								<div>
+									<input class="form-control form-control-sm form-control-solid" type="file" name="attachment" id="attachment" />
+								</div>
 							</div>
 						</div>
 						{!! Form::close() !!}

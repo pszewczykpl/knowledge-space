@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\Attachment;
 
 use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
@@ -124,6 +125,17 @@ class PostController extends Controller
         $this->authorize('update', $post);
         $post->update($request->all());
         $post->post_category()->associate($request->post_category_id);
+
+        if ($request->hasFile('attachment')) {
+            $path = $request->file('attachment')->store('attachments');
+
+            $attachment = new Attachment();
+            $attachment->path = $path;
+            $attachment->name = $request->file('attachment')->getClientOriginalName();
+            $attachment->extension = $request->file('attachment')->extension();
+            $attachment->attachmentable()->associate($post);
+            Auth::user()->posts()->save($attachment);
+        }
         $post->save();
 
         return redirect()->route('posts.show', $post->id)->with('notify_success', 'Dane artykułu zostały zaktualizowane!');
