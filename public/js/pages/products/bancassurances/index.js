@@ -16,7 +16,8 @@ $(document).ready(function() {
                 data: 'name',
                 visible: true,
                 orderable: true,
-                searchable: true
+                searchable: true,
+                width: "32%"
             }, {
                 data: 'dist_short',
                 visible: true,
