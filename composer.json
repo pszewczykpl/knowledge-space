@@ -1,14 +1,14 @@
 {
     "name": "pszewczykpl/knowledgespace",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Baza wiedzy dla Towarzystw Ubezpieczeniowych.",
     "keywords": [
         "framework",
         "laravel"
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3",
+        "php": "^7.3|^8.0",
         "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",

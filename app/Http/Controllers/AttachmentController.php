@@ -85,6 +85,11 @@ class AttachmentController extends Controller
      */
     public function destroy(Attachment $attachment)
     {
-        //
+        //$this->authorize('delete', $attachment);
+
+        Storage::move($attachment->path, 'trash/' . $attachment->path);
+        $attachment->delete();
+
+        return redirect()->back()->with('notify_danger', 'Załącznik został usunięty!');
     }
 }

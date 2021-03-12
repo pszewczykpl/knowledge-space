@@ -125,10 +125,16 @@
 								<div class="pt-5">
 									@if($post->attachments()->count() > 0)
 										@foreach($post->attachments as $attachment)
-										<a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-6">
-											<img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">
-											<span class="text-dark-75 font-weight-bold pl-1 font-size-md">{{ $attachment->name }}</span>
-										</a>
+										<div class="pb-3">
+											<a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
+												<img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">
+												<span class="text-dark-75 font-weight-bold pl-1 font-size-md">{{ $attachment->name }}</span>
+											</a>
+											<a onclick='document.getElementById("attachments_destroy_{{ $attachment->id }}").submit();' class="pr-6">
+												<span class="text-danger pl-1 font-size-md">Usuń</span>
+											</a>
+											{{ Form::open([ 'method'  => 'delete', 'route' => [ 'attachments.destroy', $attachment->id ], 'id' => 'attachments_destroy_' . $attachment->id ]) }}{{ Form::close() }}
+										</div>
 										@endforeach
 									@else
 										<span class="text-dark-50 font-weight-bold pl-1 font-size-md">Brak załączników</span>
