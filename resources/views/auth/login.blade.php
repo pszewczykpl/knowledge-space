@@ -57,9 +57,9 @@
                                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <span></span>Zapamiętaj mnie</label>
                                 </div>
-                                {{-- @if (Route::has('password.request'))
+                                 @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="text-muted text-hover-primary font-weight-bold">Zapomniałeś hasła?</a>
-                                @endif --}}
+                                @endif
                             </div>
 							
 							<div class="text-center mt-10">

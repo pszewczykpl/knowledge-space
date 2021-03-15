@@ -1,6 +1,6 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 	<a href="{{ route('home.index') }}">
-		<img alt="Logo" src="{{ asset('/media/logos/logo-dark.png') }}" />
+		<img alt="Logo" src="{{ asset('/media/logos/logo.png') }}" />
 	</a>
 	<div class="d-flex align-items-center">
 		<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">

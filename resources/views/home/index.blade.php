@@ -3,13 +3,13 @@
 @section('content')
 <div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('./media/bg/bg-1.jpg')">
 	<div class="container">
-		<div class="d-flex justify-content-between align-items-center border-bottom border-black py-7" style="border-bottom: 1.2px solid #425ba7!important;">
-			<h3 class="h3 text-black font-weight-bolder mb-0">{{ $name }}</h3>
+		<div class="d-flex justify-content-between align-items-top py-7 pt-1">
+            <img alt="Logo" src="{{ asset('media/logos/logo-std.png') }}" />
 			<div class="d-flex">
-				<span class="font-size-h6 text-black font-weight-bolder ml-8">Strefa Wiedzy dla Towarzysta Ubezpieczeniowego</span>
+				<span class="font-size-h4 text-black font-weight-bolder ml-8 pt-5">Baza Wiedzy dla Towarzysta Ubezpieczeniowego</span>
 			</div>
         </div>
-        {{-- <div class="d-flex align-items-stretch text-center flex-column py-20">
+         <div class="d-flex align-items-stretch text-center flex-column py-10">
             <h1 class="text-dark font-weight-bolder mb-12">Jak możemy Ci pomóc?</h1>
             <form class="d-flex position-relative w-75 px-lg-40 m-auto">
                 <div class="input-group" style="box-shadow: 0px 0px 35px -17px;">
@@ -29,7 +29,7 @@
                     <input type="text" class="form-control h-auto border-0 py-7 px-1 font-size-h6" placeholder="Wpisz treść wyszukiwania..." />
                 </div>
             </form>
-        </div> --}}
+        </div>
         <div class="py-15">
 		</div>
 	</div>

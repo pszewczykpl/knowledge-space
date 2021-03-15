@@ -1,7 +1,7 @@
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 	<div class="brand flex-column-auto" id="kt_brand">
 		<a href="{{ route('home.index') }}" class="brand-logo">
-			<img alt="Logo" src="{{ asset('media/logos/logo-dark.png') }}" />
+			<img alt="Logo" src="{{ asset('media/logos/logo.png') }}" />
 		</a>
 		<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 			<span class="svg-icon svg-icon svg-icon-xl">

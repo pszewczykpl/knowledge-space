@@ -80,10 +80,14 @@ class InvestmentController extends Controller
 
         $investment->load('user');
         $clone = $investment->replicate();
+        $clone->edit_date = '2020-06-30';
         $clone->save();
         $clone->files()->attach($investment->files);
         $clone->notes()->attach($investment->notes);
         $clone->funds()->attach($investment->funds);
+
+        $investment->status = 'N';
+        $investment->save();
 
         return redirect()->route('investments.show', $clone->id)->with('notify_success', 'Nowy produkt inwestycyjny został zduplikowany!');
     }
