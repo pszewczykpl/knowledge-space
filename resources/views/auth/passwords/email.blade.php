@@ -46,7 +46,7 @@
                             </div>
 							
 							<div class="text-center mt-15">
-								<button type="submit" class="btn btn-primary btn-pill shadow-sm py-4 px-9 font-weight-bold">Resetuj hasło</button>
+								<button type="submit" class="btn btn-primary btn-pill shadow-sm py-4 px-9 font-weight-bold">Zresetuj hasło</button>
 							</div>
 						</form>
 					</div>
