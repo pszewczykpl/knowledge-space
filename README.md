@@ -27,5 +27,14 @@ Hasło: admin123
 
 Link wkrótce :-)
 
+## Instalacja
+git clone https://github.com/pszewczykpl/knowledge-space.git
+cd knowledge-space
+composer install --no-dev
+php artisan key:generate
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
 ## Licencja
 Knowledge Space jest systemem open-source opartym o licencję MIT.
