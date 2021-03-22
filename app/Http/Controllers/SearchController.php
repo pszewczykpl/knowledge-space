@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Investment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,63 +44,63 @@ class SearchController extends Controller
         // MAYBE TO DO: departments, users, file categories, files, notes, replies, permissions, post categories, attachments
         /**
          * Return Systems
-         * TODO: search by  name url description
+         * TODO: search by:  name url description
          */
-        // $systems
+        // $systems = \App\Models\Protective
 
         /**
          * Return Partners
          * TODO: search by  name number_rau code nip regon type
          */
-        // $partners
+        // $partners = \App\Models\Protective
 
         /**
          * Return News
          * TODO: search by  content
          */
-        // $news
+        // $news = \App\Models\Protective
 
         /**
          * Return Posts
          * TODO: search by  title content
          */
-        // $posts
+        // $posts = \App\Models\Protective
 
         /**
          * Return Risks
          * TODO: search by  code name category group grace_period
          */
-        // $risks
+        // $risks = \App\Models\Protective
 
         /**
          * Return Funds
          * TODO: search by  code name type currency status start_date
          */
-        // $funds
+        // $funds = \App\Models\Protective
 
         /**
          * Return Employees
          * TODO: search by  name code_owu edit_date status
          */
-        // $employees
+        // $employees = \App\Models\Protective
 
         /**
          * Return Bancassurances
          * TODO: search by  name code dist_short dist code_owu subscription edit_date status
          */
-        // $protectives
+        // $bancassurances = \App\Models\Protective
 
         /**
          * Return Protectives
          * TODO: search by  name code dist_short dist code_owu subscription edit_date status
          */
-        // $protectives
+        // $protectives = \App\Models\Protective
 
         /**
          * Return Investments
          * TODO: search by  group name code dist_short dist code_owu code_toil edit_date type status
          */
-        $investments = Investment::select('*')
+        $investments = \App\Models\Investment::select('*')
             // code_owu search
             ->where('code_owu', 'like', '%' . $request->value . '%')
             // code_toil search
