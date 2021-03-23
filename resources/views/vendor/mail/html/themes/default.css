@@ -38,7 +38,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #3d4852;
+    color: #181c32!important;
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
@@ -80,7 +80,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
+    background-color: #eef0f8;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -123,9 +123,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
-    border-bottom: 1px solid #edf2f7;
-    border-top: 1px solid #edf2f7;
+    background-color: #eef0f8;
+    border-bottom: 1px solid #eef0f8;
+    border-top: 1px solid #eef0f8;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -139,7 +139,7 @@ img {
     border-color: #e8e5ef;
     border-radius: 2px;
     border-width: 1px;
-    box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015);
+    box-shadow: 0px 0px 30px -20px black !important;
     margin: 0 auto;
     padding: 0;
     width: 570px;
@@ -215,7 +215,8 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    margin: 30px auto;
+    margin-top: 0px!important;
+    margin-bottom: 16px!important;
     padding: 0;
     text-align: center;
     width: 100%;
@@ -223,20 +224,26 @@ img {
 
 .button {
     -webkit-text-size-adjust: none;
-    border-radius: 4px;
     color: #fff;
     display: inline-block;
     overflow: hidden;
     text-decoration: none;
+    transition: color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease,-webkit-box-shadow .15s ease;
+    outline: 0!important;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    font-weight: 400!important;
+    padding: .45rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .42rem;
 }
 
 .button-blue,
 .button-primary {
-    background-color: #2d3748;
-    border-bottom: 8px solid #2d3748;
-    border-left: 18px solid #2d3748;
-    border-right: 18px solid #2d3748;
-    border-top: 8px solid #2d3748;
+    color: #3699ff;
+    background-color: #e1f0ff;
+    border-color: transparent;
 }
 
 .button-green,
