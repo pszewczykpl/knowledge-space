@@ -15,7 +15,8 @@
         "laravel/framework": "^8.33",
         "laravel/tinker": "^2.6",
         "laravel/ui": "^3.2",
-        "laravelcollective/html": "^6.2"
+        "laravelcollective/html": "^6.2",
+        "predis/predis": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
