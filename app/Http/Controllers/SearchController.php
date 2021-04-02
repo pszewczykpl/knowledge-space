@@ -94,7 +94,14 @@ class SearchController extends Controller
          * Return Protectives
          * TODO: search by  name code dist_short dist code_owu subscription edit_date status
          */
-        // $protectives = \App\Models\Protective
+        $protectives = \App\Models\Protective::select('*')
+            // code_owu search
+            ->where('code_owu', 'like', '%' . $request->value . '%')
+            // code_toil search
+            ->orWhere('code', 'like', '%' . $request->value . '%')
+            ->orWhere('name', 'like', '%' . $request->value . '%')
+            ->paginate(20)
+            ->withQueryString();
 
         /**
          * Return Investments
@@ -105,6 +112,7 @@ class SearchController extends Controller
             ->where('code_owu', 'like', '%' . $request->value . '%')
             // code_toil search
             ->orWhere('code_toil', 'like', '%' . $request->value . '%')
+            ->orWhere('name', 'like', '%' . $request->value . '%')
             ->paginate(20)
             ->withQueryString();
 
@@ -112,6 +120,7 @@ class SearchController extends Controller
             'title' => 'Wyniki wyszukiwania',
             'value' => $request->value,
             'investments' => $investments,
+            'protectives' => $protectives,
         ]);
     }
 }
