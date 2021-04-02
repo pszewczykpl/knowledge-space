@@ -140,6 +140,11 @@
 </div>
 @stop
 
+@section('additional_css')
+	<link href="{{ asset('css/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+@stop
+
 @section('additional_scripts')
+	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/pages/products/bancassurances/index.js') }}" type="text/javascript"></script>
 @stop
