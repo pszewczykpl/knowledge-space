@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -143,12 +144,12 @@ class User extends Authenticatable
 
     public function hasPermission($code)
     {
-        foreach ($this->permissions()->get() as $role)
-        {
-            if ($role->code == $code)
-            {
-                return true;
-            }
+        $permissions = Cache::rememberForever('users_' . $this->id . '_permissions_all', function () {
+            return $this->permissions()->get()->pluck('code')->toArray();
+        });
+
+        if (in_array($code, $permissions)) {
+            return true;
         }
 
         return false;

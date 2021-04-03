@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,15 +29,17 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $this->authorize('viewany', News::class);
 
+        $news = News::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->orderBy('created_at', 'desc');
+
         return view('news.index', [
             'title' => 'Aktualności',
-            'news' => News::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->orderBy('created_at', 'desc')->paginate(10),
+            'news' => $news->paginate(10),
         ]);
     }
 
@@ -75,7 +78,7 @@ class NewsController extends Controller
      * Display the specified resource.
      *
      * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(News $news)
     {
@@ -91,7 +94,7 @@ class NewsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(News $news)
     {
@@ -115,6 +118,8 @@ class NewsController extends Controller
     {
         $this->authorize('update', $news);
         $news->update($request->all());
+
+        Cache::forget('news_' . $news->id);
 
         return redirect()->route('news.show', $news->id)->with('notify_success', 'Dane aktualności zostały zaktualizowane!');
     }

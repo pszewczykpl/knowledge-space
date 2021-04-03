@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateInvestment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class InvestmentController extends Controller
