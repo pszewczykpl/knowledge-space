@@ -112,7 +112,7 @@ class NewsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateNews $request, News $news)
     {
