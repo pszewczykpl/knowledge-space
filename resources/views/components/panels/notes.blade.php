@@ -18,7 +18,7 @@
             @foreach($notes->sortByDesc('updated_at'); as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
-                    <img alt="Pic" src="@if($note->user->avatar_path) {{ Storage::url($note->user->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif">
+                    <img alt="Pic" src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}">
                 </div>
                 <div class="timeline-content">
                     <div class="d-flex align-items-center justify-content-between mb-3">

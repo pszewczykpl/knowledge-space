@@ -51,7 +51,7 @@
 			<div class="d-flex mb-6">
 				<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 					<div class="symbol symbol-50 symbol-lg-120">
-						<img src="@if(Auth::user()->avatar_path) {{ Storage::url(Auth::user()->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif" alt="image">
+						<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" alt="image">
 					</div>
 				</div>
 				<div class="flex-grow-1">
