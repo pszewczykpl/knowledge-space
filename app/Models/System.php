@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\SystemUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +16,10 @@ class System extends Model
         'name',
         'url',
         'description',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => SystemUpdated::class
     ];
     
     public function user()

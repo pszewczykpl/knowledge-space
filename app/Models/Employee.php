@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\EmployeeUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,10 @@ class Employee extends Model
         'code_owu',
         'edit_date',
         'status',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => EmployeeUpdated::class
     ];
 
     public function files()

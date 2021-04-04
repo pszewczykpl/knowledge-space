@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\FundUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,10 @@ class Fund extends Model
         'cancel_date',
         'start_date',
         'cancel_reason'
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => FundUpdated::class
     ];
 
     public function investments()

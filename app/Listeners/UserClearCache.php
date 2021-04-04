@@ -28,5 +28,6 @@ class UserClearCache
     public function handle(UserUpdated $event)
     {
         Cache::forget('users_' . $event->user->id);
+        Cache::forget('users_' . $event->user->id . '_permissions_all');
     }
 }

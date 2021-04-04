@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\PostCategoryUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,10 @@ class PostCategory extends Model
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => PostCategoryUpdated::class
     ];
 
     public function posts()
