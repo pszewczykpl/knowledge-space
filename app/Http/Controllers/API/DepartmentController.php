@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class DepartmentController extends Controller
@@ -53,9 +54,13 @@ class DepartmentController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['departments'])->rememberForever('departments_count', function () {
+            return Department::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Department::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

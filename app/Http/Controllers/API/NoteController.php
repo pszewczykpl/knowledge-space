@@ -7,6 +7,7 @@ use App\Models\Note;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class NoteController extends Controller
@@ -53,9 +54,13 @@ class NoteController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['notes'])->rememberForever('notes_count', function () {
+            return Note::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Note::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

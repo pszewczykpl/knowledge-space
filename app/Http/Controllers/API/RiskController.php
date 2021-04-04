@@ -7,6 +7,7 @@ use App\Models\Risk;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class RiskController extends Controller
@@ -53,9 +54,13 @@ class RiskController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['risks'])->rememberForever('risks_count', function () {
+            return Risk::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Risk::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

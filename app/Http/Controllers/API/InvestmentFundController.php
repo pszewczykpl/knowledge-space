@@ -8,6 +8,7 @@ use App\Models\Fund;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,9 +46,13 @@ class InvestmentFundController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['investment', 'funds'])->rememberForever('investment_' . $id .'_funds_a_count', function () use ($id) {
+            return Investment::findOrFail($id)->funds()->where('status', 'A')->count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Investment::findOrFail($id)->funds()->where('status', 'A')->count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

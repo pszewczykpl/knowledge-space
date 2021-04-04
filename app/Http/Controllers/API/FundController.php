@@ -7,6 +7,7 @@ use App\Models\Fund;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class FundController extends Controller
@@ -53,9 +54,13 @@ class FundController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['funds'])->rememberForever('funds_count', function () {
+            return Fund::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Fund::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

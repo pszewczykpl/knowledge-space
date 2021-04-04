@@ -7,6 +7,7 @@ use App\Models\Partner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class PartnerController extends Controller
@@ -53,9 +54,13 @@ class PartnerController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['partners'])->rememberForever('partners_count', function () {
+            return Partner::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Partner::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

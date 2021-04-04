@@ -7,6 +7,7 @@ use App\Models\FileCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class FileCategoryController extends Controller
@@ -53,9 +54,13 @@ class FileCategoryController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['file_categories'])->rememberForever('file_categories_count', function () {
+            return FileCategory::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => FileCategory::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

@@ -6,6 +6,7 @@ use App\Models\Investment;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
 use App\Http\Controllers\Controller;
@@ -59,9 +60,13 @@ class FileController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['files'])->rememberForever('files_count', function () {
+            return File::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => File::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

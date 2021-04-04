@@ -7,6 +7,7 @@ use App\Models\PostCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class PostCategoryController extends Controller
@@ -53,9 +54,13 @@ class PostCategoryController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['post_categories'])->rememberForever('post_categories_count', function () {
+            return PostCategory::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => PostCategory::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

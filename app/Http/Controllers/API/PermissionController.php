@@ -7,6 +7,7 @@ use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class PermissionController extends Controller
@@ -53,9 +54,13 @@ class PermissionController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['permissions'])->rememberForever('permissions_count', function () {
+            return Permission::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Permission::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );
