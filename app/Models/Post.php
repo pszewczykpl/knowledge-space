@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\PostUpdated;
+use App\Events\PostSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +18,7 @@ class Post extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => PostUpdated::class
+        'updated' => PostSaved::class
     ];
 
     public function post_category()

@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\DepartmentUpdated;
+use App\Events\DepartmentSaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class DepartmentClearCache
     /**
      * Handle the event.
      *
-     * @param  DepartmentUpdated  $event
+     * @param  DepartmentSaved  $event
      * @return void
      */
-    public function handle(DepartmentUpdated $event)
+    public function handle(DepartmentSaved $event)
     {
         Cache::forget('departments_' . $event->department->id);
     }

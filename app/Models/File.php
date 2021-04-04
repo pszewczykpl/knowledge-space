@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\FileUpdated;
+use App\Events\FileSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +21,7 @@ class File extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FileUpdated::class
+        'updated' => FileSaved::class
     ];
 
     public function investments()

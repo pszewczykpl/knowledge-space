@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\FileCategoryUpdated;
+use App\Events\FileCategorySaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +18,7 @@ class FileCategory extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FileCategoryUpdated::class
+        'updated' => FileCategorySaved::class
     ];
 
     public function files()

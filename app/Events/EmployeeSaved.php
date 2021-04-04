@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\FileCategory;
+use App\Models\Employee;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FileCategoryUpdated
+class EmployeeSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $fileCategory;
+    public $employee;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(FileCategory $fileCategory)
+    public function __construct(Employee $employee)
     {
-        $this->fileCategory = $fileCategory;
+        $this->employee = $employee;
     }
 
     /**

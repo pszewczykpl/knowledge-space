@@ -54,7 +54,7 @@ class User extends Authenticatable
     ];
 
     protected $dispatchesEvents = [
-        'updated' => UserUpdated::class
+        'saved' => UserSaved::class
     ];
 
     public function department()

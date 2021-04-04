@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Department;
+use App\Models\Protective;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class DepartmentUpdated
+class ProtectiveSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $department;
+    public $protective;
 
     /**
      * Create a new event instance.
      *
-     * @param Department $department
+     * @return void
      */
-    public function __construct(Department $department)
+    public function __construct(Protective $protective)
     {
-        $this->department = $department;
+        $this->protective = $protective;
     }
 
     /**

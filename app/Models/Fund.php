@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\FundUpdated;
+use App\Events\FundSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,7 +24,7 @@ class Fund extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FundUpdated::class
+        'updated' => FundSaved::class
     ];
 
     public function investments()

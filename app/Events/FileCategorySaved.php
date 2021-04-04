@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Risk;
+use App\Models\FileCategory;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RiskUpdated
+class FileCategorySaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $risk;
+    public $fileCategory;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Risk $risk)
+    public function __construct(FileCategory $fileCategory)
     {
-        $this->risk = $risk;
+        $this->fileCategory = $fileCategory;
     }
 
     /**

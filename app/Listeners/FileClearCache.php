@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\FileUpdated;
+use App\Events\FileSaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class FileClearCache
     /**
      * Handle the event.
      *
-     * @param  FileUpdated  $event
+     * @param  FileSaved  $event
      * @return void
      */
-    public function handle(FileUpdated $event)
+    public function handle(FileSaved $event)
     {
         Cache::forget('files_' . $event->file->id);
     }

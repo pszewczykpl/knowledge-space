@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Fund;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FundUpdated
+class UserSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $fund;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Fund $fund)
+    public function __construct(User $user)
     {
-        $this->fund = $fund;
+        $this->user = $user;
     }
 
     /**

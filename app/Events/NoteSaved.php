@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\News;
+use App\Models\Note;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewsUpdated
+class NoteSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $news;
+    public $note;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(News $news)
+    public function __construct(Note $note)
     {
-        $this->news = $news;
+        $this->note = $note;
     }
 
     /**

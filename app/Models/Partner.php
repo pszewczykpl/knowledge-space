@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\PartnerUpdated;
+use App\Events\PartnerSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,7 +22,7 @@ class Partner extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => PartnerUpdated::class
+        'updated' => PartnerSaved::class
     ];
 
     public function user()

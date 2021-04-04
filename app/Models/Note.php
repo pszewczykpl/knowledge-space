@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\NoteUpdated;
+use App\Events\NoteSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +17,7 @@ class Note extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => NoteUpdated::class
+        'updated' => NoteSaved::class
     ];
 
     public function investments()

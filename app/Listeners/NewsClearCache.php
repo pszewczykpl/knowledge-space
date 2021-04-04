@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\NewsUpdated;
+use App\Events\NewsSaved;
 use Illuminate\Support\Facades\Cache;
 
 class NewsClearCache
@@ -21,10 +21,10 @@ class NewsClearCache
     /**
      * Handle the event.
      *
-     * @param  NewsUpdated  $event
+     * @param  NewsSaved  $event
      * @return void
      */
-    public function handle(NewsUpdated $event)
+    public function handle(NewsSaved $event)
     {
         Cache::forget('news_' . $event->news->id);
     }

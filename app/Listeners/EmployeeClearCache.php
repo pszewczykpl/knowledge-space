@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\EmployeeUpdated;
+use App\Events\EmployeeSaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class EmployeeClearCache
     /**
      * Handle the event.
      *
-     * @param  EmployeeUpdated  $event
+     * @param  EmployeeSaved  $event
      * @return void
      */
-    public function handle(EmployeeUpdated $event)
+    public function handle(EmployeeSaved $event)
     {
         Cache::forget('employees_' . $event->employee->id);
     }

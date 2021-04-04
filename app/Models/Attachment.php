@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\AttachmentUpdated;
+use App\Events\AttachmentSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +19,7 @@ class Attachment extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => AttachmentUpdated::class
+        'updated' => AttachmentSaved::class
     ];
 
     public function attachmentable()

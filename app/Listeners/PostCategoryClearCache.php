@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\PostCategoryUpdated;
+use App\Events\PostCategorySaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class PostCategoryClearCache
     /**
      * Handle the event.
      *
-     * @param  PostCategoryUpdated  $event
+     * @param  PostCategorySaved  $event
      * @return void
      */
-    public function handle(PostCategoryUpdated $event)
+    public function handle(PostCategorySaved $event)
     {
         Cache::forget('post_categories_' . $event->postCategory->id);
     }

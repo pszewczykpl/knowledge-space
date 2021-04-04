@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\SystemUpdated;
+use App\Events\SystemSaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class SystemClearCache
     /**
      * Handle the event.
      *
-     * @param  SystemUpdated  $event
+     * @param  SystemSaved  $event
      * @return void
      */
-    public function handle(SystemUpdated $event)
+    public function handle(SystemSaved $event)
     {
         Cache::forget('systems_' . $event->system->id);
     }

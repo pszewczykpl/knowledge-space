@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\DepartmentUpdated;
+use App\Events\DepartmentSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +19,7 @@ class Department extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => DepartmentUpdated::class
+        'updated' => DepartmentSaved::class
     ];
 
     public function users()

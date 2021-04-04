@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Investment;
+use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class InvestmentUpdated
+class PostSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $investment;
+    public $post;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Investment $investment)
+    public function __construct(Post $post)
     {
-        $this->investment = $investment;
+        $this->post = $post;
     }
 
     /**

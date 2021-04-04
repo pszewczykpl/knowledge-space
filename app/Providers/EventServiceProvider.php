@@ -2,24 +2,24 @@
 
 namespace App\Providers;
 
-use App\Events\AttachmentUpdated;
-use App\Events\BancassuranceUpdated;
-use App\Events\DepartmentUpdated;
-use App\Events\EmployeeUpdated;
-use App\Events\FileCategoryUpdated;
-use App\Events\FileUpdated;
-use App\Events\FundUpdated;
-use App\Events\InvestmentUpdated;
-use App\Events\NewsUpdated;
-use App\Events\NoteUpdated;
-use App\Events\PartnerUpdated;
-use App\Events\PostCategoryUpdated;
-use App\Events\PostUpdated;
-use App\Events\ProtectiveUpdated;
-use App\Events\ReplyUpdated;
-use App\Events\RiskUpdated;
-use App\Events\SystemUpdated;
-use App\Events\UserUpdated;
+use App\Events\AttachmentSaved;
+use App\Events\BancassuranceSaved;
+use App\Events\DepartmentSaved;
+use App\Events\EmployeeSaved;
+use App\Events\FileCategorySaved;
+use App\Events\FileSaved;
+use App\Events\FundSaved;
+use App\Events\InvestmentSaved;
+use App\Events\NewsSaved;
+use App\Events\NoteSaved;
+use App\Events\PartnerSaved;
+use App\Events\PostCategorySaved;
+use App\Events\PostSaved;
+use App\Events\ProtectiveSaved;
+use App\Events\ReplySaved;
+use App\Events\RiskSaved;
+use App\Events\SystemSaved;
+use App\Events\UserSaved;
 use App\Listeners\AttachmentClearCache;
 use App\Listeners\BancassuranceClearCache;
 use App\Listeners\DepartmentClearCache;
@@ -54,58 +54,58 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        AttachmentUpdated::class => [
+        AttachmentSaved::class => [
             AttachmentClearCache::class,
         ],
-        BancassuranceUpdated::class => [
+        BancassuranceSaved::class => [
             BancassuranceClearCache::class,
         ],
-        DepartmentUpdated::class => [
+        DepartmentSaved::class => [
             DepartmentClearCache::class,
         ],
-        EmployeeUpdated::class => [
+        EmployeeSaved::class => [
             EmployeeClearCache::class,
         ],
-        FileUpdated::class => [
+        FileSaved::class => [
             FileClearCache::class,
         ],
-        FileCategoryUpdated::class => [
+        FileCategorySaved::class => [
             FileCategoryClearCache::class,
         ],
-        FundUpdated::class => [
+        FundSaved::class => [
             FundClearCache::class,
         ],
-        InvestmentUpdated::class => [
+        InvestmentSaved::class => [
             InvestmentClearCache::class,
         ],
-        NewsUpdated::class => [
+        NewsSaved::class => [
             NewsClearCache::class,
         ],
-        NoteUpdated::class => [
+        NoteSaved::class => [
             NoteClearCache::class,
         ],
-        PartnerUpdated::class => [
+        PartnerSaved::class => [
             PartnerClearCache::class,
         ],
-        PostUpdated::class => [
+        PostSaved::class => [
             PostClearCache::class,
         ],
-        PostCategoryUpdated::class => [
+        PostCategorySaved::class => [
             PostCategoryClearCache::class,
         ],
-        ProtectiveUpdated::class => [
+        ProtectiveSaved::class => [
             ProtectiveClearCache::class,
         ],
-        ReplyUpdated::class => [
+        ReplySaved::class => [
             ReplyClearCache::class,
         ],
-        RiskUpdated::class => [
+        RiskSaved::class => [
             RiskClearCache::class,
         ],
-        SystemUpdated::class => [
+        SystemSaved::class => [
             SystemClearCache::class,
         ],
-        UserUpdated::class => [
+        UserSaved::class => [
             UserClearCache::class,
         ],
     ];

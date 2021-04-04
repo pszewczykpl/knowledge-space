@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\System;
+use App\Models\PostCategory;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SystemUpdated
+class PostCategorySaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $system;
+    public $postCategory;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(System $system)
+    public function __construct(PostCategory $postCategory)
     {
-        $this->system = $system;
+        $this->postCategory = $postCategory;
     }
 
     /**

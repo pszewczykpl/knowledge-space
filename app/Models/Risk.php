@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\RiskUpdated;
+use App\Events\RiskSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +21,7 @@ class Risk extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => RiskUpdated::class
+        'updated' => RiskSaved::class
     ];
 
     public function notes()

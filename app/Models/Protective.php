@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\ProtectiveUpdated;
+use App\Events\ProtectiveSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,7 +24,7 @@ class Protective extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => ProtectiveUpdated::class
+        'updated' => ProtectiveSaved::class
     ];
 
     public function files()

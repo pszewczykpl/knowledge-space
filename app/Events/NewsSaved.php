@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Protective;
+use App\Models\News;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProtectiveUpdated
+class NewsSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $protective;
+    public $news;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Protective $protective)
+    public function __construct(News $news)
     {
-        $this->protective = $protective;
+        $this->news = $news;
     }
 
     /**

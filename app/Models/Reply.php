@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\ReplyUpdated;
+use App\Events\ReplySaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +17,7 @@ class Reply extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => ReplyUpdated::class
+        'updated' => ReplySaved::class
     ];
     
     public function user()

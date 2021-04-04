@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\NewsUpdated;
+use App\Events\NewsSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +17,7 @@ class News extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => NewsUpdated::class
+        'updated' => NewsSaved::class
     ];
 
     public function user()

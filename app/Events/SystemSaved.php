@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Attachment;
+use App\Models\System;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AttachmentUpdated
+class SystemSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $attachment;
+    public $system;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Attachment $attachment)
+    public function __construct(System $system)
     {
-        $this->attachment = $attachment;
+        $this->system = $system;
     }
 
     /**

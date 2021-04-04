@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\PostCategory;
+use App\Models\Investment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PostCategoryUpdated
+class InvestmentSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $postCategory;
+    public $investment;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(PostCategory $postCategory)
+    public function __construct(Investment $investment)
     {
-        $this->postCategory = $postCategory;
+        $this->investment = $investment;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\File;
+use App\Models\Attachment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FileUpdated
+class AttachmentSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $file;
+    public $attachment;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(File $file)
+    public function __construct(Attachment $attachment)
     {
-        $this->file = $file;
+        $this->attachment = $attachment;
     }
 
     /**

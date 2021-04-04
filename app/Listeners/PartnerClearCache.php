@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\PartnerUpdated;
+use App\Events\PartnerSaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class PartnerClearCache
     /**
      * Handle the event.
      *
-     * @param  PartnerUpdated  $event
+     * @param  PartnerSaved  $event
      * @return void
      */
-    public function handle(PartnerUpdated $event)
+    public function handle(PartnerSaved $event)
     {
         Cache::forget('partners_' . $event->partner->id);
     }

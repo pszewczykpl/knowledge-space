@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\BancassuranceUpdated;
+use App\Events\BancassuranceSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,7 +24,7 @@ class Bancassurance extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => BancassuranceUpdated::class
+        'updated' => BancassuranceSaved::class
     ];
 
     public function files()

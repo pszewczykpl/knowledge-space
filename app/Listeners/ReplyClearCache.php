@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\ReplyUpdated;
+use App\Events\ReplySaved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Cache;
@@ -22,10 +22,10 @@ class ReplyClearCache
     /**
      * Handle the event.
      *
-     * @param  ReplyUpdated  $event
+     * @param  ReplySaved  $event
      * @return void
      */
-    public function handle(ReplyUpdated $event)
+    public function handle(ReplySaved $event)
     {
         Cache::forget('replies_' . $event->reply->id);
     }
