@@ -19,7 +19,7 @@ class Attachment extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => AttachmentSaved::class
+        'saved' => AttachmentSaved::class
     ];
 
     public function attachmentable()

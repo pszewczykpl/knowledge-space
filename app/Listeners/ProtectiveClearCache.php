@@ -28,5 +28,6 @@ class ProtectiveClearCache
     public function handle(ProtectiveSaved $event)
     {
         Cache::forget('protectives_' . $event->protective->id);
+        Cache::tags('protectives')->flush();
     }
 }

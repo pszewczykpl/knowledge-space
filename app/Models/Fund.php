@@ -24,7 +24,7 @@ class Fund extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FundSaved::class
+        'saved' => FundSaved::class
     ];
 
     public function investments()

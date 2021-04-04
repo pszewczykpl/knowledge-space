@@ -17,7 +17,7 @@ class Note extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => NoteSaved::class
+        'saved' => NoteSaved::class
     ];
 
     public function investments()

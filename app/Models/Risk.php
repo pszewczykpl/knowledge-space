@@ -21,7 +21,7 @@ class Risk extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => RiskSaved::class
+        'saved' => RiskSaved::class
     ];
 
     public function notes()

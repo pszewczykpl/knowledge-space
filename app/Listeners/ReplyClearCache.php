@@ -28,5 +28,6 @@ class ReplyClearCache
     public function handle(ReplySaved $event)
     {
         Cache::forget('replies_' . $event->reply->id);
+        Cache::tags('replies')->flush();
     }
 }

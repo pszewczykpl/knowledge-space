@@ -28,5 +28,6 @@ class FundClearCache
     public function handle(FundSaved $event)
     {
         Cache::forget('funds_' . $event->fund->id);
+        Cache::tags('funds')->flush();
     }
 }

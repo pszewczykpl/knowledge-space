@@ -28,5 +28,6 @@ class EmployeeClearCache
     public function handle(EmployeeSaved $event)
     {
         Cache::forget('employees_' . $event->employee->id);
+        Cache::tags('employees')->flush();
     }
 }

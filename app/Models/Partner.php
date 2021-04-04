@@ -22,7 +22,7 @@ class Partner extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => PartnerSaved::class
+        'saved' => PartnerSaved::class
     ];
 
     public function user()

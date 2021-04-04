@@ -17,7 +17,7 @@ class Reply extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => ReplySaved::class
+        'saved' => ReplySaved::class
     ];
     
     public function user()

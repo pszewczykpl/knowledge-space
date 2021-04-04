@@ -19,7 +19,7 @@ class Department extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => DepartmentSaved::class
+        'saved' => DepartmentSaved::class
     ];
 
     public function users()

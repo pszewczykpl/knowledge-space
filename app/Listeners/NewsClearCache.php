@@ -27,5 +27,6 @@ class NewsClearCache
     public function handle(NewsSaved $event)
     {
         Cache::forget('news_' . $event->news->id);
+        Cache::tags('news')->flush();
     }
 }

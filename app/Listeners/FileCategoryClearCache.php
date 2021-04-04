@@ -28,5 +28,6 @@ class FileCategoryClearCache
     public function handle(FileCategorySaved $event)
     {
         Cache::forget('file_categories_' . $event->fileCategory->id);
+        Cache::tags('file_categories')->flush();
     }
 }

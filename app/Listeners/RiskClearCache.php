@@ -28,5 +28,6 @@ class RiskClearCache
     public function handle(RiskSaved $event)
     {
         Cache::forget('risks_' . $event->risk->id);
+        Cache::tags('risks')->flush();
     }
 }

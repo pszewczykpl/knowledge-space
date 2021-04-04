@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Panels;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Route;
 use App\Models\FileCategory;
@@ -22,7 +23,9 @@ class Files extends Component
      * ZIP filename
      */
     public $name;
+
     public $fileable_type;
+
     public $fileable_id;
     
     /**
@@ -32,8 +35,12 @@ class Files extends Component
      */
     public function __construct($files, $name, $type, $id)
     {
+        $file_categories = Cache::tags([$type,'file_categories', 'files'])->rememberForever($type . '_' . $id . '_file_categories_all', function () use ($files) {
+            return FileCategory::whereIn('id', $files->pluck('file_category_id')->toArray())->get();
+        });
+
         $this->files = $files;
-        $this->file_categories = FileCategory::whereIn('id', $files->pluck('file_category_id')->toArray())->get();
+        $this->file_categories = $file_categories;
         $this->name =  $name;
         $this->fileable_type = $type;
         $this->fileable_id = $id;

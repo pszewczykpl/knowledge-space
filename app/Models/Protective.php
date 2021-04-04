@@ -24,7 +24,7 @@ class Protective extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => ProtectiveSaved::class
+        'saved' => ProtectiveSaved::class
     ];
 
     public function files()

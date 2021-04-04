@@ -24,7 +24,7 @@ class Bancassurance extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => BancassuranceSaved::class
+        'saved' => BancassuranceSaved::class
     ];
 
     public function files()

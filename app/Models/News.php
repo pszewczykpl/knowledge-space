@@ -17,7 +17,7 @@ class News extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => NewsSaved::class
+        'saved' => NewsSaved::class
     ];
 
     public function user()

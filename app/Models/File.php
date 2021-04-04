@@ -21,7 +21,7 @@ class File extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FileSaved::class
+        'saved' => FileSaved::class
     ];
 
     public function investments()

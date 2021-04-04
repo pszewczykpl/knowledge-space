@@ -18,7 +18,7 @@ class Post extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => PostSaved::class
+        'saved' => PostSaved::class
     ];
 
     public function post_category()

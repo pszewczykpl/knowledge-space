@@ -19,7 +19,7 @@ class System extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => SystemSaved::class
+        'saved' => SystemSaved::class
     ];
     
     public function user()

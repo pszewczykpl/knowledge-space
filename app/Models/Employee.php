@@ -20,7 +20,7 @@ class Employee extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => EmployeeSaved::class
+        'saved' => EmployeeSaved::class
     ];
 
     public function files()

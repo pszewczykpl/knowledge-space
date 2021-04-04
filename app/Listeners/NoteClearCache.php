@@ -28,5 +28,6 @@ class NoteClearCache
     public function handle(NoteSaved $event)
     {
         Cache::forget('notes_' . $event->note->id);
+        Cache::tags('notes')->flush();
     }
 }

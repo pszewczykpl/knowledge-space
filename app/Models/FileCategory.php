@@ -18,7 +18,7 @@ class FileCategory extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => FileCategorySaved::class
+        'saved' => FileCategorySaved::class
     ];
 
     public function files()

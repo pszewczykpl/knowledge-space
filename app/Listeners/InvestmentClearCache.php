@@ -28,5 +28,6 @@ class InvestmentClearCache
     public function handle(InvestmentSaved $event)
     {
         Cache::forget('investments_' . $event->investment->id);
+        Cache::tags('investments')->flush();
     }
 }

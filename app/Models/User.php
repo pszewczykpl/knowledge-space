@@ -149,7 +149,7 @@ class User extends Authenticatable
 
     public function hasPermission($code)
     {
-        $permissions = Cache::rememberForever('users_' . $this->id . '_permissions_all', function () {
+        $permissions = Cache::tags(['user', 'permissions'])->rememberForever('users_' . $this->id . '_permissions_all', function () {
             return $this->permissions()->get()->pluck('code')->toArray();
         });
 

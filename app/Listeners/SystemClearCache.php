@@ -28,5 +28,6 @@ class SystemClearCache
     public function handle(SystemSaved $event)
     {
         Cache::forget('systems_' . $event->system->id);
+        Cache::tags('systems')->flush();
     }
 }
