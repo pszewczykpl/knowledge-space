@@ -132,7 +132,7 @@
 										<label class="col-xl-3 col-lg-3 text-right col-form-label">Avatar</label>
 										<div class="col-lg-9 col-xl-9">
 											<div class="image-input image-input-outline image-input-circle" id="kt_user_avatar">
-												<div class="image-input-wrapper" style="background-image: url('@if($user->avatar_path) {{ Storage::url($user->avatar_path) }} @else {{ asset('media/avatars/default.jpg') }} @endif')"></div>
+												<div class="image-input-wrapper" style="background-image: url({{ Storage::url($user->avatar_path ?? 'avatars/default.jpg') }})"></div>
 												<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Zmień avatar">
 													<i class="fa fa-pen icon-sm text-muted"></i>
 													<input type="file" name="avatar" id="avatar" accept=".png, .jpg, .jpeg" />

@@ -27,7 +27,7 @@ class PartnerClearCache
      */
     public function handle(PartnerSaved $event)
     {
-        Cache::forget('partners_' . $event->partner->id);
+        Cache::tags('partner')->forget('partners_' . $event->partner->id);
         Cache::tags('partners')->flush();
     }
 }

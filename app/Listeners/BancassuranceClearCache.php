@@ -27,7 +27,7 @@ class BancassuranceClearCache
      */
     public function handle(BancassuranceSaved $event)
     {
-        Cache::forget('bancassurances_' . $event->bancassurance->id);
+        Cache::tags('bancassurance')->forget('bancassurances_' . $event->bancassurance->id);
         Cache::tags('bancassurances')->flush();
     }
 }

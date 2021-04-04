@@ -113,7 +113,7 @@ class RiskController extends Controller
         return view('risks.edit', [
             'title' => 'Edycja ryzyka ubezpieczeniowego',
             'description' => 'Zaktualizuj dane ryzyka i kliknij Zapisz',
-            'risk' => $risk,
+            'risk' => Risk::findOrFail($risk->id),
         ]);
     }
 

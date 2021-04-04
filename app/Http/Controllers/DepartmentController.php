@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bancassurance;
 use App\Models\Department;
 
 use App\Http\Requests\StoreDepartment;
@@ -94,7 +95,7 @@ class DepartmentController extends Controller
         return view('departments.edit', [
             'title' => 'Edycja departamentu',
             'description' => 'Zaktualizuj dane departamentu i kliknij Zapisz',
-            'department' => $department,
+            'department' => Department::findOrFail($department->id),
         ]);
     }
 

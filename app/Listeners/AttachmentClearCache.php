@@ -27,7 +27,7 @@ class AttachmentClearCache
      */
     public function handle(AttachmentSaved $event)
     {
-        Cache::forget('attachments_' . $event->attachment->id);
+        Cache::tags('attachment')->forget('attachments_' . $event->attachment->id);
         Cache::tags('attachments')->flush();
     }
 }

@@ -27,7 +27,7 @@ class DepartmentClearCache
      */
     public function handle(DepartmentSaved $event)
     {
-        Cache::forget('departments_' . $event->department->id);
+        Cache::tags('department')->forget('departments_' . $event->department->id);
         Cache::tags('departments')->flush();
     }
 }

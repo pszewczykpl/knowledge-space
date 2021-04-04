@@ -109,7 +109,7 @@ class PostController extends Controller
             'title' => 'Edycja artykułu',
             'description' => 'Zaktualizuj dane artykułu i kliknij Zapisz',
             'postCategories' => PostCategory::all(),
-            'post' => $post,
+            'post' => Post::findOrFail($post->id),
         ]);
     }
 

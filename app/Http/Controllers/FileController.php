@@ -145,7 +145,7 @@ class FileController extends Controller
         return view('files.edit', [
             'title' => 'Edycja dokumentu',
             'description' => 'Zaktualizuj dane dokumentu i kliknij Zapisz',
-            'file' => $file,
+            'file' => File::findOrFail($file->id),
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),

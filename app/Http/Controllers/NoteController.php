@@ -118,7 +118,7 @@ class NoteController extends Controller
         return view('notes.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
-            'note' => $note,
+            'note' => Note::findOrFail($note->id),
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),

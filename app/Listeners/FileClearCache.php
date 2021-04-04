@@ -27,7 +27,7 @@ class FileClearCache
      */
     public function handle(FileSaved $event)
     {
-        Cache::forget('files_' . $event->file->id);
+        Cache::tags('file')->forget('files_' . $event->file->id);
         Cache::tags('files')->flush();
     }
 }

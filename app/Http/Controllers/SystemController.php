@@ -94,7 +94,7 @@ class SystemController extends Controller
         return view('systems.edit', [
             'title' => 'Edycja systemu Towarzystwa Ubezpieczeniowego',
             'description' => 'Zaktualizuj dane systemu i kliknij Zapisz',
-            'system' => $system,
+            'system' => System::findOrFail($system->id),
         ]);
     }
 

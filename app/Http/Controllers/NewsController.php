@@ -99,7 +99,7 @@ class NewsController extends Controller
         return view('news.edit', [
             'title' => 'Edycja aktualności',
             'description' => 'Zaktualizuj dane aktualności i kliknij Zapisz',
-            'news' => $news,
+            'news' => News::findOrFail($news->id),
         ]);
     }
 

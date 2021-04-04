@@ -113,7 +113,7 @@ class EmployeeController extends Controller
         return view('products.employees.edit', [
             'title' => 'Edycja produktu pracowniczego',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'employee' => $employee,
+            'employee' => Employee::findOrFail($employee->id),
         ]);
     }
 

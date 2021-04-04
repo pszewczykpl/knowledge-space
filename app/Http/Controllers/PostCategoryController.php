@@ -97,7 +97,7 @@ class PostCategoryController extends Controller
         return view('post-categories.edit', [
             'title' => 'Edycja kategorii artykułów',
             'description' => 'Zaktualizuj dane kategorii artykułów i kliknij Zapisz',
-            'post_category' => $postCategory,
+            'post_category' => PostCategory::findOrFail($postCategory->id),
         ]);
     }
 

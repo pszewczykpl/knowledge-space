@@ -27,7 +27,7 @@ class PostClearCache
      */
     public function handle(PostSaved $event)
     {
-        Cache::forget('posts_' . $event->post->id);
+        Cache::tags('post')->forget('posts_' . $event->post->id);
         Cache::tags('posts')->flush();
     }
 }

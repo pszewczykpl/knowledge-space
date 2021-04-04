@@ -112,7 +112,7 @@ class PartnerController extends Controller
         return view('partners.edit', [
             'title' => 'Edycja partnera',
             'description' => 'Zaktualizuj dane partnera i kliknij Zapisz',
-            'partner' => $partner,
+            'partner' => Partner::findOrFail($partner->id),
         ]);
     }
 

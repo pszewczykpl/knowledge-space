@@ -114,7 +114,7 @@ class BancassuranceController extends Controller
         return view('products.bancassurances.edit', [
             'title' => 'Edycja produktu bancassurance',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'bancassurance' => $bancassurance,
+            'bancassurance' => Bancassurance::findOrFail($bancassurance->id),
         ]);
     }
 

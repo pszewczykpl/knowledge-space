@@ -120,7 +120,7 @@ class InvestmentController extends Controller
         return view('products.investments.edit', [
             'title' => 'Edycja produktu inwestycyjnego',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'investment' => $investment,
+            'investment' => Investment::findOrFail($investment->id),
         ]);
     }
 

@@ -116,7 +116,7 @@ class FundController extends Controller
         return view('funds.edit', [
             'title' => 'Edycja funduszu UFK',
             'description' => 'Zaktualizuj dane funduszu i kliknij Zapisz',
-            'fund' => $fund,
+            'fund' => Fund::findOrFail($fund->id),
             'investments' => Investment::all(),
         ]);
     }

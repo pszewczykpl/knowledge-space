@@ -97,7 +97,7 @@ class FileCategoryController extends Controller
         return view('file-categories.edit', [
             'title' => 'Edycja kategorii dokumentów',
             'description' => 'Zaktualizuj dane kategorii dokumentów i kliknij Zapisz',
-            'file_category' => $fileCategory,
+            'file_category' => FileCategory::findOrFail($fileCategory->id)
         ]);
     }
 

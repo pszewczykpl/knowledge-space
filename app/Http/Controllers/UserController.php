@@ -110,7 +110,7 @@ class UserController extends Controller
         return view('users.edit', [
             'title' => 'Edycja pracownika',
             'description' => 'Zaktualizuj dane pracownika i kliknij Zapisz',
-            'user' => $user,
+            'user' => User::findOrFail($user->id),
             'departments' => Department::all(),
             'permissions' => Permission::all(),
         ]);

@@ -27,7 +27,7 @@ class PostCategoryClearCache
      */
     public function handle(PostCategorySaved $event)
     {
-        Cache::forget('post_categories_' . $event->postCategory->id);
+        Cache::tags('post_category')->forget('post_categories_' . $event->postCategory->id);
         Cache::tags('post_categories')->flush();
     }
 }

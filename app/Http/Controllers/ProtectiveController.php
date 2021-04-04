@@ -113,7 +113,7 @@ class ProtectiveController extends Controller
         return view('products.protectives.edit', [
             'title' => 'Edycja produktu ochronnego',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'protective' => $protective,
+            'protective' => Protective::findOrFail($protective->id),
         ]);
     }
 
