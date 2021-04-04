@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\FundUpdate;
+use App\Events\FundUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class FundClearCache
 {
@@ -21,11 +22,11 @@ class FundClearCache
     /**
      * Handle the event.
      *
-     * @param  FundUpdate  $event
+     * @param  FundUpdated  $event
      * @return void
      */
-    public function handle(FundUpdate $event)
+    public function handle(FundUpdated $event)
     {
-        //
+        Cache::forget('funds_' . $event->fund->id);
     }
 }

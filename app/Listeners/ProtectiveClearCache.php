@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\ProtectiveUpdate;
+use App\Events\ProtectiveUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class ProtectiveClearCache
 {
@@ -21,11 +22,11 @@ class ProtectiveClearCache
     /**
      * Handle the event.
      *
-     * @param  ProtectiveUpdate  $event
+     * @param  ProtectiveUpdated  $event
      * @return void
      */
-    public function handle(ProtectiveUpdate $event)
+    public function handle(ProtectiveUpdated $event)
     {
-        //
+        Cache::forget('protectives_' . $event->protective->id);
     }
 }

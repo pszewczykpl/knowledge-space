@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\FileCategoryUpdate;
+use App\Events\FileCategoryUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class FileCategoryClearCache
 {
@@ -21,11 +22,11 @@ class FileCategoryClearCache
     /**
      * Handle the event.
      *
-     * @param  FileCategoryUpdate  $event
+     * @param  FileCategoryUpdated  $event
      * @return void
      */
-    public function handle(FileCategoryUpdate $event)
+    public function handle(FileCategoryUpdated $event)
     {
-        //
+        Cache::forget('file_categories_' . $event->fileCategory->id);
     }
 }

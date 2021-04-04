@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\UserUpdate;
+use App\Events\UserUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class UserClearCache
 {
@@ -21,11 +22,11 @@ class UserClearCache
     /**
      * Handle the event.
      *
-     * @param  UserUpdate  $event
+     * @param  UserUpdated  $event
      * @return void
      */
-    public function handle(UserUpdate $event)
+    public function handle(UserUpdated $event)
     {
-        //
+        Cache::forget('users_' . $event->user->id);
     }
 }

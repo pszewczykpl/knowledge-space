@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\PostUpdate;
+use App\Events\PostUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class PostClearCache
 {
@@ -21,11 +22,11 @@ class PostClearCache
     /**
      * Handle the event.
      *
-     * @param  PostUpdate  $event
+     * @param  PostUpdated  $event
      * @return void
      */
-    public function handle(PostUpdate $event)
+    public function handle(PostUpdated $event)
     {
-        //
+        Cache::forget('posts_' . $event->post->id);
     }
 }

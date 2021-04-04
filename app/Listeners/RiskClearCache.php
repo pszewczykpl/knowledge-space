@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\RiskUpdate;
+use App\Events\RiskUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class RiskClearCache
 {
@@ -21,11 +22,11 @@ class RiskClearCache
     /**
      * Handle the event.
      *
-     * @param  RiskUpdate  $event
+     * @param  RiskUpdated  $event
      * @return void
      */
-    public function handle(RiskUpdate $event)
+    public function handle(RiskUpdated $event)
     {
-        //
+        Cache::forget('risks_' . $event->risk->id);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\InvestmentUpdate;
+use App\Events\InvestmentUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class InvestmentClearCache
 {
@@ -21,11 +22,11 @@ class InvestmentClearCache
     /**
      * Handle the event.
      *
-     * @param  InvestmentUpdate  $event
+     * @param  InvestmentUpdated  $event
      * @return void
      */
-    public function handle(InvestmentUpdate $event)
+    public function handle(InvestmentUpdated $event)
     {
-        //
+        Cache::forget('investments_' . $event->investment->id);
     }
 }

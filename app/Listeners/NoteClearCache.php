@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\NoteUpdate;
+use App\Events\NoteUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Cache;
 
 class NoteClearCache
 {
@@ -21,11 +22,11 @@ class NoteClearCache
     /**
      * Handle the event.
      *
-     * @param  NoteUpdate  $event
+     * @param  NoteUpdated  $event
      * @return void
      */
-    public function handle(NoteUpdate $event)
+    public function handle(NoteUpdated $event)
     {
-        //
+        Cache::forget('notes_' . $event->note->id);
     }
 }
