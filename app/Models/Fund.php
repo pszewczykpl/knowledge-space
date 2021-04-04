@@ -6,6 +6,7 @@ use App\Events\FundSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Fund extends Model
 {
@@ -45,5 +46,12 @@ class Fund extends Model
     public function extended_name()
     {
         return $this->name . ' (' . $this->code . ')';
+    }
+
+    public function get_notes()
+    {
+        return Cache::tags(['fund', 'notes', 'users'])->rememberForever('funds_' . $this->id . '_notes_all', function () {
+            return $this->notes()->with('user')->get();
+        });
     }
 }

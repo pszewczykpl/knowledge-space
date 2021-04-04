@@ -135,7 +135,7 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane active" id="notes" role="tabpanel">
-							<x-panels.notes :notes="$partner->notes" -type="partner" :id="$partner->id"  />
+							<x-panels.notes :notes="$partner->get_notes()" -type="partner" :id="$partner->id"  />
 						</div>
 					</div>
 				</div>

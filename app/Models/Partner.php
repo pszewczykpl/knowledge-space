@@ -6,6 +6,7 @@ use App\Events\PartnerSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Partner extends Model
 {
@@ -33,5 +34,12 @@ class Partner extends Model
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    public function get_notes()
+    {
+        return Cache::tags(['partner', 'notes', 'users'])->rememberForever('partners_' . $this->id . '_notes_all', function () {
+            return $this->notes()->with('user')->get();
+        });
     }
 }

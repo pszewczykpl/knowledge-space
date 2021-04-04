@@ -134,7 +134,7 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane active" id="notes" role="tabpanel">
-							<x-panels.notes :notes="$risk->notes" -type="risk" :id="$risk->id"  />
+							<x-panels.notes :notes="$risk->get_notes()" -type="risk" :id="$risk->id"  />
 						</div>
 					</div>
 				</div>

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\UserUpdated;
+use App\Events\UserSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

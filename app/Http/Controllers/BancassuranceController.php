@@ -8,6 +8,7 @@ use App\Http\Requests\StoreBancassurance;
 use App\Http\Requests\UpdateBancassurance;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -62,9 +63,9 @@ class BancassuranceController extends Controller
         $this->authorize('create', Bancassurance::class);
         
         $bancassurance = new Bancassurance($request->all());
-        Auth::user()->bancassurance()->save($bancassurance);
+        Auth::user()->bancassurances()->save($bancassurance);
 
-        return redirect()->route('bancassurance.show', $bancassurance->id)->with('notify_success', 'Nowy produkt bancassurance został dodany!');
+        return redirect()->route('bancassurances.show', $bancassurance->id)->with('notify_success', 'Nowy produkt bancassurance został dodany!');
     }
 
     /**
@@ -83,7 +84,7 @@ class BancassuranceController extends Controller
         $clone->files()->attach($bancassurance->files);
         $clone->notes()->attach($bancassurance->notes);
 
-        return redirect()->route('bancassurance.show', $clone->id)->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
+        return redirect()->route('bancassurances.show', $clone->id)->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
     }
 
     /**
@@ -129,7 +130,7 @@ class BancassuranceController extends Controller
         $this->authorize('update', $bancassurance);
         $bancassurance->update($request->all());
 
-        return redirect()->route('bancassurance.show', $bancassurance->id)->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
+        return redirect()->route('bancassurances.show', $bancassurance->id)->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
     }
 
     /**
@@ -143,7 +144,7 @@ class BancassuranceController extends Controller
         $this->authorize('delete', $bancassurance);
         $bancassurance->delete();
 
-        return redirect()->route('bancassurance.index')->with('notify_danger', 'Produkt bancassurance został usunięty!');
+        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został usunięty!');
     }
     
     /**
@@ -159,7 +160,7 @@ class BancassuranceController extends Controller
         $this->authorize('restore', $bancassurance);
         $bancassurance->restore();
 
-        return redirect()->route('bancassurance.index')->with('notify_danger', 'Produkt bancassurance został przywrócony!');
+        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został przywrócony!');
     }
 
     /**
@@ -176,6 +177,6 @@ class BancassuranceController extends Controller
         
         $bancassurance->forceDelete();
 
-        return redirect()->route('bancassurance.index')->with('notify_danger', 'Produkt bancassurance został trwale usunięty!');
+        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został trwale usunięty!');
     }
 }

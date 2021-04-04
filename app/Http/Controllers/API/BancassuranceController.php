@@ -6,6 +6,7 @@ use App\Models\Bancassurance;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
 use App\Http\Controllers\Controller;
@@ -60,9 +61,13 @@ class BancassuranceController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['bancassurances'])->rememberForever('bancassurances_count', function () {
+            return Bancassurance::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Bancassurance::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

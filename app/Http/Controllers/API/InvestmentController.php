@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Bancassurance;
 use App\Models\Investment;
 use App\Models\Fund;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
 use App\Http\Controllers\Controller;
@@ -55,9 +57,13 @@ class InvestmentController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['investments'])->rememberForever('investments_count', function () {
+            return Investment::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Investment::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );

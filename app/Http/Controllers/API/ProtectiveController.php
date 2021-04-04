@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Bancassurance;
 use App\Models\Protective;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
 use App\Http\Controllers\Controller;
@@ -60,9 +62,13 @@ class ProtectiveController extends Controller
         ->offset($_POST['start'])
         ->get();
 
+        $records_total = Cache::tags(['protectives'])->rememberForever('protectives_count', function () {
+            return Protective::count();
+        });
+
         $json_data = array(
             "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => Protective::count(),
+            "recordsTotal"    => $records_total,
             "recordsFiltered" => $filtered,
             "data"            => $records
         );
