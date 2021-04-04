@@ -45,7 +45,6 @@
 						<span class="menu-text font-weight-light">Szukaj</span>
 					</a>
                 </li>
-				@can('viewany', App\Models\News::class)
 				<li class="menu-item {{ (request()->routeIs('news.*')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
 					<a href="{{ route('news.index') }}" class="menu-link">
 						<span class="svg-icon menu-icon svg-icon-primary">
@@ -60,7 +59,6 @@
 						<span class="menu-text font-weight-light">Aktualności</span>
 					</a>
                 </li>
-				@endcan
 				<li class="menu-section">
 					<h4 class="menu-text">Archiwum produktowe</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>

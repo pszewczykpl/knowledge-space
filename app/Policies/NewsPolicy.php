@@ -18,11 +18,7 @@ class NewsPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasPermission('news-viewany')) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -34,11 +30,7 @@ class NewsPolicy
      */
     public function view(User $user, News $news)
     {
-        if($user->hasPermission('news-view')) {
-            return true;
-        }
-
-        return $user->id === $news->user_id;
+        return true;
     }
 
     /**

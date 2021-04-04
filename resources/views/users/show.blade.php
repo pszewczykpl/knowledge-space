@@ -53,30 +53,27 @@
 			@if(Auth::user()->can('create', App\Models\News::class) and $user->id == Auth::user()->id)
 				<x-cards.news-store />
 			@endif
-			@if($user->news->count() == 0)
-			<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
-				@if($user->id == Auth::user()->id)
-				<div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
-				@else
-				<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
-				@endif
-			</div>
-			@else
-				@foreach($user->news()->orderBy('created_at', 'desc')->withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->get()->take(20) as $new)
-				<x-cards.news :news="$new" />
-				@endforeach
-			@endif
-			@can('viewany', App\Models\News::class)
-            <div class="text-center">
-				<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm mt-3 py-3 px-14">Przejdź do Aktualności</a>
-			</div>
-			@endcan
 			@endauth
-			@guest
-			<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
-                <div class="alert-text">Aby przeglądać aktualności użytkowników <a href="{{ route('login') }}">Zaloguj się</a>.</div>
-			</div>
-			@endguest
+				@if($user->news->count() == 0)
+					<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
+						@auth
+						@if($user->id == Auth::user()->id)
+							<div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
+						@else
+							<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+						@endif
+						@else
+							<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+							@endauth
+					</div>
+				@else
+					@foreach($user->news()->orderBy('created_at', 'desc')->get()->take(20) as $new)
+						<x-cards.news :news="$new" />
+					@endforeach
+				@endif
+				<div class="text-center">
+						<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm mt-3 py-3 px-14">Przejdź do Aktualności</a>
+					</div>
         </div>
     </div>
 </div>

@@ -1,4 +1,3 @@
-@can('view', $news)
 <div class="card card-custom gutter-b @if($news->trashed()) bg-danger @endif">
 	<div class="card-body">
 		<div>
@@ -42,14 +41,12 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
                             <ul class="navi navi-hover flex-column">
 								@if(!$news->trashed())
-									@can('view', $news)
 									<li class="navi-item">
 										<a href="{{ route('news.show', $news->id) }}" class="navi-link">
 											<i class="navi-icon flaticon2-expand"></i>
 											<span class="navi-text">Wyświetl</span>
 										</a>
 									</li>
-									@endcan
 									@can('update', $news)
 									<li class="navi-item">
 										<a href="{{ route('news.edit', $news->id) }}" class="navi-link">
@@ -107,11 +104,11 @@
 								</g>
 							</svg>
 						</span>
-						{{ $news->replies->count() }}
+						{{ $news->get_replies()->count() }}
 					</span>
 				</div>
 				
-				@foreach($news->replies()->withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->get() as $reply)
+				@foreach($news->get_replies() as $reply)
 					<div class="d-flex py-5">
 						<div class="symbol symbol-40 symbol-white mr-5 mt-1">
 							<span class="symbol-label" style="background-image:url({{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }})"></span>
@@ -163,6 +160,7 @@
 				@endforeach
 			</div>
 		</div>
+		@auth
 		@if(!$news->trashed() and Auth::user()->can('create', App\Models\Reply::class))
 		<div class="separator separator-solid mt-5 mb-4"></div>
 		{!! Form::open(['route' => 'replies.store', 'method' => 'post', 'class' => 'position-relative']) !!}
@@ -173,6 +171,6 @@
 			</div>
 		{!! Form::close() !!}
 		@endif
+			@endauth
 	</div>
 </div>
-@endcan

@@ -6,6 +6,7 @@ use App\Events\NewsSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class News extends Model
 {
@@ -28,5 +29,12 @@ class News extends Model
     public function replies()
     {
         return $this->hasMany('App\Models\Reply');
+    }
+
+    public function get_replies()
+    {
+        return Cache::tags(['news', 'replies', 'users'])->rememberForever('news_' . $this->id . '_replies_all', function () {
+            return $this->replies()->with('user')->get();
+        });
     }
 }

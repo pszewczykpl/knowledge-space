@@ -23,7 +23,7 @@ class NewsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
     
     /**
@@ -33,9 +33,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewany', News::class);
-
-        $news = News::withTrashed(Auth::user()->hasPermission('view-deleted') ?? false)->orderBy('created_at', 'desc');
+        $news = News::orderBy('created_at', 'desc');
 
         return view('news.index', [
             'title' => 'Aktualności',
@@ -82,8 +80,6 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        $this->authorize('view', $news);
-
         return view('news.show', [
             'title' => 'Aktualność',
             'news' => $news,
