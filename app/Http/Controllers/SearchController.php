@@ -84,45 +84,53 @@ class SearchController extends Controller
          * Return Employees
          * TODO: search by  name code_owu edit_date status
          */
-        // $employees = \App\Models\Protective
+        $employees = \App\Models\Employee::select('*')
+            ->where('name', 'like', '%' . $value . '%')
+            ->orWhere('code_owu', 'like', '%' . $value . '%')
+            ->take(25)
+            ->get();
 
         /**
          * Return Bancassurances
          * TODO: search by  name code dist_short dist code_owu subscription edit_date status
          */
-        // $bancassurances = \App\Models\Protective
+        $bancassurances = \App\Models\Bancassurance::select('*')
+            ->where('name', 'like', '%' . $value . '%')
+            ->orWhere('code', 'like', '%' . $value . '%')
+            ->orWhere('code_owu', 'like', '%' . $value . '%')
+            ->take(25)
+            ->get();
 
         /**
          * Return Protectives
-         * TODO: search by  name code dist_short dist code_owu subscription edit_date status
+         * search by  name code dist_short dist code_owu subscription edit_date status
          */
         $protectives = \App\Models\Protective::select('*')
-            // code_owu search
-            ->where('code_owu', 'like', '%' . $request->value . '%')
-            // code_toil search
-            ->orWhere('code', 'like', '%' . $request->value . '%')
-            ->orWhere('name', 'like', '%' . $request->value . '%')
-            ->paginate(20)
-            ->withQueryString();
+            ->where('name', 'like', '%' . $value . '%')
+            ->orWhere('code', 'like', '%' . $value . '%')
+            ->orWhere('code_owu', 'like', '%' . $value . '%')
+            ->take(25)
+            ->get();
 
         /**
          * Return Investments
-         * TODO: search by  group name code dist_short dist code_owu code_toil edit_date type status
+         * search by  group name code dist_short dist code_owu code_toil edit_date type status
          */
         $investments = \App\Models\Investment::select('*')
-            // code_owu search
-            ->where('code_owu', 'like', '%' . $value . '%')
-            // code_toil search
+            ->where('name', 'like', '%' . $value . '%')
+            ->orWhere('code', 'like', '%' . $value . '%')
+            ->orWhere('code_owu', 'like', '%' . $value . '%')
             ->orWhere('code_toil', 'like', '%' . $value . '%')
-            ->orWhere('name', 'like', '%' . $value . '%')
-            ->paginate(20)
-            ->withQueryString();
+            ->take(25)
+            ->get();
 
         return view('search.results', [
             'title' => 'Wyniki wyszukiwania',
             'value' => $value,
             'investments' => $investments,
             'protectives' => $protectives,
+            'bancassurances' => $bancassurances,
+            'employees' => $employees,
         ]);
     }
 }
