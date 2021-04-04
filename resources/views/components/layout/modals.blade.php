@@ -8,7 +8,7 @@
 				</h5>							
 			</div>
 			<div class="modal-body text-center">
-				<div style="padding-bottom: 10px;">
+				<div style="padding-bottom: 20px;">
 					Wprowadź datę rozpoczęcia Polisy/Ubezpieczenia, a następnie wybierz Oblicz. Kalkulator pokażę w którym miesiącu oraz roku polisowym znajduje się Ubezpieczenia.
 				</div>
 				<div class="form-group m-form__group row">
@@ -41,14 +41,14 @@
 						</div>
 					</div>
 				</div>
-    			<div style="padding-top: 10px;">
+    			<div style="padding-top: 10px; font-size: 15px" class="alert alert-light" role="alert">
     			    Rok polisowy: <span id="rok"></span><br/>
     			    Miesiąc polisowy: <span id="miesiac"></span><br/>
     			</div>
     		</div>
 			<div class="modal-footer" style="border: 0px; padding-top: 0px;">
-				<button type="button" class="btn m-btn--pill m-btn--air btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder" data-dismiss="modal">Wyjdź</button>
-				<button type="button" class="btn m-btn--pill m-btn--air m-btn m-btn--custom btn-outline-brand active" onclick="policyCalcFunc()">Oblicz</button>
+				<button type="button" class="btn btn-text-dark btn-hover-light-dark mr-2" data-dismiss="modal">Wyjdź</button>
+				<button type="button" class="btn btn-primary btn-shadow font-weight-bold mr-2" onclick="policyCalcFunc()">Oblicz</button>
 			</div>
 		</div>
 	</div>
