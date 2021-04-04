@@ -30,7 +30,6 @@ class PermissionController extends Controller
     {
         return view('permissions.index', [
             'title' => 'Uprawnienia systemowe',
-            'permissions' => Permission::all(),
         ]);
     }
 }

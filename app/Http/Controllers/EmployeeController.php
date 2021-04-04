@@ -33,7 +33,6 @@ class EmployeeController extends Controller
     {
         return view('products.employees.index', [
             'title' => 'Ubezpieczenia Pracownicze',
-            'employees' => Employee::all(),
         ]);
     }
 

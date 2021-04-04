@@ -20,7 +20,7 @@ class BancassuranceController extends Controller
     /**
      * Display a listing of the resource for datatables.net plugin
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function datatables(Request $request)
     {
@@ -76,7 +76,7 @@ class BancassuranceController extends Controller
      * @param App\Bancassurance $id
      * @param array $extensions
      * 
-     * @return redirect App\Http\Controllers\API\FilesController@zipFiles
+     * @return \Illuminate\Http\RedirectResponse App\Http\Controllers\API\FilesController@zipFiles
      */
     public function zip_files($id)
     {

@@ -38,7 +38,6 @@ class UserController extends Controller
         
         return view('users.index', [
             'title' => 'Pracownicy',
-            'users' => User::all(),
         ]);
     }
 

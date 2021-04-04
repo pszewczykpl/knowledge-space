@@ -34,7 +34,6 @@ class InvestmentController extends Controller
     {
         return view('products.investments.index', [
             'title' => 'Ubezpieczenia Inwestycyjne',
-            'investments' => Investment::all(),
         ]);
     }
     

@@ -33,7 +33,6 @@ class SystemController extends Controller
     {
         return view('systems.index', [
             'title' => 'Systemy Towarzystwa Ubezpieczeń',
-            'systems' => System::all(),
         ]);
     }
 

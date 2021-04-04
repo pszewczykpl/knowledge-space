@@ -34,7 +34,6 @@ class FundController extends Controller
     {
         return view('funds.index', [
             'title' => 'Ubezpieczeniowe Fundusze Kapitałowe',
-            'funds' => Fund::all(),
         ]);
     }
 

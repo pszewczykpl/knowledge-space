@@ -33,7 +33,6 @@ class ProtectiveController extends Controller
     {
         return view('products.protectives.index', [
             'title' => 'Ubezpieczenia Ochronne',
-            'protectives' => Protective::all(),
         ]);
     }
 

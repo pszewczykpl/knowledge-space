@@ -33,7 +33,6 @@ class DepartmentController extends Controller
         
         return view('departments.index', [
             'title' => 'Departamenty',
-            'department' => Department::all(),
         ]);
     }
 

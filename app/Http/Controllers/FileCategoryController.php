@@ -35,7 +35,6 @@ class FileCategoryController extends Controller
 
         return view('file-categories.index', [
             'title' => 'Kategorie dokumentów',
-            'file_categories' => FileCategory::all(),
         ]);
     }
 

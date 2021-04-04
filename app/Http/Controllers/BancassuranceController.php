@@ -33,7 +33,6 @@ class BancassuranceController extends Controller
     {
         return view('products.bancassurances.index', [
             'title' => 'Ubezpieczenia Bancassurance',
-            'bancassurance' => Bancassurance::all(),
         ]);
     }
 

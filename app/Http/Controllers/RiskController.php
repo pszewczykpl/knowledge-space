@@ -33,7 +33,6 @@ class RiskController extends Controller
     {
         return view('risks.index', [
             'title' => 'Ryzyka ubezpieczeniowe',
-            'risks' => Risk::all(),
         ]);
     }
 

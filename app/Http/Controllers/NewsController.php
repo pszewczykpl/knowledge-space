@@ -46,7 +46,7 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -62,7 +62,7 @@ class NewsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreNews $request)
     {
@@ -118,8 +118,6 @@ class NewsController extends Controller
     {
         $this->authorize('update', $news);
         $news->update($request->all());
-
-        Cache::forget('news_' . $news->id);
 
         return redirect()->route('news.show', $news->id)->with('notify_success', 'Dane aktualności zostały zaktualizowane!');
     }

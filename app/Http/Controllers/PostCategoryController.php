@@ -35,7 +35,6 @@ class PostCategoryController extends Controller
 
         return view('post-categories.index', [
             'title' => 'Kategorie artykułów',
-            'post_categories' => PostCategory::all(),
         ]);
     }
 

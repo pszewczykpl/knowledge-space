@@ -33,7 +33,6 @@ class PartnerController extends Controller
     {
         return view('partners.index', [
             'title' => 'Partnerzy',
-            'partners' => Partner::all(),
         ]);
     }
 
