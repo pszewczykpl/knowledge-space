@@ -41,6 +41,8 @@ class SearchController extends Controller
      */
     public function search(Search $request, string $scope)
     {
+        $value = trim($request->value);
+
         // MAYBE TO DO: departments, users, file categories, files, notes, replies, permissions, post categories, attachments
         /**
          * Return Systems
@@ -109,16 +111,16 @@ class SearchController extends Controller
          */
         $investments = \App\Models\Investment::select('*')
             // code_owu search
-            ->where('code_owu', 'like', '%' . $request->value . '%')
+            ->where('code_owu', 'like', '%' . $value . '%')
             // code_toil search
-            ->orWhere('code_toil', 'like', '%' . $request->value . '%')
-            ->orWhere('name', 'like', '%' . $request->value . '%')
+            ->orWhere('code_toil', 'like', '%' . $value . '%')
+            ->orWhere('name', 'like', '%' . $value . '%')
             ->paginate(20)
             ->withQueryString();
 
         return view('search.results', [
             'title' => 'Wyniki wyszukiwania',
-            'value' => $request->value,
+            'value' => $value,
             'investments' => $investments,
             'protectives' => $protectives,
         ]);

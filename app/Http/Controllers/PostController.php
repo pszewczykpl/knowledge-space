@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,17 +35,22 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+
         if(($request->category ?? null) === null) {
-            $posts = Post::withTrashed($user ? $user->hasPermission('view-deleted') : false)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::with('user', 'post_category')->withTrashed($user ? $user->hasPermission('view-deleted') : false)->orderBy('created_at', 'desc')->paginate(10);
         }
         else {
-            $posts = Post::withTrashed($user ? $user->hasPermission('view-deleted') : false)->where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::with('user', 'post_category')->withTrashed($user ? $user->hasPermission('view-deleted') : false)->where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
         }
+
+        $post_categories = Cache::tags(['post_categories'])->rememberForever('post_categories_all', function () {
+            return PostCategory::all();
+        });
 
         return view('posts.index', [
             'title' => 'Artykuły',
             'posts' => $posts,
-            'postCategories' => PostCategory::all(),
+            'postCategories' => $post_categories,
         ]);
     }
 
