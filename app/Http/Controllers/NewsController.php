@@ -33,7 +33,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::orderBy('created_at', 'desc');
+        $news = News::with('user')->orderBy('created_at', 'desc');
 
         return view('news.index', [
             'title' => 'Aktualności',
