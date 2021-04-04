@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\NewsUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,10 @@ class News extends Model
     
     protected $fillable = [
         'content',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => NewsUpdated::class
     ];
 
     public function user()
