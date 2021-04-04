@@ -193,10 +193,10 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$investment->getNotes()" -type="investment" :id="$investment->id"  />
+							<x-panels.notes :notes="$investment->get_notes()" -type="investment" :id="$investment->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$investment->getFiles()" :name="$investment->extended_name()" -type="investment" :id="$investment->id" />
+							<x-panels.files :files="$investment->get_files()" :name="$investment->extended_name()" -type="investment" :id="$investment->id" />
 						</div>
 						<div class="tab-pane" id="funds" role="tabpanel">
 							<x-panels.funds :investmentid="$investment->id" />

@@ -175,10 +175,10 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$bancassurance->notes" -type="bancassurance" :id="$bancassurance->id"  />
+							<x-panels.notes :notes="$bancassurance->get_notes()" -type="bancassurance" :id="$bancassurance->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$bancassurance->files" :name="$bancassurance->extended_name()" -type="bancassurance" :id="$bancassurance->id" />
+							<x-panels.files :files="$bancassurance->get_files()" :name="$bancassurance->extended_name()" -type="bancassurance" :id="$bancassurance->id" />
 						</div>
 					</div>
 				</div>

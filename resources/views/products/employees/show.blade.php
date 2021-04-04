@@ -171,10 +171,10 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$employee->notes" -type="employee" :id="$employee->id"  />
+							<x-panels.notes :notes="$employee->get_notes()" -type="employee" :id="$employee->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$employee->files" :name="$employee->extended_name()" -type="employee" :id="$employee->id" />
+							<x-panels.files :files="$employee->get_files()" :name="$employee->extended_name()" -type="employee" :id="$employee->id" />
 						</div>
 					</div>
 				</div>

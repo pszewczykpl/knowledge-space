@@ -6,6 +6,7 @@ use App\Events\EmployeeSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Employee extends Model
 {
@@ -41,5 +42,19 @@ class Employee extends Model
     public function extended_name()
     {
         return $this->name . ' od ' . $this->edit_date;
+    }
+
+    public function get_files()
+    {
+        return Cache::tags(['employee', 'files', 'users'])->rememberForever('employees_' . $this->id . '_files_all', function () {
+            return $this->files()->with('user')->get();
+        });
+    }
+
+    public function get_notes()
+    {
+        return Cache::tags(['employee', 'notes', 'users'])->rememberForever('employees_' . $this->id . '_notes_all', function () {
+            return $this->notes()->with('user')->get();
+        });
     }
 }
