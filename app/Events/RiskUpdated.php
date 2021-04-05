@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Risk;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class RiskUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $risk;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Risk $risk)
     {
-        //
+        $this->risk = $risk;
     }
 
     /**

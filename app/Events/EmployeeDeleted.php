@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Employee;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class EmployeeDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $employee;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Employee $employee)
     {
-        //
+        $this->employee = $employee;
     }
 
     /**

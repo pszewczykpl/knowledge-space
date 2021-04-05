@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\System;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class SystemDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $system;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(System $system)
     {
-        //
+        $this->system = $system;
     }
 
     /**

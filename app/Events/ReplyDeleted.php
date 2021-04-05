@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Reply;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class ReplyDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $reply;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Reply $reply)
     {
-        //
+        $this->reply = $reply;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\News;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class NewsDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $news;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(News $news)
     {
-        //
+        $this->news = $news;
     }
 
     /**

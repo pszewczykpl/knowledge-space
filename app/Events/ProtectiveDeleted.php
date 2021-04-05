@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Protective;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class ProtectiveDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $protective;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Protective $protective)
     {
-        //
+        $this->protective = $protective;
     }
 
     /**

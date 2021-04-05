@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Attachment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +15,16 @@ class AttachmentDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $attachment;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Attachment $attachment)
     {
-        //
+        $this->attachment = $attachment;
     }
 
     /**
