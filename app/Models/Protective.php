@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\ProtectiveCreated;
+use App\Events\ProtectiveDeleted;
 use App\Events\ProtectiveSaved;
+use App\Events\ProtectiveUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,7 +28,10 @@ class Protective extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => ProtectiveSaved::class
+        'saved' => ProtectiveSaved::class,
+        'created' => ProtectiveCreated::class,
+        'updated' => ProtectiveUpdated::class,
+        'deleted' => ProtectiveDeleted::class,
     ];
 
     public function files()
@@ -41,6 +47,11 @@ class Protective extends Model
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function extended_name()

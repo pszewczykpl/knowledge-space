@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\PartnerCreated;
+use App\Events\PartnerDeleted;
 use App\Events\PartnerSaved;
+use App\Events\PartnerUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,7 +26,10 @@ class Partner extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => PartnerSaved::class
+        'saved' => PartnerSaved::class,
+        'created' => PartnerCreated::class,
+        'updated' => PartnerUpdated::class,
+        'deleted' => PartnerDeleted::class,
     ];
 
     public function user()
@@ -34,6 +40,11 @@ class Partner extends Model
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function get_notes()

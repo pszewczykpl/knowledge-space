@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\InvestmentCreated;
+use App\Events\InvestmentDeleted;
 use App\Events\InvestmentSaved;
+use App\Events\InvestmentUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,7 +30,10 @@ class Investment extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => InvestmentSaved::class
+        'saved' => InvestmentSaved::class,
+        'created' => InvestmentCreated::class,
+        'updated' => InvestmentUpdated::class,
+        'deleted' => InvestmentDeleted::class,
     ];
 
     public function files()
@@ -48,6 +54,11 @@ class Investment extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function extended_name()

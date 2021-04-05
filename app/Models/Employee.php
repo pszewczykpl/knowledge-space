@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\EmployeeCreated;
+use App\Events\EmployeeDeleted;
 use App\Events\EmployeeSaved;
+use App\Events\EmployeeUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +24,10 @@ class Employee extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => EmployeeSaved::class
+        'saved' => EmployeeSaved::class,
+        'created' => EmployeeCreated::class,
+        'updated' => EmployeeUpdated::class,
+        'deleted' => EmployeeDeleted::class,
     ];
 
     public function files()
@@ -37,6 +43,11 @@ class Employee extends Model
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function extended_name()

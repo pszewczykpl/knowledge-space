@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\SystemCreated;
+use App\Events\SystemDeleted;
 use App\Events\SystemSaved;
+use App\Events\SystemUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,11 +23,19 @@ class System extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => SystemSaved::class
+        'saved' => SystemSaved::class,
+        'created' => SystemCreated::class,
+        'updated' => SystemUpdated::class,
+        'deleted' => SystemDeleted::class,
     ];
     
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 }

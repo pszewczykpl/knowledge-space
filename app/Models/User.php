@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\UserCreated;
+use App\Events\UserDeleted;
 use App\Events\UserSaved;
+use App\Events\UserUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,7 +57,10 @@ class User extends Authenticatable
     ];
 
     protected $dispatchesEvents = [
-        'saved' => UserSaved::class
+        'saved' => UserSaved::class,
+        'created' => UserCreated::class,
+        'updated' => UserUpdated::class,
+        'deleted' => UserDeleted::class,
     ];
 
     public function department()
@@ -145,6 +151,11 @@ class User extends Authenticatable
     public function post_categories()
     {
         return $this->hasMany('App\Models\PostCategory');
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function hasPermission($code)

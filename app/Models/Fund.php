@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\FundCreated;
+use App\Events\FundDeleted;
 use App\Events\FundSaved;
+use App\Events\FundUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,7 +28,10 @@ class Fund extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => FundSaved::class
+        'saved' => FundSaved::class,
+        'created' => FundCreated::class,
+        'updated' => FundUpdated::class,
+        'deleted' => FundDeleted::class,
     ];
 
     public function investments()
@@ -41,6 +47,11 @@ class Fund extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function extended_name()

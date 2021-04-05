@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\BancassuranceCreated;
+use App\Events\BancassuranceDeleted;
 use App\Events\BancassuranceSaved;
+use App\Events\BancassuranceUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,7 +28,10 @@ class Bancassurance extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => BancassuranceSaved::class
+        'saved' => BancassuranceSaved::class,
+        'created' => BancassuranceCreated::class,
+        'updated' => BancassuranceUpdated::class,
+        'deleted' => BancassuranceDeleted::class,
     ];
 
     public function files()
@@ -41,6 +47,11 @@ class Bancassurance extends Model
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 
     public function extended_name()

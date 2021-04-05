@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\ReplyCreated;
+use App\Events\ReplyDeleted;
 use App\Events\ReplySaved;
+use App\Events\ReplyUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +20,10 @@ class Reply extends Model
     ];
 
     protected $dispatchesEvents = [
-        'saved' => ReplySaved::class
+        'saved' => ReplySaved::class,
+        'created' => ReplyCreated::class,
+        'updated' => ReplyUpdated::class,
+        'deleted' => ReplyDeleted::class,
     ];
     
     public function user()
@@ -28,5 +34,10 @@ class Reply extends Model
     public function news()
     {
         return $this->belongsTo('App\Models\News');
+    }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'eventable');
     }
 }
