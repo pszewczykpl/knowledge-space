@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class InvestmentEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Investment deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleInvestmentCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->investment);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Investment deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleInvestmentUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->investment);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Investment saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleInvestmentSaved($event) {
         Cache::tags('investment')->forget('investments_' . $event->investment->id);
         Cache::tags('investments')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Investment deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleInvestmentDeleted($event) {
         Cache::tags('investment')->forget('investments_' . $event->investment->id);
         Cache::tags('investments')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->investment);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\InvestmentCreated',
+            [InvestmentEventSubscriber::class, 'handleInvestmentCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\InvestmentUpdated',
+            [InvestmentEventSubscriber::class, 'handleInvestmentUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\InvestmentSaved',
+            [InvestmentEventSubscriber::class, 'handleInvestmentSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\InvestmentDeleted',
+            [InvestmentEventSubscriber::class, 'handleInvestmentDeleted']
         );
     }
 }

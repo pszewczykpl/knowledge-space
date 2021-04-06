@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class BancassuranceEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Bancassurance deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleBancassuranceCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->bancassurance);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Bancassurance deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleBancassuranceUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->bancassurance);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Bancassurance saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleBancassuranceSaved($event) {
         Cache::tags('bancassurance')->forget('bancassurances_' . $event->bancassurance->id);
         Cache::tags('bancassurances')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Bancassurance deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleBancassuranceDeleted($event) {
         Cache::tags('bancassurance')->forget('bancassurances_' . $event->bancassurance->id);
         Cache::tags('bancassurances')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->bancassurance);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\BancassuranceCreated',
+            [BancassuranceEventSubscriber::class, 'handleBancassuranceCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\BancassuranceUpdated',
+            [BancassuranceEventSubscriber::class, 'handleBancassuranceUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\BancassuranceSaved',
+            [BancassuranceEventSubscriber::class, 'handleBancassuranceSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\BancassuranceDeleted',
+            [BancassuranceEventSubscriber::class, 'handleBancassuranceDeleted']
         );
     }
 }

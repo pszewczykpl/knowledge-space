@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class DepartmentEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Department deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleDepartmentCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->department);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Department deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleDepartmentUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->department);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Department saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleDepartmentSaved($event) {
         Cache::tags('department')->forget('departments_' . $event->department->id);
         Cache::tags('departments')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Department deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleDepartmentDeleted($event) {
         Cache::tags('department')->forget('departments_' . $event->department->id);
         Cache::tags('departments')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->department);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\DepartmentCreated',
+            [DepartmentEventSubscriber::class, 'handleDepartmentCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\DepartmentUpdated',
+            [DepartmentEventSubscriber::class, 'handleDepartmentUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\DepartmentSaved',
+            [DepartmentEventSubscriber::class, 'handleDepartmentSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\DepartmentDeleted',
+            [DepartmentEventSubscriber::class, 'handleDepartmentDeleted']
         );
     }
 }

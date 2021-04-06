@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class PartnerEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Partner deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handlePartnerCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->partner);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Partner deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handlePartnerUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->partner);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Partner saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handlePartnerSaved($event) {
         Cache::tags('partner')->forget('partners_' . $event->partner->id);
         Cache::tags('partners')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Partner deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handlePartnerDeleted($event) {
         Cache::tags('partner')->forget('partners_' . $event->partner->id);
         Cache::tags('partners')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->partner);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\PartnerCreated',
+            [PartnerEventSubscriber::class, 'handlePartnerCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\PartnerUpdated',
+            [PartnerEventSubscriber::class, 'handlePartnerUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\PartnerSaved',
+            [PartnerEventSubscriber::class, 'handlePartnerSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\PartnerDeleted',
+            [PartnerEventSubscriber::class, 'handlePartnerDeleted']
         );
     }
 }

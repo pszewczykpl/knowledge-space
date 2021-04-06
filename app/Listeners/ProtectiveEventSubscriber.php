@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class ProtectiveEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Protective deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleProtectiveCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->protective);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Protective deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleProtectiveUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->protective);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Protective saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleProtectiveSaved($event) {
         Cache::tags('protective')->forget('protectives_' . $event->protective->id);
         Cache::tags('protectives')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Protective deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleProtectiveDeleted($event) {
         Cache::tags('protective')->forget('protectives_' . $event->protective->id);
         Cache::tags('protectives')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->protective);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\ProtectiveCreated',
+            [ProtectiveEventSubscriber::class, 'handleProtectiveCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\ProtectiveUpdated',
+            [ProtectiveEventSubscriber::class, 'handleProtectiveUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\ProtectiveSaved',
+            [ProtectiveEventSubscriber::class, 'handleProtectiveSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\ProtectiveDeleted',
+            [ProtectiveEventSubscriber::class, 'handleProtectiveDeleted']
         );
     }
 }

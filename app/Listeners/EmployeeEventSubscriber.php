@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class EmployeeEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Employee deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleEmployeeCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->employee);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Employee deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleEmployeeUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->employee);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Employee saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleEmployeeSaved($event) {
         Cache::tags('employee')->forget('employees_' . $event->employee->id);
         Cache::tags('employees')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Employee deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleEmployeeDeleted($event) {
         Cache::tags('employee')->forget('employees_' . $event->employee->id);
         Cache::tags('employees')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->employee);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\EmployeeCreated',
+            [EmployeeEventSubscriber::class, 'handleEmployeeCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\EmployeeUpdated',
+            [EmployeeEventSubscriber::class, 'handleEmployeeUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\EmployeeSaved',
+            [EmployeeEventSubscriber::class, 'handleEmployeeSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\EmployeeDeleted',
+            [EmployeeEventSubscriber::class, 'handleEmployeeDeleted']
         );
     }
 }

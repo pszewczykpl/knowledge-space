@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class FileCategoryEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle FileCategory deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleFileCategoryCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fileCategory);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle FileCategory deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleFileCategoryUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fileCategory);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle FileCategory saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleFileCategorySaved($event) {
         Cache::tags('file_category')->forget('file_categories_' . $event->fileCategory->id);
         Cache::tags('file_categories')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle FileCategory deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleFileCategoryDeleted($event) {
         Cache::tags('file_category')->forget('file_categories_' . $event->fileCategory->id);
         Cache::tags('file_categories')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fileCategory);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\FileCategoryCreated',
+            [FileCategoryEventSubscriber::class, 'handleFileCategoryCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\FileCategoryUpdated',
+            [FileCategoryEventSubscriber::class, 'handleFileCategoryUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\FileCategorySaved',
+            [FileCategoryEventSubscriber::class, 'handleFileCategorySaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\FileCategoryDeleted',
+            [FileCategoryEventSubscriber::class, 'handleFileCategoryDeleted']
         );
     }
 }

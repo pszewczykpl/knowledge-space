@@ -7,50 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class NoteEventSubscriber
+class FundEventSubscriber
 {
     /**
-     * Handle note deleted events.
+     * Handle Fund deleted events.
      * @param $event
      */
-    public function handleNoteCreated($event) {
+    public function handleFundCreated($event) {
         $event_entry = new Event();
         $event_entry->event = 'created';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fund);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Fund deleted events.
      * @param $event
      */
-    public function handleNoteUpdated($event) {
+    public function handleFundUpdated($event) {
         $event_entry = new Event();
         $event_entry->event = 'updated';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fund);
         Auth::user()->events()->save($event_entry);
     }
 
     /**
-     * Handle note saved events.
+     * Handle Fund saved events.
      * @param $event
      */
-    public function handleNoteSaved($event) {
+    public function handleFundSaved($event) {
         Cache::tags('fund')->forget('funds_' . $event->fund->id);
         Cache::tags('funds')->flush();
     }
 
     /**
-     * Handle note deleted events.
+     * Handle Fund deleted events.
      * @param $event
      */
-    public function handleNoteDeleted($event) {
+    public function handleFundDeleted($event) {
         Cache::tags('fund')->forget('funds_' . $event->fund->id);
         Cache::tags('funds')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
-        $event_entry->eventable()->associate($event->note);
+        $event_entry->eventable()->associate($event->fund);
         Auth::user()->events()->save($event_entry);
     }
 
@@ -63,23 +63,23 @@ class NoteEventSubscriber
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\NoteCreated',
-            [NoteEventSubscriber::class, 'handleNoteCreated']
+            'App\Events\FundCreated',
+            [FundEventSubscriber::class, 'handleFundCreated']
         );
 
         $events->listen(
-            'App\Events\NoteUpdated',
-            [NoteEventSubscriber::class, 'handleNoteUpdated']
+            'App\Events\FundUpdated',
+            [FundEventSubscriber::class, 'handleFundUpdated']
         );
 
         $events->listen(
-            'App\Events\NoteSaved',
-            [NoteEventSubscriber::class, 'handleNoteSaved']
+            'App\Events\FundSaved',
+            [FundEventSubscriber::class, 'handleFundSaved']
         );
 
         $events->listen(
-            'App\Events\NoteDeleted',
-            [NoteEventSubscriber::class, 'handleNoteDeleted']
+            'App\Events\FundDeleted',
+            [FundEventSubscriber::class, 'handleFundDeleted']
         );
     }
 }
