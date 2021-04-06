@@ -36,8 +36,8 @@ class NoteEventSubscriber
      * @param $event
      */
     public function handleNoteSaved($event) {
-        Cache::tags('note')->forget('notes_' . $event->note->id);
-        Cache::tags('notes')->flush();
+        Cache::tags('system')->forget('systems_' . $event->system->id);
+        Cache::tags('systems')->flush();
     }
 
     /**
@@ -45,8 +45,8 @@ class NoteEventSubscriber
      * @param $event
      */
     public function handleNoteDeleted($event) {
-        Cache::tags('note')->forget('notes_' . $event->note->id);
-        Cache::tags('notes')->flush();
+        Cache::tags('system')->forget('systems_' . $event->system->id);
+        Cache::tags('systems')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
