@@ -155,7 +155,7 @@ class User extends Authenticatable
 
     public function events()
     {
-        return $this->morphMany(Event::class, 'eventable');
+        return $this->hasMany('App\Models\Event');
     }
 
     public function hasPermission($code)

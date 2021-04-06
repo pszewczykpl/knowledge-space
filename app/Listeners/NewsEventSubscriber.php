@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class NewsEventSubscriber
@@ -11,7 +13,10 @@ class NewsEventSubscriber
      * @param $event
      */
     public function handleNewsCreated($event) {
-        //
+        $event2 = new Event();
+        $event2->event = 'created';
+        $event2->eventable()->associate($event->news);
+        Auth::user()->events()->save($event2);
     }
 
     /**
