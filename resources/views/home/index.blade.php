@@ -6,7 +6,7 @@
 		<div class="d-flex justify-content-between align-items-top py-7 pt-1">
             <img alt="Logo" src="{{ asset('media/logos/logo-std.png') }}" />
 			<div class="d-flex">
-				<span class="font-size-h4 text-black font-weight-bolder ml-8 pt-5">Baza Wiedzy dla Towarzysta Ubezpieczeniowego</span>
+				<span class="font-size-h4 text-black font-weight-bolder ml-8 pt-5">Baza Wiedzy dla Towarzystwa Ubezpieczeniowego</span>
 			</div>
         </div>
          <div class="d-flex align-items-stretch text-center flex-column py-10">
@@ -40,7 +40,7 @@
     	<div class="card-body pb-0" style="box-shadow: 0px 0px 30px -20px;">
             <div class="alert alert-white pb-2" role="alert">
                 <h4 class="alert-heading text-dark">Nie masz konta w Bazie Wiedzy? <a class="font-weight-bold text-primary" href="{{ route('register') }}">Zarejestruj się!</a></h4>
-                <p>Dzięki rejestracji w systemie Baza Wiedzy uzyskasz dostęp m.in. do tworzenia własnych notatek pod produktami czy przeglądania aktualności w BW! </p>
+                <p>Dzięki rejestracji w systemie Baza Wiedzy uzyskasz dostęp do pozostałych funkcjonalności systemu!</p>
             </div>
         </div>
     </div>
