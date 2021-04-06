@@ -38,6 +38,7 @@ class FundEventSubscriber
     public function handleFundSaved($event) {
         Cache::tags('fund')->forget('funds_' . $event->fund->id);
         Cache::tags('funds')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class FundEventSubscriber
     public function handleFundDeleted($event) {
         Cache::tags('fund')->forget('funds_' . $event->fund->id);
         Cache::tags('funds')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

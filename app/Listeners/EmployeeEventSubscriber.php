@@ -38,6 +38,7 @@ class EmployeeEventSubscriber
     public function handleEmployeeSaved($event) {
         Cache::tags('employee')->forget('employees_' . $event->employee->id);
         Cache::tags('employees')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class EmployeeEventSubscriber
     public function handleEmployeeDeleted($event) {
         Cache::tags('employee')->forget('employees_' . $event->employee->id);
         Cache::tags('employees')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

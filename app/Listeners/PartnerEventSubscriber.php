@@ -38,6 +38,7 @@ class PartnerEventSubscriber
     public function handlePartnerSaved($event) {
         Cache::tags('partner')->forget('partners_' . $event->partner->id);
         Cache::tags('partners')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class PartnerEventSubscriber
     public function handlePartnerDeleted($event) {
         Cache::tags('partner')->forget('partners_' . $event->partner->id);
         Cache::tags('partners')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

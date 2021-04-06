@@ -38,6 +38,7 @@ class FileEventSubscriber
     public function handleFileSaved($event) {
         Cache::tags('file')->forget('files_' . $event->file->id);
         Cache::tags('files')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class FileEventSubscriber
     public function handleFileDeleted($event) {
         Cache::tags('file')->forget('files_' . $event->file->id);
         Cache::tags('files')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

@@ -38,6 +38,7 @@ class AttachmentEventSubscriber
     public function handleAttachmentSaved($event) {
         Cache::tags('attachment')->forget('attachments_' . $event->attachment->id);
         Cache::tags('attachments')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class AttachmentEventSubscriber
     public function handleAttachmentDeleted($event) {
         Cache::tags('attachment')->forget('attachments_' . $event->attachment->id);
         Cache::tags('attachments')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

@@ -41,6 +41,7 @@ class UserEventSubscriber
 
         // and others with users information
         Cache::tags('users')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -53,6 +54,7 @@ class UserEventSubscriber
 
         // and others with users information
         Cache::tags('users')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

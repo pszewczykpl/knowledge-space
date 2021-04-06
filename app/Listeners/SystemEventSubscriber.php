@@ -38,6 +38,7 @@ class SystemEventSubscriber
     public function handleSystemSaved($event) {
         Cache::tags('system')->forget('systems_' . $event->system->id);
         Cache::tags('systems')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class SystemEventSubscriber
     public function handleSystemDeleted($event) {
         Cache::tags('system')->forget('systems_' . $event->system->id);
         Cache::tags('systems')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

@@ -38,6 +38,7 @@ class RiskEventSubscriber
     public function handleRiskSaved($event) {
         Cache::tags('risk')->forget('risks_' . $event->risk->id);
         Cache::tags('risks')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class RiskEventSubscriber
     public function handleRiskDeleted($event) {
         Cache::tags('risk')->forget('risks_' . $event->risk->id);
         Cache::tags('risks')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';

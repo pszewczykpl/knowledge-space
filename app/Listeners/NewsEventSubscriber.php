@@ -38,6 +38,7 @@ class NewsEventSubscriber
     public function handleNewsSaved($event) {
         Cache::tags('news')->forget('news_' . $event->news->id);
         Cache::tags('news')->flush();
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -47,6 +48,7 @@ class NewsEventSubscriber
     public function handleNewsDeleted($event) {
         Cache::tags('news')->forget('news_' . $event->news->id);
         Cache::tags('news')->flush();
+        Cache::tags('events')->flush();
 
         $event_entry = new Event();
         $event_entry->event = 'deleted';
