@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Models\Event;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,10 +14,10 @@ class NewsEventSubscriber
      * @param $event
      */
     public function handleNewsCreated($event) {
-        $event2 = new Event();
-        $event2->event = 'created';
-        $event2->eventable()->associate($event->news);
-        Auth::user()->events()->save($event2);
+        $event_entry = new Event();
+        $event_entry->event = 'created';
+        $event_entry->eventable()->associate($event->news);
+        Auth::user()->events()->save($event_entry);
     }
 
     /**
@@ -24,7 +25,10 @@ class NewsEventSubscriber
      * @param $event
      */
     public function handleNewsUpdated($event) {
-        //
+        $event_entry = new Event();
+        $event_entry->event = 'updated';
+        $event_entry->eventable()->associate($event->news);
+        Auth::user()->events()->save($event_entry);
     }
 
     /**
@@ -43,6 +47,11 @@ class NewsEventSubscriber
     public function handleNewsDeleted($event) {
         Cache::tags('news')->forget('news_' . $event->news->id);
         Cache::tags('news')->flush();
+
+        $event_entry = new Event();
+        $event_entry->event = 'deleted';
+        $event_entry->eventable()->associate($event->news);
+        Auth::user()->events()->save($event_entry);
     }
 
     /**
