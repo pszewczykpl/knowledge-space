@@ -177,26 +177,26 @@
                             {{ $event->user->fullname() }}
 							@if($event->event == 'created') utworzył
 								@elseif($event->event == 'updated') zaktualizował
-								@elseif($event->event == 'updated') usunął
+								@elseif($event->event == 'deleted') usunął
 							@endif
-							@if($event->eventable_type  == 'App\Models\Attachment') <a href="{{ route('attachments.show', $event->eventable_id) }}">załącznik</a>.
-							@elseif($event->eventable_type  == 'App\Models\Bancassurance') <a href="{{ route('bancassurances.show', $event->eventable_id) }}">produkt bancassurance</a>.
-							@elseif($event->eventable_type  == 'App\Models\Department') <a href="{{ route('departments.show', $event->eventable_id) }}">departament</a>.
-							@elseif($event->eventable_type  == 'App\Models\Employee') <a href="{{ route('employees.show', $event->eventable_id) }}">produkt pracowniczy</a>.
-							@elseif($event->eventable_type  == 'App\Models\FileCategory') <a href="{{ route('file-categories.show', $event->eventable_id) }}">kategorię dokumentu</a>.
-							@elseif($event->eventable_type  == 'App\Models\File') <a href="{{ route('files.show', $event->eventable_id) }}">dokument</a>.
-							@elseif($event->eventable_type  == 'App\Models\Fund') <a href="{{ route('funds.show', $event->eventable_id) }}">fundusz</a>.
-							@elseif($event->eventable_type  == 'App\Models\Investment') <a href="{{ route('investments.show', $event->eventable_id) }}">produkt inwestycyjny</a>.
-							@elseif($event->eventable_type  == 'App\Models\News') <a href="{{ route('news.show', $event->eventable_id) }}">aktualność</a>.
-							@elseif($event->eventable_type  == 'App\Models\Note') <a href="{{ route('notes.show', $event->eventable_id) }}">notatkę</a>.
-							@elseif($event->eventable_type  == 'App\Models\Partner') <a href="{{ route('partners.show', $event->eventable_id) }}">partnera</a>.
-							@elseif($event->eventable_type  == 'App\Models\PostCategory') <a href="{{ route('post-categories.show', $event->eventable_id) }}">kategorię postu</a>.
-							@elseif($event->eventable_type  == 'App\Models\Post') <a href="{{ route('posts.show', $event->eventable_id) }}">post</a>.
-							@elseif($event->eventable_type  == 'App\Models\Protective') <a href="{{ route('protectives.show', $event->eventable_id) }}">produkt ochronny</a>.
+							@if($event->eventable_type  == 'App\Models\Attachment') <a @if($event->event != 'deleted') href="{{ route('attachments.show', $event->eventable_id) }}" @endif>załącznik</a>.
+							@elseif($event->eventable_type  == 'App\Models\Bancassurance') <a @if($event->event != 'deleted') href="{{ route('bancassurances.show', $event->eventable_id) }}" @endif>produkt bancassurance</a>.
+							@elseif($event->eventable_type  == 'App\Models\Department') <a @if($event->event != 'deleted') href="{{ route('departments.show', $event->eventable_id) }}" @endif>departament</a>.
+							@elseif($event->eventable_type  == 'App\Models\Employee') <a @if($event->event != 'deleted') href="{{ route('employees.show', $event->eventable_id) }}" @endif>produkt pracowniczy</a>.
+							@elseif($event->eventable_type  == 'App\Models\FileCategory') <a @if($event->event != 'deleted') href="{{ route('file-categories.show', $event->eventable_id) }}" @endif>kategorię dokumentu</a>.
+							@elseif($event->eventable_type  == 'App\Models\File') <a @if($event->event != 'deleted') href="{{ route('files.show', $event->eventable_id) }}" @endif>dokument</a>.
+							@elseif($event->eventable_type  == 'App\Models\Fund') <a @if($event->event != 'deleted') href="{{ route('funds.show', $event->eventable_id) }}" @endif>fundusz</a>.
+							@elseif($event->eventable_type  == 'App\Models\Investment') <a @if($event->event != 'deleted') href="{{ route('investments.show', $event->eventable_id) }}" @endif>produkt inwestycyjny</a>.
+							@elseif($event->eventable_type  == 'App\Models\News') <a @if($event->event != 'deleted') href="{{ route('news.show', $event->eventable_id) }}" @endif>aktualność</a>.
+							@elseif($event->eventable_type  == 'App\Models\Note') <a @if($event->event != 'deleted') href="{{ route('notes.show', $event->eventable_id) }}" @endif>notatkę</a>.
+							@elseif($event->eventable_type  == 'App\Models\Partner') <a @if($event->event != 'deleted') href="{{ route('partners.show', $event->eventable_id) }}" @endif>partnera</a>.
+							@elseif($event->eventable_type  == 'App\Models\PostCategory') <a @if($event->event != 'deleted') href="{{ route('post-categories.show', $event->eventable_id) }}" @endif>kategorię postu</a>.
+							@elseif($event->eventable_type  == 'App\Models\Post') <a @if($event->event != 'deleted') href="{{ route('posts.show', $event->eventable_id) }}" @endif>post</a>.
+							@elseif($event->eventable_type  == 'App\Models\Protective') <a @if($event->event != 'deleted') href="{{ route('protectives.show', $event->eventable_id) }}" @endif>produkt ochronny</a>.
 							@elseif($event->eventable_type  == 'App\Models\Reply') <a>odpowiedź</a>.
-							@elseif($event->eventable_type  == 'App\Models\Risk') <a href="{{ route('risks.show', $event->eventable_id) }}">ryzyko</a>.
-							@elseif($event->eventable_type  == 'App\Models\System') <a href="{{ route('systems.show', $event->eventable_id) }}">system</a>.
-							@elseif($event->eventable_type  == 'App\Models\User') <a href="{{ route('users.show', $event->eventable_id) }}">pracownika</a>.
+							@elseif($event->eventable_type  == 'App\Models\Risk') <a @if($event->event != 'deleted') href="{{ route('risks.show', $event->eventable_id) }}" @endif>ryzyko</a>.
+							@elseif($event->eventable_type  == 'App\Models\System') <a @if($event->event != 'deleted') href="{{ route('systems.show', $event->eventable_id) }}" @endif>system</a>.
+							@elseif($event->eventable_type  == 'App\Models\User') <a @if($event->event != 'deleted') href="{{ route('users.show', $event->eventable_id) }}" @endif>pracownika</a>.
 							@endif
                         </p>
                     </div>

@@ -120,6 +120,13 @@ $(document).ready(function() {
                 searchable: false
             }
         ],
+        searchCols: [
+            null,null, null, null,
+            {
+                'search': 'A'
+            },
+            null,null,null
+        ],
         language: {
             "decimal":        "",
             "emptyTable":     "Brak danych do wyświetlenia",
@@ -171,7 +178,7 @@ $("#active_or_all").click(function() {
 
         $(this).removeClass('btn-success');
         $(this).addClass('btn-primary');
-        $(this).html('Pokaż Wszystkie')
+        $(this).html('Pokaż Nieaktywne')
 
         $.notify({
             message: 'Widzisz tylko aktywne fundusze',
