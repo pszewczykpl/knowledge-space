@@ -28,7 +28,7 @@
 	<div class="d-flex flex-row">
 		<div class="flex-row-fluid">
 			<div class="row">
-				<div class="col-10">
+				<div class="col-8">
 						<x-cards.news-store />
 					@foreach($news as $new)
 						<x-cards.news :news="$new" />
@@ -39,16 +39,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-2">
-					<div class="card card-custom" style="background-color: #1B283F;">
-						<div class="card-body" style="padding: 1.5rem !important;">
-							<div class="p-0">
-								<h3 class="text-white font-weight-bolder my-4 text-center">Bądź na bieżąco</h3>
-								<p class="text-muted font-size-lg mb-7 text-center">
-								Dzięki zakładce Aktualności jesteś na bieżąco z najważniejszymi informacjami!</p>
-							</div>
-						</div>
-					</div>
+				<div class="col-4">
+					<x-cards.top-events />
 				</div>
 			</div>
 		</div>
