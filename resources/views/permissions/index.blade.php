@@ -18,12 +18,6 @@
 	<div class="d-flex flex-column flex-md-row">
 		<div class="flex-md-row-fluid">
 			<div class="card card-custom">
-				<div class="card-header flex-wrap border-0 pt-6 pb-0">
-					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj uprawnienia</span>
-					</h3>
-				</div>
 				<div class="card-body">
 					<div class="mb-1">
 						<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">

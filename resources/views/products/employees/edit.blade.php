@@ -12,7 +12,7 @@
 		</ul>
 	</div>
 	<div class="d-flex align-items-center">
-        <a href="{{ route('employees.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+        <a href="{{ route('employees.show', $employee) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
         @can('update', $employee)
             <a onclick='document.getElementById("employee_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
         @endcan

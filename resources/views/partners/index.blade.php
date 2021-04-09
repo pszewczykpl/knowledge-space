@@ -9,6 +9,13 @@
 	</div>
 	<div class="d-flex align-items-center">
 		<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+		@can('create', App\Models\Partner::class)
+			<a href="{{ route('partners.create') }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.partner', ['class' => 'navi-icon']) Dodaj Partnera
+			</a>
+		@endcan
+		@can('viewAny', App\Models\Trash::class)
+			<a href="{{ route('trash.index', ['model' => 'partners']) }}" class="btn btn-light-danger btn-sm">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+		@endcan
 	</div>
 </div>
 @stop
@@ -18,42 +25,6 @@
 	<div class="d-flex flex-column flex-md-row">
 		<div class="flex-md-row-fluid">
 			<div class="card card-custom">
-				<div class="card-header flex-wrap border-0 pt-6 pb-0">
-					<h3 class="card-title align-items-start flex-column">
-						<span class="card-label font-weight-bolder text-dark">{{ $title }}</span>
-						<span class="text-muted mt-1 font-weight-bold font-size-sm">Przeglądaj partnerów Towarzystwa Ubezpieczeń</span>
-					</h3>
-					<div class="card-toolbar">
-						@can('create', App\Models\Partner::class)
-						<a href="{{ route('partners.create') }}" class="btn btn-light-primary btn-shadow font-weight-bold mr-2">
-							<span class="svg-icon navi-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-										<rect x="0" y="0" width="24" height="24"/>
-										<path d="M18,2 L20,2 C21.6568542,2 23,3.34314575 23,5 L23,19 C23,20.6568542 21.6568542,22 20,22 L18,22 L18,2 Z" fill="#000000" opacity="0.3"/>
-										<path d="M5,2 L17,2 C18.6568542,2 20,3.34314575 20,5 L20,19 C20,20.6568542 18.6568542,22 17,22 L5,22 C4.44771525,22 4,21.5522847 4,21 L4,3 C4,2.44771525 4.44771525,2 5,2 Z M12,11 C13.1045695,11 14,10.1045695 14,9 C14,7.8954305 13.1045695,7 12,7 C10.8954305,7 10,7.8954305 10,9 C10,10.1045695 10.8954305,11 12,11 Z M7.00036205,16.4995035 C6.98863236,16.6619875 7.26484009,17 7.4041679,17 C11.463736,17 14.5228466,17 16.5815,17 C16.9988413,17 17.0053266,16.6221713 16.9988413,16.5 C16.8360465,13.4332455 14.6506758,12 11.9907452,12 C9.36772908,12 7.21569918,13.5165724 7.00036205,16.4995035 Z" fill="#000000"/>
-									</g>
-								</svg>
-							</span>
-							Dodaj Partnera
-						</a>
-						@endcan
-						@can('viewAny', App\Models\Trash::class)
-							<a href="{{ route('trash.index', ['model' => 'partners']) }}" class="btn btn-light-danger btn-shadow font-weight-bold ml-2">
-								<span class="svg-icon navi-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<rect x="0" y="0" width="24" height="24"/>
-											<path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#000000" fill-rule="nonzero"/>
-											<path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
-										</g>
-									</svg>
-								</span>
-								Elementy usunięte
-							</a>
-						@endcan
-					</div>
-				</div>
 				<div class="card-body">
 					<div class="mb-1">
 						<div class="row align-items-center">
