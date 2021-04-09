@@ -28,21 +28,16 @@ $(document).ready(function() {
                 data: 'edit_date',
                 visible: true,
                 orderable: true,
-                searchable: false
-            }, {
-                data: 'status',
-                visible: true,
-                orderable: false,
-                searchable: true,
-                render: function (data, type, row) {
-                    if(data=='N') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Archiwalne</span>';
+                searchable: false,
+                render: function (data, type, full, row) {
+                    if(full.status=='N') {
+                        return data + '<span class="label font-weight-bold label-lg label-light-primary label-inline ml-2">Archiwalne</span>';
                     }
-                    else if(data=='A') {
-                        return '<span class="label font-weight-bold label-lg label-light-success label-inline">Aktualne</span>';
+                    else if(full.status=='A') {
+                        return data + '<span class="label font-weight-bold label-lg label-light-success label-inline ml-2">Aktualne</span>';
                     }
                     else {
-                        return 'brak danych'
+                        return data;
                     }
                 }
             }, {
@@ -97,14 +92,19 @@ $(document).ready(function() {
                 visible: false,
                 orderable: false,
                 searchable: false
+            }, {
+                data: 'status',
+                visible: false,
+                orderable: false,
+                searchable: true
             }
         ],
         searchCols: [
             null,null, null,
+            null,null,
             {
                 'search': 'A'
-            },
-            null,null
+            }
         ],
         language: {
             "decimal":        "",
@@ -152,8 +152,8 @@ $(document).ready(function() {
 
 $("#active_or_all").click(function() {
     if ($(this).hasClass('btn-success')) {
-        $('#col3_filter').val('A');
-        $('#col3_filter').click();
+        $('#col5_filter').val('A');
+        $('#col5_filter').click();
 
         $(this).removeClass('btn-success');
         $(this).addClass('btn-primary');
@@ -168,8 +168,8 @@ $("#active_or_all").click(function() {
         });
     }
     else if ($(this).hasClass('btn-primary')) {
-        $('#col3_filter').val('');
-        $('#col3_filter').click();
+        $('#col5_filter').val('');
+        $('#col5_filter').click();
 
         $(this).removeClass('btn-primary');
         $(this).addClass('btn-success');
@@ -182,6 +182,23 @@ $("#active_or_all").click(function() {
             allow_dismiss: false,
             newest_on_top: true
         });
+    }
+});
+
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
     }
 });
 
