@@ -57,16 +57,18 @@
 						<div class="row align-items-center" id="search_box_panel" style="display: none;">
 						</div>
 					</div>
-					<table class="table table-separate table-head-custom collapsed" id="table">
-						<thead>
-							<tr>
-								<td>Nazwa produktu</td>
-								<td>Kod OWU</td>
-								<td>Dokumenty ważne od</td>
-								<td>Akcje</td>
-							</tr>
-						</thead>
-					</table>
+					<div class="pl-3 pr-3">
+						<table class="table table-separate table-head-custom collapsed" id="table">
+							<thead>
+								<tr>
+									<td>Nazwa produktu</td>
+									<td>Kod OWU</td>
+									<td>Dokumenty ważne od</td>
+									<td>Akcje</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div class="card card-custom gutter-b bg-diagonal bg-diagonal-light-primary mt-10">

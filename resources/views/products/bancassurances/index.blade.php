@@ -60,18 +60,20 @@
 							<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
 						</div>
 					</div>
-					<table class="table table-separate table-head-custom collapsed" id="table">
-						<thead>
-							<tr>
-								<td>Nazwa produktu</td>
-								<td>Kod dystrybutora</td>
-								<td>Kod produktu</td>
-								<td>Kod OWU</td>
-								<td>Dokumenty ważne od</td>
-								<td>Akcje</td>
-							</tr>
-						</thead>
-					</table>
+					<div class="pl-3 pr-3">
+						<table class="table table-separate table-head-custom collapsed" id="table">
+							<thead>
+								<tr>
+									<td>Nazwa produktu</td>
+									<td>Kod dystrybutora</td>
+									<td>Kod produktu</td>
+									<td>Kod OWU</td>
+									<td>Dokumenty ważne od</td>
+									<td>Akcje</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div class="card card-custom gutter-b bg-diagonal bg-diagonal-light-primary mt-10">
