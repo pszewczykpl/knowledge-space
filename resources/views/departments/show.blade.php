@@ -1,22 +1,22 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('subheader')
-<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-	<div class="d-flex align-items-center flex-wrap mr-2">
-		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ $title }}</h5>
-		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-	</div>
-	<div class="d-flex align-items-center">
-        <a href="{{ route('departments.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
+        <li class="breadcrumb-item">
+            <span class="text-muted">Przeglądaj</span>
+        </li>
+    </ul>
+@stop
+
+@section('toolbar')
+        <a href="{{ route('departments.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
 		@can('update', $department)
-			<a href="{{ route('departments.edit', $department->id) }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
+			<a href="{{ route('departments.edit', $department->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
 		@endcan
 		@can('delete', $department)
-			<a onclick='document.getElementById("departments_destroy_{{ $department->id }}").submit();' class="btn btn-light-danger btn-sm">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
+			<a onclick='document.getElementById("departments_destroy_{{ $department->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
 			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'departments.destroy', $department->id ], 'id' => 'departments_destroy_' . $department->id ]) }}{{ Form::close() }}
 		@endcan
-	</div>
-</div>
 @stop
 
 @section('content')

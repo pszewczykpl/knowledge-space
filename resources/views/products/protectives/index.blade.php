@@ -1,30 +1,23 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('subheader')
-<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-	<div class="d-flex align-items-center flex-wrap">
-		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-3">{{ $title }}</h5>
-		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-3 bg-gray-200"></div>
+	<x-datatables.search-box-global />
+	<button type="button" class="btn btn-clean btn-sm ml-1" id="search_box_panel_button">Zaawansowane</button>
+	<div class="subheader-separator subheader-separator-ver mt-2 mb-2 ml-3 bg-gray-200"></div>
+	<button type="button" class="btn btn-primary btn-sm ml-3" id="active_or_all">Pokaż Archiwalne</button>
+@stop
 
-		<x-datatables.search-box-global />
-		<button type="button" class="btn btn-clean btn-sm mr-3" id="search_box_panel_button">Zaawansowane</button>
-		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-3 bg-gray-200"></div>
-		<button type="button" class="btn btn-primary btn-sm" id="active_or_all">Pokaż Archiwalne</button>
-
-	</div>
-	<div class="d-flex align-items-center">
-		<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+@section('toolbar')
+	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
 		@can('create', App\Models\Protective::class)
-			<a href="{{ route('protectives.create') }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.protective', ['class' => 'navi-icon']) Dodaj Ubezpieczenie</a>
+			<a href="{{ route('protectives.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.protective', ['class' => 'navi-icon']) Dodaj Ubezpieczenie</a>
 		@endcan
 		@can('create', App\Models\File::class)
-			<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.file', ['class' => 'navi-icon']) Dodaj Dokument</a>
+			<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.file', ['class' => 'navi-icon']) Dodaj Dokument</a>
 		@endcan
 		@can('viewAny', App\Models\Trash::class)
-			<a href="{{ route('trash.index', ['model' => 'protectives']) }}" class="btn btn-light-danger btn-sm">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+			<a href="{{ route('trash.index', ['model' => 'protectives']) }}" class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
 		@endcan
-	</div>
-</div>
 @stop
 
 @section('content')
@@ -100,11 +93,11 @@
 </div>
 @stop
 
-@section('additional_css')
+@push('css')
 	<link href="{{ asset('css/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@stop
+@endpush
 
-@section('additional_scripts')
+@push('scripts')
 	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/pages/products/protectives/index.js') }}" type="text/javascript"></script>
-@stop
+@endpush

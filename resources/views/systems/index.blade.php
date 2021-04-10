@@ -1,23 +1,18 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('subheader')
-<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-	<div class="d-flex align-items-center flex-wrap mr-2">
-		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ $title }}</h5>
-		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-		<x-datatables.search-box-global />
-	</div>
-	<div class="d-flex align-items-center">
-		<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<x-datatables.search-box-global />
+@stop
+
+@section('toolbar')
+	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
 		@can('create', App\Models\System::class)
-			<a href="{{ route('systems.create') }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.system', ['class' => 'navi-icon']) Dodaj System
+			<a href="{{ route('systems.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.system', ['class' => 'navi-icon']) Dodaj System
 			</a>
 		@endcan
 		@can('viewAny', App\Models\Trash::class)
-			<a href="{{ route('trash.index', ['model' => 'systems']) }}" class="btn btn-light-danger btn-sm">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+			<a href="{{ route('trash.index', ['model' => 'systems']) }}" class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
 		@endcan
-	</div>
-</div>
 @stop
 
 @section('content')
@@ -49,11 +44,11 @@
 </div>
 @stop
 
-@section('additional_css')
+@push('css')
 	<link href="{{ asset('css/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@stop
+@endpush
 
-@section('additional_scripts')
+@push('scripts')
 	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/pages/systems/index.js') }}" type="text/javascript"></script>
-@stop
+@endpush

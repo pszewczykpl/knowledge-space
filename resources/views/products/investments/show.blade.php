@@ -1,34 +1,29 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('subheader')
-<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-	<div class="d-flex align-items-center flex-wrap mr-2">
-		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-3">{{ $title }}</h5>
-		<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-3 bg-gray-200"></div>
-        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-            <li class="breadcrumb-item">
-				<span class="text-muted">{{ $investment->code_toil }}</span>
-			</li>
-			<li class="breadcrumb-item">
-				<span class="text-muted">{{ $investment->edit_date }}</span>
-			</li>
-		</ul>
-	</div>
-	<div class="d-flex align-items-center">
-		<a href="{{ route('investments.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-		<a onclick="ShareInvestments('{{ $investment->id }}')" class="btn btn-light-primary btn-sm mr-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
-		@can('update', $investment)
-			<a href="{{ route('investments.edit', $investment->id) }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('create', App\Models\Investment::class)
-			<a href="{{ route('investments.duplicate', $investment) }}" class="btn btn-light-primary btn-sm mr-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
-		@endcan
-		@can('delete', $investment)
-			<a onclick='document.getElementById("investments_destroy_{{ $investment->id }}").submit();' class="btn btn-light-danger btn-sm">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'investments.destroy', $investment->id ], 'id' => 'investments_destroy_' . $investment->id ]) }}{{ Form::close() }}
-		@endcan
-	</div>
-</div>
+<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
+    <li class="breadcrumb-item">
+		<span class="text-muted">{{ $investment->code_toil }}</span>
+	</li>
+	<li class="breadcrumb-item">
+		<span class="text-muted">{{ $investment->edit_date }}</span>
+	</li>
+</ul>
+@stop
+
+@section('toolbar')
+	<a href="{{ route('investments.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<a onclick="ShareInvestments('{{ $investment->id }}')" class="btn btn-light-primary btn-sm ml-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
+	@can('update', $investment)
+		<a href="{{ route('investments.edit', $investment->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
+	@endcan
+	@can('create', App\Models\Investment::class)
+		<a href="{{ route('investments.duplicate', $investment) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
+	@endcan
+	@can('delete', $investment)
+		<a onclick='document.getElementById("investments_destroy_{{ $investment->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'investments.destroy', $investment->id ], 'id' => 'investments_destroy_' . $investment->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')
@@ -152,13 +147,13 @@
 </div>
 @stop
 
-@section('additional_css')
+@push('css')
 	<link href="{{ asset('css/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@stop
+@endpush
 
-@section('additional_scripts')
+@push('scripts')
 	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/pages/products/investments/show.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/components/panels/files.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/components/panels/funds.js') }}" type="text/javascript"></script>
-@stop
+@endpush

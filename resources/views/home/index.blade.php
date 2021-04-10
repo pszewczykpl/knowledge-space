@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.app')
 
 @section('content')
 <div class="d-flex bgi-size-cover bgi-position-center" style="background-image: url({{ asset('media/bg/bg-1.jpg') }})">

@@ -1,14 +1,15 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('subheader')
-<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-	<div class="d-flex align-items-center flex-wrap mr-2">
-		<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ $title }}</h5>
-	</div>
-	<div class="d-flex align-items-center">
-		<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a></a>
-	</div>
-</div>
+	<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
+		<li class="breadcrumb-item">
+			<span class="text-muted">Przeglądaj wszystkie artykuły</span>
+		</li>
+	</ul>
+@stop
+
+@section('toolbar')
+	<a href="{{ route('funds.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
 @stop
 
 @section('content')
@@ -60,7 +61,7 @@
 </div>
 @stop
 
-@section('additional_scripts')
+@push('scripts')
 {{-- <script src="{{ asset('js/pages/trash/funds.js') }}" type="text/javascript"></script> --}}
 <script>
 	$(document).ready(function() {
@@ -94,4 +95,4 @@
 		});
 	});
 </script>
-@stop
+@endpush
