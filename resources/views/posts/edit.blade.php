@@ -56,12 +56,6 @@
 								<textarea name="content" style="display:none" id="content"></textarea>
 								<input type="submit" id="submit" name="submit" value="Aktualizuj" style="visibility: hidden;">
 							</div>
-							<div class="form-group row">
-								<label class="col-form-label text-left pr-2">Załącznik:</label>
-								<div>
-									<input class="form-control form-control-sm form-control-solid" type="file" name="attachment" id="attachment" />
-								</div>
-							</div>
 						</div>
 						{!! Form::close() !!}
 					</div>

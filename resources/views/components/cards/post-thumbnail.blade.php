@@ -6,27 +6,11 @@
 					<a href="{{ route('posts.show', $post->id) }}" class="@if($post->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-2 font-size-h4 font-weight-bold">{{ $post->title }}</a>
 					<div class="d-flex">
 						<div class="d-flex align-items-center pr-5">
-							<span class="svg-icon svg-icon-md @if($post->trashed()) svg-icon-white @else svg-icon-primary @endif pr-1">
-								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                        <path d="M10,4 L21,4 C21.5522847,4 22,4.44771525 22,5 L22,7 C22,7.55228475 21.5522847,8 21,8 L10,8 C9.44771525,8 9,7.55228475 9,7 L9,5 C9,4.44771525 9.44771525,4 10,4 Z M10,10 L21,10 C21.5522847,10 22,10.4477153 22,11 L22,13 C22,13.5522847 21.5522847,14 21,14 L10,14 C9.44771525,14 9,13.5522847 9,13 L9,11 C9,10.4477153 9.44771525,10 10,10 Z M10,16 L21,16 C21.5522847,16 22,16.4477153 22,17 L22,19 C22,19.5522847 21.5522847,20 21,20 L10,20 C9.44771525,20 9,19.5522847 9,19 L9,17 C9,16.4477153 9.44771525,16 10,16 Z" fill="#000000"></path>
-                                        <rect fill="#000000" opacity="0.3" x="2" y="4" width="5" height="16" rx="1"></rect>
-                                    </g>
-                                </svg>
-							</span>
+							@include('svg.post-category', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
 							<a href="{{ route('posts.index', ['category' => $post->post_category->id]) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->post_category->name }}</a>
 						</div>
 						<div class="d-flex align-items-center">
-							<span class="svg-icon svg-icon-md @if($post->trashed()) svg-icon-white @else svg-icon-primary @endif pr-1">
-								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                        <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                        <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                                    </g>
-                                </svg>
-							</span>
+							@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
 							<a href="{{ route('users.show', $post->user->id) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->user->fullname() }}</a>
 						</div>
 					</div>
