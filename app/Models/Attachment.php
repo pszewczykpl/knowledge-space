@@ -33,6 +33,11 @@ class Attachment extends Model
         return $this->morphTo();
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');

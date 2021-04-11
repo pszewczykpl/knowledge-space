@@ -158,6 +158,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Event');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany('App\Models\Attachment');
+    }
+
     public function hasPermission($code)
     {
         $permissions = Cache::tags(['user', 'permissions'])->rememberForever('users_' . $this->id . '_permissions_all', function () {

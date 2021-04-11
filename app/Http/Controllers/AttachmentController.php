@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,6 +14,16 @@ use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +52,19 @@ class AttachmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $this->authorize('create', Attachment::class);
+
+        $path = $request->file->store('file');
+
+        $attachment = new Attachment($request->all());
+        $attachment->path = $path;
+        $attachment->name = $request->file('attachment')->getClientOriginalName();
+        $attachment->extension = $request->file('attachment')->extension();
+        Auth::user()->attachments()->save($attachment);
+
+        $attachment->posts()->attach($request->post_id);
+
+        return redirect()->route('files.index')->with('notify_success', 'Nowy załącznik został dodany!');
     }
 
     /**

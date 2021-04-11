@@ -83,12 +83,17 @@
 										<span class="text-dark-50 font-weight-bold pl-1 font-size-md">Brak załączników</span>
 									@endif
 
-{{--									div class="form-group row">--}}
-{{--										<label class="col-form-label text-left pr-2">Załącznik:</label>--}}
-{{--										<div>--}}
-{{--											<input class="form-control form-control-sm form-control-solid" type="file" name="attachment" id="attachment" />--}}
-{{--										</div>--}}
-{{--									/div>--}}
+									{!! Form::open(['route' => 'attachments.store', 'method' => 'post', 'files' => true, 'id' => 'attachment_store_form']) !!}
+									<div class="form-group row">
+										<label class="col-form-label text-left pr-2">Załącznik:</label>
+										<div>
+											<input class="form-control form-control-sm form-control-solid" type="file" name="attachment" id="attachment" />
+											<input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}">
+										</div>
+									</div>
+										{!! Form::close() !!}
+										<a onclick='document.getElementById("attachment_store_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
+									
 								</div>
 							</div>
 						</div>
