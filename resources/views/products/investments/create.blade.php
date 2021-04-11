@@ -34,17 +34,7 @@
                     <li class="nav-item mr-3">
                         <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
                             <span class="nav-icon mr-2">
-                                <span class="svg-icon mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-                                            <rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-                                            <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-                                            <rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
-                                        </g>
-                                    </svg>
-                                </span>
+                                @include('svg.investment', ['class' => 'mr-3'])
                             </span>
                             <span class="nav-text font-weight-bold">Szczegóły</span>
                         </a>
@@ -52,16 +42,7 @@
                     <li class="nav-item mr-3">
                         <a class="nav-link" data-toggle="tab" href="#files" role="tab">
                             <span class="nav-icon mr-2">
-                                <span class="svg-icon mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<polygon points="0 0 24 0 24 24 0 24"></polygon>
-											<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-											<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-											<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-										</g>
-									</svg>
-                                </span>
+                                @include('svg.file', ['class' => 'mr-3'])
                             </span>
                             <span class="nav-text font-weight-bold">Dokumenty</span>
                         </a>

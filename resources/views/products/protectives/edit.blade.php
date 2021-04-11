@@ -34,14 +34,7 @@
                     <li class="nav-item mr-3">
                         <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
                             <span class="nav-icon mr-2">
-                                <span class="svg-icon mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24"/>
-                                            <path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
-                                        </g>
-                                    </svg>
-                                </span>
+                                @include('svg.protective', ['class' => 'mr-3'])
                             </span>
                             <span class="nav-text font-weight-bold">Szczegóły</span>
                         </a>
@@ -49,16 +42,7 @@
                     <li class="nav-item mr-3">
                         <a class="nav-link" data-toggle="tab" href="#files" role="tab">
                             <span class="nav-icon mr-2">
-                                <span class="svg-icon mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<polygon points="0 0 24 0 24 24 0 24"></polygon>
-											<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-											<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"></rect>
-											<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"></rect>
-										</g>
-									</svg>
-                                </span>
+                                @include('svg.file', ['class' => 'mr-3'])
                             </span>
                             <span class="nav-text font-weight-bold">Dokumenty</span>
                         </a>
