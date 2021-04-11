@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -54,15 +55,16 @@ class AttachmentController extends Controller
     {
 //        $this->authorize('create', Attachment::class);
 
-        $path = $request->file->store('file');
+        $path = $request->attachment->store('attachments');
 
         $attachment = new Attachment($request->all());
         $attachment->path = $path;
         $attachment->name = $request->file('attachment')->getClientOriginalName();
         $attachment->extension = $request->file('attachment')->extension();
+        $attachment->attachmentable()->associate(Post::find($request->post_id));
         Auth::user()->attachments()->save($attachment);
 
-        $attachment->posts()->attach($request->post_id);
+        // $attachment->posts()->attach($request->post_id);
 
         return redirect()->route('files.index')->with('notify_success', 'Nowy załącznik został dodany!');
     }
