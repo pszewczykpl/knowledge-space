@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use App\Models\Post;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
@@ -36,16 +37,6 @@ class AttachmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,20 +44,21 @@ class AttachmentController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->authorize('create', Attachment::class);
+        $this->authorize('create', Attachment::class);
 
-        $path = $request->attachment->store('attachments');
+//        $path = $request->attachment->store('attachments');
 
         $attachment = new Attachment($request->all());
-        $attachment->path = $path;
-        $attachment->name = $request->file('attachment')->getClientOriginalName();
-        $attachment->extension = $request->file('attachment')->extension();
-        $attachment->attachmentable()->associate(Post::find($request->post_id));
+//        $attachment->path = $path;
+        $attachment->path = 'files/deleted.pdf';
+//        $attachment->name = $request->file('attachment')->getClientOriginalName();
+        $attachment->name = 'Dzisiaj idzie jakoś dziwnie';
+//        $attachment->extension = $request->file('attachment')->extension();
+        $attachment->extension = 'pdf';
+        $attachment->attachmentable()->associate($request->attachmentable_type::find($request->attachmentable_id));
         Auth::user()->attachments()->save($attachment);
 
-        // $attachment->posts()->attach($request->post_id);
-
-        return redirect()->route('files.index')->with('notify_success', 'Nowy załącznik został dodany!');
+        return redirect()->back()->with('notify_success', 'Nowy załącznik został dodany!');
     }
 
     /**
@@ -81,29 +73,6 @@ class AttachmentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Attachment $attachment)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Attachment  $attachment
@@ -111,7 +80,7 @@ class AttachmentController extends Controller
      */
     public function destroy(Attachment $attachment)
     {
-        //$this->authorize('delete', $attachment);
+        $this->authorize('delete', $attachment);
 
         Storage::move($attachment->path, 'trash/' . $attachment->path);
         $attachment->delete();

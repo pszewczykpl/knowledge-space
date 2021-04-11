@@ -70,4 +70,9 @@ class Note extends Model
     {
         return $this->morphMany(Event::class, 'eventable');
     }
+
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'attachmentable');
+    }
 }
