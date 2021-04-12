@@ -36,7 +36,7 @@ class FileCategoryEventSubscriber
      * @param $event
      */
     public function handleFileCategorySaved($event) {
-        Cache::tags('file_category')->forget('file_categories_' . $event->fileCategory->id);
+        Cache::tags('file_category')->flush();
         Cache::tags('file_categories')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class FileCategoryEventSubscriber
      * @param $event
      */
     public function handleFileCategoryDeleted($event) {
-        Cache::tags('file_category')->forget('file_categories_' . $event->fileCategory->id);
+        Cache::tags('file_category')->flush();
         Cache::tags('file_categories')->flush();
         Cache::tags('events')->flush();
 

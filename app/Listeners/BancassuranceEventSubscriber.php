@@ -36,7 +36,7 @@ class BancassuranceEventSubscriber
      * @param $event
      */
     public function handleBancassuranceSaved($event) {
-        Cache::tags('bancassurance')->forget('bancassurances_' . $event->bancassurance->id);
+        Cache::tags('bancassurance')->flush();
         Cache::tags('bancassurances')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class BancassuranceEventSubscriber
      * @param $event
      */
     public function handleBancassuranceDeleted($event) {
-        Cache::tags('bancassurance')->forget('bancassurances_' . $event->bancassurance->id);
+        Cache::tags('bancassurance')->flush();
         Cache::tags('bancassurances')->flush();
         Cache::tags('events')->flush();
 

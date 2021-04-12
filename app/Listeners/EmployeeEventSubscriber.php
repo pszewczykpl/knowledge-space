@@ -36,7 +36,7 @@ class EmployeeEventSubscriber
      * @param $event
      */
     public function handleEmployeeSaved($event) {
-        Cache::tags('employee')->forget('employees_' . $event->employee->id);
+        Cache::tags('employee')->flush();
         Cache::tags('employees')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class EmployeeEventSubscriber
      * @param $event
      */
     public function handleEmployeeDeleted($event) {
-        Cache::tags('employee')->forget('employees_' . $event->employee->id);
+        Cache::tags('employee')->flush();
         Cache::tags('employees')->flush();
         Cache::tags('events')->flush();
 

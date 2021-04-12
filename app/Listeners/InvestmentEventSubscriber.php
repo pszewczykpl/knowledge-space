@@ -36,7 +36,7 @@ class InvestmentEventSubscriber
      * @param $event
      */
     public function handleInvestmentSaved($event) {
-        Cache::tags('investment')->forget('investments_' . $event->investment->id);
+        Cache::tags('investment')->flush();
         Cache::tags('investments')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class InvestmentEventSubscriber
      * @param $event
      */
     public function handleInvestmentDeleted($event) {
-        Cache::tags('investment')->forget('investments_' . $event->investment->id);
+        Cache::tags('investment')->flush();
         Cache::tags('investments')->flush();
         Cache::tags('events')->flush();
 

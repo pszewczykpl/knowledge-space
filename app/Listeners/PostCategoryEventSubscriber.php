@@ -36,7 +36,7 @@ class PostCategoryEventSubscriber
      * @param $event
      */
     public function handlePostCategorySaved($event) {
-        Cache::tags('post_category')->forget('post_categories_' . $event->postCategory->id);
+        Cache::tags('post_category')->flush();
         Cache::tags('post_categories')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class PostCategoryEventSubscriber
      * @param $event
      */
     public function handlePostCategoryDeleted($event) {
-        Cache::tags('post_category')->forget('post_categories_' . $event->postCategory->id);
+        Cache::tags('post_category')->flush();
         Cache::tags('post_categories')->flush();
         Cache::tags('events')->flush();
 

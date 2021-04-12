@@ -36,7 +36,7 @@ class PostEventSubscriber
      * @param $event
      */
     public function handlePostSaved($event) {
-        Cache::tags('post')->forget('posts_' . $event->post->id);
+        Cache::tags('post')->flush();
         Cache::tags('posts')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class PostEventSubscriber
      * @param $event
      */
     public function handlePostDeleted($event) {
-        Cache::tags('post')->forget('posts_' . $event->post->id);
+        Cache::tags('post')->flush();
         Cache::tags('posts')->flush();
         Cache::tags('events')->flush();
 

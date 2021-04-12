@@ -36,7 +36,7 @@ class DepartmentEventSubscriber
      * @param $event
      */
     public function handleDepartmentSaved($event) {
-        Cache::tags('department')->forget('departments_' . $event->department->id);
+        Cache::tags('department')->flush();
         Cache::tags('departments')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class DepartmentEventSubscriber
      * @param $event
      */
     public function handleDepartmentDeleted($event) {
-        Cache::tags('department')->forget('departments_' . $event->department->id);
+        Cache::tags('department')->flush();
         Cache::tags('departments')->flush();
         Cache::tags('events')->flush();
 

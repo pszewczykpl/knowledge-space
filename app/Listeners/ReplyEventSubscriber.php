@@ -36,7 +36,7 @@ class ReplyEventSubscriber
      * @param $event
      */
     public function handleReplySaved($event) {
-        Cache::tags('reply')->forget('replies_' . $event->reply->id);
+        Cache::tags('reply')->flush();
         Cache::tags('replies')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class ReplyEventSubscriber
      * @param $event
      */
     public function handleReplyDeleted($event) {
-        Cache::tags('reply')->forget('replies_' . $event->reply->id);
+        Cache::tags('reply')->flush();
         Cache::tags('replies')->flush();
         Cache::tags('events')->flush();
 

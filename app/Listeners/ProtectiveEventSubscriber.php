@@ -36,7 +36,7 @@ class ProtectiveEventSubscriber
      * @param $event
      */
     public function handleProtectiveSaved($event) {
-        Cache::tags('protective')->forget('protectives_' . $event->protective->id);
+        Cache::tags('protective')->flush();
         Cache::tags('protectives')->flush();
         Cache::tags('events')->flush();
     }
@@ -46,7 +46,7 @@ class ProtectiveEventSubscriber
      * @param $event
      */
     public function handleProtectiveDeleted($event) {
-        Cache::tags('protective')->forget('protectives_' . $event->protective->id);
+        Cache::tags('protective')->flush();
         Cache::tags('protectives')->flush();
         Cache::tags('events')->flush();
 
