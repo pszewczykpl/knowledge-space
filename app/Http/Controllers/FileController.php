@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FileDetached;
 use App\Models\File;
 use App\Models\Investment;
 use App\Models\Protective;
@@ -219,6 +220,8 @@ class FileController extends Controller
         $this->authorize('update', $file);
         
         $file->{$fileable_type . 's'}()->detach($fileable_id);
+
+        FileDetached::dispatch($file);
 
         return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
     }

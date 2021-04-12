@@ -42,6 +42,16 @@ class FileEventSubscriber
     }
 
     /**
+     * Handle File saved events.
+     * @param $event
+     */
+    public function handleFileDetached($event) {
+        Cache::tags('file')->flush();
+        Cache::tags('files')->flush();
+        Cache::tags('events')->flush();
+    }
+
+    /**
      * Handle File deleted events.
      * @param $event
      */
@@ -82,6 +92,11 @@ class FileEventSubscriber
         $events->listen(
             'App\Events\FileDeleted',
             [FileEventSubscriber::class, 'handleFileDeleted']
+        );
+
+        $events->listen(
+            'App\Events\FileDetached',
+            [FileEventSubscriber::class, 'handleFileDetached']
         );
     }
 }
