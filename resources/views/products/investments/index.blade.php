@@ -18,61 +18,26 @@
 @stop
 
 @section('content')
-<div class="container">
-	<div class="d-flex flex-column flex-md-row">
-		<div class="flex-md-row-fluid">
-			<div class="card card-custom">
-				<div class="card-body">
-					<div class="mb-1">
-						<div class="alert alert-custom alert-light-primary alert-shadow fade show mb-5" role="alert">
-							<div class="alert-icon">
-								<i class="flaticon-info"></i>
-							</div>
-							<div class="alert-text">
-								Ubezpieczenie Inwestycyjne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
-								Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>
-								Jeśli chcesz przeglądać również <span class="label font-weight-bold label-md label-white text-primary label-inline">Archiwalne</span> komplety dokumentów - kliknij Pokaż Archiwalne.<br>
-							</div>
-							<div class="alert-close">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true"><i class="ki ki-close"></i></span>
-								</button>
-							</div>
-						</div>
-						<div class="row align-items-center">
-							<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
-							<x-datatables.search-box --size="3" --number="1" --placeholder="Kod TOiL" />
-							<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
-							<x-datatables.search-box --size="3" --number="3" --placeholder="Grupa produktowa" />
-						</div>
-						<div class="row align-items-center" id="search_box_panel" style="display: none;">
-							<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
-							<x-datatables.search-box --size="3" --number="9" --placeholder="Kod dystrybutora" />
-							<x-datatables.search-box --size="3" --number="10" --placeholder="Kod OWU" />
-							<x-datatables.search-box --size="3" --number="11" --placeholder="Typ produktu" />
-							<x-datatables.search-box --size="3" --number="7" --placeholder="Status" --hidden />
-						</div>
-					</div>
-					<div class="pl-3 pr-3">
-						<table class="table table-separate table-head-custom collapsed" id="table">
-							<thead>
-								<tr>
-									<td>Nazwa produktu</td>
-									<td>Kod TOiL</td>
-									<td>Kod produktu</td>
-									<td>Grupa produktowa</td>
-									<td>Dokumenty ważne od</td>
-									<td>Akcje</td>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
-			</div>
-			<x-cards.help-us />
-		</div>
-	</div>
-</div>
+	<x-layout.datatable :columns='["Nazwa produktu", "Kod TOiL", "Kod produktu", "Grupa produktowa", "Dokumenty ważne od", "Akcje"]' --info --help-us >
+		<x-slot name="info_text">
+			Ubezpieczenie Inwestycyjne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
+			Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>
+			Jeśli chcesz przeglądać również <span class="label font-weight-bold label-md label-white text-primary label-inline">Archiwalne</span> komplety dokumentów - kliknij Pokaż Archiwalne.<br>
+		</x-slot>
+		<x-slot name="search">
+			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
+			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod TOiL" />
+			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
+			<x-datatables.search-box --size="3" --number="3" --placeholder="Grupa produktowa" />
+			<x-datatables.search-box --size="3" --number="7" --placeholder="Status" --hidden />
+		</x-slot>
+		<x-slot name="advanced_search">
+			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
+			<x-datatables.search-box --size="3" --number="9" --placeholder="Kod dystrybutora" />
+			<x-datatables.search-box --size="3" --number="10" --placeholder="Kod OWU" />
+			<x-datatables.search-box --size="3" --number="11" --placeholder="Typ produktu" />
+		</x-slot>
+	</x-layout.datatable>
 @stop
 
 @push('css')
