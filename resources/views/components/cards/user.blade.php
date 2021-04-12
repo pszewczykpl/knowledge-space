@@ -71,7 +71,7 @@
                             </svg>
                         </span>
                         <span class="text-dark-75 font-weight-bold">
-                            {{ $user->department->name }}
+                            {{ $user->getCachedRelation('department')->first()->name }}
                         </span>
                     </div>
                     <div class="pt-8 text-center">

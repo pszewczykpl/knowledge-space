@@ -59,9 +59,15 @@ class Protective extends Model
         return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
     }
 
-    public function get_cached_relation(string $relation)
+    /**
+     * Get cached relation with user.
+     *
+     * @param string $relation
+     * @return array|mixed
+     */
+    public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['protective', $relation, 'users'])->rememberForever('protectives_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

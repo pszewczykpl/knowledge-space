@@ -31,7 +31,7 @@
 				<x-cards.news-store />
 			@endif
 			@endauth
-				@if($user->news->count() == 0)
+				@if($user->getCachedRelation('news')->count() == 0)
 					<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
 						@auth
 						@if($user->id == Auth::user()->id)
@@ -44,7 +44,7 @@
 							@endauth
 					</div>
 				@else
-					@foreach($user->news()->orderBy('created_at', 'desc')->get()->take(20) as $new)
+					@foreach($user->getCachedRelation('news')->sortByDesc('created_at')->take(20) as $new)
 						<x-cards.news :news="$new" />
 					@endforeach
 				@endif

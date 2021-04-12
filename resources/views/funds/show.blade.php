@@ -73,7 +73,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$fund->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$fund->created_at" />
-				<x-cards.details-row --attribute="Utworzone przez" :value="$fund->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$fund->getCachedRelation('user')->first()->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">
@@ -95,7 +95,7 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane active" id="notes" role="tabpanel">
-							<x-panels.notes :notes="$fund->get_cached_relation('notes')" -type="fund" :id="$fund->id"  />
+							<x-panels.notes :notes="$fund->getCachedRelation('notes')" -type="fund" :id="$fund->id"  />
 						</div>
 					</div>
 				</div>

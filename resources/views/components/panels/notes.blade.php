@@ -15,7 +15,7 @@
     @endcan
     <div class="timeline timeline-3">
         <div class="timeline-items">
-            @foreach($notes->sortByDesc('updated_at'); as $note)
+            @foreach($notes->sortByDesc('updated_at') as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
                     <img alt="Pic" src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}">
@@ -48,13 +48,13 @@
                         {{ $note->content }}
                     </p>
 
-                    @if($note->get_cached_relation('attachments')->count() > 0)
+                    @if($note->getCachedRelation('attachments')->count() > 0)
                     <div class="row pl-3">
                         @include('svg.attachment', ['class' => 'svg-icon-primary svg-icon-2x'])
                         <span class="text-dark-50 font-weight-md font-size-lg pl-1">Załączniki</span>
                     </div>
                     <div class="row pl-3 pt-3">
-                            @foreach($note->get_cached_relation('attachments') as $attachment)
+                            @foreach($note->getCachedRelation('attachments') as $attachment)
                                 <div class="pb-3 pr-6">
                                     <a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
                                         <img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">

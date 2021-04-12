@@ -43,9 +43,15 @@ class PostCategory extends Model
         return $this->morphMany(Event::class, 'eventable');
     }
 
-    public function get_cached_relation(string $relation)
+    /**
+     * Get cached relation with user.
+     *
+     * @param string $relation
+     * @return array|mixed
+     */
+    public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['post_category', $relation, 'users'])->rememberForever('post_categories_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

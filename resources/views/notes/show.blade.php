@@ -70,8 +70,8 @@
                             <span class="text-dark-50 font-weight-md font-size-lg">Załączniki</span>
                         </div>
                         <div class="col-12 col-md-8 pt-5">
-                            @if($note->attachments()->count() > 0)
-                                @foreach($note->attachments as $attachment)
+                            @if($note->getCachedRelation('attachments')->count() > 0)
+                                @foreach($note->getCachedRelation('attachments') as $attachment)
                                     <div class="pb-3">
                                         <a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
                                             <img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">
@@ -123,7 +123,7 @@
                                 <label class="col-form-label col-4 text-left">Ubezpieczenia Inwestycyjne:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->investments as $investment)
+                                        @foreach($note->getCachedRelation('investments') as $investment)
                                         <option value="{{ $investment->id }}" selected >{{ $investment->name }} ({{ $investment->code_toil }}) od {{ $investment->edit_date }}</option>
                                         @endforeach
                                     </select>
@@ -134,7 +134,7 @@
                                 <label class="col-form-label col-4 text-left">Ubezpieczenia Ochronne:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->protectives as $protective)
+                                        @foreach($note->getCachedRelation('protectives') as $protective)
                                         <option value="{{ $protective->id }}" selected >{{ $protective->name }} ({{ $protective->edit_date }})</option>
                                         @endforeach
                                     </select>
@@ -145,7 +145,7 @@
                                 <label class="col-form-label col-4 text-left">Ubezpieczenia Bancassurance:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->bancassurances as $bancassurance)
+                                        @foreach($note->getCachedRelation('bancassurances') as $bancassurance)
                                         <option value="{{ $bancassurance->id }}" selected >{{ $bancassurance->name }} ({{ $bancassurance->edit_date }})</option>
                                         @endforeach
                                     </select>
@@ -156,7 +156,7 @@
                                 <label class="col-form-label col-4 text-left">Ubezpieczenia Pracownicze:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->employees as $employee)
+                                        @foreach($note->getCachedRelation('employees') as $employee)
                                         <option value="{{ $employee->id }}" selected>{{ $employee->name }} ({{ $employee->edit_date }})</option>
                                         @endforeach
                                     </select>
@@ -167,7 +167,7 @@
                                 <label class="col-form-label col-4 text-left">Partnerzy:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="partner_id[]" id="partner_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->partners as $partner)
+                                        @foreach($note->getCachedRelation('partners') as $partner)
                                         <option value="{{ $partner->id }}" selected>{{ $partner->name }}</option>
                                         @endforeach
                                     </select>
@@ -178,7 +178,7 @@
                                 <label class="col-form-label col-4 text-left">Ryzyka Ubezpieczeniowe:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="risk_id[]" id="risk_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->risks as $risk)
+                                        @foreach($note->getCachedRelation('risks') as $risk)
                                         <option value="{{ $risk->id }}" selected>{{ $risk->name }}</option>
                                         @endforeach
                                     </select>
@@ -189,7 +189,7 @@
                                 <label class="col-form-label col-4 text-left">Fundusze UFK:</label>
                                 <div class="col-8">
                                     <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="fund_id[]" id="fund_id[]" data-actions-box="true" data-live-search="true" disabled>
-                                        @foreach($note->funds as $fund)
+                                        @foreach($note->getCachedRelation('funds') as $fund)
                                         <option value="{{ $fund->id }}" selected>{{ $fund->extended_name() }}</option>
                                         @endforeach
                                     </select>

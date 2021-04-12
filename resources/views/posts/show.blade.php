@@ -30,11 +30,11 @@
 										<div class="d-flex">
 											<div class="d-flex align-items-center pr-5">
 												@include('svg.post-category', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-												<a href="{{ route('posts.index', ['category' => $post->post_category->id]) }}" class="text-muted font-weight-bold">{{ $post->post_category->name }}</a>
+												<a href="{{ route('posts.index', ['category' => $post->getCachedRelation('post_category')->first()->id]) }}" class="text-muted font-weight-bold">{{ $post->getCachedRelation('post_category')->first()->name }}</a>
 											</div>
 											<div class="d-flex align-items-center pr-5">
 												@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-												<a href="{{ route('users.show', $post->user->id) }}" class="text-muted font-weight-bold">{{ $post->user->fullname() }}</a>
+												<a href="{{ route('users.show', $post->getCachedRelation('user')->first()->id) }}" class="text-muted font-weight-bold">{{ $post->getCachedRelation('user')->first()->fullname() }}</a>
 											</div>
 											<div class="d-flex align-items-center pr-5">
 												@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
@@ -54,8 +54,8 @@
 									<span class="text-dark-50 font-weight-md font-size-lg">Załączniki</span>
 								</div>
 								<div class="pt-5">
-									@if($post->attachments()->count() > 0)
-										@foreach($post->attachments as $attachment)
+									@if($post->getCachedRelation('attachments')->count() > 0)
+										@foreach($post->getCachedRelation('attachments') as $attachment)
 										<div class="pb-3">
 											<a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
 												<img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">

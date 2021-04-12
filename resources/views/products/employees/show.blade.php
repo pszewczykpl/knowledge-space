@@ -62,7 +62,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$employee->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$employee->created_at" />
-				<x-cards.details-row --attribute="Utworzone przez" :value="$employee->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$employee->getCachedRelation('user')->first()->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">
@@ -92,10 +92,10 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$employee->get_cached_relation('notes')" -type="employee" :id="$employee->id"  />
+							<x-panels.notes :notes="$employee->getCachedRelation('notes')" -type="employee" :id="$employee->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$employee->get_cached_relation('files')" :name="$employee->extended_name()" -type="employee" :id="$employee->id" />
+							<x-panels.files :files="$employee->getCachedRelation('files')" :name="$employee->extended_name()" -type="employee" :id="$employee->id" />
 						</div>
 					</div>
 				</div>

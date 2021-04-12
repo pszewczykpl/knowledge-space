@@ -14,7 +14,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         @include('svg.department', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-                        <span class="text-muted font-weight-bold">{{ $news->user->department->name }}</span>
+                        <span class="text-muted font-weight-bold">{{ $news->user->getCachedRelation('department')->first()->name }}</span>
                     </div>
                 </div>
             </div>

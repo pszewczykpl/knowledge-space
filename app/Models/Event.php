@@ -20,9 +20,15 @@ class Event extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function get_cached_relation(string $relation)
+    /**
+     * Get cached relation with user.
+     *
+     * @param string $relation
+     * @return array|mixed
+     */
+    public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['event', $relation, 'users'])->rememberForever('events_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

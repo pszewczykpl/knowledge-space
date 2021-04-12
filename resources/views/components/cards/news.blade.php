@@ -14,7 +14,7 @@
 						</div>
 						<div class="d-flex align-items-center">
 							@include('svg.department', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-							<span class="@if($news->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $news->user->get_cached_relation('department')[0]->name }}</span>
+							<span class="@if($news->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $news->user->getCachedRelation('department')->first()->name }}</span>
 						</div>
 					</div>
 				</div>
@@ -88,11 +88,11 @@
 								</g>
 							</svg>
 						</span>
-						{{ $news->get_cached_relation('replies')->count() }}
+						{{ $news->getCachedRelation('replies')->count() }}
 					</span>
 				</div>
 				
-				@foreach($news->get_cached_relation('replies') as $reply)
+				@foreach($news->getCachedRelation('replies') as $reply)
 					<div class="d-flex py-5">
 						<div class="symbol symbol-40 symbol-white mr-5 mt-1">
 							<span class="symbol-label" style="background-image:url({{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }})"></span>
