@@ -16,36 +16,14 @@
 @stop
 
 @section('content')
-<div class="container">
-	<div class="d-flex flex-column flex-md-row">
-		<div class="flex-md-row-fluid">
-			<div class="card card-custom">
-				<div class="card-body pt">
-					<div class="mb-1">
-						<div class="row align-items-center">
-							<x-datatables.search-box --size="3" --number="5" --placeholder="Imię" />
-							<x-datatables.search-box --size="3" --number="6" --placeholder="Nazwisko" />
-							<x-datatables.search-box --size="3" --number="7" --placeholder="Nazwa użytkownika" />
-							<x-datatables.search-box --size="3" --number="1" --placeholder="E-mail" />
-							<x-datatables.search-box --size="3" --number="3" --placeholder="Telefon" />
-							<x-datatables.search-box --size="3" --number="8" --placeholder="Stanowisko" />
-						</div>
-					</div>
-					<table class="table table-separate table-head-custom collapsed" id="table">
-						<thead>
-							<tr>
-								<td>Imię i Nazwisko</td>
-								<td>E-mail</td>
-								<td>Telefon</td>
-								<td>Akcje</td>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+	<x-layout.datatable :columns='["Imię i nazwisko", "E-mail", "Telefon", "Akcje"]' --help-us>
+		<x-slot name="search">
+			<x-datatables.search-box --size="3" --number="5" --placeholder="Imię" />
+			<x-datatables.search-box --size="3" --number="6" --placeholder="Nazwisko" />
+			<x-datatables.search-box --size="3" --number="1" --placeholder="E-mail" />
+			<x-datatables.search-box --size="3" --number="3" --placeholder="Telefon" />
+		</x-slot>
+	</x-layout.datatable>
 @stop
 
 @push('css')

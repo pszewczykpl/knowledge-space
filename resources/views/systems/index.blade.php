@@ -16,32 +16,12 @@
 @stop
 
 @section('content')
-<div class="container">
-	<div class="d-flex flex-column flex-md-row">
-		<div class="flex-md-row-fluid">
-			<div class="card card-custom">
-				<div class="card-body">
-					<div class="mb-1">
-						<div class="row align-items-center">
-							<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
-							<x-datatables.search-box --size="3" --number="0" --placeholder="URL" />
-						</div>
-					</div>
-					<table class="table table-separate table-head-custom collapsed" id="table">
-						<thead>
-							<tr>
-								<td>Nazwa</td>
-								<td>URL</td>
-								<td>Opis</td>
-								<td>Akcje</td>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+	<x-layout.datatable :columns='["Nazwa", "URL", "Opis", "Akcje"]' --help-us>
+		<x-slot name="search">
+			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
+			<x-datatables.search-box --size="3" --number="0" --placeholder="URL" />
+		</x-slot>
+	</x-layout.datatable>
 @stop
 
 @push('css')

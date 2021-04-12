@@ -16,49 +16,16 @@
 @stop
 
 @section('content')
-<div class="container">
-	<div class="d-flex flex-column flex-md-row">
-		<div class="flex-md-row-fluid">
-			<div class="card card-custom">
-				<div class="card-body">
-					<div class="mb-1">
-						<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">
-							<div class="alert-icon">
-								<i class="flaticon-info"></i>
-							</div>
-							<div class="alert-text">
-								<b>Pamiętaj!</b><br>
-								Poniżej znajdują się dokumenty dodane we wszystkich obiektach dostępnch w systemie.<br>
-								Pojedynczy dokument może być powiązany z wieloma obiektami.
-							</div>
-							<div class="alert-close">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">
-										<i class="ki ki-close"></i>
-									</span>
-								</button>
-							</div>
-						</div>
-						<div class="row align-items-center">
-							<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
-							<x-datatables.search-box --size="3" --number="1" --placeholder="Ścieżka" />
-						</div>
-					</div>
-					<table class="table table-separate table-head-custom collapsed" id="table">
-						<thead>
-							<tr>
-								<td>Nazwa</td>
-								<td>Ścieżka</td>
-								<td>Kategoria dokumentu</td>
-								<td>Akcje</td>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+	<x-layout.datatable :columns='["Nazwa", "Ścieżka", "Kategoria dokumentu", "Akcje"]' --info>
+		<x-slot name="info_text">
+			Poniżej znajdują się dokumenty dodane we wszystkich obiektach dostępnch w systemie.<br>
+			Pojedynczy dokument może być powiązany z wieloma obiektami.
+		</x-slot>
+		<x-slot name="search">
+			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
+			<x-datatables.search-box --size="3" --number="1" --placeholder="Ścieżka" />
+		</x-slot>
+	</x-layout.datatable>
 @stop
 
 @push('css')
