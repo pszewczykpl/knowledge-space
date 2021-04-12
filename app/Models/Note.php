@@ -9,6 +9,7 @@ use App\Events\NoteUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Note extends Model
 {
@@ -74,5 +75,12 @@ class Note extends Model
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'attachmentable');
+    }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['note', $relation, 'users'])->rememberForever('notes_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
     }
 }

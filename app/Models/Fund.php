@@ -59,10 +59,10 @@ class Fund extends Model
         return $this->name . ' (' . $this->code . ')';
     }
 
-    public function get_notes()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['fund', 'notes', 'users'])->rememberForever('funds_' . $this->id . '_notes_all', function () {
-            return $this->notes()->with('user')->get();
+        return Cache::tags(['fund', $relation, 'users'])->rememberForever('funds_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

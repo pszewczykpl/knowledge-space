@@ -55,17 +55,10 @@ class Employee extends Model
         return $this->name . ' od ' . $this->edit_date;
     }
 
-    public function get_files()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['employee', 'files', 'users'])->rememberForever('employees_' . $this->id . '_files_all', function () {
-            return $this->files()->with('user')->get();
-        });
-    }
-
-    public function get_notes()
-    {
-        return Cache::tags(['employee', 'notes', 'users'])->rememberForever('employees_' . $this->id . '_notes_all', function () {
-            return $this->notes()->with('user')->get();
+        return Cache::tags(['employee', $relation, 'users'])->rememberForever('employees_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

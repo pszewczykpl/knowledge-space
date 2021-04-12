@@ -9,6 +9,7 @@ use App\Events\ReplyUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Reply extends Model
 {
@@ -39,5 +40,12 @@ class Reply extends Model
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['reply', $relation, 'users'])->rememberForever('replies_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
     }
 }

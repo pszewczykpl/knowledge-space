@@ -180,4 +180,11 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
+    }
 }

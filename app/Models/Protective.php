@@ -59,17 +59,10 @@ class Protective extends Model
         return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
     }
 
-    public function get_files()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['protective', 'files', 'users'])->rememberForever('protectives_' . $this->id . '_files_all', function () {
-            return $this->files()->with('user')->get();
-        });
-    }
-
-    public function get_notes()
-    {
-        return Cache::tags(['protective', 'notes', 'users'])->rememberForever('protectives_' . $this->id . '_notes_all', function () {
-            return $this->notes()->with('user')->get();
+        return Cache::tags(['protective', $relation, 'users'])->rememberForever('protectives_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

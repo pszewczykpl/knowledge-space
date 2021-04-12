@@ -38,4 +38,11 @@ class System extends Model
     {
         return $this->morphMany(Event::class, 'eventable');
     }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['system', $relation, 'users'])->rememberForever('systems_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
+    }
 }

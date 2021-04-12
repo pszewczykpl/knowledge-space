@@ -88,11 +88,11 @@
 								</g>
 							</svg>
 						</span>
-						{{ $news->get_replies()->count() }}
+						{{ $news->get_cached_relation('replies')->count() }}
 					</span>
 				</div>
 				
-				@foreach($news->get_replies() as $reply)
+				@foreach($news->get_cached_relation('replies') as $reply)
 					<div class="d-flex py-5">
 						<div class="symbol symbol-40 symbol-white mr-5 mt-1">
 							<span class="symbol-label" style="background-image:url({{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }})"></span>

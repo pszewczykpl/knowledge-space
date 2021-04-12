@@ -71,24 +71,10 @@ class Investment extends Model
         return $this->name . ' (' . $this->code_toil . ') od ' . $this->edit_date;
     }
 
-    public function get_files()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['investment', 'files', 'users'])->rememberForever('investments_' . $this->id . '_files_all', function () {
-            return $this->files()->with('user')->get();
-        });
-    }
-
-    public function get_notes()
-    {
-        return Cache::tags(['investment', 'notes', 'users'])->rememberForever('investments_' . $this->id . '_notes_all', function () {
-            return $this->notes()->with('user')->get();
-        });
-    }
-
-    public function get_funds()
-    {
-        return Cache::tags(['investment', 'funds', 'users'])->rememberForever('investments_' . $this->id . '_funds_all', function () {
-            return $this->funds()->with('user')->get();
+        return Cache::tags(['investment', $relation, 'users'])->rememberForever('investments_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

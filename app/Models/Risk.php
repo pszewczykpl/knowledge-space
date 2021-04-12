@@ -46,10 +46,10 @@ class Risk extends Model
         return $this->morphMany(Event::class, 'eventable');
     }
 
-    public function get_notes()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['risk', 'notes', 'users'])->rememberForever('risks_' . $this->id . '_notes_all', function () {
-            return $this->notes()->with('user')->get();
+        return Cache::tags(['risk', $relation, 'users'])->rememberForever('risks_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

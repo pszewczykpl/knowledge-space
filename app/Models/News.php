@@ -42,10 +42,10 @@ class News extends Model
         return $this->morphMany(Event::class, 'eventable');
     }
 
-    public function get_replies()
+    public function get_cached_relation(string $relation)
     {
-        return Cache::tags(['news', 'replies', 'users'])->rememberForever('news_' . $this->id . '_replies_all', function () {
-            return $this->replies()->with('user')->get();
+        return Cache::tags(['news', $relation, 'users'])->rememberForever('news_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
         });
     }
 }

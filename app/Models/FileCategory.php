@@ -9,6 +9,7 @@ use App\Events\FileCategoryUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class FileCategory extends Model
 {
@@ -40,5 +41,12 @@ class FileCategory extends Model
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['file_category', $relation, 'users'])->rememberForever('file_categories_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
     }
 }

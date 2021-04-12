@@ -9,6 +9,7 @@ use App\Events\DepartmentUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Department extends Model
 {
@@ -41,5 +42,12 @@ class Department extends Model
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    public function get_cached_relation(string $relation)
+    {
+        return Cache::tags(['department', $relation, 'users'])->rememberForever('departments_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+            return $this->{$relation}()->with('user')->get();
+        });
     }
 }
