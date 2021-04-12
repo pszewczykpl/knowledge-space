@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-	<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
-		<li class="breadcrumb-item">
-			<span class="text-muted">Przeglądaj</span>
-		</li>
-	</ul>
+	<x-layout.subheader description="Przeglądaj" />
 @stop
 
 @section('toolbar')
