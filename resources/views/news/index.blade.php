@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-	<x-datatables.search-box-global />
+	<x-layout.subheader description="Przeglądaj wszystkie aktualności" />
 @stop
 
 @section('toolbar')

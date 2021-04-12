@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-	<x-datatables.search-box-global />
-	<button type="button" class="btn btn-primary btn-sm ml-3" id="active_or_all">Pokaż Nieaktywne</button>
+	<x-layout.subheader type="datatables" --active custom-active-text="Pokaż Nieaktywne" --advanced />
 @stop
 
 @section('toolbar')

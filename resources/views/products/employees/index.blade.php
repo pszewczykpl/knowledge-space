@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-	<x-datatables.search-box-global />
-{{--	<button type="button" class="btn btn-clean btn-sm ml-1" id="search_box_panel_button">Zaawansowane</button>--}}
-	<div class="subheader-separator subheader-separator-ver mt-2 mb-2 ml-3 bg-gray-200"></div>
-	<button type="button" class="btn btn-primary btn-sm ml-3" id="active_or_all">Pokaż Archiwalne</button>
+	<x-layout.subheader type="datatables" --active />
 @stop
 
 @section('toolbar')

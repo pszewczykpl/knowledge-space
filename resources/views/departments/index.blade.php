@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-	<x-datatables.search-box-global />
+	<x-layout.subheader type="datatables" />
 @stop
 
 @section('toolbar')
