@@ -5,9 +5,9 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('notes.show', $note) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+        <a href="{{ route('notes.show', $note) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('update', $note)
-            <a onclick='document.getElementById("note_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
+            <a onclick='document.getElementById("note_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 

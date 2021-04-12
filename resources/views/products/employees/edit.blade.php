@@ -5,9 +5,9 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('employees.show', $employee) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+        <a href="{{ route('employees.show', $employee) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('update', $employee)
-            <a onclick='document.getElementById("employee_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
+            <a onclick='document.getElementById("employee_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 

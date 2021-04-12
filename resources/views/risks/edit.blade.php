@@ -5,9 +5,9 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('risks.show', $risk) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+        <a href="{{ route('risks.show', $risk) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('update', $risk)
-            <a onclick='document.getElementById("risk_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
+            <a onclick='document.getElementById("risk_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 

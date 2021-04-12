@@ -5,9 +5,9 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('investments.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+        <a href="{{ route('investments.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('create', App\Models\Investment::class)
-            <a onclick='document.getElementById("investment_store_form").submit();' class="btn btn-light-primary btn-sm ml-1">@include('svg.save', ['class' => 'navi-icon']) Zapisz</a>
+            <a onclick='document.getElementById("investment_store_form").submit();' class="btn btn-light-primary btn-sm ml-1">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 

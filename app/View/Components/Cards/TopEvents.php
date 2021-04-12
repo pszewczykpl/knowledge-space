@@ -21,7 +21,7 @@ class TopEvents extends Component
     public function __construct()
     {
         $this->events = Cache::tags(['events'])->rememberForever('events_top_8', function () {
-            return Event::orderByDesc('created_at')->take(8)->get();
+            return Event::with('user')->orderByDesc('created_at')->take(8)->get();
         });
     }
 
