@@ -71,7 +71,7 @@
                                 <li class="navi-item">
                                     <a href="{{ route('files.show', $file->id) }}" class="navi-link" target="_blank">
                                         <i class="navi-icon flaticon2-expand"></i>
-                                        <span class="navi-text">Wyświetl</span>
+                                        <span class="navi-text">{{ __('View') }}</span>
                                     </a>
                                 </li>
                                 @endif

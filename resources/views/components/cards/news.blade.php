@@ -28,7 +28,7 @@
 									<li class="navi-item">
 										<a href="{{ route('news.show', $news->id) }}" class="navi-link">
 											<i class="navi-icon flaticon2-expand"></i>
-											<span class="navi-text">Wyświetl</span>
+											<span class="navi-text">{{ __('View') }}</span>
 										</a>
 									</li>
 									@can('update', $news)

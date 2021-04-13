@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Search;
 
@@ -37,11 +38,12 @@ class SearchController extends Controller
      * Display a search results.
      *
      * @param $value
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function search(Search $request, string $scope)
     {
         $value = trim($request->value);
+        $active = $request->non_active ? ['A', 'N'] : ['A'];
 
         // MAYBE TO DO: departments, users, file categories, files, notes, replies, permissions, post categories, attachments
         /**
@@ -113,14 +115,24 @@ class SearchController extends Controller
             ->get();
 
         /**
-         * Return Investments
-         * search by  group name code dist_short dist code_owu code_toil edit_date type status
+         * Redirect to Investment when only one Investment find.
+         */
+        foreach(['name', 'code_owu', 'code_toil', 'code'] as $column) {
+            $investment = \App\Models\Investment::select('id')->where($column, $value)->whereIn('status', $active)->get();
+            if($investment->count() === 1) {
+                return redirect()->route('investments.show', $investment->first()->id);
+            }
+        }
+        /**
+         * Search Investments when more then one Investments find.
          */
         $investments = \App\Models\Investment::select('*')
-            ->where('name', 'like', '%' . $value . '%')
-            ->orWhere('code', 'like', '%' . $value . '%')
-            ->orWhere('code_owu', 'like', '%' . $value . '%')
-            ->orWhere('code_toil', 'like', '%' . $value . '%')
+            ->where(function ($query) use ($value) {
+                foreach(['name', 'code_owu', 'code_toil', 'code'] as $column) {
+                    $query->orWhere($column, 'like', '%' . $value . '%');
+                }
+            })
+            ->whereIn('status', $active)
             ->take(25)
             ->get();
 
