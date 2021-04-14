@@ -11,6 +11,86 @@ use App\Http\Requests\Search;
 
 class SearchController extends Controller
 {
+    public $searchModels = [
+        '\App\Models\Investment' => [
+            'route' => 'investments',
+            'icon' => 'investment',
+            'title' => 'Ubezpieczenia Inwestycyjne',
+            'columns' => ['name', 'code_owu', 'code_toil', 'code', 'group', 'dist'],
+            'result' => [
+                'additional_data' => [
+                    'code' => 'Kod produktu',
+                    'group' => 'Grupa produktowa',
+                ]
+            ]
+        ],
+        '\App\Models\Protective' => [
+            'route' => 'protectives',
+            'icon' => 'protective',
+            'title' => 'Ubezpieczenia Ochronne',
+            'columns' => ['name', 'code_owu', 'code', 'dist'],
+            'result' => [
+                'additional_data' => [
+                    'code' => 'Kod produktu',
+                ]
+            ]
+        ],
+        '\App\Models\Bancassurance' => [
+            'route' => 'bancassurances',
+            'icon' => 'bancassurance',
+            'title' => 'Ubezpieczenia bancassurance',
+            'columns' => ['name', 'code_owu', 'code', 'dist'],
+            'result' => [
+                'additional_data' => [
+                    'code' => 'Kod produktu',
+                ]
+            ]
+        ],
+        '\App\Models\Employee' => [
+            'route' => 'employees',
+            'icon' => 'employee',
+            'title' => 'Ubezpieczenia Pracowniczne',
+            'columns' => ['name', 'code_owu'],
+            'result' => [
+                'additional_data' => [
+                    'code' => 'Kod produktu',
+                ]
+            ]
+        ],
+//        '\App\Models\Fund' => [
+//            'route' => 'funds',
+//            'columns' => ['name', 'code', 'type'],
+//        ],
+//        '\App\Models\Risk' => [
+//            'route' => 'risks',
+//            'columns' => ['name', 'code', 'category'],
+//        ],
+//        '\App\Models\Post' => [
+//            'route' => 'posts',
+//            'columns' => ['title', 'content'],
+//        ],
+//        '\App\Models\News' => [
+//            'route' => 'news',
+//            'columns' => ['content'],
+//        ],
+//        '\App\Models\Partner' => [
+//            'route' => 'partners',
+//            'columns' => ['name', 'nip', 'regon', 'numer_rau'],
+//        ],
+//        '\App\Models\System' => [
+//            'route' => 'systems',
+//            'columns' => ['name', 'url'],
+//        ],
+//        '\App\Models\File' => [
+//            'route' => 'files',
+//            'columns' => ['name'],
+//        ],
+//        '\App\Models\Department' => [
+//            'route' => 'departments',
+//            'columns' => ['name'],
+//        ],
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -44,90 +124,53 @@ class SearchController extends Controller
     {
         $value = trim($request->value);
         $active = $request->non_active ? ['A', 'N'] : ['A'];
-        $columns = [
-            'investments' => ['name', 'code_owu', 'code_toil', 'code', 'group', 'dist'],
-            'protectives' => ['name', 'code_owu', 'code', 'dist'],
-            'bancassurances' => ['name', 'code_owu', 'code', 'dist'],
-            'employees' => ['name', 'code_owu'],
-            'funds' => ['name', 'code', 'type'],
-            'risks' => ['name', 'code', 'type'],
-            'posts' => ['title', 'content'],
-            'news' => ['content'],
-            'partners' => ['name', 'nip', 'regon', 'numer_rau'],
-            'systems' => ['name', 'url'],
-            'files' => ['name'],
-            'departments' => ['name'],
-        ];
 
-        /**
-         * Search Employees.
-         */
-        $employees = \App\Models\Employee::select('*')
-            ->where(function ($query) use ($value, $columns) {
-                foreach($columns['employees'] as $column) {
-                    $query->orWhere($column, 'like', '%' . $value . '%');
-                }
-            })
-            ->whereIn('status', $active)
-            ->get();
+        $resultsCount = 0;
 
-        /**
-         * Search Bancassurances.
-         */
-        $bancassurances = \App\Models\Bancassurance::select('*')
-            ->where(function ($query) use ($value, $columns) {
-                foreach($columns['bancassurances'] as $column) {
-                    $query->orWhere($column, 'like', '%' . $value . '%');
-                }
-            })
-            ->whereIn('status', $active)
-            ->get();
+        foreach($this->searchModels as $model => $data) {
+            ${$data['route']} =
+                $model::where(function ($query) use ($value, $data) {
+                    foreach($data['columns'] as $column) {
+                        $query->orWhere($column, 'like', '%' . $value . '%');
+                    }
+                })
+                ->whereIn('status', $active)
+                ->get();
 
-        /**
-         * Search Protectives.
-         */
-        $protectives = \App\Models\Protective::select('*')
-            ->where(function ($query) use ($value, $columns) {
-                foreach($columns['protectives'] as $column) {
-                    $query->orWhere($column, 'like', '%' . $value . '%');
-                }
-            })
-            ->whereIn('status', $active)
-            ->get();
-
-        /**
-         * Search Investments.
-         */
-        $investments = \App\Models\Investment::select('*')
-            ->where(function ($query) use ($value, $columns) {
-                foreach($columns['investments'] as $column) {
-                    $query->orWhere($column, 'like', '%' . $value . '%');
-                }
-            })
-            ->whereIn('status', $active)
-            ->get();
-
-        if($investments->count() === 1 and (count($protectives) === 0 and count($bancassurances) === 0 and count($employees) === 0)) {
-            return redirect()->route('investments.show', $investments->first()->id);
+            $resultsCount += (int) ${$data['route']}->count();
         }
-        if($protectives->count() === 1 and (count($investments) === 0 and count($bancassurances) === 0 and count($employees) === 0)) {
-            return redirect()->route('protectives.show', $protectives->first()->id);
+
+        if($resultsCount === 1) {
+            foreach($this->searchModels as $model => $data) {
+                if(${$data['route']}->count() === 1) {
+                    return redirect()->route($data['route'] . '.show', ${$data['route']}->first()->id);
+                }
+            }
         }
-        if($bancassurances->count() === 1 and (count($protectives) === 0 and count($investments) === 0 and count($employees) === 0)) {
-            return redirect()->route('bancassurances.show', $bancassurances->first()->id);
+
+        $meta = (array) null;
+        foreach($this->searchModels as $model => $data) {
+            $results[$data['route']] = ${$data['route']};
+
+            $meta[$data['route']]['icon'] = $data['icon'];
+            $meta[$data['route']]['title'] = $data['title'];
+
+            foreach ($results[$data['route']] as $key => $item) {
+                $asd = (array) null;
+                foreach($data['result']['additional_data'] as $key2 => $item2) {
+                    $asd[$item2] = $results[$data['route']][$key]->{$key2};
+                }
+
+                $results[$data['route']][$key]->additional = $asd;
+            }
         }
-        if($employees->count() === 1 and (count($protectives) === 0 and count($bancassurances) === 0 and count($investments) === 0)) {
-            return redirect()->route('employees.show', $employees->first()->id);
-        }         
 
         return view('search.results', [
             'title' => 'Wyniki wyszukiwania',
             'value' => $value,
             'active' => $active,
-            'investments' => $investments,
-            'protectives' => $protectives,
-            'bancassurances' => $bancassurances,
-            'employees' => $employees,
+            'results' => $results,
+            'meta' => $meta,
         ]);
     }
 }
