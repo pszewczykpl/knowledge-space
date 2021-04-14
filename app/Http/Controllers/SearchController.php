@@ -57,10 +57,17 @@ class SearchController extends Controller
                 ]
             ]
         ],
-//        '\App\Models\Fund' => [
-//            'route' => 'funds',
-//            'columns' => ['name', 'code', 'type'],
-//        ],
+        '\App\Models\Fund' => [
+            'route' => 'funds',
+            'icon' => 'fund',
+            'title' => 'Ubezpieczeniowe Fudusze Kapitałowe',
+            'columns' => ['name', 'code', 'type'],
+            'result' => [
+                'additional_data' => [
+                    'type' => 'Typ',
+                ]
+            ]
+        ],
 //        '\App\Models\Risk' => [
 //            'route' => 'risks',
 //            'columns' => ['name', 'code', 'category'],
