@@ -46,15 +46,12 @@ class AttachmentController extends Controller
     {
         $this->authorize('create', Attachment::class);
 
-//        $path = $request->attachment->store('attachments');
+        $path = $request->attachment->store('attachments');
 
         $attachment = new Attachment($request->all());
-//        $attachment->path = $path;
-        $attachment->path = 'files/deleted.pdf';
-//        $attachment->name = $request->file('attachment')->getClientOriginalName();
-        $attachment->name = 'Dzisiaj idzie jakoś dziwnie';
-//        $attachment->extension = $request->file('attachment')->extension();
-        $attachment->extension = 'pdf';
+        $attachment->path = $path;
+        $attachment->name = $request->file('attachment')->getClientOriginalName();
+        $attachment->extension = $request->file('attachment')->extension();
         $attachment->attachmentable()->associate($request->attachmentable_type::find($request->attachmentable_id));
         Auth::user()->attachments()->save($attachment);
 
