@@ -60,7 +60,7 @@ class AppRefresh extends Command
         $this->info('Application key set!');
         $this->callSilently('event:generate');
         $this->info('Application events and listeners generated!');
-        $this->call('migrate');
+        $this->call('migrate', ['force' => true]);
 
         $this->info('Caching application...');
         $this->callSilently('config:cache');
