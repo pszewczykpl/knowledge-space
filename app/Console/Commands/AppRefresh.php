@@ -56,11 +56,9 @@ class AppRefresh extends Command
 
         $this->callSilently('package:discover');
         $this->info('Package manifest generated!');
-        $this->callSilently('key:generate');
-        $this->info('Application key set!');
-        $this->callSilently('event:generate');
-        $this->info('Application events and listeners generated!');
-        $this->call('migrate', ['force' => true]);
+        $this->call('key:generate', ['--force' => true]);
+        $this->call('event:generate');
+        $this->call('migrate', ['--force' => true]);
 
         $this->info('Caching application...');
         $this->callSilently('config:cache');
