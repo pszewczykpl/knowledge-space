@@ -24,13 +24,6 @@ class Risk extends Model
         'grace_period',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => RiskSaved::class,
-        'created' => RiskCreated::class,
-        'updated' => RiskUpdated::class,
-        'deleted' => RiskDeleted::class,
-    ];
-
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
@@ -54,7 +47,7 @@ class Risk extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

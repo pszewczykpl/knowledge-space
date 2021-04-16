@@ -21,13 +21,6 @@ class FileCategory extends Model
         'prefix',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => FileCategorySaved::class,
-        'created' => FileCategoryCreated::class,
-        'updated' => FileCategoryUpdated::class,
-        'deleted' => FileCategoryDeleted::class,
-    ];
-
     public function files()
     {
         return $this->hasMany('App\Models\File');
@@ -51,7 +44,7 @@ class FileCategory extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

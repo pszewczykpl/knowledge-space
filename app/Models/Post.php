@@ -21,13 +21,6 @@ class Post extends Model
         'content',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => PostSaved::class,
-        'created' => PostCreated::class,
-        'updated' => PostUpdated::class,
-        'deleted' => PostDeleted::class,
-    ];
-
     public function post_category()
     {
         return $this->belongsTo('App\Models\PostCategory');
@@ -56,7 +49,7 @@ class Post extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

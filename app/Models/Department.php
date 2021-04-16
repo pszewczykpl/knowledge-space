@@ -22,13 +22,6 @@ class Department extends Model
         'description',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => DepartmentSaved::class,
-        'created' => DepartmentCreated::class,
-        'updated' => DepartmentUpdated::class,
-        'deleted' => DepartmentDeleted::class,
-    ];
-
     public function users()
     {
         return $this->hasMany('App\Models\User');
@@ -52,7 +45,7 @@ class Department extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

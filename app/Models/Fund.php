@@ -27,13 +27,6 @@ class Fund extends Model
         'cancel_reason'
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => FundSaved::class,
-        'created' => FundCreated::class,
-        'updated' => FundUpdated::class,
-        'deleted' => FundDeleted::class,
-    ];
-
     public function investments()
     {
         return $this->belongsToMany('App\Models\Investment')->withTimestamps();
@@ -67,7 +60,7 @@ class Fund extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

@@ -56,13 +56,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => UserSaved::class,
-        'created' => UserCreated::class,
-        'updated' => UserUpdated::class,
-        'deleted' => UserDeleted::class,
-    ];
-
     public function department()
     {
         return $this->belongsTo('App\Models\Department');
@@ -163,6 +156,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Event');
     }
 
+    public function eventable()
+    {
+        return $this->morphMany(Event::class, 'eventable');
+    }
+
     public function attachments()
     {
         return $this->hasMany('App\Models\Attachment');
@@ -170,7 +168,7 @@ class User extends Authenticatable
 
     public function hasPermission($code)
     {
-        $permissions = Cache::tags(['user', 'permissions'])->rememberForever('users_' . $this->id . '_permissions_all', function () {
+        $permissions = Cache::tags(['users', 'permissions'])->rememberForever('users_' . $this->id . '_permissions_all', function () {
             return $this->permissions()->get()->pluck('code')->toArray();
         });
 
@@ -194,7 +192,7 @@ class User extends Authenticatable
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

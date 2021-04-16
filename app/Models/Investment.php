@@ -29,13 +29,6 @@ class Investment extends Model
         'status',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => InvestmentSaved::class,
-        'created' => InvestmentCreated::class,
-        'updated' => InvestmentUpdated::class,
-        'deleted' => InvestmentDeleted::class,
-    ];
-
     public function files()
     {
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
@@ -79,7 +72,7 @@ class Investment extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

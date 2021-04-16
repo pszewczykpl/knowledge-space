@@ -54,49 +54,49 @@ class RouteServiceProvider extends ServiceProvider
          * Bind resources for cache using rememberForever
          */
         Route::bind('attachment', function ($value) {
-            return Cache::tags(['attachment'])->rememberForever('attachments_' . $value, function () use ($value) {
+            return Cache::tags(['attachments'])->rememberForever('attachments_' . $value, function () use ($value) {
                 return Attachment::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('bancassurance', function ($value) {
-            return Cache::tags(['bancassurance'])->rememberForever('bancassurances_' . $value, function () use ($value) {
+            return Cache::tags(['bancassurances'])->rememberForever('bancassurances_' . $value, function () use ($value) {
                 return Bancassurance::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('department', function ($value) {
-            return Cache::tags(['department'])->rememberForever('departments_' . $value, function () use ($value) {
+            return Cache::tags(['departments'])->rememberForever('departments_' . $value, function () use ($value) {
                 return Department::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('employee', function ($value) {
-            return Cache::tags(['employee'])->rememberForever('employees_' . $value, function () use ($value) {
+            return Cache::tags(['employees'])->rememberForever('employees_' . $value, function () use ($value) {
                 return Employee::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('file', function ($value) {
-            return Cache::tags(['file'])->rememberForever('files_' . $value, function () use ($value) {
+            return Cache::tags(['files'])->rememberForever('files_' . $value, function () use ($value) {
                 return File::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('file-category', function ($value) {
-            return Cache::tags(['file_category'])->rememberForever('file_categories_' . $value, function () use ($value) {
+            return Cache::tags(['file_categories'])->rememberForever('file_categories_' . $value, function () use ($value) {
                 return FileCategory::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('fund', function ($value) {
-            return Cache::tags(['fund'])->rememberForever('funds_' . $value, function () use ($value) {
+            return Cache::tags(['funds'])->rememberForever('funds_' . $value, function () use ($value) {
                 return Fund::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('investment', function ($value) {
-            return Cache::tags(['investment'])->rememberForever('investments_' . $value, function () use ($value) {
+            return Cache::tags(['investments'])->rememberForever('investments_' . $value, function () use ($value) {
                 return Investment::where('id', $value)->firstOrFail();
             });
         });
@@ -108,61 +108,61 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('note', function ($value) {
-            return Cache::tags(['note'])->rememberForever('notes_' . $value, function () use ($value) {
+            return Cache::tags(['notes'])->rememberForever('notes_' . $value, function () use ($value) {
                 return Note::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('partner', function ($value) {
-            return Cache::tags(['partner'])->rememberForever('partners_' . $value, function () use ($value) {
+            return Cache::tags(['partners'])->rememberForever('partners_' . $value, function () use ($value) {
                 return Partner::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('permission', function ($value) {
-            return Cache::tags(['permission'])->rememberForever('permissions_' . $value, function () use ($value) {
+            return Cache::tags(['permissions'])->rememberForever('permissions_' . $value, function () use ($value) {
                 return Permission::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('post', function ($value) {
-            return Cache::tags(['post'])->rememberForever('posts_' . $value, function () use ($value) {
+            return Cache::tags(['posts'])->rememberForever('posts_' . $value, function () use ($value) {
                 return Post::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('post-category', function ($value) {
-            return Cache::tags(['post_category'])->rememberForever('post_categories_' . $value, function () use ($value) {
+            return Cache::tags(['post_categories'])->rememberForever('post_categories_' . $value, function () use ($value) {
                 return PostCategory::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('protective', function ($value) {
-            return Cache::tags(['protective'])->rememberForever('protectives_' . $value, function () use ($value) {
+            return Cache::tags(['protectives'])->rememberForever('protectives_' . $value, function () use ($value) {
                 return Protective::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('reply', function ($value) {
-            return Cache::tags(['reply'])->rememberForever('replies_' . $value, function () use ($value) {
+            return Cache::tags(['replies'])->rememberForever('replies_' . $value, function () use ($value) {
                 return Reply::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('risk', function ($value) {
-            return Cache::tags(['risk'])->rememberForever('risks_' . $value, function () use ($value) {
+            return Cache::tags(['risks'])->rememberForever('risks_' . $value, function () use ($value) {
                 return Risk::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('system', function ($value) {
-            return Cache::tags(['system'])->rememberForever('systems_' . $value, function () use ($value) {
+            return Cache::tags(['systems'])->rememberForever('systems_' . $value, function () use ($value) {
                 return System::where('id', $value)->firstOrFail();
             });
         });
 
         Route::bind('user', function ($value) {
-            return Cache::tags(['user'])->rememberForever('users_' . $value, function () use ($value) {
+            return Cache::tags(['users'])->rememberForever('users_' . $value, function () use ($value) {
                 return User::where('id', $value)->firstOrFail();
             });
         });

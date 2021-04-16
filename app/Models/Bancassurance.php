@@ -27,13 +27,6 @@ class Bancassurance extends Model
         'status',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => BancassuranceSaved::class,
-        'created' => BancassuranceCreated::class,
-        'updated' => BancassuranceUpdated::class,
-        'deleted' => BancassuranceDeleted::class,
-    ];
-
     public function files()
     {
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
@@ -67,7 +60,7 @@ class Bancassurance extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

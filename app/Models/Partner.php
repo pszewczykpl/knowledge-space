@@ -25,13 +25,6 @@ class Partner extends Model
         'type'
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => PartnerSaved::class,
-        'created' => PartnerCreated::class,
-        'updated' => PartnerUpdated::class,
-        'deleted' => PartnerDeleted::class,
-    ];
-
     public function user()
     {
         return $this->belongsTo('App\Models\User');
@@ -55,7 +48,7 @@ class Partner extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

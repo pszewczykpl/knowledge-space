@@ -19,13 +19,6 @@ class Reply extends Model
     protected $fillable = [
         'content',
     ];
-
-    protected $dispatchesEvents = [
-        'saved' => ReplySaved::class,
-        'created' => ReplyCreated::class,
-        'updated' => ReplyUpdated::class,
-        'deleted' => ReplyDeleted::class,
-    ];
     
     public function user()
     {
@@ -50,7 +43,7 @@ class Reply extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

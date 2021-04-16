@@ -23,13 +23,6 @@ class Employee extends Model
         'status',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => EmployeeSaved::class,
-        'created' => EmployeeCreated::class,
-        'updated' => EmployeeUpdated::class,
-        'deleted' => EmployeeDeleted::class,
-    ];
-
     public function files()
     {
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
@@ -63,7 +56,7 @@ class Employee extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

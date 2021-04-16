@@ -22,13 +22,6 @@ class Attachment extends Model
         'extension',
     ];
 
-    protected $dispatchesEvents = [
-        'saved' => AttachmentSaved::class,
-        'created' => AttachmentCreated::class,
-        'updated' => AttachmentUpdated::class,
-        'deleted' => AttachmentDeleted::class,
-    ];
-
     public function attachmentable()
     {
         return $this->morphTo();
@@ -52,7 +45,7 @@ class Attachment extends Model
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags(['user', $relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
+        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
             return $this->{$relation}()->with('user')->get();
         });
     }

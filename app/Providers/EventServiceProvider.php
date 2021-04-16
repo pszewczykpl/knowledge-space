@@ -2,24 +2,6 @@
 
 namespace App\Providers;
 
-use App\Listeners\AttachmentEventSubscriber;
-use App\Listeners\BancassuranceEventSubscriber;
-use App\Listeners\DepartmentEventSubscriber;
-use App\Listeners\EmployeeEventSubscriber;
-use App\Listeners\FileCategoryEventSubscriber;
-use App\Listeners\FileEventSubscriber;
-use App\Listeners\FundEventSubscriber;
-use App\Listeners\InvestmentEventSubscriber;
-use App\Listeners\NewsEventSubscriber;
-use App\Listeners\NoteEventSubscriber;
-use App\Listeners\PartnerEventSubscriber;
-use App\Listeners\PostCategoryEventSubscriber;
-use App\Listeners\PostEventSubscriber;
-use App\Listeners\ProtectiveEventSubscriber;
-use App\Listeners\ReplyEventSubscriber;
-use App\Listeners\RiskEventSubscriber;
-use App\Listeners\SystemEventSubscriber;
-use App\Listeners\UserEventSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -44,24 +26,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        AttachmentEventSubscriber::class,
-        BancassuranceEventSubscriber::class,
-        DepartmentEventSubscriber::class,
-        EmployeeEventSubscriber::class,
-        FileEventSubscriber::class,
-        FileCategoryEventSubscriber::class,
-        FundEventSubscriber::class,
-        InvestmentEventSubscriber::class,
-        NewsEventSubscriber::class,
-        NoteEventSubscriber::class,
-        PartnerEventSubscriber::class,
-        PostEventSubscriber::class,
-        PostCategoryEventSubscriber::class,
-        ProtectiveEventSubscriber::class,
-        ReplyEventSubscriber::class,
-        RiskEventSubscriber::class,
-        SystemEventSubscriber::class,
-        UserEventSubscriber::class,
+        //
     ];
 
     /**
@@ -73,6 +38,26 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        \App\Models\Attachment::observe(\App\Observers\AttachmentObserver::class);
+        \App\Models\Bancassurance::observe(\App\Observers\BancassuranceObserver::class);
+        \App\Models\Department::observe(\App\Observers\DepartmentObserver::class);
+        \App\Models\Employee::observe(\App\Observers\EmployeeObserver::class);
+        \App\Models\Event::observe(\App\Observers\EventObserver::class);
+        \App\Models\FileCategory::observe(\App\Observers\FileCategoryObserver::class);
+        \App\Models\File::observe(\App\Observers\FileObserver::class);
+        \App\Models\Fund::observe(\App\Observers\FundObserver::class);
+        \App\Models\Investment::observe(\App\Observers\InvestmentObserver::class);
+        \App\Models\News::observe(\App\Observers\NewsObserver::class);
+        \App\Models\Note::observe(\App\Observers\NoteObserver::class);
+        \App\Models\Partner::observe(\App\Observers\PartnerObserver::class);
+        \App\Models\Event::observe(\App\Observers\EventObserver::class);
+        \App\Models\Permission::observe(\App\Observers\PermissionObserver::class);
+        \App\Models\PostCategory::observe(\App\Observers\PostCategoryObserver::class);
+        \App\Models\Post::observe(\App\Observers\PostObserver::class);
+        \App\Models\Protective::observe(\App\Observers\ProtectiveObserver::class);
+        \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+        \App\Models\Risk::observe(\App\Observers\RiskObserver::class);
+        \App\Models\System::observe(\App\Observers\SystemObserver::class);
+        \App\Models\User::observe(\App\Observers\UserObserver::class);
     }
 }
