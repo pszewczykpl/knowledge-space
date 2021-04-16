@@ -18,13 +18,13 @@
             @foreach($notes->sortByDesc('updated_at') as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
-                    <img alt="Pic" src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}">
+                    <img alt="Pic" src="{{ Storage::url($note->getCachedRelation('user')->avatar_path ?? 'avatars/default.jpg') }}">
                 </div>
                 <div class="timeline-content">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="mr-2">
-                            <a href="{{ route('users.show', $note->user->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
-                                {{ $note->user->first_name }} {{ $note->user->last_name }}
+                            <a href="{{ route('users.show', $note->getCachedRelation('user')->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
+                                {{ $note->getCachedRelation('user')->fullname() }}
                             </a>
                             <span class="text-muted font-weight-light ml-2">
                                 {{ $note->updated_at }}
