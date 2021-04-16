@@ -38,15 +38,15 @@ class Attachment extends Model
     }
 
     /**
-     * Get cached relation with user.
+     * Get cached relation.
      *
      * @param string $relation
      * @return array|mixed
      */
     public function getCachedRelation(string $relation)
     {
-        return Cache::tags([$relation, 'users'])->rememberForever('users_' . $this->id . '_' . $relation .'_user_get', function () use ($relation) {
-            return $this->{$relation}()->with('user')->get();
+        return Cache::tags(['attachments', $relation])->rememberForever('attachments_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->{$relation};
         });
     }
 }
