@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Protective;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class ProtectiveObserver
@@ -15,7 +16,14 @@ class ProtectiveObserver
      */
     public function created(Protective $protective)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($protective);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class ProtectiveObserver
      */
     public function updated(Protective $protective)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($protective);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class ProtectiveObserver
      */
     public function deleted(Protective $protective)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($protective);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class ProtectiveObserver
      */
     public function restored(Protective $protective)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($protective);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class ProtectiveObserver
      */
     public function forceDeleted(Protective $protective)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($protective);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

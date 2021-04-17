@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Investment;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class InvestmentObserver
@@ -15,7 +16,14 @@ class InvestmentObserver
      */
     public function created(Investment $investment)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($investment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class InvestmentObserver
      */
     public function updated(Investment $investment)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($investment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class InvestmentObserver
      */
     public function deleted(Investment $investment)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($investment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class InvestmentObserver
      */
     public function restored(Investment $investment)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($investment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class InvestmentObserver
      */
     public function forceDeleted(Investment $investment)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($investment);
+        $investment->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

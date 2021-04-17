@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver
@@ -15,7 +16,14 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($post);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class PostObserver
      */
     public function updated(Post $post)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($post);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class PostObserver
      */
     public function deleted(Post $post)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($post);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class PostObserver
      */
     public function restored(Post $post)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($post);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class PostObserver
      */
     public function forceDeleted(Post $post)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($post);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

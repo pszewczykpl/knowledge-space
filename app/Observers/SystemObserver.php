@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\System;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class SystemObserver
@@ -15,7 +16,14 @@ class SystemObserver
      */
     public function created(System $system)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($system);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class SystemObserver
      */
     public function updated(System $system)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($system);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class SystemObserver
      */
     public function deleted(System $system)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($system);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class SystemObserver
      */
     public function restored(System $system)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($system);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class SystemObserver
      */
     public function forceDeleted(System $system)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($system);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

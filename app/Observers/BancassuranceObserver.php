@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Bancassurance;
+use App\Models\Event;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class BancassuranceObserver
@@ -15,7 +18,14 @@ class BancassuranceObserver
      */
     public function created(Bancassurance $bancassurance)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($bancassurance);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +36,14 @@ class BancassuranceObserver
      */
     public function updated(Bancassurance $bancassurance)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($bancassurance);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +65,14 @@ class BancassuranceObserver
      */
     public function deleted(Bancassurance $bancassurance)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($bancassurance);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +83,14 @@ class BancassuranceObserver
      */
     public function restored(Bancassurance $bancassurance)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($bancassurance);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +101,13 @@ class BancassuranceObserver
      */
     public function forceDeleted(Bancassurance $bancassurance)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($bancassurance);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

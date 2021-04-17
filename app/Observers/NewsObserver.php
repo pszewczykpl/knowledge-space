@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\News;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class NewsObserver
@@ -15,7 +16,14 @@ class NewsObserver
      */
     public function created(News $news)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($news);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class NewsObserver
      */
     public function updated(News $news)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($news);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class NewsObserver
      */
     public function deleted(News $news)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($news);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class NewsObserver
      */
     public function restored(News $news)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($news);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class NewsObserver
      */
     public function forceDeleted(News $news)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($news);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

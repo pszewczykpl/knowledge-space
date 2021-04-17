@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Note;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class NoteObserver
@@ -15,7 +16,14 @@ class NoteObserver
      */
     public function created(Note $note)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($note);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class NoteObserver
      */
     public function updated(Note $note)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($note);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class NoteObserver
      */
     public function deleted(Note $note)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($note);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class NoteObserver
      */
     public function restored(Note $note)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($note);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class NoteObserver
      */
     public function forceDeleted(Note $note)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($note);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

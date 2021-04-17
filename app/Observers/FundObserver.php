@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Fund;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class FundObserver
@@ -15,7 +16,14 @@ class FundObserver
      */
     public function created(Fund $fund)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($fund);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class FundObserver
      */
     public function updated(Fund $fund)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($fund);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class FundObserver
      */
     public function deleted(Fund $fund)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($fund);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class FundObserver
      */
     public function restored(Fund $fund)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($fund);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class FundObserver
      */
     public function forceDeleted(Fund $fund)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($fund);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

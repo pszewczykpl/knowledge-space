@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Partner;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class PartnerObserver
@@ -15,7 +16,14 @@ class PartnerObserver
      */
     public function created(Partner $partner)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($partner);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class PartnerObserver
      */
     public function updated(Partner $partner)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($partner);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class PartnerObserver
      */
     public function deleted(Partner $partner)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($partner);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class PartnerObserver
      */
     public function restored(Partner $partner)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($partner);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class PartnerObserver
      */
     public function forceDeleted(Partner $partner)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($partner);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

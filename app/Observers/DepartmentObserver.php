@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Department;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class DepartmentObserver
@@ -15,7 +16,14 @@ class DepartmentObserver
      */
     public function created(Department $department)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($department);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class DepartmentObserver
      */
     public function updated(Department $department)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($department);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class DepartmentObserver
      */
     public function deleted(Department $department)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($department);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class DepartmentObserver
      */
     public function restored(Department $department)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($department);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class DepartmentObserver
      */
     public function forceDeleted(Department $department)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($department);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\FileCategory;
+use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
 
 class FileCategoryObserver
@@ -15,7 +16,14 @@ class FileCategoryObserver
      */
     public function created(FileCategory $fileCategory)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($fileCategory);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -26,7 +34,14 @@ class FileCategoryObserver
      */
     public function updated(FileCategory $fileCategory)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($fileCategory);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -48,7 +63,14 @@ class FileCategoryObserver
      */
     public function deleted(FileCategory $fileCategory)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($fileCategory);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -59,7 +81,14 @@ class FileCategoryObserver
      */
     public function restored(FileCategory $fileCategory)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($fileCategory);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -70,6 +99,13 @@ class FileCategoryObserver
      */
     public function forceDeleted(FileCategory $fileCategory)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($fileCategory);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }
