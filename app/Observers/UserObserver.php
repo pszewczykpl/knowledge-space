@@ -20,6 +20,7 @@ class UserObserver
     {
         $event = new Event();
         $event->event = 'created';
+        $event->visible = false;
         $event->eventable()->associate($user);
         $event->save();
 
@@ -38,6 +39,7 @@ class UserObserver
     {
         $event = new Event();
         $event->event = 'updated';
+        $event->visible = false;
         $event->eventable()->associate($user);
         $event->save();
 
@@ -67,6 +69,7 @@ class UserObserver
     {
         $event = new Event();
         $event->event = 'deleted';
+        $event->visible = false;
         $event->eventable()->associate($user);
         $event->save();
 
@@ -85,6 +88,7 @@ class UserObserver
     {
         $event = new Event();
         $event->event = 'restored';
+        $event->visible = false;
         $event->eventable()->associate($user);
         $event->save();
 
@@ -103,6 +107,7 @@ class UserObserver
     {
         $event = new Event();
         $event->event = 'forceDeleted';
+        $event->visible = false;
         $event->eventable()->associate($user);
         $event->save();
 
