@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\FileCategory;
 use App\Models\Event;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class FileCategoryObserver
 {

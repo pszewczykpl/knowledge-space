@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Department;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class DepartmentObserver

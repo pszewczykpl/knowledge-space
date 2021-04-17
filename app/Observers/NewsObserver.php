@@ -4,6 +4,8 @@ namespace App\Observers;
 
 use App\Models\News;
 use App\Models\Event;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class NewsObserver
@@ -14,7 +16,7 @@ class NewsObserver
      * @param  \App\Models\News  $news
      * @return void
      */
-    public function created(News $news)
+    public function created(News $news, User $user)
     {
         $event = new Event();
         $event->event = 'created';

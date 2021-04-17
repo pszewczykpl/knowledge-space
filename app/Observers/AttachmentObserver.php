@@ -18,7 +18,14 @@ class AttachmentObserver
      */
     public function created(Attachment $attachment)
     {
-        //
+        $event = new Event();
+        $event->event = 'created';
+        $event->eventable()->associate($attachment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -29,7 +36,14 @@ class AttachmentObserver
      */
     public function updated(Attachment $attachment)
     {
-        //
+        $event = new Event();
+        $event->event = 'updated';
+        $event->eventable()->associate($attachment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -51,7 +65,14 @@ class AttachmentObserver
      */
     public function deleted(Attachment $attachment)
     {
-        //
+        $event = new Event();
+        $event->event = 'deleted';
+        $event->eventable()->associate($attachment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -62,7 +83,14 @@ class AttachmentObserver
      */
     public function restored(Attachment $attachment)
     {
-        //
+        $event = new Event();
+        $event->event = 'restored';
+        $event->eventable()->associate($attachment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 
     /**
@@ -73,6 +101,13 @@ class AttachmentObserver
      */
     public function forceDeleted(Attachment $attachment)
     {
-        //
+        $event = new Event();
+        $event->event = 'forceDeleted';
+        $event->eventable()->associate($attachment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
     }
 }
