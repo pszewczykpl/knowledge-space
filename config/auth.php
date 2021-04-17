@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Auth\EloquentUserProvider;
+
 return [
 
     /*
@@ -67,7 +69,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'UserServiceProvider',
             'model' => App\Models\User::class,
         ],
 
