@@ -7,11 +7,11 @@
 					<div class="d-flex">
 						<div class="d-flex align-items-center pr-5">
 							@include('svg.post-category', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-							<a href="{{ route('posts.index', ['category' => $post->getCachedRelation('post_category')->first()->id]) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->getCachedRelation('post_category')->first()->name }}</a>
+							<a href="{{ route('posts.index', ['category' => $post->getCachedRelation('post_category')->id]) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->getCachedRelation('post_category')->name }}</a>
 						</div>
 						<div class="d-flex align-items-center">
 							@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-							<a href="{{ route('users.show', $post->user->id) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->user->fullname() }}</a>
+							<a href="{{ route('users.show', $post->getCachedRelation('user')->id) }}" class="@if($post->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $post->getCachedRelation('user')->fullname() }}</a>
 						</div>
 					</div>
 				</div>

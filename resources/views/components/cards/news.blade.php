@@ -3,10 +3,10 @@
 		<div>
 			<div class="d-flex align-items-center pb-4">
 				<div class="symbol symbol-40 symbol-white mr-5">
-					<span class="symbol-label" style="background-image:url({{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }})"></span>
+					<span class="symbol-label" style="background-image:url({{ Storage::url($news->getCachedRelation('user')->avatar_path ?? 'avatars/default.jpg') }})"></span>
 				</div>
 				<div class="d-flex flex-column flex-grow-1">
-					<a href="{{ route('users.show', $news->user->id) }}" class="@if($news->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder">{{ $news->user->fullname() }}</a>
+					<a href="{{ route('users.show', $news->getCachedRelation('user')->id) }}" class="@if($news->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder">{{ $news->getCachedRelation('user')->fullname() }}</a>
 					<div class="d-flex">
 						<div class="d-flex align-items-center pr-5">
 							@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
@@ -14,7 +14,7 @@
 						</div>
 						<div class="d-flex align-items-center">
 							@include('svg.department', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-							<span class="@if($news->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $news->user->getCachedRelation('department')->first()->name }}</span>
+							<span class="@if($news->trashed()) text-white @else text-muted @endif font-weight-bold">{{ $news->getCachedRelation('user')->getCachedRelation('department')->name }}</span>
 						</div>
 					</div>
 				</div>
@@ -87,12 +87,12 @@
 				@foreach($news->getCachedRelation('replies') as $reply)
 					<div class="d-flex py-5">
 						<div class="symbol symbol-40 symbol-white mr-5 mt-1">
-							<span class="symbol-label" style="background-image:url({{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }})"></span>
+							<span class="symbol-label" style="background-image:url({{ Storage::url($reply->getCachedRelation('user')->avatar_path ?? 'avatars/default.jpg') }})"></span>
 						</div>
 						<div class="d-flex flex-column flex-row-fluid">
 							<div class="d-flex align-items-center flex-wrap">
 								<div class="d-flex">
-									<a href="{{ route('users.show', $reply->user->id) }}" class="@if($news->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->user->fullname() }}</a>
+									<a href="{{ route('users.show', $reply->getCachedRelation('user')->id) }}" class="@if($news->trashed()) text-white @else text-dark-75 text-hover-primary @endif mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->getCachedRelation('user')->fullname() }}</a>
 								</div>
 								<div class="flex-grow-1">
 									@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary'])
