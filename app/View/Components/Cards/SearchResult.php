@@ -6,32 +6,20 @@ use Illuminate\View\Component;
 
 class SearchResult extends Component
 {
-    public $id;
-    public $title;
-    public $additional;
-    public $active;
-    public $route;
+    public $result;
     public $icon;
-    public $iconColor;
+    public $route;
 
     /**
      * Create a new component instance.
      *
      * @param $result
-     * @param $route
-     * @param $icon
-     * @param string $iconColor
-     * @param array $additional
      */
-    public function __construct($result, $route, $icon, $iconColor = 'primary')
+    public function __construct($result, $icon, $route)
     {
-        $this->additional = (array) $result->additional;
-        $this->id = $result->id;
-        $this->title = $result->extended_name();
-        $this->active = ($result->status ?? 'A') == 'A';
-        $this->route = $route;
+        $this->result = $result;
         $this->icon = $icon;
-        $this->iconColor = $iconColor;
+        $this->route = $route;
     }
 
     /**
