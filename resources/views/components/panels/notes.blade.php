@@ -18,13 +18,13 @@
             @foreach($notes->sortByDesc('updated_at') as $note)
             <div class="timeline-item">
                 <div class="timeline-media">
-                    <img alt="Pic" src="{{ Storage::url($note->getCachedRelation('user')->avatar_path ?? 'avatars/default.jpg') }}">
+                    <img alt="Pic" src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}">
                 </div>
                 <div class="timeline-content">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="mr-2">
-                            <a href="{{ route('users.show', $note->getCachedRelation('user')->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
-                                {{ $note->getCachedRelation('user')->fullname() }}
+                            <a href="{{ route('users.show', $note->user->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
+                                {{ $note->user->fullname() }}
                             </a>
                             <span class="text-muted font-weight-light ml-2">
                                 {{ $note->updated_at }}
@@ -48,13 +48,13 @@
                         {{ $note->content }}
                     </p>
 
-                    @if($note->getCachedRelation('attachments')->count() > 0)
+                    @if($note->attachments->count() > 0)
                     <div class="row pl-3">
                         @include('svg.attachment', ['class' => 'svg-icon-primary svg-icon-2x'])
                         <span class="text-dark-50 font-weight-md font-size-lg pl-1">Załączniki</span>
                     </div>
                     <div class="row pl-3 pt-3">
-                            @foreach($note->getCachedRelation('attachments') as $attachment)
+                            @foreach($note->attachments as $attachment)
                                 <div class="pb-3 pr-6">
                                     <a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
                                         <img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">

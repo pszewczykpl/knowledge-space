@@ -68,7 +68,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$investment->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$investment->created_at" />
-				<x-cards.details-row --attribute="Utworzone przez" :value="$investment->getCachedRelation('user')->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$investment->user->fullname()" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">
@@ -106,10 +106,10 @@
 				<div class="card-body px-0">
 					<div class="tab-content pt-2">
 						<div class="tab-pane " id="notes" role="tabpanel">
-							<x-panels.notes :notes="$investment->getCachedRelation('notes')" -type="investment" :id="$investment->id"  />
+							<x-panels.notes :notes="$investment->notes" -type="investment" :id="$investment->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$investment->getCachedRelation('files')" :name="$investment->extended_name()" -type="investment" :id="$investment->id" />
+							<x-panels.files :files="$investment->files" :name="$investment->extended_name()" -type="investment" :id="$investment->id" />
 						</div>
 						<div class="tab-pane" id="funds" role="tabpanel">
 							<x-panels.funds :investmentid="$investment->id" />

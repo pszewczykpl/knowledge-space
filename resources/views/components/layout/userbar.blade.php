@@ -29,7 +29,7 @@
 							<span class="navi-text text-muted text-primary pt-1">{{ Auth::user()->position }}</span>
 							@else
 							<span class="navi-icon mr-1"> @include('svg.department', ['class' => 'svg-icon-lg svg-icon-primary']) </span>
-							<span class="navi-text text-muted text-primary pt-1">{{ Auth::user()->getCachedRelation('department')->first()->name }}</span>
+							<span class="navi-text text-muted text-primary pt-1">{{ Auth::user()->department->name }}</span>
 							@endif
 						</span>
 					</span>

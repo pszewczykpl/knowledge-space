@@ -76,7 +76,7 @@
                                         </svg>
                                     </span>
                                     <span class="text-dark-75 font-weight-bold">
-                                        {{ Auth::user()->getCachedRelation('department')->first()->name }}
+                                        {{ Auth::user()->department->name }}
                                     </span>
                                 </div>
                                 <div class="text-center pl-3">

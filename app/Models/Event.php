@@ -19,22 +19,32 @@ class Event extends Model
         return $this->morphTo();
     }
 
+    /**
+     * Get the user that performed the actions.
+     */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 
     /**
-     * Get cached relation.
+     * Set user attribute value from cached data.
      *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * @return mixed
      */
-    public function getCachedRelation(string $relation)
+    public function getUserAttribute()
     {
-        return Cache::tags(['events', $relation])->rememberForever('events_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['events', 'users'])->rememberForever('events_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
         });
+        $this->setRelation('user', $user);
+        
+        return $user;
     }
+
 }

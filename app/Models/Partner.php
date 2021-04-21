@@ -25,14 +25,29 @@ class Partner extends Model
         'type'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
+    }
+
+    /**
+     * Set notes attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getNotesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('notes')) {
+            return $this->getRelationValue('notes');
+        }
+    
+        $notes = Cache::tags(['partners', 'notes'])->rememberForever('partners_' . $this->id . '_notes', function () {
+            return $this->getRelationValue('notes');
+        });
+        $this->setRelation('notes', $notes);
+        
+        return $notes;
     }
 
     public function events()
@@ -41,16 +56,31 @@ class Partner extends Model
     }
 
     /**
-     * Get cached relation.
-     *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * Get the author that created the partner.
      */
-    public function getCachedRelation(string $relation)
+    public function user()
     {
-        return Cache::tags(['partners', $relation])->rememberForever('partners_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
-        });
+        return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Set user attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getUserAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['partners', 'users'])->rememberForever('partners_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
+        });
+        $this->setRelation('user', $user);
+        
+        return $user;
+    }
+
 }

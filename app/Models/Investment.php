@@ -29,29 +29,113 @@ class Investment extends Model
         'status',
     ];
 
+    /**
+     * Get all of the files for the investment.
+     */
     public function files()
     {
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Set files attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getFilesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('files')) {
+            return $this->getRelationValue('files');
+        }
+    
+        $files = Cache::tags(['investments', 'files'])->rememberForever('investments_' . $this->id . '_files', function () {
+            return $this->getRelationValue('files');
+        });
+        $this->setRelation('files', $files);
+
+        return $files;
+    }
+
+    /**
+     * Get all of the notes for the investment.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
     }
+
+    /**
+     * Set notes attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getNotesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('notes')) {
+            return $this->getRelationValue('notes');
+        }
     
+        $notes = Cache::tags(['investments', 'notes'])->rememberForever('investments_' . $this->id . '_notes', function () {
+            return $this->getRelationValue('notes');
+        });
+        $this->setRelation('notes', $notes);
+        
+        return $notes;
+    }
+    
+    /**
+     * Get the funds that belong to the investment.
+     */
     public function funds()
     {
         return $this->belongsToMany('App\Models\Fund')->withTimestamps();
     }
 
-    public function user()
+    /**
+     * Set funds attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getFundsAttribute()
     {
-        return $this->belongsTo('App\Models\User');
+        // When relation is loaded, return value
+        if ($this->relationLoaded('funds')) {
+            return $this->getRelationValue('funds');
+        }
+    
+        $funds = Cache::tags(['investments', 'funds'])->rememberForever('investments_' . $this->id . '_funds', function () {
+            return $this->getRelationValue('funds');
+        });
+        $this->setRelation('funds', $funds);
+        
+        return $funds;
     }
 
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['investments', 'events'])->rememberForever('investments_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+        
+        return $events;
     }
 
     public function extended_name()
@@ -65,16 +149,31 @@ class Investment extends Model
     }
 
     /**
-     * Get cached relation.
-     *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * Get the author that created the investment.
      */
-    public function getCachedRelation(string $relation)
+    public function user()
     {
-        return Cache::tags(['investments', $relation])->rememberForever('investments_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
-        });
+        return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Set user attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getUserAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['investments', 'users'])->rememberForever('investments_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
+        });
+        $this->setRelation('user', $user);
+        
+        return $user;
+    }
+
 }

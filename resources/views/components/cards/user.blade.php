@@ -63,7 +63,7 @@
                     <div class="pt-2 text-center">
                         @include('svg.department', ['class' => 'svg-icon-lg svg-icon-primary'])
                         <span class="text-dark-75 font-weight-bold">
-                            {{ $user->getCachedRelation('department')->name }}
+                            {{ $user->department->name }}
                         </span>
                     </div>
                     <div class="pt-8 text-center">

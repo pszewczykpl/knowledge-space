@@ -26,11 +26,6 @@ class Post extends Model
         return $this->belongsTo('App\Models\PostCategory');
     }
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'attachmentable');
@@ -42,16 +37,31 @@ class Post extends Model
     }
 
     /**
-     * Get cached relation.
-     *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * Get the author that created the post.
      */
-    public function getCachedRelation(string $relation)
+    public function user()
     {
-        return Cache::tags(['posts', $relation])->rememberForever('posts_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
-        });
+        return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Set user attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getUserAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['posts', 'users'])->rememberForever('posts_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
+        });
+        $this->setRelation('user', $user);
+        
+        return $user;
+    }
+
 }

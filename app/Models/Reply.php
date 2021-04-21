@@ -19,11 +19,6 @@ class Reply extends Model
     protected $fillable = [
         'content',
     ];
-    
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
 
     public function news()
     {
@@ -34,18 +29,33 @@ class Reply extends Model
     {
         return $this->morphMany(Event::class, 'eventable');
     }
+    
+    /**
+     * Get the author that created the reply.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     /**
-     * Get cached relation.
+     * Set user attribute value from cached data.
      *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * @return mixed
      */
-    public function getCachedRelation(string $relation)
+    public function getUserAttribute()
     {
-        return Cache::tags(['replies', $relation])->rememberForever('replies_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['replies', 'users'])->rememberForever('replies_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
         });
+        $this->setRelation('user', $user);
+        
+        return $user;
     }
+
 }

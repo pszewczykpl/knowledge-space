@@ -23,17 +23,19 @@
 					<div class="card card-custom card-stretch gutter-b shadow-lg pb-8 pt-8">
 
 						@foreach($results as $key => $data)
-							<div class="card-header border-0 pt-3">
-								<h3 class="card-title align-items-start flex-column">
-									<span class="card-label font-weight-bolder text-dark">{{ $meta[$key]['title'] }}</span>
-									<span class="text-muted mt-1 font-weight-bold font-size-sm">{{ $data->count() }} wyszukań dla frazy <b>{{ $value }}</b></span>
-								</h3>
-							</div>
-							<div class="card-body pt-0 pb-0">
-								@foreach($data as $values)
-									<x-cards.search-result :result="$values" :route="$key" :icon="$meta[$key]['icon']" />
-								@endforeach
-							</div>
+							@if($data->count() > 0)
+								<div class="card-header border-0 pt-3">
+									<h3 class="card-title align-items-start flex-column">
+										<span class="card-label font-weight-bolder text-dark">{{ $meta[$key]['title'] }}</span>
+										<span class="text-muted mt-1 font-weight-bold font-size-sm">{{ $data->count() }} wyszukań dla frazy <b>{{ $value }}</b></span>
+									</h3>
+								</div>
+								<div class="card-body pt-0 pb-0">
+									@foreach($data as $values)
+										<x-cards.search-result :result="$values" :route="$key" :icon="$meta[$key]['icon']" />
+									@endforeach
+								</div>
+							@endif
 						@endforeach
 
 					</div>

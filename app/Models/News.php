@@ -20,11 +20,6 @@ class News extends Model
         'content',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function replies()
     {
         return $this->hasMany('App\Models\Reply');
@@ -36,16 +31,31 @@ class News extends Model
     }
 
     /**
-     * Get cached relation.
-     *
-     * @param string $relation
-     * @param string $field
-     * @return array|mixed
+     * Get the author that created the news.
      */
-    public function getCachedRelation(string $relation)
+    public function user()
     {
-        return Cache::tags(['news', $relation])->rememberForever('news_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
-        });
+        return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Set user attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getUserAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('user')) {
+            return $this->getRelationValue('user');
+        }
+    
+        $user = Cache::tags(['news', 'users'])->rememberForever('news_' . $this->id . '_user', function () {
+            return $this->getRelationValue('user');
+        });
+        $this->setRelation('user', $user);
+        
+        return $user;
+    }
+
 }

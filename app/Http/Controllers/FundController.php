@@ -97,10 +97,7 @@ class FundController extends Controller
      */
     public function show(Fund $fund)
     {
-        return view('funds.show', [
-            'title' => 'Szczegóły',
-            'fund' => $fund,
-        ]);
+        echo $fund->notes;
     }
 
     /**

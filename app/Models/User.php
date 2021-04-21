@@ -76,6 +76,26 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\File');
     }
 
+    /**
+     * Set files attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getFilesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('files')) {
+            return $this->getRelationValue('files');
+        }
+    
+        $files = Cache::tags(['users', 'files'])->rememberForever('users_' . $this->id . '_files', function () {
+            return $this->getRelationValue('files');
+        });
+        $this->setRelation('files', $files);
+
+        return $files;
+    }
+
     public function file_categories()
     {
         return $this->hasMany('App\Models\FileCategory');
@@ -99,6 +119,26 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->hasMany('App\Models\Note');
+    }
+
+    /**
+     * Set notes attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getNotesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('notes')) {
+            return $this->getRelationValue('notes');
+        }
+    
+        $notes = Cache::tags(['users', 'notes'])->rememberForever('users_' . $this->id . '_notes', function () {
+            return $this->getRelationValue('notes');
+        });
+        $this->setRelation('notes', $notes);
+        
+        return $notes;
     }
 
     public function partners()
@@ -141,11 +181,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
     public function post_categories()
     {
         return $this->hasMany('App\Models\PostCategory');
@@ -184,16 +219,4 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    /**
-     * Get cached relation.
-     *
-     * @param string $relation
-     * @return array|mixed
-     */
-    public function getCachedRelation(string $relation)
-    {
-        return Cache::tags(['users', $relation])->rememberForever('users_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->{$relation};
-        });
-    }
 }

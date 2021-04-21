@@ -37,7 +37,7 @@
                             <div class="timeline-desc timeline-desc-light-primary">
                                 <span class="font-weight-bolder text-primary">{{ $event->created_at }}</span>
                                 <p class="font-weight-normal text-dark-50 pb-2">
-                                    {{ $event->getCachedRelation('user') ? $event->getCachedRelation('user')->fullname() : '' }}
+                                    {{ $event->user ? $event->user->fullname() : '' }}
                                     @if($event->event == 'created') utworzył
                                         @elseif($event->event == 'updated') zaktualizował
                                         @elseif($event->event == 'deleted') usunął
