@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Models\FileCategory;
 
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\HttpFoundation\BinaryFileResponse as BinaryFileResponseAlias;
 use ZipArchive;
 
 use App\Http\Controllers\Controller;
@@ -79,7 +80,7 @@ class FileController extends Controller
      * 
      * @param request $request
      * 
-     * @return file
+     * @return BinaryFileResponseAlias
      */
     public function zip(Request $request)
     {
