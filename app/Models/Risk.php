@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\RiskCreated;
-use App\Events\RiskDeleted;
-use App\Events\RiskSaved;
-use App\Events\RiskUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Risk extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
         'name',
@@ -36,17 +37,7 @@ class Risk extends Model
      */
     public function getNotesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('notes')) {
-            return $this->getRelationValue('notes');
-        }
-    
-        $notes = Cache::tags(['risks', 'notes'])->rememberForever('risks_' . $this->id . '_notes', function () {
-            return $this->getRelationValue('notes');
-        });
-        $this->setRelation('notes', $notes);
-        
-        return $notes;
+        return $this->getCachedRelation('notes', ['notes']);
     }
 
     /**
@@ -64,21 +55,11 @@ class Risk extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['risks', 'events'])->rememberForever('risks_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
     
     /**
-     * Get the author that created the risk.
+     * Get the user that created the risk.
      */
     public function user()
     {
@@ -92,17 +73,29 @@ class Risk extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['risks', 'users'])->rememberForever('risks_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'risks'))->rememberForever('risks_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

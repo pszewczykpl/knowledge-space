@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\UserCreated;
-use App\Events\UserDeleted;
-use App\Events\UserSaved;
-use App\Events\UserUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,6 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the department that owns the user.
+     */
     public function department()
     {
         return $this->belongsTo('App\Models\Department');
@@ -68,17 +67,7 @@ class User extends Authenticatable
      */
     public function getDepartmentAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('department')) {
-            return $this->getRelationValue('department');
-        }
-    
-        $department = Cache::tags(['users', 'departments'])->rememberForever('users_' . $this->id . '_department', function () {
-            return $this->getRelationValue('department');
-        });
-        $this->setRelation('department', $department);
-
-        return $department;
+        return $this->getCachedRelation('department', ['departments']);
     }
 
     /**
@@ -96,17 +85,7 @@ class User extends Authenticatable
      */
     public function getAttachmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('attachments')) {
-            return $this->getRelationValue('attachments');
-        }
-    
-        $attachments = Cache::tags(['users', 'attachments'])->rememberForever('users_' . $this->id . '_attachments', function () {
-            return $this->getRelationValue('attachments');
-        });
-        $this->setRelation('attachments', $attachments);
-
-        return $attachments;
+        return $this->getCachedRelation('attachments', ['attachments']);
     }
 
     /**
@@ -124,17 +103,7 @@ class User extends Authenticatable
      */
     public function getDepartmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('departments')) {
-            return $this->getRelationValue('departments');
-        }
-    
-        $departments = Cache::tags(['users', 'departments'])->rememberForever('users_' . $this->id . '_departments', function () {
-            return $this->getRelationValue('departments');
-        });
-        $this->setRelation('departments', $departments);
-
-        return $departments;
+        return $this->getCachedRelation('departments', ['departments']);
     }
 
     /**
@@ -152,17 +121,7 @@ class User extends Authenticatable
      */
     public function getEmployeesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('employees')) {
-            return $this->getRelationValue('employees');
-        }
-    
-        $employees = Cache::tags(['users', 'employees'])->rememberForever('users_' . $this->id . '_employees', function () {
-            return $this->getRelationValue('employees');
-        });
-        $this->setRelation('employees', $employees);
-
-        return $employees;
+        return $this->getCachedRelation('employees', ['employees']);
     }
 
     /**
@@ -180,17 +139,7 @@ class User extends Authenticatable
      */
     public function getFilesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('files')) {
-            return $this->getRelationValue('files');
-        }
-    
-        $files = Cache::tags(['users', 'files'])->rememberForever('users_' . $this->id . '_files', function () {
-            return $this->getRelationValue('files');
-        });
-        $this->setRelation('files', $files);
-
-        return $files;
+        return $this->getCachedRelation('files', ['files']);
     }
 
     /**
@@ -208,17 +157,7 @@ class User extends Authenticatable
      */
     public function getFileCategoriesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('fileCategories')) {
-            return $this->getRelationValue('fileCategories');
-        }
-    
-        $fileCategories = Cache::tags(['users', 'file_categories'])->rememberForever('users_' . $this->id . '_file_categories', function () {
-            return $this->getRelationValue('fileCategories');
-        });
-        $this->setRelation('fileCategories', $fileCategories);
-
-        return $fileCategories;
+        return $this->getCachedRelation('fileCategories', ['file_categories']);
     }
 
     /**
@@ -236,17 +175,7 @@ class User extends Authenticatable
      */
     public function getFundsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('funds')) {
-            return $this->getRelationValue('funds');
-        }
-    
-        $funds = Cache::tags(['users', 'funds'])->rememberForever('users_' . $this->id . '_funds', function () {
-            return $this->getRelationValue('funds');
-        });
-        $this->setRelation('funds', $funds);
-
-        return $funds;
+        return $this->getCachedRelation('funds', ['funds']);
     }
 
     /**
@@ -264,17 +193,7 @@ class User extends Authenticatable
      */
     public function getInvestmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('investments')) {
-            return $this->getRelationValue('investments');
-        }
-    
-        $investments = Cache::tags(['users', 'investments'])->rememberForever('users_' . $this->id . '_investments', function () {
-            return $this->getRelationValue('investments');
-        });
-        $this->setRelation('investments', $investments);
-
-        return $investments;
+        return $this->getCachedRelation('investments', ['investments']);
     }
 
     /**
@@ -292,17 +211,7 @@ class User extends Authenticatable
      */
     public function getNewsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('news')) {
-            return $this->getRelationValue('news');
-        }
-    
-        $news = Cache::tags(['users', 'news'])->rememberForever('users_' . $this->id . '_news', function () {
-            return $this->getRelationValue('news');
-        });
-        $this->setRelation('news', $news);
-
-        return $news;
+        return $this->getCachedRelation('news', ['news']);
     }
 
     /**
@@ -320,17 +229,7 @@ class User extends Authenticatable
      */
     public function getNotesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('notes')) {
-            return $this->getRelationValue('notes');
-        }
-    
-        $notes = Cache::tags(['users', 'notes'])->rememberForever('users_' . $this->id . '_notes', function () {
-            return $this->getRelationValue('notes');
-        });
-        $this->setRelation('notes', $notes);
-        
-        return $notes;
+        return $this->getCachedRelation('notes', ['notes']);
     }
 
     /**
@@ -348,17 +247,7 @@ class User extends Authenticatable
      */
     public function getPartnersAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('partners')) {
-            return $this->getRelationValue('partners');
-        }
-    
-        $partners = Cache::tags(['users', 'partners'])->rememberForever('users_' . $this->id . '_partners', function () {
-            return $this->getRelationValue('partners');
-        });
-        $this->setRelation('partners', $partners);
-
-        return $partners;
+        return $this->getCachedRelation('partners', ['partners']);
     }
 
     public function permissions()
@@ -373,17 +262,7 @@ class User extends Authenticatable
      */
     public function getPermissionsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('permissions')) {
-            return $this->getRelationValue('permissions');
-        }
-    
-        $permissions = Cache::tags(['users', 'permissions'])->rememberForever('users_' . $this->id . '_permissions', function () {
-            return $this->getRelationValue('permissions');
-        });
-        $this->setRelation('permissions', $permissions);
-
-        return $permissions;
+        return $this->getCachedRelation('permissions', ['permissions']);
     }
 
     /**
@@ -401,17 +280,7 @@ class User extends Authenticatable
      */
     public function getProtectivesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('protectives')) {
-            return $this->getRelationValue('protectives');
-        }
-    
-        $protectives = Cache::tags(['users', 'protectives'])->rememberForever('users_' . $this->id . '_protectives', function () {
-            return $this->getRelationValue('protectives');
-        });
-        $this->setRelation('protectives', $protectives);
-
-        return $protectives;
+        return $this->getCachedRelation('protectives', ['protectives']);
     }
     
     /**
@@ -429,17 +298,7 @@ class User extends Authenticatable
      */
     public function getBancassurancesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('bancassurances')) {
-            return $this->getRelationValue('bancassurances');
-        }
-    
-        $bancassurances = Cache::tags(['users', 'bancassurances'])->rememberForever('users_' . $this->id . '_bancassurances', function () {
-            return $this->getRelationValue('bancassurances');
-        });
-        $this->setRelation('bancassurances', $bancassurances);
-
-        return $bancassurances;
+        return $this->getCachedRelation('bancassurances', ['bancassurances']);
     }
 
     /**
@@ -457,17 +316,7 @@ class User extends Authenticatable
      */
     public function getRepliesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('replies')) {
-            return $this->getRelationValue('replies');
-        }
-    
-        $replies = Cache::tags(['users', 'replies'])->rememberForever('users_' . $this->id . '_replies', function () {
-            return $this->getRelationValue('replies');
-        });
-        $this->setRelation('replies', $replies);
-
-        return $replies;
+        return $this->getCachedRelation('replies', ['replies']);
     }
 
     /**
@@ -485,17 +334,7 @@ class User extends Authenticatable
      */
     public function getRisksAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('risks')) {
-            return $this->getRelationValue('risks');
-        }
-    
-        $risks = Cache::tags(['users', 'risks'])->rememberForever('users_' . $this->id . '_risks', function () {
-            return $this->getRelationValue('risks');
-        });
-        $this->setRelation('risks', $risks);
-
-        return $risks;
+        return $this->getCachedRelation('risks', ['risks']);
     }
 
     /**
@@ -513,17 +352,7 @@ class User extends Authenticatable
      */
     public function getSystemsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('systems')) {
-            return $this->getRelationValue('systems');
-        }
-    
-        $systems = Cache::tags(['users', 'systems'])->rememberForever('users_' . $this->id . '_systems', function () {
-            return $this->getRelationValue('systems');
-        });
-        $this->setRelation('systems', $systems);
-
-        return $systems;
+        return $this->getCachedRelation('systems', ['systems']);
     }
 
     /**
@@ -541,17 +370,7 @@ class User extends Authenticatable
      */
     public function getPostsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('posts')) {
-            return $this->getRelationValue('posts');
-        }
-    
-        $posts = Cache::tags(['users', 'posts'])->rememberForever('users_' . $this->id . '_posts', function () {
-            return $this->getRelationValue('posts');
-        });
-        $this->setRelation('posts', $posts);
-
-        return $posts;
+        return $this->getCachedRelation('posts', ['posts']);
     }
 
     /**
@@ -569,17 +388,7 @@ class User extends Authenticatable
      */
     public function getPostCategoriesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('postCategories')) {
-            return $this->getRelationValue('postCategories');
-        }
-    
-        $postCategories = Cache::tags(['users', 'post_categories'])->rememberForever('users_' . $this->id . '_post_categories', function () {
-            return $this->getRelationValue('postCategories');
-        });
-        $this->setRelation('postCategories', $postCategories);
-
-        return $postCategories;
+        return $this->getCachedRelation('postCategories', ['post_categories']);
     }
 
     /**
@@ -597,22 +406,34 @@ class User extends Authenticatable
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['users', 'events'])->rememberForever('users_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     public function eventable()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
+        }
+
+        $data = Cache::tags(array_push($tags, 'users'))->rememberForever('users_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
+        });
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
     public function hasPermission($code)

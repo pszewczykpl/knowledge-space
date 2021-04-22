@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\PostCreated;
-use App\Events\PostDeleted;
-use App\Events\PostSaved;
-use App\Events\PostUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title',
         'content',
@@ -33,17 +34,7 @@ class Post extends Model
      */
     public function getPostCategoryAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('postCategory')) {
-            return $this->getRelationValue('postCategory');
-        }
-    
-        $postCategory = Cache::tags(['posts', 'post_categories'])->rememberForever('posts_' . $this->id . '_post_category', function () {
-            return $this->getRelationValue('postCategory');
-        });
-        $this->setRelation('postCategory', $postCategory);
-
-        return $postCategory;
+        return $this->getCachedRelation('postCategory', ['post_categories']);
     }
 
     public function attachments()
@@ -58,17 +49,7 @@ class Post extends Model
      */
     public function getAttachmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('attachments')) {
-            return $this->getRelationValue('attachments');
-        }
-    
-        $attachments = Cache::tags(['posts', 'attachments'])->rememberForever('posts_' . $this->id . '_attachments', function () {
-            return $this->getRelationValue('attachments');
-        });
-        $this->setRelation('attachments', $attachments);
-
-        return $attachments;
+        return $this->getCachedRelation('attachments', ['attachments']);
     }
 
     /**
@@ -86,21 +67,11 @@ class Post extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['posts', 'events'])->rememberForever('posts_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     /**
-     * Get the author that created the post.
+     * Get the user that created the post.
      */
     public function user()
     {
@@ -114,17 +85,29 @@ class Post extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['posts', 'users'])->rememberForever('posts_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'posts'))->rememberForever('posts_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

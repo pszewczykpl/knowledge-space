@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\EmployeeCreated;
-use App\Events\EmployeeDeleted;
-use App\Events\EmployeeSaved;
-use App\Events\EmployeeUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Employee extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'code_owu',
@@ -38,17 +39,7 @@ class Employee extends Model
      */
     public function getFilesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('files')) {
-            return $this->getRelationValue('files');
-        }
-    
-        $files = Cache::tags(['employees', 'files'])->rememberForever('employees_' . $this->id . '_files', function () {
-            return $this->getRelationValue('files');
-        });
-        $this->setRelation('files', $files);
-
-        return $files;
+        return $this->getCachedRelation('files', ['files']);
     }
 
     public function notes()
@@ -63,17 +54,7 @@ class Employee extends Model
      */
     public function getNotesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('notes')) {
-            return $this->getRelationValue('notes');
-        }
-    
-        $notes = Cache::tags(['employees', 'notes'])->rememberForever('employees_' . $this->id . '_notes', function () {
-            return $this->getRelationValue('notes');
-        });
-        $this->setRelation('notes', $notes);
-        
-        return $notes;
+        return $this->getCachedRelation('notes', ['notes']);
     }
 
     /**
@@ -91,17 +72,7 @@ class Employee extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['employees', 'events'])->rememberForever('employees_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     public function extended_name()
@@ -110,7 +81,7 @@ class Employee extends Model
     }
 
     /**
-     * Get the author that created the employee.
+     * Get the user that created the employee.
      */
     public function user()
     {
@@ -124,17 +95,29 @@ class Employee extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['employees', 'users'])->rememberForever('employees_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'employees'))->rememberForever('employees_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

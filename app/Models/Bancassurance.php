@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\BancassuranceCreated;
-use App\Events\BancassuranceDeleted;
-use App\Events\BancassuranceSaved;
-use App\Events\BancassuranceUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Bancassurance extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'code',
@@ -42,17 +43,7 @@ class Bancassurance extends Model
      */
     public function getFilesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('files')) {
-            return $this->getRelationValue('files');
-        }
-    
-        $files = Cache::tags(['bancassurances', 'files'])->rememberForever('bancassurances_' . $this->id . '_files', function () {
-            return $this->getRelationValue('files');
-        });
-        $this->setRelation('files', $files);
-
-        return $files;
+        return $this->getCachedRelation('files', ['files']);
     }
 
     /**
@@ -70,17 +61,7 @@ class Bancassurance extends Model
      */
     public function getNotesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('notes')) {
-            return $this->getRelationValue('notes');
-        }
-    
-        $notes = Cache::tags(['bancassurances', 'notes'])->rememberForever('bancassurances_' . $this->id . '_notes', function () {
-            return $this->getRelationValue('notes');
-        });
-        $this->setRelation('notes', $notes);
-        
-        return $notes;
+        return $this->getCachedRelation('notes', ['notes']);
     }
 
     /**
@@ -98,17 +79,7 @@ class Bancassurance extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['bancassurances', 'events'])->rememberForever('bancassurances_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     public function extended_name()
@@ -117,7 +88,7 @@ class Bancassurance extends Model
     }
 
     /**
-     * Get the author that created the bancassurance.
+     * Get the user that created the bancassurance.
      */
     public function user()
     {
@@ -131,17 +102,29 @@ class Bancassurance extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['bancassurances', 'users'])->rememberForever('bancassurances_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'bancassurances'))->rememberForever('bancassurances_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

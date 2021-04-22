@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\InvestmentCreated;
-use App\Events\InvestmentDeleted;
-use App\Events\InvestmentSaved;
-use App\Events\InvestmentUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Investment extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'group',
         'name',
@@ -38,23 +39,13 @@ class Investment extends Model
     }
 
     /**
-     * Set files attribute value from cached data.
+     * Get files attribute value from cached data.
      *
      * @return mixed
      */
     public function getFilesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('files')) {
-            return $this->getRelationValue('files');
-        }
-    
-        $files = Cache::tags(['investments', 'files'])->rememberForever('investments_' . $this->id . '_files', function () {
-            return $this->getRelationValue('files');
-        });
-        $this->setRelation('files', $files);
-
-        return $files;
+        return $this->getCachedRelation('files', ['files']);
     }
 
     /**
@@ -66,25 +57,15 @@ class Investment extends Model
     }
 
     /**
-     * Set notes attribute value from cached data.
+     * Get notes attribute value from cached data.
      *
-     * @return mixed
+     * @return void
      */
     public function getNotesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('notes')) {
-            return $this->getRelationValue('notes');
-        }
-    
-        $notes = Cache::tags(['investments', 'notes'])->rememberForever('investments_' . $this->id . '_notes', function () {
-            return $this->getRelationValue('notes');
-        });
-        $this->setRelation('notes', $notes);
-        
-        return $notes;
+        return $this->getCachedRelation('notes', ['notes']);
     }
-    
+
     /**
      * Get the funds that belong to the investment.
      */
@@ -94,23 +75,13 @@ class Investment extends Model
     }
 
     /**
-     * Set funds attribute value from cached data.
+     * Get funds attribute value from cached data.
      *
      * @return mixed
      */
     public function getFundsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('funds')) {
-            return $this->getRelationValue('funds');
-        }
-    
-        $funds = Cache::tags(['investments', 'funds'])->rememberForever('investments_' . $this->id . '_funds', function () {
-            return $this->getRelationValue('funds');
-        });
-        $this->setRelation('funds', $funds);
-        
-        return $funds;
+        return $this->getCachedRelation('funds', ['funds']);
     }
 
     /**
@@ -122,23 +93,13 @@ class Investment extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['investments', 'events'])->rememberForever('investments_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-        
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     public function extended_name()
@@ -152,7 +113,7 @@ class Investment extends Model
     }
 
     /**
-     * Get the author that created the investment.
+     * Get the user that created the investment.
      */
     public function user()
     {
@@ -160,23 +121,35 @@ class Investment extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['investments', 'users'])->rememberForever('investments_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'investments'))->rememberForever('investments_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

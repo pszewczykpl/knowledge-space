@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\PostCategoryCreated;
-use App\Events\PostCategoryDeleted;
-use App\Events\PostCategorySaved;
-use App\Events\PostCategoryUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class PostCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'description',
@@ -33,17 +34,7 @@ class PostCategory extends Model
      */
     public function getPostsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('posts')) {
-            return $this->getRelationValue('posts');
-        }
-    
-        $posts = Cache::tags(['post_categories', 'posts'])->rememberForever('post_categories_' . $this->id . '_posts', function () {
-            return $this->getRelationValue('posts');
-        });
-        $this->setRelation('posts', $posts);
-
-        return $posts;
+        return $this->getCachedRelation('posts', ['posts']);
     }
 
     /**
@@ -61,21 +52,11 @@ class PostCategory extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['post_categories', 'events'])->rememberForever('post_categories_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     /**
-     * Get the author that created the post category.
+     * Get the user that created the post category.
      */
     public function user()
     {
@@ -89,17 +70,29 @@ class PostCategory extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['post_categories', 'users'])->rememberForever('post_categories_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'post_categories'))->rememberForever('post_categories_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

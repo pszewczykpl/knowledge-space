@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\NoteCreated;
-use App\Events\NoteDeleted;
-use App\Events\NoteSaved;
-use App\Events\NoteUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class Note extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'content',
     ];
@@ -32,17 +33,7 @@ class Note extends Model
      */
     public function getInvestmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('investments')) {
-            return $this->getRelationValue('investments');
-        }
-    
-        $investments = Cache::tags(['notes', 'investments'])->rememberForever('notes_' . $this->id . '_investments', function () {
-            return $this->getRelationValue('investments');
-        });
-        $this->setRelation('investments', $investments);
-
-        return $investments;
+        return $this->getCachedRelation('investments', ['investments']);
     }
 
     public function protectives()
@@ -57,17 +48,7 @@ class Note extends Model
      */
     public function getProtectivesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('protectives')) {
-            return $this->getRelationValue('protectives');
-        }
-    
-        $protectives = Cache::tags(['notes', 'protectives'])->rememberForever('notes_' . $this->id . '_protectives', function () {
-            return $this->getRelationValue('protectives');
-        });
-        $this->setRelation('protectives', $protectives);
-
-        return $protectives;
+        return $this->getCachedRelation('protectives', ['protectives']);
     }
 
     public function bancassurances()
@@ -82,17 +63,7 @@ class Note extends Model
      */
     public function getBancassurancesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('bancassurances')) {
-            return $this->getRelationValue('bancassurances');
-        }
-    
-        $bancassurances = Cache::tags(['notes', 'bancassurances'])->rememberForever('notes_' . $this->id . '_bancassurances', function () {
-            return $this->getRelationValue('bancassurances');
-        });
-        $this->setRelation('bancassurances', $bancassurances);
-
-        return $bancassurances;
+        return $this->getCachedRelation('bancassurances', ['bancassurances']);
     }
 
     public function employees()
@@ -107,17 +78,7 @@ class Note extends Model
      */
     public function getEmployeesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('employees')) {
-            return $this->getRelationValue('employees');
-        }
-    
-        $employees = Cache::tags(['notes', 'employees'])->rememberForever('notes_' . $this->id . '_employees', function () {
-            return $this->getRelationValue('employees');
-        });
-        $this->setRelation('employees', $employees);
-
-        return $employees;
+        return $this->getCachedRelation('employees', ['employees']);
     }
 
     public function funds()
@@ -132,17 +93,7 @@ class Note extends Model
      */
     public function getFundsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('funds')) {
-            return $this->getRelationValue('funds');
-        }
-    
-        $funds = Cache::tags(['notes', 'funds'])->rememberForever('notes_' . $this->id . '_funds', function () {
-            return $this->getRelationValue('funds');
-        });
-        $this->setRelation('funds', $funds);
-
-        return $funds;
+        return $this->getCachedRelation('funds', ['funds']);
     }
 
     public function partners()
@@ -157,17 +108,7 @@ class Note extends Model
      */
     public function getPartnersAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('partners')) {
-            return $this->getRelationValue('partners');
-        }
-    
-        $partners = Cache::tags(['notes', 'partners'])->rememberForever('notes_' . $this->id . '_partners', function () {
-            return $this->getRelationValue('partners');
-        });
-        $this->setRelation('partners', $partners);
-
-        return $partners;
+        return $this->getCachedRelation('partners', ['partners']);
     }
 
     public function risks()
@@ -182,17 +123,7 @@ class Note extends Model
      */
     public function getRisksAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('risks')) {
-            return $this->getRelationValue('risks');
-        }
-    
-        $risks = Cache::tags(['notes', 'risks'])->rememberForever('notes_' . $this->id . '_risks', function () {
-            return $this->getRelationValue('risks');
-        });
-        $this->setRelation('risks', $risks);
-
-        return $risks;
+        return $this->getCachedRelation('risks', ['risks']);
     }
 
     /**
@@ -210,17 +141,7 @@ class Note extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['notes', 'events'])->rememberForever('notes_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     public function attachments()
@@ -235,21 +156,11 @@ class Note extends Model
      */
     public function getAttachmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('attachments')) {
-            return $this->getRelationValue('attachments');
-        }
-    
-        $attachments = Cache::tags(['notes', 'attachments'])->rememberForever('notes_' . $this->id . '_attachments', function () {
-            return $this->getRelationValue('attachments');
-        });
-        $this->setRelation('attachments', $attachments);
-
-        return $attachments;
+        return $this->getCachedRelation('attachments', ['attachments']);
     }
 
     /**
-     * Get the author that created the note.
+     * Get the user that created the note.
      */
     public function user()
     {
@@ -263,17 +174,29 @@ class Note extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['notes', 'users'])->rememberForever('notes_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'notes'))->rememberForever('notes_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }

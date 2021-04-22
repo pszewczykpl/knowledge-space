@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\FileCreated;
-use App\Events\FileDeleted;
-use App\Events\FileSaved;
-use App\Events\FileUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +11,12 @@ class File extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'path',
         'name',
@@ -36,17 +37,7 @@ class File extends Model
      */
     public function getInvestmentsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('investments')) {
-            return $this->getRelationValue('investments');
-        }
-    
-        $investments = Cache::tags(['files', 'investments'])->rememberForever('files_' . $this->id . '_investments', function () {
-            return $this->getRelationValue('investments');
-        });
-        $this->setRelation('investments', $investments);
-
-        return $investments;
+        return $this->getCachedRelation('investments', ['investments']);
     }
 
     public function employees()
@@ -61,17 +52,7 @@ class File extends Model
      */
     public function getEmployeesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('employees')) {
-            return $this->getRelationValue('employees');
-        }
-    
-        $employees = Cache::tags(['files', 'employees'])->rememberForever('files_' . $this->id . '_employees', function () {
-            return $this->getRelationValue('employees');
-        });
-        $this->setRelation('employees', $employees);
-
-        return $employees;
+        return $this->getCachedRelation('employees', ['employees']);
     }
 
     public function protectives()
@@ -86,17 +67,7 @@ class File extends Model
      */
     public function getProtectivesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('protectives')) {
-            return $this->getRelationValue('protectives');
-        }
-    
-        $protectives = Cache::tags(['files', 'protectives'])->rememberForever('files_' . $this->id . '_protectives', function () {
-            return $this->getRelationValue('protectives');
-        });
-        $this->setRelation('protectives', $protectives);
-
-        return $protectives;
+        return $this->getCachedRelation('protectives', ['protectives']);
     }
 
     public function bancassurances()
@@ -111,17 +82,7 @@ class File extends Model
      */
     public function getBancassurancesAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('bancassurances')) {
-            return $this->getRelationValue('bancassurances');
-        }
-    
-        $bancassurances = Cache::tags(['files', 'bancassurances'])->rememberForever('files_' . $this->id . '_bancassurances', function () {
-            return $this->getRelationValue('bancassurances');
-        });
-        $this->setRelation('bancassurances', $bancassurances);
-
-        return $bancassurances;
+        return $this->getCachedRelation('bancassurances', ['bancassurances']);
     }
 
     public function fileCategory()
@@ -136,17 +97,7 @@ class File extends Model
      */
     public function getFileCategoryAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('fileCategory')) {
-            return $this->getRelationValue('fileCategory');
-        }
-    
-        $fileCategory = Cache::tags(['files', 'file_categories'])->rememberForever('files_' . $this->id . '_file_category', function () {
-            return $this->getRelationValue('fileCategory');
-        });
-        $this->setRelation('fileCategory', $fileCategory);
-
-        return $fileCategory;
+        return $this->getCachedRelation('fileCategory', ['file_categories']);
     }
 
     /**
@@ -164,21 +115,11 @@ class File extends Model
      */
     public function getEventsAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('events')) {
-            return $this->getRelationValue('events');
-        }
-    
-        $events = Cache::tags(['files', 'events'])->rememberForever('files_' . $this->id . '_events', function () {
-            return $this->getRelationValue('events');
-        });
-        $this->setRelation('events', $events);
-
-        return $events;
+        return $this->getCachedRelation('events', ['events']);
     }
 
     /**
-     * Get the author that created the file.
+     * Get the user that created the file.
      */
     public function user()
     {
@@ -192,17 +133,29 @@ class File extends Model
      */
     public function getUserAttribute()
     {
-        // When relation is loaded, return value
-        if ($this->relationLoaded('user')) {
-            return $this->getRelationValue('user');
+        return $this->getCachedRelation('user', ['users']);
+    }
+
+    /**
+     * Get relations data from cache.
+     *
+     * @param string $relation
+     * @param array $tags
+     * @return mixed
+     */
+    public function getCachedRelation(string $relation, array $tags = [])
+    {
+        if ($this->relationLoaded($relation)) {
+            return $this->getRelationValue($relation);
         }
-    
-        $user = Cache::tags(['files', 'users'])->rememberForever('files_' . $this->id . '_user', function () {
-            return $this->getRelationValue('user');
+
+        $data = Cache::tags(array_push($tags, 'files'))->rememberForever('files_' . $this->id . '_' . $relation, function () use ($relation) {
+            return $this->getRelationValue($relation);
         });
-        $this->setRelation('user', $user);
-        
-        return $user;
+
+        $this->setRelation($relation, $data);
+
+        return $data;
     }
 
 }
