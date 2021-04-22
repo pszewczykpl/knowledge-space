@@ -65,7 +65,7 @@ class PostCategoryController extends Controller
         $this->authorize('create', PostCategory::class);
         
         $postCategory = new PostCategory($request->all());
-        Auth::user()->post_categories()->save($postCategory);
+        Auth::user()->postCategories()->save($postCategory);
 
         return redirect()->route('post-categories.show', $postCategory->id)->with('notify_success', 'Nowa kategoria artykułów została dodana!');
     }
@@ -80,7 +80,7 @@ class PostCategoryController extends Controller
     {
         return view('post-categories.show', [
             'title' => 'Szczegóły',
-            'post_category' => $postCategory,
+            'postCategory' => $postCategory,
         ]);
     }
 
@@ -97,7 +97,7 @@ class PostCategoryController extends Controller
         return view('post-categories.edit', [
             'title' => 'Edycja kategorii artykułów',
             'description' => 'Zaktualizuj dane kategorii artykułów i kliknij Zapisz',
-            'post_category' => PostCategory::findOrFail($postCategory->id),
+            'postCategory' => PostCategory::findOrFail($postCategory->id),
         ]);
     }
 

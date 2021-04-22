@@ -207,11 +207,11 @@
                                                     Odpowiedzi <b>({{ $user->replies->count() }})</b><br>
                                                     Notatki <b>({{ $user->notes->count() }})</b><br>
                                                     Dokumenty <b>({{ $user->files->count() }})</b><br>
-                                                    Kategorie dokumentów <b>({{ $user->file_categories->count() }})</b><br>
-                                                    Departamenty <b>({{ $user->file_categories->count() }})</b><br>
+                                                    Kategorie dokumentów <b>({{ $user->fileCategories->count() }})</b><br>
+                                                    Departamenty <b>({{ $user->departments->count() }})</b><br>
                                                     Systemy <b>({{ $user->systems->count() }})</b><br>
                                                     Artykuły <b>({{ $user->posts->count() }})</b><br>
-                                                    Kategorie artykułów <b>({{ $user->post_categories->count() }})</b><br>
+                                                    Kategorie artykułów <b>({{ $user->postCategories->count() }})</b><br>
                                                 </div>
                                             </div>
                                         </div>

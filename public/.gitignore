@@ -1,1 +1,9 @@
-filemanager.php
+*
+!/css
+!/js
+!/media
+!.gitignore
+!.htaccess
+!favicon.ico
+!index.php
+!web.config

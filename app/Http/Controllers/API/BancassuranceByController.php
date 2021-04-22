@@ -68,6 +68,6 @@ class BancassuranceByController extends Controller
             abort(404);
         }
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $files->first()->file_category->name]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $files->first()->fileCategory->name]);
     }
 }

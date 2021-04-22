@@ -10,12 +10,12 @@
 
 @section('toolbar')
         <a href="{{ route('post-categories.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-        @can('update', $post_category)
-        <a href="{{ route('post-categories.edit', $post_category->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
+        @can('update', $postCategory)
+        <a href="{{ route('post-categories.edit', $postCategory->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
         @endcan
-        @can('delete', $post_category)
-            <a onclick='document.getElementById("post_categories_destroy_{{ $post_category->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'post-categories.destroy', $post_category->id ], 'id' => 'post_categories_destroy_' . $post_category->id ]) }}{{ Form::close() }}
+        @can('delete', $postCategory)
+            <a onclick='document.getElementById("post_categories_destroy_{{ $postCategory->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
+            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'post-categories.destroy', $postCategory->id ], 'id' => 'post_categories_destroy_' . $postCategory->id ]) }}{{ Form::close() }}
         @endcan
 @stop
 
@@ -61,13 +61,13 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Nazwa:</label>
                             <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $post_category->name }}" disabled>
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $postCategory->name }}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Opis:</label>
                             <div class="col-9">
-                                <textarea class="form-control form-control-lg form-control-solid" type="text" name="description" id="description" disabled>{{ $post_category->description }}</textarea>
+                                <textarea class="form-control form-control-lg form-control-solid" type="text" name="description" id="description" disabled>{{ $postCategory->description }}</textarea>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@
 										<div class="d-flex">
 											<div class="d-flex align-items-center pr-5">
 												@include('svg.post-category', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-												<a href="{{ route('posts.index', ['category' => $post->post_category->id]) }}" class="text-muted font-weight-bold">{{ $post->post_category->name }}</a>
+												<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}" class="text-muted font-weight-bold">{{ $post->postCategory->name }}</a>
 											</div>
 											<div class="d-flex align-items-center pr-5">
 												@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])

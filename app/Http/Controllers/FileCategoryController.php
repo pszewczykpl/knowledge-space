@@ -50,7 +50,7 @@ class FileCategoryController extends Controller
         return view('file-categories.create', [
             'title' => 'Nowa kategoria dokumentów',
             'description' => 'Uzupełnij dane kategorii dokumentów i kliknij Zapisz',
-            'file_categories' => FileCategory::all()
+            'fileCategories' => FileCategory::all()
         ]);
     }
 
@@ -65,7 +65,7 @@ class FileCategoryController extends Controller
         $this->authorize('create', FileCategory::class);
         
         $fileCategory = new FileCategory($request->all());
-        Auth::user()->file_categories()->save($fileCategory);
+        Auth::user()->fileCategories()->save($fileCategory);
 
         return redirect()->route('file-categories.show', $fileCategory->id)->with('notify_success', 'Nowa kategoria dokumentów została dodana!');
     }
@@ -80,7 +80,7 @@ class FileCategoryController extends Controller
     {
         return view('file-categories.show', [
             'title' => 'Szczegóły',
-            'file_category' => $fileCategory,
+            'fileCategory' => $fileCategory,
         ]);
     }
 
@@ -97,7 +97,7 @@ class FileCategoryController extends Controller
         return view('file-categories.edit', [
             'title' => 'Edycja kategorii dokumentów',
             'description' => 'Zaktualizuj dane kategorii dokumentów i kliknij Zapisz',
-            'file_category' => FileCategory::findOrFail($fileCategory->id)
+            'fileCategory' => FileCategory::findOrFail($fileCategory->id)
         ]);
     }
 

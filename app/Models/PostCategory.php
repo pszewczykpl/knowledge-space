@@ -26,9 +26,52 @@ class PostCategory extends Model
         return $this->hasMany('App\Models\Post');
     }
 
+    /**
+     * Set posts attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getPostsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('posts')) {
+            return $this->getRelationValue('posts');
+        }
+    
+        $posts = Cache::tags(['post_categories', 'posts'])->rememberForever('post_categories_' . $this->id . '_posts', function () {
+            return $this->getRelationValue('posts');
+        });
+        $this->setRelation('posts', $posts);
+
+        return $posts;
+    }
+
+    /**
+     * Get all of the post category's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['post_categories', 'events'])->rememberForever('post_categories_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+
+        return $events;
     }
 
     /**

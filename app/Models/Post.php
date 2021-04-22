@@ -21,9 +21,29 @@ class Post extends Model
         'content',
     ];
 
-    public function post_category()
+    public function postCategory()
     {
         return $this->belongsTo('App\Models\PostCategory');
+    }
+
+    /**
+     * Set postCategory attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getPostCategoryAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('postCategory')) {
+            return $this->getRelationValue('postCategory');
+        }
+    
+        $postCategory = Cache::tags(['posts', 'post_categories'])->rememberForever('posts_' . $this->id . '_post_category', function () {
+            return $this->getRelationValue('postCategory');
+        });
+        $this->setRelation('postCategory', $postCategory);
+
+        return $postCategory;
     }
 
     public function attachments()
@@ -31,9 +51,52 @@ class Post extends Model
         return $this->morphMany(Attachment::class, 'attachmentable');
     }
 
+    /**
+     * Set attachments attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getAttachmentsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('attachments')) {
+            return $this->getRelationValue('attachments');
+        }
+    
+        $attachments = Cache::tags(['posts', 'attachments'])->rememberForever('posts_' . $this->id . '_attachments', function () {
+            return $this->getRelationValue('attachments');
+        });
+        $this->setRelation('attachments', $attachments);
+
+        return $attachments;
+    }
+
+    /**
+     * Get all of the post's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['posts', 'events'])->rememberForever('posts_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+
+        return $events;
     }
 
     /**

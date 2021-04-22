@@ -95,7 +95,7 @@ class FileController extends Controller
                 
                 $zip->addFile(
                     'storage/' . $file->path, 
-                    $file->file_category->prefix . $file->name . '.' . $file->extension
+                    $file->fileCategory->prefix . $file->name . '.' . $file->extension
                 );
                 
             }

@@ -10,12 +10,12 @@
 
 @section('toolbar')
         <a href="{{ route('file-categories.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-        @can('update', $file_category)
-        <a href="{{ route('file-categories.edit', $file_category->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
+        @can('update', $fileCategory)
+        <a href="{{ route('file-categories.edit', $fileCategory->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
         @endcan
-        @can('delete', $file_category)
-            <a onclick='document.getElementById("file_categories_destroy_{{ $file_category->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'file-categories.destroy', $file_category->id ], 'id' => 'file_categories_destroy_' . $file_category->id ]) }}{{ Form::close() }}
+        @can('delete', $fileCategory)
+            <a onclick='document.getElementById("file_categories_destroy_{{ $fileCategory->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
+            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'file-categories.destroy', $fileCategory->id ], 'id' => 'file_categories_destroy_' . $fileCategory->id ]) }}{{ Form::close() }}
         @endcan
 @stop
 
@@ -61,7 +61,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Nazwa:</label>
                             <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $file_category->name }}" disabled>
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $fileCategory->name }}" disabled>
                             </div>
                         </div>
                         <div class="row">
@@ -80,7 +80,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Prefix:</label>
                             <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="prefix" id="prefix" value="{{ $file_category->prefix }}" disabled>
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="prefix" id="prefix" value="{{ $fileCategory->prefix }}" disabled>
                             </div>
                         </div>
                     </div>

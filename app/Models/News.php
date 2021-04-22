@@ -25,9 +25,52 @@ class News extends Model
         return $this->hasMany('App\Models\Reply');
     }
 
+    /**
+     * Set replies attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getRepliesAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('replies')) {
+            return $this->getRelationValue('replies');
+        }
+    
+        $replies = Cache::tags(['news', 'replies'])->rememberForever('news_' . $this->id . '_replies', function () {
+            return $this->getRelationValue('replies');
+        });
+        $this->setRelation('replies', $replies);
+
+        return $replies;
+    }
+
+    /**
+     * Get all of the news's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['news', 'events'])->rememberForever('news_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+
+        return $events;
     }
 
     /**

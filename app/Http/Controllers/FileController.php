@@ -61,7 +61,7 @@ class FileController extends Controller
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
-            'file_categories' => FileCategory::all(),
+            'fileCategories' => FileCategory::all(),
             'fileable_type' => $request->fileable_type ?? null,
             'fileable_id' => $request->fileable_id ?? null,
         ]);
@@ -88,7 +88,7 @@ class FileController extends Controller
 
         $file->path = $path;
         $file->extension = $request->file('file')->extension();
-        $file->file_category()->associate($request->file_category_id);
+        $file->fileCategory()->associate($request->file_category_id);
         Auth::user()->files()->save($file);
         
         $file->investments()->attach($request->investment_id);
@@ -151,7 +151,7 @@ class FileController extends Controller
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
-            'file_categories' => FileCategory::all(),
+            'fileCategories' => FileCategory::all(),
         ]);
     }
 
@@ -168,7 +168,7 @@ class FileController extends Controller
 
         $file->update($request->all());
         
-        $file->file_category()->associate($request->file_category_id);
+        $file->fileCategory()->associate($request->file_category_id);
         if(($request->draft_checkbox ?? null)) {
             $file->draft = 1;
         } else {

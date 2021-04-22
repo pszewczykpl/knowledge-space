@@ -17,7 +17,7 @@ class Files extends Component
     /**
      * File Categories
      */
-    public $file_categories;
+    public $fileCategories;
 
     /**
      * ZIP filename
@@ -35,12 +35,12 @@ class Files extends Component
      */
     public function __construct($files, $name, $type, $id)
     {
-        $file_categories = Cache::tags([$type,'file_categories', 'files'])->rememberForever($type . '_' . $id . '_file_categories_all', function () use ($files) {
+        $fileCategories = Cache::tags([$type,'file_categories', 'files'])->rememberForever($type . '_' . $id . '_file_categories_all', function () use ($files) {
             return FileCategory::whereIn('id', $files->pluck('file_category_id')->toArray())->get();
         });
 
         $this->files = $files;
-        $this->file_categories = $file_categories;
+        $this->fileCategories = $fileCategories;
         $this->name =  $name;
         $this->fileable_type = $type;
         $this->fileable_id = $id;

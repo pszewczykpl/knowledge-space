@@ -69,7 +69,7 @@
                             <label class="col-form-label col-3 text-lg-right text-left">Kategoria dokumentu:</label>
                             <div class="col-9">
                                 <select class="form-control form-control-lg form-control-solid" name="file_category_id" id="file_category_id">
-                                    @foreach($file_categories as $file_category)
+                                    @foreach($fileCategories as $file_category)
                                     <option value="{{ $file_category->id }}" @if($file->file_category_id == $file_category->id) selected @endif>{{ $file_category->name }}</option>
                                     @endforeach
                                 </select>

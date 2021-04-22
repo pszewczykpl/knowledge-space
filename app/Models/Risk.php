@@ -49,9 +49,32 @@ class Risk extends Model
         return $notes;
     }
 
+    /**
+     * Get all of the risk's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['risks', 'events'])->rememberForever('risks_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+
+        return $events;
     }
     
     /**

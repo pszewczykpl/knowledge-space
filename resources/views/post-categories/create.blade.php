@@ -7,7 +7,7 @@
 @section('toolbar')
         <a href="{{ route('post-categories.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('create', App\Models\PostCategory::class)
-        <a onclick='document.getElementById("post_cateogry_store_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
+        <a onclick='document.getElementById("post_category_store_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="card-body px-0">
-        {!! Form::open(['route' => 'post-categories.store', 'method' => 'post', 'id' => 'post_cateogry_store_form']) !!}
+        {!! Form::open(['route' => 'post-categories.store', 'method' => 'post', 'id' => 'post_category_store_form']) !!}
         <div class="tab-content">
             <div class="tab-pane active px-7" id="info" role="tabpanel">
                 <div class="row">

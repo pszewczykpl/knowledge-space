@@ -37,20 +37,20 @@ class PostController extends Controller
         $user = Auth::user();
 
         if(($request->category ?? null) === null) {
-            $posts = Post::with('user', 'post_category')->withTrashed($user ? $user->hasPermission('view-deleted') : false)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         }
         else {
-            $posts = Post::with('user', 'post_category')->withTrashed($user ? $user->hasPermission('view-deleted') : false)->where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
         }
 
-        $post_categories = Cache::tags(['post_categories'])->rememberForever('post_categories_all', function () {
+        $postCategories = Cache::tags(['post_categories'])->rememberForever('post_categories_all', function () {
             return PostCategory::all();
         });
 
         return view('posts.index', [
             'title' => 'Artykuły',
             'posts' => $posts,
-            'postCategories' => $post_categories,
+            'postCategories' => $postCategories,
         ]);
     }
 
@@ -81,7 +81,7 @@ class PostController extends Controller
         $this->authorize('create', Post::class);
 
         $post = new Post($request->all());
-        $post->post_category()->associate($request->post_category_id);
+        $post->postCategory()->associate($request->post_category_id);
         Auth::user()->posts()->save($post);
 
         return redirect()->route('posts.index')->with('notify_success', 'Nowy artykuł został dodany!');
@@ -130,7 +130,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
         $post->update($request->all());
-        $post->post_category()->associate($request->post_category_id);
+        $post->postCategory()->associate($request->post_category_id);
 
         if ($request->hasFile('attachment')) {
             $path = $request->file('attachment')->store('attachments');

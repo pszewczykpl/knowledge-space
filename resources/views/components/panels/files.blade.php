@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="row" style="margin-right: 0px; margin-left: 0px;">
-    @foreach ($file_categories->split(2) as $split)
+    @foreach ($fileCategories->split(2) as $split)
     <div class="col-md-6" style="padding-right: 0px; padding-left: 0px;">
         @foreach($split as $category)
         <div class="card card-custom" style="box-shadow: 0px 0px 0px 0px; -webkit-box-shadow: 0px 0px 0px 0x;">

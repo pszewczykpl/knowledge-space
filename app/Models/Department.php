@@ -27,9 +27,52 @@ class Department extends Model
         return $this->hasMany('App\Models\User');
     }
 
+    /**
+     * Set users attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getUsersAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('users')) {
+            return $this->getRelationValue('users');
+        }
+    
+        $users = Cache::tags(['departments', 'users'])->rememberForever('departments_' . $this->id . '_users', function () {
+            return $this->getRelationValue('users');
+        });
+        $this->setRelation('users', $users);
+
+        return $users;
+    }
+
+    /**
+     * Get all of the department's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
+    }
+
+    /**
+     * Set events attribute value from cached data.
+     *
+     * @return mixed
+     */
+    public function getEventsAttribute()
+    {
+        // When relation is loaded, return value
+        if ($this->relationLoaded('events')) {
+            return $this->getRelationValue('events');
+        }
+    
+        $events = Cache::tags(['departments', 'events'])->rememberForever('departments_' . $this->id . '_events', function () {
+            return $this->getRelationValue('events');
+        });
+        $this->setRelation('events', $events);
+
+        return $events;
     }
 
     /**

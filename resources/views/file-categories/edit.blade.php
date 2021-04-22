@@ -5,8 +5,8 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('file-categories.show', $file_category) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
-        @can('update', $file_category)
+        <a href="{{ route('file-categories.show', $fileCategory) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
+        @can('update', $fileCategory)
             <a onclick='document.getElementById("file_cateogry_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="card-body px-0">
-        {!! Form::open(['route' => ['file-categories.update', $file_category->id], 'method' => 'PUT', 'id' => 'file_cateogry_update_form']) !!}
+        {!! Form::open(['route' => ['file-categories.update', $fileCategory->id], 'method' => 'PUT', 'id' => 'file_cateogry_update_form']) !!}
         <div class="tab-content">
             <div class="tab-pane active px-7" id="info" role="tabpanel">
                 <div class="row">
@@ -54,7 +54,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Nazwa:</label>
                             <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $file_category->name }}">
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $fileCategory->name }}">
                             </div>
                         </div>
                         <div class="row">
@@ -73,7 +73,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-3 text-lg-right text-left">Prefix:</label>
                             <div class="col-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text" name="prefix" id="prefix" value="{{ $file_category->prefix }}">
+                                <input class="form-control form-control-lg form-control-solid" type="text" name="prefix" id="prefix" value="{{ $fileCategory->prefix }}">
                             </div>
                         </div>
                     </div>

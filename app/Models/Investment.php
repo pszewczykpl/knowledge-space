@@ -113,6 +113,9 @@ class Investment extends Model
         return $funds;
     }
 
+    /**
+     * Get all of the investment's events.
+     */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
