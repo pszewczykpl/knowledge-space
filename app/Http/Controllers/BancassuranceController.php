@@ -28,7 +28,7 @@ class BancassuranceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -40,7 +40,7 @@ class BancassuranceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -56,7 +56,7 @@ class BancassuranceController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreBancassurance $request)
     {
@@ -72,7 +72,7 @@ class BancassuranceController extends Controller
      * Duplicate a newly created resource in storage.
      *
      * @param  \Illuminate\Http\StoreBancassurance  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function duplicate(Bancassurance $bancassurance)
     {
@@ -91,7 +91,7 @@ class BancassuranceController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Bancassurance $bancassurance)
     {
@@ -105,7 +105,7 @@ class BancassuranceController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Bancassurance $bancassurance)
     {
@@ -123,7 +123,7 @@ class BancassuranceController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateBancassurance $request, Bancassurance $bancassurance)
     {
@@ -137,7 +137,7 @@ class BancassuranceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Bancassurance $bancassurance)
     {
@@ -151,7 +151,7 @@ class BancassuranceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function restore($id)
     {
@@ -167,7 +167,7 @@ class BancassuranceController extends Controller
      * Force remove the specified resource from storage.
      *
      * @param  id  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function force_destroy($id)
     {
