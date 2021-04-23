@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set department attribute value from cached data.
+     * Get department attribute value from cached data.
      *
      * @return mixed
      */
@@ -79,7 +79,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set attachments attribute value from cached data.
+     * Get attachments attribute value from cached data.
      *
      * @return mixed
      */
@@ -97,7 +97,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set departments attribute value from cached data.
+     * Get departments attribute value from cached data.
      *
      * @return mixed
      */
@@ -115,7 +115,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set employees attribute value from cached data.
+     * Get employees attribute value from cached data.
      *
      * @return mixed
      */
@@ -133,7 +133,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set files attribute value from cached data.
+     * Get files attribute value from cached data.
      *
      * @return mixed
      */
@@ -151,7 +151,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set fileCategories attribute value from cached data.
+     * Get fileCategories attribute value from cached data.
      *
      * @return mixed
      */
@@ -169,7 +169,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set funds attribute value from cached data.
+     * Get funds attribute value from cached data.
      *
      * @return mixed
      */
@@ -187,7 +187,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set investments attribute value from cached data.
+     * Get investments attribute value from cached data.
      *
      * @return mixed
      */
@@ -205,7 +205,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set news attribute value from cached data.
+     * Get news attribute value from cached data.
      *
      * @return mixed
      */
@@ -223,7 +223,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set notes attribute value from cached data.
+     * Get notes attribute value from cached data.
      *
      * @return mixed
      */
@@ -241,7 +241,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set partners attribute value from cached data.
+     * Get partners attribute value from cached data.
      *
      * @return mixed
      */
@@ -256,7 +256,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set permissions attribute value from cached data.
+     * Get permissions attribute value from cached data.
      *
      * @return mixed
      */
@@ -274,7 +274,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set protectives attribute value from cached data.
+     * Get protectives attribute value from cached data.
      *
      * @return mixed
      */
@@ -292,7 +292,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set bancassurances attribute value from cached data.
+     * Get bancassurances attribute value from cached data.
      *
      * @return mixed
      */
@@ -310,7 +310,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set replies attribute value from cached data.
+     * Get replies attribute value from cached data.
      *
      * @return mixed
      */
@@ -328,7 +328,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set risks attribute value from cached data.
+     * Get risks attribute value from cached data.
      *
      * @return mixed
      */
@@ -346,7 +346,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set systems attribute value from cached data.
+     * Get systems attribute value from cached data.
      *
      * @return mixed
      */
@@ -364,7 +364,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set posts attribute value from cached data.
+     * Get posts attribute value from cached data.
      *
      * @return mixed
      */
@@ -382,7 +382,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set postCategories attribute value from cached data.
+     * Get postCategories attribute value from cached data.
      *
      * @return mixed
      */
@@ -400,7 +400,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */

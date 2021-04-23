@@ -28,7 +28,7 @@ class Post extends Model
     }
 
     /**
-     * Set postCategory attribute value from cached data.
+     * Get postCategory attribute value from cached data.
      *
      * @return mixed
      */
@@ -43,7 +43,7 @@ class Post extends Model
     }
 
     /**
-     * Set attachments attribute value from cached data.
+     * Get attachments attribute value from cached data.
      *
      * @return mixed
      */
@@ -61,7 +61,7 @@ class Post extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -79,7 +79,7 @@ class Post extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

@@ -37,7 +37,7 @@ class Protective extends Model
     }
 
     /**
-     * Set files attribute value from cached data.
+     * Get files attribute value from cached data.
      *
      * @return mixed
      */
@@ -52,7 +52,7 @@ class Protective extends Model
     }
 
     /**
-     * Set notes attribute value from cached data.
+     * Get notes attribute value from cached data.
      *
      * @return mixed
      */
@@ -70,7 +70,7 @@ class Protective extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -93,7 +93,7 @@ class Protective extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

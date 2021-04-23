@@ -32,7 +32,7 @@ class Partner extends Model
     }
 
     /**
-     * Set notes attribute value from cached data.
+     * Get notes attribute value from cached data.
      *
      * @return mixed
      */
@@ -50,7 +50,7 @@ class Partner extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -68,7 +68,7 @@ class Partner extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

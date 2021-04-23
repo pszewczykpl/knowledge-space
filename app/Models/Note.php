@@ -27,7 +27,7 @@ class Note extends Model
     }
 
     /**
-     * Set investments attribute value from cached data.
+     * Get investments attribute value from cached data.
      *
      * @return mixed
      */
@@ -42,7 +42,7 @@ class Note extends Model
     }
 
     /**
-     * Set protectives attribute value from cached data.
+     * Get protectives attribute value from cached data.
      *
      * @return mixed
      */
@@ -57,7 +57,7 @@ class Note extends Model
     }
 
     /**
-     * Set bancassurances attribute value from cached data.
+     * Get bancassurances attribute value from cached data.
      *
      * @return mixed
      */
@@ -72,7 +72,7 @@ class Note extends Model
     }
 
     /**
-     * Set employees attribute value from cached data.
+     * Get employees attribute value from cached data.
      *
      * @return mixed
      */
@@ -87,7 +87,7 @@ class Note extends Model
     }
 
     /**
-     * Set funds attribute value from cached data.
+     * Get funds attribute value from cached data.
      *
      * @return mixed
      */
@@ -102,7 +102,7 @@ class Note extends Model
     }
 
     /**
-     * Set partners attribute value from cached data.
+     * Get partners attribute value from cached data.
      *
      * @return mixed
      */
@@ -117,7 +117,7 @@ class Note extends Model
     }
 
     /**
-     * Set risks attribute value from cached data.
+     * Get risks attribute value from cached data.
      *
      * @return mixed
      */
@@ -135,7 +135,7 @@ class Note extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -150,7 +150,7 @@ class Note extends Model
     }
 
     /**
-     * Set attachments attribute value from cached data.
+     * Get attachments attribute value from cached data.
      *
      * @return mixed
      */
@@ -168,7 +168,7 @@ class Note extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

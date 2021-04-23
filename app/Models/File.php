@@ -31,7 +31,7 @@ class File extends Model
     }
 
     /**
-     * Set investments attribute value from cached data.
+     * Get investments attribute value from cached data.
      *
      * @return mixed
      */
@@ -46,7 +46,7 @@ class File extends Model
     }
 
     /**
-     * Set employees attribute value from cached data.
+     * Get employees attribute value from cached data.
      *
      * @return mixed
      */
@@ -61,7 +61,7 @@ class File extends Model
     }
 
     /**
-     * Set protectives attribute value from cached data.
+     * Get protectives attribute value from cached data.
      *
      * @return mixed
      */
@@ -76,7 +76,7 @@ class File extends Model
     }
 
     /**
-     * Set bancassurances attribute value from cached data.
+     * Get bancassurances attribute value from cached data.
      *
      * @return mixed
      */
@@ -91,7 +91,7 @@ class File extends Model
     }
 
     /**
-     * Set fileCategory attribute value from cached data.
+     * Get fileCategory attribute value from cached data.
      *
      * @return mixed
      */
@@ -109,7 +109,7 @@ class File extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -127,7 +127,7 @@ class File extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

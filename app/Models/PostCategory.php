@@ -28,7 +28,7 @@ class PostCategory extends Model
     }
 
     /**
-     * Set posts attribute value from cached data.
+     * Get posts attribute value from cached data.
      *
      * @return mixed
      */
@@ -46,7 +46,7 @@ class PostCategory extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -64,7 +64,7 @@ class PostCategory extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

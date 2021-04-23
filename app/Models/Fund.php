@@ -34,7 +34,7 @@ class Fund extends Model
     }
 
     /**
-     * Set investments attribute value from cached data.
+     * Get investments attribute value from cached data.
      *
      * @return mixed
      */
@@ -49,7 +49,7 @@ class Fund extends Model
     }
 
     /**
-     * Set notes attribute value from cached data.
+     * Get notes attribute value from cached data.
      *
      * @return mixed
      */
@@ -67,7 +67,7 @@ class Fund extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -108,7 +108,7 @@ class Fund extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */

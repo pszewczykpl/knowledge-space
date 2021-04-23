@@ -27,7 +27,7 @@ class Reply extends Model
     }
 
     /**
-     * Set news attribute value from cached data.
+     * Get news attribute value from cached data.
      *
      * @return mixed
      */
@@ -45,7 +45,7 @@ class Reply extends Model
     }
 
     /**
-     * Set events attribute value from cached data.
+     * Get events attribute value from cached data.
      *
      * @return mixed
      */
@@ -63,7 +63,7 @@ class Reply extends Model
     }
 
     /**
-     * Set user attribute value from cached data.
+     * Get user attribute value from cached data.
      *
      * @return mixed
      */
