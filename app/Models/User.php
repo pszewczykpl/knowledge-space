@@ -64,12 +64,10 @@ class User extends Authenticatable
 
     /**
      * Get department attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getDepartmentAttribute()
     {
-        return $this->getCachedRelation('department', ['departments']);
+        return $this->getCachedRelation('department');
     }
 
     /**
@@ -82,12 +80,10 @@ class User extends Authenticatable
 
     /**
      * Get attachments attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getAttachmentsAttribute()
     {
-        return $this->getCachedRelation('attachments', ['attachments']);
+        return $this->getCachedRelation('attachments');
     }
 
     /**
@@ -100,12 +96,10 @@ class User extends Authenticatable
 
     /**
      * Get departments attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getDepartmentsAttribute()
     {
-        return $this->getCachedRelation('departments', ['departments']);
+        return $this->getCachedRelation('departments');
     }
 
     /**
@@ -118,12 +112,10 @@ class User extends Authenticatable
 
     /**
      * Get employees attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getEmployeesAttribute()
     {
-        return $this->getCachedRelation('employees', ['employees']);
+        return $this->getCachedRelation('employees');
     }
 
     /**
@@ -136,12 +128,10 @@ class User extends Authenticatable
 
     /**
      * Get files attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getFilesAttribute()
     {
-        return $this->getCachedRelation('files', ['files']);
+        return $this->getCachedRelation('files');
     }
 
     /**
@@ -154,12 +144,10 @@ class User extends Authenticatable
 
     /**
      * Get fileCategories attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getFileCategoriesAttribute()
     {
-        return $this->getCachedRelation('fileCategories', ['file_categories']);
+        return $this->getCachedRelation('fileCategories');
     }
 
     /**
@@ -172,12 +160,10 @@ class User extends Authenticatable
 
     /**
      * Get funds attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getFundsAttribute()
     {
-        return $this->getCachedRelation('funds', ['funds']);
+        return $this->getCachedRelation('funds');
     }
 
     /**
@@ -190,12 +176,10 @@ class User extends Authenticatable
 
     /**
      * Get investments attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getInvestmentsAttribute()
     {
-        return $this->getCachedRelation('investments', ['investments']);
+        return $this->getCachedRelation('investments');
     }
 
     /**
@@ -208,12 +192,10 @@ class User extends Authenticatable
 
     /**
      * Get news attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getNewsAttribute()
     {
-        return $this->getCachedRelation('news', ['news']);
+        return $this->getCachedRelation('news');
     }
 
     /**
@@ -226,12 +208,10 @@ class User extends Authenticatable
 
     /**
      * Get notes attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getNotesAttribute()
     {
-        return $this->getCachedRelation('notes', ['notes']);
+        return $this->getCachedRelation('notes');
     }
 
     /**
@@ -244,14 +224,15 @@ class User extends Authenticatable
 
     /**
      * Get partners attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getPartnersAttribute()
     {
-        return $this->getCachedRelation('partners', ['partners']);
+        return $this->getCachedRelation('partners');
     }
 
+    /**
+     * The permissions that belong to the user.
+     */
     public function permissions()
     {
         return $this->belongsToMany('App\Models\Permission', 'user_permission')->withTimestamps();
@@ -259,12 +240,10 @@ class User extends Authenticatable
 
     /**
      * Get permissions attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getPermissionsAttribute()
     {
-        return $this->getCachedRelation('permissions', ['permissions']);
+        return $this->getCachedRelation('permissions');
     }
 
     /**
@@ -277,12 +256,10 @@ class User extends Authenticatable
 
     /**
      * Get protectives attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getProtectivesAttribute()
     {
-        return $this->getCachedRelation('protectives', ['protectives']);
+        return $this->getCachedRelation('protectives');
     }
     
     /**
@@ -295,12 +272,10 @@ class User extends Authenticatable
 
     /**
      * Get bancassurances attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getBancassurancesAttribute()
     {
-        return $this->getCachedRelation('bancassurances', ['bancassurances']);
+        return $this->getCachedRelation('bancassurances');
     }
 
     /**
@@ -313,12 +288,10 @@ class User extends Authenticatable
 
     /**
      * Get replies attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getRepliesAttribute()
     {
-        return $this->getCachedRelation('replies', ['replies']);
+        return $this->getCachedRelation('replies');
     }
 
     /**
@@ -331,12 +304,10 @@ class User extends Authenticatable
 
     /**
      * Get risks attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getRisksAttribute()
     {
-        return $this->getCachedRelation('risks', ['risks']);
+        return $this->getCachedRelation('risks');
     }
 
     /**
@@ -349,12 +320,10 @@ class User extends Authenticatable
 
     /**
      * Get systems attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getSystemsAttribute()
     {
-        return $this->getCachedRelation('systems', ['systems']);
+        return $this->getCachedRelation('systems');
     }
 
     /**
@@ -367,12 +336,10 @@ class User extends Authenticatable
 
     /**
      * Get posts attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getPostsAttribute()
     {
-        return $this->getCachedRelation('posts', ['posts']);
+        return $this->getCachedRelation('posts');
     }
 
     /**
@@ -385,12 +352,10 @@ class User extends Authenticatable
 
     /**
      * Get postCategories attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getPostCategoriesAttribute()
     {
-        return $this->getCachedRelation('postCategories', ['post_categories']);
+        return $this->getCachedRelation('postCategories');
     }
 
     /**
@@ -403,14 +368,15 @@ class User extends Authenticatable
 
     /**
      * Get events attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
+    /**
+     * Get all of the user's events.
+     */
     public function eventable()
     {
         return $this->morphMany(Event::class, 'eventable');

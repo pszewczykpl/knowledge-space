@@ -42,7 +42,7 @@ class Fund extends Model
      */
     public function getInvestmentsAttribute()
     {
-        return $this->getCachedRelation('investments', ['investments']);
+        return $this->getCachedRelation('investments');
     }
 
     public function notes()
@@ -57,7 +57,7 @@ class Fund extends Model
      */
     public function getNotesAttribute()
     {
-        return $this->getCachedRelation('notes', ['notes']);
+        return $this->getCachedRelation('notes');
     }
 
     /**
@@ -75,7 +75,7 @@ class Fund extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     public function extended_name()
@@ -116,7 +116,7 @@ class Fund extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
     
 }

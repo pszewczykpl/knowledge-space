@@ -37,7 +37,7 @@ class Department extends Model
      */
     public function getUsersAttribute()
     {
-        return $this->getCachedRelation('users', ['users']);
+        return $this->getCachedRelation('users');
     }
 
     /**
@@ -55,7 +55,7 @@ class Department extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     /**
@@ -73,7 +73,7 @@ class Department extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }

@@ -13,7 +13,7 @@ trait CacheModels {
      * @param array $additionalTags
      * @return array|mixed
      */
-    public function getCachedRelation(string $relation, array $additionalTags = [])
+    private function getCachedRelation(string $relation, array $additionalTags = [])
     {
         if ($this->relationLoaded($relation)) {
             return $this->getRelationValue($relation);

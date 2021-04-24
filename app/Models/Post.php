@@ -36,7 +36,7 @@ class Post extends Model
      */
     public function getPostCategoryAttribute()
     {
-        return $this->getCachedRelation('postCategory', ['post_categories']);
+        return $this->getCachedRelation('postCategory');
     }
 
     public function attachments()
@@ -51,7 +51,7 @@ class Post extends Model
      */
     public function getAttachmentsAttribute()
     {
-        return $this->getCachedRelation('attachments', ['attachments']);
+        return $this->getCachedRelation('attachments');
     }
 
     /**
@@ -69,7 +69,7 @@ class Post extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     /**
@@ -87,7 +87,7 @@ class Post extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }

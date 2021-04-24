@@ -35,7 +35,7 @@ class Note extends Model
      */
     public function getInvestmentsAttribute()
     {
-        return $this->getCachedRelation('investments', ['investments']);
+        return $this->getCachedRelation('investments');
     }
 
     public function protectives()
@@ -50,7 +50,7 @@ class Note extends Model
      */
     public function getProtectivesAttribute()
     {
-        return $this->getCachedRelation('protectives', ['protectives']);
+        return $this->getCachedRelation('protectives');
     }
 
     public function bancassurances()
@@ -65,7 +65,7 @@ class Note extends Model
      */
     public function getBancassurancesAttribute()
     {
-        return $this->getCachedRelation('bancassurances', ['bancassurances']);
+        return $this->getCachedRelation('bancassurances');
     }
 
     public function employees()
@@ -80,7 +80,7 @@ class Note extends Model
      */
     public function getEmployeesAttribute()
     {
-        return $this->getCachedRelation('employees', ['employees']);
+        return $this->getCachedRelation('employees');
     }
 
     public function funds()
@@ -95,7 +95,7 @@ class Note extends Model
      */
     public function getFundsAttribute()
     {
-        return $this->getCachedRelation('funds', ['funds']);
+        return $this->getCachedRelation('funds');
     }
 
     public function partners()
@@ -110,7 +110,7 @@ class Note extends Model
      */
     public function getPartnersAttribute()
     {
-        return $this->getCachedRelation('partners', ['partners']);
+        return $this->getCachedRelation('partners');
     }
 
     public function risks()
@@ -125,7 +125,7 @@ class Note extends Model
      */
     public function getRisksAttribute()
     {
-        return $this->getCachedRelation('risks', ['risks']);
+        return $this->getCachedRelation('risks');
     }
 
     /**
@@ -143,7 +143,7 @@ class Note extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     public function attachments()
@@ -158,7 +158,7 @@ class Note extends Model
      */
     public function getAttachmentsAttribute()
     {
-        return $this->getCachedRelation('attachments', ['attachments']);
+        return $this->getCachedRelation('attachments');
     }
 
     /**
@@ -176,7 +176,7 @@ class Note extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }

@@ -45,7 +45,7 @@ class Protective extends Model
      */
     public function getFilesAttribute()
     {
-        return $this->getCachedRelation('files', ['files']);
+        return $this->getCachedRelation('files');
     }
 
     public function notes()
@@ -60,7 +60,7 @@ class Protective extends Model
      */
     public function getNotesAttribute()
     {
-        return $this->getCachedRelation('notes', ['notes']);
+        return $this->getCachedRelation('notes');
     }
 
     /**
@@ -78,7 +78,7 @@ class Protective extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     public function extended_name()
@@ -101,7 +101,7 @@ class Protective extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }

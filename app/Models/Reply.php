@@ -35,7 +35,7 @@ class Reply extends Model
      */
     public function getNewsAttribute()
     {
-        return $this->getCachedRelation('news', ['news']);
+        return $this->getCachedRelation('news');
     }
 
     /**
@@ -53,7 +53,7 @@ class Reply extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
     
     /**
@@ -71,7 +71,7 @@ class Reply extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }

@@ -39,7 +39,7 @@ class File extends Model
      */
     public function getInvestmentsAttribute()
     {
-        return $this->getCachedRelation('investments', ['investments']);
+        return $this->getCachedRelation('investments');
     }
 
     public function employees()
@@ -54,7 +54,7 @@ class File extends Model
      */
     public function getEmployeesAttribute()
     {
-        return $this->getCachedRelation('employees', ['employees']);
+        return $this->getCachedRelation('employees');
     }
 
     public function protectives()
@@ -69,7 +69,7 @@ class File extends Model
      */
     public function getProtectivesAttribute()
     {
-        return $this->getCachedRelation('protectives', ['protectives']);
+        return $this->getCachedRelation('protectives');
     }
 
     public function bancassurances()
@@ -84,7 +84,7 @@ class File extends Model
      */
     public function getBancassurancesAttribute()
     {
-        return $this->getCachedRelation('bancassurances', ['bancassurances']);
+        return $this->getCachedRelation('bancassurances');
     }
 
     public function fileCategory()
@@ -99,7 +99,7 @@ class File extends Model
      */
     public function getFileCategoryAttribute()
     {
-        return $this->getCachedRelation('fileCategory', ['file_categories']);
+        return $this->getCachedRelation('fileCategory');
     }
 
     /**
@@ -117,7 +117,7 @@ class File extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     /**
@@ -135,7 +135,7 @@ class File extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
+        return $this->getCachedRelation('user');
     }
 
 }
