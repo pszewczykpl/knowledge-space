@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use App\Traits\CacheModels;
 
 class Attachment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use CacheModels;
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +48,7 @@ class Attachment extends Model
      */
     public function getEventsAttribute()
     {
-        return $this->getCachedRelation('events', ['events']);
+        return $this->getCachedRelation('events');
     }
 
     /**
@@ -64,29 +66,7 @@ class Attachment extends Model
      */
     public function getUserAttribute()
     {
-        return $this->getCachedRelation('user', ['users']);
-    }
-
-    /**
-     * Get relations data from cache.
-     *
-     * @param string $relation
-     * @param array $tags
-     * @return mixed
-     */
-    public function getCachedRelation(string $relation, array $tags = [])
-    {
-        if ($this->relationLoaded($relation)) {
-            return $this->getRelationValue($relation);
-        }
-
-        $data = Cache::tags(array_push($tags, 'attachments'))->rememberForever('attachments_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->getRelationValue($relation);
-        });
-
-        $this->setRelation($relation, $data);
-
-        return $data;
+        return $this->getCachedRelation('user');
     }
 
 }

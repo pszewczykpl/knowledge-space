@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CacheModels;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +15,7 @@ class User extends Authenticatable
     use HasFactory;
     use SoftDeletes;
     use Notifiable;
+    use CacheModels;
 
     /**
      * The attributes that are mass assignable.
@@ -412,28 +414,6 @@ class User extends Authenticatable
     public function eventable()
     {
         return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
-     * Get relations data from cache.
-     *
-     * @param string $relation
-     * @param array $tags
-     * @return mixed
-     */
-    public function getCachedRelation(string $relation, array $tags = [])
-    {
-        if ($this->relationLoaded($relation)) {
-            return $this->getRelationValue($relation);
-        }
-
-        $data = Cache::tags(array_push($tags, 'users'))->rememberForever('users_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->getRelationValue($relation);
-        });
-
-        $this->setRelation($relation, $data);
-
-        return $data;
     }
 
     public function hasPermission($code)

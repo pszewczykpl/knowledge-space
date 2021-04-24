@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CacheModels;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class Partner extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use CacheModels;
 
     /**
      * The attributes that are mass assignable.
@@ -75,28 +77,6 @@ class Partner extends Model
     public function getUserAttribute()
     {
         return $this->getCachedRelation('user', ['users']);
-    }
-
-    /**
-     * Get relations data from cache.
-     *
-     * @param string $relation
-     * @param array $tags
-     * @return mixed
-     */
-    public function getCachedRelation(string $relation, array $tags = [])
-    {
-        if ($this->relationLoaded($relation)) {
-            return $this->getRelationValue($relation);
-        }
-
-        $data = Cache::tags(array_push($tags, 'partners'))->rememberForever('partners_' . $this->id . '_' . $relation, function () use ($relation) {
-            return $this->getRelationValue($relation);
-        });
-
-        $this->setRelation($relation, $data);
-
-        return $data;
     }
 
 }
