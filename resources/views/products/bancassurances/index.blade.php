@@ -29,7 +29,6 @@
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />
 			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
 			<x-datatables.search-box --size="3" --number="3" --placeholder="Kod OWU" />
-			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
 		</x-slot>
 		<x-slot name="advanced_search">
 			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
