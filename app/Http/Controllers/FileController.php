@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\FileDetached;
 use App\Models\File;
 use App\Models\Investment;
 use App\Models\Protective;
@@ -13,10 +12,8 @@ use App\Models\FileCategory;
 use App\Http\Requests\StoreFile;
 use App\Http\Requests\UpdateFile;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -199,12 +196,12 @@ class FileController extends Controller
     {
         $this->authorize('update', $file);
         
-        $file->{$fileable_type . 's'}()->detach($fileable_id);
+        $file->{$fileable_type}()->detach($fileable_id);
 
         $file->load('user');
         $clone = $file->replicate();
         $clone->save();
-        $clone->{$fileable_type . 's'}()->attach($fileable_id);
+        $clone->{$fileable_type}()->attach($fileable_id);
 
         return redirect()->route('files.edit', $clone)->with('notify_success', 'Dokument został zastąpiony!');
     }
@@ -219,9 +216,7 @@ class FileController extends Controller
     {
         $this->authorize('update', $file);
         
-        $file->{$fileable_type . 's'}()->detach($fileable_id);
-
-        FileDetached::dispatch($file);
+        $file->{$fileable_type}()->detach($fileable_id);
 
         return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
     }

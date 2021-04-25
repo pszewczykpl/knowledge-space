@@ -104,12 +104,7 @@ class Investment extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function extended_name()
-    {
-        return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
-    }
-
-    public function fullname()
+    public function getExtendedNameAttribute()
     {
         return $this->name . ' (' . $this->code_toil . ') od ' . $this->edit_date;
     }

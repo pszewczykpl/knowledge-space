@@ -99,7 +99,7 @@
 							<x-panels.notes :notes="$bancassurance->notes" -type="bancassurance" :id="$bancassurance->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$bancassurance->files" :name="$bancassurance->extended_name()" -type="bancassurance" :id="$bancassurance->id" />
+							<x-panels.files :model="$bancassurance" />
 						</div>
 					</div>
 				</div>

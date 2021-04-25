@@ -77,7 +77,7 @@ class Employee extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function extended_name()
+    public function getExtendedNameAttribute()
     {
         return $this->name . ' od ' . $this->edit_date;
     }

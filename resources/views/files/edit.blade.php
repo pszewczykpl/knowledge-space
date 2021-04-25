@@ -154,7 +154,7 @@
                                 @php $file_investment = $file->investments->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($investments as $investment)
-                                    <option value="{{ $investment->id }}" {{ in_array($investment->id, $file_investment) ? "selected": "" }}>{{ $investment->fullname() }}</option>
+                                    <option value="{{ $investment->id }}" {{ in_array($investment->id, $file_investment) ? "selected": "" }}>{{ $investment->extended_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>
@@ -166,7 +166,7 @@
                                 @php $file_protective = $file->protectives->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($protectives as $protective)
-                                    <option value="{{ $protective->id }}" {{ in_array($protective->id, $file_protective) ? "selected": "" }}>{{ $protective->extended_name() }}</option>
+                                    <option value="{{ $protective->id }}" {{ in_array($protective->id, $file_protective) ? "selected": "" }}>{{ $protective->extended_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się komentarz.</span>
@@ -178,7 +178,7 @@
                                 @php $file_bancassurance = $file->bancassurances->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($bancassurances as $bancassurance)
-                                    <option value="{{ $bancassurance->id }}" {{ in_array($bancassurance->id, $file_bancassurance) ? "selected": "" }}>{{ $bancassurance->extended_name() }}</option>
+                                    <option value="{{ $bancassurance->id }}" {{ in_array($bancassurance->id, $file_bancassurance) ? "selected": "" }}>{{ $bancassurance->extended_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia bancassurance w których ma pojawić się komentarz.</span>
@@ -190,7 +190,7 @@
                                 @php $file_employee = $file->employees->pluck('id')->toArray(); @endphp
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, $file_employee) ? "selected": "" }}>{{ $employee->extended_name() }}</option>
+                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, $file_employee) ? "selected": "" }}>{{ $employee->extended_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się komentarz.</span>

@@ -81,7 +81,7 @@ class Protective extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function extended_name()
+    public function getExtendedNameAttribute()
     {
         return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
     }

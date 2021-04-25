@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property mixed extended_name
+ */
 class Bancassurance extends Model
 {
     use HasFactory;
@@ -35,7 +38,7 @@ class Bancassurance extends Model
      */
     public function files()
     {
-        return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
+        return $this->morphToMany(File::class, 'fileable')->withTimestamps();
     }
 
     /**
@@ -71,7 +74,7 @@ class Bancassurance extends Model
      */
     public function events()
     {
-        return $this->morphMany(Event::class, 'eventable');
+        return $this->morphMany(Event::class, 'eventable')->withTimestamps();
     }
 
     /**
@@ -84,7 +87,7 @@ class Bancassurance extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function extended_name()
+    public function getExtendedNameAttribute()
     {
         return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
     }

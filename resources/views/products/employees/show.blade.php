@@ -95,7 +95,7 @@
 							<x-panels.notes :notes="$employee->notes" -type="employee" :id="$employee->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
-							<x-panels.files :files="$employee->files" :name="$employee->extended_name()" -type="employee" :id="$employee->id" />
+							<x-panels.files :model="$employee" />
 						</div>
 					</div>
 				</div>

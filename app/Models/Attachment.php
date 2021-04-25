@@ -25,7 +25,7 @@ class Attachment extends Model
     ];
 
     /**
-     * Get the parent attachmentable model (note or post).
+     * Get the parent attachmentable model (note or post or news or reply).
      */
     public function attachmentable()
     {
@@ -42,8 +42,6 @@ class Attachment extends Model
 
     /**
      * Get events attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getEventsAttribute()
     {
@@ -60,8 +58,6 @@ class Attachment extends Model
 
     /**
      * Get user attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getUserAttribute()
     {

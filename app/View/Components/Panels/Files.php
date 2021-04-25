@@ -22,28 +22,30 @@ class Files extends Component
     /**
      * ZIP filename
      */
-    public $name;
+    public string $name;
 
-    public $fileable_type;
+    public string $fileable_type;
 
-    public $fileable_id;
-    
+    public int $fileable_id;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($files, $name, $type, $id)
+    public function __construct($model)
     {
-        $fileCategories = Cache::tags([$type,'file_categories', 'files'])->rememberForever($type . '_' . $id . '_file_categories_all', function () use ($files) {
-            return FileCategory::whereIn('id', $files->pluck('file_category_id')->toArray())->get();
+
+        $this->files = $model->files;
+        $this->name = str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $model->extended_name);
+
+        $fileCategories = Cache::tags([$model->getTable(),'file_categories', 'files'])->rememberForever($model->getTable() . '_' . $model->id . '_file_categories_get', function () use ($model) {
+            return FileCategory::whereIn('id', $model->files->pluck('file_category_id')->toArray())->get();
         });
 
-        $this->files = $files;
         $this->fileCategories = $fileCategories;
-        $this->name =  $name;
-        $this->fileable_type = $type;
-        $this->fileable_id = $id;
+        $this->fileable_type = $model->getTable();
+        $this->fileable_id = $model->id;
     }
 
     /**
