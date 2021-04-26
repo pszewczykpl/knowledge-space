@@ -18,7 +18,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa produktu", "Kod OWU", "Dokumenty ważne od", "Akcje"]' --info --help-us >
+	<x-layout.datatable :columns='["Nazwa produktu", "Kod OWU", "Ostatnia aktualizacja", "Akcje"]' --info --help-us >
 		<x-slot name="info_text">
 			Ubezpieczenie Pracownicze może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
 			Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>

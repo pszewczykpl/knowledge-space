@@ -18,7 +18,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa produktu", "Kod dystrybutora", "Kod produktu", "Kod OWU", "Dokumenty ważne od", "Akcje"]' --info --help-us >
+	<x-layout.datatable :columns='["Nazwa produktu", "Kod dystrybutora", "Kod produktu", "Kod OWU", "Data aktualizacji", "Akcje"]' --info --help-us >
 		<x-slot name="info_text">
 			Ubezpieczenie Ochronne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
 			Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>
@@ -43,5 +43,5 @@
 
 @push('scripts')
 	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/pages/products/protectives/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/products/protectives/index.js') }}" type="text/javascript"></script>
 @endpush

@@ -104,11 +104,6 @@ class Investment extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function getExtendedNameAttribute()
-    {
-        return $this->name . ' (' . $this->code_toil . ') od ' . $this->edit_date;
-    }
-
     /**
      * Get the user that created the investment.
      */
@@ -125,6 +120,29 @@ class Investment extends Model
     public function getUserAttribute()
     {
         return $this->getCachedRelation('user');
+    }
+
+    /**
+     * Get extended name attribute.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute()
+    {
+        return $this->name . ' (' . $this->code_toil . ')';
+    }
+
+    /**
+     * Get extended name attribute.
+     *
+     * @return string
+     */
+    public function getStatusAttribute() : string
+    {
+        return match ($this->status) {
+            'A' => 'Aktualne',
+            'N' => 'Archiwalne',
+        };
     }
 
 }
