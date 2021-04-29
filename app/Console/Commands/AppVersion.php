@@ -19,7 +19,7 @@ class AppVersion extends Command
      *
      * @var string
      */
-    protected $description = 'Get the application version';
+    protected $description = 'Get the actual application version';
 
     /**
      * Create a new command instance.

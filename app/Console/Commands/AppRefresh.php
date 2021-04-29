@@ -18,7 +18,7 @@ class AppRefresh extends Command
      *
      * @var string
      */
-    protected $description = 'Refresh the application cache and migrate';
+    protected $description = 'Refresh the application cache and run migrate';
 
     /**
      * Create a new command instance.
