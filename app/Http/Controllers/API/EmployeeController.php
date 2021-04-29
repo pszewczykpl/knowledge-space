@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use App\Traits\HasDatatables;
 use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
@@ -19,62 +20,17 @@ use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeController extends Controller
 {
+    use HasDatatables;
+
     /**
-     * Display a listing of the resource for datatables.net plugin
+     * Display a listing of the resource for datatables.net plugin.
      *
      * @param Request $request
      * @return array
      */
-    public function datatables(Request $request)
+    public function datatables(Request $request): array
     {
-        $records = Employee::select('*')
-        
-        ->where(function ($query) {
-            if($_POST['search']['value'] != null) {
-                foreach($_POST['columns'] as $column) {
-                    if($column['searchable'] == 'true') {
-                        if(!isset($i)) {
-                            $query->where($column['data'], 'like', '%' . trim($_POST['search']['value']) . '%');
-                            $i = 1;
-                        }
-                        else {
-                            $query->orWhere($column['data'], 'like', '%' . trim($_POST['search']['value']) . '%');
-                        }
-                    }
-                }
-            }
-        })
-
-        ->where(function ($query) {
-            foreach($_POST['columns'] as $column) {
-                if($column['searchable'] == 'true' && $column['search']['value'] != null) {
-                    $query->where($column['data'], 'like', '%' . trim($column['search']['value']) . '%');
-                }
-            }
-        })
-
-        ->orderBy($_POST['columns'][$_POST['order'][0]['column']]['data'], $_POST['order'][0]['dir'])
-        ->orderBy('edit_date', 'desc');
-
-        $filtered = $records->count();
-
-        $records = $records
-        ->limit($_POST['length'])
-        ->offset($_POST['start'])
-        ->get();
-
-        $records_total = Cache::tags(['employees'])->rememberForever('employees_count', function () {
-            return Employee::count();
-        });
-
-        $json_data = array(
-            "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => $records_total,
-            "recordsFiltered" => $filtered,
-            "data"            => $records
-        );
-
-        return $json_data;
+        return $this->getJsonData($request, 'App\Models\Employee');
     }
 
     /**
@@ -90,6 +46,7 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $files = $employee->files->where('extension', 'pdf');
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $employee->extended_name()]);
+        return rediresct()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $employee->extended_name]);
     }
+
 }

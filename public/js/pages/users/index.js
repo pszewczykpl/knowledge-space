@@ -15,10 +15,10 @@ $(document).ready(function() {
             {
                 data: 'fullname',
                 visible: true,
-                orderable: true,
-                searchable: true,
+                orderable: false,
+                searchable: false,
                 defaultContent: '',
-                render: function (data, type, full, row) {
+                render: function (data, type, full) {
                     return full.first_name + ' ' + full.last_name;
                 }
             },{

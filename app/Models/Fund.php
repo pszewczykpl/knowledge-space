@@ -85,20 +85,14 @@ class Fund extends Model
 
     public function getTypeAttribute()
     {
-        switch ($this->attributes['type']) {
-            case('Z'):
-                return 'Inwestycyjny';
-            case('M'):
-                return 'Modelowy';
-            case('U'):
-                return 'UFK';
-            case('S'):
-                return 'SOK';
-            case('T'):
-                return 'Tracker';
-            default:
-                return $this->attributes['type'];
-        }
+        return match ($this->attributes['type']) {
+            'Z' => 'Inwestycyjny',
+            'M' => 'Modelowy',
+            'U' => 'UFK',
+            'S' => 'SOK',
+            'T' => 'Tracker',
+            default => $this->attributes['type'],
+        };
     }
 
     /**

@@ -2,73 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Bancassurance;
 use App\Models\Investment;
-use App\Models\Fund;
-use App\Models\File;
-use App\Models\FileCategory;
-
-use Illuminate\Support\Facades\Cache;
-use ZipArchive;
+use App\Traits\HasDatatables;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Builder;
 
 class InvestmentController extends Controller
 {
+    use HasDatatables;
+
     /**
-     * Display a listing of the resource for datatables.net plugin
+     * Display a listing of the resource for datatables.net plugin.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return array
      */
-    public function datatables(Request $request)
+    public function datatables(Request $request): array
     {
-        $records = Investment::select('*')
-        
-        ->where(function ($query) {
-            if($_POST['search']['value'] != null) {
-                foreach($_POST['columns'] as $column) {
-                    if($column['searchable'] == 'true') {
-                        $query->orWhere($column['data'], 'like', '%' . trim($_POST['search']['value']) . '%');
-                    }
-                }
-            }
-        })
-
-        ->where(function ($query) {
-            foreach($_POST['columns'] as $column) {
-                if($column['searchable'] == 'true' && $column['search']['value'] != null) {
-                    $query->where($column['data'], 'like', '%' . trim($column['search']['value']) . '%');
-                }
-            }
-        })
-
-        ->orderBy($_POST['columns'][$_POST['order'][0]['column']]['data'], $_POST['order'][0]['dir'])
-        ->orderBy('edit_date', 'desc');
-
-        $filtered = $records->count();
-
-        $records = $records
-        ->limit($_POST['length'])
-        ->offset($_POST['start'])
-        ->get();
-
-        $records_total = Cache::tags(['investments'])->rememberForever('investments_count', function () {
-            return Investment::count();
-        });
-
-        $json_data = array(
-            "draw"            => intval($_POST['draw']),
-            "recordsTotal"    => $records_total,
-            "recordsFiltered" => $filtered,
-            "data"            => $records
-        );
-
-        return $json_data;
+        return $this->getJsonData($request, 'App\Models\Investment');
     }
 
     /**
@@ -77,13 +29,14 @@ class InvestmentController extends Controller
      * @param App\Investment $id
      * @param array $extensions
      * 
-     * @return redirect App\Http\Controllers\API\FilesController@zipFiles
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function zip_files($id)
     {
         $investment = Investment::findOrFail($id);
         $files = $investment->files->where('extension', 'pdf');
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $investment->extended_name()]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $investment->extended_name]);
     }
+
 }

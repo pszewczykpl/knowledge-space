@@ -137,11 +137,12 @@ class Investment extends Model
      *
      * @return string
      */
-    public function getStatusAttribute() : string
+    public function getStatusAttribute()
     {
-        return match ($this->status) {
-            'A' => 'Aktualne',
-            'N' => 'Archiwalne',
+        return match ($this->attributes['status']) {
+            'A' => 'Aktualny',
+            'N' => 'Archiwalny',
+            default => $this->attributes['status'],
         };
     }
 

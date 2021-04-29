@@ -37,16 +37,8 @@ $(document).ready(function() {
                 visible: true,
                 orderable: true,
                 searchable: false,
-                render: function (data, type, full, row) {
-                    if(full.status=='Nieaktywne') {
-                        return data + '<span class="label label-light-primary label-inline ml-2">' + full.status + '</span>';
-                    }
-                    else if(full.status=='Aktualne') {
-                        return data + '<span class="label label-light-success label-inline ml-2">' + full.status + '</span>';
-                    }
-                    else {
-                        return data;
-                    }
+                render: function (data, type, full) {
+                    return data + `<span class="label label-light-${(full.status === 'Aktualny' ? "success" : "primary")} label-inline ml-1">${full.status}</span>`;
                 }
             }, {
                 data: 'actions',
@@ -55,7 +47,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '' +
+                    let return_string = '' +
                         '<div class="dropdown dropdown-inline">' +
                             '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
                                 '<i class="flaticon-more-1"></i>' +
@@ -65,18 +57,18 @@ $(document).ready(function() {
                                     '<li class="navi-item">' +
                                         '<a class="navi-link" onclick="ShareInvestments(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
                                     '</li>' +
-                                    '<div class="dropdown-divider"></div>' + 
+                                    '<div class="dropdown-divider"></div>' +
                                     '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/investments/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>' +
+                                        `<a href="${HOST_URL}/api/investments/${full.id}/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>` +
                                     '</li>';
                         if(PERMISSIONS.includes('investments-update')) {
-                            return_string += '' + 
+                            return_string += '' +
                                     '<li class="navi-item">' +
                                         '<a href="' + HOST_URL + '/investments/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
                                     '</li>';
                         }
                         if(PERMISSIONS.includes('investments-create')) {
-                            return_string += '' + 
+                            return_string += '' +
                                     '<li class="navi-item">' +
                                         '<a href="' + HOST_URL + '/investments/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
                                     '</li>';
