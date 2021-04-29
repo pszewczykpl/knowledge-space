@@ -79,7 +79,7 @@ class NoteController extends Controller
         
         $note = new Note($request->all());
         Auth::user()->notes()->save($note);
-        
+
         $note->investments()->attach($request->investment_id);
         $note->protectives()->attach($request->protective_id);
         $note->bancassurances()->attach($request->bancassurance_id);
@@ -118,7 +118,7 @@ class NoteController extends Controller
         return view('notes.edit', [
             'title' => 'Edycja notatki',
             'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
-            'note' => Note::findOrFail($note->id),
+            'note' => $note,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),

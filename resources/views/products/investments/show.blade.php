@@ -68,7 +68,7 @@
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$investment->updated_at" />
 				<x-cards.details-row --attribute="Data utworzenia" :value="$investment->created_at" />
-				<x-cards.details-row --attribute="Utworzone przez" :value="$investment->user->fullname()" />
+				<x-cards.details-row --attribute="Utworzone przez" :value="$investment->user->full_name" />
 			</x-cards.details>
 		</div>
 		<div class="col-lg-8">

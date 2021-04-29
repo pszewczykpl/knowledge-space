@@ -22,9 +22,7 @@ class ReplyObserver
         $event->eventable()->associate($reply);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -40,9 +38,7 @@ class ReplyObserver
         $event->eventable()->associate($reply);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -69,9 +65,7 @@ class ReplyObserver
         $event->eventable()->associate($reply);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -87,9 +81,7 @@ class ReplyObserver
         $event->eventable()->associate($reply);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -105,8 +97,6 @@ class ReplyObserver
         $event->eventable()->associate($reply);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 }

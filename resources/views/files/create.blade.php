@@ -141,7 +141,7 @@
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($investments as $investment)
-                                    <option value="{{ $investment->id }}" @if($fileable_type == 'investment' and $fileable_id == $investment->id) selected @endif>{{ $investment->fullname() }}</option>
+                                    <option value="{{ $investment->id }}" @if($fileable_type == 'investment' and $fileable_id == $investment->id) selected @endif>{{ $investment->full_name }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się dokument.</span>

@@ -39,7 +39,7 @@
 				<div class="flex-grow-1">
 					<div class="d-flex justify-content-between flex-wrap mt-0">
 						<div class="d-flex mr-3">
-							<a href="{{ route('users.show', Auth::user()->id) }}" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bolder mr-3" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="<b>Wyświetl profil</b>">{{ Auth::user()->fullname() }}</a>
+							<a href="{{ route('users.show', Auth::user()->id) }}" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bolder mr-3" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="<b>Wyświetl profil</b>">{{ Auth::user()->full_name }}</a>
 						</div>
 						<div class="my-lg-0 my-3">
 							<a onclick="event.preventDefault();document.getElementById('logout-form-home').submit();" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 mt-0">Wyloguj</a>

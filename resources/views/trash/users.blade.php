@@ -28,7 +28,7 @@
 						<tbody>
 							@foreach($users as $user)
 							<tr>
-								<td>{{ $user->fullname() }}</td>
+								<td>{{ $user->full_name }}</td>
 								<td>{{ $user->email }}</td>
 								<td>
 									@can('restore', $user)

@@ -11,7 +11,7 @@
 						</div>
 						<div class="d-flex align-items-center">
 							@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-							<a href="{{ route('users.show', $post->user->id) }}" class="text-muted font-weight-bold">{{ $post->user->fullname() }}</a>
+							<a href="{{ route('users.show', $post->user->id) }}" class="text-muted font-weight-bold">{{ $post->user->full_name }}</a>
 						</div>
 					</div>
 				</div>

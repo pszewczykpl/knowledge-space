@@ -24,7 +24,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="mr-2">
                             <a href="{{ route('users.show', $note->user->id) }}" class="text-dark-75 text-hover-primary font-weight-bold">
-                                {{ $note->user->fullname() }}
+                                {{ $note->user->full_name }}
                             </a>
                             <span class="text-muted font-weight-light ml-2">
                                 {{ $note->updated_at }}

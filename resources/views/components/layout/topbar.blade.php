@@ -139,7 +139,7 @@
 				@auth
 				<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 					<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Witaj,</span>
-					<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->fullname() }}</span>
+					<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->full_name }}</span>
 					<div class="symbol symbol-35">
 						<div class="symbol-label" style="background-image:url({{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }})"></div>
 					</div>

@@ -24,9 +24,7 @@ class UserObserver
         $event->eventable()->associate($user);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -43,9 +41,7 @@ class UserObserver
         $event->eventable()->associate($user);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -73,9 +69,7 @@ class UserObserver
         $event->eventable()->associate($user);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -92,9 +86,7 @@ class UserObserver
         $event->eventable()->associate($user);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -111,8 +103,6 @@ class UserObserver
         $event->eventable()->associate($user);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 }

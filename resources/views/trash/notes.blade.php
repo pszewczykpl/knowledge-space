@@ -29,7 +29,7 @@
 							@foreach($notes as $note)
 							<tr>
 								<td>{{ $note->content }}</td>
-								<td>{{ $note->user->fullname() }}</td>
+								<td>{{ $note->user->full_name }}</td>
 								<td>
 									@can('restore', $note)
 									<a onclick='document.getElementById("note_restore_{{ $note->id }}").submit();' class="btn btn-sm btn-clean btn-icon btn-icon-md" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Przywróć">

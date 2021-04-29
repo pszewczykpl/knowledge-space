@@ -10,7 +10,7 @@
 				<i class="symbol-badge bg-success"></i>
 			</div>
 			<div class="d-flex flex-column">
-				<span class="font-weight-bold font-size-h5 text-dark-75">{{ Auth::user()->fullname() }}</span>
+				<span class="font-weight-bold font-size-h5 text-dark-75">{{ Auth::user()->full_name }}</span>
 				<div class="navi mt-2">
 					<span class="navi-item">
 						<span class="navi-link p-0 pb-2">

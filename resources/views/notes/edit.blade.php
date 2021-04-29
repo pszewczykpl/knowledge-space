@@ -81,7 +81,7 @@
                                         @php $note_investment = $note->investments->pluck('id')->toArray(); @endphp
                                         <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                             @foreach($investments as $investment)
-                                            <option value="{{ $investment->id }}" {{ in_array($investment->id, $note_investment) ? "selected": "" }}>{{ $investment->fullname() }}</option>
+                                            <option value="{{ $investment->id }}" {{ in_array($investment->id, $note_investment) ? "selected": "" }}>{{ $investment->full_name }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się komentarz.</span>

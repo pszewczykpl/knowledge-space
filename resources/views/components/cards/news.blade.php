@@ -6,7 +6,7 @@
 					<span class="symbol-label" style="background-image:url({{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }})"></span>
 				</div>
 				<div class="d-flex flex-column flex-grow-1">
-					<a href="{{ route('users.show', $news->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">{{ $news->user->fullname() }}</a>
+					<a href="{{ route('users.show', $news->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">{{ $news->user->full_name }}</a>
 					<div class="d-flex">
 						<div class="d-flex align-items-center pr-5">
 							@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
@@ -71,7 +71,7 @@
 						<div class="d-flex flex-column flex-row-fluid">
 							<div class="d-flex align-items-center flex-wrap">
 								<div class="d-flex">
-									<a href="{{ route('users.show', $reply->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->user->fullname() }}</a>
+									<a href="{{ route('users.show', $reply->user->id) }}" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-2">{{ $reply->user->full_name }}</a>
 								</div>
 								<div class="flex-grow-1">
 									@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary'])

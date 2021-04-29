@@ -22,9 +22,7 @@ class SystemObserver
         $event->eventable()->associate($system);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -40,9 +38,7 @@ class SystemObserver
         $event->eventable()->associate($system);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -69,9 +65,7 @@ class SystemObserver
         $event->eventable()->associate($system);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -87,9 +81,7 @@ class SystemObserver
         $event->eventable()->associate($system);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -105,8 +97,6 @@ class SystemObserver
         $event->eventable()->associate($system);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 }

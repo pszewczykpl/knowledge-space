@@ -22,9 +22,7 @@ class PermissionObserver
         $event->eventable()->associate($permission);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -40,9 +38,7 @@ class PermissionObserver
         $event->eventable()->associate($permission);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -58,9 +54,7 @@ class PermissionObserver
         $event->eventable()->associate($permission);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -76,9 +70,7 @@ class PermissionObserver
         $event->eventable()->associate($permission);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 
     /**
@@ -94,8 +86,6 @@ class PermissionObserver
         $event->eventable()->associate($permission);
         $event->save();
 
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        if(Auth::check()) Auth::user()->events()->save($event);
     }
 }

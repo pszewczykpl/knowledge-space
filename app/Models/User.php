@@ -382,22 +382,15 @@ class User extends Authenticatable
         return $this->morphMany(Event::class, 'eventable');
     }
 
-    public function hasPermission($code)
+    /**
+     * Check if user has the permission (by code).
+     *
+     * @param string $code
+     * @return bool
+     */
+    public function hasPermission(string $code): bool
     {
-        $permissions = Cache::tags(['users', 'permissions'])->rememberForever('users_' . $this->id . '_permissions_all', function () {
-            return $this->permissions()->get()->pluck('code')->toArray();
-        });
-
-        if (in_array($code, $permissions)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function fullname()
-    {
-        return $this->first_name . ' ' . $this->last_name;
+        return in_array($code, $this->permissions->pluck('code')->toArray());
     }
 
     public function getFullNameAttribute(): string

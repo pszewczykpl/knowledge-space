@@ -10,7 +10,7 @@
                     </div>
 					<div class="pt-2 text-center">
                         <span class="text-dark-75 text-primary card-title font-weight-bold font-size-h4">
-                            {{ $user->fullname() }}
+                            {{ $user->full_name }}
                         </span>
                     </div>
                     <div class="pt-2 text-center">
