@@ -97,6 +97,20 @@ class Bancassurance extends Model
     }
 
     /**
+     * Get record status (up to date or not).
+     *
+     * @return string
+     */
+    public function getStatusAttribute(): string
+    {
+        return match ($this->attributes['status']) {
+            'A' => 'Aktualny',
+            'N' => 'Archiwalny',
+            default => $this->attributes['status'],
+        };
+    }
+
+    /**
      * Get the user that created the bancassurance.
      */
     public function user(): BelongsTo

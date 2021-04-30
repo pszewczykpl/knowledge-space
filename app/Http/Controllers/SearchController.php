@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Search;
 
@@ -16,7 +18,7 @@ class SearchController extends Controller
             'route' => 'investments',
             'icon' => 'investment',
             'title' => 'Ubezpieczenia Inwestycyjne',
-            'columns' => ['name', 'code_owu', 'code_toil', 'code', 'group', 'dist'],
+            'columns' => ['name', 'code_owu', 'code_toil', 'code', 'group', 'dist', 'dist_short'],
             'result' => [
                 'additional_data' => [
                     'code' => 'Kod produktu',
@@ -28,10 +30,11 @@ class SearchController extends Controller
             'route' => 'protectives',
             'icon' => 'protective',
             'title' => 'Ubezpieczenia Ochronne',
-            'columns' => ['name', 'code_owu', 'code', 'dist'],
+            'columns' => ['name', 'code_owu', 'code', 'dist', 'dist_short'],
             'result' => [
                 'additional_data' => [
                     'code' => 'Kod produktu',
+                    'dist' => 'Dystrybutor',
                 ]
             ]
         ],
@@ -43,7 +46,7 @@ class SearchController extends Controller
             'result' => [
                 'additional_data' => [
                     'code' => 'Kod produktu',
-                    'code_owu' => 'Kod OWU',
+                    'dist' => 'Dystrybutor',
                 ]
             ]
         ],
@@ -54,7 +57,7 @@ class SearchController extends Controller
             'columns' => ['name', 'code_owu'],
             'result' => [
                 'additional_data' => [
-                    'code' => 'Kod produktu',
+                    //
                 ]
             ]
         ],
@@ -69,10 +72,18 @@ class SearchController extends Controller
                 ]
             ]
         ],
-//        '\App\Models\Risk' => [
-//            'route' => 'risks',
-//            'columns' => ['name', 'code', 'category'],
-//        ],
+        '\App\Models\Risk' => [
+            'route' => 'risks',
+            'icon' => 'risk',
+            'title' => 'Ryzyka ubezpieczeniowe',
+            'columns' => ['name', 'code'],
+            'result' => [
+                'additional_data' => [
+                    'code' => 'Kod',
+                    'category' => 'Kategoria',
+                ]
+            ]
+        ],
 //        '\App\Models\Post' => [
 //            'route' => 'posts',
 //            'columns' => ['title', 'content'],
@@ -113,7 +124,7 @@ class SearchController extends Controller
      * Display a search results.
      *
      * @param $value
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -125,8 +136,9 @@ class SearchController extends Controller
     /**
      * Display a search results.
      *
-     * @param $value
-     * @return string
+     * @param Search $request
+     * @param string $scope
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|View
      */
     public function search(Search $request, string $scope)
     {
@@ -142,7 +154,12 @@ class SearchController extends Controller
                         $query->orWhere($column, 'like', '%' . $value . '%');
                     }
                 })
-                ->whereIn('status', $active)
+                ->where(function ($query) use ($active, $data) {
+                    if(Schema::hasColumn($data['route'], 'status')){
+                        $query->whereIn('status', $active);
+                    }
+                })
+                ->orderByDesc('id')
                 ->get();
 
             $resultsCount += (int) ${$data['route']}->count();

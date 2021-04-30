@@ -18,7 +18,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa produktu", "Kod dystrybutora", "Kod produktu", "Kod OWU", "Ostatnia aktualizacja", "Akcje"]' --info --help-us >
+	<x-layout.datatable :columns='["Nazwa produktu", "Kod dystrybutora", "Kod produktu", "Kod OWU", "Data aktualizacji", "Akcje"]' --info --help-us >
 		<x-slot name="info_text">
 			Ubezpieczenie Bancassurance może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
 			Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>
@@ -29,6 +29,7 @@
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />
 			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
 			<x-datatables.search-box --size="3" --number="3" --placeholder="Kod OWU" />
+			<x-datatables.search-box --size="3" --number="7" --placeholder="Status" --hidden />
 		</x-slot>
 		<x-slot name="advanced_search">
 			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
@@ -42,5 +43,5 @@
 
 @push('scripts')
 	<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/pages/products/bancassurances/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/products/bancassurances/index.js') }}" type="text/javascript"></script>
 @endpush

@@ -1,14 +1,7 @@
 @extends('layouts.app')
 
 @section('subheader')
-<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
-    <li class="breadcrumb-item">
-		<span class="text-muted">{{ $investment->code_toil }}</span>
-	</li>
-	<li class="breadcrumb-item">
-		<span class="text-muted">{{ $investment->edit_date }}</span>
-	</li>
-</ul>
+	<x-layout.subheader :description="$investment->extended_name" />
 @stop
 
 @section('toolbar')
@@ -30,31 +23,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
-			<div class="card card-custom gutter-b">
-				<div class="card-header h-auto py-sm-0 border-0">
-					@if($investment->status == 'N')
-					<div class="card-title">
-						<h3 class="card-label text-danger font-weight-bold"><b>Dokumenty Archiwalne</b></h3>
-					</div>
-					<div class="card-toolbar">
-						<span class="label font-weight-bold label label-inline label-light-danger">Ważne</span>
-					</div>
-					@else
-					<div class="card-title">
-						<h3 class="card-label text-success font-weight-bold"><b>Dokumenty aktualne</b></h3>
-					</div>
-					@endif
-				</div>
-				<div class="card-body pt-0 pb-6">
-					<p class="text-dark-50">
-					@if($investment->status == 'N')
-					<span class="font-weight-bold">Pamiętaj!</span> Dla wybranego prdouktu istnieje nowszy komplet dokumentów.
-					@else
-					To najnowszy komplet dokumentów dla wybranego produktu.
-					@endif
-					</p>
-				</div>
-			</div>
 			<x-cards.details --title="Szczegóły ubezpieczenia" --description="Dane ubezpieczenia inwestycyjnego">
 				<x-cards.details-row --attribute="Nazwa produktu" :value="$investment->name" />
 				<x-cards.details-row --attribute="Kod produktu" :value="$investment->code" />
@@ -109,6 +77,7 @@
 							<x-panels.notes :notes="$investment->notes" -type="investment" :id="$investment->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
+							@if($investment->status == 'Archiwalny')<x-cards.archive-files />@endif
 							<x-panels.files :model="$investment" />
 						</div>
 						<div class="tab-pane" id="funds" role="tabpanel">

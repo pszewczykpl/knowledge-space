@@ -13,13 +13,8 @@
                     @endforeach
                 </div>
         </div>
-        @switch($result->status ?? null)
-            @case('A')
-                <span class="label font-weight-bold label-lg label-light-success label-inline">Aktualne</span>
-            @break
-            @case('N')
-                <span class="label font-weight-bold label-lg label-light-primary label-inline">Archiwalne</span>
-            @break
-        @endswitch
+        @if($result->status ?? false)
+            @if($result->edit_date ?? false)<span class="mr-2 text-dark-75">{{ $result->edit_date }}</span>@endif <span class="label label-lg @if($result->status == 'Aktualny') label-light-success @else label-light-primary @endif label-inline">{{ $result->status }}</span>
+        @endif
     </div>
 </a>

@@ -25,7 +25,7 @@ $(document).ready(function() {
                 searchable: true,
                 "width": "35%"
             }, {
-                data: 'file_category.name',
+                data: 'file',
                 visible: true,
                 orderable: false,
                 searchable: false,

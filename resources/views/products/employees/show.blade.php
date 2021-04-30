@@ -30,31 +30,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
-			<div class="card card-custom gutter-b">
-				<div class="card-header h-auto py-sm-0 border-0">
-					@if($employee->status == 'N')
-					<div class="card-title">
-						<h3 class="card-label text-danger font-weight-bold"><b>Dokumenty Archiwalne</b></h3>
-					</div>
-					<div class="card-toolbar">
-						<span class="label font-weight-bold label label-inline label-light-danger">Ważne</span>
-					</div>
-					@else
-					<div class="card-title">
-						<h3 class="card-label text-success font-weight-bold"><b>Dokumenty aktualne</b></h3>
-					</div>
-					@endif
-				</div>
-				<div class="card-body pt-0 pb-6">
-					<p class="text-dark-50">
-					@if($employee->status == 'N')
-					<span class="font-weight-bold">Pamiętaj!</span> Dla wybranego prdouktu istnieje nowszy komplet dokumentów.
-					@else
-					To najnowszy komplet dokumentów dla wybranego produktu.
-					@endif
-					</p>
-				</div>
-			</div>
 			<x-cards.details --title="Szczegóły ubezpieczenia" --description="Dane ubezpieczenia pracowniczego">
 				<x-cards.details-row --attribute="Nazwa produktu" :value="$employee->name" />
 				<x-cards.details-row --attribute="Kod OWU" :value="$employee->code_owu" />
@@ -95,6 +70,7 @@
 							<x-panels.notes :notes="$employee->notes" -type="employee" :id="$employee->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
+							@if($employee->status == 'Archiwalny')<x-cards.archive-files />@endif
 							<x-panels.files :model="$employee" />
 						</div>
 					</div>

@@ -29,16 +29,8 @@ $(document).ready(function() {
                 visible: true,
                 orderable: true,
                 searchable: false,
-                render: function (data, type, full, row) {
-                    if(full.status=='N') {
-                        return data + '<span class="label font-weight-bold label-lg label-light-primary label-inline ml-2">Archiwalne</span>';
-                    }
-                    else if(full.status=='A') {
-                        return data + '<span class="label font-weight-bold label-lg label-light-success label-inline ml-2">Aktualne</span>';
-                    }
-                    else {
-                        return data;
-                    }
+                render: function (data, type, full) {
+                    return data + `<span class="label label-light-${(full.status === 'Aktualny' ? "success" : "primary")} label-inline ml-1">${full.status}</span>`;
                 }
             }, {
                 data: 'actions',

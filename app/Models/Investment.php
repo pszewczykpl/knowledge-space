@@ -133,11 +133,11 @@ class Investment extends Model
     }
 
     /**
-     * Get extended name attribute.
+     * Get record status (up to date or not).
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusAttribute(): string
     {
         return match ($this->attributes['status']) {
             'A' => 'Aktualny',

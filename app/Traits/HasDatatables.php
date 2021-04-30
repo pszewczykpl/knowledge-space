@@ -34,7 +34,8 @@ trait HasDatatables {
                 }
             })
 
-            ->orderBy($request->input('columns')[$request->input('order.0.column')]['data'], $request->input('order.0.dir'));
+            ->orderBy($request->input('columns')[$request->input('order.0.column')]['data'], $request->input('order.0.dir'))
+            ->orderBy('id', 'desc');
 
         $filtered = $records->count();
 

@@ -30,38 +30,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
-			<div class="card card-custom gutter-b">
-				<div class="card-header h-auto py-sm-0 border-0">
-					@if($bancassurance->status == 'N')
-					<div class="card-title">
-						<h3 class="card-label text-danger font-weight-bold"><b>Dokumenty Archiwalne</b></h3>
-					</div>
-					<div class="card-toolbar">
-						<span class="label font-weight-bold label label-inline label-light-danger">Ważne</span>
-					</div>
-					@else
-					<div class="card-title">
-						<h3 class="card-label text-success font-weight-bold"><b>Dokumenty aktualne</b></h3>
-					</div>
-					@endif
-				</div>
-				<div class="card-body pt-0 pb-6">
-					<p class="text-dark-50">
-					@if($bancassurance->status == 'N')
-					<span class="font-weight-bold">Pamiętaj!</span> Dla wybranego prdouktu istnieje nowszy komplet dokumentów.
-					@else
-					To najnowszy komplet dokumentów dla wybranego produktu.
-					@endif
-					</p>
-				</div>
-			</div>
 			<x-cards.details --title="Szczegóły ubezpieczenia" --description="Dane ubezpieczenia bancassurance">
 				<x-cards.details-row --attribute="Nazwa produktu" :value="$bancassurance->name" />
 				<x-cards.details-row --attribute="Kod produktu" :value="$bancassurance->code" />
 				<x-cards.details-row --attribute="Kod OWU" :value="$bancassurance->code_owu" />
 				<x-cards.details-row --attribute="Dystrybutor" :value="$bancassurance->dist" />
 				<x-cards.details-row --attribute="Kod dystrybutora" :value="$bancassurance->dist_short" />
-				<x-cards.details-row --attribute="Numer subskrypcji" :value="$bancassurance->subscription" />
 			</x-cards.details>
 			<x-cards.details --title="Historia rekordu" --description="Historia edycji rekordu">
 				<x-cards.details-row --attribute="Data ostatniej edycji" :value="$bancassurance->updated_at" />
@@ -99,6 +73,7 @@
 							<x-panels.notes :notes="$bancassurance->notes" -type="bancassurance" :id="$bancassurance->id"  />
 						</div>
 						<div class="tab-pane active" id="files" role="tabpanel">
+							@if($bancassurance->status == 'Archiwalny')<x-cards.archive-files />@endif
 							<x-panels.files :model="$bancassurance" />
 						</div>
 					</div>
