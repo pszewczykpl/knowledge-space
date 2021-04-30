@@ -86,19 +86,6 @@
                             @else
                                 <span class="text-dark-50 font-weight-bold pl-1 font-size-md">Brak załączników</span>
                             @endif
-
-                            @can('create', \App\Models\Attachment::class)
-                                {!! Form::open(['route' => 'attachments.store', 'method' => 'post', 'files' => true, 'id' => 'attachment_store_form']) !!}
-                                <div class="col-12 col-md-8 pt-3 pl-0 d-flex">
-                                    <div>
-                                        <input class="form-control form-control-sm form-control-solid" type="file" name="attachment" id="attachment" />
-                                        <input type="hidden" id="attachmentable_id" name="attachmentable_id" value="{{ $note->id }}">
-                                        <input type="hidden" id="attachmentable_type" name="attachmentable_type" value="App\Models\Note">
-                                    </div>
-                                    <a onclick='document.getElementById("attachment_store_form").submit();' class="btn btn-light-primary btn-sm ml-3">@include('svg.save', ['class' => 'navi-icon']) Dodaj załącznik</a>
-                                </div>
-                                {!! Form::close() !!}
-                            @endcan
                         </div>
                     </div>
 
