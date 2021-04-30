@@ -38,7 +38,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        \App\Models\Attachment::observe(\App\Observers\AttachmentObserver::class);
         \App\Models\Bancassurance::observe(\App\Observers\BancassuranceObserver::class);
         \App\Models\Department::observe(\App\Observers\DepartmentObserver::class);
         \App\Models\Employee::observe(\App\Observers\EmployeeObserver::class);

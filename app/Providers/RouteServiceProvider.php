@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Attachment;
 use App\Models\Bancassurance;
 use App\Models\Department;
 use App\Models\Employee;
@@ -53,12 +52,6 @@ class RouteServiceProvider extends ServiceProvider
         /**
          * Bind resources for cache using rememberForever
          */
-        Route::bind('attachment', function ($id) {
-            return Cache::tags(['attachments'])->rememberForever('attachments_' . $id, function () use ($id) {
-                return Attachment::find($id);
-            });
-        });
-
         Route::bind('bancassurance', function ($id) {
             return Cache::tags(['bancassurances'])->rememberForever('bancassurances_' . $id, function () use ($id) {
                 return Bancassurance::find($id);
