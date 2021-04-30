@@ -11,7 +11,7 @@ trait CacheModels {
      *
      * @param string $relation
      * @param array $additionalTags
-     * @return array|mixed
+     * @return mixed
      */
     private function getCachedRelation(string $relation, array $additionalTags = []): mixed
     {

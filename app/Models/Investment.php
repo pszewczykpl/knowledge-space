@@ -123,13 +123,13 @@ class Investment extends Model
     }
 
     /**
-     * Get extended name attribute.
+     * Get unique name of the product.
      *
      * @return string
      */
-    public function getExtendedNameAttribute()
+    public function getExtendedNameAttribute(): string
     {
-        return $this->name . ' (' . $this->code_toil . ')';
+        return $this->attributes['name'] . ' (' . $this->attributes['code_toil'] . ')';
     }
 
     /**

@@ -78,9 +78,14 @@ class Fund extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function extended_name()
+    /**
+     * Get unique name of the product.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute(): string
     {
-        return $this->name . ' (' . $this->code . ')';
+        return $this->attributes['name'];
     }
 
     public function getTypeAttribute()

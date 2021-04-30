@@ -5,8 +5,9 @@ namespace App\Models;
 use App\Traits\CacheModels;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Cache;
 
 /**
  * @property mixed extended_name
@@ -35,16 +36,16 @@ class Bancassurance extends Model
 
     /**
      * Get all of the files for the bancassurance.
+     *
+     * @return MorphToMany
      */
-    public function files()
+    public function files(): MorphToMany
     {
-        return $this->morphToMany(File::class, 'fileable')->withTimestamps();
+        return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
     }
 
     /**
      * Get files attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getFilesAttribute()
     {
@@ -53,16 +54,16 @@ class Bancassurance extends Model
 
     /**
      * Get all of the notes for the bancassurance.
+     *
+     * @return MorphToMany
      */
-    public function notes()
+    public function notes(): MorphToMany
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
     }
 
     /**
      * Get notes attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getNotesAttribute()
     {
@@ -74,36 +75,37 @@ class Bancassurance extends Model
      */
     public function events()
     {
-        return $this->morphMany(Event::class, 'eventable')->withTimestamps();
+        return $this->morphMany('App\Models\Event', 'eventable')->withTimestamps();
     }
 
     /**
      * Get events attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getEventsAttribute()
     {
         return $this->getCachedRelation('events');
     }
 
-    public function getExtendedNameAttribute()
+    /**
+     * Get unique name of the product.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute(): string
     {
-        return $this->name . ' (' . $this->dist_short . ') od ' . $this->edit_date;
+        return $this->attributes['name'] . ' (' . $this->attributes['code_owu'] . ')';
     }
 
     /**
      * Get the user that created the bancassurance.
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo('App\Models\User');
     }
 
     /**
      * Get user attribute value from cached data.
-     *
-     * @return mixed
      */
     public function getUserAttribute()
     {

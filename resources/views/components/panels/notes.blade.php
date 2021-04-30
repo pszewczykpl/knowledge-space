@@ -48,27 +48,6 @@
                         {{ $note->content }}
                     </p>
 
-                    @if($note->attachments->count() > 0)
-                    <div class="row pl-3">
-                        @include('svg.attachment', ['class' => 'svg-icon-primary svg-icon-2x'])
-                        <span class="text-dark-50 font-weight-md font-size-lg pl-1">Załączniki</span>
-                    </div>
-                    <div class="row pl-3 pt-3">
-                            @foreach($note->attachments as $attachment)
-                                <div class="pb-3 pr-6">
-                                    <a href="{{ route('attachments.show', $attachment->id) }}" target="_blank" class="pr-3">
-                                        <img src="{{ asset('/media/files/' . $attachment->extension . '.svg') }}" style="width: 24px;" title="{{ $attachment->name }}">
-                                        <span class="text-dark-75 font-weight-bold pl-1 font-size-md">{{ $attachment->name }}</span>
-                                    </a>
-                                    <a onclick='document.getElementById("attachments_destroy_{{ $attachment->id }}").submit();' class="">
-                                        <span class="text-danger pl-1 font-size-md">Usuń</span>
-                                    </a>
-                                    {{ Form::open([ 'method'  => 'delete', 'route' => [ 'attachments.destroy', $attachment->id ], 'id' => 'attachments_destroy_' . $attachment->id ]) }}{{ Form::close() }}
-                                </div>
-                            @endforeach
-                    </div>
-                    @endif
-
                 </div>
             </div>
             @endforeach

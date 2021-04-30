@@ -39,10 +39,11 @@ class SearchController extends Controller
             'route' => 'bancassurances',
             'icon' => 'bancassurance',
             'title' => 'Ubezpieczenia bancassurance',
-            'columns' => ['name', 'code_owu', 'code', 'dist'],
+            'columns' => ['name', 'code_owu', 'code', 'dist', 'dist_short'],
             'result' => [
                 'additional_data' => [
                     'code' => 'Kod produktu',
+                    'code_owu' => 'Kod OWU',
                 ]
             ]
         ],

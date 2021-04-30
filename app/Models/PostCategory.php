@@ -75,4 +75,14 @@ class PostCategory extends Model
         return $this->getCachedRelation('user');
     }
 
+    /**
+     * Get unique name of the product.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute(): string
+    {
+        return $this->attributes['name'];
+    }
+
 }

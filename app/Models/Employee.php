@@ -77,9 +77,14 @@ class Employee extends Model
         return $this->getCachedRelation('events');
     }
 
-    public function getExtendedNameAttribute()
+    /**
+     * Get unique name of the product.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute(): string
     {
-        return $this->name . ' od ' . $this->edit_date;
+        return $this->attributes['name'] . ' (' . $this->attributes['code_owu'] . ')';
     }
 
     /**

@@ -27,5 +27,15 @@ class Permission extends Model
     {
         return $this->belongsToMany('App\Models\User', 'user_permission')->withTimestamps();
     }
+
+    /**
+     * Get unique name of the product.
+     *
+     * @return string
+     */
+    public function getExtendedNameAttribute(): string
+    {
+        return $this->attributes['name'];
+    }
     
 }
