@@ -14,6 +14,7 @@ use App\Http\Requests\UpdateFile;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -217,6 +218,7 @@ class FileController extends Controller
         $this->authorize('update', $file);
         
         $file->{$fileable_type}()->detach($fileable_id);
+        Cache::tags('files')->flush();
 
         return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
     }

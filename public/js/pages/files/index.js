@@ -25,14 +25,6 @@ $(document).ready(function() {
                 searchable: true,
                 "width": "35%"
             }, {
-                data: 'file',
-                visible: true,
-                orderable: false,
-                searchable: false,
-                render: function (data, type, row) {
-                    return '<span class="label font-weight-bold label-lg label-light-success label-inline">' + data +  '</span>';
-                }
-            }, {
                 data: 'actions',
                 visible: true,
                 orderable: false,

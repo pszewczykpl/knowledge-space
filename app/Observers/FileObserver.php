@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\File;
 use App\Models\Event;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 

@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa", "Ścieżka", "Kategoria dokumentu", "Akcje"]' --info>
+	<x-layout.datatable :columns='["Nazwa", "Ścieżka", "Akcje"]' --info>
 		<x-slot name="info_text">
 			Poniżej znajdują się dokumenty dodane we wszystkich obiektach dostępnch w systemie.<br>
 			Pojedynczy dokument może być powiązany z wieloma obiektami.
