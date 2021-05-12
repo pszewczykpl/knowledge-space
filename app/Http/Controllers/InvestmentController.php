@@ -81,7 +81,7 @@ class InvestmentController extends Controller
 
         $investment->load('user');
         $clone = $investment->replicate();
-        $clone->edit_date = '2020-06-30';
+        $clone->edit_date = '2021-01-18';
         $clone->save();
         $clone->files()->attach($investment->files);
         $clone->notes()->attach($investment->notes);
