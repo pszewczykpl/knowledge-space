@@ -10,17 +10,16 @@ trait CacheModels {
      * Get relations data from cache.
      *
      * @param string $relation
-     * @param array $additionalTags
+     * @param array $tags
      * @return mixed
      */
-    private function getCachedRelation(string $relation, array $additionalTags = []): mixed
+    private function getCachedRelation(string $relation, array $tags = []): mixed
     {
         if ($this->relationLoaded($relation)) {
             return $this->getRelationValue($relation);
         }
 
-        $tags = array_push($additionalTags, $this->getTable(), $this->{$relation}()->getRelated()->getTable());
-
+        array_push($tags, $this->getTable(), $this->{$relation}()->getRelated()->getTable());
         $data = Cache::tags($tags)->rememberForever($this->getTable() . '_' . $this->id . '_' . $relation, function () use ($relation) {
             return $this->getRelationValue($relation);
         });
