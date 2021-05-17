@@ -35,7 +35,7 @@ class ProtectiveController extends Controller
         $protective = Protective::findOrFail($id);
         $files = $protective->files->where('extension', 'pdf');
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $protective->extended_name]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $protective->extended_name)]);
     }
 
 }

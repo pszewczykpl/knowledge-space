@@ -46,7 +46,7 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $files = $employee->files->where('extension', 'pdf');
 
-        return rediresct()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $employee->extended_name]);
+        return rediresct()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $employee->extended_name)]);
     }
 
 }

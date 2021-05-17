@@ -36,7 +36,7 @@ class InvestmentController extends Controller
         $investment = Investment::findOrFail($id);
         $files = $investment->files->where('extension', 'pdf');
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => $investment->extended_name]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $investment->extended_name)]);
     }
 
 }
