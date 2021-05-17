@@ -141,7 +141,7 @@
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="investment_id[]" id="investment_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($investments as $investment)
-                                    <option value="{{ $investment->id }}" @if($fileable_type == 'investment' and $fileable_id == $investment->id) selected @endif>{{ $investment->full_name }}</option>
+                                    <option value="{{ $investment->id }}" @if($fileable_type == 'investment' and $fileable_id == $investment->id) selected @endif>{{ $investment->extended_name }} od {{ $investment->edit_date }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia inwestycyjne w których ma pojawić się dokument.</span>
@@ -152,7 +152,7 @@
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="protective_id[]" id="protective_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($protectives as $protective)
-                                    <option value="{{ $protective->id }}" @if($fileable_type == 'protective' and $fileable_id == $protective->id) selected @endif>{{ $protective->extended_name() }}</option>
+                                    <option value="{{ $protective->id }}" @if($fileable_type == 'protective' and $fileable_id == $protective->id) selected @endif>{{ $protective->extended_name }} od {{ $protective->edit_date }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia ochronne w których ma pojawić się dokument.</span>
@@ -163,7 +163,7 @@
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($bancassurances as $bancassurance)
-                                    <option value="{{ $bancassurance->id }}" @if($fileable_type == 'bancassurance' and $fileable_id == $bancassurance->id) selected @endif>{{ $bancassurance->extended_name() }}</option>
+                                    <option value="{{ $bancassurance->id }}" @if($fileable_type == 'bancassurance' and $fileable_id == $bancassurance->id) selected @endif>{{ $bancassurance->extended_name }} od {{ $bancassurance->edit_date }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia bancassurance w których ma pojawić się dokument.</span>
@@ -174,7 +174,7 @@
                             <div class="col-8">
                                 <select class="form-control form-control-lg form-control-solid selectpicker" multiple="multiple" name="employee_id[]" id="employee_id[]" data-actions-box="true" data-live-search="true">
                                     @foreach($employees as $employee)
-                                    <option value="{{ $employee->id }}" @if($fileable_type == 'employee' and $fileable_id == $employee->id) selected @endif>{{ $employee->extended_name() }}</option>
+                                    <option value="{{ $employee->id }}" @if($fileable_type == 'employee' and $fileable_id == $employee->id) selected @endif>{{ $employee->extended_name }} od {{ $employee->edit_date }}</option>
                                     @endforeach
                                 </select>
                                 <span class="form-text text-muted">Wskaż ubezpieczenia pracownicze w których ma pojawić się dokument.</span>
