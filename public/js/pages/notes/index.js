@@ -19,15 +19,6 @@ $(document).ready(function() {
                 searchable: true,
                 "width": "60%"
             }, {
-                data: 'fullname',
-                visible: true,
-                orderable: false,
-                searchable: false,
-                defaultContent: '',
-                render: function (data, type, full, row) {
-                    return '<a href="' + HOST_URL + '/users/' + full.user.id + '">' + full.user.first_name + ' ' + full.user.last_name + '</a>';
-                }
-            }, {
                 data: 'actions',
                 visible: true,
                 orderable: false,
