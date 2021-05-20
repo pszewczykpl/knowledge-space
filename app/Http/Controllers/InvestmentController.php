@@ -6,6 +6,8 @@ use App\Models\Investment;
 
 use App\Http\Requests\StoreInvestment;
 use App\Http\Requests\UpdateInvestment;
+use App\Models\System;
+use App\Models\SystemProperty;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -81,7 +83,7 @@ class InvestmentController extends Controller
 
         $investment->load('user');
         $clone = $investment->replicate();
-        $clone->edit_date = '2021-01-18';
+        $clone->edit_date = SystemProperty::select('value')->where('key', 'default_edit_date')->firstOrFail()->pluck('value')[0];
         $clone->save();
         $clone->files()->attach($investment->files);
         $clone->notes()->attach($investment->notes);
