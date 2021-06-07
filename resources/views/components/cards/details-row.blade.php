@@ -1,10 +1,8 @@
 @if($value ?? null)
-<div class="card-body py-0 pt-0">
-	<div class="form-group row my-sm-0">
-		<label class="col-6 col-form-label text-right">{{ $attribute }}:</label>
-		<div class="col-6">
-			<span class="form-control-plaintext font-weight-bolder">{{ $value }}</span>
+	<div class="row mb-7">
+		<label class="col-lg-5 fw-bold text-muted">{{ $attribute }}:</label>
+		<div class="col-lg-7">
+			<span class="fw-bolder fs-6 text-dark">{{ $value }}</span>
 		</div>
 	</div>
-</div>
 @endif

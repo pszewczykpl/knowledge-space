@@ -1,10 +1,10 @@
-<div class="card card-custom gutter-b">
-	<div class="card-header align-items-center border-0 mt-4">
-		<h3 class="card-title align-items-start flex-column">
-			<span class="font-weight-bolder text-dark">{{ $title }}</span>
-			<span class="text-muted mt-3 font-weight-bold font-size-sm">{{ $description }}</span>
+<div class="card mb-5 mb-xl-8">
+	<div class="card-header border-0">
+		<h3 class="card-title">
+			<span class="fw-bolder m-0">{{ $title }}</span>
 		</h3>
 	</div>
-	{{ $slot }}
-	<div class="mt-3"></div>
+	<div class="card-body pt-3">
+		{{ $slot }}
+	</div>
 </div>

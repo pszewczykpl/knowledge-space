@@ -1,4 +1,3 @@
-
 <div class="modal" id="policy_calculator_modal" tabindex="-1" role="dialog" aria-labelledby="PolicyCalculatorModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

@@ -12,18 +12,18 @@
 @stop
 
 @section('toolbar')
-		<a href="{{ route('protectives.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-		<a onclick="ShareProtectives('{{ $protective->id }}')" class="btn btn-light-primary btn-sm ml-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
-		@can('update', $protective)
-			<a href="{{ route('protectives.edit', $protective->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('create', App\Models\Protective::class)
-			<a href="{{ route('protectives.duplicate', $protective) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
-		@endcan
-		@can('delete', $protective)
-			<a onclick='document.getElementById("protectives_destroy_{{ $protective->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'protectives.destroy', $protective->id ], 'id' => 'protectives_destroy_' . $protective->id ]) }}{{ Form::close() }}
-		@endcan
+	<a href="{{ route('protectives.index') }}" class="btn btn-light btn-sm mx-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<a onclick="ShareProtectives('{{ $protective->id }}')" class="btn btn-light-primary btn-sm mx-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
+	@can('update', $protective)
+		<a href="{{ route('protectives.edit', $protective->id) }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
+	@endcan
+	@can('create', App\Models\Protective::class)
+		<a href="{{ route('protectives.duplicate', $protective) }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
+	@endcan
+	@can('delete', $protective)
+		<a onclick='document.getElementById("protectives_destroy_{{ $protective->id }}").submit();' class="btn btn-light-danger btn-sm mx-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'protectives.destroy', $protective->id ], 'id' => 'protectives_destroy_' . $protective->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')

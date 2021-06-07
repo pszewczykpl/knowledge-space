@@ -5,25 +5,20 @@
 @stop
 
 @section('toolbar')
-	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<a href="{{ route('home.index') }}" class="btn btn-light btn-sm mx-1">@include('svg.back', ['class' => 'svg-icon']) Powrót</a>
 	@can('create', App\Models\Investment::class)
-		<a href="{{ route('investments.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.investment', ['class' => 'navi-icon']) Dodaj Ubezpieczenie</a>
+		<a href="{{ route('investments.create') }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.investment', ['class' => 'svg-icon']) Dodaj Ubezpieczenie</a>
 	@endcan
 	@can('create', App\Models\File::class)
-		<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.file', ['class' => 'navi-icon']) Dodaj Dokument</a>
+		<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.file', ['class' => 'svg-icon']) Dodaj Dokument</a>
 	@endcan
 	@can('viewAny', App\Models\Trash::class)
-		<a href="{{ route('trash.index', ['model' => 'investments']) }}" class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+		<a href="{{ route('trash.index', ['model' => 'investments']) }}" class="btn btn-light-danger btn-sm mx-1">@include('svg.trash', ['class' => 'svg-icon']) Elementy usunięte</a>
 	@endcan
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa produktu", "Kod TOiL", "Kod produktu", "Grupa produktowa", "Data aktualizacji", "Akcje"]' --info --help-us >
-		<x-slot name="info_text">
-			Ubezpieczenie Inwestycyjne może posiadać kilka komletów dokumentów, które obowiązywały w różnych okresach czasu.<br>
-			Oznaczenie <span class="label font-weight-bold label-md label-white text-success label-inline">Aktualne</span> informuje, że jest to najnowszy komplet dokumentów.<br>
-			Jeśli chcesz przeglądać również <span class="label font-weight-bold label-md label-white text-primary label-inline">Archiwalne</span> komplety dokumentów - kliknij Pokaż Archiwalne.<br>
-		</x-slot>
+	<x-layout.datatable :columns='["Nazwa produktu", "Kod TOiL", "Kod produktu", "Grupa produktowa", "Ostatnia aktualizacja", "Akcje"]'>
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod TOiL" />

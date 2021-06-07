@@ -5,16 +5,16 @@
 @stop
 
 @section('toolbar')
-	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-		@can('create', App\Models\Protective::class)
-			<a href="{{ route('protectives.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.protective', ['class' => 'navi-icon']) Dodaj Ubezpieczenie</a>
-		@endcan
-		@can('create', App\Models\File::class)
-			<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.file', ['class' => 'navi-icon']) Dodaj Dokument</a>
-		@endcan
-		@can('viewAny', App\Models\Trash::class)
-			<a href="{{ route('trash.index', ['model' => 'protectives']) }}" class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
-		@endcan
+	<a href="{{ route('home.index') }}" class="btn btn-light btn-sm mx-1">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	@can('create', App\Models\Protective::class)
+		<a href="{{ route('protectives.create') }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.protective', ['class' => 'navi-icon']) Dodaj Ubezpieczenie</a>
+	@endcan
+	@can('create', App\Models\File::class)
+		<a href="{{ route('files.create') }}" class="btn btn-light-primary btn-sm mx-1">@include('svg.file', ['class' => 'navi-icon']) Dodaj Dokument</a>
+	@endcan
+	@can('viewAny', App\Models\Trash::class)
+		<a href="{{ route('trash.index', ['model' => 'protectives']) }}" class="btn btn-light-danger btn-sm mx-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+	@endcan
 @stop
 
 @section('content')

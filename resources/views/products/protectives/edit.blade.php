@@ -5,9 +5,9 @@
 @stop
 
 @section('toolbar')
-        <a href="{{ route('protectives.show', $protective) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
+        <a href="{{ route('protectives.show', $protective) }}" class="btn btn-light btn-sm mx-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
         @can('update', $protective)
-            <a onclick='document.getElementById("protective_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
+            <a onclick='document.getElementById("protective_update_form").submit();' class="btn btn-light-primary btn-sm mx-1">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
         @endcan
 @stop
 

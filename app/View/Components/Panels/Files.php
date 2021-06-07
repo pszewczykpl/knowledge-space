@@ -23,6 +23,7 @@ class Files extends Component
      * ZIP filename
      */
     public string $name;
+    public $model;
 
     public string $fileable_type;
 
@@ -37,6 +38,7 @@ class Files extends Component
     {
 
         $this->files = $model->files;
+        $this->model = $model;
         $this->name = str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $model->extended_name);
 
         $fileCategories = Cache::tags([$model->getTable(),'file_categories', 'files'])->rememberForever($model->getTable() . '_' . $model->id . '_file_categories_get', function () use ($model) {

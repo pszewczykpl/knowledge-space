@@ -4,21 +4,6 @@
             <div class="card card-custom">
                 <div class="card-body">
                     <div class="mb-1">
-                        @if($info)
-                            <div class="alert alert-custom alert-light-primary alert-shadow fade show mb-5" role="alert">
-                                <div class="alert-icon">
-                                    <i class="flaticon-info"></i>
-                                </div>
-                                <div class="alert-text">
-                                    {{ $info_text }}
-                                </div>
-                                <div class="alert-close">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                                    </button>
-                                </div>
-                            </div>
-                        @endif
                         <div class="row align-items-center">
                             {{ $search ?? '' }}
                         </div>
@@ -26,12 +11,12 @@
                             {{ $advanced_search ?? '' }}
                         </div>
                     </div>
-                    <div class="pl-3 pr-3">
-                        <table class="table table-separate table-head-custom collapsed" id="table">
+                    <div class="px-0">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="table">
                             <thead>
-                            <tr>
+                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 @foreach($columns as $column)
-                                <td>{{ $column }}</td>
+                                    <th>{{ $column }}</th>
                                 @endforeach
                             </tr>
                             </thead>
