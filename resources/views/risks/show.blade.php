@@ -1,31 +1,17 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
-            <li class="breadcrumb-item">
-				<span class="text-muted">{{ substr($risk->name, 0, 50) }}
-				@if(substr($risk->name, 0, 50) !== $risk->name)...@endif
-				</span>
-			</li>
-			<li class="breadcrumb-item">
-				<span class="text-muted">{{ $risk->code }}</span>
-			</li>
-		</ul>
-@stop
-
 @section('toolbar')
-		<a href="{{ route('risks.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-        <a onclick="ShareRisks('{{ $risk->id }}')" class="btn btn-light-primary btn-sm ml-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
-		@can('update', $risk)
-			<a href="{{ route('risks.edit', $risk->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('create', App\Models\Risk::class)
-			<a href="{{ route('risks.duplicate', $risk) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
-		@endcan
-		@can('delete', $risk)
-			<a onclick='document.getElementById("risks_destroy_{{ $risk->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'risks.destroy', $risk->id ], 'id' => 'risks_destroy_' . $risk->id ]) }}{{ Form::close() }}
-		@endcan
+	<x-layout.toolbar.button action="back" href="{{ route('risks.index') }}" />
+	@can('update', $risk)
+		<x-layout.toolbar.button action="edit" href="{{ route('risks.edit', $risk) }}" />
+	@endcan
+	@can('create', $risk)
+		<x-layout.toolbar.button action="duplicate" href="{{ route('risks.duplicate', $risk) }}" />
+	@endcan
+	@can('delete', $risk)
+		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('risks_destroy_{{ $risk->id }}').submit();" />
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'risks.destroy', $risk ], 'id' => 'risks_destroy_' . $risk->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')
@@ -75,5 +61,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/risks/show.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/risks/show.js') }}" type="text/javascript"></script>
 @endpush

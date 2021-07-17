@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/risks',
@@ -29,7 +28,7 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 render: function(data) {
-                    return '<span class="label font-weight-bold label-lg label-light-primary label-inline">' + data + '</span>';
+                    return `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
                 }
             },{
                 data: 'group',
@@ -48,34 +47,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareRisks(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>';
-                        if(PERMISSIONS.includes('risks-update')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/risks/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
-                                    '</li>';
-                        }
-                        if(PERMISSIONS.includes('risks-create')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/risks/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
-                                    '</li>';
-                        }
-                        return_string += '' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' + 
-                        '<a href="' + HOST_URL + '/risks/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-                        return return_string;
+                    return '<a href="' + HOST_URL + '/risks/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -128,20 +100,20 @@ $(document).ready(function() {
     });
 });
 
-function ShareRisks(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/risks/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano link do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }
+
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
+    }
+});

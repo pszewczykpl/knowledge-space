@@ -1,13 +1,11 @@
-<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-	<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+<div class="footer py-8 d-flex flex-lg-column" id="kt_footer">
+	<div class="container d-flex flex-column flex-md-row flex-stack">
 		<div class="text-dark order-2 order-md-1">
-			<span class="text-muted fw-bold me-1">{{ $year }}©</span>
-			<a href="mailto:piotr.szewczyk@openlife.pl" target="_blank" class="text-gray-800 text-hover-primary">Piotr Szewczyk</a>
-        </div>
-		<ul class="menu menu-gray-600 fw-bold order-1">
-			<li class="menu-item">
-				<span class="px-2">{{ $name }} (Wersja {{ $version }})</span>
-			</li>
-		</ul>
+			<span class="text-gray-400 fw-bold me-1">Utworzony przez</span>
+			<a href="http://google.com" target="_blank" class="text-muted text-hover-primary fw-bold me-2 fs-6">Piotr Szewczyk</a>
+		</div>
+		<div class="text-dark order-2 order-md-1">
+			<span class="text-gray-400 fw-bold me-1">{{ $year }}© {{ $name }} (Wersja {{ $version }})</span>
+		</div>
 	</div>
 </div>

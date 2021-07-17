@@ -1,22 +1,14 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
-		<li class="breadcrumb-item">
-			<span class="text-muted">Przeglądaj</span>
-		</li>
-	</ul>
-@stop
-
 @section('toolbar')
-		<a href="{{ route('news.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-		@can('update', $news)
-			<a href="{{ route('news.edit', $news->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('delete', $news)
-			<a onclick='document.getElementById("news_destroy_{{ $news->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'news.destroy', $news->id ], 'id' => 'news_destroy_' . $news->id ]) }}{{ Form::close() }}
-		@endcan
+	<x-layout.toolbar.button action="back" href="{{ route('news.index') }}" />
+	@can('update', $news)
+		<x-layout.toolbar.button action="edit" href="{{ route('news.edit', $news) }}" />
+	@endcan
+	@can('delete', $news)
+		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('news_destroy_{{ $news->id }}').submit();" />
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'news.destroy', $news ], 'id' => 'news_destroy_' . $news->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')
@@ -45,5 +37,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/news/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/news/index.js') }}" type="text/javascript"></script>
 @endpush

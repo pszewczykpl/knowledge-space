@@ -10,6 +10,12 @@ $(document).ready(function() {
             type: 'POST',
             datatype: 'json'
         },
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
         columns: [
             {
                 data: 'name',
@@ -146,14 +152,7 @@ $("#active_or_all").click(function() {
         $(this).removeClass('btn-success');
         $(this).addClass('btn-primary');
         $(this).html('Pokaż Archiwalne')
-
-        $.notify({
-            message: 'Widzisz tylko aktualnie obowiązujące komplety dokumentów',
-        },{
-            type: 'success',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów");
     }
     else if ($(this).hasClass('btn-primary')) {
         $('#col7_filter').val('');
@@ -161,15 +160,8 @@ $("#active_or_all").click(function() {
 
         $(this).removeClass('btn-primary');
         $(this).addClass('btn-success');
-        $(this).html('Pokaż tylko Aktualne')
-
-        $.notify({
-            message: 'Widzisz wzystkie komplety dokumentów',
-        },{
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        $(this).html('Pokaż tylko Aktualne')          
+        toastr.success("Widzisz wszystkie komplety dokumentów");
     }
 });
 
@@ -189,20 +181,3 @@ $("#search_box_panel_button").click(function() {
         $(this).blur();
     }
 });
-
-function ShareInvestments(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/investments/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano do schowka!',
-      },{
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }

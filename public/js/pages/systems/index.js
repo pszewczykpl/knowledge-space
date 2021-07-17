@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/systems',
@@ -22,7 +21,10 @@ $(document).ready(function() {
                 visible: true,
                 orderable: true,
                 searchable: true,
-                width: '40%'
+                width: '40%',
+                render: function (data, type, full, row) {
+                    return `<a href="${data}" target="_blank">${data}</a>`;
+                }
             }, {
                 data: 'description',
                 visible: true,
@@ -36,12 +38,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '';
-                    if(PERMISSIONS.includes('systems-update')) {
-                        return_string += '<a href="' + HOST_URL + '/systems/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>';
-                    }
-                    return_string += '<a href="' + HOST_URL + '/systems/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-                    return return_string;
+                    return '<a href="' + HOST_URL + '/systems/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -92,4 +89,21 @@ $(document).ready(function() {
     $('input.column_filter').on('keyup change click', function() {
         filterColumn($(this).parents('div').attr('data-column'));
     });
+});
+
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
+    }
 });

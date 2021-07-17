@@ -1,18 +1,14 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader description="Przeglądaj" />
-@stop
-
 @section('toolbar')
-		<a href="{{ route('posts.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-		@can('update', $post)
-			<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('delete', $post)
-			<a onclick='document.getElementById("posts_destroy_{{ $post->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'posts.destroy', $post->id ], 'id' => 'posts_destroy_' . $post->id ]) }}{{ Form::close() }}
-		@endcan
+	<x-layout.toolbar.button action="back" href="{{ route('posts.index') }}" />
+	@can('update', $post)
+		<x-layout.toolbar.button action="edit" href="{{ route('posts.edit', $post) }}" />
+	@endcan
+	@can('delete', $post)
+		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('posts_destroy_{{ $post->id }}').submit();" />
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'posts.destroy', $post ], 'id' => 'posts_destroy_' . $post->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')

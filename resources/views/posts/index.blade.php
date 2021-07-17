@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader description="Przeglądaj wszystkie artykuły" />
-@stop
-
 @section('toolbar')
-	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<x-layout.toolbar.button action="back" href="{{ route('home.index') }}" />
 	@can('create', App\Models\Post::class)
-		<a href="{{ route('posts.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.post', ['class' => 'navi-icon']) Dodaj Artykuł</a>
+		<x-layout.toolbar.button action="custom" svg="post" title="Dodaj Artykuł" href="{{ route('posts.create') }}" />
 	@endcan
+	{{-- @can('viewAny', App\Models\Trash::class)
+		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'posts']) }}" />
+	@endcan --}}
 @stop
 
 @section('content')
@@ -49,5 +48,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/posts/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/posts/index.js') }}" type="text/javascript"></script>
 @endpush

@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/permissions',
@@ -77,4 +76,21 @@ $(document).ready(function() {
     $('input.column_filter').on('keyup change click', function() {
         filterColumn($(this).parents('div').attr('data-column'));
     });
+});
+
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
+    }
 });

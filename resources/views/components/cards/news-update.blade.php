@@ -1,5 +1,5 @@
 @can('update', $news)
-<div class="card card-custom gutter-b">
+<div class="card card-custom gutter-b card-rounded card-shadow">
 	<div class="card-body">
 		<div class="d-flex align-items-center">
 			<div class="symbol symbol-40 symbol-light-success mr-5">

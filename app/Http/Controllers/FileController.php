@@ -75,17 +75,24 @@ class FileController extends Controller
     {
         $this->authorize('create', File::class);
 
-        $path = $request->file->store('files');
-
         $file = new File($request->all());
+
+        if ($request->hasFile('file')) {
+            $path = $request->file->store('files');
+            $file->path = $path;
+            $file->extension = $request->file('file')->extension();
+        }
+        else {
+            $file->path = 'files/deleted.pdf';
+            $file->extension = 'pdf';
+        }
+        
         if(($request->draft_checkbox ?? null)) {
             $file->draft = 1;
         } else {
             $file->draft = 0;
         }
 
-        $file->path = $path;
-        $file->extension = $request->file('file')->extension();
         $file->fileCategory()->associate($request->file_category_id);
         Auth::user()->files()->save($file);
         

@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader description="Przeglądaj usunięte obiekty" />
-@stop
-
 @section('toolbar')
-	<a href="{{ route('post-categories.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<x-layout.toolbar.button action="back" href="{{ route('post-categories.index') }}" />
 @stop
 
 @section('content')

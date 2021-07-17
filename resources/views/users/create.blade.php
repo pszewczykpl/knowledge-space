@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
-@section('subheader')
-    <x-layout.subheader :description="$description" />
-@stop
-
 @section('toolbar')
-        <a href="{{ route('users.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
-        @can('create', App\Models\User::class)
-        <a onclick='document.getElementById("user_store_form").submit();' class="btn btn-light-primary btn-sm ml-1">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
-        @endcan
+	<x-layout.toolbar.button action="cancel" href="{{ route('users.index') }}" />
+	@can('create', App\Models\User::class)
+		<x-layout.toolbar.button action="save" onclick="document.getElementById('user_store_form').submit();" />
+	@endcan
 @stop
 
 @section('content')
@@ -231,5 +227,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/users/create.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pages/users/create.js') }}" type="text/javascript"></script>
 @endpush

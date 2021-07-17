@@ -1,31 +1,17 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm ml-3">
-            <li class="breadcrumb-item">
-				<span class="text-muted">{{ substr($fund->name, 0, 50) }}
-				@if(substr($fund->name, 0, 50) !== $fund->name)...@endif
-				</span>
-			</li>
-			<li class="breadcrumb-item">
-				<span class="text-muted">{{ $fund->code }}</span>
-			</li>
-		</ul>
-@stop
-
 @section('toolbar')
-		<a href="{{ route('funds.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
-        <a onclick="ShareFunds('{{ $fund->id }}')" class="btn btn-light-primary btn-sm ml-1">@include('svg.share', ['class' => 'navi-icon']) Udostępnij</a>
-		@can('update', $fund)
-			<a href="{{ route('funds.edit', $fund->id) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.edit', ['class' => 'navi-icon']) Edytuj</a>
-		@endcan
-		@can('create', App\Models\Fund::class)
-			<a href="{{ route('funds.duplicate', $fund) }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.duplicate', ['class' => 'navi-icon']) Duplikuj</a>
-		@endcan
-		@can('delete', $fund)
-			<a onclick='document.getElementById("funds_destroy_{{ $fund->id }}").submit();' class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Usuń</a>
-			{{ Form::open([ 'method'  => 'delete', 'route' => [ 'funds.destroy', $fund->id ], 'id' => 'funds_destroy_' . $fund->id ]) }}{{ Form::close() }}
-		@endcan
+	<x-layout.toolbar.button action="back" href="{{ route('funds.index') }}" />
+	@can('update', $fund)
+		<x-layout.toolbar.button action="edit" href="{{ route('funds.edit', $fund) }}" />
+	@endcan
+	@can('create', $fund)
+		<x-layout.toolbar.button action="duplicate" href="{{ route('funds.duplicate', $fund) }}" />
+	@endcan
+	@can('delete', $fund)
+		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('funds_destroy_{{ $fund->id }}').submit();" />
+		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'funds.destroy', $fund ], 'id' => 'funds_destroy_' . $fund->id ]) }}{{ Form::close() }}
+	@endcan
 @stop
 
 @section('content')
@@ -60,7 +46,7 @@
 			<x-cards.details --title="Szczegóły funduszu" --description="Dane funduszu ubezpieczeniowego">
 				<x-cards.details-row --attribute="Nazwa" :value="$fund->name" />
 				<x-cards.details-row --attribute="Symbol" :value="$fund->code" />
-				<x-cards.details-row --attribute="Rodzaj" :value="$fund->type" />
+				<x-cards.details-row --attribute="Typ" :value="$fund->type" />
 				<x-cards.details-row --attribute="Waluta" :value="$fund->currency" />
 				<x-cards.details-row --attribute="Data udostępnienia" :value="$fund->start_date" />
 				@if(isset($fund->cancel_date))
@@ -106,5 +92,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/funds/show.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/funds/show.js') }}" type="text/javascript"></script>
 @endpush

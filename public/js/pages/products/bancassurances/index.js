@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/bancassurances',
@@ -39,7 +38,7 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: false,
                 render: function (data, type, full) {
-                    return data + `<span class="label label-light-${(full.status === 'Aktualny' ? "success" : "primary")} label-inline ml-1">${full.status}</span>`;
+                    return '<span class="me-2">' + data + '</span>' + `<span class="badge badge-light-${(full.status === 'Aktualny' ? "success" : "primary")} fw-bolder px-4 py-3">${full.status}</span>`;
                 }
             }, {
                 data: 'actions',
@@ -48,38 +47,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: "",
                 render: function (data, type, full, row) {
-                    return_string = '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareBancassurances(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>' +
-                                    '<div class="dropdown-divider"></div>' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/bancassurances/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>' +
-                                    '</li>';
-                        if(PERMISSIONS.includes('bancassurances-update')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/bancassurances/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
-                                    '</li>';
-                        }
-                        if(PERMISSIONS.includes('bancassurances-create')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/bancassurances/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
-                                    '</li>';
-                        }
-                        return_string += '' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' + 
-                        '<a href="' + HOST_URL + '/bancassurances/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-                        return return_string;
+                    return '<a href="' + HOST_URL + '/bancassurances/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -163,13 +131,7 @@ $("#active_or_all").click(function() {
         $(this).addClass('btn-primary');
         $(this).html('Pokaż Archiwalne')
 
-        $.notify({
-            message: 'Widzisz tylko aktualnie obowiązujące komplety dokumentów',
-        },{
-            type: 'success',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów");
     }
     else if ($(this).hasClass('btn-primary')) {
         $('#col7_filter').val('');
@@ -179,13 +141,7 @@ $("#active_or_all").click(function() {
         $(this).addClass('btn-success');
         $(this).html('Pokaż tylko Aktualne')
 
-        $.notify({
-            message: 'Widzisz wzystkie komplety dokumentów',
-        },{
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz wszystkie komplety dokumentów");
     }
 });
 
@@ -205,20 +161,3 @@ $("#search_box_panel_button").click(function() {
         $(this).blur();
     }
 });
-
-function ShareBancassurances(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/bancassurances/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano link do schowka!',
-      },{
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }

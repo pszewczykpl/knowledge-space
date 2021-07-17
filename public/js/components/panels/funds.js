@@ -1,11 +1,8 @@
 $(document).ready(function() {
     $('#table_funds').DataTable( {
-        responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [8, 16, 32, 64],
-        pageLength: 8,
+        pageLength: 10,
         ajax: {
             url: HOST_URL + '/api/datatables/investment/' + INVESTMENT_ID + '/funds',
             type: 'POST',
@@ -23,26 +20,19 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true
             },{
+                data: 'start_date',
+                visible: true,
+                orderable: true,
+                searchable: false
+            },
+            {
                 data: 'actions',
                 visible: true,
                 orderable: false,
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareFunds(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' +
-                        '<a href="' + HOST_URL + '/funds/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
+                    return '<a href="' + HOST_URL + '/funds/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -83,22 +73,13 @@ $(document).ready(function() {
     $('input.column_filter').on('keyup change click', function() {
         filterColumn($(this).parents('div').attr('data-column'));
     });
-});
 
-function ShareFunds(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/funds/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }
+    /*
+     * Adjust DataTable.net when funds table is show.
+     */
+    $("#funds_tab").on( "click", function() {
+        $('#funds').addClass( [ "active", "show" ] );
+        $('#table_funds').DataTable().columns.adjust().draw();
+    });
+
+});

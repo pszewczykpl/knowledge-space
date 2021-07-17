@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
-@section('subheader')
-    <x-layout.subheader :description="$description" />
-@stop
-
 @section('toolbar')
-        <a href="{{ route('users.show', $user) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
-        @can('update', $user)
-            <a onclick='document.getElementById("user_update_form").submit();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
-        @endcan
+	<x-layout.toolbar.button action="cancel" href="{{ route('users.show', $user) }}" />
+	@can('update', $user)
+		<x-layout.toolbar.button action="save" onclick="document.getElementById('user_update_form').submit();" />
+	@endcan
 @stop
 
 @section('content')
@@ -296,5 +292,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/users/edit.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pages/users/edit.js') }}" type="text/javascript"></script>
 @endpush

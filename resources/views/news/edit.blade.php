@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader :description="$description" />
-@stop
-
 @section('toolbar')
-		<a href="{{ route('news.show', $news) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) Anuluj</a>
+	<x-layout.toolbar.button action="cancel" href="{{ route('news.show', $news) }}" />
 @stop
 
 @section('content')

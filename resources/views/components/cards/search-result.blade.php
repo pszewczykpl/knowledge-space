@@ -1,5 +1,5 @@
 <a href="{{ route($route.'.show', $result->id) }}">
-    <div class="d-flex align-items-center mb-2 bg-hover-light-primary p-4 rounded-xl">
+    <div class="d-flex align-items-center mb-2 bg-hover-light-primary p-4 card-rounded card-shadow">
         <div class="symbol symbol-40 symbol-white mr-5">
 			<span class="symbol-label">
 				@include('svg.'.$icon, ['class' => 'svg-icon-xl svg-icon-'.($result->iconColor ?? 'primary')])

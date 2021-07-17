@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/funds',
@@ -29,84 +28,24 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: false,
                 render: function (data, type, row) {
-                    if(data=='D') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Depozytowy</span>';
-                    }
-                    else if(data=='Z') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Inwestycyjny</span>';
-                    }
-                    else if(data=='M') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Modelowy</span>';
-                    }
-                    else if(data=='U') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">UFK</span>';
-                    }
-                    else if(data=='S') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">SOK</span>';
-                    }
-                    else if(data=='T') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Tracker</span>';
-                    }
-                    else {
-                        return data;
-                    }
+                    return `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
                 }
             },{
                 data: 'start_date',
                 visible: true,
                 orderable: true,
-                searchable: false
-            },{
-                data: 'status',
-                visible: true,
-                orderable: false,
-                searchable: true,
-                render: function (data, type, row) {
-                    if(data=='N') {
-                        return '<span class="label font-weight-bold label-lg label-light-primary label-inline">Nieaktywny</span>';
-                    }
-                    else if(data=='A') {
-                        return '<span class="label font-weight-bold label-lg label-light-success label-inline">Aktywny</span>';
-                    }
-                    else {
-                        return 'Brak danych'
-                    }
+                searchable: false,
+                render: function (data, type, full) {
+                    return `<span class="me-2">${(data === null ? "Brak danych" : data)}</span><span class="badge badge-light-${(full.status === 'Aktualny' ? "success" : "primary")} fw-bolder px-4 py-3">${full.status}</span>`;
                 }
-            }, {
+            },{
                 data: 'actions',
                 visible: true,
                 orderable: false,
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareFunds(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>';
-                        if(PERMISSIONS.includes('funds-update')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/funds/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
-                                    '</li>';
-                        }
-                        if(PERMISSIONS.includes('funds-create')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/funds/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
-                                    '</li>';
-                        }
-                        return_string += '' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' + 
-                        '<a href="' + HOST_URL + '/funds/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-                        return return_string;
+                    return '<a href="' + HOST_URL + '/funds/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'currency',
@@ -118,14 +57,24 @@ $(document).ready(function() {
                 visible: false,
                 orderable: false,
                 searchable: false
+            },{
+                data: 'status',
+                visible: false,
+                orderable: false,
+                searchable: true
             }
         ],
         searchCols: [
-            null,null, null, null,
+            null,
+            null, 
+            null, 
+            null,
+            null,
+            null,
+            null,
             {
                 'search': 'A'
-            },
-            null,null,null
+            }
         ],
         language: {
             "decimal":        "",
@@ -173,53 +122,38 @@ $(document).ready(function() {
 
 $("#active_or_all").click(function() {
     if ($(this).hasClass('btn-success')) {
-        $('#col4_filter').val('A');
-        $('#col4_filter').click();
+        $('#col7_filter').val('A');
+        $('#col7_filter').click();
 
         $(this).removeClass('btn-success');
         $(this).addClass('btn-primary');
-        $(this).html('Pokaż Nieaktywne')
-
-        $.notify({
-            message: 'Widzisz tylko aktywne fundusze',
-        },{
-            type: 'success',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        $(this).html('Pokaż Nieaktywne');
+        toastr.success("Widzisz tylko aktywne fundusze");
     }
     else if ($(this).hasClass('btn-primary')) {
-        $('#col4_filter').val('');
-        $('#col4_filter').click();
+        $('#col7_filter').val('');
+        $('#col7_filter').click();
 
         $(this).removeClass('btn-primary');
         $(this).addClass('btn-success');
         $(this).html('Pokaż tylko Aktywne')
-
-        $.notify({
-            message: 'Widzisz wzystkie fundusze',
-        },{
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz wzystkie fundusze");
     }
 });
 
-function ShareFunds(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/funds/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
+    }
+});

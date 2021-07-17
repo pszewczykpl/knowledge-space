@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader description="Przeglądaj wszystkie aktualności" />
-@stop
-
 @section('toolbar')
-	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<x-layout.toolbar.button action="back" href="{{ route('home.index') }}" />
+	{{-- @can('viewAny', App\Models\Trash::class)
+		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'news']) }}" />
+	@endcan --}}
 @stop
 
 @section('content')
@@ -34,6 +33,6 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/news/index.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/components/cards/news-store.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/news/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/components/cards/news-store.js') }}" type="text/javascript"></script>
 @endpush

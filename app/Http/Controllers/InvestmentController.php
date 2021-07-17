@@ -72,7 +72,7 @@ class InvestmentController extends Controller
     }
 
     /**
-     * Duplicate a newly created resource in storage.
+     * Duplicate
      *
      * @param  \Illuminate\Http\StoreInvestment  $request
      * @return \Illuminate\Http\Response
@@ -136,6 +136,7 @@ class InvestmentController extends Controller
     public function update(UpdateInvestment $request, Investment $investment) 
     {
         $this->authorize('update', $investment);
+
         $investment->update($request->all());
 
         return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');

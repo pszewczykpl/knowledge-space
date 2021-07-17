@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader type="datatables" />
-@stop
-
 @section('toolbar')
-	<a href="{{ route('home.index') }}" class="btn btn-clean btn-sm">@include('svg.back', ['class' => 'navi-icon']) Powrót</a>
+	<x-layout.toolbar.button action="back" href="{{ route('home.index') }}" />
 	@can('create', App\Models\FileCategory::class)
-		<a href="{{ route('file-categories.create') }}" class="btn btn-light-primary btn-sm ml-1">@include('svg.file-category', ['class' => 'navi-icon']) Dodaj Kategorię
-		</a>
+		<x-layout.toolbar.button action="custom" svg="file-category" title="Dodaj Kategorię" href="{{ route('file-categories.create') }}" />
 	@endcan
 	@can('viewAny', App\Models\Trash::class)
-		<a href="{{ route('trash.index', ['model' => 'file-categories']) }}" class="btn btn-light-danger btn-sm ml-1">@include('svg.trash', ['class' => 'navi-icon']) Elementy usunięte</a>
+		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'file-categories']) }}" />
 	@endcan
 @stop
 
@@ -23,11 +18,6 @@
 	</x-layout.datatable>
 @stop
 
-@push('css')
-<link href="{{ asset('css/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-@endpush
-
 @push('scripts')
-<script src="{{ asset('js/datatables.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/pages/file-categories/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/file-categories/index.js') }}" type="text/javascript"></script>
 @endpush

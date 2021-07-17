@@ -3,8 +3,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/files',
@@ -31,12 +30,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '';
-                    if(PERMISSIONS.includes('files-update')) {
-                        return_string += '<a href="' + HOST_URL + '/files/' + full.id + '/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edytuj"><i class="flaticon2-edit"></i></a>';
-                    }
-                    return_string += '<a href="' + HOST_URL + '/files/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-                    return return_string;
+                    return '<a href="' + HOST_URL + '/files/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             },{
                 data: 'id',
@@ -89,20 +83,20 @@ $(document).ready(function() {
     });
 });
 
-function ShareFiles(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/files/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano link do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }
+
+$("#search_box_panel_button").click(function() {
+    var search_box_panel = document.getElementById("search_box_panel");
+
+    if ($(this).hasClass('active')) {
+        search_box_panel.style.display = 'none';
+
+        $(this).removeClass('active');
+        $(this).blur();
+    }
+    else {
+        search_box_panel.style.display = 'flex';
+
+        $(this).addClass('active');
+        $(this).blur();
+    }
+});

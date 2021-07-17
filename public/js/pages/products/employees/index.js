@@ -4,8 +4,7 @@ $(document).ready(function() {
         responsive: true,
         processing: true,
         serverSide: true,
-        dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
-        lengthMenu: [5, 15, 25, 50],
+        lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
             url: HOST_URL + '/api/datatables/employees',
@@ -30,7 +29,7 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: false,
                 render: function (data, type, full) {
-                    return data + `<span class="label label-light-${(full.status === 'Aktualny' ? "success" : "primary")} label-inline ml-1">${full.status}</span>`;
+                    return '<span class="me-2">' + data + '</span>' + `<span class="badge badge-light-${(full.status === 'Aktualny' ? "success" : "primary")} fw-bolder px-4 py-3">${full.status}</span>`;
                 }
             }, {
                 data: 'actions',
@@ -39,45 +38,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return_string = '' +
-                        '<div class="dropdown dropdown-inline">' +
-                            '<a class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown" aria-expanded="false" title="Więcej">' +
-                                '<i class="flaticon-more-1"></i>' +
-                            '</a>' +
-                            '<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">' +
-                                '<ul class="navi navi-hover flex-column">' +
-                                    '<li class="navi-item">' +
-                                        '<a class="navi-link" onclick="ShareEmployees(' + full.id + ')"><i class="navi-icon flaticon2-reply-1"></i><span class="navi-text" title="Udostępnij jako link">Udostępnij</span></a>' +
-                                    '</li>' +
-                                    '<div class="dropdown-divider"></div>' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/api/employees/' + full.id + '/files/zip" class="navi-link"><i class="navi-icon flaticon2-download-2"></i><span class="navi-text" title="Pobierz dokumenty jako plik .zip">Pobierz jako zip</span></a>' +
-                                    '</li>';
-                        if(PERMISSIONS.includes('employees-update')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/employees/' + full.id + '/edit" class="navi-link"><i class="navi-icon flaticon2-edit"></i><span class="navi-text">Edytuj</span></a>' +
-                                    '</li>';
-                        }
-                        if(PERMISSIONS.includes('employees-create')) {
-                            return_string += '' + 
-                                    '<li class="navi-item">' +
-                                        '<a href="' + HOST_URL + '/employees/' + full.id + '/duplicate" class="navi-link"><i class="navi-icon flaticon2-copy"></i><span class="navi-text">Duplikuj</span></a>' +
-                                    '</li>';
-                        }
-                        return_string += '' +
-                                '</ul>' +
-                            '</div>' +
-                        '</div>' + 
-                        '<a href="' + HOST_URL + '/employees/' + full.id + '" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Wyświetl"><i class="flaticon2-expand"></i></a>';
-
-                    return_string_trashed = '';
-                        if(PERMISSIONS.includes('force-delete')) {
-                            return_string_trashed += '' + 
-                                '<form method="POST" action="' + HOST_URL + '/employees/' + full.id + '/restore" accept-charset="UTF-8"><input name="_method" type="hidden" value="PUT"><input name="_token" type="hidden" value="' + $('meta[name="_token"]').attr('content') + '"><button type="submit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Przywróć"><i class="flaticon2-time"></i></button></form>';
-                        }
-
-                    return full.deleted_at ? return_string_trashed : return_string;
+                    return '<a href="' + HOST_URL + '/employees/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -151,13 +112,7 @@ $("#active_or_all").click(function() {
         $(this).addClass('btn-primary');
         $(this).html('Pokaż Archiwalne')
 
-        $.notify({
-            message: 'Widzisz tylko aktualnie obowiązujące komplety dokumentów',
-        },{
-            type: 'success',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów");
     }
     else if ($(this).hasClass('btn-primary')) {
         $('#col5_filter').val('');
@@ -167,13 +122,7 @@ $("#active_or_all").click(function() {
         $(this).addClass('btn-success');
         $(this).html('Pokaż tylko Aktualne')
 
-        $.notify({
-            message: 'Widzisz wzystkie komplety dokumentów',
-        },{
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: true
-        });
+        toastr.success("Widzisz wszystkie komplety dokumentów");
     }
 });
 
@@ -193,21 +142,3 @@ $("#search_box_panel_button").click(function() {
         $(this).blur();
     }
 });
-
-function ShareEmployees(id) {
-    const el = document.createElement('textarea');
-    el.value = HOST_URL + '/employees/' + id;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  
-    $.notify({
-          message: 'Skopiowano link do schowka!',
-      },{
-          // settings
-          type: 'primary',
-          allow_dismiss: false,
-          newest_on_top: true
-      });
-  }

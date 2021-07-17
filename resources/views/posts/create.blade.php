@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader :description="$description" />
-@stop
-
 @section('toolbar')
-		<a href="{{ route('posts.index') }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
-        @can('create', App\Models\Post::class)
-        <a onclick='document.getElementById("submit").click();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
-        @endcan
+	<x-layout.toolbar.button action="cancel" href="{{ route('posts.index') }}" />
+	@can('create', App\Models\Post::class)
+		<x-layout.toolbar.button action="save" onclick="document.getElementById('post_store_form').submit();" />
+	@endcan
 @stop
 
 @section('content')
@@ -63,5 +59,5 @@
 @stop
 
 @push('scripts')
-<script src="{{ asset('js/pages/posts/create.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/pages/posts/create.js') }}" type="text/javascript"></script>
 @endpush

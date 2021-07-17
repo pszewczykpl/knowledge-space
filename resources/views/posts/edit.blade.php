@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
-@section('subheader')
-	<x-layout.subheader :description="$description" />
-@stop
-
 @section('toolbar')
-		<a href="{{ route('posts.show', $post) }}" class="btn btn-clean btn-sm mr-1">@include('svg.back', ['class' => 'navi-icon']) {{ __('Cancel') }}</a>
-        @can('update', $post)
-        	<a onclick='document.getElementById("submit").click();' class="btn btn-light-primary btn-sm">@include('svg.save', ['class' => 'navi-icon']) {{ __('Save') }}</a>
-        @endcan
+	<x-layout.toolbar.button action="cancel" href="{{ route('posts.show', $post) }}" />
+	@can('update', $post)
+		<x-layout.toolbar.button action="save" onclick="document.getElementById('post_update_form').submit();" />
+	@endcan
 @stop
 
 @section('content')
