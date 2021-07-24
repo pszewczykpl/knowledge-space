@@ -190,7 +190,7 @@
 					</a>
 				</div>
 				@endcan
-				@can('viewany', App\Models\Permission::class)
+				@can('viewany', App\Models\Note::class)
 				<div class="menu-item">
 					<a class="menu-link {{ (request()->routeIs('notes.*')) ? 'active' : '' }}" href="{{ route('notes.index') }}">
 						<span class="menu-icon">
@@ -203,17 +203,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-		@auth
-			<a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-custom btn-primary w-100">
-				<span class="btn-label">Mój profil</span>
-				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])
-			</a>
-		@else
-			<a href="{{ route('login') }}" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="100" title="Zaloguj się, aby uzyskać dostęp do wszystkich funkcjonalności systemu.">
-				<span class="btn-label">Zaloguj się</span>
-				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])
-			</a>
-		@endauth
-	</div>
+{{--	<div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">--}}
+{{--		@auth--}}
+{{--			<a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-custom btn-primary w-100">--}}
+{{--				<span class="btn-label">Mój profil</span>--}}
+{{--				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])--}}
+{{--			</a>--}}
+{{--		@else--}}
+{{--			<a href="{{ route('login') }}" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="100" title="Zaloguj się, aby uzyskać dostęp do wszystkich funkcjonalności systemu.">--}}
+{{--				<span class="btn-label">Zaloguj się</span>--}}
+{{--				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])--}}
+{{--			</a>--}}
+{{--		@endauth--}}
+{{--	</div>--}}
 </div>
