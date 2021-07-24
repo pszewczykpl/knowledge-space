@@ -26,7 +26,7 @@ class FileController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['show', 'download']);
+        $this->middleware('auth')->except(['index', 'show', 'download']);
     }
     
     /**
@@ -36,8 +36,6 @@ class FileController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewany', File::class);
-
         return view('files.index', [
             'title' => 'Dokumenty',
         ]);

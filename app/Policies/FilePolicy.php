@@ -18,11 +18,7 @@ class FilePolicy
      */
     public function viewAny(User $user)
     {
-        if($user->hasPermission('files-viewany')) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
