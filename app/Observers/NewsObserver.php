@@ -16,7 +16,7 @@ class NewsObserver
      * @param  \App\Models\News  $news
      * @return void
      */
-    public function created(News $news, User $user)
+    public function created(News $news)
     {
         $event = new Event();
         $event->event = 'created';
