@@ -1,40 +1,13 @@
-"use strict";
-
-var KTWidgets = function() {
-
-    var _initFormsWidget2 = function() {
-        var formEl = KTUtil.getById("kt_forms_widget_2_form");
-        var editorId = 'editor';
-
-        // init editor
-        var options = {
-            modules: {
-                toolbar: {
-                    container: "#kt_forms_widget_2_editor_toolbar"
-                }
-            },
-            placeholder: 'Wprowadź tekst aktualności...',
-            theme: 'snow'
-        };
-
-        if (!formEl) {
-            return;
+var quill = new Quill('#kt_forms_widget_1_editor', {
+    modules: {
+        toolbar: {
+            container: "#kt_forms_widget_1_editor_toolbar"
         }
+    },
+    placeholder: "Wpisz treść aktualności!",
+    theme:"snow"
+});
 
-        var editorObj = new Quill('#' + editorId, options);
-
-        $("#kt_forms_widget_2_form").on("submit",function(){
-            $("#content").val(editorObj.root.innerHTML);
-        })
-    }
-
-    return {
-        init: function() {
-            _initFormsWidget2();
-        }
-    }
-}();
-
-jQuery(document).ready(function() {
-    KTWidgets.init();
+$("#kt_forms_widget_1_form").on("submit",function(){
+    $("#content").val(quill.root.innerHTML);
 });
