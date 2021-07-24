@@ -1,40 +1,53 @@
 @extends('layouts.auth')
 
-@section('desc')
-<p class="mb-10 text-muted font-weight-bold">Jeśli chcesz zalogować sie w serwisie Baza Wiedzy - <a href="{{ route('login') }}">Zaloguj się</a>. Możesz również <a href="{{ route('home.index') }}">Wejść jako użytkownik niezalogowany</a>.</p>
-<a href="{{ route('login') }}" class="btn btn-outline-primary btn-pill py-4 px-9 font-weight-bold mr-3">Zaloguj się</a>
-<a href="{{ route('home.index') }}" class="btn btn-outline-primary btn-pill py-4 px-9 font-weight-bold">Wejdź bez logowania</a>
-@stop
-
 @section('content')
-<div class="text-center mb-10">
-    <h2 class="font-weight-bold">Ustaw nowe hasło!</h2>
-    <p class="text-muted font-weight-bold">Podaj e-mail i wpisz nowe hasło do logowania</p>
-</div>
-<form method="POST" action="{{ route('password.update') }}" class="form text-left">
-    @csrf
-    <input type="hidden" name="token" value="{{ $token }}">
-    <div class="form-group py-2 m-0 border-bottom">
-        <input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('email') is-invalid @enderror" placeholder="E-mail" id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-        @error('email')
-        <div class="fv-plugins-message-container">
-            <div class="fv-help-block">{{ $message }}</div>
+    <form method="POST" action="{{ route('password.update') }}" class="form w-100">
+        @csrf
+        <input type="hidden" name="token" value="{{ $token }}">
+        <div class="text-center mb-10">
+            <h1 class="text-dark mb-3">Ustaw nowe hasło!</h1>
+            <div class="text-gray-400 fw-bold fs-4">Podaj e-mail i wpisz nowe hasło do logowania</div>
         </div>
-        @enderror
-    </div>
-    <div class="form-group py-2 m-0 border-bottom">
-        <input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('password') is-invalid @enderror" placeholder="Nowe hasło" id="password" type="password" name="password" required autocomplete="new-password">
-        @error('email')
-        <div class="fv-plugins-message-container">
-            <div class="fv-help-block">{{ $message }}</div>
+{{--        @if(count($errors) > 0)--}}
+{{--            <div class="notice d-flex bg-light-danger rounded border-danger border border-dashed p-6 mb-10" role="alert">--}}
+{{--                <div class="d-flex flex-column pe-0 pe-sm-10">--}}
+{{--                    @foreach($errors->all() as $error)--}}
+{{--                        {{ $error }} <br>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endif--}}
+        <div class="fv-row mb-5">
+            <label class="form-label fs-6 fw-bolder text-dark">E-mail</label>
+            <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" placeholder="E-mail" id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email">
+            @error('email')
+            <div class="fv-plugins-message-container invalid-feedback">
+                <div class="fv-help-block">{{ $message }}</div>
+            </div>
+            @enderror
         </div>
-        @enderror
-    </div>
-    <div class="form-group py-2 m-0 border-bottom">
-        <input class="form-control h-auto border-0 px-0 placeholder-dark-75 @error('password_confirmation') is-invalid @enderror" placeholder="Powtórz hasło" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
-    </div>
-    <div class="text-center mt-15">
-        <button type="submit" class="btn btn-primary btn-pill shadow-sm py-4 px-9 font-weight-bold">Zapisz hasło</button>
-    </div>
-</form>
+        <div class="fv-row mb-5">
+            <label class="form-label fs-6 fw-bolder text-dark">Hasło</label>
+            <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" placeholder="Nowe hasło" id="password" type="password" name="password" required autocomplete="new-password" autofocus>
+            @error('password')
+            <div class="fv-plugins-message-container invalid-feedback">
+                <div class="fv-help-block">{{ $message }}</div>
+            </div>
+            @enderror
+        </div>
+        <div class="fv-row mb-10">
+            <label class="form-label fs-6 fw-bolder text-dark">Powtórz hasło</label>
+            <input class="form-control form-control-lg form-control-solid @error('password_confirmation') is-invalid @enderror" placeholder="Powtórz hasło" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+            @error('password_confirmation')
+            <div class="fv-plugins-message-container invalid-feedback">
+                <div class="fv-help-block">{{ $message }}</div>
+            </div>
+            @enderror
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">Zapisz hasło</button>
+            {{--            <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div>--}}
+            {{--            <a href="{{ route('login') }}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">Przejdź do logowania</a>--}}
+        </div>
+    </form>
 @stop

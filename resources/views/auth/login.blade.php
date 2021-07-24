@@ -27,14 +27,14 @@
             </div>
             <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="Password" placeholder="Hasło" id="password" type="password" name="password" required autocomplete="current-password">
             @error('password')
-                <div class="fv-plugins-message-container">
+                <div class="fv-plugins-message-container invalid-feedback">
                     <div class="fv-help-block">{{ $message }}</div>
                 </div>
             @enderror
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">Zaloguj się</button>
-            <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+            <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div>
             <a href="{{ route('home.index') }}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">Wejdź bez logowania</a>
         </div>
     </form>
