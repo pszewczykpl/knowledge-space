@@ -155,11 +155,13 @@
 				</div>
 				@endcan
 
+				@auth
 				<div class="menu-item">
 					<div class="menu-content pt-8 pb-2">
 						<span class="menu-section text-muted text-uppercase fs-8 ls-1">Administracja</span>
 					</div>
 				</div>
+				@endauth
 				@can('viewany', App\Models\PostCategory::class)
 				<div class="menu-item">
 					<a class="menu-link {{ (request()->routeIs('post-categories.*')) ? 'active' : '' }}" href="{{ route('post-categories.index') }}">
@@ -203,17 +205,4 @@
 			</div>
 		</div>
 	</div>
-{{--	<div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">--}}
-{{--		@auth--}}
-{{--			<a href="{{ route('users.show', Auth::user()->id) }}" class="btn btn-custom btn-primary w-100">--}}
-{{--				<span class="btn-label">Mój profil</span>--}}
-{{--				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])--}}
-{{--			</a>--}}
-{{--		@else--}}
-{{--			<a href="{{ route('login') }}" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="100" title="Zaloguj się, aby uzyskać dostęp do wszystkich funkcjonalności systemu.">--}}
-{{--				<span class="btn-label">Zaloguj się</span>--}}
-{{--				@include('svg.main', ['class' => 'svg-icon btn-icon svg-icon-2'])--}}
-{{--			</a>--}}
-{{--		@endauth--}}
-{{--	</div>--}}
 </div>
