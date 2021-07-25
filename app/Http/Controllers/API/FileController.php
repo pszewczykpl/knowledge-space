@@ -53,8 +53,8 @@ class FileController extends Controller
             foreach($files as $file) {
                 
                 $zip->addFile(
-                    'storage/' . $file->path, 
-                    $file->fileCategory->prefix . $file->name . '.' . $file->extension
+                    'storage/' . $file->path,
+                    ($file->fileCategory->prefix ?? "") . $file->name . '.' . $file->extension
                 );
                 
             }
