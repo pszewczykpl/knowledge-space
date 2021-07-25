@@ -36,15 +36,3 @@
         {!! Form::close() !!}
     </x-pages.form>
 @stop
-
-@push('scripts')
-    <script>
-        $("#edit_date").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: "YYYY-MM-DD"
-            }
-        });
-    </script>
-@endpush

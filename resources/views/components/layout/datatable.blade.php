@@ -10,7 +10,7 @@
                                 <input type="text" class="form-control form-control-solid w-325px ps-14 global_filter" placeholder="Szukaj..." id="global_filter">
                             </div>
                             @if($search)
-                                <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary">Wyszukiwanie Zaawansowane</a>
+                                <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary">Pokaż Wyszukiwanie Zaawansowane</a>
                             @endif
                             </div>
                     </div>
@@ -22,7 +22,7 @@
                                     <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"></rect>
                                     <rect fill="#000000" opacity="0.5" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000)" x="4" y="11" width="16" height="2" rx="1"></rect>
                                 </svg>
-                            </span>Add User</button>
+                            </span>Exportuj do CSV</button>
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,8 @@
                             {{ $search ?? '' }}
                             
                             {{ $advanced_search ?? '' }}
+
+                            <div class="mb-1"></div>
                         </div>
                     </div>
                     <div class="px-0">

@@ -70,6 +70,3 @@
         {!! Form::close() !!}
     </x-pages.form>
 @stop
-
-@push('scripts')
-@endpush

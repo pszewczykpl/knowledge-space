@@ -290,6 +290,3 @@
     </div>
 </div>
 @stop
-
-@push('scripts')
-@endpush
