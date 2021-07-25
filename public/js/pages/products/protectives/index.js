@@ -144,20 +144,3 @@ $("#active_or_all").click(function() {
         toastr.success("Widzisz wszystkie komplety dokumentów");
     }
 });
-
-$("#search_box_panel_button").click(function() {
-    var search_box_panel = document.getElementById("search_box_panel");
-
-    if ($(this).hasClass('active')) {
-        search_box_panel.style.display = 'none';
-
-        $(this).removeClass('active');
-        $(this).blur();
-    }
-    else {
-        search_box_panel.style.display = 'flex';
-
-        $(this).addClass('active');
-        $(this).blur();
-    }
-});
