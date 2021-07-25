@@ -37,5 +37,4 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/news/index.js') }}" type="text/javascript"></script>
 @endpush

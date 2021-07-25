@@ -59,5 +59,4 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/posts/create.js') }}" type="text/javascript"></script>
 @endpush

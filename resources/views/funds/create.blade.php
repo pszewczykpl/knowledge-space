@@ -64,7 +64,6 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('js/pages/funds/create.js') }}" type="text/javascript"></script>
     <script>
         $("#start_date").daterangepicker({
             singleDatePicker: true,

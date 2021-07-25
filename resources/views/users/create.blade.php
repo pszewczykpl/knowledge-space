@@ -227,5 +227,4 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('js/pages/users/create.js') }}" type="text/javascript"></script>
 @endpush

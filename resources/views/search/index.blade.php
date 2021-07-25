@@ -21,23 +21,4 @@
 			</div>
 		</div>
 	</div>
-{{--	<div class="container mt-n15">--}}
-
-{{--			<div class="row">--}}
-{{--				<div class="col-12">--}}
-{{--					<div class="card card-custom card-stretch gutter-b shadow-lg">--}}
-{{--						<div class="card-header border-0 pt-5">--}}
-{{--							<h3 class="card-title align-items-start flex-column">--}}
-{{--								<span class="card-label font-weight-bolder text-dark">Jak wyszukiwać informacje?</span>--}}
-{{--								<span class="text-muted mt-1 font-weight-bold font-size-sm">Mini poradnik</span>--}}
-{{--							</h3>--}}
-{{--						</div>--}}
-{{--						<div class="card-body pt-4">--}}
-{{--							Instrukca jak byc debilem--}}
-{{--						</div>--}}
-{{--					</div>--}}
-
-{{--				</div></div>--}}
-
-{{--	</div>--}}
 @stop

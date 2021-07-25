@@ -64,5 +64,4 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/partners/show.js') }}" type="text/javascript"></script>
 @endpush

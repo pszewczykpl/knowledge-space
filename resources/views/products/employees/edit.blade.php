@@ -38,7 +38,6 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('js/pages/products/employees/edit.js') }}" type="text/javascript"></script>
     <script>
         $("#edit_date").daterangepicker({
             singleDatePicker: true,

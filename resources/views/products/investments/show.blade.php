@@ -60,7 +60,6 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/products/investments/show.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/components/panels/files.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/components/panels/funds.js') }}" type="text/javascript"></script>
 @endpush

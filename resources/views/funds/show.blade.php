@@ -92,5 +92,4 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/funds/show.js') }}" type="text/javascript"></script>
 @endpush

@@ -50,5 +50,4 @@
 
 @push('scripts')
 	<script src="{{ asset('js/components/cards/news-store.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/pages/users/show.js') }}" type="text/javascript"></script>
 @endpush

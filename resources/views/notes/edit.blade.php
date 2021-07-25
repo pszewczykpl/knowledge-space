@@ -82,5 +82,4 @@
 @stop
 
 @push('scripts')
-    <script src="{{ asset('js/pages/notes/edit.js') }}" type="text/javascript"></script>
 @endpush
