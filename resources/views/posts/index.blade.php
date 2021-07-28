@@ -11,7 +11,6 @@
 @stop
 
 @section('content')
-
 <div id="kt_content_container" class="container">
 	<div class="card card-shadow card-rounded">
 		<div class="card-body">
@@ -54,22 +53,24 @@
 
 					<div class="col-md-4">
 						<div class="flex-column flex-lg-row-auto mb-8 ms-10 pt-lg-6">
-							<div class="mb-16">
-								<h4 class="text-black mb-7">Szukaj w Artykułach</h4>
-								<div class="position-relative">
-									@include('svg.search', ['class' => 'svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6'])
-									<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Szukaj...">
-								</div>
-							</div>
+{{--							<div class="mb-16">--}}
+{{--								<h4 class="text-black mb-7">Szukaj w Artykułach</h4>--}}
+{{--								<div class="position-relative">--}}
+{{--									@include('svg.search', ['class' => 'svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6'])--}}
+{{--									<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Szukaj...">--}}
+{{--								</div>--}}
+{{--							</div>--}}
 							<div class="mb-16">
 								<h4 class="text-black mb-7">Kategorie Artykułów</h4>
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
-									<a href="{{ route('posts.index') }}" class="@if(request()->get('category') === null) text-primary @else text-muted text-hover-primary @endif pe-2">Wszystkie</a><div class="m-0">585</div>
+									<a href="{{ route('posts.index') }}" class="@if(request()->get('category') === null) text-primary @else text-muted text-hover-primary @endif pe-2">Wszystkie</a>
+{{--									<div class="m-0">585</div>--}}
 								</div>
 
 								@foreach($postCategories as $postCategory)
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
-									<a href="{{ route('posts.index', ['category' => $postCategory->id]) }}" class="@if($postCategory->id == request()->get('category')) text-primary @else text-muted text-hover-primary @endif pe-2">{{ $postCategory->name }}</a><div class="m-0">585</div>
+									<a href="{{ route('posts.index', ['category' => $postCategory->id]) }}" class="@if($postCategory->id == request()->get('category')) text-primary @else text-muted text-hover-primary @endif pe-2">{{ $postCategory->name }}</a>
+{{--									<div class="m-0">585</div>--}}
 								</div>
 								@endforeach
 

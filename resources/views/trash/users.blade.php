@@ -52,5 +52,5 @@
 @stop
 
 @push('scripts')
- <script src="{{ asset('js/pages/trash/users.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/trash/users.js') }}" type="text/javascript"></script>
 @endpush

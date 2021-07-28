@@ -32,7 +32,7 @@
                             </ul>
 
                             @auth
-                                <a href="#" class="btn btn-primary fw-bolder fs-8 fs-lg-base">Mój profil</a>
+{{--                                <a href="#" class="btn btn-primary fw-bolder fs-8 fs-lg-base">Mój profil</a>--}}
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-primary fw-bolder fs-8 fs-lg-base">Zaloguj się</a>
                             @endauth

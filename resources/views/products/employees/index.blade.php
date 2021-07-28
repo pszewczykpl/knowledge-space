@@ -31,7 +31,7 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/products/employees/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/products/employees/index.js') }}" type="text/javascript"></script>
 	<script>
 		$("#active_or_all").click(function() {
 			if (!$(this)[0].checked) {

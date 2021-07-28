@@ -36,7 +36,7 @@
 
 								</ul>
 
-								<a href="{{ route('login') }}" class="btn btn-outline btn-outline-dashed btn-outline-default active">Pokaż dane archiwalne</a>
+{{--								<a href="{{ route('login') }}" class="btn btn-outline btn-outline-dashed btn-outline-default active">Pokaż dane archiwalne</a>--}}
 							</div>
 						</div>
 					</div>

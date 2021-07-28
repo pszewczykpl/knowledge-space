@@ -2,9 +2,9 @@
 
 @section('toolbar')
 	<x-layout.toolbar.button action="back" href="{{ route('home.index') }}" />
-	@can('create', App\Models\User::class)
-		<x-layout.toolbar.button action="custom" svg="user" title="Dodaj Pracownika" href="{{ route('users.create') }}" />
-	@endcan
+{{--	@can('create', App\Models\User::class)--}}
+{{--		<x-layout.toolbar.button action="custom" svg="user" title="Dodaj Pracownika" href="{{ route('users.create') }}" />--}}
+{{--	@endcan--}}
 	@can('viewAny', App\Models\Trash::class)
 		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'users']) }}" />
 	@endcan
@@ -22,5 +22,5 @@
 @stop
 
 @push('scripts')
-	<script src="{{ asset('js/pages/users/index.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/users/index.js') }}" type="text/javascript"></script>
 @endpush

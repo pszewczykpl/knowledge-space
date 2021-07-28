@@ -6,6 +6,6 @@
 	<meta name="_token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	@stack('css')
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('css_' . str_replace('.', '_', config('app.version')) . '/app.css') }}" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 </head>
