@@ -37,10 +37,10 @@ class PostController extends Controller
         $user = Auth::user();
 
         if(($request->category ?? null) === null) {
-            $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(8);
         }
         else {
-            $posts = Post::where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(8);
         }
 
         $postCategories = Cache::tags(['post_categories'])->rememberForever('post_categories_all', function () {

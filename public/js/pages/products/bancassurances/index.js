@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#table').DataTable( {
+    var table = $('#table').DataTable( {
         responsive: true,
         processing: true,
         serverSide: true,
@@ -10,6 +10,11 @@ $(document).ready(function() {
             type: 'POST',
             datatype: 'json'
         },
+        buttons: [
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
         columns: [
             {
                 data: 'name',
@@ -120,27 +125,16 @@ $(document).ready(function() {
     $('input.column_filter').on('keyup change click', function() {
         filterColumn($(this).parents('div').attr('data-column'));
     });
-});
 
-$("#active_or_all").click(function() {
-    if ($(this).hasClass('btn-success')) {
-        $('#col7_filter').val('A');
-        $('#col7_filter').click();
+    $("#export_to_csv").on("click", function() {
+        table.button( '.buttons-csv' ).trigger();
+    });
 
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-primary');
-        $(this).html('Pokaż Archiwalne')
+    $("#export_to_excel").on("click", function() {
+        table.button( '.buttons-excel' ).trigger();
+    });
 
-        toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów");
-    }
-    else if ($(this).hasClass('btn-primary')) {
-        $('#col7_filter').val('');
-        $('#col7_filter').click();
-
-        $(this).removeClass('btn-primary');
-        $(this).addClass('btn-success');
-        $(this).html('Pokaż tylko Aktualne')
-
-        toastr.success("Widzisz wszystkie komplety dokumentów");
-    }
+    $("#export_to_pdf").on("click", function() {
+        table.button( '.buttons-pdf' ).trigger();
+    });
 });

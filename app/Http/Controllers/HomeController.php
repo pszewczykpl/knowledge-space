@@ -28,7 +28,7 @@ class HomeController extends Controller
         return view('home.index', [
             'title' => 'Strona główna',
             'systems' => $systems,
-            'news' => News::orderBy('id', 'desc')->get(),
+            'news' => News::orderBy('id', 'desc')->take(5)->get(),
             'name' => config('app.name'),
         ]);
     }

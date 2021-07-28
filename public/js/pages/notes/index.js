@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#table').DataTable( {
+    var table = $('#table').DataTable( {
         responsive: true,
         processing: true,
         serverSide: true,
@@ -10,6 +10,11 @@ $(document).ready(function() {
             type: 'POST',
             datatype: 'json'
         },
+        buttons: [
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
         columns: [
             {
                 data: 'content',
@@ -74,5 +79,17 @@ $(document).ready(function() {
 
     $('input.column_filter').on('keyup change click', function() {
         filterColumn($(this).parents('div').attr('data-column'));
+    });
+
+    $("#export_to_csv").on("click", function() {
+        table.button( '.buttons-csv' ).trigger();
+    });
+
+    $("#export_to_excel").on("click", function() {
+        table.button( '.buttons-excel' ).trigger();
+    });
+
+    $("#export_to_pdf").on("click", function() {
+        table.button( '.buttons-pdf' ).trigger();
     });
 });

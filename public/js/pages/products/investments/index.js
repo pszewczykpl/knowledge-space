@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     var table = $('#table').DataTable( {
         responsive: true,
         processing: true,
@@ -7,7 +6,7 @@ $(document).ready(function() {
         lengthMenu: [5, 15, 25, 50, 100],
         pageLength: 15,
         ajax: {
-            url: HOST_URL + '/api/datatables/employees',
+            url: HOST_URL + '/api/datatables/investments',
             type: 'POST',
             datatype: 'json'
         },
@@ -21,10 +20,19 @@ $(document).ready(function() {
                 data: 'name',
                 visible: true,
                 orderable: true,
-                searchable: true,
-                width: '35%'
+                searchable: true
             }, {
-                data: 'code_owu',
+                data: 'code_toil',
+                visible: true,
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'code',
+                visible: true,
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'group',
                 visible: true,
                 orderable: true,
                 searchable: true
@@ -43,7 +51,7 @@ $(document).ready(function() {
                 searchable: false,
                 defaultContent: '',
                 render: function (data, type, full, row) {
-                    return '<a href="' + HOST_URL + '/employees/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
+                    return '<a href="' + HOST_URL + '/investments/' + full.id + '" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a>';
                 }
             }, {
                 data: 'id',
@@ -55,14 +63,41 @@ $(document).ready(function() {
                 visible: false,
                 orderable: false,
                 searchable: true
+            }, {
+                data: 'dist',
+                visible: false,
+                orderable: false,
+                searchable: true
+            }, {
+                data: 'dist_short',
+                visible: false,
+                orderable: false,
+                searchable: true
+            }, {
+                data: 'code_owu',
+                visible: false,
+                orderable: false,
+                searchable: true
+            }, {
+                data: 'type',
+                visible: false,
+                orderable: false,
+                searchable: true
             }
         ],
         searchCols: [
-            null,null, null,
-            null,null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             {
                 'search': 'A'
-            }
+            },
+            null,
+            null
         ],
         language: {
             "decimal":        "",
@@ -92,7 +127,7 @@ $(document).ready(function() {
             $('#global_filter').val()
         ).draw();
     }
-    
+
     function filterColumn (i) {
         $('#table').DataTable().column(i).search(
             $('#col'+i+'_filter').val()
