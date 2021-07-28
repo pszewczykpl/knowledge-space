@@ -19,7 +19,7 @@
 					
                     <x-layout.footer />
 
-					<a data-toggle="modal" data-target="#policy_calculator_modal" class="btn btn-sm btn-white btn-active-primary shadow-sm position-fixed px-5 fw-bolder index-2 top-50 mt-10 end-0 transform-90 fs-6">
+					<a data-bs-toggle="modal" data-bs-target="#policy_calculator_modal" class="btn btn-sm btn-white btn-active-primary shadow-sm position-fixed px-5 fw-bolder index-2 top-50 mt-10 end-0 transform-90 fs-6">
 						<span>Kalkulator miesięcy</span>
 					</a>
                     
