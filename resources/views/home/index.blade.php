@@ -4,7 +4,6 @@
 <div id="kt_content_container" class="container">
     <div class="d-flex flex-column flex-md-row">
         <div class="flex-md-row-fluid">
-
             <form action="{{ route('search', ['scope' => 'all']) }}">
                 <div class="card mb-12 card-shadow card-rounded">
                     <div class="card-body flex-column p-5">
@@ -28,19 +27,11 @@
                                         Panel główny
                                     </button>
                                 </li>
-
                             </ul>
-
-                            @auth
-{{--                                <a href="#" class="btn btn-primary fw-bolder fs-8 fs-lg-base">Mój profil</a>--}}
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-primary fw-bolder fs-8 fs-lg-base">Zaloguj się</a>
-                            @endauth
                         </div>
                     </div>
                 </div>
             </form>
-
 
             <div class="row">
                 <div class="col-md-8">
@@ -60,9 +51,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="flex-column flex-lg-row-auto">
-                        <div class="card card-rounded p-10 mb-15">
+                        <div class="card card-rounded p-10 mb-8 card-shadow">
                             <h2 class="text-dark fw-bolder mb-11">Na skróty...</h2>
-
                             <a href="{{ route('investments.index') }}">
                                 <div class="d-flex align-items-center mb-10">
                                     @include('svg.investment', ['class' => 'svg-icon svg-icon-1 svg-icon-primary me-5'])
@@ -74,7 +64,6 @@
                                     </div>
                                 </div>
                             </a>
-
                             <a href="{{ route('protectives.index') }}">
                                 <div class="d-flex align-items-center mb-10">
                                     @include('svg.protective', ['class' => 'svg-icon svg-icon-1 svg-icon-danger me-5'])
@@ -86,7 +75,6 @@
                                     </div>
                                 </div>
                             </a>
-
                             <a href="{{ route('bancassurances.index') }}">
                                 <div class="d-flex align-items-center mb-10">
                                     @include('svg.bancassurance', ['class' => 'svg-icon svg-icon-1 svg-icon-info me-5'])
@@ -98,7 +86,6 @@
                                     </div>
                                 </div>
                             </a>
-
                             <a href="{{ route('employees.index') }}">
                                 <div class="d-flex align-items-center mb-10">
                                     @include('svg.employee', ['class' => 'svg-icon svg-icon-1 svg-icon-success me-5'])
@@ -110,9 +97,8 @@
                                     </div>
                                 </div>
                             </a>
-
                             <a href="{{ route('funds.index') }}">
-                                <div class="d-flex align-items-center mb-10">
+                                <div class="d-flex align-items-center mb-5">
                                     @include('svg.fund', ['class' => 'svg-icon svg-icon-1 svg-icon-primary me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Fundusze UFK</h5>
@@ -122,14 +108,30 @@
                                     </div>
                                 </div>
                             </a>
-
                         </div>
-
+                        <div class="d-flex flex-wrap align-items-center my-1 mb-7">
+                            <h3 class="fw-bolder me-5 my-1">Artykuły
+                                <span class="text-gray-400 fs-6 mx-2">ostatnio dodane</span>
+                            </h3>
+                        </div>
+                        @foreach($post as $post)
+                            <a href="{{ route('posts.show', $post) }}">
+                                <div class="card bgi-no-repeat card-xl-stretch mb-6 card-rounded card-shadow" style="background-position: right top; background-size: 30% auto; background-image: url({{ asset('media/bg/abstract-4.svg') }})">
+                                    <div class="card-body pt-3 mt-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-30px symbol-circle me-3">
+                                                <img src="{{ Storage::url($post->user->avatar_path ?? 'avatars/default.jpg') }}" class="" alt="">
+                                            </div>
+                                            <div class="fw-normal text-primary my-7">{{ $post->created_at }}</div>
+                                        </div>
+                                        <span class="text-dark fw-bold fs-4 m-0">{{ $post->title }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

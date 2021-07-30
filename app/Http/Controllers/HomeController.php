@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PostCategory;
 use App\Models\System;
 use App\Models\News;
+use App\Models\Post;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class HomeController extends Controller
             'systems' => $systems,
             'news' => News::orderBy('id', 'desc')->take(5)->get(),
             'name' => config('app.name'),
+            'post' => Post::orderBy('id', 'desc')->take(3)->get(),
         ]);
     }
 }
