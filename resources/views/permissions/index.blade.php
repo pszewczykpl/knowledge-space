@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa", "Kod", "Opis"]'>
+	<x-layout.datatable id="permissions_datatable" :columns='["Nazwa", "Kod", "Opis"]'>
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod" />
@@ -13,7 +13,3 @@
 		</x-slot>
 	</x-layout.datatable>
 @stop
-
-@push('scripts')
-	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/permissions/index.js') }}" type="text/javascript"></script>
-@endpush

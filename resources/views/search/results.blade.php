@@ -49,7 +49,7 @@
 
 				@foreach($results as $key => $data)
 					@if($data->count() > 0)
-						<div class="d-flex flex-wrap flex-stack pb-7">
+						<div class="d-flex flex-wrap flex-stack pb-7 @if (!$loop->first) pt-5 @endif">
 							<div class="d-flex flex-wrap align-items-center my-1">
 								<h3 class="fw-bolder me-5 my-1">{{ $meta[$key]['title'] }}
 									<span class="text-gray-400 fs-6 mx-2">{{ $data->count() }} wyszukań dla frazy <b><i>{{ $value }}</i></b></span>

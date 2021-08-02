@@ -35,15 +35,20 @@ class InvestmentController extends Controller
      */
     public function index()
     {
+        $investments = Cache::tags(['investments'])->rememberForever('investments_index', function () {
+            return Investment::where('status', '=', 'A')->orderBy('code', 'desc')->take(15)->get();
+        });
+
         return view('products.investments.index', [
             'title' => 'Ubezpieczenia Inwestycyjne',
+            'investments' => $investments
         ]);
     }
     
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create() 
     {

@@ -12,16 +12,16 @@
                             @if($search)
                                 <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary">Pokaż Wyszukiwanie Zaawansowane</a>
                             @endif
-                            </div>
+                        </div>
                     </div>
-{{--                    <div class="card-toolbar">--}}
-{{--                        <div class="d-flex justify-content-end text-gray-500 fw-bold fs-5 me-3">Eksportuj do: </div>--}}
-{{--                        <div class="d-flex justify-content-end">--}}
-{{--                            <button id="export_to_csv" name="export_to_csv" type="button" class="btn btn-link btn-color-primaty me-3">CSV</button>--}}
-{{--                            <button id="export_to_excel" name="export_to_excel" type="button" class="btn btn-link btn-color-primaty me-3">Excel</button>--}}
-{{--                            <button id="export_to_pdf" name="export_to_pdf" type="button" class="btn btn-link btn-color-primaty me-3">PDF</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-end text-gray-500 fw-bold fs-5 me-3">Eksportuj do: </div>
+                        <div class="d-flex justify-content-end">
+                            <button id="export_to_excel" name="export_to_excel" type="button" class="btn btn-link btn-color-primaty me-3">Excel</button>
+                            <button id="export_to_csv" name="export_to_csv" type="button" class="btn btn-link btn-color-primaty me-3">CSV</button>
+                            <button id="export_to_pdf" name="export_to_pdf" type="button" class="btn btn-link btn-color-primaty me-3">PDF</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body pt-0">
@@ -38,13 +38,14 @@
                         </div>
                     </div>
                     <div class="px-0">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="table" style="width: 100% !important">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 datatable" id="{{ $id }}" style="width: 100% !important">
                             <thead>
                             <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
                                 @foreach($columns as $column)
                                     <th>{{ $column }}</th>
                                 @endforeach
                             </tr>
+                            {{ $defer ?? '' }}
                             </thead>
                         </table>
                     </div>

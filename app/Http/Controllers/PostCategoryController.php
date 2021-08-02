@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class PostCategoryController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *

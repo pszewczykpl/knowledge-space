@@ -31,7 +31,3 @@
 		</div>
 	</div>
 @stop
-
-@push('scripts')
-	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/components/cards/news-store.js') }}" type="text/javascript"></script>
-@endpush

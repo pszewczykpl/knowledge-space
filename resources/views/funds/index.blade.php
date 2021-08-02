@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Symbol", "Nazwa", "Typ", "Data początku", "Akcje"]'>
+	<x-layout.datatable id="funds_datatable" :columns='["Symbol", "Nazwa", "Typ", "Data początku", "Akcje"]'>
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Symbol" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Nazwa" />
@@ -23,7 +23,3 @@
 		</x-slot>
 	</x-layout.datatable>
 @stop
-
-@push('scripts')
-	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/funds/index.js') }}" type="text/javascript"></script>
-@endpush

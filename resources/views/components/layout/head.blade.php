@@ -8,4 +8,5 @@
 	@stack('css')
 	<link href="{{ asset('css_' . str_replace('.', '_', config('app.version')) . '/app.css') }}" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/app2.js') }}" defer></script>
 </head>

@@ -11,14 +11,10 @@
 @stop
 
 @section('content')
-	<x-layout.datatable :columns='["Nazwa", "URL", "Opis", "Akcje"]'>
+	<x-layout.datatable id="systems_datatable" :columns='["Nazwa", "URL", "Opis", "Akcje"]'>
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="URL" />
 		</x-slot>
 	</x-layout.datatable>
 @stop
-
-@push('scripts')
-	<script src="{{ asset('js_' . str_replace('.', '_', config('app.version')) . '/pages/systems/index.js') }}" type="text/javascript"></script>
-@endpush
