@@ -13,7 +13,7 @@
         <div class="col-12 col-md-8">
             <div class="card card-custom gutter-b">
 				<div class="card-body">
-					<table class="table table-separate table-head-custom collapsed" id="table">
+					<table class="table table-separate table-head-custom collapsed" id="users_trash_datatable">
 						<thead>
 							<tr>
 								<th>Imię i Nazwisko</th>
