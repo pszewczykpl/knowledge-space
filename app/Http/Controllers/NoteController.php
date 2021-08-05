@@ -17,6 +17,7 @@ use App\Http\Requests\UpdateNote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class NoteController extends Controller
@@ -165,6 +166,7 @@ class NoteController extends Controller
         $this->authorize('update', $note);
         
         $note->{$noteable_type . 's'}()->detach($noteable_id);
+        Cache::tags('notes')->flush();
 
         return redirect()->back()->with('notify_danger', 'Notatka została odpięta od produktu!');
     }
