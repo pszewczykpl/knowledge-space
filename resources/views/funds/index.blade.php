@@ -20,6 +20,13 @@
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="5" --placeholder="Waluta" />
 			<x-datatables.search-box --size="3" --number="7" --placeholder="Status" --hidden />
+			<div class="col-md-3 pb-3 my-2 my-md-0">
+				<label class="fs-6 form-label fw-normal text-gray-800">Fundusze nieaktywne</label>
+				<div class="form-check form-switch form-check-custom form-check-solid mt-1">
+					<input class="form-check-input" type="checkbox" id="active_or_all_funds" />
+					<label class="form-check-label" for="active_or_all_funds" id="active_or_all_title">Pokaż fundusze nieaktywne</label>
+				</div>
+			</div>
 		</x-slot>
 	</x-layout.datatable>
 @stop

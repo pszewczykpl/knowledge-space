@@ -27,11 +27,8 @@
                 <div class="card-body pt-0">
                     <div class="mb-1">
                         <div class="row align-items-center" id="search_box_panel" style="display: none;">
-                            
                             <div class="col-12"><div class="separator separator-dashed mt-6 mb-6"></div></div>
-                            
                             {{ $search ?? '' }}
-
                             <div class="mb-1"></div>
                         </div>
                     </div>

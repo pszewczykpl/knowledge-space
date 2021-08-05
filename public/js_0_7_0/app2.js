@@ -621,6 +621,23 @@ $('#funds_datatable').DataTable( {
     order: [3, "desc"]
 });
 
+$("#active_or_all_funds").click(function() {
+    if (!$(this)[0].checked) {
+        $('#col7_filter').val('A');
+        $('#col7_filter').click();
+
+        $("#active_or_all_title").html('Pokaż fundusze nieaktywne');
+        toastr.success("Widzisz tylko aktualne fundusze");
+    }
+    else if ($(this)[0].checked) {
+        $('#col7_filter').val('');
+        $('#col7_filter').click();
+
+        $("#active_or_all_title").html('Ukryj fundusze nieaktywne');
+        toastr.success("Widzisz wszystkie fundusze");
+    }
+});
+
 /* Notatki */
 $('#notes_datatable').DataTable( {
     responsive: true,
