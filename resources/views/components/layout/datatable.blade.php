@@ -31,8 +31,6 @@
                             <div class="col-12"><div class="separator separator-dashed mt-6 mb-6"></div></div>
                             
                             {{ $search ?? '' }}
-                            
-                            {{ $advanced_search ?? '' }}
 
                             <div class="mb-1"></div>
                         </div>
@@ -41,11 +39,19 @@
                         <table class="table align-middle table-row-dashed fs-6 gy-5 datatable" id="{{ $id }}" style="width: 100% !important">
                             <thead>
                             <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
-                                @foreach($columns as $column)
-                                    <th>{{ $column }}</th>
+                                @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
+                                    <th style="display: none;">{{ $columnTitle }}</th>
                                 @endforeach
                             </tr>
-                            {{ $defer ?? '' }}
+                            <tbody>
+                            @foreach($datatableSettings['deferData'] as $row)
+                                <tr>
+                                    @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
+                                        <td style='display: none;'>@if($columnCode != 'actions') {!! $row->{$columnCode} !!} @endif</td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                            </tbody>
                             </thead>
                         </table>
                     </div>

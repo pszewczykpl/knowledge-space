@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class PostCategory extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,15 @@ class PostCategory extends Model
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+        ],
+        'orderBy' => ['name', 'asc']
     ];
 
     public function posts()

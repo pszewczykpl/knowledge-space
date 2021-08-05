@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Fund extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,21 @@ class Fund extends Model
         'cancel_date',
         'start_date',
         'cancel_reason'
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'code' => 'Symbol',
+            'name' => 'Nazwa',
+            'type' => 'Typ',
+            'start_date' => 'Data startu',
+            'actions' => 'Akcje',
+            'currency' => 'Waluta',
+            'id' => 'ID',
+            'status' => 'Status'
+        ],
+        'where' => [['status', '=', 'A']],
+        'orderBy' => ['start_date', 'desc']
     ];
 
     public function investments()
@@ -96,6 +113,7 @@ class Fund extends Model
             'U' => 'UFK',
             'S' => 'SOK',
             'T' => 'Tracker',
+            'D' => 'Depozytowy',
             default => $this->attributes['type'],
         };
     }

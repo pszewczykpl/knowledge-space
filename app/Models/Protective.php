@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Protective extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,23 @@ class Protective extends Model
         'subscription',
         'edit_date',
         'status',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa produktu',
+            'dist_short' => 'Nazwa dystrybutora',
+            'code' => 'Kod produktu',
+            'code_owu' => 'Kod OWU',
+            'edit_date' => 'Ostatnia aktualizacja',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+            'status' => 'Status',
+            'dist' => 'Nazwa dystrybutora',
+            'subscription' => 'Subskrypcja'
+        ],
+        'where' => [['status', '=', 'A']],
+        'orderBy' => ['code', 'desc']
     ];
 
     /**

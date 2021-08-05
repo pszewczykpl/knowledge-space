@@ -38,6 +38,7 @@ class UserController extends Controller
         
         return view('users.index', [
             'title' => 'Pracownicy',
+            'datatables' => User::getDatatablesData()
         ]);
     }
 

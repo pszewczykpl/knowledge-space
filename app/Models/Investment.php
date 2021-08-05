@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Investment extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +32,25 @@ class Investment extends Model
         'edit_date',
         'type',
         'status',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa produktu',
+            'code_toil' => 'Kod TOiL',
+            'code' => 'Kod produktu',
+            'group' => 'Grupa produktowa',
+            'edit_date' => 'Ostatnia aktualizacja',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+            'status' => 'Status',
+            'dist' => 'Nazwa dystrybutora',
+            'dist_code' => 'Kod dystrybutora',
+            'code_owu' => 'Kod OWU',
+            'type' => 'Typ produktu'
+        ],
+        'where' => [['status', '=', 'A']],
+        'orderBy' => ['code', 'desc']
     ];
 
     /**

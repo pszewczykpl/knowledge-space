@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable id="investments_datatable" :columns='["Nazwa produktu", "Kod TOiL", "Kod produktu", "Grupa produktowa", "Ostatnia aktualizacja", "Akcje", "ID"]'>
+	<x-layout.datatable :data="$datatables" id="investments_datatable">
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod TOiL" />
@@ -31,26 +31,6 @@
 					<label class="form-check-label" for="active_or_all_investments" id="active_or_all_title">Pokaż dane archiwalne</label>
 				</div>
 			</div>
-		</x-slot>
-		<x-slot name="defer">
-			<tbody>
-				@foreach($investments as $investment)
-					<tr>
-						<td>{{ $investment->name }}</td>
-						<td>{{ $investment->code_toil }}</td>
-						<td>{{ $investment->code }}</td>
-						<td>{{ $investment->group }}</td>
-						<td>{{ $investment->edit_date }}</td>
-						<td></td>
-						<td>{{ $investment->id }}</td>
-						<td>{{ $investment->status }}</td>
-						<td>{{ $investment->dist }}</td>
-						<td>{{ $investment->dist_code }}</td>
-						<td>{{ $investment->code_owu }}</td>
-						<td>{{ $investment->type }}</td>
-					</tr>
-				@endforeach
-			</tbody>
 		</x-slot>
 	</x-layout.datatable>
 @stop

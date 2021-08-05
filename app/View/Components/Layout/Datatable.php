@@ -6,9 +6,7 @@ use Illuminate\View\Component;
 
 class Datatable extends Component
 {
-    public $help_us;
-    public $columns;
-    public $info;
+    public $datatableSettings;
     public $id;
 
     /**
@@ -18,11 +16,9 @@ class Datatable extends Component
      * @param bool $helpUs
      * @param bool $info
      */
-    public function __construct(array $columns, bool $helpUs = false, bool $info = false, $id = 'table')
+    public function __construct($data, $id = 'table')
     {
-        $this->columns = $columns;
-        $this->help_us = $helpUs;
-        $this->info = $info;
+        $this->datatableSettings = $data;
         $this->id = $id;
     }
 

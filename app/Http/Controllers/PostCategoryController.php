@@ -36,6 +36,7 @@ class PostCategoryController extends Controller
 
         return view('post-categories.index', [
             'title' => 'Kategorie artykułów',
+            'datatables' => PostCategory::getDatatablesData()
         ]);
     }
 

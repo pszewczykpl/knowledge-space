@@ -56,4 +56,19 @@ trait HasDatatables {
         );
     }
 
+    public static function datatablesDeferData()
+    {
+        return Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_datatable_index', function () {
+            return self::where(self::$datatables['where'] ?? [])->orderBy(self::$datatables['orderBy'][0] ?? 'id', self::$datatables['orderBy'][1] ?? 'desc')->orderBy('id', 'desc')->take(15)->get();
+        });
+    }
+
+    public static function getDatatablesData()
+    {
+        return [
+            'columns' => self::$datatables['columns'],
+            'deferData' => self::datatablesDeferData()
+        ];
+    }
+
 }

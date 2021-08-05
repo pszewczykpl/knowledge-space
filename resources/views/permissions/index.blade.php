@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable id="permissions_datatable" :columns='["Nazwa", "Kod", "Opis"]'>
+	<x-layout.datatable :data="$datatables" id="permissions_datatable">
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod" />

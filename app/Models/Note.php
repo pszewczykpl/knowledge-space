@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +13,7 @@ class Note extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +22,15 @@ class Note extends Model
      */
     protected $fillable = [
         'content',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'content' => 'Treść',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+        ],
+        'orderBy' => ['content', 'asc']
     ];
 
     public function investments()

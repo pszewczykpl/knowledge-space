@@ -35,13 +35,9 @@ class InvestmentController extends Controller
      */
     public function index()
     {
-        $investments = Cache::tags(['investments'])->rememberForever('investments_index', function () {
-            return Investment::where('status', '=', 'A')->orderBy('code', 'desc')->take(15)->get();
-        });
-
         return view('products.investments.index', [
             'title' => 'Ubezpieczenia Inwestycyjne',
-            'investments' => $investments
+            'datatables' => Investment::getDatatablesData()
         ]);
     }
     
@@ -126,17 +122,17 @@ class InvestmentController extends Controller
 
         return view('products.investments.edit', [
             'title' => 'Edycja produktu inwestycyjnego',
-            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'investment' => Investment::findOrFail($investment->id),
+            'investment' => $investment,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\StoreInvestment  $request
-     * @param  \App\Investment  $investment
-     * @return \Illuminate\Http\Response
+     * @param UpdateInvestment $request
+     * @param Investment $investment
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateInvestment $request, Investment $investment) 
     {
@@ -144,7 +140,7 @@ class InvestmentController extends Controller
 
         $investment->update($request->all());
 
-        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
+        return redirect()->route('investments.show', $investment)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
     }
 
     /**

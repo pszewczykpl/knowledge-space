@@ -34,6 +34,7 @@ class FundController extends Controller
     {
         return view('funds.index', [
             'title' => 'Ubezpieczeniowe Fundusze Kapitałowe',
+            'datatables' => Fund::getDatatablesData()
         ]);
     }
 

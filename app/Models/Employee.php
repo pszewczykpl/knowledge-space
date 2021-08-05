@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Employee extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,19 @@ class Employee extends Model
         'code_owu',
         'edit_date',
         'status',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa produktu',
+            'code_owu' => 'Kod OWU',
+            'edit_date' => 'Ostatnia aktualizacja',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+            'status' => 'Status'
+        ],
+        'where' => [['status', '=', 'A']],
+        'orderBy' => ['code_owu', 'desc']
     ];
 
     /**

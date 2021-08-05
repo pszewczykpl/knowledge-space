@@ -33,6 +33,7 @@ class PartnerController extends Controller
     {
         return view('partners.index', [
             'title' => 'Partnerzy',
+            'datatables' => Partner::getDatatablesData()
         ]);
     }
 

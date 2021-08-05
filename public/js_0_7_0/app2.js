@@ -305,7 +305,7 @@ $('#employees_datatable').DataTable( {
     ],
     searchCols: [null, null, null, null, null, {'search': 'A'}],
     language: options['language'],
-    order: [2, "desc"]
+    order: [1, "desc"]
 });
 
 $("#active_or_all_employees").click(function() {
@@ -396,7 +396,7 @@ $('#bancassurances_datatable').DataTable( {
             searchable: false
         }
     ],
-    searchCols: [null, null, null, null, null, null, null, {'search': 'A'}, null],
+    searchCols: [null, null, null, null, null, null, null, {'search': 'A'}, null, null],
     language: options['language'],
     order: [2, "desc"]
 });
@@ -541,10 +541,15 @@ $('#files_datatable').DataTable( {
             visible: false,
             orderable: false,
             searchable: false
+        },{
+            data: 'extension',
+            visible: false,
+            orderable: false,
+            searchable: false
         }
     ],
     language: options['language'],
-    order: [1, "asc"]
+    order: [0, "asc"]
 });
 
 /* Fundusze */
@@ -680,12 +685,8 @@ $('#partners_datatable').DataTable( {
             visible: true,
             orderable: true,
             searchable: true,
-            render: function(data) {
-                if(data) {
-                    return `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
-                } else {
-                    return '';
-                }
+            render: function(data, type) {
+                return type === 'export' ? data :  `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
             }
         },{
             data: 'number_rau',
@@ -823,8 +824,8 @@ $('#risks_datatable').DataTable( {
             visible: true,
             orderable: true,
             searchable: true,
-            render: function(data) {
-                return `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
+            render: function(data, type) {
+                return type === 'export' ? data : `<span class="badge badge-light-primary fw-bolder px-4 py-3">${data}</span>`;
             }
         },{
             data: 'group',
@@ -879,7 +880,7 @@ $('#systems_datatable').DataTable( {
             searchable: true,
             width: '40%',
             render: function (data, type, full, row) {
-                return `<a href="${data}" target="_blank">${data}</a>`;
+                return type === 'export' ? data :  `<a href="${data}" target="_blank">${data}</a>`;
             }
         }, {
             data: 'description',

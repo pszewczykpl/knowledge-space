@@ -42,6 +42,7 @@ class NoteController extends Controller
 
         return view('notes.index', [
             'title' => 'Notatki',
+            'datatables' => Note::getDatatablesData()
         ]);
     }
 

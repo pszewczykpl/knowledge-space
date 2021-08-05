@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Risk extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +27,19 @@ class Risk extends Model
         'category',
         'group',
         'grace_period',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'code' => 'Symbol',
+            'name' => 'Nazwa',
+            'category' => 'Kategoria',
+            'group' => 'Grupa',
+            'grace_period' => 'Okres karencji',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+        ],
+        'orderBy' => ['code', 'asc']
     ];
 
     public function notes()

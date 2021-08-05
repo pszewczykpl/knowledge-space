@@ -30,6 +30,7 @@ class PermissionController extends Controller
     {
         return view('permissions.index', [
             'title' => 'Uprawnienia systemowe',
+            'datatables' => Permission::getDatatablesData()
         ]);
     }
 }

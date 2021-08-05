@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class BancassuranceController extends Controller
@@ -34,6 +35,7 @@ class BancassuranceController extends Controller
     {
         return view('products.bancassurances.index', [
             'title' => 'Ubezpieczenia Bancassurance',
+            'datatables' => Bancassurance::getDatatablesData()
         ]);
     }
 

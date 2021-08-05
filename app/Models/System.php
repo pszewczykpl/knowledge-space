@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class System extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,17 @@ class System extends Model
         'name',
         'url',
         'description',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa',
+            'url' => 'URL',
+            'description' => 'Opis',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+        ],
+        'orderBy' => ['name', 'asc']
     ];
 
     /**

@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable id="notes_datatable" :columns='["Treść", "Akcje"]'>
+	<x-layout.datatable :data="$datatables" id="notes_datatable">
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Treść" />
 		</x-slot>

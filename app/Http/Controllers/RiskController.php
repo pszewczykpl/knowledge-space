@@ -33,6 +33,7 @@ class RiskController extends Controller
     {
         return view('risks.index', [
             'title' => 'Ryzyka ubezpieczeniowe',
+            'datatables' => Risk::getDatatablesData()
         ]);
     }
 

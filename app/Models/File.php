@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CacheModels;
+use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class File extends Model
     use HasFactory;
     use SoftDeletes;
     use CacheModels;
+    use HasDatatables;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +27,17 @@ class File extends Model
         'code',
         'extension',
         'draft',
+    ];
+
+    static $datatables = [
+        'columns' => [
+            'name' => 'Nazwa',
+            'path' => 'Ścieżka',
+            'actions' => 'Akcje',
+            'id' => 'ID',
+            'extension' => 'Rozszerzenie pliku',
+        ],
+        'orderBy' => ['name', 'asc']
     ];
 
     public function investments()

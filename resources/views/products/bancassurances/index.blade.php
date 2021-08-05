@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-	<x-layout.datatable id="bancassurances_datatable" :columns='["Nazwa produktu", "Kod dystrybutora", "Kod produktu", "Kod OWU", "Ostatnia aktualizacja", "Akcje"]'>
+	<x-layout.datatable :data="$datatables" id="bancassurances_datatable">
 		<x-slot name="search">
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />

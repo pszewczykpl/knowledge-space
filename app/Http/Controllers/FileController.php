@@ -38,6 +38,7 @@ class FileController extends Controller
     {
         return view('files.index', [
             'title' => 'Dokumenty',
+            'datatables' => File::getDatatablesData()
         ]);
     }
 

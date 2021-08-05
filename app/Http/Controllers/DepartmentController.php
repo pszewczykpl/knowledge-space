@@ -34,6 +34,7 @@ class DepartmentController extends Controller
         
         return view('departments.index', [
             'title' => 'Departamenty',
+            'datatables' => Department::getDatatablesData()
         ]);
     }
 

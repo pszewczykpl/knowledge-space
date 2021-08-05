@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bancassurance;
 use App\Models\Employee;
 
 use App\Http\Requests\StoreEmployee;
@@ -10,6 +11,7 @@ use App\Http\Requests\UpdateEmployee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
@@ -33,6 +35,7 @@ class EmployeeController extends Controller
     {
         return view('products.employees.index', [
             'title' => 'Ubezpieczenia Pracownicze',
+            'datatables' => Employee::getDatatablesData()
         ]);
     }
 
