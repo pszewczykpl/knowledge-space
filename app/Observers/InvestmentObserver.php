@@ -72,6 +72,8 @@ class InvestmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('investments')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class InvestmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('investments')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class InvestmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('investments')->flush();
     }
 }

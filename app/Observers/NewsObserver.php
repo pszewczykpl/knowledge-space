@@ -73,6 +73,8 @@ class NewsObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('news')->flush();
     }
 
     /**
@@ -91,6 +93,8 @@ class NewsObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('news')->flush();
     }
 
     /**
@@ -109,5 +113,7 @@ class NewsObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('news')->flush();
     }
 }

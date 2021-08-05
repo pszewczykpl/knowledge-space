@@ -72,6 +72,8 @@ class FundObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('funds')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class FundObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('funds')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class FundObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('funds')->flush();
     }
 }

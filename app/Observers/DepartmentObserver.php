@@ -72,6 +72,8 @@ class DepartmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('departments')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class DepartmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('departments')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class DepartmentObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('departments')->flush();
     }
 }

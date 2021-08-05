@@ -73,6 +73,8 @@ class BancassuranceObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('bancassurances')->flush();
     }
 
     /**
@@ -91,6 +93,8 @@ class BancassuranceObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('bancassurances')->flush();
     }
 
     /**
@@ -109,5 +113,7 @@ class BancassuranceObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('bancassurances')->flush();
     }
 }

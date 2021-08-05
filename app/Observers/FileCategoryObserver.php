@@ -72,6 +72,8 @@ class FileCategoryObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('file_categories')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class FileCategoryObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('file_categories')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class FileCategoryObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('file_categories')->flush();
     }
 }

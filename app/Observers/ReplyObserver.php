@@ -66,6 +66,8 @@ class ReplyObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('replies')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class ReplyObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('replies')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class ReplyObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('replies')->flush();
     }
 }

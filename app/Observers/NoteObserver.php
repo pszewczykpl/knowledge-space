@@ -72,6 +72,8 @@ class NoteObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('notes')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class NoteObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('notes')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class NoteObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('notes')->flush();
     }
 }

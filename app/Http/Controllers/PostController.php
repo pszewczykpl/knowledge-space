@@ -131,17 +131,6 @@ class PostController extends Controller
         $this->authorize('update', $post);
         $post->update($request->all());
         $post->postCategory()->associate($request->post_category_id);
-
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('attachments');
-
-            $attachment = new Attachment();
-            $attachment->path = $path;
-            $attachment->name = $request->file('attachment')->getClientOriginalName();
-            $attachment->extension = $request->file('attachment')->extension();
-            $attachment->attachmentable()->associate($post);
-            Auth::user()->posts()->save($attachment);
-        }
         $post->save();
 
         return redirect()->route('posts.show', $post->id)->with('notify_success', 'Dane artykułu zostały zaktualizowane!');

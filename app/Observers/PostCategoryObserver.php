@@ -66,6 +66,8 @@ class PostCategoryObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('post_categories')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class PostCategoryObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('post_categories')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class PostCategoryObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('post_categories')->flush();
     }
 }

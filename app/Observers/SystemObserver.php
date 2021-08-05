@@ -66,6 +66,8 @@ class SystemObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('systems')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class SystemObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('systems')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class SystemObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('systems')->flush();
     }
 }

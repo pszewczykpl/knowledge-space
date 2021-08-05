@@ -66,6 +66,8 @@ class ProtectiveObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('protectives')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class ProtectiveObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('protectives')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class ProtectiveObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('protectives')->flush();
     }
 }

@@ -66,6 +66,8 @@ class PartnerObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('partners')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class PartnerObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('partners')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class PartnerObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('partners')->flush();
     }
 }

@@ -73,6 +73,8 @@ class FileObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('files')->flush();
     }
 
     /**
@@ -91,6 +93,8 @@ class FileObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('files')->flush();
     }
 
     /**
@@ -109,5 +113,7 @@ class FileObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('files')->flush();
     }
 }

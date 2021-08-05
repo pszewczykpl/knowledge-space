@@ -42,6 +42,17 @@ class PermissionObserver
     }
 
     /**
+     * Handle the Permission "saved" event.
+     *
+     * @param  \App\Models\Permission  $permission
+     * @return void
+     */
+    public function saved(Permission $permission)
+    {
+        Cache::tags('permissions')->flush();
+    }
+
+    /**
      * Handle the Permission "deleted" event.
      *
      * @param  \App\Models\Permission  $permission
@@ -55,6 +66,8 @@ class PermissionObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('permissions')->flush();
     }
 
     /**
@@ -71,6 +84,8 @@ class PermissionObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('permissions')->flush();
     }
 
     /**
@@ -87,5 +102,7 @@ class PermissionObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('permissions')->flush();
     }
 }

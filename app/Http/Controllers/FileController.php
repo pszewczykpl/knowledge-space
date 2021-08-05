@@ -239,7 +239,9 @@ class FileController extends Controller
     {
         $this->authorize('delete', $file);
 
-        Storage::move($file->path, 'trash/' . $file->path);
+        if($file->path !== 'files/deleted.pdf') {
+            Storage::move($file->path, 'trash/' . $file->path);
+        }
         $file->delete();
 
         return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');

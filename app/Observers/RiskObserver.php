@@ -66,6 +66,8 @@ class RiskObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('risks')->flush();
     }
 
     /**
@@ -82,6 +84,8 @@ class RiskObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('risks')->flush();
     }
 
     /**
@@ -98,5 +102,7 @@ class RiskObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('risks')->flush();
     }
 }

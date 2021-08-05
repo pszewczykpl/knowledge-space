@@ -72,6 +72,8 @@ class EmployeeObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('employees')->flush();
     }
 
     /**
@@ -90,6 +92,8 @@ class EmployeeObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('employees')->flush();
     }
 
     /**
@@ -108,5 +112,7 @@ class EmployeeObserver
         if(Auth::check()) {
             Auth::user()->events()->save($event);
         }
+
+        Cache::tags('employees')->flush();
     }
 }

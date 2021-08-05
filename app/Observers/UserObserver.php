@@ -70,6 +70,8 @@ class UserObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('users')->flush();
     }
 
     /**
@@ -87,6 +89,8 @@ class UserObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('users')->flush();
     }
 
     /**
@@ -104,5 +108,7 @@ class UserObserver
         $event->save();
 
         if(Auth::check()) Auth::user()->events()->save($event);
+
+        Cache::tags('users')->flush();
     }
 }
