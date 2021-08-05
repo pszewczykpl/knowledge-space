@@ -33,6 +33,7 @@
                         </div>
                     </div>
                     <div class="px-0">
+                        <script> var DATATABLES_ROW_COUNT = {{ $datatableSettings['rowsCount'] }}; </script>
                         <table class="table align-middle table-row-dashed fs-6 gy-5 datatable" id="{{ $id }}" style="width: 100% !important">
                             <thead>
                             <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">

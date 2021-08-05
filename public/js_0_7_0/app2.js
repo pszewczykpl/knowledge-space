@@ -57,6 +57,10 @@ var options = {
     }
 };
 
+if (typeof DATATABLES_ROW_COUNT == 'undefined') {
+    DATATABLES_ROW_COUNT = 15;
+}
+
 /* Produkty Inwestycyjne */
 $('#investments_datatable').DataTable( {
     responsive: true,
@@ -65,7 +69,7 @@ $('#investments_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/investments', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -167,7 +171,7 @@ $('#protectives_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/protectives', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -260,7 +264,7 @@ $('#employees_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/employees', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -333,7 +337,7 @@ $('#bancassurances_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/bancassurances', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -426,7 +430,7 @@ $('#departments_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/departments', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -472,7 +476,7 @@ $('#file_categories_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/file-categories', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -508,7 +512,7 @@ $('#files_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/files', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -560,7 +564,7 @@ $('#funds_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/funds', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -646,7 +650,7 @@ $('#notes_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/notes', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -683,7 +687,7 @@ $('#partners_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/partners', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -748,7 +752,7 @@ $('#permissions_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/permissions', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -786,7 +790,7 @@ $('#post_categories_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/post-categories', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -822,7 +826,7 @@ $('#risks_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/risks', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -882,7 +886,7 @@ $('#systems_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/systems', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
@@ -933,7 +937,7 @@ $('#users_datatable').DataTable( {
     lengthMenu: options['lengthMenu'],
     pageLength: options['pageLength'],
     ajax: { url: HOST_URL + '/api/datatables/users', type: 'POST', datatype: 'json' },
-    deferLoading: 1418,
+    deferLoading: DATATABLES_ROW_COUNT,
     buttons: options['buttons'],
     columns: [
         {
