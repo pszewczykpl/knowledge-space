@@ -13,7 +13,7 @@ use App\Http\Requests\Search;
 
 class SearchController extends Controller
 {
-    public $searchModels = [
+    private $searchModels = [
         '\App\Models\Investment' => [
             'route' => 'investments',
             'icon' => 'investment',
