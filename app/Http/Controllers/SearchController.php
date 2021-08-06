@@ -84,10 +84,17 @@ class SearchController extends Controller
                 ]
             ]
         ],
-//        '\App\Models\Post' => [
-//            'route' => 'posts',
-//            'columns' => ['title', 'content'],
-//        ],
+        '\App\Models\Post' => [
+            'route' => 'posts',
+            'icon' => 'post',
+            'title' => 'Artykuły',
+            'columns' => ['title', 'content'],
+            'result' => [
+                'additional_data' => [
+                    //
+                ]
+            ]
+        ],
 //        '\App\Models\News' => [
 //            'route' => 'news',
 //            'columns' => ['content'],
