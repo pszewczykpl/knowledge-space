@@ -21,10 +21,10 @@
 						<div class="row">
 							<div class="col-12">
 								@foreach($posts as $post)
-									<div class="ps-lg-6 mb-16 mt-md-0 mt-17">
+									<div class="ps-lg-6 mb-8 @if(!$loop->first) mt-8 @endif">
 										<div class="mb-6">
-											<a href="{{ route('posts.show', $post->id) }}" class="fw-bolder text-dark mb-4 fs-2 lh-base text-hover-primary">{{ $post->title }}</a>
-											<div class="fw-bold fs-5 mt-4 text-gray-600 text-dark">{{  substr(strip_tags($post->content), 0, 350)  }}... <a class="text-primary font-weight-bold" href="{{ route('posts.show', $post->id) }}">Czytaj dalej</a></div>
+											<a href="{{ route('posts.show', $post->id) }}" class="fw-bolder text-dark mb-4 fs-3 lh-base text-hover-primary">{{ $post->title }}</a>
+											<div class="fw-normal fs-5 mt-4 text-dark">{{  substr(strip_tags($post->content), 0, 350)  }}... <a class="text-primary font-weight-bold" href="{{ route('posts.show', $post->id) }}">Czytaj dalej</a></div>
 										</div>
 										<div class="d-flex flex-stack flex-wrap">
 											<div class="d-flex align-items-center pe-2">
@@ -41,6 +41,7 @@
 											<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}"><span class="badge badge-light-primary fw-bolder my-2">{{ $post->postCategory->name }}</span></a>
 										</div>
 									</div>
+									@if(!$loop->last)<div class="separator ms-6"></div>@endif
 								@endforeach
 							</div>
 							<div class="row justify-content-center">

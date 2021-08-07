@@ -98,6 +98,7 @@ class PostController extends Controller
         return view('posts.show', [
             'title' => 'Artykuł',
             'post' => $post,
+            'postCategories' => PostCategory::all()
         ]);
     }
 

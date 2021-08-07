@@ -60,29 +60,28 @@
 			<div class="mb-10">
 				<div class="row">
 
-					<div class="col-md-12 justify-content-between d-flex flex-column pt-lg-6">
+					<div class="col-md-8 justify-content-between d-flex flex-column pt-lg-6">
 						<div class="row">
 							<div class="col-12">
 								<div class="mb-8">
 									<div class="ps-lg-6">
-										<div class="d-flex flex-wrap mb-6">
-											<div class="me-9 my-1">
-												@include('svg.post-category', ['class' => 'svg-icon svg-icon-primary svg-icon-2 me-1'])
-												<span class="fw-bolder text-gray-400">{{ $post->postCategory->name }}</span>
-											</div>
-											<div class="me-9 my-1">
-												@include('svg.user', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-												<span class="fw-bolder text-gray-400">{{ $post->user->full_name }}</span>
-											</div>
-											<div class="me-9 my-1">
-												@include('svg.time', ['class' => 'svg-icon-md svg-icon-primary pr-1'])
-												<span class="fw-bolder text-gray-400">{{ date('Y-m-d', strtotime($post->updated_at)) }}</span>
+{{--										<span class="fw-bolder text-dark mb-4 fs-3 lh-base">{{ $post->title }}</span>--}}
+										<div class="d-flex align-items-center mb-4">
+											<div class="d-flex flex-column">
+												<h1 class="text-gray-800 fw-bold">{{ $post->title }}</h1>
+												<div class="">
+													<span class="fw-bold text-muted me-6">Kategoria:
+														<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}" class="fw-bolder text-muted text-hover-primary">{{ $post->postCategory->name }}</a></span>
+													<span class="fw-bold text-muted me-6">Autor:
+														<a href="{{ route('users.show', $post->user) }}" class="fw-bolder text-muted text-hover-primary">{{ $post->user->full_name }}</a></span>
+													<span class="fw-bold text-muted">Utworzono:
+														<span class="fw-bolder text-gray-600 me-1">{{ date_format($post->created_at, 'Y-m-d') }}</span>
+												</div>
 											</div>
 										</div>
-										<span class="text-dark text-hover-primary fs-2 fw-bolder">{{ $post->title }}</span>
 										<style>.show-post p { margin-top: 0; margin-bottom: 0; }</style>
 										<div class="mt-5">
-											<div class="show-post text-dark-75 font-size-lg font-weight-normal">
+											<div class="show-post fw-normal fs-5 mt-4 text-dark" style="font-family: Poppins, Helvetica, sans-serif;">
 												{!! $post->content !!}
 											</div>
 										</div>
@@ -92,6 +91,34 @@
 						</div>
 					</div>
 
+
+					<div class="col-md-4">
+						<div class="flex-column flex-lg-row-auto mb-8 ms-10 pt-lg-6">
+							{{--							<div class="mb-16">--}}
+							{{--								<h4 class="text-black mb-7">Szukaj w Artykułach</h4>--}}
+							{{--								<div class="position-relative">--}}
+							{{--									@include('svg.search', ['class' => 'svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6'])--}}
+							{{--									<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Szukaj...">--}}
+							{{--								</div>--}}
+							{{--							</div>--}}
+							<div class="mb-16">
+								<h4 class="text-black mb-7">Kategorie Artykułów</h4>
+								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
+									<a href="{{ route('posts.index') }}" class="text-muted text-hover-primary pe-2">Wszystkie</a>
+									{{--									<div class="m-0">585</div>--}}
+								</div>
+
+								@foreach($postCategories as $postCategory)
+									<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
+										<a href="{{ route('posts.index', ['category' => $postCategory->id]) }}" class="text-muted text-hover-primary pe-2">{{ $postCategory->name }}</a>
+										{{--									<div class="m-0">585</div>--}}
+									</div>
+								@endforeach
+
+
+							</div>
+						</div>
+					</div>
 
 				</div>
 			</div>

@@ -46,7 +46,7 @@
 		</div>
 		<style>.show-news p { margin-top: 0; margin-bottom: 0; }</style>
 		<div class="mb-7">
-			<div class="text-gray-800 fw-normal show-news mb-5">
+			<div class="text-gray-800 fw-normal show-news mb-5 fs-6">
 				{!! $news->content !!}
 			</div>
 			<div class="d-flex align-items-center mb-5">
@@ -72,7 +72,7 @@
 								{{ Form::open([ 'method'  => 'delete', 'route' => [ 'replies.destroy', $reply->id ], 'id' => 'reply_destroy_' . $reply->id ]) }}{{ Form::close() }}
 							@endcan
 						</div>
-						<span class="text-gray-800 fs-7 fw-normal pt-1">{{ $reply->content }}</span>
+						<span class="text-gray-800 fs-6 fw-normal pt-1">{{ $reply->content }}</span>
 					</div>
 				</div>
 			@endforeach
@@ -84,7 +84,7 @@
 				<div class="separator mb-4"></div>
 				{!! Form::open(['route' => 'replies.store', 'method' => 'post', 'class' => 'position-relative mb-6']) !!}
 					<input type="hidden" id="news_id" name="news_id" value="{{ $news->id }}">
-					<input id="content" name="content" class="form-control border-0 p-0 pe-10 resize-none min-h-25px text-gray-800 fw-normal fs-7" placeholder="Odpowiedź...">
+					<input id="content" name="content" class="form-control border-0 p-0 pe-10 resize-none min-h-25px text-gray-800 fw-normal fs-6" placeholder="Odpowiedź...">
 					<div class="position-absolute top-0 end-0">
 						<input type="submit" value="Odpowiedz" class="btn btn-sm btn-active-color-primary pe-0 me-2">
 					</div>
