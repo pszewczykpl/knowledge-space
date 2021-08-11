@@ -26,7 +26,13 @@
 				</div>
 			</x-pages.form-card-row>
 		</x-pages.form-card>
+		<x-pages.form-card title="Aktualizacja systemu">
+			<x-pages.form-card-row label="Aktualizacja wersji systemu z GIT">
+				<a href="{{ route('system-properties.getNewAppVersionFromGit') }}" class="btn btn-outline btn-outline-dashed btn-outline-danger text-hover-white">Aktualizacja systemu</a>
+			</x-pages.form-card-row>
+		</x-pages.form-card>
 
-		{!! Form::close() !!}
+
+	{!! Form::close() !!}
 	</x-pages.form>
 @stop
