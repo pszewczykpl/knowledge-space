@@ -50,6 +50,11 @@ class SystemPropertyController extends Controller
         return redirect()->route('system-properties.index')->with('notify_success', 'Parametry systemu zostały zaktualizowane!');
     }
 
+    /**
+     * Updating version of the app from git.
+     *
+     * @param Request $request
+     */
     public function getNewAppVersionFromGit(Request $request)
     {
         Artisan::call('down', [
@@ -61,5 +66,7 @@ class SystemPropertyController extends Controller
         shell_exec('php ../composer.phar update --optimize-autoloader --no-dev');
         Artisan::call('app:refresh');
         Artisan::call('up');
+
+        return redirect()->route('system-properties.index')->with('notify_success', 'Aktualizacja systemu przebiegła pomyślnie!');
     }
 }
