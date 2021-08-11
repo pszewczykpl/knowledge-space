@@ -131,4 +131,4 @@ Route::get('search', [SearchController::class, 'index'])->name('search.index');
 
 Route::get('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'index'])->name('system-properties.index');
 Route::put('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'update'])->name('system-properties.update');
-Route::get('system-properties/update-app', [\App\Http\Controllers\SystemPropertyController::class, 'update_app'])->name('system-properties.getNewAppVersionFromGit');
+Route::get('system-properties/update-app', [\App\Http\Controllers\SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
