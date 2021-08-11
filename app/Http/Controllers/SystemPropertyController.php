@@ -51,6 +51,6 @@ class SystemPropertyController extends Controller
 
     public function getNewAppVersionFromGit(Request $request)
     {
-        echo shell_exec('sh ../deployment.sh');
+        echo exec('sh ../deployment.sh');
     }
 }
