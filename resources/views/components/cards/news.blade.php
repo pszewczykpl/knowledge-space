@@ -2,9 +2,11 @@
 	<div class="card-body pb-0">
 		<div class="d-flex align-items-center mb-5">
 			<div class="d-flex align-items-center flex-grow-1">
-				<div class="symbol symbol-45px me-5">
-					<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" alt>
-				</div>
+				<a href="{{ route('users.show', $news->user->id) }}">
+					<div class="symbol symbol-45px me-5">
+						<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" alt>
+					</div>
+				</a>
 				<div class="d-flex flex-column">
 					<a href="{{ route('users.show', $news->user->id) }}" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{ $news->user->full_name }}</a>
 					<span class="text-gray-400 fw-bold">{{ date('Y-m-d', strtotime($news->updated_at)) }}</span>
