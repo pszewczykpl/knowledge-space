@@ -48,4 +48,9 @@ class SystemPropertyController extends Controller
 
         return redirect()->route('system-properties.index')->with('notify_success', 'Parametry systemu zostały zaktualizowane!');
     }
+
+    public function getNewAppVersionFromGit(Request $request)
+    {
+        $info = shell_exec('sh ./deployment.sh');
+    }
 }
