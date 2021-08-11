@@ -43,9 +43,11 @@ class SystemPropertyController extends Controller
     {
         $this->authorize('update', SystemProperty::class);
 
-        $default_edit_date = SystemProperty::where('key', '=', 'default_edit_date')->firstOrFail();
-        $default_edit_date->value = $request->default_edit_date;
-        $default_edit_date->save();
+        foreach(SystemProperty::$properties as $property) {
+            $to_edit[$property] = SystemProperty::where('key', '=', $property)->firstOrFail();
+            $to_edit[$property]->value = $request->{$property};
+            $to_edit[$property]->save();
+        }
 
         return redirect()->route('system-properties.index')->with('notify_success', 'Parametry systemu zostały zaktualizowane!');
     }

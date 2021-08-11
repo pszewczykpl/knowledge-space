@@ -20,4 +20,13 @@ class SystemProperty extends Model
         'key',
         'value',
     ];
+
+    public static $properties = [
+        'default_edit_date'
+    ];
+
+    public static function getValue(string $key)
+    {
+        return self::where('key', '=', $key)->firstOrFail()->value;
+    }
 }
