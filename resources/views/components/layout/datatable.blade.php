@@ -15,7 +15,8 @@
                         </div>
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end text-gray-500 fw-bold fs-5 me-3">Eksportuj do: </div>
+                        <i class="fas fa-exclamation-circle mx-2 fs-7" data-bs-toggle="tooltip" data-bs-html="true" data-bs-delay-hide="100" title="Eksport widocznych rekordów do raportu."></i>
+                        <div class="d-flex justify-content-end text-gray-500 fw-bold fs-5 me-3">Eksportuj do:</div>
                         <div class="d-flex justify-content-end">
                             <button id="export_to_excel" name="export_to_excel" type="button" class="btn btn-link btn-color-primaty me-3">Excel</button>
                             <button id="export_to_csv" name="export_to_csv" type="button" class="btn btn-link btn-color-primaty me-3">CSV</button>

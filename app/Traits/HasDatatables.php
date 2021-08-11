@@ -65,7 +65,7 @@ trait HasDatatables {
 
     public static function getDatatablesData()
     {
-        $records_total = Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_count', function () {
+        $records_total = Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_start_count', function () {
             return self::where(self::$datatables['where'] ?? [])->count();
         });
 
