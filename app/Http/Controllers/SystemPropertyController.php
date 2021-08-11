@@ -61,6 +61,5 @@ class SystemPropertyController extends Controller
         shell_exec('php ../composer.phar update --optimize-autoloader --no-dev');
         Artisan::call('app:refresh');
         Artisan::call('up');
-        echo Artisan::call('app:version');
     }
 }
