@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SystemProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SystemPropertyController extends Controller
 {
@@ -51,6 +52,15 @@ class SystemPropertyController extends Controller
 
     public function getNewAppVersionFromGit(Request $request)
     {
-        echo exec('sh ../deployment.sh');
+        Artisan::call('down', [
+            '--render' => 'errors::maintenance',
+            '--secret' => 'deployment'
+        ]);
+        shell_exec('git fetch --all');
+        shell_exec('git reset --hard origin/master');
+        shell_exec('php ../composer.phar update --optimize-autoloader --no-dev');
+        Artisan::call('app:refresh');
+        Artisan::call('up');
+        echo Artisan::call('app:version');
     }
 }
