@@ -67,6 +67,6 @@ class SystemPropertyController extends Controller
         Artisan::call('app:refresh');
         Artisan::call('up');
 
-        return redirect()->route('system-properties.index')->with('notify_success', 'Aktualizacja systemu przebiegła pomyślnie!');
+        return redirect()->route('login')->with('notify_success', 'Aktualizacja systemu przebiegła pomyślnie!');
     }
 }
