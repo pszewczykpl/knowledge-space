@@ -53,6 +53,37 @@ class SystemPropertyController extends Controller
     }
 
     /**
+     * Set app to maintenance mode on.
+     *
+     * @param Request $request
+     */
+    public function maintenance_on(Request $request)
+    {
+        $this->authorize('update', SystemProperty::class);
+
+        Artisan::call('down', [
+            '--render' => 'errors::maintenance',
+            '--secret' => 'deployment'
+        ]);
+
+        return redirect()->route('system-properties.index')->with('notify_success', 'System znajduje się w trybie Maintenance!');
+    }
+
+    /**
+     * Set app to maintenance mode off.
+     *
+     * @param Request $request
+     */
+    public function maintenance_off(Request $request)
+    {
+        $this->authorize('update', SystemProperty::class);
+
+        Artisan::call('up');
+
+        return redirect()->route('system-properties.index')->with('notify_success', 'Tryb Maintenance został wyłączony!');
+    }
+
+    /**
      * Updating version of the app from git.
      *
      * @param Request $request
