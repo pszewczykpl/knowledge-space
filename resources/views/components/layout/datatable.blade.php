@@ -46,7 +46,7 @@
                             @foreach($datatableSettings['deferData'] as $row)
                                 <tr>
                                     @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
-                                        <td style='display: none;'>@if($columnCode != 'actions') {!! $row->{$columnCode} !!} @endif</td>
+                                        <td style='display: none;'>{{ ($row->{$columnCode} ?? '') }}</td>
                                     @endforeach
                                 </tr>
                             @endforeach

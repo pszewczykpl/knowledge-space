@@ -12,9 +12,9 @@ trait HasDatatables {
      * @param string $model
      * @return array
      */
-    private function getJsonData(Request $request, string $model): array
+    private function getJsonData(Request $request, string $model, array $with = []): array
     {
-        $records = $model::select('*')
+        $records = $model::with($with)->select('*')
 
             ->where(function ($query) use ($request) {
                 if($request->has('search.value')) {

@@ -30,7 +30,7 @@ class FileController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\File');
+        return $this->getJsonData($request, 'App\Models\File', ['fileCategory']);
     }
 
     /**

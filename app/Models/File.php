@@ -32,10 +32,13 @@ class File extends Model
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
+            'file_category_name' => 'Kategoria',
             'path' => 'Ścieżka',
             'actions' => 'Akcje',
             'id' => 'ID',
             'extension' => 'Rozszerzenie pliku',
+            'file_category_id' => 'ID Kategorii',
+            'draft' => 'Dokument roboczy',
         ],
         'orderBy' => ['name', 'asc']
     ];
@@ -159,6 +162,16 @@ class File extends Model
     public function getExtendedNameAttribute(): string
     {
         return $this->attributes['name'];
+    }
+
+    /**
+     * Get fileCategory name from cached relation.
+     *
+     * @return string
+     */
+    public function getFileCategoryNameAttribute(): string
+    {
+        return $this->fileCategory->name;
     }
 
 }
