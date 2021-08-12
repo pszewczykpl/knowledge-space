@@ -65,7 +65,7 @@ class SystemPropertyController extends Controller
         ]);
         shell_exec('git fetch --all');
         shell_exec('git reset --hard origin/master');
-        shell_exec('php ../composer.phar update --optimize-autoloader --no-dev');
+//        shell_exec('php ../composer.phar update --optimize-autoloader --no-dev');
         Artisan::call('app:refresh');
         Artisan::call('up');
 
