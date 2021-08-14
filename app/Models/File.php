@@ -39,7 +39,9 @@ class File extends Model
             'extension' => 'Rozszerzenie pliku',
             'file_category_id' => 'ID Kategorii',
             'draft' => 'Dokument roboczy',
+            'type' => 'Typ dokumentu',
         ],
+        'where' => [['draft', '=', 0], ['type', '=', 'I']],
         'orderBy' => ['name', 'asc']
     ];
 
@@ -162,6 +164,15 @@ class File extends Model
     public function getExtendedNameAttribute(): string
     {
         return $this->attributes['name'];
+    }
+
+    public function getTypeAttribute()
+    {
+        return match ($this->attributes['type']) {
+            'P' => 'Produktowe',
+            'I' => 'Pozostałe',
+            default => $this->attributes['type'],
+        };
     }
 
     /**
