@@ -95,6 +95,18 @@ class SearchController extends Controller
                 ]
             ]
         ],
+        '\App\Models\File' => [
+            'route' => 'files',
+            'icon' => 'file',
+            'title' => 'Dokumenty',
+            'columns' => ['name', 'code'],
+            'result' => [
+                'additional_data' => [
+                    'file_category_name' => 'Kategoria dokumentu',
+                    'extension' => 'Rozszerzenie',
+                ]
+            ]
+        ],
 //        '\App\Models\News' => [
 //            'route' => 'news',
 //            'columns' => ['content'],
@@ -164,6 +176,9 @@ class SearchController extends Controller
                 ->where(function ($query) use ($active, $data) {
                     if(Schema::hasColumn($data['route'], 'status')){
                         $query->whereIn('status', $active);
+                    }
+                    if(Schema::hasColumn($data['route'], 'draft')){
+                        $query->whereIn('draft', ($active == ['A', 'N'] ? [0, 1] : [0]));
                     }
                 })
                 ->orderByDesc('id')

@@ -49,10 +49,10 @@
                 <x-pages.form-card-row label="Dokumenty ważne od">
                     <input class="form-control form-control-lg form-control-solid datepicker" type="text" name="edit_date" id="edit_date" value="{{ $investment->edit_date }}" placeholder="Wybierz Datę pooczątku obowiązywania dokumentów">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Status dokumentów">
+                <x-pages.form-card-row label="Status rekordu">
                     <select class="form-control form-control-lg form-control-solid" name="status" id="status">
-                        <option value="A" @if($investment->status == 'A') selected @endif>Aktywne</option>
-                        <option value="N" @if($investment->status == 'N') selected @endif>Archiwalne</option>
+                        <option value="A" @if($investment->status == 'Aktualny') selected @endif>Aktualny</option>
+                        <option value="N" @if($investment->status == 'Archiwalny') selected @endif>Archiwalny</option>
                     </select>
                 </x-pages.form-card-row>
             </x-pages.form-card>

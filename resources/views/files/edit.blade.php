@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('toolbar')
-	<x-layout.toolbar.button action="cancel" href="{{ route('files.show', $file) }}" />
+	<x-layout.toolbar.button action="cancel" href="{{ route('files.index') }}" />
 	@can('update', $file)
 		<x-layout.toolbar.button action="save" onclick="document.getElementById('file_update_form').submit();" />
 	@endcan
@@ -18,6 +18,12 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Kod dokumentu">
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ $file->code }}" placeholder="Wpisz Kod dokumentu w API">
+                </x-pages.form-card-row>
+                <x-pages.form-card-row label="Typ dokumentu">
+                    <select class="form-control form-control-lg form-control-solid" name="type" id="type">
+                        <option value="P" @if($file->type == 'Produktowy') selected @endif>Produktowy</option>
+                        <option value="I" @if($file->type == 'Pozostały') selected @endif>Pozostały</option>
+                    </select>
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Kategoria dokumentu">
                     <select class="form-control form-control-lg form-control-solid" name="file_category_id" id="file_category_id">

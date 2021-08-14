@@ -19,6 +19,12 @@
                 <x-pages.form-card-row label="Kod dokumentu">
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ old('code') }}" placeholder="Wpisz Kod dokumentu w API">
                 </x-pages.form-card-row>
+                <x-pages.form-card-row label="Typ dokumentu">
+                    <select class="form-control form-control-lg form-control-solid" name="type" id="type">
+                        <option value="P" @if(old('type') == 'P') selected @endif>Produktowy</option>
+                        <option value="I" @if(old('type') == 'I') selected @endif>Pozostały</option>
+                    </select>
+                </x-pages.form-card-row>
                 <x-pages.form-card-row label="Kategoria dokumentu">
                     <select class="form-control form-control-lg form-control-solid" name="file_category_id" id="file_category_id">
                         @foreach($fileCategories as $file_category)

@@ -27,6 +27,7 @@ class File extends Model
         'code',
         'extension',
         'draft',
+        'type',
     ];
 
     static $datatables = [
@@ -169,8 +170,8 @@ class File extends Model
     public function getTypeAttribute()
     {
         return match ($this->attributes['type']) {
-            'P' => 'Produktowe',
-            'I' => 'Pozostałe',
+            'P' => 'Produktowy',
+            'I' => 'Pozostały',
             default => $this->attributes['type'],
         };
     }

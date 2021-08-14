@@ -24,12 +24,12 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ">
                     <select class="form-control form-control-lg form-control-solid" name="type" id="type">
-                        <option value="Z" @if($fund->type == 'Z') selected @endif>Inwestycyjny</option>
-                        <option value="D" @if($fund->type == 'D') selected @endif>Depozytowy</option>
-                        <option value="M" @if($fund->type == 'M') selected @endif>Modelowy</option>
-                        <option value="U" @if($fund->type == 'U') selected @endif>UFK</option>
-                        <option value="S" @if($fund->type == 'S') selected @endif>SOK</option>
-                        <option value="T" @if($fund->type == 'T') selected @endif>Tracker</option>
+                        <option value="Z" @if($fund->type == 'Inwestycyjny') selected @endif>Inwestycyjny</option>
+                        <option value="D" @if($fund->type == 'Depozytowy') selected @endif>Depozytowy</option>
+                        <option value="M" @if($fund->type == 'Modelowy') selected @endif>Modelowy</option>
+                        <option value="U" @if($fund->type == 'UFK') selected @endif>UFK</option>
+                        <option value="S" @if($fund->type == 'SOK') selected @endif>SOK</option>
+                        <option value="T" @if($fund->type == 'Tracker') selected @endif>Tracker</option>
                     </select>
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Data udostępnienia">
@@ -37,8 +37,8 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Status">
                     <select class="form-control form-control-lg form-control-solid" name="status" id="status">
-                        <option value="A" @if($fund->status == 'A') selected @endif>Aktywny</option>
-                        <option value="N" @if($fund->status == 'N') selected @endif>Nieaktywny</option>
+                        <option value="A" @if($fund->status == 'Aktywny') selected @endif>Aktywny</option>
+                        <option value="N" @if($fund->status == 'Nieaktywny') selected @endif>Nieaktywny</option>
                     </select>
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Data likwidacji">

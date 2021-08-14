@@ -126,8 +126,8 @@ class Fund extends Model
     public function getStatusAttribute(): string
     {
         return match ($this->attributes['status']) {
-            'A' => 'Aktualny',
-            'N' => 'Archiwalny',
+            'A' => 'Aktywny',
+            'N' => 'Nieaktywny',
             default => $this->attributes['status'],
         };
     }
