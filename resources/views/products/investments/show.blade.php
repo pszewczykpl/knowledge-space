@@ -45,12 +45,38 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show" id="info" role="tabpanel">
 						<x-panels.notes :notes="$investment->notes" -type="investment" :id="$investment->id"  />
+
+						<x-panels.archive-data>
+							<x-slot name="header">
+								<th class="min-w-250px">Nazwa produktu</th>
+								<th class="min-w-150px">Kod TOiL</th>
+								<th class="min-w-150px">Kod produktu</th>
+								<th class="min-w-150px">Data aktualizacji</th>
+								<th class="min-w-100px"></th>
+							</x-slot>
+							<x-slot name="data">
+								@foreach($archive_investments as $archive_investment)
+									<tr class="@if($archive_investment->id == $investment->id) bg-light @endif">
+										<td>{{ $archive_investment->name }}</td>
+										<td>{{ $archive_investment->code_toil }}</td>
+										<td>{{ $archive_investment->code }}</td>
+										<td>{{ $archive_investment->edit_date }}</td>
+										<td>@if($archive_investment->id != $investment->id) <a href="{{ route('investments.show', $archive_investment->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+									</tr>
+								@endforeach
+							</x-slot>
+						</x-panels.archive-data>
+
 					</div>
 					<div class="tab-pane fade show active" id="files" role="tabpanel">
+
 						<x-panels.files :model="$investment" />
+
 					</div>
 					<div class="tab-pane fade show" id="funds" role="tabpanel">
+
 						<x-panels.funds :investmentid="$investment->id" />
+
 					</div>
 				</div>
 

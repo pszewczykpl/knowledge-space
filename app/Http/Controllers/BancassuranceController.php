@@ -100,6 +100,10 @@ class BancassuranceController extends Controller
         return view('products.bancassurances.show', [
             'title' => 'Szczegóły',
             'bancassurance' => $bancassurance,
+            'archive_bancassurances' => Bancassurance::where('code', '=', $bancassurance->code)
+                ->where('dist_short', '=', $bancassurance->dist_short)
+                ->where('code_owu', '=', $bancassurance->code_owu)
+                ->orderBy('edit_date', 'desc')->get(),
         ]);
     }
 

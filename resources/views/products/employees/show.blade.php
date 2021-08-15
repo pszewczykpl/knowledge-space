@@ -35,6 +35,26 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show" id="info" role="tabpanel">
 						<x-panels.notes :notes="$employee->notes" -type="employee" :id="$employee->id"  />
+
+						<x-panels.archive-data>
+							<x-slot name="header">
+								<th class="min-w-200px">Nazwa produktu</th>
+								<th class="min-w-150px">Kod OWU</th>
+								<th class="min-w-150px">Data aktualizacji</th>
+								<th class="min-w-100px"></th>
+							</x-slot>
+							<x-slot name="data">
+								@foreach($archive_employees as $archive_employee)
+									<tr class="@if($archive_employee->id == $employee->id) bg-light @endif">
+										<td>{{ $archive_employee->name }}</td>
+										<td>{{ $archive_employee->code_owu }}</td>
+										<td>{{ $archive_employee->edit_date }}</td>
+										<td>@if($archive_employee->id != $employee->id) <a href="{{ route('employees.show', $archive_employee->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+									</tr>
+								@endforeach
+							</x-slot>
+						</x-panels.archive-data>
+
 					</div>
 					<div class="tab-pane fade show active" id="files" role="tabpanel">
 						<x-panels.files :model="$employee" />

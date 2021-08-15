@@ -100,6 +100,7 @@ class EmployeeController extends Controller
         return view('products.employees.show', [
             'title' => 'Szczegóły',
             'employee' => $employee,
+            'archive_employees' => Employee::where('name', '=', $employee->name)->orderBy('edit_date', 'desc')->get(),
         ]);
     }
 

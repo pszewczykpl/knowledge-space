@@ -38,6 +38,28 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show" id="info" role="tabpanel">
 						<x-panels.notes :notes="$bancassurance->notes" -type="bancassurance" :id="$bancassurance->id"  />
+
+						<x-panels.archive-data>
+							<x-slot name="header">
+								<th class="min-w-200px">Nazwa produktu</th>
+								<th class="min-w-150px">Kod dystrybutora</th>
+								<th class="min-w-150px">Kod produktu</th>
+								<th class="min-w-150px">Data aktualizacji</th>
+								<th class="min-w-100px"></th>
+							</x-slot>
+							<x-slot name="data">
+								@foreach($archive_bancassurances as $archive_bancassurance)
+									<tr class="@if($archive_bancassurance->id == $bancassurance->id) bg-light @endif">
+										<td>{{ $archive_bancassurance->name }}</td>
+										<td>{{ $archive_bancassurance->dist_short }}</td>
+										<td>{{ $archive_bancassurance->code }}</td>
+										<td>{{ $archive_bancassurance->edit_date }}</td>
+										<td>@if($archive_bancassurance->id != $bancassurance->id) <a href="{{ route('bancassurances.show', $archive_bancassurance->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+									</tr>
+								@endforeach
+							</x-slot>
+						</x-panels.archive-data>
+
 					</div>
 					<div class="tab-pane fade show active" id="files" role="tabpanel">
 						<x-panels.files :model="$bancassurance" />

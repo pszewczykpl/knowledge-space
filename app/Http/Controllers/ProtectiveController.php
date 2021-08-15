@@ -98,6 +98,10 @@ class ProtectiveController extends Controller
         return view('products.protectives.show', [
             'title' => 'Szczegóły',
             'protective' => $protective,
+            'archive_protectives' => Protective::where('code', '=', $protective->code)
+                ->where('dist_short', '=', $protective->dist_short)
+                ->where('code_owu', '=', $protective->code_owu)
+                ->orderBy('edit_date', 'desc')->get(),
         ]);
     }
 

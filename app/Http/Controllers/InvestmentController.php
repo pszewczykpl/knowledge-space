@@ -107,6 +107,7 @@ class InvestmentController extends Controller
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
+            'archive_investments' => Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get(),
         ]);
     }
     

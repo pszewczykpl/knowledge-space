@@ -38,6 +38,28 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show" id="info" role="tabpanel">
 						<x-panels.notes :notes="$protective->notes" -type="protective" :id="$protective->id"  />
+
+						<x-panels.archive-data>
+							<x-slot name="header">
+								<th class="min-w-200px">Nazwa produktu</th>
+								<th class="min-w-150px">Kod dystrybutora</th>
+								<th class="min-w-150px">Kod produktu</th>
+								<th class="min-w-150px">Data aktualizacji</th>
+								<th class="min-w-100px"></th>
+							</x-slot>
+							<x-slot name="data">
+								@foreach($archive_protectives as $archive_protective)
+									<tr class="@if($archive_protective->id == $protective->id) bg-light @endif">
+										<td>{{ $archive_protective->name }}</td>
+										<td>{{ $archive_protective->dist_short }}</td>
+										<td>{{ $archive_protective->code }}</td>
+										<td>{{ $archive_protective->edit_date }}</td>
+										<td>@if($archive_protective->id != $protective->id) <a href="{{ route('protectives.show', $archive_protective->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+									</tr>
+								@endforeach
+							</x-slot>
+						</x-panels.archive-data>
+
 					</div>
 					<div class="tab-pane fade show active" id="files" role="tabpanel">
 						<x-panels.files :model="$protective" />
