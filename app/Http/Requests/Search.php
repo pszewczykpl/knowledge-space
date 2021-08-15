@@ -25,6 +25,7 @@ class Search extends FormRequest
     {
         return [
             'value' => 'required|string|max:255|min:3',
+            'value' => 'required|string|max:255|min:3',
         ];
     }
 }

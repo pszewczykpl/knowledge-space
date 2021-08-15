@@ -127,7 +127,6 @@ Route::resource('posts', PostController::class);
 Route::resource('attachments', AttachmentController::class);
 
 Route::get('search/{scope}', [SearchController::class, 'search'])->name('search');
-Route::get('search', [SearchController::class, 'index'])->name('search.index');
 
 Route::get('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'index'])->name('system-properties.index');
 Route::put('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'update'])->name('system-properties.update');

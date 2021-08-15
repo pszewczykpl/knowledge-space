@@ -65,13 +65,13 @@
 								<h4 class="text-black mb-7">Kategorie Artykułów</h4>
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
 									<a href="{{ route('posts.index') }}" class="@if(request()->get('category') === null) text-primary @else text-muted text-hover-primary @endif pe-2">Wszystkie</a>
-{{--									<div class="m-0">585</div>--}}
+									<div class="m-0">{{ App\Models\Post::count() }}</div>
 								</div>
 
 								@foreach($postCategories as $postCategory)
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
 									<a href="{{ route('posts.index', ['category' => $postCategory->id]) }}" class="@if($postCategory->id == request()->get('category')) text-primary @else text-muted text-hover-primary @endif pe-2">{{ $postCategory->name }}</a>
-{{--									<div class="m-0">585</div>--}}
+									<div class="m-0">{{ $postCategory->posts->count() }}</div>
 								</div>
 								@endforeach
 

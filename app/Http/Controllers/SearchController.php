@@ -142,19 +142,6 @@ class SearchController extends Controller
     /**
      * Display a search results.
      *
-     * @param $value
-     * @return View
-     */
-    public function index()
-    {
-        return view('search.index', [
-            'title' => 'Szukaj',
-        ]);
-    }
-
-    /**
-     * Display a search results.
-     *
      * @param Search $request
      * @param string $scope
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|View
