@@ -37,7 +37,9 @@ class AppRefresh extends Command
      */
     public function handle()
     {
+        // First, we clear all cached data.
         $this->info('Clearing application caches...');
+
         $this->callSilently('config:cache');
         $this->info('Cached configuration cleared!');
         $this->callSilently('route:cache');
@@ -52,14 +54,17 @@ class AppRefresh extends Command
         $this->info('Cached bootstrap files cleared!');
         $this->callSilently('cache:clear');
         $this->info('Application cache cleared!');
+
         $this->info('All application caches cleared successfully!');
 
+        // Next, we refresh app data e.g. regenerate key, generate events, package discover and run migrations.
         $this->callSilently('package:discover');
         $this->info('Package manifest generated!');
         $this->call('key:generate', ['--force' => true]);
         $this->call('event:generate');
         $this->call('migrate', ['--force' => true]);
 
+        // Finally, we cache all app data/configs.
         $this->info('Caching application...');
         $this->callSilently('config:cache');
         $this->info('Configuration cached!');
