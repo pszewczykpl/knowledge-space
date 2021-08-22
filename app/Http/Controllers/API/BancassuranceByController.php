@@ -5,11 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Models\Bancassurance;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Builder;
 
 class BancassuranceByController extends Controller
 {

@@ -13,12 +13,12 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
-        "laravel/framework": "^8.37",
+        "laravel/framework": "^8.55",
         "laravel/tinker": "^2.6",
-        "laravel/ui": "^3.2",
+        "laravel/ui": "^3.3",
         "laravelcollective/html": "^6.2",
         "predis/predis": "^1.1",
-      "ext-zip": "*"
+        "ext-zip": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
