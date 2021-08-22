@@ -59,7 +59,7 @@
 			</div>
 			@else
 				<span class="h-40px border-gray-300 card-shadow border-start mx-4"></span>
-				<a href="{{ route('login') }}" class="btn btn-outline btn-outline-dashed btn-outline-default">Zaloguj się</a>
+				<a href="{{ route('login') }}" class="btn btn-outline btn-outline-dashed card-rounded btn-outline-default">Zaloguj się</a>
 			@endauth
 
 		</div>

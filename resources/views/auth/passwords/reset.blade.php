@@ -19,7 +19,7 @@
 {{--        @endif--}}
         <div class="fv-row mb-5">
             <label class="form-label fs-6 fw-bolder text-dark">E-mail</label>
-            <input class="form-control form-control-lg form-control-solid @error('email') is-invalid @enderror" placeholder="E-mail" id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email">
+            <input class="form-control form-control-lg form-control-solid card-rounded @error('email') is-invalid @enderror" placeholder="E-mail" id="email" type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email">
             @error('email')
             <div class="fv-plugins-message-container invalid-feedback">
                 <div class="fv-help-block">{{ $message }}</div>
@@ -28,7 +28,7 @@
         </div>
         <div class="fv-row mb-5">
             <label class="form-label fs-6 fw-bolder text-dark">Hasło</label>
-            <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" placeholder="Nowe hasło" id="password" type="password" name="password" required autocomplete="new-password" autofocus>
+            <input class="form-control form-control-lg form-control-solid card-rounded @error('password') is-invalid @enderror" placeholder="Nowe hasło" id="password" type="password" name="password" required autocomplete="new-password" autofocus>
             @error('password')
             <div class="fv-plugins-message-container invalid-feedback">
                 <div class="fv-help-block">{{ $message }}</div>
@@ -37,7 +37,7 @@
         </div>
         <div class="fv-row mb-10">
             <label class="form-label fs-6 fw-bolder text-dark">Powtórz hasło</label>
-            <input class="form-control form-control-lg form-control-solid @error('password_confirmation') is-invalid @enderror" placeholder="Powtórz hasło" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+            <input class="form-control form-control-lg form-control-solid card-rounded @error('password_confirmation') is-invalid @enderror" placeholder="Powtórz hasło" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
             @error('password_confirmation')
             <div class="fv-plugins-message-container invalid-feedback">
                 <div class="fv-help-block">{{ $message }}</div>
@@ -45,7 +45,7 @@
             @enderror
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">Zapisz hasło</button>
+            <button type="submit" class="btn btn-lg btn-primary card-rounded w-100 mb-5">Zapisz hasło</button>
             {{--            <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div>--}}
             {{--            <a href="{{ route('login') }}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">Przejdź do logowania</a>--}}
         </div>
