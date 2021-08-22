@@ -4,12 +4,12 @@
             <h2>Dokumenty</h2>
         </div>
         <div class="card-toolbar">
-            <a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success font-weight-bold btn-flex btn-sm ms-2" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty jako <b>.zip</b>">
+            <a href="{{ route('files.zip', ['id' => $files->where('draft', 0)->pluck('id')->toArray(), 'name' => $name]) }}" class="btn btn-light-success font-weight-bold btn-flex btn-sm ms-2 card-rounded">
                 @include('svg.zip', ['class' => 'svg-icon svg-icon-3'])
                 Pobierz jako .zip
             </a>
             @can('create', App\Models\File::class)
-            <a href="{{ route('files.create', ['fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="btn btn-light-primary font-weight-bold btn-flex btn-sm ms-2" data-skin="primary" data-toggle="tooltip" data-html="true" data-original-title="Pobierz wszystkie dokumenty jako <b>.zip</b>">
+            <a href="{{ route('files.create', ['fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="btn btn-light-primary font-weight-bold btn-flex btn-sm ms-2 card-rounded">
                 @include('svg.file', ['class' => 'svg-icon svg-icon-3'])
                 Dodaj dokument
             </a>
@@ -32,7 +32,7 @@
         @foreach ($fileCategories->split(2) as $split)
             <div class="col-md-6 p-0 m-0 px-3">
                 @foreach($split as $category)
-                <div class="card card-custom p-0 m-0">
+                <div class="card card-custom shadow-none p-0 m-0">
                     <div class="card-header border-0 p-0 m-0 min-h-60px">
                         <h3 class="card-title fw-bold text-dark">{{ $category->name }}</h3>
                         <div class="card-toolbar">

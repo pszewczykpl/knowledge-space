@@ -33,7 +33,7 @@ class ProtectiveController extends Controller
     public function zip_files($id)
     {
         $protective = Protective::findOrFail($id);
-        $files = $protective->files->where('extension', 'pdf');
+        $files = $protective->files->where('draft', false);
 
         return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $protective->extended_name)]);
     }

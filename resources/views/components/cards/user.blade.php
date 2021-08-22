@@ -1,4 +1,4 @@
-<div class="card card-custom gutter-b">
+<div class="card card-custom card-rounded gutter-b">
 	<div class="card-body">
 		<div class="d-flex justify-content-between flex-column pt-4 h-100">
 			<div class="pb-5">

@@ -29,7 +29,7 @@
 				<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 					<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" alt="metronic">
 				</div>
-				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true" style="">
+				<div class="menu menu-sub menu-sub-dropdown menu-column card-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true" style="">
 					<div class="menu-item px-3">
 						<div class="menu-content d-flex align-items-center px-3">
 							<div class="symbol symbol-50px me-5">
@@ -43,12 +43,12 @@
 					</div>
 					<div class="separator my-2"></div>
 					<div class="menu-item px-5">
-						<a href="{{ route('users.show', Auth::user()->id) }}" class="menu-link px-5">
+						<a href="{{ route('users.show', Auth::user()->id) }}" class="menu-link card-rounded px-5">
 							<span class="menu-text">Mój profil</span>
 						</a>
 					</div>
 					<div class="menu-item px-5">
-						<a onclick="event.preventDefault();document.getElementById('logout-form-home').submit();" class="menu-link px-5">
+						<a onclick="event.preventDefault();document.getElementById('logout-form-home').submit();" class="menu-link card-rounded px-5">
 							<span class="menu-text">Wyloguj</span>
 						</a>
 						<form id="logout-form-home" action="{{ route('logout') }}" method="POST" style="display: none;">

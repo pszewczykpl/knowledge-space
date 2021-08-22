@@ -16,7 +16,7 @@
 					</label>
 					<div class="col-lg-9 col-md-9 col-sm-12">
 						<div class="input-group date">
-							<input type="text" class="form-control datepicker" placeholder="Wskaż datę" id="MyDate"/>
+							<input type="text" class="form-control form-control-solid card-rounded datepicker" placeholder="Wskaż datę" id="MyDate"/>
 						</div>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 					</label>
 					<div class="col-lg-9 col-md-9 col-sm-12">
 						<div class="input-group date" >
-							<input type="text" class="form-control datepicker" value="<?php echo date("Y-m-d"); ?>" id="MyDateEnd"/>
+							<input type="text" class="form-control form-control-solid card-rounded datepicker" value="<?php echo date("Y-m-d"); ?>" id="MyDateEnd"/>
 						</div>
 					</div>
 				</div>
@@ -36,7 +36,7 @@
     			</div>
     		</div>
 			<div class="modal-footer" style="border: 0px; padding-top: 0px;">
-				<button type="button" class="btn btn-primary btn-shadow font-weight-bold me-2" onclick="policyCalcFunc()">Oblicz</button>
+				<button type="button" class="btn btn-primary btn-shadow font-weight-bold me-2 card-rounded" onclick="policyCalcFunc()">Oblicz</button>
 			</div>
 		</div>
 	</div>

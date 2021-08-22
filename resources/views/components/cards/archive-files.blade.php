@@ -1,6 +1,6 @@
 <div class="card card-custom pt-0 pb-0">
     <div class="card-body p-0 m-0">
-        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+        <div class="notice d-flex bg-light-primary card-rounded border-primary border border-dashed p-6">
             @include('svg.file', ['class' => 'svg-icon svg-icon-2tx svg-icon-primary me-4'])
             <div class="d-flex flex-stack flex-grow-1">
                 <div class="fw-bold">

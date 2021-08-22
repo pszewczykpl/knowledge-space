@@ -7,7 +7,7 @@
                         <div class="d-flex align-items-center">
                             <div class="d-flex align-items-center position-relative my-1" id="filter_global">
                                 @include('svg.search', ['class' => 'svg-icon svg-icon-1 position-absolute ms-6'])
-                                <input type="text" class="form-control form-control-solid w-325px ps-14 global_filter" placeholder="Szukaj..." id="global_filter">
+                                <input type="text" class="form-control form-control-solid w-325px ps-14 card-rounded global_filter" placeholder="Szukaj..." id="global_filter">
                             </div>
                             @if($search)
                                 <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary">Pokaż Wyszukiwanie Zaawansowane</a>

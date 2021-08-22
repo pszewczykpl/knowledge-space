@@ -33,7 +33,7 @@ class BancassuranceController extends Controller
     public function zip_files($id)
     {
         $bancassurance = Bancassurance::findOrFail($id);
-        $files = $bancassurance->files->where('extension', 'pdf');
+        $files = $bancassurance->files->where('draft', false);
 
         return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $bancassurance->extended_name)]);
     }

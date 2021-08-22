@@ -34,7 +34,7 @@ class ProtectiveByController extends Controller
     
         $file = $protective->files()->where([
             ['code', $file_code],
-            ['extension', '=', 'pdf']
+            ['draft', false]
         ])->firstOrFail();
 
         return redirect()->route('files.download', $file->id);

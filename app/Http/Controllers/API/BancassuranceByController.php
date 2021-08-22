@@ -56,7 +56,7 @@ class BancassuranceByController extends Controller
         
         $files = $bancassurance->files()->where([
             ['file_category_id', $category_id],
-            ['extension', 'pdf'],
+            ['draft', false],
         ])->get();
 
         if($files->isEmpty()) {

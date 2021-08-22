@@ -34,7 +34,7 @@ class InvestmentController extends Controller
     public function zip_files($id)
     {
         $investment = Investment::findOrFail($id);
-        $files = $investment->files->where('extension', 'pdf');
+        $files = $investment->files->where('draft', false);
 
         return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $investment->extended_name)]);
     }

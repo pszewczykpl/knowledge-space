@@ -21,18 +21,18 @@
 			<x-datatables.search-box --size="3" --number="11" --placeholder="Typ" --hidden />
 			<div class="col-md-3 pb-3 my-2 my-md-0">
 				<label class="fs-6 form-label fw-normal text-gray-800">Typ produktu</label>
-				<div class="nav-group nav-group-fluid">
+				<div class="nav-group nav-group-fluid card-rounded">
 					<label>
 						<input type="radio" class="btn-check" id="type_all_investments" name="type" value="" checked="checked">
-						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4">Wszystkie</span>
+						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4 card-rounded">Wszystkie</span>
 					</label>
 					<label>
 						<input type="radio" class="btn-check" id="type_i_investments" name="type" value="indywidualny">
-						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4">Indywidualne</span>
+						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4 card-rounded">Indywidualne</span>
 					</label>
 					<label>
 						<input type="radio" class="btn-check" id="type_g_investments" name="type" value="grupowy">
-						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4">Grupowe</span>
+						<span class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bolder px-4 card-rounded">Grupowe</span>
 					</label>
 				</div>
 			</div>

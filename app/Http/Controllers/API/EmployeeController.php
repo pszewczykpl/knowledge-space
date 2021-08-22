@@ -44,7 +44,7 @@ class EmployeeController extends Controller
     public function zip_files($id)
     {
         $employee = Employee::findOrFail($id);
-        $files = $employee->files->where('extension', 'pdf');
+        $files = $employee->files->where('draft', false);
 
         return rediresct()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $employee->extended_name)]);
     }
