@@ -69,7 +69,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = new User;
-        $user->username = $data['email'];
+        $user->username = (string) (function () use ($data) {
+            $login = strtolower(substr($data['first_name'], 0, 1) . $data['last_name']);
+            for($i = 0; User::where('username', '=', $login . ($i === 0 ? '' : $i))->exists(); $i++);
+            return $login . ($i === 0 ? '' : $i);
+        })();
         $user->first_name = $data['first_name'];
         $user->last_name = $data['last_name'];
         $user->email = $data['email'];
