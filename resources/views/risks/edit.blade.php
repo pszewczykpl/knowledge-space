@@ -20,7 +20,7 @@
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ $risk->code }}" placeholder="Wpisz Kod ryzyka">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Kategoria">
-                    <select class="form-control form-control-lg form-control-solid" name="category" id="category">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="category" id="category">
                         <option value="WYPADKOWE" @if($risk->category == 'WYPADKOWE') selected @endif>Wypadkowe</option>
                         <option value="INNE" @if($risk->category == 'INNE') selected @endif>Inne</option>
                         <option value="CHOROBOWE" @if($risk->category == 'CHOROBOWE') selected @endif>Chorobowe</option>

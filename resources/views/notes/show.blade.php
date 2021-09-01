@@ -22,49 +22,49 @@
 
         <x-pages.form-card title="Powiązania">
             <x-pages.form-card-row label="Ubezpieczenia Inwestycyjne">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="investment_id[]" id="investment_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="investment_id[]" id="investment_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->investments->count() }} rekordów">
                     @foreach($note->investments as $investment)
-                        <option value="{{ $investment->id }}">{{ $investment->extended_name }} od {{ $investment->edit_date }}</option>
+                        <option value="{{ $investment->id }}" disabled>{{ $investment->extended_name }} od {{ $investment->edit_date }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Ubezpieczenia Ochronne">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="protective_id[]" id="protective_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="protective_id[]" id="protective_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->protectives->count() }} rekordów">
                     @foreach($note->protectives as $protective)
                         <option value="{{ $protective->id }}">{{ $protective->extended_name }} od {{ $protective->edit_date }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Ubezpieczenia Bancassurance">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->bancassurances->count() }} rekordów">
                     @foreach($note->bancassurances as $bancassurance)
                         <option value="{{ $bancassurance->id }}">{{ $bancassurance->extended_name }} od {{ $bancassurance->edit_date }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Ubezpieczenia Pracownicze">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="employee_id[]" id="employee_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="employee_id[]" id="employee_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->employees->count() }} rekordów">
                     @foreach($note->employees as $employee)
                         <option value="{{ $employee->id }}">{{ $employee->extended_name }} od {{ $employee->edit_date }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Fundusze UFK">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="fund_id[]" id="fund_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="fund_id[]" id="fund_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->funds->count() }} rekordów">
                     @foreach($note->funds as $fund)
                         <option value="{{ $fund->id }}">{{ $fund->extended_name }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Partnerzy">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="partner_id[]" id="partner_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="partner_id[]" id="partner_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->partners->count() }} rekordów">
                     @foreach($note->partners as $partner)
                         <option value="{{ $partner->id }}">{{ $partner->name }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Ryzyka ubezpieczeniowe">
-                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="risk_id[]" id="risk_id[]">
+                <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="risk_id[]" id="risk_id[]" data-control="select2" data-placeholder="Wybrano {{ $note->risks->count() }} rekordów">
                     @foreach($note->risks as $risk)
                         <option value="{{ $risk->id }}">{{ $risk->name }}</option>
                     @endforeach

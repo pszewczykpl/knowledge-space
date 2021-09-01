@@ -19,7 +19,7 @@
 						<div class="col-md-8 justify-content-between d-flex flex-column pt-lg-6">
 							<div class="row">
 								<div class="col-12">
-									<div class="mb-8">
+									<div class="mb-0">
 										<div class="ps-lg-6">
 											<div class="form-group row">
 												<div class="col-lg-12">
@@ -76,7 +76,7 @@
 										<div class="col-lg-12">
 											<label class="form-label required fw-bold fs-6">Kategoria artykułu:</label>
 											<div class="fv-row fv-plugins-icon-container">
-												<select class="form-control form-control-lg form-control-solid" id="post_category_id" name="post_category_id">
+												<select class="form-control form-control-lg form-control-solid select2-single" id="post_category_id" name="post_category_id">
 													@foreach($postCategories as $postCategory)
 														<option value="{{ $postCategory->id }}" @if($post->post_category_id == $postCategory->id) selected @endif>{{ $postCategory->name }}</option>
 													@endforeach

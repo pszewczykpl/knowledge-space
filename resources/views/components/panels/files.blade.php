@@ -43,7 +43,7 @@
                     </div>
                     <div class="card-body p-0 m-0">
                     @foreach($files->where('file_category_id', $category->id) as $file)
-                        <div class="@if($file->draft == 1) draft-files @endif" @if($file->draft == 1) style="display: none !important;" @endif >
+                        <div class="@if($file->draft == 1) draft-files @endif @if($file->draft == 1) d-none @endif" >
                             <div class="@if($file->type == 'Pozostały') type-i-files @elseif($file->type == 'Produktowy') type-p-files @endif">
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="me-3">

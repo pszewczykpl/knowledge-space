@@ -20,7 +20,7 @@
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ old('code') }}" placeholder="Wpisz Kod">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ">
-                    <select class="form-control form-control-lg form-control-solid" name="type" id="type">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
                         <option value="Dystrybutor" @if(old('type') == 'Dystrybutor') selected @endif>Dystrybutor</option>
                         <option value="Multiagencja" @if(old('type') == 'Multiagencja') selected @endif>Multiagencja</option>
                         <option value="Agent" @if(old('type') == 'Agent') selected @endif>Agent</option>

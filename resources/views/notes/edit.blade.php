@@ -21,7 +21,7 @@
             <x-pages.form-card title="Powiązania">
                 <x-pages.form-card-row label="Ubezpieczenia Inwestycyjne">
                     @php $note_investment = $note->investments->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="investment_id[]" id="investment_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="investment_id[]" id="investment_id[]">
                         @foreach($investments as $investment)
                             <option value="{{ $investment->id }}" {{ in_array($investment->id, $note_investment) ? "selected": "" }}>{{ $investment->extended_name }} od {{ $investment->edit_date }}</option>
                         @endforeach
@@ -29,7 +29,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Ubezpieczenia Ochronne">
                     @php $note_protective = $note->protectives->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="protective_id[]" id="protective_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="protective_id[]" id="protective_id[]">
                         @foreach($protectives as $protective)
                             <option value="{{ $protective->id }}" {{ in_array($protective->id, $note_protective) ? "selected": "" }}>{{ $protective->extended_name }} od {{ $protective->edit_date }}</option>
                         @endforeach
@@ -37,7 +37,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Ubezpieczenia Bancassurance">
                     @php $note_bancassurance = $note->bancassurances->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="bancassurance_id[]" id="bancassurance_id[]">
                         @foreach($bancassurances as $bancassurance)
                             <option value="{{ $bancassurance->id }}" {{ in_array($bancassurance->id, $note_bancassurance) ? "selected": "" }}>{{ $bancassurance->extended_name }} od {{ $bancassurance->edit_date }}</option>
                         @endforeach
@@ -45,7 +45,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Ubezpieczenia Pracownicze">
                     @php $note_employee = $note->employees->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="employee_id[]" id="employee_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="employee_id[]" id="employee_id[]">
                         @foreach($employees as $employee)
                             <option value="{{ $employee->id }}" {{ in_array($employee->id, $note_employee) ? "selected": "" }}>{{ $employee->extended_name }} od {{ $employee->edit_date }}</option>
                         @endforeach
@@ -53,7 +53,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Fundusze UFK">
                     @php $note_fund = $note->funds->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="fund_id[]" id="fund_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="fund_id[]" id="fund_id[]">
                         @foreach($funds as $fund)
                             <option value="{{ $fund->id }}" {{ in_array($fund->id, $note_fund) ? "selected": "" }}>{{ $fund->extended_name }}</option>
                         @endforeach
@@ -61,7 +61,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Partnerzy">
                     @php $note_partner = $note->partners->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="partner_id[]" id="partner_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="partner_id[]" id="partner_id[]">
                         @foreach($partners as $partner)
                             <option value="{{ $partner->id }}" {{ in_array($partner->id, $note_partner) ? "selected": "" }}>{{ $partner->name }}</option>
                         @endforeach
@@ -69,7 +69,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Ryzyka ubezpieczeniowe">
                     @php $note_risk = $note->risks->pluck('id')->toArray(); @endphp
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="risk_id[]" id="risk_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="risk_id[]" id="risk_id[]">
                         @foreach($risks as $risk)
                             <option value="{{ $risk->id }}" {{ in_array($risk->id, $note_risk) ? "selected": "" }}>{{ $risk->name }}</option>
                         @endforeach

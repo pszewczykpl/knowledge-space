@@ -23,7 +23,7 @@
                     <input class="form-control form-control-lg form-control-solid" type="text" name="currency" id="currency" value="{{ old('currency') }}" placeholder="Wpisz Waluta">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ">
-                    <select class="form-control form-control-lg form-control-solid" name="type" id="type">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
                         <option value="Z" @if(old('type') == 'Z') selected @endif>Inwestycyjny</option>
                         <option value="D" @if(old('type') == 'D') selected @endif>Depozytowy</option>
                         <option value="M" @if(old('type') == 'M') selected @endif>Modelowy</option>
@@ -36,7 +36,7 @@
                     <input class="form-control form-control-lg form-control-solid datepicker" type="text" name="start_date" id="start_date" value="{{ old('start_date') }}" placeholder="Wybierz Datę udostępnienia funduszu">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Status">
-                    <select class="form-control form-control-lg form-control-solid" name="status" id="status">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="status" id="status">
                         <option value="A" @if(old('status') == 'A') selected @endif>Aktywny</option>
                         <option value="N" @if(old('status') == 'N') selected @endif>Nieaktywny</option>
                     </select>
@@ -51,7 +51,7 @@
 
             <x-pages.form-card title="Powiązania">
                 <x-pages.form-card-row label="Ubezpieczenia Inwestycyjne">
-                    <select class="form-select form-select-lg form-select-solid" multiple="multiple" name="investment_id[]" id="investment_id[]">
+                    <select class="form-select form-select-lg form-select-solid select2-multi" multiple="multiple" name="investment_id[]" id="investment_id[]">
                         @foreach($investments as $investment)
                             <option value="{{ $investment->id }}" @if(in_array($investment->id, old('investment_id') ?? [])) selected @endif>{{ $investment->extended_name }} od {{ $investment->edit_date }}</option>
                         @endforeach

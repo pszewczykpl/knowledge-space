@@ -34,7 +34,7 @@
             @enderror
         </div>
         <div class="fv-row mb-5">
-            <select class="form-control form-control-lg form-control-solid card-rounded @error('department_id') is-invalid @enderror" name="department_id" id="department_id" value="{{ old('department_id') }}">
+            <select class="form-control form-control-lg form-control-solid card-rounded select2-single @error('department_id') is-invalid @enderror" name="department_id" id="department_id" value="{{ old('department_id') }}">
                 @foreach(App\Models\Department::all() as $department)
                 <option value="{{ $department->id }}">{{ $department->name }}</option>
                 @endforeach

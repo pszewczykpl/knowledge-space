@@ -17,7 +17,7 @@
 			<x-datatables.search-box --size="3" --number="6" --placeholder="ID Kategorii" --hidden />
 			<div class="col-md-3 pb-3 my-2 my-md-0">
 				<label class="fs-6 form-label fw-normal text-gray-800">Kategoria</label>
-				<select class="form-control form-control-solid card-rounded" name="file_category_id" id="file_category_id">
+				<select class="form-control form-control-solid card-rounded select2-single-clear" name="file_category_id" id="file_category_id">
 						<option value="">Wszystkie</option>
 					@foreach($fileCategories as $fileCategory)
 						<option value="{{ $fileCategory->id }}">{{ $fileCategory->name }}</option>

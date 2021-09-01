@@ -26,7 +26,7 @@
                     <input class="form-control form-control-lg form-control-solid datepicker" type="text" name="edit_date" id="edit_date" value="{{ $employee->edit_date }}" placeholder="Wybierz Datę pooczątku obowiązywania dokumentów">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Status dokumentów">
-                    <select class="form-control form-control-lg form-control-solid" name="status" id="status">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="status" id="status">
                         <option value="A" @if($employee->status == 'A') selected @endif>Aktywne</option>
                         <option value="N" @if($employee->status == 'N') selected @endif>Archiwalne</option>
                     </select>

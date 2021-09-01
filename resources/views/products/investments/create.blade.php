@@ -29,7 +29,7 @@
                     <input class="form-control form-control-lg form-control-solid" type="text" name="group" id="group" value="{{ old('group') }}" placeholder="Wpisz Grupę produktową">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ produktu">
-                    <select class="form-control form-control-lg form-control-solid" name="type" id="type">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
                         <option value="indywidualny" @if(old('type') == 'indywidualny') selected @endif>Indywidualny</option>
                         <option value="grupowy" @if(old('type') == 'grupowy') selected @endif>Grupowy</option>
                     </select>
@@ -50,7 +50,7 @@
                     <input class="form-control form-control-lg form-control-solid datepicker" type="text" name="edit_date" id="edit_date" value="{{ old('edit_date') }}" placeholder="Wybierz Datę pooczątku obowiązywania dokumentów">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Status dokumentów">
-                    <select class="form-control form-control-lg form-control-solid" name="status" id="status">
+                    <select class="form-control form-control-lg form-control-solid select2-single" name="status" id="status">
                         <option value="A" @if(old('status') == 'A') selected @endif>Aktywne</option>
                         <option value="N" @if(old('status') == 'N') selected @endif>Archiwalne</option>
                     </select>

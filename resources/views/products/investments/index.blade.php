@@ -36,8 +36,8 @@
 					</label>
 				</div>
 			</div>
-			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
 			<x-datatables.search-box --size="3" --number="10" --placeholder="Kod OWU" />
+			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
 			<x-datatables.search-box --size="3" --number="3" --placeholder="Grupa produktowa" />
 			<x-datatables.search-box --size="3" --number="9" --placeholder="Kod dystrybutora" />
 			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />

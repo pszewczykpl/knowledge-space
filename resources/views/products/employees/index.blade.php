@@ -16,7 +16,7 @@
 @section('content')
 	<x-layout.datatable :data="$datatables" id="employees_datatable">
 		<x-slot name="search">
-			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
+			<x-datatables.search-box --size="6" --number="0" --placeholder="Nazwa produktu" />
 			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod OWU" />
 			<x-datatables.search-box --size="3" --number="5" --placeholder="Status" --hidden />
 			<div class="col-md-3 pb-3 my-2 my-md-0">

@@ -16,10 +16,10 @@
 @section('content')
 	<x-layout.datatable :data="$datatables" id="protectives_datatable">
 		<x-slot name="search">
-			<x-datatables.search-box --size="3" --number="0" --placeholder="Nazwa produktu" />
-			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />
-			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
+			<x-datatables.search-box --size="6" --number="0" --placeholder="Nazwa produktu" />
 			<x-datatables.search-box --size="3" --number="3" --placeholder="Kod OWU" />
+			<x-datatables.search-box --size="3" --number="2" --placeholder="Kod produktu" />
+			<x-datatables.search-box --size="3" --number="1" --placeholder="Kod dystrybutora" />
 			<x-datatables.search-box --size="3" --number="8" --placeholder="Nazwa dystrybutora" />
 			<x-datatables.search-box --size="3" --number="7" --placeholder="Status" --hidden />
 			<div class="col-md-3 pb-3 my-2 my-md-0">
