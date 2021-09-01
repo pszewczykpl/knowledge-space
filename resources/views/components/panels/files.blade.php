@@ -29,6 +29,9 @@
             </div>
         </div>
         <div class="row p-0 m-0 pt-1">
+            <script>
+                var FILES_PANEL_LIST_CATEGORY_IDS = {!! json_encode($fileCategories->pluck('id')->toArray()) !!};
+            </script>
         @foreach ($fileCategories->split(2) as $split)
             <div class="col-md-6 p-0 m-0 px-3">
                 @foreach($split as $category)
@@ -42,9 +45,10 @@
                         </div>
                     </div>
                     <div class="card-body p-0 m-0">
+                        <div class="d-none" id="non_files_in_category_{{ $category->id }}"><span class="text-muted fs-7">Brak dokumentów w kategorii {{ $category->name }} dla wskazanych kryteriów wyświetlania.</span></div>
                     @foreach($files->where('file_category_id', $category->id) as $file)
-                        <div class="@if($file->draft == 1) draft-files @endif @if($file->draft == 1) d-none @endif" >
-                            <div class="@if($file->type == 'Pozostały') type-i-files @elseif($file->type == 'Produktowy') type-p-files @endif">
+                        <div class="files-1-element-category-{{ $category->id }} @if($file->draft == 1) draft-files @endif @if($file->draft == 1) d-none @else d-inline @endif" >
+                            <div class="files-2-element-category-{{ $category->id }} @if($file->type == 'Pozostały') type-i-files @elseif($file->type == 'Produktowy') type-p-files @endif d-inline">
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="me-3">
                                         <a href="{{ route('files.show', $file->id) }}" target="_blank"><img src="{{ asset('/media/files/' . $file->extension . '.svg') }}" style="width: 35px;" alt="{{ $file->name }}"></a>

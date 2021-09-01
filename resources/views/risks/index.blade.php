@@ -14,8 +14,8 @@
 @section('content')
 	<x-layout.datatable :data="$datatables" id="risks_datatable">
 		<x-slot name="search">
+			<x-datatables.search-box --size="6" --number="1" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="0" --placeholder="Symbol" />
-			<x-datatables.search-box --size="3" --number="1" --placeholder="Nazwa" />
 			<x-datatables.search-box --size="3" --number="2" --placeholder="Kategoria" />
 			<x-datatables.search-box --size="3" --number="3" --placeholder="Grupa" />
 		</x-slot>

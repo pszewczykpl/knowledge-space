@@ -37,7 +37,7 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Dokument roboczy?">
                     <div class="form-check form-check-custom form-check-solid form-check-lg">
-                        <input class="form-check-input" type="checkbox" name="draft_checkbox" id="draft_checkbox" value="{{ $file->draft_checkbox }}">
+                        <input class="form-check-input" @if($file->draft) checked="checked" @endif type="checkbox" name="draft_checkbox" id="draft_checkbox">
                     </div>
                 </x-pages.form-card-row>
             </x-pages.form-card>
