@@ -29,7 +29,11 @@ trait HasDatatables {
             ->where(function ($query) use ($request) {
                 foreach($request->input('columns') as $column) {
                     if((! is_null($column['search']['value'])) and $column['searchable'] == 'true') {
-                        $query->where($column['data'], 'like', '%' . trim($column['search']['value']) . '%');
+                        if($column['search']['regex'] == 'false') {
+                            $query->where($column['data'], '=', trim($column['search']['value']));
+                        } else {
+                            $query->where($column['data'], 'like', '%' . trim($column['search']['value']) . '%');
+                        }
                     }
                 }
             })

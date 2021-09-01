@@ -25,18 +25,20 @@ class SearchBox extends Component
      * Size data
      */
     public $hidden;
-    
+    public $regex;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($number, $placeholder, $size, $hidden = false)
+    public function __construct($number, $placeholder, $size, $disableRegex = false, $hidden = false)
     {
         $this->number = $number;
         $this->placeholder = $placeholder;
         $this->size = $size;
         $this->hidden = $hidden;
+        $this->regex = !$disableRegex;
     }
 
     /**
