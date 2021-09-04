@@ -10,7 +10,11 @@ use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +34,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -45,7 +49,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -63,7 +67,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\StoreUser  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreUser $request)
     {
@@ -87,7 +91,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(User $user)
     {
@@ -102,7 +106,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(User $user)
     {
@@ -122,7 +126,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\StoreUser  $request
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UpdateUser $request, User $user)
     {
@@ -152,7 +156,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(User $user)
     {
@@ -166,7 +170,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function restore($id)
     {
@@ -182,7 +186,7 @@ class UserController extends Controller
      * Force remove the specified resource from storage.
      *
      * @param  id  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function force_destroy($id)
     {

@@ -24,6 +24,7 @@
         "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.8",
         "fzaninotto/faker": "^1.9.1",
+        "laravel/dusk": "^6.18",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.4",
         "phpunit/phpunit": "^9.5"

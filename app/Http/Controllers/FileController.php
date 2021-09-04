@@ -12,10 +12,17 @@ use App\Models\FileCategory;
 use App\Http\Requests\StoreFile;
 use App\Http\Requests\UpdateFile;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileController extends Controller
 {
@@ -32,7 +39,7 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -46,12 +53,13 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return View
+     * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function create(Request $request)
     {
         $this->authorize('create', File::class);
-        
+
         return view('files.create', [
             'title' => 'Nowy dokument',
             'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
@@ -68,8 +76,9 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreFile $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(StoreFile $request)
     {
@@ -106,8 +115,8 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return RedirectResponse|StreamedResponse
      */
     public function show(File $file)
     {
@@ -130,8 +139,8 @@ class FileController extends Controller
     /**
      * Download the specified resource.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return StreamedResponse
      */
     public function download(File $file) 
     {
@@ -141,8 +150,9 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function edit(File $file)
     {
@@ -163,9 +173,10 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param UpdateFile $request
+     * @param File $file
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(UpdateFile $request, File $file)
     {
@@ -173,12 +184,8 @@ class FileController extends Controller
 
         $file->update($request->all());
         
-        $file->fileCategory()->associate($request->file_category_id);
-        if(($request->draft_checkbox ?? null)) {
-            $file->draft = 1;
-        } else {
-            $file->draft = 0;
-        }
+        $file->fileCategory()->associate($request->input('file_category_id'));
+        $file->draft = ($request->input('draft_checkbox') ?? null) ? 1 : 0;
 
         if ($request->hasFile('file')) {
             $path = $request->file->store('files');
@@ -198,7 +205,7 @@ class FileController extends Controller
      * Replicate the specified resource from storage.
      *
      * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function replace(File $file, $fileable_type, $fileable_id)
     {
@@ -218,7 +225,7 @@ class FileController extends Controller
      * Detach the specified resource from storage.
      *
      * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function detach(File $file, $fileable_type, $fileable_id)
     {
@@ -233,8 +240,8 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return RedirectResponse
      */
     public function destroy(File $file)
     {
@@ -251,10 +258,10 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
-    public function restore($id)
+    public function restore(int $id)
     {
         $file = File::withTrashed()->findOrFail($id);
 
@@ -269,10 +276,10 @@ class FileController extends Controller
     /**
      * Force remove the specified resource from storage.
      *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function force_destroy($id)
+    public function force_destroy(int $id)
     {
         $file = File::withTrashed()->findOrFail($id);
 

@@ -50,7 +50,6 @@ class BancassuranceController extends Controller
         
         return view('products.bancassurances.create', [
             'title' => 'Nowy produkt bancassurance',
-            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
 
