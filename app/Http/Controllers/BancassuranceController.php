@@ -7,12 +7,11 @@ use App\Models\Bancassurance;
 use App\Http\Requests\StoreBancassurance;
 use App\Http\Requests\UpdateBancassurance;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class BancassuranceController extends Controller
 {
@@ -29,9 +28,9 @@ class BancassuranceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('products.bancassurances.index', [
             'title' => 'Ubezpieczenia Bancassurance',
@@ -42,12 +41,13 @@ class BancassuranceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
+     * @throws AuthorizationException
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', Bancassurance::class);
-        
+
         return view('products.bancassurances.create', [
             'title' => 'Nowy produkt bancassurance',
         ]);
@@ -56,10 +56,11 @@ class BancassuranceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreBancassurance $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function store(StoreBancassurance $request)
+    public function store(StoreBancassurance $request): RedirectResponse
     {
         $this->authorize('create', Bancassurance::class);
         
@@ -72,10 +73,11 @@ class BancassuranceController extends Controller
     /**
      * Duplicate a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreBancassurance  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Bancassurance $bancassurance
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function duplicate(Bancassurance $bancassurance)
+    public function duplicate(Bancassurance $bancassurance): RedirectResponse
     {
         $this->authorize('create', Bancassurance::class);
 
@@ -85,16 +87,16 @@ class BancassuranceController extends Controller
         $clone->files()->attach($bancassurance->files);
         $clone->notes()->attach($bancassurance->notes);
 
-        return redirect()->route('bancassurances.show', $clone->id)->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
+        return redirect()->route('bancassurances.show', $clone)->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Contracts\View\View
+     * @param Bancassurance $bancassurance
+     * @return View
      */
-    public function show(Bancassurance $bancassurance)
+    public function show(Bancassurance $bancassurance): View
     {
         return view('products.bancassurances.show', [
             'title' => 'Szczegóły',
@@ -109,56 +111,60 @@ class BancassuranceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Contracts\View\View
+     * @param Bancassurance $bancassurance
+     * @return View
+     * @throws AuthorizationException
      */
-    public function edit(Bancassurance $bancassurance)
+    public function edit(Bancassurance $bancassurance): View
     {
         $this->authorize('update', $bancassurance);
 
         return view('products.bancassurances.edit', [
             'title' => 'Edycja produktu bancassurance',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'bancassurance' => Bancassurance::findOrFail($bancassurance->id),
+            'bancassurance' => $bancassurance,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\RedirectResponse
+     * @param UpdateBancassurance $request
+     * @param Bancassurance $bancassurance
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(UpdateBancassurance $request, Bancassurance $bancassurance)
+    public function update(UpdateBancassurance $request, Bancassurance $bancassurance): RedirectResponse
     {
         $this->authorize('update', $bancassurance);
         $bancassurance->update($request->all());
 
-        return redirect()->route('bancassurances.show', $bancassurance->id)->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
+        return redirect()->route('bancassurances.show', $bancassurance)->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Bancassurance  $bancassurance
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Bancassurance $bancassurance
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Bancassurance $bancassurance)
+    public function destroy(Bancassurance $bancassurance): RedirectResponse
     {
         $this->authorize('delete', $bancassurance);
         $bancassurance->delete();
 
         return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został usunięty!');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function restore($id)
+    public function restore(int $id): RedirectResponse
     {
         $bancassurance = Bancassurance::withTrashed()->findOrFail($id);
 
@@ -171,15 +177,15 @@ class BancassuranceController extends Controller
     /**
      * Force remove the specified resource from storage.
      *
-     * @param  id  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function force_destroy($id)
+    public function force_destroy(int $id): RedirectResponse
     {
         $bancassurance = Bancassurance::withTrashed()->findOrFail($id);
 
         $this->authorize('forceDelete', $bancassurance);
-        
         $bancassurance->forceDelete();
 
         return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został trwale usunięty!');

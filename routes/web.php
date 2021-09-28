@@ -92,8 +92,8 @@ Route::put('protectives/{id}/restore', [ProtectiveController::class, 'restore'])
 Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
 Route::resource('protectives', ProtectiveController::class);
 
-Route::delete('bancassurances/{id}/forcedestroy', [BancassuranceController::class, 'force_destroy'])->name('bancassurances.forceDestroy');
-Route::put('bancassurances/{id}/restore', [BancassuranceController::class, 'restore'])->name('bancassurances.restore');
+Route::delete('bancassurances/{bancassurance}/forcedestroy', [BancassuranceController::class, 'force_destroy'])->name('bancassurances.forceDestroy');
+Route::put('bancassurances/{bancassurance}/restore', [BancassuranceController::class, 'restore'])->name('bancassurances.restore');
 Route::get('bancassurances/{bancassurance}/duplicate', [BancassuranceController::class, 'duplicate'])->name('bancassurances.duplicate');
 Route::resource('bancassurances', BancassuranceController::class);
 

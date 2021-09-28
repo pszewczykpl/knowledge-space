@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -144,9 +147,9 @@ class SearchController extends Controller
      *
      * @param Search $request
      * @param string $scope
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|View
+     * @return View|RedirectResponse
      */
-    public function search(Search $request, string $scope)
+    public function search(Search $request, string $scope): View|RedirectResponse
     {
         $value = trim($request->value);
         $active = $request->non_active ? ['A', 'N'] : ['A'];

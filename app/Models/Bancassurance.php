@@ -55,7 +55,7 @@ class Bancassurance extends Model
     ];
 
     /**
-     * Get all of the files for the bancassurance.
+     * Get all the files for the bancassurance.
      *
      * @return MorphToMany
      */

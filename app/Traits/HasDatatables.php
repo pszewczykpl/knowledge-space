@@ -4,19 +4,21 @@ namespace App\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use function MongoDB\BSON\toJSON;
 
 trait HasDatatables {
 
     /**
      * @param Request $request
      * @param string $model
+     * @param array $with
      * @return array
      */
     private function getJsonData(Request $request, string $model, array $with = []): array
     {
         $records = $model::with($with)->select('*')
 
-            ->when(! is_null($request->has('search.value')), function ($records) use ($request) {
+            ->when(! is_null($request->input('search.value')), function ($records) use ($request) {
                 return $records->where(function ($query) use ($request) {
                     foreach($request->input(key: 'columns') as $column) {
                         if($column['searchable'] == 'true') {
@@ -63,6 +65,9 @@ trait HasDatatables {
         );
     }
 
+    /**
+     * @return array|mixed
+     */
     public static function datatablesDeferData()
     {
         return Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_datatable_index', function () {
@@ -70,7 +75,10 @@ trait HasDatatables {
         });
     }
 
-    public static function getDatatablesData()
+    /**
+     * @return array
+     */
+    public static function getDatatablesData(): array
     {
         $records_total = Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_start_count', function () {
             return self::where(self::$datatables['where'] ?? [])->count();
