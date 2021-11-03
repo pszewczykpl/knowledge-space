@@ -30,8 +30,8 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ produktu">
                     <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
-                        <option value="indywidualny" @if($investment->type == 'indywidualny') selected @endif>Indywidualny</option>
-                        <option value="grupowy" @if($investment->type == 'grupowy') selected @endif>Grupowy</option>
+                        <option value="I" @if($investment->type == 'Indywidualny') selected @endif>Indywidualny</option>
+                        <option value="G" @if($investment->type == 'Grupowy') selected @endif>Grupowy</option>
                     </select>
                 </x-pages.form-card-row>
             </x-pages.form-card>

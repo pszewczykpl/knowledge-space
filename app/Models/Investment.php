@@ -167,4 +167,18 @@ class Investment extends Model
         };
     }
 
+    /**
+     * Get record type.
+     *
+     * @return string
+     */
+    public function getTypeAttribute(): string
+    {
+        return match ($this->attributes['type']) {
+            'I' => 'Indywidualny',
+            'G' => 'Grupowy',
+            default => $this->attributes['type'],
+        };
+    }
+
 }

@@ -30,8 +30,8 @@
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ produktu">
                     <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
-                        <option value="indywidualny" @if(old('type') == 'indywidualny') selected @endif>Indywidualny</option>
-                        <option value="grupowy" @if(old('type') == 'grupowy') selected @endif>Grupowy</option>
+                        <option value="I" @if(old('type') == 'I') selected @endif>Indywidualny</option>
+                        <option value="G" @if(old('type') == 'G') selected @endif>Grupowy</option>
                     </select>
                 </x-pages.form-card-row>
             </x-pages.form-card>

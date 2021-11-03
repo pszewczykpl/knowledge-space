@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bancassurance;
 use App\Models\Employee;
-
 use App\Http\Requests\StoreEmployee;
 use App\Http\Requests\UpdateEmployee;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -29,9 +25,9 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('products.employees.index', [
             'title' => 'Ubezpieczenia Pracownicze',
@@ -42,9 +38,10 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
+     * @throws AuthorizationException
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize('create', Employee::class);
         
@@ -57,10 +54,11 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreEmployee  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreEmployee $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function store(StoreEmployee $request)
+    public function store(StoreEmployee $request): RedirectResponse
     {
         $this->authorize('create', Employee::class);
         
@@ -73,10 +71,11 @@ class EmployeeController extends Controller
     /**
      * Duplicate a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreEmployee  $request
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function duplicate(Employee $employee)
+    public function duplicate(Employee $employee): RedirectResponse
     {
         $this->authorize('create', Employee::class);
 
@@ -92,10 +91,10 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return View
      */
-    public function show(Employee $employee)
+    public function show(Employee $employee): View
     {
         return view('products.employees.show', [
             'title' => 'Szczegóły',
@@ -107,28 +106,30 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return View
+     * @throws AuthorizationException
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee): View
     {
         $this->authorize('update', $employee);
 
         return view('products.employees.edit', [
             'title' => 'Edycja produktu pracowniczego',
             'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'employee' => Employee::findOrFail($employee->id),
+            'employee' => $employee,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateEmployee  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param UpdateEmployee $request
+     * @param Employee $employee
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(UpdateEmployee $request, Employee $employee)
+    public function update(UpdateEmployee $request, Employee $employee): RedirectResponse
     {
         $this->authorize('update', $employee);
         $employee->update($request->all());
@@ -139,24 +140,26 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Employee $employee)
+    public function destroy(Employee $employee): RedirectResponse
     {
         $this->authorize('delete', $employee);
         $employee->delete();
 
         return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został usunięty!');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function restore($id)
+    public function restore($id): RedirectResponse
     {
         $employee = Employee::withTrashed()->findOrFail($id);
 
@@ -169,15 +172,15 @@ class EmployeeController extends Controller
     /**
      * Force remove the specified resource from storage.
      *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function force_destroy($id)
+    public function force_destroy($id): RedirectResponse
     {
         $employee = Employee::withTrashed()->findOrFail($id);
 
         $this->authorize('forceDelete', $employee);
-        
         $employee->forceDelete();
 
         return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został trwale usunięty!');
