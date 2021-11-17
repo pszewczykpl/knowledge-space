@@ -14,8 +14,10 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        Department::factory()
-            ->times(5)
-            ->create();
+        $user = Department::create([
+            'name' => 'Departament Obsługi Klienta',
+            'code' => 'DOK',
+            'description' => 'DOK'
+        ]);
     }
 }

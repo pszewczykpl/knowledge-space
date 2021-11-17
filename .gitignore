@@ -20,4 +20,4 @@ composer.phar
 .bash_profile
 .bashrc
 .viminfo
-.dump.rdb
+dump.rdb
