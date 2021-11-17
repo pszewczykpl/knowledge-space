@@ -4,7 +4,7 @@
 			<div class="d-flex align-items-center">
 				<div class="d-flex align-items-center flex-grow-1">
 					<div class="symbol symbol-45px me-5">
-						<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" alt="">
+						<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 					</div>
 					<div class="d-flex flex-column">
 						<span class="text-gray-600 fs-6 fw-normal">Coś nowego, <b>{{ Auth::user()->first_name }}</b>?</span>

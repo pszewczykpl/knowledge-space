@@ -5,7 +5,7 @@
 				<div class="d-flex flex-column flex-center">
 					<div class="symbol symbol-120 symbol-circle symbol-white overflow-hidden">
 						<span class="symbol-label">
-							<img src="{{ Storage::url($user->avatar_path ?? 'avatars/default.jpg') }}" class="h-100" alt="" />
+							<img src="{{ Storage::url($user->avatar_path ?? 'avatars/default.jpg') }}" class="h-100" />
 						</span>
                     </div>
 					<div class="pt-2 text-center">

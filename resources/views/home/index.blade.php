@@ -23,7 +23,7 @@
                         <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5">
                             <ul class="nav flex-wrap border-transparent fw-bolder">
                                 <li class="nav-item my-1">
-                                    <button class="btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 card-rounded text-uppercase active">
+                                    <button class="btn btn-color-gray-600 btn-active-secondary btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 card-rounded text-uppercase active">
                                         Panel główny
                                     </button>
                                 </li>

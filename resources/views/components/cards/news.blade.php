@@ -4,7 +4,7 @@
 			<div class="d-flex align-items-center flex-grow-1">
 				<a href="{{ route('users.show', $news->user->id) }}">
 					<div class="symbol symbol-45px me-5">
-						<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" alt>
+						<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 					</div>
 				</a>
 				<div class="d-flex flex-column">
@@ -52,7 +52,7 @@
 				{!! $news->content !!}
 			</div>
 			<div class="d-flex align-items-center mb-5">
-				<span class="btn btn-sm btn-light btn-color-muted px-4 py-2 me-4">
+				<span class="btn btn-sm btn-light btn-color-muted px-4 py-2 me-4 card-rounded">
 					@include('svg.reply', ['class' => 'svg-icon svg-icon-3'])
 					{{ $news->replies->count() }}
 				</span>
@@ -63,7 +63,7 @@
 			@foreach($news->replies as $reply)
 				<div class="d-flex mb-5">
 					<div class="symbol symbol-45px me-5">
-						<img src="{{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }}" alt>
+						<img src="{{ Storage::url($reply->user->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 					</div>
 					<div class="d-flex flex-column flex-row-fluid">
 						<div class="d-flex align-items-center flex-wrap mb-1">

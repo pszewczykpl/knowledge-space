@@ -1,4 +1,4 @@
-<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '100px', lg: '150px'}">
 	<div class="container d-flex align-items-center justify-content-between" id="kt_header_container">
 		<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-2 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 			<h1 class="text-dark fw-bolder my-0 fs-2">{{ $title }}</h1>
@@ -27,13 +27,13 @@
 
 			<div class="d-flex align-items-center" id="kt_header_user_menu_toggle">
 				<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-					<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" alt="metronic">
+					<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 				</div>
 				<div class="menu menu-sub menu-sub-dropdown menu-column card-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true" style="">
 					<div class="menu-item px-3">
 						<div class="menu-content d-flex align-items-center px-3">
 							<div class="symbol symbol-50px me-5">
-								<img alt="Logo" src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}">
+								<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 							</div>
 							<div class="d-flex flex-column">
 								<div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->full_name }} </div>

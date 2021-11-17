@@ -38,7 +38,7 @@
 													<span class="text-muted"> dodał w dniu {{ date_format($post->created_at, 'Y-m-d') }}</span>
 												</div>
 											</div>
-											<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}"><span class="badge badge-light-primary fw-bolder my-2">{{ $post->postCategory->name }}</span></a>
+											<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}"><span class="badge badge-light-primary fw-bolder my-2 card-rounded">{{ $post->postCategory->name }}</span></a>
 										</div>
 									</div>
 									@if(!$loop->last)<div class="separator ms-6"></div>@endif

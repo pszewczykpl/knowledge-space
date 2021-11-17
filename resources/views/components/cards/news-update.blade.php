@@ -4,7 +4,7 @@
 			<div class="d-flex align-items-center">
 				<div class="d-flex align-items-center flex-grow-1">
 					<div class="symbol symbol-45px me-5">
-						<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" alt>
+						<img src="{{ Storage::url($news->user->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 					</div>
 					<div class="d-flex flex-column">
 						<a href="{{ route('users.show', $news->user->id) }}" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{ $news->user->full_name }}</a>

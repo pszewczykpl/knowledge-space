@@ -22,7 +22,7 @@
                         <div class="d-flex flex-stack mb-5">
                             <div class="d-flex align-items-center f">
                                 <div class="symbol symbol-50px me-5">
-                                    <img src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}" alt="">
+                                    <img src="{{ Storage::url($note->user->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
                                 </div>
                                 <div class="d-flex flex-column fw-bold fs-5 text-gray-600 text-dark">
                                     <div class="d-flex align-items-center">

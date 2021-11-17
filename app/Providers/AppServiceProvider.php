@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         if($this->app->environment('production')) {
             \URL::forceScheme('https');
         }
+
+        view()->share('dark_mode', true);
+        view()->share('rounded', 0.8);
     }
 
     /**

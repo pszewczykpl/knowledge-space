@@ -30,8 +30,8 @@
 
 		<x-pages.form-card title="Operacje systemu">
 			<x-pages.form-card-row label="Tryb maintenance">
-				<a href="{{ route('system-properties.maintenanceOn') }}" class="btn btn-outline btn-outline-dashed btn-outline-danger text-hover-white">Włącz</a>
-				<a href="{{ route('system-properties.maintenanceOff') }}" class="btn btn-outline btn-outline-dashed btn-outline-success text-hover-white">Wyłącz</a>
+				<a href="{{ route('system-properties.maintenanceOn') }}" class="btn btn-outline btn-outline-dashed btn-outline-danger text-hover-white card-rounded">Włącz</a>
+				<a href="{{ route('system-properties.maintenanceOff') }}" class="btn btn-outline btn-outline-dashed btn-outline-success text-hover-white card-rounded">Wyłącz</a>
 				<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mt-4">
 					<div class="d-flex flex-stack flex-grow-1">
 						<div class="fw-bold">
