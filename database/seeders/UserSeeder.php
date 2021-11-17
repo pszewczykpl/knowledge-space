@@ -32,8 +32,8 @@ class UserSeeder extends Seeder
         ]);
         $user->permissions()->attach(Permission::all());
         
-       User::factory()
-       ->times(23)
-       ->create();
+    //    User::factory()
+    //    ->times(23)
+    //    ->create();
     }
 }
