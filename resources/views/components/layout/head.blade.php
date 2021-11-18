@@ -1,5 +1,4 @@
 <head>
-	@php $dark_mode = true @endphp
 	<meta charset="utf-8" />
 	<title>{{ $title }} | {{ $name }}</title>
 	<meta name="description" content="Baza Wiedzy Open Life" />

@@ -37,12 +37,12 @@
                         <script> var DATATABLES_ROW_COUNT = {{ $datatableSettings['rowsCount'] }}; </script>
                         <table class="table align-middle table-row-dashed fs-6 gy-5 datatable" id="{{ $id }}" style="width: 100% !important">
                             <thead>
-                            <tr class="text-start text-gray-800 fw-bolder fs-7 text-uppercase gs-0">
+                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
                                     <th style="display: none;">{{ $columnTitle }}</th>
                                 @endforeach
                             </tr>
-                            <tbody>
+                            <tbody class="text-gray-600 fw-bold">
                             @foreach($datatableSettings['deferData'] as $row)
                                 <tr>
                                     @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
