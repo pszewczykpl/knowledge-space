@@ -4,7 +4,19 @@
     <x-layout.head :title="$title" />
 
 	<body id="kt_body" class="@if($dark_mode) dark-mode @endif header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed">
-        <div class="d-flex flex-column flex-root">
+	
+		<!--
+			data-kt-aside-minimize="on"
+			------------------------------------------------------------
+			body classes: page-loading-enabled page-loading
+
+			<div class="page-loader">
+			<span class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Ładowanie...</span>
+			</span>
+		</div> -->
+
+		<div class="d-flex flex-column flex-root">
 			<div class="page d-flex flex-row flex-column-fluid">
                 
                 <x-layout.aside />

@@ -5,7 +5,7 @@
         @csrf
         <input type="checkbox" name="remember" id="remember" style="display: none;" checked>
         <div class="text-center mb-10">
-            <h1 class="text-dark mb-3">Witaj w Bazie Wiedzy!</h1>
+            <h1 class="text-dark mb-3">Zaloguj się do Bazy Wiedzy!</h1>
             <div class="text-gray-400 fw-bold fs-4">Nowy tutaj?
                 <a href="{{ route('register') }}" class="link-primary fw-bolder">Stwórz konto</a></div>
         </div>
@@ -33,9 +33,9 @@
             @enderror
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-lg btn-primary card-rounded w-100 mb-5">Zaloguj się</button>
+            <button type="submit" class="btn btn-lg btn-primary card-rounded w-100 mb-5">Kontynuuj</button>
             <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div>
-            <a href="{{ route('home.index') }}" class="btn btn-flex flex-center btn-light btn-lg card-rounded w-100 mb-5">Wejdź bez logowania</a>
+            <a href="{{ route('home.index') }}" class="btn btn-flex flex-center btn-light btn-lg card-rounded w-100 mb-5">Kontynuuj bez logowania</a>
         </div>
     </form>
 @stop

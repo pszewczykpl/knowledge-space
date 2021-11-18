@@ -3,7 +3,7 @@
 
     <x-layout.head title="Logowanie" />
 
-    <body id="kt_body" class="bg-body">
+    <body id="kt_body" class="@if($dark_mode) dark-mode @else bg-body @endif">
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
                 <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">

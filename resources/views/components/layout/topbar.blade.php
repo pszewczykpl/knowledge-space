@@ -55,6 +55,12 @@
 							@csrf
 						</form>
 					</div>
+					<div class="separator my-2"></div>
+					<div class="menu-item px-5">
+						<a href="{{ route('system-configuration.dark-mode') }}" class="menu-link card-rounded px-5">
+							<span class="menu-text">Wypróbuj Tryb ciemny</span>
+						</a>
+					</div>
 				</div>
 			</div>
 			@else

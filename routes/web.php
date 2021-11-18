@@ -133,3 +133,5 @@ Route::put('system-properties', [\App\Http\Controllers\SystemPropertyController:
 Route::get('system-properties/update-app', [\App\Http\Controllers\SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
 Route::get('system-properties/maintenance/off', [\App\Http\Controllers\SystemPropertyController::class, 'maintenance_off'])->name('system-properties.maintenanceOff');
 Route::get('system-properties/maintenance/on', [\App\Http\Controllers\SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
+
+Route::get('system-configuration/dark-mode', [\App\Http\Controllers\SystemConfigurationController::class, 'switchDarkMode'])->name('system-configuration.dark-mode');
