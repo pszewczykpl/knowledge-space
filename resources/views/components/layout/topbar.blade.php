@@ -29,7 +29,7 @@
 				<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
 					<img src="{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}" class="card-rounded">
 				</div>
-				<div class="menu menu-sub menu-sub-dropdown menu-column card-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true" style="">
+				<div class="menu menu-sub menu-sub-dropdown menu-column card-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
 					<div class="menu-item px-3">
 						<div class="menu-content d-flex align-items-center px-3">
 							<div class="symbol symbol-50px me-5">
