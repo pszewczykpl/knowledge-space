@@ -34,8 +34,8 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-lg btn-primary card-rounded w-100 mb-5">Kontynuuj</button>
-            <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div>
-            <a href="{{ route('home.index') }}" class="btn btn-flex flex-center btn-light btn-lg card-rounded w-100 mb-5">Kontynuuj bez logowania</a>
+            {{-- <div class="text-center text-muted text-uppercase fw-bolder mb-5">lub</div> --}}
+            {{-- <a href="{{ route('home.index') }}" class="btn btn-flex flex-center btn-light btn-lg card-rounded w-100 mb-5">Kontynuuj bez logowania</a> --}}
         </div>
     </form>
 @stop

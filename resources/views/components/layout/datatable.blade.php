@@ -10,12 +10,12 @@
                                 <input type="text" class="form-control form-control-solid w-325px ps-14 card-rounded global_filter" placeholder="Szukaj..." id="global_filter">
                             </div>
                             @if($search)
-                                <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary">Pokaż Wyszukiwanie Zaawansowane</a>
+                                <a id="search_box_panel_button" class="btn btn-link btn-color-muted mx-5 btn-active-color-primary" data-bs-toggle="collapse" href="#kt_advanced_search_form" aria-expanded="true">Pokaż Wyszukiwanie Zaawansowane</a>
                             @endif
                         </div>
                     </div>
                     <div class="card-toolbar">
-                        <i class="fas fa-exclamation-circle mx-2 fs-7" data-bs-toggle="tooltip" data-bs-html="true" data-bs-delay-hide="100" title="Eksport widocznych rekordów do raportu."></i>
+                        <i class="fas fa-exclamation-circle mx-2 fs-7" data-bs-toggle="tooltip" data-bs-placement="top" title="Eksport widocznych rekordów do raportu"></i>
                         <div class="d-flex justify-content-end text-gray-500 fw-bold fs-5 me-3">Eksportuj do:</div>
                         <div class="d-flex justify-content-end">
                             <button id="export_to_excel" name="export_to_excel" type="button" class="btn btn-link btn-color-primaty me-3">Excel</button>
@@ -27,12 +27,15 @@
 
                 <div class="card-body pt-0">
                     <div class="mb-1">
-                        <div class="row align-items-center" id="search_box_panel" style="display: none;">
-                            <div class="col-12"><div class="separator separator-dashed mt-6 mb-6"></div></div>
-                                {{ $search ?? '' }}
-                            <div class="mb-1"></div>
+                        <div class="collapse" id="kt_advanced_search_form">
+                            <div class="row align-items-center">
+                                <div class="col-12"><div class="separator separator-dashed mt-6 mb-6"></div></div>
+                                    {{ $search ?? '' }}
+                                <div class="mb-1"></div>
+                            </div>
                         </div>
                     </div>
+                    
                     <div class="px-0">
                         <script> var DATATABLES_ROW_COUNT = {{ $datatableSettings['rowsCount'] }}; </script>
                         <table class="table align-middle table-row-dashed fs-6 gy-5 datatable" id="{{ $id }}" style="width: 100% !important">

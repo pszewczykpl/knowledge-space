@@ -47,6 +47,40 @@
 							<span class="menu-text">Mój profil</span>
 						</a>
 					</div>
+					
+					<div class="separator my-2"></div>
+
+					<div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+						<a class="menu-link card-rounded px-5">
+							<span class="menu-title position-relative">Język 
+							<span class="fs-8 card-rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Polski 
+							<img class="w-15px h-15px card-rounded ms-2" src="{{ asset('media/flags/poland.svg') }}" alt="Polski" /></span></span>
+						</a>
+						<div class="menu-sub menu-sub-dropdown w-175px py-4">
+							<div class="menu-item px-3">
+								<a class="menu-link d-flex px-5 card-rounded active">
+								<span class="symbol symbol-20px me-4">
+									<img class="card-rounded" src="{{ asset('media/flags/poland.svg') }}" alt="" />
+								</span>Polski</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
+						<a class="menu-link card-rounded px-5">
+							<span class="menu-title position-relative">Wygląd 
+							<span class="fs-8 card-rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">@if($dark_mode)Ciemny @elseif(!$dark_mode)Jasny @endif</span></span>
+						</a>
+						<div class="menu-sub menu-sub-dropdown w-175px py-4">
+							<div class="menu-item card-rounded px-3">
+								<a @if($dark_mode) href="{{ route('system-configuration.dark-mode') }}" @endif class="menu-link card-rounded d-flex px-5 @if(!$dark_mode)active @endif">Jasny motyw</a>
+							</div>
+							<div class="menu-item card-rounded px-3">
+								<a @if(!$dark_mode) href="{{ route('system-configuration.dark-mode') }}" @endif class="menu-link card-rounded d-flex px-5 @if($dark_mode)active @endif">Ciemny motyw</a>
+							</div>
+						</div>
+					</div>
+
 					<div class="menu-item px-5">
 						<a onclick="event.preventDefault();document.getElementById('logout-form-home').submit();" class="menu-link card-rounded px-5">
 							<span class="menu-text">Wyloguj</span>
@@ -55,12 +89,8 @@
 							@csrf
 						</form>
 					</div>
-					<div class="separator my-2"></div>
-					<div class="menu-item px-5">
-						<a href="{{ route('system-configuration.dark-mode') }}" class="menu-link card-rounded px-5">
-							<span class="menu-text">Wypróbuj Tryb ciemny</span>
-						</a>
-					</div>
+
+
 				</div>
 			</div>
 			@else
