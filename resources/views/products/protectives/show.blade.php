@@ -54,7 +54,7 @@
 										<td>{{ $archive_protective->dist_short }}</td>
 										<td>{{ $archive_protective->code }}</td>
 										<td>{{ $archive_protective->edit_date }}</td>
-										<td>@if($archive_protective->id != $protective->id) <a href="{{ route('protectives.show', $archive_protective->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+										<td>@if($archive_protective->id != $protective->id) <a href="{{ route('protectives.show', $archive_protective->id) }}" class="btn btn-light btn-sm card-rounded" title="Wyświetl">Wyświetl</a> @endif</td>
 									</tr>
 								@endforeach
 							</x-slot>

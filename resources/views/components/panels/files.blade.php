@@ -81,33 +81,33 @@
                                             </div>
                                             @if($file->extension == 'pdf')
                                                 <div class="menu-item px-3 my-1">
-                                                    <a href="{{ route('files.show', $file->id) }}" class="menu-link px-3" target="_blank">{{ __('View') }}</a>
+                                                    <a href="{{ route('files.show', $file->id) }}" class="menu-link card-rounded px-3" target="_blank">{{ __('View') }}</a>
                                                 </div>
                                             @endif
                                             <div class="menu-item px-3 my-1">
-                                                <a href="{{ route('files.download', $file->id) }}" class="menu-link px-3" target="_blank">Pobierz</a>
+                                                <a href="{{ route('files.download', $file->id) }}" class="menu-link px-3 card-rounded" target="_blank">Pobierz</a>
                                             </div>
                                             @can('update', $file)
                                             <div class="separator mt-3 opacity-75 mb-3"></div>
                                             @endcan
                                             @can('update', $file)
                                             <div class="menu-item px-3 my-1">
-                                                <a href="{{ route('files.edit', $file->id) }}" class="menu-link px-3">Edytuj</a>
+                                                <a href="{{ route('files.edit', $file->id) }}" class="menu-link px-3 card-rounded">Edytuj</a>
                                             </div>
                                             @endcan
                                             @can('update', $file)
                                             <div class="menu-item px-3 my-1">
-                                                <a href="{{ route('files.replace', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="menu-link px-3">Zastąp</a>
+                                                <a href="{{ route('files.replace', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="menu-link px-3 card-rounded">Zastąp</a>
                                             </div>
                                             @endcan
                                             @can('update', $file)
                                             <div class="menu-item px-3 my-1">
-                                                <a href="{{ route('files.detach', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="menu-link px-3">Odepnij</a>
+                                                <a href="{{ route('files.detach', ['file' => $file, 'fileable_type' => $fileable_type, 'fileable_id' => $fileable_id]) }}" class="menu-link px-3 card-rounded">Odepnij</a>
                                             </div>
                                             @endcan
                                             @can('delete', $file)
                                             <div class="menu-item px-3 my-1">
-                                                <a onclick='document.getElementById("file_destroy_{{ $file->id }}").submit();' class="menu-link px-3">Usuń</a>
+                                                <a onclick='document.getElementById("file_destroy_{{ $file->id }}").submit();' class="menu-link px-3 card-rounded">Usuń</a>
                                                 {{ Form::open([ 'method'  => 'delete', 'route' => [ 'files.destroy', $file->id ], 'id' => 'file_destroy_' . $file->id ]) }}{{ Form::close() }}
                                             </div>
                                             @endcan

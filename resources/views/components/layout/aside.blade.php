@@ -206,7 +206,7 @@
 					<div class="menu-item">
 						<a class="menu-link {{ (request()->routeIs('system-properties.*')) ? 'active' : '' }}" href="{{ route('system-properties.index') }}">
 						<span class="menu-icon">
-							@include('svg.system', ['class' => 'svg-icon svg-icon-2'])
+							@include('svg.system-properties', ['class' => 'svg-icon svg-icon-2'])
 						</span>
 							<span class="menu-title">Parametry systemu</span>
 						</a>

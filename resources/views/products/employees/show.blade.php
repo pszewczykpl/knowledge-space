@@ -49,7 +49,7 @@
 										<td>{{ $archive_employee->name }}</td>
 										<td>{{ $archive_employee->code_owu }}</td>
 										<td>{{ $archive_employee->edit_date }}</td>
-										<td>@if($archive_employee->id != $employee->id) <a href="{{ route('employees.show', $archive_employee->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+										<td>@if($archive_employee->id != $employee->id) <a href="{{ route('employees.show', $archive_employee->id) }}" class="btn btn-light btn-sm card-rounded" title="Wyświetl">Wyświetl</a> @endif</td>
 									</tr>
 								@endforeach
 							</x-slot>

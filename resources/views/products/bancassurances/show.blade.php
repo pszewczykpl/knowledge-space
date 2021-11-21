@@ -54,7 +54,7 @@
 										<td>{{ $archive_bancassurance->dist_short }}</td>
 										<td>{{ $archive_bancassurance->code }}</td>
 										<td>{{ $archive_bancassurance->edit_date }}</td>
-										<td>@if($archive_bancassurance->id != $bancassurance->id) <a href="{{ route('bancassurances.show', $archive_bancassurance->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+										<td>@if($archive_bancassurance->id != $bancassurance->id) <a href="{{ route('bancassurances.show', $archive_bancassurance->id) }}" class="btn btn-light btn-sm card-rounded" title="Wyświetl">Wyświetl</a> @endif</td>
 									</tr>
 								@endforeach
 							</x-slot>

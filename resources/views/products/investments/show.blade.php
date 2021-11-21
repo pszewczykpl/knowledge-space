@@ -61,7 +61,7 @@
 										<td>{{ $archive_investment->code_toil }}</td>
 										<td>{{ $archive_investment->code }}</td>
 										<td>{{ $archive_investment->edit_date }}</td>
-										<td>@if($archive_investment->id != $investment->id) <a href="{{ route('investments.show', $archive_investment->id) }}" class="btn btn-light btn-sm" title="Wyświetl">Wyświetl</a> @endif</td>
+										<td>@if($archive_investment->id != $investment->id) <a href="{{ route('investments.show', $archive_investment->id) }}" class="btn btn-light btn-sm card-rounded" title="Wyświetl">Wyświetl</a> @endif</td>
 									</tr>
 								@endforeach
 							</x-slot>

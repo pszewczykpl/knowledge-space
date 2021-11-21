@@ -55,7 +55,7 @@
                             <h2 class="text-dark fw-bolder mb-11">Na skróty...</h2>
                             <a href="{{ route('investments.index') }}">
                                 <div class="d-flex align-items-center mb-10">
-                                    @include('svg.investment', ['class' => 'svg-icon svg-icon-1 svg-icon-primary me-5'])
+                                    @include('svg.investment', ['class' => 'svg-icon svg-icon-2hx svg-icon-primary me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Ubezpieczenia Inwestycyjne</h5>
                                         <div class="fw-normal">
@@ -66,7 +66,7 @@
                             </a>
                             <a href="{{ route('protectives.index') }}">
                                 <div class="d-flex align-items-center mb-10">
-                                    @include('svg.protective', ['class' => 'svg-icon svg-icon-1 svg-icon-danger me-5'])
+                                    @include('svg.protective', ['class' => 'svg-icon svg-icon-2hx svg-icon-danger me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Ubezpieczenia Ochronne</h5>
                                         <div class="fw-normal">
@@ -77,7 +77,7 @@
                             </a>
                             <a href="{{ route('bancassurances.index') }}">
                                 <div class="d-flex align-items-center mb-10">
-                                    @include('svg.bancassurance', ['class' => 'svg-icon svg-icon-1 svg-icon-info me-5'])
+                                    @include('svg.bancassurance', ['class' => 'svg-icon svg-icon-2hx svg-icon-info me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Ubezpieczenia Bancassurance</h5>
                                         <div class="fw-normal">
@@ -88,7 +88,7 @@
                             </a>
                             <a href="{{ route('employees.index') }}">
                                 <div class="d-flex align-items-center mb-10">
-                                    @include('svg.employee', ['class' => 'svg-icon svg-icon-1 svg-icon-success me-5'])
+                                    @include('svg.employee', ['class' => 'svg-icon svg-icon-2hx svg-icon-success me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Ubezpieczenia Pracownicze</h5>
                                         <div class="fw-normal">
@@ -99,7 +99,7 @@
                             </a>
                             <a href="{{ route('funds.index') }}">
                                 <div class="d-flex align-items-center mb-5">
-                                    @include('svg.fund', ['class' => 'svg-icon svg-icon-1 svg-icon-primary me-5'])
+                                    @include('svg.fund', ['class' => 'svg-icon svg-icon-2hx svg-icon-primary me-5'])
                                     <div class="d-flex flex-column">
                                         <h5 class="text-gray-800 fw-bold">Fundusze UFK</h5>
                                         <div class="fw-normal">
