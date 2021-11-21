@@ -1,11 +1,6 @@
 <span class="svg-icon {{ $class ?? null }}">
-	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-			<rect x="0" y="0" width="24" height="24"/>
-			<rect fill="#000000" opacity="0.3" x="17" y="4" width="3" height="13" rx="1.5"/>
-			<rect fill="#000000" opacity="0.3" x="12" y="9" width="3" height="8" rx="1.5"/>
-			<path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero"/>
-			<rect fill="#000000" opacity="0.3" x="7" y="11" width="3" height="6" rx="1.5"/>
-		</g>
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+	<path opacity="0.3" d="M8.4 14L15.6 8.79999L20 9.90002V6L16 4L9 11L5 12V14H8.4Z" fill="black"/>
+	<path d="M21 18H20V12L16 11L9 16H6V3C6 2.4 5.6 2 5 2C4.4 2 4 2.4 4 3V18H3C2.4 18 2 18.4 2 19C2 19.6 2.4 20 3 20H4V21C4 21.6 4.4 22 5 22C5.6 22 6 21.6 6 21V20H21C21.6 20 22 19.6 22 19C22 18.4 21.6 18 21 18Z" fill="black"/>
 	</svg>
 </span>
