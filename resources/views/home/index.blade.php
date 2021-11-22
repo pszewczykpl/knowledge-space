@@ -9,7 +9,7 @@
                     <div class="card-body flex-column p-5">
                         <div class="d-flex align-items-center h-lg-300px p-5 p-lg-15">
                             <div class="d-flex flex-column align-items-start justift-content-center flex-equal me-5">
-                                <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800 mb-5 mb-lg-10">Jak możemy Ci pomóc?</h1>
+                                <span class="fw-bolder fs-4 fs-lg-1 text-gray-800 mb-5 mb-lg-10" style="height: 35px !important;">Szukasz <span id="home_search_title"></span></span>
                                 <div class="position-relative w-100">
                                     @include('svg.search', ['class' => 'svg-icon svg-icon-2 svg-icon-primary position-absolute top-50 translate-middle ms-8'])
                                     <input type="text" class="form-control fs-4 py-4 ps-14 text-gray-600 placeholder-gray-500 mw-500px fw-normal card-rounded" name="value" id="value" @if($value ?? false) value="{{ $value }}" @endif placeholder="Wpisz treść wyszukiwania i kliknij Enter">
