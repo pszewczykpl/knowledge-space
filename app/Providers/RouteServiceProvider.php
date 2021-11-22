@@ -59,34 +59,23 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('department', function ($id) {
-            return Cache::tags(['departments'])->rememberForever('departments_' . $id, function () use ($id) {
-                return Department::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Department', $id);
         });
 
         Route::bind('employee', function ($id) {
-            return Cache::tags(['employees'])->rememberForever('employees_' . $id, function () use ($id) {
-                return Employee::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Employee', $id);
         });
 
         Route::bind('file', function ($id) {
-            return Cache::tags(['files'])->rememberForever('files_' . $id, function () use ($id) {
-                return File::find($id);
-            });
-            
+            return $this->getCachedEloquent('App\Models\File', $id);
         });
 
         Route::bind('file-category', function ($id) {
-            return Cache::tags(['file_categories'])->rememberForever('file_categories_' . $id, function () use ($id) {
-                return FileCategory::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\FileCategory', $id);
         });
 
         Route::bind('fund', function ($id) {
-            return Cache::tags(['funds'])->rememberForever('funds_' . $id, function () use ($id) {
-                return Fund::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Fund', $id);
         });
 
         Route::bind('investment', function ($id) {
@@ -94,69 +83,47 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('news', function ($id) {
-            return Cache::tags(['news'])->rememberForever('news_' . $id, function () use ($id) {
-                return News::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\News', $id);
         });
 
         Route::bind('note', function ($id) {
-            return Cache::tags(['notes'])->rememberForever('notes_' . $id, function () use ($id) {
-                return Note::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Note', $id);
         });
 
         Route::bind('partner', function ($id) {
-            return Cache::tags(['partners'])->rememberForever('partners_' . $id, function () use ($id) {
-                return Partner::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Partner', $id);
         });
 
         Route::bind('permission', function ($id) {
-            return Cache::tags(['permissions'])->rememberForever('permissions_' . $id, function () use ($id) {
-                return Permission::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Permission', $id);
         });
 
         Route::bind('post', function ($id) {
-            return Cache::tags(['posts'])->rememberForever('posts_' . $id, function () use ($id) {
-                return Post::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Post', $id);
         });
 
         Route::bind('post-category', function ($id) {
-            return Cache::tags(['post_categories'])->rememberForever('post_categories_' . $id, function () use ($id) {
-                return PostCategory::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\PostCategory', $id);
         });
 
         Route::bind('protective', function ($id) {
-            return Cache::tags(['protectives'])->rememberForever('protectives_' . $id, function () use ($id) {
-                return Protective::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Protective', $id);
         });
 
         Route::bind('reply', function ($id) {
-            return Cache::tags(['replies'])->rememberForever('replies_' . $id, function () use ($id) {
-                return Reply::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Reply', $id);
         });
 
         Route::bind('risk', function ($id) {
-            return Cache::tags(['risks'])->rememberForever('risks_' . $id, function () use ($id) {
-                return Risk::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Risk', $id);
         });
 
         Route::bind('system', function ($id) {
-            return Cache::tags(['systems'])->rememberForever('systems_' . $id, function () use ($id) {
-                return System::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\System', $id);
         });
 
         Route::bind('user', function ($id) {
-            return Cache::tags(['users'])->rememberForever('users_' . $id, function () use ($id) {
-                return User::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\User', $id);
         });
 
         parent::boot();
