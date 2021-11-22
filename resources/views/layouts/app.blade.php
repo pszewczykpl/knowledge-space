@@ -3,7 +3,13 @@
     
     <x-layout.head :title="$title" />
 
-	<body id="kt_body" class="@if($dark_mode) dark-mode @endif header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed">
+	<body id="kt_body" class="@if($dark_mode) dark-mode @endif header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed page-loading-enabled page-loading">
+
+		<div class="page-loader">
+			<span class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Ładowanie...</span>
+			</span>
+		</div>
 	
 		<!--
 			data-kt-aside-minimize="on"
