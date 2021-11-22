@@ -1,4 +1,4 @@
-<div class="modal" id="policy_calculator_modal" tabindex="-1" role="dialog" aria-labelledby="PolicyCalculatorModal" aria-hidden="true">
+<div class="modal fade" id="policy_calculator_modal" tabindex="-1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content card-shadow card-rounded">
 			<div class="modal-header">
