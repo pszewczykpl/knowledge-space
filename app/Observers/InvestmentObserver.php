@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Cache;
 
 class InvestmentObserver
 {
+    public function retrieved(Investment $investment)
+    {
+        $event = new Event();
+        $event->event = 'retrieved';
+        $event->eventable()->associate($investment);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
+    }
+
     /**
      * Handle the Investment "created" event.
      *

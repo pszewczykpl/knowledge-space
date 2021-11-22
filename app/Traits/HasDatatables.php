@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Investment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use function MongoDB\BSON\toJSON;
@@ -16,7 +17,9 @@ trait HasDatatables {
      */
     private function getJsonData(Request $request, string $model, array $with = []): array
     {
-        $records = $model::with($with)->select('*')
+        $records = 
+            
+            $model::with($with)->select('*')
 
             ->when(! is_null($request->input('search.value')), function ($records) use ($request) {
                 return $records->where(function ($query) use ($request) {
@@ -45,8 +48,7 @@ trait HasDatatables {
 
         $filtered = $records->count();
 
-        $records = $records
-            ->when($request->input('length') != '-1', function ($records) use ($request) {
+        $records = $records->when($request->input('length') != '-1', function ($records) use ($request) {
                 return $records
                     ->limit($request->input('length'))
                     ->offset($request->input('start'));

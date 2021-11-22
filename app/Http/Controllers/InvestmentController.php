@@ -104,10 +104,14 @@ class InvestmentController extends Controller
      */
     public function show(Investment $investment) 
     {
+        $archive_investment = Investment::withoutEvents(function () use ($investment) {
+            return Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get();
+        });
+
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
-            'archive_investments' => Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get(),
+            'archive_investments' => $archive_investment,
         ]);
     }
     

@@ -20,12 +20,14 @@ use App\Models\Reply;
 use App\Models\Risk;
 use App\Models\System;
 use App\Models\User;
+use App\Traits\CacheModels;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    use CacheModels;
     /**
      * This namespace is applied to your controller routes.
      *
@@ -53,9 +55,7 @@ class RouteServiceProvider extends ServiceProvider
          * Bind resources for cache using rememberForever
          */
         Route::bind('bancassurance', function ($id) {
-            return Cache::tags(['bancassurances'])->rememberForever('bancassurances_' . $id, function () use ($id) {
-                return Bancassurance::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Bancassurance', $id);
         });
 
         Route::bind('department', function ($id) {
@@ -74,6 +74,7 @@ class RouteServiceProvider extends ServiceProvider
             return Cache::tags(['files'])->rememberForever('files_' . $id, function () use ($id) {
                 return File::find($id);
             });
+            
         });
 
         Route::bind('file-category', function ($id) {
@@ -89,9 +90,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('investment', function ($id) {
-            return Cache::tags(['investments'])->rememberForever('investments_' . $id, function () use ($id) {
-                return Investment::find($id);
-            });
+            return $this->getCachedEloquent('App\Models\Investment', $id);
         });
 
         Route::bind('news', function ($id) {

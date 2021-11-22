@@ -75,7 +75,7 @@
 					</div>
 					<div class="tab-pane fade show" id="funds" role="tabpanel">
 
-						<x-panels.funds :investmentid="$investment->id" />
+						{{-- <x-panels.funds :investmentid="$investment->id" /> --}}
 
 					</div>
 				</div>

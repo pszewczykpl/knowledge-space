@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Route;
 use App\Models\FileCategory;
+use App\Models\File;
 
 class Files extends Component
 {
@@ -36,13 +37,16 @@ class Files extends Component
      */
     public function __construct($model)
     {
-
-        $this->files = $model->files;
+        File::withoutEvents(function () use ($model) {
+            $this->files = $model->files;
+        });
         $this->model = $model;
         $this->name = str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $model->extended_name);
 
         $fileCategories = Cache::tags([$model->getTable(),'file_categories', 'files'])->rememberForever($model->getTable() . '_' . $model->id . '_file_categories_get', function () use ($model) {
-            return FileCategory::whereIn('id', $model->files->pluck('file_category_id')->toArray())->get();
+            return FileCategory::withoutEvents(function () use ($model) {
+                return FileCategory::whereIn('id', $model->files->pluck('file_category_id')->toArray())->get();
+            });
         });
 
         $this->fileCategories = $fileCategories;

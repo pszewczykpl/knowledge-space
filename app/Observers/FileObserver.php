@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class FileObserver
 {
+    public function retrieved(File $file)
+    {
+        $event = new Event();
+        $event->event = 'retrieved';
+        $event->eventable()->associate($file);
+        $event->save();
+
+        if(Auth::check()) {
+            Auth::user()->events()->save($event);
+        }
+    }
+
     /**
      * Handle the File "created" event.
      *
