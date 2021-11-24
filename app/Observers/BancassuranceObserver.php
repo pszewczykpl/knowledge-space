@@ -11,39 +11,6 @@ use Illuminate\Support\Facades\Cache;
 class BancassuranceObserver
 {
     /**
-     * Handle the Bancassurance "retrieved" event.
-     *
-     * @param  \App\Models\Bancassurance  $bancassurance
-     * @return void
-     */
-    public function retrieved(Bancassurance $bancassurance)
-    {
-        //
-    }
-
-    /**
-     * Handle the Bancassurance "created" event.
-     *
-     * @param  \App\Models\Bancassurance  $bancassurance
-     * @return void
-     */
-    public function created(Bancassurance $bancassurance)
-    {
-        //
-    }
-
-    /**
-     * Handle the Bancassurance "updated" event.
-     *
-     * @param  \App\Models\Bancassurance  $bancassurance
-     * @return void
-     */
-    public function updated(Bancassurance $bancassurance)
-    {
-        //
-    }
-
-    /**
      * Handle the Bancassurance "saved" event.
      *
      * @param  \App\Models\Bancassurance  $bancassurance

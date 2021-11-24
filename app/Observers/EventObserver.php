@@ -9,28 +9,6 @@ use Illuminate\Support\Facades\Cache;
 class EventObserver
 {
     /**
-     * Handle the Event "created" event.
-     *
-     * @param  \App\Models\Event  $event
-     * @return void
-     */
-    public function created(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Handle the Event "updated" event.
-     *
-     * @param  \App\Models\Event  $event
-     * @return void
-     */
-    public function updated(Event $event)
-    {
-        //
-    }
-
-    /**
      * Handle the Event "saved" event.
      *
      * @param  \App\Models\Event  $event
@@ -49,7 +27,7 @@ class EventObserver
      */
     public function deleted(Event $event)
     {
-        //
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -60,7 +38,7 @@ class EventObserver
      */
     public function restored(Event $event)
     {
-        //
+        Cache::tags('events')->flush();
     }
 
     /**
@@ -71,6 +49,6 @@ class EventObserver
      */
     public function forceDeleted(Event $event)
     {
-        //
+        Cache::tags('events')->flush();
     }
 }

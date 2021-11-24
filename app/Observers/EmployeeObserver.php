@@ -10,39 +10,6 @@ use Illuminate\Support\Facades\Cache;
 class EmployeeObserver
 {
     /**
-     * Handle the Employee "retrieved" event.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return void
-     */
-    public function retrieved(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Handle the Employee "created" event.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return void
-     */
-    public function created(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Handle the Employee "updated" event.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return void
-     */
-    public function updated(Employee $employee)
-    {
-        //
-    }
-
-    /**
      * Handle the Employee "saved" event.
      *
      * @param  \App\Models\Employee  $employee
