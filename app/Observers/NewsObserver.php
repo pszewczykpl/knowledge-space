@@ -11,42 +11,6 @@ use Illuminate\Support\Facades\Cache;
 class NewsObserver
 {
     /**
-     * Handle the News "created" event.
-     *
-     * @param  \App\Models\News  $news
-     * @return void
-     */
-    public function created(News $news)
-    {
-        $event = new Event();
-        $event->event = 'created';
-        $event->eventable()->associate($news);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-    }
-
-    /**
-     * Handle the News "updated" event.
-     *
-     * @param  \App\Models\News  $news
-     * @return void
-     */
-    public function updated(News $news)
-    {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->eventable()->associate($news);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-    }
-
-    /**
      * Handle the News "saved" event.
      *
      * @param  \App\Models\News  $news
@@ -65,15 +29,6 @@ class NewsObserver
      */
     public function deleted(News $news)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->eventable()->associate($news);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('news')->flush();
     }
 
@@ -85,15 +40,6 @@ class NewsObserver
      */
     public function restored(News $news)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->eventable()->associate($news);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('news')->flush();
     }
 
@@ -105,15 +51,6 @@ class NewsObserver
      */
     public function forceDeleted(News $news)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->eventable()->associate($news);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('news')->flush();
     }
 }

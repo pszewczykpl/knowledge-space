@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Cache;
 class EmployeeObserver
 {
     /**
+     * Handle the Employee "retrieved" event.
+     *
+     * @param  \App\Models\Employee  $employee
+     * @return void
+     */
+    public function retrieved(Employee $employee)
+    {
+        //
+    }
+
+    /**
      * Handle the Employee "created" event.
      *
      * @param  \App\Models\Employee  $employee
@@ -17,14 +28,7 @@ class EmployeeObserver
      */
     public function created(Employee $employee)
     {
-        $event = new Event();
-        $event->event = 'created';
-        $event->eventable()->associate($employee);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        //
     }
 
     /**
@@ -35,14 +39,7 @@ class EmployeeObserver
      */
     public function updated(Employee $employee)
     {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->eventable()->associate($employee);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        //
     }
 
     /**
@@ -64,15 +61,6 @@ class EmployeeObserver
      */
     public function deleted(Employee $employee)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->eventable()->associate($employee);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('employees')->flush();
     }
 
@@ -84,15 +72,6 @@ class EmployeeObserver
      */
     public function restored(Employee $employee)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->eventable()->associate($employee);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('employees')->flush();
     }
 
@@ -104,15 +83,6 @@ class EmployeeObserver
      */
     public function forceDeleted(Employee $employee)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->eventable()->associate($employee);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('employees')->flush();
     }
 }

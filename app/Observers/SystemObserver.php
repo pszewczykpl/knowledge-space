@@ -10,38 +10,6 @@ use Illuminate\Support\Facades\Cache;
 class SystemObserver
 {
     /**
-     * Handle the System "created" event.
-     *
-     * @param  \App\Models\System  $system
-     * @return void
-     */
-    public function created(System $system)
-    {
-        $event = new Event();
-        $event->event = 'created';
-        $event->eventable()->associate($system);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-    }
-
-    /**
-     * Handle the System "updated" event.
-     *
-     * @param  \App\Models\System  $system
-     * @return void
-     */
-    public function updated(System $system)
-    {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->eventable()->associate($system);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-    }
-
-    /**
      * Handle the System "saved" event.
      *
      * @param  \App\Models\System  $system
@@ -60,13 +28,6 @@ class SystemObserver
      */
     public function deleted(System $system)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->eventable()->associate($system);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('systems')->flush();
     }
 
@@ -78,13 +39,6 @@ class SystemObserver
      */
     public function restored(System $system)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->eventable()->associate($system);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('systems')->flush();
     }
 
@@ -96,13 +50,6 @@ class SystemObserver
      */
     public function forceDeleted(System $system)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->eventable()->associate($system);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('systems')->flush();
     }
 }

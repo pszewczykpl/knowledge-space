@@ -10,54 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FileObserver
 {
-    public function retrieved(File $file)
-    {
-        $event = new Event();
-        $event->event = 'retrieved';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-    }
-
-    /**
-     * Handle the File "created" event.
-     *
-     * @param  \App\Models\File  $file
-     * @return void
-     */
-    public function created(File $file)
-    {
-        $event = new Event();
-        $event->event = 'created';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-    }
-
-    /**
-     * Handle the File "updated" event.
-     *
-     * @param  \App\Models\File  $file
-     * @return void
-     */
-    public function updated(File $file)
-    {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-    }
-
     /**
      * Handle the File "saved" event.
      *
@@ -77,15 +29,6 @@ class FileObserver
      */
     public function deleted(File $file)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('files')->flush();
     }
 
@@ -97,15 +40,6 @@ class FileObserver
      */
     public function restored(File $file)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('files')->flush();
     }
 
@@ -117,15 +51,6 @@ class FileObserver
      */
     public function forceDeleted(File $file)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->eventable()->associate($file);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('files')->flush();
     }
 }

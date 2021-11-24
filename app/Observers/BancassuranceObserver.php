@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Cache;
 class BancassuranceObserver
 {
     /**
+     * Handle the Bancassurance "retrieved" event.
+     *
+     * @param  \App\Models\Bancassurance  $bancassurance
+     * @return void
+     */
+    public function retrieved(Bancassurance $bancassurance)
+    {
+        //
+    }
+
+    /**
      * Handle the Bancassurance "created" event.
      *
      * @param  \App\Models\Bancassurance  $bancassurance
@@ -18,14 +29,7 @@ class BancassuranceObserver
      */
     public function created(Bancassurance $bancassurance)
     {
-        $event = new Event();
-        $event->event = 'created';
-        $event->eventable()->associate($bancassurance);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        //
     }
 
     /**
@@ -36,14 +40,7 @@ class BancassuranceObserver
      */
     public function updated(Bancassurance $bancassurance)
     {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->eventable()->associate($bancassurance);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
+        //
     }
 
     /**
@@ -65,15 +62,6 @@ class BancassuranceObserver
      */
     public function deleted(Bancassurance $bancassurance)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->eventable()->associate($bancassurance);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('bancassurances')->flush();
     }
 
@@ -85,15 +73,6 @@ class BancassuranceObserver
      */
     public function restored(Bancassurance $bancassurance)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->eventable()->associate($bancassurance);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('bancassurances')->flush();
     }
 
@@ -105,15 +84,6 @@ class BancassuranceObserver
      */
     public function forceDeleted(Bancassurance $bancassurance)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->eventable()->associate($bancassurance);
-        $event->save();
-
-        if(Auth::check()) {
-            Auth::user()->events()->save($event);
-        }
-
         Cache::tags('bancassurances')->flush();
     }
 }

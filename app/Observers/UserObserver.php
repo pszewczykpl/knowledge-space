@@ -11,40 +11,6 @@ use Illuminate\Support\Facades\Cache;
 class UserObserver
 {
     /**
-     * Handle the User "created" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function created(User $user)
-    {
-        $event = new Event();
-        $event->event = 'created';
-        $event->visible = false;
-        $event->eventable()->associate($user);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-    }
-
-    /**
-     * Handle the User "updated" event.
-     *
-     * @param  \App\Models\User  $user
-     * @return void
-     */
-    public function updated(User $user)
-    {
-        $event = new Event();
-        $event->event = 'updated';
-        $event->visible = false;
-        $event->eventable()->associate($user);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-    }
-
-    /**
      * Handle the User "saved" event.
      *
      * @param  \App\Models\User  $user
@@ -63,14 +29,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        $event = new Event();
-        $event->event = 'deleted';
-        $event->visible = false;
-        $event->eventable()->associate($user);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('users')->flush();
     }
 
@@ -82,14 +40,6 @@ class UserObserver
      */
     public function restored(User $user)
     {
-        $event = new Event();
-        $event->event = 'restored';
-        $event->visible = false;
-        $event->eventable()->associate($user);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('users')->flush();
     }
 
@@ -101,14 +51,6 @@ class UserObserver
      */
     public function forceDeleted(User $user)
     {
-        $event = new Event();
-        $event->event = 'forceDeleted';
-        $event->visible = false;
-        $event->eventable()->associate($user);
-        $event->save();
-
-        if(Auth::check()) Auth::user()->events()->save($event);
-
         Cache::tags('users')->flush();
     }
 }
