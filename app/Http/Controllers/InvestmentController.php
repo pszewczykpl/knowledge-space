@@ -8,6 +8,7 @@ use App\Http\Requests\StoreInvestment;
 use App\Http\Requests\UpdateInvestment;
 use App\Models\System;
 use App\Models\SystemProperty;
+use App\Jobs\StoreEvent;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -104,14 +105,12 @@ class InvestmentController extends Controller
      */
     public function show(Investment $investment) 
     {
-        $archive_investment = Investment::withoutEvents(function () use ($investment) {
-            return Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get();
-        });
+        StoreEvent::dispatch('show', $investment);
 
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
-            'archive_investments' => $archive_investment,
+            'archive_investments' => Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get(),
         ]);
     }
     
@@ -144,6 +143,8 @@ class InvestmentController extends Controller
         $this->authorize('update', $investment);
 
         $investment->update($request->all());
+
+        StoreEvent::dispatch('update', $investment);
 
         return redirect()->route('investments.show', $investment)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
     }
