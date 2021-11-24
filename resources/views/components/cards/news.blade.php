@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="my-0">
-				<button type="button" class="btn btn-sm btn-icon btn-active-light" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+				<button type="button" class="btn btn-sm btn-icon btn-active-light card-rounded" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
 					<span class="svg-icon svg-icon-1">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -25,21 +25,18 @@
 						</svg>
 					</span>
 				</button>
-				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-					<div class="menu-item px-3">
-						<div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Opcje</div>
-					</div>
+				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3 card-rounded" data-kt-menu="true">
 					<div class="menu-item px-3 my-1">
-						<a href="{{ route('news.show', $news->id) }}" class="menu-link px-3">{{ __('View') }}</a>
+						<a href="{{ route('news.show', $news->id) }}" class="menu-link card-rounded px-3">{{ __('View') }}</a>
 					</div>
 					@can('update', $news)
 						<div class="menu-item px-3 my-1">
-							<a href="{{ route('news.edit', $news->id) }}" class="menu-link px-3">Edytuj</a>
+							<a href="{{ route('news.edit', $news->id) }}" class="menu-link px-3 card-rounded">Edytuj</a>
 						</div>
 					@endcan
 					@can('delete', $news)
 						<div class="menu-item px-3 my-1">
-							<a onclick='document.getElementById("news_destroy_{{ $news->id }}").submit();' class="menu-link px-3">Usuń</a>
+							<a onclick='document.getElementById("news_destroy_{{ $news->id }}").submit();' class="menu-link px-3 card-rounded">Usuń</a>
 							{{ Form::open([ 'method'  => 'delete', 'route' => [ 'news.destroy', $news->id ], 'id' => 'news_destroy_' . $news->id ]) }}{{ Form::close() }}
 						</div>
 					@endcan
