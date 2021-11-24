@@ -70,6 +70,9 @@ class InvestmentController extends Controller
         $investment = new Investment($request->all());
         Auth::user()->investments()->save($investment);
 
+        // Store event using job
+        StoreEvent::dispatch('store', $investment);
+
         return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Nowy produkt inwestycyjny został dodany!');
     }
 
@@ -94,6 +97,9 @@ class InvestmentController extends Controller
         $investment->status = 'N';
         $investment->save();
 
+        // Store event using job
+        StoreEvent::dispatch('duplicate', $investment);
+
         return redirect()->route('investments.show', $clone->id)->with('notify_success', 'Nowy produkt inwestycyjny został zduplikowany!');
     }
 
@@ -105,6 +111,7 @@ class InvestmentController extends Controller
      */
     public function show(Investment $investment) 
     {
+        // Store event using job
         StoreEvent::dispatch('show', $investment);
 
         return view('products.investments.show', [
@@ -144,6 +151,7 @@ class InvestmentController extends Controller
 
         $investment->update($request->all());
 
+        // Store event using job
         StoreEvent::dispatch('update', $investment);
 
         return redirect()->route('investments.show', $investment)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
@@ -159,6 +167,9 @@ class InvestmentController extends Controller
     {
         $this->authorize('delete', $investment);
         $investment->delete();
+
+        // Store event using job
+        StoreEvent::dispatch('destroy', $investment);
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }
@@ -176,6 +187,9 @@ class InvestmentController extends Controller
         $this->authorize('restore', $investment);
         $investment->restore();
 
+        // Store event using job
+        StoreEvent::dispatch('restore', $investment);
+
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został przywrócony!');
     }
 
@@ -192,6 +206,9 @@ class InvestmentController extends Controller
         $this->authorize('forceDelete', $investment);
         
         $investment->forceDelete();
+
+        // Store event using job
+        StoreEvent::dispatch('forceDelete', $investment);
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został trwale usunięty!');
     }
