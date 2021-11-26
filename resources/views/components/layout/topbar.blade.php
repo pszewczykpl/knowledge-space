@@ -53,14 +53,26 @@
 					<div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
 						<a class="menu-link card-rounded px-5">
 							<span class="menu-title position-relative">Język 
-							<span class="fs-8 card-rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Polski 
-							<img class="w-15px h-15px card-rounded ms-2" src="{{ asset('media/flags/poland.svg') }}" alt="Polski" /></span></span>
+								<span class="fs-8 card-rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Polski 
+									<span class="svg-icon w-15px h-15px card-rounded ms-2">
+										<svg xmlns="http://www.w3.org/2000/svg" class="w-15px h-15px card-rounded ms-2" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+											<rect y="256" style="fill:#FF4B55;" width="512" height="256"/>
+											<rect style="fill:#F5F5F5;" width="512" height="256"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+										</svg>
+									</span>
+								</span>
+							</span>
 						</a>
 						<div class="menu-sub menu-sub-dropdown w-175px py-4">
 							<div class="menu-item px-3">
 								<a class="menu-link d-flex px-5 card-rounded active">
-								<span class="symbol symbol-20px me-4">
-									<img class="card-rounded" src="{{ asset('media/flags/poland.svg') }}" alt="" />
+								<span class="symbol symbol-20px me-4 card-rounded">
+									<span class="svg-icon card-rounded">
+										<svg xmlns="http://www.w3.org/2000/svg" class="card-rounded" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+											<rect y="256" style="fill:#FF4B55;" width="512" height="256"/>
+											<rect style="fill:#F5F5F5;" width="512" height="256"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+										</svg>
+									</span>
 								</span>Polski</a>
 							</div>
 						</div>

@@ -5,12 +5,12 @@
 
 	<body 
 		id="kt_body"
-		data-kt-aside-minimize="on"
+		{{-- data-kt-aside-minimize="on" --}}
 		class="
 			@if($dark_mode) dark-mode @endif
 			header-fixed header-tablet-and-mobile-fixed aside-enabled
 			aside-fixed 
-			page-loading-enabled page-loading
+			{{-- page-loading-enabled page-loading --}}
 		">
 
 		<div class="page-loader">
