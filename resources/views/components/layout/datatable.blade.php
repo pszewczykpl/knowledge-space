@@ -20,7 +20,7 @@
                         <div class="d-flex justify-content-end">
                             <button id="export_to_excel" name="export_to_excel" type="button" class="btn btn-link btn-color-primaty me-3">Excel</button>
                             <button id="export_to_csv" name="export_to_csv" type="button" class="btn btn-link btn-color-primaty me-3">CSV</button>
-                            <button id="export_to_pdf" name="export_to_pdf" type="button" class="btn btn-link btn-color-primaty me-3">PDF</button>
+                            {{-- <button id="export_to_pdf" name="export_to_pdf" type="button" class="btn btn-link btn-color-primaty me-3">PDF</button> --}}
                         </div>
                     </div>
                 </div>
