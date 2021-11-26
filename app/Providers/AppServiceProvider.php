@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
 
-        View::share('rounded', 1.5);
+        View::share('rounded', 1.4);
     }
 
     /**
