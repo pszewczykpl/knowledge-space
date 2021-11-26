@@ -30,7 +30,6 @@ class User extends Authenticatable
         'username',
         'email',
         'phone',
-        'password',
         'company',
         'position',
         'description',
@@ -413,6 +412,17 @@ class User extends Authenticatable
     public function getFullNameAttribute(): string
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function profileProgressValue(): int
+    {
+        $sum = 0;
+        foreach($this->fillable as $column) {
+            if(! is_null($this->{$column}))
+                $sum++;
+        }
+
+        return $sum*100/count($this->fillable);
     }
 
 }
