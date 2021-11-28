@@ -116,7 +116,7 @@
                         </div>
                         @foreach($post as $post)
                             <a href="{{ route('posts.show', $post) }}">
-                                <div class="card bgi-no-repeat card-xl-stretch mb-6 card-rounded card-shadow" style="background-position: right top; background-size: 30% auto; background-image: url({{ asset('media/bg/abstract-4.svg') }})">
+                                <div class="card bgi-no-repeat card-xl-stretch mb-6 card-rounded card-shadow" style="background-position: right top; background-size: 30% auto;">
                                     <div class="card-body pt-3 mt-0">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-30px symbol-circle me-3">
