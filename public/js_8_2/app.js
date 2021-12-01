@@ -87,8 +87,8 @@ if (
     }),
     $("#active_or_all_investments").click(function () {
         $(this)[0].checked
-            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Widzisz wszystkie komplety dokumentów"))
-            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów"));
+            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Wyświetlono archiwalne komplety ubezpieczeń"))
+            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Ukryto archiwalne komplety ubezpieczeń"));
     }),
     $("#protectives_datatable").DataTable({
         responsive: !0,
@@ -138,8 +138,8 @@ if (
     }),
     $("#active_or_all_protectives").click(function () {
         $(this)[0].checked
-            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Widzisz wszystkie komplety dokumentów"))
-            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów"));
+            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Wyświetlono archiwalne komplety ubezpieczeń"))
+            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Ukryto archiwalne komplety ubezpieczeń"));
     }),
     $("#employees_datatable").DataTable({
         responsive: !0,
@@ -185,8 +185,8 @@ if (
     }),
     $("#active_or_all_employees").click(function () {
         $(this)[0].checked
-            ? $(this)[0].checked && ($("#col5_filter").val(""), $("#col5_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Widzisz wszystkie komplety dokumentów"))
-            : ($("#col5_filter").val("A"), $("#col5_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów"));
+            ? $(this)[0].checked && ($("#col5_filter").val(""), $("#col5_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Wyświetlono archiwalne komplety ubezpieczeń"))
+            : ($("#col5_filter").val("A"), $("#col5_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Ukryto archiwalne komplety ubezpieczeń"));
     }),
     $("#bancassurances_datatable").DataTable({
         responsive: !0,
@@ -236,8 +236,8 @@ if (
     }),
     $("#active_or_all_bancassurances").click(function () {
         $(this)[0].checked
-            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Widzisz wszystkie komplety dokumentów"))
-            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Widzisz tylko aktualnie obowiązujące komplety dokumentów"));
+            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj dane archiwalne"), toastr.success("Wyświetlono archiwalne komplety ubezpieczeń"))
+            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż dane archiwalne"), toastr.success("Ukryto archiwalne komplety ubezpieczeń"));
     }),
     $("#departments_datatable").DataTable({
         responsive: !0,
@@ -413,8 +413,8 @@ if (
     }),
     $("#active_or_all_funds").click(function () {
         $(this)[0].checked
-            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj fundusze nieaktywne"), toastr.success("Widzisz wszystkie fundusze"))
-            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż fundusze nieaktywne"), toastr.success("Widzisz tylko aktualne fundusze"));
+            ? $(this)[0].checked && ($("#col7_filter").val(""), $("#col7_filter").click(), $("#active_or_all_title").html("Ukryj fundusze nieaktywne"), toastr.success("Wyświetlono archiwalne fundusze"))
+            : ($("#col7_filter").val("A"), $("#col7_filter").click(), $("#active_or_all_title").html("Pokaż fundusze nieaktywne"), toastr.success("Ukryto archiwalne fundusze"));
     }),
     $("#notes_datatable").DataTable({
         responsive: !0,
@@ -749,12 +749,14 @@ $("#draft_or_all_files").click(function() {
         $('#col7_filter').click();
 
         $("#draft_or_all_files_title").html('Pokaż dokumenty robocze');
+		toastr.success("Ukryto dokumenty robocze");
     }
     else if ($(this)[0].checked) {
         $('#col7_filter').val('');
         $('#col7_filter').click();
 
         $("#draft_or_all_files_title").html('Ukryj dokumenty robocze');
+		toastr.success("Wyświetlono dokumenty robocze");
     }
 });
 $("#type_p_files").change(function() {
