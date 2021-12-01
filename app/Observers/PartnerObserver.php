@@ -12,44 +12,48 @@ class PartnerObserver
     /**
      * Handle the Partner "saved" event.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param Partner $partner
      * @return void
      */
     public function saved(Partner $partner)
     {
+        // Remove all items with "partners" tag
         Cache::tags('partners')->flush();
     }
 
     /**
      * Handle the Partner "deleted" event.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param Partner $partner
      * @return void
      */
     public function deleted(Partner $partner)
     {
+        // Remove all items with "partners" tag
         Cache::tags('partners')->flush();
     }
 
     /**
      * Handle the Partner "restored" event.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param Partner $partner
      * @return void
      */
     public function restored(Partner $partner)
     {
+        // Remove all items with "partners" tag
         Cache::tags('partners')->flush();
     }
 
     /**
      * Handle the Partner "force deleted" event.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param Partner $partner
      * @return void
      */
     public function forceDeleted(Partner $partner)
     {
+        // Remove all items with "partners" tag
         Cache::tags('partners')->flush();
     }
 }

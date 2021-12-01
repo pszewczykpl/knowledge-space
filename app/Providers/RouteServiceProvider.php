@@ -51,9 +51,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /**
-         * Bind resources for cache using rememberForever
-         */
         Route::bind('bancassurance', function ($id) {
             return $this->getCachedEloquent('App\Models\Bancassurance', $id);
         });

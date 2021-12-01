@@ -13,44 +13,48 @@ class NewsObserver
     /**
      * Handle the News "saved" event.
      *
-     * @param  \App\Models\News  $news
+     * @param News $news
      * @return void
      */
     public function saved(News $news)
     {
+        // Remove all items with "news" tag
         Cache::tags('news')->flush();
     }
 
     /**
      * Handle the News "deleted" event.
      *
-     * @param  \App\Models\News  $news
+     * @param News $news
      * @return void
      */
     public function deleted(News $news)
     {
+        // Remove all items with "news" tag
         Cache::tags('news')->flush();
     }
 
     /**
      * Handle the News "restored" event.
      *
-     * @param  \App\Models\News  $news
+     * @param News $news
      * @return void
      */
     public function restored(News $news)
     {
+        // Remove all items with "news" tag
         Cache::tags('news')->flush();
     }
 
     /**
      * Handle the News "force deleted" event.
      *
-     * @param  \App\Models\News  $news
+     * @param News $news
      * @return void
      */
     public function forceDeleted(News $news)
     {
+        // Remove all items with "news" tag
         Cache::tags('news')->flush();
     }
 }

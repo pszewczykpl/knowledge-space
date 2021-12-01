@@ -12,44 +12,48 @@ class DepartmentObserver
     /**
      * Handle the Department "saved" event.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return void
      */
     public function saved(Department $department)
     {
+        // Remove all items with "departments" tag
         Cache::tags('departments')->flush();
     }
 
     /**
      * Handle the Department "deleted" event.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return void
      */
     public function deleted(Department $department)
     {
+        // Remove all items with "departments" tag
         Cache::tags('departments')->flush();
     }
 
     /**
      * Handle the Department "restored" event.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return void
      */
     public function restored(Department $department)
     {
+        // Remove all items with "departments" tag
         Cache::tags('departments')->flush();
     }
 
     /**
      * Handle the Department "force deleted" event.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return void
      */
     public function forceDeleted(Department $department)
     {
+        // Remove all items with "departments" tag
         Cache::tags('departments')->flush();
     }
 }

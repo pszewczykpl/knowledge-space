@@ -13,44 +13,48 @@ class FileObserver
     /**
      * Handle the File "saved" event.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return void
      */
     public function saved(File $file)
     {
+        // Remove all items with "files" tag
         Cache::tags('files')->flush();
     }
 
     /**
      * Handle the File "deleted" event.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return void
      */
     public function deleted(File $file)
     {
+        // Remove all items with "files" tag
         Cache::tags('files')->flush();
     }
 
     /**
      * Handle the File "restored" event.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return void
      */
     public function restored(File $file)
     {
+        // Remove all items with "files" tag
         Cache::tags('files')->flush();
     }
 
     /**
      * Handle the File "force deleted" event.
      *
-     * @param  \App\Models\File  $file
+     * @param File $file
      * @return void
      */
     public function forceDeleted(File $file)
     {
+        // Remove all items with "files" tag
         Cache::tags('files')->flush();
     }
 }

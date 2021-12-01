@@ -12,44 +12,48 @@ class InvestmentObserver
     /**
      * Handle the Investment "saved" event.
      *
-     * @param  \App\Models\Investment  $investment
+     * @param Investment $investment
      * @return void
      */
     public function saved(Investment $investment)
     {
+        // Remove all items with "investments" tag
         Cache::tags('investments')->flush();
     }
 
     /**
      * Handle the Investment "deleted" event.
      *
-     * @param  \App\Models\Investment  $investment
+     * @param Investment $investment
      * @return void
      */
     public function deleted(Investment $investment)
     {
+        // Remove all items with "investments" tag
         Cache::tags('investments')->flush();
     }
 
     /**
      * Handle the Investment "restored" event.
      *
-     * @param  \App\Models\Investment  $investment
+     * @param Investment $investment
      * @return void
      */
     public function restored(Investment $investment)
     {
+        // Remove all items with "investments" tag
         Cache::tags('investments')->flush();
     }
 
     /**
      * Handle the Investment "force deleted" event.
      *
-     * @param  \App\Models\Investment  $investment
+     * @param Investment $investment
      * @return void
      */
     public function forceDeleted(Investment $investment)
     {
+        // Remove all items with "investments" tag
         Cache::tags('investments')->flush();
     }
 }

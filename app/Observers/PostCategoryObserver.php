@@ -12,44 +12,48 @@ class PostCategoryObserver
     /**
      * Handle the PostCategory "saved" event.
      *
-     * @param  \App\Models\PostCategory  $postCategory
+     * @param PostCategory $postCategory
      * @return void
      */
     public function saved(PostCategory $postCategory)
     {
+        // Remove all items with "post_categories" tag
         Cache::tags('post_categories')->flush();
     }
 
     /**
      * Handle the PostCategory "deleted" event.
      *
-     * @param  \App\Models\PostCategory  $postCategory
+     * @param PostCategory $postCategory
      * @return void
      */
     public function deleted(PostCategory $postCategory)
     {
+        // Remove all items with "post_categories" tag
         Cache::tags('post_categories')->flush();
     }
 
     /**
      * Handle the PostCategory "restored" event.
      *
-     * @param  \App\Models\PostCategory  $postCategory
+     * @param PostCategory $postCategory
      * @return void
      */
     public function restored(PostCategory $postCategory)
     {
+        // Remove all items with "post_categories" tag
         Cache::tags('post_categories')->flush();
     }
 
     /**
      * Handle the PostCategory "force deleted" event.
      *
-     * @param  \App\Models\PostCategory  $postCategory
+     * @param PostCategory $postCategory
      * @return void
      */
     public function forceDeleted(PostCategory $postCategory)
     {
+        // Remove all items with "post_categories" tag
         Cache::tags('post_categories')->flush();
     }
 }

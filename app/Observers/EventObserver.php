@@ -11,44 +11,48 @@ class EventObserver
     /**
      * Handle the Event "saved" event.
      *
-     * @param  \App\Models\Event  $event
+     * @param Event $event
      * @return void
      */
     public function saved(Event $event)
     {
+        // Remove all items with "events" tag
         Cache::tags('events')->flush();
     }
 
     /**
      * Handle the Event "deleted" event.
      *
-     * @param  \App\Models\Event  $event
+     * @param Event $event
      * @return void
      */
     public function deleted(Event $event)
     {
+        // Remove all items with "events" tag
         Cache::tags('events')->flush();
     }
 
     /**
      * Handle the Event "restored" event.
      *
-     * @param  \App\Models\Event  $event
+     * @param Event $event
      * @return void
      */
     public function restored(Event $event)
     {
+        // Remove all items with "events" tag
         Cache::tags('events')->flush();
     }
 
     /**
      * Handle the Event "force deleted" event.
      *
-     * @param  \App\Models\Event  $event
+     * @param Event $event
      * @return void
      */
     public function forceDeleted(Event $event)
     {
+        // Remove all items with "events" tag
         Cache::tags('events')->flush();
     }
 }

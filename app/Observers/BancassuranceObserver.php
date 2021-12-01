@@ -13,44 +13,48 @@ class BancassuranceObserver
     /**
      * Handle the Bancassurance "saved" event.
      *
-     * @param  \App\Models\Bancassurance  $bancassurance
+     * @param Bancassurance $bancassurance
      * @return void
      */
     public function saved(Bancassurance $bancassurance)
     {
+        // Remove all items with "bancassurances" tag
         Cache::tags('bancassurances')->flush();
     }
 
     /**
      * Handle the Bancassurance "deleted" event.
      *
-     * @param  \App\Models\Bancassurance  $bancassurance
+     * @param Bancassurance $bancassurance
      * @return void
      */
     public function deleted(Bancassurance $bancassurance)
     {
+        // Remove all items with "bancassurances" tag
         Cache::tags('bancassurances')->flush();
     }
 
     /**
      * Handle the Bancassurance "restored" event.
      *
-     * @param  \App\Models\Bancassurance  $bancassurance
+     * @param Bancassurance $bancassurance
      * @return void
      */
     public function restored(Bancassurance $bancassurance)
     {
+        // Remove all items with "bancassurances" tag
         Cache::tags('bancassurances')->flush();
     }
 
     /**
      * Handle the Bancassurance "force deleted" event.
      *
-     * @param  \App\Models\Bancassurance  $bancassurance
+     * @param Bancassurance $bancassurance
      * @return void
      */
     public function forceDeleted(Bancassurance $bancassurance)
     {
+        // Remove all items with "bancassurances" tag
         Cache::tags('bancassurances')->flush();
     }
 }

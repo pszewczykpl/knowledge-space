@@ -12,44 +12,48 @@ class ProtectiveObserver
     /**
      * Handle the Protective "saved" event.
      *
-     * @param  \App\Models\Protective  $protective
+     * @param Protective $protective
      * @return void
      */
     public function saved(Protective $protective)
     {
+        // Remove all items with "protectives" tag
         Cache::tags('protectives')->flush();
     }
 
     /**
      * Handle the Protective "deleted" event.
      *
-     * @param  \App\Models\Protective  $protective
+     * @param Protective $protective
      * @return void
      */
     public function deleted(Protective $protective)
     {
+        // Remove all items with "protectives" tag
         Cache::tags('protectives')->flush();
     }
 
     /**
      * Handle the Protective "restored" event.
      *
-     * @param  \App\Models\Protective  $protective
+     * @param Protective $protective
      * @return void
      */
     public function restored(Protective $protective)
     {
+        // Remove all items with "protectives" tag
         Cache::tags('protectives')->flush();
     }
 
     /**
      * Handle the Protective "force deleted" event.
      *
-     * @param  \App\Models\Protective  $protective
+     * @param Protective $protective
      * @return void
      */
     public function forceDeleted(Protective $protective)
     {
+        // Remove all items with "protectives" tag
         Cache::tags('protectives')->flush();
     }
 }

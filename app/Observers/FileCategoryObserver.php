@@ -12,44 +12,48 @@ class FileCategoryObserver
     /**
      * Handle the FileCategory "saved" event.
      *
-     * @param  \App\Models\FileCategory  $fileCategory
+     * @param FileCategory $fileCategory
      * @return void
      */
     public function saved(FileCategory $fileCategory)
     {
+        // Remove all items with "file_categories" tag
         Cache::tags('file_categories')->flush();
     }
 
     /**
      * Handle the FileCategory "deleted" event.
      *
-     * @param  \App\Models\FileCategory  $fileCategory
+     * @param FileCategory $fileCategory
      * @return void
      */
     public function deleted(FileCategory $fileCategory)
     {
+        // Remove all items with "file_categories" tag
         Cache::tags('file_categories')->flush();
     }
 
     /**
      * Handle the FileCategory "restored" event.
      *
-     * @param  \App\Models\FileCategory  $fileCategory
+     * @param FileCategory $fileCategory
      * @return void
      */
     public function restored(FileCategory $fileCategory)
     {
+        // Remove all items with "file_categories" tag
         Cache::tags('file_categories')->flush();
     }
 
     /**
      * Handle the FileCategory "force deleted" event.
      *
-     * @param  \App\Models\FileCategory  $fileCategory
+     * @param FileCategory $fileCategory
      * @return void
      */
     public function forceDeleted(FileCategory $fileCategory)
     {
+        // Remove all items with "file_categories" tag
         Cache::tags('file_categories')->flush();
     }
 }
