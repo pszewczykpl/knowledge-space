@@ -37,9 +37,9 @@
 						<li class="nav-item">
 							<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#files" id="files_tab">Dokumenty</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#funds" id="funds_tab">Fundusze</a>
-						</li>
+{{--						<li class="nav-item">--}}
+{{--							<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#funds" id="funds_tab">Fundusze</a>--}}
+{{--						</li>--}}
 					</ul>
 
 				<div class="tab-content" id="myTabContent">
@@ -73,11 +73,11 @@
 						<x-panels.files :model="$investment" />
 
 					</div>
-					<div class="tab-pane fade show" id="funds" role="tabpanel">
+{{--					<div class="tab-pane fade show" id="funds" role="tabpanel">--}}
 
-						{{-- <x-panels.funds :investmentid="$investment->id" /> --}}
+{{--						--}}{{-- <x-panels.funds :investmentid="$investment->id" /> --}}
 
-					</div>
+{{--					</div>--}}
 				</div>
 
 			</div>
