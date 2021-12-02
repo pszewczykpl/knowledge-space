@@ -42,6 +42,7 @@
                             </h3>
                         </div>
                     </div>
+                    <x-cards.news-store />
                     @foreach($news as $new)
                         <x-cards.news :news="$new" />
                     @endforeach

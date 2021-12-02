@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="col-4">
-						<x-cards.top-events />
+{{--						<x-cards.top-events />--}}
 					</div>
 				</div>
 			</div>

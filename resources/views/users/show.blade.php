@@ -12,40 +12,6 @@
 @stop
 
 @section('content')
-{{-- <div class="container">
-    <div class="row">
-        <div class="col-12 col-md-4">
-			<x-cards.user :user="$user" />
-        </div>
-        <div class="col-12 col-md-8">
-            @auth
-			@if(Auth::user()->can('create', App\Models\News::class) and $user->id == Auth::user()->id)
-				<x-cards.news-store />
-			@endif
-			@endauth
-				@if($user->news->count() == 0)
-					<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
-						@auth
-						@if($user->id == Auth::user()->id)
-							<div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
-						@else
-							<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
-						@endif
-						@else
-							<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
-							@endauth
-					</div>
-				@else
-					@foreach($user->news->sortByDesc('created_at')->take(20) as $new)
-						<x-cards.news :news="$new" />
-					@endforeach
-				@endif
-				<div class="text-center">
-						<a href="{{ route('news.index') }}" class="btn btn-primary font-weight-bolder font-size-sm mt-3 py-3 px-14">Przejdź do Aktualności</a>
-					</div>
-        </div>
-    </div>
-</div> --}}
 <div class="container-xxl">
 	<div class="card mb-5 mb-xxl-8 card-rounded card-shadow">
 		<div class="card-body pt-9 pb-0">
@@ -96,13 +62,14 @@
 								</span> {{ $user->email }}</a>
 							</div>
 						</div>
-						<div class="d-flex my-4">
-							<a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">Obserwuj</a>
-						</div>
+{{--						<div class="d-flex my-4">--}}
+{{--							<a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">Obserwuj</a>--}}
+{{--						</div>--}}
 					</div>
 					<div class="d-flex flex-wrap flex-stack">
 
 						<div class="row">
+							@if($user->description)
 							<div class="col align-self-start">
 								<div class="d-flex flex-column flex-grow-1 pe-8">
 									<div class="d-flex flex-wrap">
@@ -112,6 +79,7 @@
 									</div>
 								</div>
 							</div>
+							@endif
 							<div class="col align-self-end">
 								<div class="row">
 									<div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3 col align-self-end">
