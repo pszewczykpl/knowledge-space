@@ -13,10 +13,10 @@ class DepartmentPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         if($user->hasPermission('departments-viewany')) {
             return true;
@@ -28,11 +28,11 @@ class DepartmentPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Department  $department
-     * @return mixed
+     * @param User $user
+     * @param Department $department
+     * @return bool
      */
-    public function view(User $user, Department $department)
+    public function view(User $user, Department $department): bool
     {
         if($user->hasPermission('departments-view')) {
             return true;
@@ -44,10 +44,10 @@ class DepartmentPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         if($user->hasPermission('departments-create')) {
             return true;

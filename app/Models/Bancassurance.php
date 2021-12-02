@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @property mixed extended_name
+ * @property mixed $user_id
  */
 class Bancassurance extends Model
 {

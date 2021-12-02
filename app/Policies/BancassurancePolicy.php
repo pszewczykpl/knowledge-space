@@ -13,10 +13,10 @@ class BancassurancePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -24,11 +24,11 @@ class BancassurancePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bancassurance  $bancassurance
-     * @return mixed
+     * @param User $user
+     * @param Bancassurance $bancassurance
+     * @return bool
      */
-    public function view(User $user, Bancassurance $bancassurance)
+    public function view(User $user, Bancassurance $bancassurance): bool
     {
         return true;
     }
@@ -36,79 +36,59 @@ class BancassurancePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('bancassurances-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('bancassurances-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bancassurance  $bancassurance
-     * @return mixed
+     * @param User $user
+     * @param Bancassurance $bancassurance
+     * @return bool
      */
-    public function update(User $user, Bancassurance $bancassurance)
+    public function update(User $user, Bancassurance $bancassurance): bool
     {
-        if($user->hasPermission('bancassurances-update')) {
-            return true;
-        }
-
-        return $user->id === $bancassurance->user_id;
+        return $user->hasPermission('bancassurances-update') or ($user->id === $bancassurance->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bancassurance  $bancassurance
-     * @return mixed
+     * @param User $user
+     * @param Bancassurance $bancassurance
+     * @return bool
      */
-    public function delete(User $user, Bancassurance $bancassurance)
+    public function delete(User $user, Bancassurance $bancassurance): bool
     {
-        if($user->hasPermission('bancassurances-delete')) {
-            return true;
-        }
-
-        return $user->id === $bancassurance->user_id;
+        return $user->hasPermission('bancassurances-delete') or ($user->id === $bancassurance->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Bancassurance  $bancassurance
-     * @return mixed
+     * @param User $user
+     * @param Bancassurance $bancassurance
+     * @return bool
      */
-    public function restore(User $user, Bancassurance $bancassurance)
+    public function restore(User $user, Bancassurance $bancassurance): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Bancassurance  $bancassurance
-     * @return mixed
+     * @param User $user
+     * @param Bancassurance $bancassurance
+     * @return bool
      */
-    public function forceDelete(User $user, Bancassurance $bancassurance)
+    public function forceDelete(User $user, Bancassurance $bancassurance): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }
