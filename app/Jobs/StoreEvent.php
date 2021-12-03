@@ -17,8 +17,20 @@ class StoreEvent implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $model;
-    public $user;
+    /**
+     * @var Model
+     */
+    public Model $model;
+
+    /**
+     * @var User|null
+     */
+
+    public ?User $user;
+
+    /**
+     * @var string
+     */
     public $type;
 
     /**
@@ -46,7 +58,7 @@ class StoreEvent implements ShouldQueue
         $event->event = $this->type;
         $event->eventable()->associate($this->model);
         
-        if($this->user instanceof User)
+        if(! is_null($this->user))
             $this->user->events()->save($event);
         else
             $event->save();
