@@ -11,24 +11,13 @@ class FilePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        return true;
-    }
-
-    /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\File  $file
-     * @return mixed
+     * @param User $user
+     * @param File $file
+     * @return bool
      */
-    public function view(User $user, File $file)
+    public function view(User $user, File $file): bool
     {
         return true;
     }
@@ -36,79 +25,59 @@ class FilePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('files-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('files-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\File  $file
-     * @return mixed
+     * @param User $user
+     * @param File $file
+     * @return bool
      */
-    public function update(User $user, File $file)
+    public function update(User $user, File $file): bool
     {
-        if($user->hasPermission('files-update')) {
-            return true;
-        }
-
-        return $user->id === $file->user_id;
+        return $user->hasPermission('files-update') or ($user->id === $file->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\File  $file
-     * @return mixed
+     * @param User $user
+     * @param File $file
+     * @return bool
      */
-    public function delete(User $user, File $file)
+    public function delete(User $user, File $file): bool
     {
-        if($user->hasPermission('files-delete')) {
-            return true;
-        }
-
-        return $user->id === $file->user_id;
+        return $user->hasPermission('files-delete') or ($user->id === $file->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\File  $file
-     * @return mixed
+     * @param User $user
+     * @param File $file
+     * @return bool
      */
-    public function restore(User $user, File $file)
+    public function restore(User $user, File $file): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\File  $file
-     * @return mixed
+     * @param User $user
+     * @param File $file
+     * @return bool
      */
-    public function forceDelete(User $user, File $file)
+    public function forceDelete(User $user, File $file): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

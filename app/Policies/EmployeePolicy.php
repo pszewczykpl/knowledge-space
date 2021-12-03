@@ -11,104 +11,61 @@ class EmployeePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Employee  $employee
-     * @return mixed
-     */
-    public function view(User $user, Employee $employee)
-    {
-        return true;
-    }
-
-    /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('employees-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('employees-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Employee  $employee
-     * @return mixed
+     * @param User $user
+     * @param Employee $employee
+     * @return bool
      */
-    public function update(User $user, Employee $employee)
+    public function update(User $user, Employee $employee): bool
     {
-        if($user->hasPermission('employees-update')) {
-            return true;
-        }
-
-        return $user->id === $employee->user_id;
+        return $user->hasPermission('employees-update') or ($user->id === $employee->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Employee  $employee
-     * @return mixed
+     * @param User $user
+     * @param Employee $employee
+     * @return bool
      */
-    public function delete(User $user, Employee $employee)
+    public function delete(User $user, Employee $employee): bool
     {
-        if($user->hasPermission('employees-delete')) {
-            return true;
-        }
-
-        return $user->id === $employee->user_id;
+        return $user->hasPermission('employees-delete') or ($user->id === $employee->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Employee  $employee
-     * @return mixed
+     * @param User $user
+     * @param Employee $employee
+     * @return bool
      */
-    public function restore(User $user, Employee $employee)
+    public function restore(User $user, Employee $employee): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Employee  $employee
-     * @return mixed
+     * @param User $user
+     * @param Employee $employee
+     * @return bool
      */
-    public function forceDelete(User $user, Employee $employee)
+    public function forceDelete(User $user, Employee $employee): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

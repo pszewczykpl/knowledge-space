@@ -13,110 +13,82 @@ class PostCategoryPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        if($user->hasPermission('post-categories-viewany')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('post-categories-viewany');
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\PostCategory  $postCategory
-     * @return mixed
+     * @param User $user
+     * @param PostCategory $postCategory
+     * @return bool
      */
-    public function view(User $user, PostCategory $postCategory)
+    public function view(User $user, PostCategory $postCategory): bool
     {
-        if($user->hasPermission('post-categories-view')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('post-categories-view');
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('post-categories-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('post-categories-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\PostCategory  $postCategory
-     * @return mixed
+     * @param User $user
+     * @param PostCategory $postCategory
+     * @return bool
      */
-    public function update(User $user, PostCategory $postCategory)
+    public function update(User $user, PostCategory $postCategory): bool
     {
-        if($user->hasPermission('post-categories-update')) {
-            return true;
-        }
-
-        return $user->id === $postCategory->user_id;
+        return $user->hasPermission('post-categories-update') or ($user->id === $postCategory->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\PostCategory  $postCategory
-     * @return mixed
+     * @param User $user
+     * @param PostCategory $postCategory
+     * @return bool
      */
-    public function delete(User $user, PostCategory $postCategory)
+    public function delete(User $user, PostCategory $postCategory): bool
     {
-        if($user->hasPermission('post-categories-delete')) {
-            return true;
-        }
-
-        return $user->id === $postCategory->user_id;
+        return $user->hasPermission('post-categories-delete') or ($user->id === $postCategory->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PostCategory  $postCategory
-     * @return mixed
+     * @param User $user
+     * @param PostCategory $postCategory
+     * @return bool
      */
-    public function restore(User $user, PostCategory $postCategory)
+    public function restore(User $user, PostCategory $postCategory): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\PostCategory  $postCategory
-     * @return mixed
+     * @param User $user
+     * @param PostCategory $postCategory
+     * @return bool
      */
-    public function forceDelete(User $user, PostCategory $postCategory)
+    public function forceDelete(User $user, PostCategory $postCategory): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

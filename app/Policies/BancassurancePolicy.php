@@ -11,29 +11,6 @@ class BancassurancePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param User $user
-     * @return bool
-     */
-    public function viewAny(User $user): bool
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param User $user
-     * @param Bancassurance $bancassurance
-     * @return bool
-     */
-    public function view(User $user, Bancassurance $bancassurance): bool
-    {
-        return true;
-    }
-
-    /**
      * Determine whether the user can create models.
      *
      * @param User $user

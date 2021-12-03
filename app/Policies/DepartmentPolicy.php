@@ -18,11 +18,7 @@ class DepartmentPolicy
      */
     public function viewAny(User $user): bool
     {
-        if($user->hasPermission('departments-viewany')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('departments-viewany');
     }
 
     /**
@@ -34,11 +30,7 @@ class DepartmentPolicy
      */
     public function view(User $user, Department $department): bool
     {
-        if($user->hasPermission('departments-view')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('departments-view');
     }
 
     /**
@@ -49,74 +41,54 @@ class DepartmentPolicy
      */
     public function create(User $user): bool
     {
-        if($user->hasPermission('departments-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('departments-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Department  $department
-     * @return mixed
+     * @param User $user
+     * @param Department $department
+     * @return bool
      */
-    public function update(User $user, Department $department)
+    public function update(User $user, Department $department): bool
     {
-        if($user->hasPermission('departments-update')) {
-            return true;
-        }
-
-        return $user->id === $department->user_id;
+        return $user->hasPermission('departments-update') or ($user->id === $department->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Department  $department
-     * @return mixed
+     * @param User $user
+     * @param Department $department
+     * @return bool
      */
-    public function delete(User $user, Department $department)
+    public function delete(User $user, Department $department): bool
     {
-        if($user->hasPermission('departments-delete')) {
-            return true;
-        }
-
-        return $user->id === $department->user_id;
+        return $user->hasPermission('departments-delete') or ($user->id === $department->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
-     * @return mixed
+     * @param User $user
+     * @param Department $department
+     * @return bool
      */
-    public function restore(User $user, Department $department)
+    public function restore(User $user, Department $department): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
-     * @return mixed
+     * @param User $user
+     * @param Department $department
+     * @return bool
      */
-    public function forceDelete(User $user, Department $department)
+    public function forceDelete(User $user, Department $department): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

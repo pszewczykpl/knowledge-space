@@ -11,104 +11,61 @@ class InvestmentPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Investment  $investment
-     * @return mixed
-     */
-    public function view(User $user, Investment $investment)
-    {
-        return true;
-    }
-
-    /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('investments-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('investments-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Investment  $investment
-     * @return mixed
+     * @param User $user
+     * @param Investment $investment
+     * @return bool
      */
-    public function update(User $user, Investment $investment)
+    public function update(User $user, Investment $investment): bool
     {
-        if($user->hasPermission('investments-update')) {
-            return true;
-        }
-
-        return $user->id === $investment->user_id;
+        return $user->hasPermission('investments-update') or ($user->id === $investment->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Investment  $investment
-     * @return mixed
+     * @param User $user
+     * @param Investment $investment
+     * @return bool
      */
-    public function delete(User $user, Investment $investment)
+    public function delete(User $user, Investment $investment): bool
     {
-        if($user->hasPermission('investments-delete')) {
-            return true;
-        }
-
-        return $user->id === $investment->user_id;
+        return $user->hasPermission('investments-delete') or ($user->id === $investment->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Investment  $investment
-     * @return mixed
+     * @param User $user
+     * @param Investment $investment
+     * @return bool
      */
-    public function restore(User $user, Investment $investment)
+    public function restore(User $user, Investment $investment): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Investment  $investment
-     * @return mixed
+     * @param User $user
+     * @param Investment $investment
+     * @return bool
      */
-    public function forceDelete(User $user, Investment $investment)
+    public function forceDelete(User $user, Investment $investment): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

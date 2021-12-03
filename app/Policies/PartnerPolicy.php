@@ -11,104 +11,61 @@ class PartnerPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Partner  $partner
-     * @return mixed
-     */
-    public function view(User $user, Partner $partner)
-    {
-        return true;
-    }
-
-    /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if($user->hasPermission('partners-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('partners-create');
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Partner  $partner
-     * @return mixed
+     * @param User $user
+     * @param Partner $partner
+     * @return bool
      */
-    public function update(User $user, Partner $partner)
+    public function update(User $user, Partner $partner): bool
     {
-        if($user->hasPermission('partners-update')) {
-            return true;
-        }
-
-        return $user->id === $partner->user_id;
+        return $user->hasPermission('partners-update') or ($user->id === $partner->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Partner  $partner
-     * @return mixed
+     * @param User $user
+     * @param Partner $partner
+     * @return bool
      */
-    public function delete(User $user, Partner $partner)
+    public function delete(User $user, Partner $partner): bool
     {
-        if($user->hasPermission('partners-delete')) {
-            return true;
-        }
-
-        return $user->id === $partner->user_id;
+        return $user->hasPermission('partners-delete') or ($user->id === $partner->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Partner  $partner
-     * @return mixed
+     * @param User $user
+     * @param Partner $partner
+     * @return bool
      */
-    public function restore(User $user, Partner $partner)
+    public function restore(User $user, Partner $partner): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Partner  $partner
-     * @return mixed
+     * @param User $user
+     * @param Partner $partner
+     * @return bool
      */
-    public function forceDelete(User $user, Partner $partner)
+    public function forceDelete(User $user, Partner $partner): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

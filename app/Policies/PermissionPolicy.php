@@ -13,32 +13,22 @@ class PermissionPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\User  $user
-     * 
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        if($user->hasPermission('permissions-viewany')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('permissions-viewany');
     }
-    
+
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $user
-     * 
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function update(User $user)
+    public function update(User $user): bool
     {
-        if($user->hasPermission('permissions-update')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('permissions-update');
     }
 }

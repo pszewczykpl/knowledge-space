@@ -10,60 +10,50 @@ class ReplyPolicy
 {
     use HandlesAuthorization;
 
-    public function create(User $user)
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function create(User $user): bool
     {
-        if($user->hasPermission('replies-create')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('replies-create');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $user
-     * @param  \App\Reply  $reply
-     * @return mixed
+     * @param User $user
+     * @param Reply $reply
+     * @return bool
      */
-    public function delete(User $user, Reply $reply)
+    public function delete(User $user, Reply $reply): bool
     {
-        if($user->hasPermission('replies-delete')) {
-            return true;
-        }
-
-        return $user->id === $reply->user_id;
+        return $user->hasPermission('replies-delete') or ($user->id === $reply->user_id);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Reply  $reply
-     * @return mixed
+     * @param User $user
+     * @param Reply $reply
+     * @return bool
      */
-    public function restore(User $user, Reply $reply)
+    public function restore(User $user, Reply $reply): bool
     {
-        if($user->hasPermission('restore')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('restore');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Reply  $reply
-     * @return mixed
+     * @param User $user
+     * @param Reply $reply
+     * @return bool
      */
-    public function forceDelete(User $user, Reply $reply)
+    public function forceDelete(User $user, Reply $reply): bool
     {
-        if($user->hasPermission('force-delete')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('force-delete');
     }
 }

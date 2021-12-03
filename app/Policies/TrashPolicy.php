@@ -12,15 +12,11 @@ class TrashPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        if($user->hasPermission('view-deleted')) {
-            return true;
-        }
-
-        return false;
+        return $user->hasPermission('view-deleted');
     }
 }
