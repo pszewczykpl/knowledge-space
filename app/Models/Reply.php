@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $content
+ * @property int $news_id
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class Reply extends Model
 {
     use HasFactory;

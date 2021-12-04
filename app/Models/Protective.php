@@ -9,6 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property int $code
+ * @property string $dist_short
+ * @property string $dist
+ * @property string $code_owu
+ * @property int $subscription
+ * @property mixed $edit_date
+ * @property string $status
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class Protective extends Model
 {
     use HasFactory;

@@ -9,6 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $code_owu
+ * @property mixed $edit_date
+ * @property string $status
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class Employee extends Model
 {
     use HasFactory;

@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $content
+ * @property int $post_category_id
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class Post extends Model
 {
     use HasFactory;

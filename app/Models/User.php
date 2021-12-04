@@ -13,8 +13,30 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $username
+ * @property string $email
+ * @property string|null $phone
+ * @property string $password
+ * @property string $company
+ * @property int $department_id
+ * @property string $position
+ * @property string|null $description
+ * @property string $location
+ * @property string|null $avatar_path
+ * @property string|null $remember_token
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ *
+ * @property string $full_name Added using getFullNameAttribute() method
+ *
+ * @property bool $v_rounded --- TO DELETE ---
+ * @property bool $v_aside_toggled --- TO DELETE ---
+ * @property bool $v_dark_mode --- TO DELETE ---
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use SoftDeletes;

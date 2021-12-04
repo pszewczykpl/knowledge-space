@@ -9,6 +9,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $path
+ * @property string $name
+ * @property string $extension
+ * @property string|null $code
+ * @property bool $draft
+ * @property string $type
+ * @property int $file_category_id
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class File extends Model
 {
     use HasFactory;

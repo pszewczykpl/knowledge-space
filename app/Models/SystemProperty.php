@@ -6,6 +6,13 @@ use App\Traits\CacheModels;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $key
+ * @property string $value
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ */
 class SystemProperty extends Model
 {
     use HasFactory;

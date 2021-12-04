@@ -9,6 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @property int $id
+ * @property string $code
+ * @property string $name
+ * @property string $status
+ * @property string $type
+ * @property string $currency
+ * @property mixed|null $cancel_date
+ * @property mixed|null $start_date
+ * @property string|null $cancel_reason
+ * @property int $user_id
+ * @property mixed|null $created_at
+ * @property mixed|null $updated_at
+ * @property mixed|null $deleted_at
+ */
 class Fund extends Model
 {
     use HasFactory;
