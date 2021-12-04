@@ -43,7 +43,6 @@
 				</div>
 			</div>
 		</div>
-		<style>.show-news p { margin-top: 0; margin-bottom: 0; }</style>
 		<div class="mb-7">
 			<div class="text-gray-800 fw-normal show-news mb-5 fs-6">
 				{!! $news->content !!}
