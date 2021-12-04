@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'Illuminate\Auth\Events\Verified' => [
+            'App\Listeners\LogVerifiedUser',
+        ],
     ];
 
     /**
@@ -49,7 +52,6 @@ class EventServiceProvider extends ServiceProvider
         \App\Models\News::observe(\App\Observers\NewsObserver::class);
         \App\Models\Note::observe(\App\Observers\NoteObserver::class);
         \App\Models\Partner::observe(\App\Observers\PartnerObserver::class);
-        \App\Models\Event::observe(\App\Observers\EventObserver::class);
         \App\Models\Permission::observe(\App\Observers\PermissionObserver::class);
         \App\Models\PostCategory::observe(\App\Observers\PostCategoryObserver::class);
         \App\Models\Post::observe(\App\Observers\PostObserver::class);
