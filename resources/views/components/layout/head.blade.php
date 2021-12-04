@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="_token" content="{{ csrf_token() }}">
 	@stack('css')
-	<link href="{{ asset('css_' . str_replace('.', '_', config('app.version')) . '/app' . ($dark_mode ? '.dark' : '') . '.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('css/app' . ($dark_mode ? '.dark' : '') . '.css?v=' . config('app.version')) }}" rel="stylesheet" type="text/css" />
 	<style>
 		.card-rounded {
 			border-radius: {{ $rounded }}rem !important;
