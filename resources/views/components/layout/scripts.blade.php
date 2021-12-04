@@ -7,9 +7,9 @@
     </span>
 </div>
 
-<script> var HOST_URL = @php echo '"' . url('/') . '"'; @endphp; </script>
-	<script> var PERMISSIONS = @auth {!! json_encode(cache()->tags(['users', 'permissions'])->remember('users_'.auth()->id().'_permissions_all', 900, function () { return auth()->user()->permissions()->get()->pluck('code')->toArray(); })) !!} @else []  @endauth; </script>
-	<script src="{{ asset('js/app.js?v=' . config('app.version')) }}"></script>
+<script>var HOST_URL = "{{ url('/') }}";</script>
+<script>var PERMISSIONS = @auth {!! json_encode(cache()->tags(['users', 'permissions'])->remember('users_'.auth()->id().'_permissions_all', 900, function () { return auth()->user()->permissions()->get()->pluck('code')->toArray(); })) !!} @else []  @endauth;</script>
+<script src="{{ asset('js/app.js?v=' . config('app.version')) }}"></script>
 @if (Session::has('notify_success'))
     <script>
         toastr.success('{{ Session::get('notify_success') }}');
