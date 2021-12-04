@@ -18,33 +18,16 @@ class StoreEvent implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @var Model
-     */
-    public Model $model;
-
-    /**
-     * @var User|null
-     */
-
-    public ?User $user;
-
-    /**
-     * @var string
-     */
-    public $type;
-
-    /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $type, Model $model)
-    {
-        $this->model = $model;
-        $this->type = $type;
-        
-        if(Auth::check())
-            $this->user = Auth::user();
+    public function __construct(
+        public string $type,
+        public Model $model,
+        public ?User $user = null
+    ) {
+        if(Auth::check()) $this->user = Auth::user();
     }
 
     /**
