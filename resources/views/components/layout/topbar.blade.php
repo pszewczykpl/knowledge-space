@@ -16,7 +16,7 @@
 				</span>
 			</div>
 			<a href="{{ route('home.index') }}" class="d-flex align-items-center">
-				<img alt="Logo" src="{{ asset('media/logos/logo-std.png') }}" class="h-30px" />
+				<img alt="Logo" src="{{ asset('images/logos/main.png') }}" class="h-30px" />
 			</a>
 		</div>
 		<div class="d-flex flex-shrink-0">

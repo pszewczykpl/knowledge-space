@@ -17,7 +17,7 @@
                                 <span class="fw-normal fs-6 text-gray-400 mt-3 mx-1 pe-10"><b>Wskazówka!</b> Do wyszukiwarki możesz wpisać takie dane jak: <i>Nazwę produktu</i>, <i>Kod TOiL</i>, <i>Kod produktu</i> i wiele innych!</span>
                             </div>
                             <div class="flex-equal d-flex justify-content-center align-items-end ms-10">
-                                <img src="{{ asset('media/bg/presentation.png') }}" alt="" class="mw-100 mh-125px mh-lg-300px mb-lg-n12">
+                                <img src="{{ asset('images/presentation.png') }}" alt="" class="mw-100 mh-125px mh-lg-300px mb-lg-n12">
                             </div>
                         </div>
                         <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5">
