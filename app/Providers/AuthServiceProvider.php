@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,25 +12,25 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Department::class => DepartmentPolicy::class,
-        Employee::class => EmployeePolicy::class,
-        FileCategory::class => FileCategoryPolicy::class,
-        File::class => FilePolicy::class,
-        Fund::class => FundPolicy::class,
-        Investment::class => InvestmentPolicy::class,
-        News::class => NewsPolicy::class,
-        Note::class => NotePolicy::class,
-        Partner::class => PartnerPolicy::class,
-        Permission::class => PermissionPolicy::class,
-        Protective::class => ProtectivePolicy::class,
-        Banassurance::class => BanassurancePolicy::class,
-        Reply::class => ReplyPolicy::class,
-        Risk::class => RiskPolicy::class,
-        System::class => SystemPolicy::class,
-        Trash::class => TrashPolicy::class,
-        User::class => UserPolicy::class,
-        Post::class => PostPolicy::class,
-        PostCategory::class => PostCategoryPolicy::class,
+        \App\Models\Department::class => \App\Policies\DepartmentPolicy::class,
+        \App\Models\Employee::class => \App\Policies\EmployeePolicy::class,
+        \App\Models\FileCategory::class => \App\Policies\FileCategoryPolicy::class,
+        \App\Models\File::class => \App\Policies\FilePolicy::class,
+        \App\Models\Fund::class => \App\Policies\FundPolicy::class,
+        \App\Models\Investment::class => \App\Policies\InvestmentPolicy::class,
+        \App\Models\News::class => \App\Policies\NewsPolicy::class,
+        \App\Models\Note::class => \App\Policies\NotePolicy::class,
+        \App\Models\Partner::class => \App\Policies\PartnerPolicy::class,
+        \App\Models\Permission::class => \App\Policies\PermissionPolicy::class,
+        \App\Models\Protective::class => \App\Policies\ProtectivePolicy::class,
+        \App\Models\Bancassurance::class => \App\Policies\BancassurancePolicy::class,
+        \App\Models\Reply::class => \App\Policies\ReplyPolicy::class,
+        \App\Models\Risk::class => \App\Policies\RiskPolicy::class,
+        \App\Models\System::class => \App\Policies\SystemPolicy::class,
+        Trash::class => \App\Policies\TrashPolicy::class,
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+        \App\Models\Post::class => \App\Policies\PostPolicy::class,
+        \App\Models\PostCategory::class => \App\Policies\PostCategoryPolicy::class,
     ];
 
     /**
@@ -44,6 +43,5 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
-
     }
 }
