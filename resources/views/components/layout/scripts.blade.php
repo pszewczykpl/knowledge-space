@@ -9,7 +9,7 @@
 
 <script>
     const HOST_URL = "{{ url('/') }}";
-    const PERMISSIONS = @auth {!! json_encode(cache()->tags(['users', 'permissions'])->remember('users_'.auth()->id().'_permissions_all', 900, function () { return auth()->user()->permissions()->get()->pluck('code')->toArray(); })) !!} @else []  @endauth;
+    const PERMISSIONS = @auth {!! json_encode(auth()->user()->permissions->pluck('code')->toArray()) !!} @else []  @endauth;
 </script>
 <script src="{{ asset('js/app' . (isset($datatables) ? '.datatables' : '') . '.js?v=' . config('app.version')) }}"></script>
 
