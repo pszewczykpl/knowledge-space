@@ -9,12 +9,4 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app' . ($dark_mode ? '.dark' : '') . '.css?v=' . config('app.version')) }}" />
 	@stack('css')
-	<style>
-		.card-rounded {
-			border-radius: {{ $rounded }}rem !important;
-		}
-		.card-shadow {
-			box-shadow: @if($dark_mode) none @else 0 10px 35px 0 rgb(56 71 109 / 12%) @endif !important;
-		}
-	</style>
 </head>

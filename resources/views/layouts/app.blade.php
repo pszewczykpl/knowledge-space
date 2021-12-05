@@ -44,7 +44,9 @@
         
         <x-layout.modals />
 
-        <x-layout.scripts />
+		@isset($datatables)
+        <x-layout.scripts :datatables="true" /> @else <x-layout.scripts />
+		@endisset
 
 		@stack('scripts')
 		

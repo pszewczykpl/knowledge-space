@@ -11,14 +11,11 @@
     const HOST_URL = "{{ url('/') }}";
     const PERMISSIONS = @auth {!! json_encode(cache()->tags(['users', 'permissions'])->remember('users_'.auth()->id().'_permissions_all', 900, function () { return auth()->user()->permissions()->get()->pluck('code')->toArray(); })) !!} @else []  @endauth;
 </script>
-<script src="{{ asset('js/app.js?v=' . config('app.version')) }}"></script>
+<script src="{{ asset('js/app' . (isset($datatables) ? '.datatables' : '') . '.js?v=' . config('app.version')) }}"></script>
+
 @if (Session::has('notify_success'))
-    <script>
-        toastr.success('{{ Session::get('notify_success') }}');
-    </script>
+    <script>toastr.info('{{ session()->get('notify_success') }}');</script>
 @endif
 @if (Session::has('notify_danger'))
-    <script>
-        toastr.error('{{ Session::get('notify_danger') }}');
-    </script>
+    <script>toastr.error('{{ Session::get('notify_danger') }}');</script>
 @endif

@@ -42,14 +42,14 @@
                             <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
-                                    <th style="display: none;">{{ $columnTitle }}</th>
+                                    <th>{{ $columnTitle }}</th>
                                 @endforeach
                             </tr>
                             <tbody class="text-gray-600 fw-bold">
                             @foreach($datatableSettings['deferData'] as $row)
                                 <tr>
                                     @foreach($datatableSettings['columns'] as $columnCode => $columnTitle)
-                                        <td style="display: none">{!! $row->{$columnCode} ?? '' !!}</td>
+                                        <td>{!! $row->{$columnCode} ?? '' !!}</td>
                                     @endforeach
                                 </tr>
                             @endforeach

@@ -51,7 +51,7 @@
                             <div class="files-2-element-category-{{ $category->id }} @if($file->type == 'Pozostały') type-i-files @elseif($file->type == 'Produktowy') type-p-files @endif d-inline">
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="me-3">
-                                        <a href="{{ route('files.show', $file->id) }}" target="_blank"><img src="{{ asset('/media/files/' . $file->extension . '.svg') }}" style="width: 35px;" alt="{{ $file->name }}"></a>
+                                        <a href="{{ route('files.show', $file->id) }}" target="_blank"><img src="{{ asset('/images/files/' . $file->extension . '.svg') }}" style="width: 35px;" alt="{{ $file->name }}"></a>
                                     </div>
                                     <div class="d-flex flex-column flex-grow-1">
                                         <a href="{{ route('files.show', $file->id) }}" class="fs-7 fw-normal text-dark mt-auto" target="_blank">
