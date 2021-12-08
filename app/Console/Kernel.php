@@ -26,6 +26,16 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+//        $schedule->job(new Heartbeat)->everyMinute();
+        $schedule
+            ->command('queue:work')
+            ->withoutOverlapping()
+            ->runInBackground();
+
+        $schedule
+            ->command('queue:restart')
+            ->hourly();
+
     }
 
     /**
