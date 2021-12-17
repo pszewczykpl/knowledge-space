@@ -18,6 +18,7 @@ class FileObserver
      */
     public function saved(File $file)
     {
+        Cache::forget("files:$file->id");
         // Remove all items with "files" tag
         Cache::tags('files')->flush();
     }

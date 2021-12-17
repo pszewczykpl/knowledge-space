@@ -17,6 +17,7 @@ class FileCategoryObserver
      */
     public function saved(FileCategory $fileCategory)
     {
+        Cache::forget("file_categories:$fileCategory->id");
         // Remove all items with "file_categories" tag
         Cache::tags('file_categories')->flush();
     }

@@ -17,6 +17,7 @@ class PartnerObserver
      */
     public function saved(Partner $partner)
     {
+        Cache::forget("partners:$partner->id");
         // Remove all items with "partners" tag
         Cache::tags('partners')->flush();
     }

@@ -25,7 +25,7 @@ trait CacheModels {
 
         // Get relation data from database and add to cache
         $data = Cache::tags($tags)
-            ->rememberForever($this->getTable() . '_' . $this->id . '_' . $relation, function () use ($relation) {
+            ->rememberForever($this->getTable() . ':' . $this->id . ':' . $relation, function () use ($relation) {
                 return $this->getRelationValue($relation);
             });
 
@@ -35,13 +35,9 @@ trait CacheModels {
         return $data;
     }
 
-    private function getCachedEloquent(string $model, int $id, array $tags = [])
+    public function getCachedEloquent(string $model, int $id)
     {
-        // Add: custom tags from function arg and name of database tables: this and related
-        array_push($tags, $model::getModel()->getTable());
-
-        $data = Cache::tags($tags)
-            ->rememberForever($model::getModel()->getTable() . '_' . $id, function () use ($model, $id) {
+        $data = Cache::rememberForever("{$model::getModel()->getTable()}:$id", function () use ($model, $id) {
                 return $model::withoutEvents(function () use ($model, $id) {
                     return $model::find($id);
                 });

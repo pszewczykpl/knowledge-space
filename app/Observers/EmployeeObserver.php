@@ -17,6 +17,7 @@ class EmployeeObserver
      */
     public function saved(Employee $employee)
     {
+        Cache::forget("employees:$employee->id");
         // Remove all items with "employees" tag
         Cache::tags('employees')->flush();
     }

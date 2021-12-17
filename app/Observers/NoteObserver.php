@@ -17,6 +17,7 @@ class NoteObserver
      */
     public function saved(Note $note)
     {
+        Cache::forget("notes:$note->id");
         // Remove all items with "notes" tag
         Cache::tags('notes')->flush();
     }

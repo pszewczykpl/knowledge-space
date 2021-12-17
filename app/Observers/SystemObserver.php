@@ -17,6 +17,7 @@ class SystemObserver
      */
     public function saved(System $system)
     {
+        Cache::forget("systems:$system->id");
         // Remove all items with "systems" tag
         Cache::tags('systems')->flush();
     }

@@ -17,6 +17,7 @@ class PostCategoryObserver
      */
     public function saved(PostCategory $postCategory)
     {
+        Cache::forget("post_categories:$postCategory->id");
         // Remove all items with "post_categories" tag
         Cache::tags('post_categories')->flush();
     }

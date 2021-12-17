@@ -17,6 +17,7 @@ class PermissionObserver
      */
     public function saved(Permission $permission)
     {
+        Cache::forget("permissions:$permission->id");
         // Remove all items with "permissions" tag
         Cache::tags('permissions')->flush();
     }

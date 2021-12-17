@@ -17,6 +17,7 @@ class ReplyObserver
      */
     public function saved(Reply $reply)
     {
+        Cache::forget("replies:$reply->id");
         // Remove all items with "replies" tag
         Cache::tags('replies')->flush();
     }
