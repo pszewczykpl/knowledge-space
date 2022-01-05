@@ -19,13 +19,25 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        /**
+         * Running only one instance in background of queue:work to handle jobs.
+         */
+        $schedule
+            ->command('queue:work')
+            ->withoutOverlapping()
+            ->runInBackground();
+
+        /**
+         * Restarting hourly queue:work to handle some issues/errors/bugs.
+         */
+        $schedule
+            ->command('queue:restart')
+            ->hourly();
     }
 
     /**

@@ -18,6 +18,7 @@ class BancassuranceObserver
      */
     public function saved(Bancassurance $bancassurance)
     {
+        Cache::forget("bancassurances:$bancassurance->id");
         // Remove all items with "bancassurances" tag
         Cache::tags('bancassurances')->flush();
     }

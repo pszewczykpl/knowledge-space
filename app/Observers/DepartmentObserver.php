@@ -17,6 +17,7 @@ class DepartmentObserver
      */
     public function saved(Department $department)
     {
+        Cache::forget("departments:$department->id");
         // Remove all items with "departments" tag
         Cache::tags('departments')->flush();
     }

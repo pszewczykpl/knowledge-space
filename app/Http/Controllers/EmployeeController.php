@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\StoreEvent;
 use App\Models\Employee;
 use App\Http\Requests\StoreEmployee;
 use App\Http\Requests\UpdateEmployee;
@@ -9,6 +10,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class EmployeeController extends Controller
 {
@@ -96,10 +98,16 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee): View
     {
+        $history = Cache::remember("employees:$employee->id:history", 60*60*12, function () use ($employee) {
+            return Employee::where('name', '=', $employee->name)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+
+        StoreEvent::dispatch('show', $employee);
         return view('products.employees.show', [
             'title' => 'Szczegóły',
             'employee' => $employee,
-            'archive_employees' => Employee::where('name', '=', $employee->name)->orderBy('edit_date', 'desc')->get(),
+            'archive_employees' => $history,
         ]);
     }
 

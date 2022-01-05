@@ -16,6 +16,7 @@ class EventObserver
      */
     public function saved(Event $event)
     {
+        Cache::forget("events:$event->id");
         // Remove all items with "events" tag
         Cache::tags('events')->flush();
     }

@@ -17,6 +17,7 @@ class PostObserver
      */
     public function saved(Post $post)
     {
+        Cache::forget("posts:$post->id");
         // Remove all items with "posts" tag
         Cache::tags('posts')->flush();
     }

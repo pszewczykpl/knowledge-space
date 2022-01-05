@@ -12,7 +12,13 @@ use App\Jobs\StoreEvent;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -32,7 +38,7 @@ class InvestmentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -45,7 +51,7 @@ class InvestmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function create() 
     {
@@ -61,7 +67,7 @@ class InvestmentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\StoreInvestment  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreInvestment $request) 
     {
@@ -80,7 +86,7 @@ class InvestmentController extends Controller
      * Duplicate
      *
      * @param  \Illuminate\Http\StoreInvestment  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function duplicate(Investment $investment)
     {
@@ -106,18 +112,20 @@ class InvestmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Investment  $investment
-     * @return \Illuminate\Http\Response
+     * @param Investment $investment
+     * @return Application|Factory|View
      */
-    public function show(Investment $investment) 
+    public function show(Investment $investment)
     {
-        // Store event using job
-        StoreEvent::dispatch('show', $investment);
+        $history = Cache::remember("investments:$investment->id:history", 60*60*12, function () use ($investment) {
+            return Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get();
+        });
 
+        StoreEvent::dispatch('show', $investment);
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
-            'archive_investments' => Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get(),
+            'archive_investments' => $history,
         ]);
     }
     
@@ -125,7 +133,7 @@ class InvestmentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Investment  $investment
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Investment $investment) 
     {
@@ -142,8 +150,8 @@ class InvestmentController extends Controller
      *
      * @param UpdateInvestment $request
      * @param Investment $investment
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(UpdateInvestment $request, Investment $investment) 
     {
@@ -161,7 +169,7 @@ class InvestmentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Investment  $investment
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Investment $investment) 
     {
@@ -178,7 +186,7 @@ class InvestmentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function restore($id)
     {
@@ -197,7 +205,7 @@ class InvestmentController extends Controller
      * Force remove the specified resource from storage.
      *
      * @param  id  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function force_destroy($id)
     {

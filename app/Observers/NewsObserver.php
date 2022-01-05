@@ -18,6 +18,7 @@ class NewsObserver
      */
     public function saved(News $news)
     {
+        Cache::forget("news:$news->id");
         // Remove all items with "news" tag
         Cache::tags('news')->flush();
     }

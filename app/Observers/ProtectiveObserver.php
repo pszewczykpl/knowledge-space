@@ -17,6 +17,7 @@ class ProtectiveObserver
      */
     public function saved(Protective $protective)
     {
+        Cache::forget("protectives:$protective->id");
         // Remove all items with "protectives" tag
         Cache::tags('protectives')->flush();
     }

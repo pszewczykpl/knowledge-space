@@ -17,7 +17,10 @@ class InvestmentObserver
      */
     public function saved(Investment $investment)
     {
-        // Remove all items with "investments" tag
+        // Deleting cached eloquent
+        Cache::forget("investments:$investment->id");
+
+        // ... and deleting all items with "investments" tag
         Cache::tags('investments')->flush();
     }
 

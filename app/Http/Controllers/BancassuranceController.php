@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\StoreEvent;
 use App\Models\Bancassurance;
 
 use App\Http\Requests\StoreBancassurance;
@@ -11,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class BancassuranceController extends Controller
 {
@@ -97,13 +99,18 @@ class BancassuranceController extends Controller
      */
     public function show(Bancassurance $bancassurance): View
     {
+        $history = Cache::remember("bancassurances:$bancassurance->id:history", 60*60*12, function () use ($bancassurance) {
+            return Bancassurance::where('code', '=', $bancassurance->code)
+                ->where('dist_short', '=', $bancassurance->dist_short)
+                ->where('code_owu', '=', $bancassurance->code_owu)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+
+        StoreEvent::dispatch('show', $bancassurance);
         return view('products.bancassurances.show', [
             'title' => 'Szczegóły',
             'bancassurance' => $bancassurance,
-            'archive_bancassurances' => Bancassurance::where('code', '=', $bancassurance->code)
-                ->where('dist_short', '=', $bancassurance->dist_short)
-                ->where('code_owu', '=', $bancassurance->code_owu)
-                ->orderBy('edit_date', 'desc')->get(),
+            'archive_bancassurances' => $history,
         ]);
     }
 

@@ -17,6 +17,7 @@ class FundObserver
      */
     public function saved(Fund $fund)
     {
+        Cache::forget("funds:$fund->id");
         // Remove all items with "funds" tag
         Cache::tags('funds')->flush();
     }

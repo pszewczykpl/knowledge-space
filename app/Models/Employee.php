@@ -28,6 +28,13 @@ class Employee extends Model
     use HasDatatables;
 
     /**
+     * Set default with() method in query.
+     *
+     * @var string[]
+     */
+    public $with = ['user'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

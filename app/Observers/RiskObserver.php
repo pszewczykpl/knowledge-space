@@ -17,6 +17,7 @@ class RiskObserver
      */
     public function saved(Risk $risk)
     {
+        Cache::forget("risks:$risk->id");
         // Remove all items with "risks" tag
         Cache::tags('risks')->flush();
     }

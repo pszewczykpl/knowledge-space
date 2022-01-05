@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     use CacheModels;
+
     /**
      * This namespace is applied to your controller routes.
      *
@@ -52,75 +53,201 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::bind('bancassurance', function ($id) {
-            return $this->getCachedEloquent('App\Models\Bancassurance', $id);
+            $data = Cache::remember("bancassurances:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Bancassurance::withoutEvents(function () use ($id) {
+                    return \App\Models\Bancassurance::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Bancassurance", $data);
+
+            return $data;
         });
 
         Route::bind('department', function ($id) {
-            return $this->getCachedEloquent('App\Models\Department', $id);
+            $data = Cache::remember("departments:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Department::withoutEvents(function () use ($id) {
+                    return \App\Models\Department::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Department", $data);
+
+            return $data;
         });
 
         Route::bind('employee', function ($id) {
-            return $this->getCachedEloquent('App\Models\Employee', $id);
+            $data = Cache::remember("employees:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Employee::withoutEvents(function () use ($id) {
+                    return \App\Models\Employee::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Employee", $data);
+
+            return $data;
         });
 
         Route::bind('file', function ($id) {
-            return $this->getCachedEloquent('App\Models\File', $id);
+            $data = Cache::remember("files:$id", 60*60*12, function () use ($id) {
+                return \App\Models\File::withoutEvents(function () use ($id) {
+                    return \App\Models\File::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\File", $data);
+
+            return $data;
         });
 
         Route::bind('file-category', function ($id) {
-            return $this->getCachedEloquent('App\Models\FileCategory', $id);
+            $data = Cache::remember("file_categories:$id", 60*60*12, function () use ($id) {
+                return \App\Models\FileCategory::withoutEvents(function () use ($id) {
+                    return \App\Models\FileCategory::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\FileCategory", $data);
+
+            return $data;
         });
 
         Route::bind('fund', function ($id) {
-            return $this->getCachedEloquent('App\Models\Fund', $id);
+            $data = Cache::remember("funds:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Fund::withoutEvents(function () use ($id) {
+                    return \App\Models\Fund::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Fund", $data);
+
+            return $data;
         });
 
         Route::bind('investment', function ($id) {
-            return $this->getCachedEloquent('App\Models\Investment', $id);
+            $data = Cache::remember("investments:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Investment::withoutEvents(function () use ($id) {
+                    return \App\Models\Investment::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Investment", $data);
+
+            return $data;
         });
 
         Route::bind('news', function ($id) {
-            return $this->getCachedEloquent('App\Models\News', $id);
+            $data = Cache::remember("news:$id", 60*60*12, function () use ($id) {
+                return \App\Models\News::withoutEvents(function () use ($id) {
+                    return \App\Models\News::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\News", $data);
+
+            return $data;
         });
 
         Route::bind('note', function ($id) {
-            return $this->getCachedEloquent('App\Models\Note', $id);
+            $data = Cache::remember("notes:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Note::withoutEvents(function () use ($id) {
+                    return \App\Models\Note::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Note", $data);
+
+            return $data;
         });
 
         Route::bind('partner', function ($id) {
-            return $this->getCachedEloquent('App\Models\Partner', $id);
+            $data = Cache::remember("partners:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Partner::withoutEvents(function () use ($id) {
+                    return \App\Models\Partner::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Partner", $data);
+
+            return $data;
         });
 
         Route::bind('permission', function ($id) {
-            return $this->getCachedEloquent('App\Models\Permission', $id);
+            $data = Cache::remember("permissions:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Permission::withoutEvents(function () use ($id) {
+                    return \App\Models\Permission::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Permission", $data);
+
+            return $data;
         });
 
         Route::bind('post', function ($id) {
-            return $this->getCachedEloquent('App\Models\Post', $id);
+            $data = Cache::remember("posts:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Post::withoutEvents(function () use ($id) {
+                    return \App\Models\Post::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Post", $data);
+
+            return $data;
         });
 
         Route::bind('post-category', function ($id) {
-            return $this->getCachedEloquent('App\Models\PostCategory', $id);
+            $data = Cache::remember("post_categories:$id", 60*60*12, function () use ($id) {
+                return \App\Models\PostCategory::withoutEvents(function () use ($id) {
+                    return \App\Models\PostCategory::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\PostCategory", $data);
+
+            return $data;
         });
 
         Route::bind('protective', function ($id) {
-            return $this->getCachedEloquent('App\Models\Protective', $id);
+            $data = Cache::remember("protectives:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Protective::withoutEvents(function () use ($id) {
+                    return \App\Models\Protective::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Protective", $data);
+
+            return $data;
         });
 
         Route::bind('reply', function ($id) {
-            return $this->getCachedEloquent('App\Models\Reply', $id);
+            $data = Cache::remember("replies:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Reply::withoutEvents(function () use ($id) {
+                    return \App\Models\Reply::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Reply", $data);
+
+            return $data;
         });
 
         Route::bind('risk', function ($id) {
-            return $this->getCachedEloquent('App\Models\Risk', $id);
+            $data = Cache::remember("risks:$id", 60*60*12, function () use ($id) {
+                return \App\Models\Risk::withoutEvents(function () use ($id) {
+                    return \App\Models\Risk::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\Risk", $data);
+
+            return $data;
         });
 
         Route::bind('system', function ($id) {
-            return $this->getCachedEloquent('App\Models\System', $id);
+            $data = Cache::remember("systems:$id", 60*60*12, function () use ($id) {
+                return \App\Models\System::withoutEvents(function () use ($id) {
+                    return \App\Models\System::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\System", $data);
+
+            return $data;
         });
 
         Route::bind('user', function ($id) {
-            return $this->getCachedEloquent('App\Models\User', $id);
+            $data = Cache::remember("users:$id", 60*60*12, function () use ($id) {
+                return \App\Models\User::withoutEvents(function () use ($id) {
+                    return \App\Models\User::find($id);
+                });
+            });
+            event("eloquent.retrieved: \App\Models\User", $data);
+
+            return $data;
         });
 
         parent::boot();

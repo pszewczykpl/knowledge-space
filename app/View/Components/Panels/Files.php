@@ -43,10 +43,8 @@ class Files extends Component
         $this->model = $model;
         $this->name = str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $model->extended_name);
 
-        $fileCategories = Cache::tags([$model->getTable(),'file_categories', 'files'])->rememberForever($model->getTable() . '_' . $model->id . '_file_categories_get', function () use ($model) {
-            return FileCategory::withoutEvents(function () use ($model) {
+        $fileCategories = Cache::remember($model->getTable() . ':' . "$model->id:files::file_categories", 60*60*12, function () use ($model) {
                 return FileCategory::whereIn('id', $model->files->pluck('file_category_id')->toArray())->get();
-            });
         });
 
         $this->fileCategories = $fileCategories;

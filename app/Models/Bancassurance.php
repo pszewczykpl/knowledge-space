@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Cache;
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property mixed|null $deleted_at
+ * @method static find($id)
  */
 class Bancassurance extends Model
 {
@@ -32,6 +33,13 @@ class Bancassurance extends Model
     use SoftDeletes;
     use CacheModels;
     use HasDatatables;
+
+    /**
+     * Set default with() method in query.
+     *
+     * @var string[]
+     */
+    public $with = ['user'];
 
     /**
      * The attributes that are mass assignable.

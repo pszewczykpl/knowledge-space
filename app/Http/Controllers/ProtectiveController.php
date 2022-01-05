@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\StoreEvent;
 use App\Models\Protective;
 
 use App\Http\Requests\StoreProtective;
@@ -10,6 +11,7 @@ use App\Http\Requests\UpdateProtective;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class ProtectiveController extends Controller
@@ -95,13 +97,18 @@ class ProtectiveController extends Controller
      */
     public function show(Protective $protective)
     {
+        $history = Cache::remember("protectives:$protective->id:history", 60*60*12, function () use ($protective) {
+            return Protective::where('code', '=', $protective->code)
+                ->where('dist_short', '=', $protective->dist_short)
+                ->where('code_owu', '=', $protective->code_owu)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+
+        StoreEvent::dispatch('show', $protective);
         return view('products.protectives.show', [
             'title' => 'Szczegóły',
             'protective' => $protective,
-            'archive_protectives' => Protective::where('code', '=', $protective->code)
-                ->where('dist_short', '=', $protective->dist_short)
-                ->where('code_owu', '=', $protective->code_owu)
-                ->orderBy('edit_date', 'desc')->get(),
+            'archive_protectives' => $history,
         ]);
     }
 

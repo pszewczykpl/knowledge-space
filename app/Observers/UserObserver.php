@@ -18,6 +18,7 @@ class UserObserver
      */
     public function saved(User $user)
     {
+        Cache::forget("users:$user->id");
         // Remove all items with "users" tag
         Cache::tags('users')->flush();
     }
