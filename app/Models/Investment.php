@@ -10,18 +10,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * @property int $id
- * @property string $group
- * @property string $name
- * @property int $code
- * @property string $dist_short
- * @property string $dist
- * @property string $code_owu
- * @property string $code_toil
- * @property mixed $edit_date
- * @property string $type
- * @property string $status
- * @property int $user_id
+ * @property int        $id
+ * @property string     $group
+ * @property string     $name
+ * @property int        $code
+ * @property string     $dist_short
+ * @property string     $dist
+ * @property string     $code_owu
+ * @property string     $code_toil
+ * @property mixed      $edit_date
+ * @property string     $type
+ * @property string     $status
+ * @property int        $user_id
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property mixed|null $deleted_at
