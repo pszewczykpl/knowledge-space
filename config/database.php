@@ -78,6 +78,21 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'rejestrator' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_EXT1_URL'),
+            'host' => env('DB_EXT1_HOST', '127.0.0.1'),
+            'port' => env('DB_EXT1_PORT', '5432'),
+            'database' => env('DB_EXT1_DATABASE', 'forge'),
+            'username' => env('DB_EXT1_USERNAME', 'forge'),
+            'password' => env('DB_EXT1_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
