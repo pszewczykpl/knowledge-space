@@ -35,6 +35,7 @@ class UpdateUser extends FormRequest
             'description' => 'nullable|string',
             'location' => 'required|string|max:255',
             'avatar_path' => 'nullable|string',
+            'avatar_remove' => 'nullable|string',
         ];
     }
 }

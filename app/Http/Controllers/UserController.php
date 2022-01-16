@@ -132,11 +132,13 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $user->update($request->all());
+        $user->update($request->except('avatar_remove'));
 
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
+        } else if ($request->avatar_remove) {
+            $user->avatar_path = null;
         }
 
         if($request->new_password) {
@@ -148,7 +150,7 @@ class UserController extends Controller
         if(isset($request->permission_id)) {
             $user->permissions()->sync($request->permission_id);
         }
-        
+
         return redirect()->route('users.edit', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
 

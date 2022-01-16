@@ -15,7 +15,23 @@
         <x-pages.form-card title="Dane użytkownika">
             <x-pages.form-card-row label="Avatar">
 {{--                <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $fund->name }}" placeholder="Wpisz Nazwa wyświetlana">--}}
-                Upload avatarów chwilowo niedostępny
+    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-size: 100%; background-image: url('{{ Storage::url('avatars/default.jpg') }}')">
+        <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 100%; background-image: url('{{ Storage::url(auth()->user()->avatar_path ?? 'avatars/default.jpg') }}')"></div>
+        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Edytuj avatar">
+            @include('svg.edit', ['class' => 'svg-icon svg-icon-3'])
+            <input type="file" name="avatar" id="avatar" accept=".png, .jpg, .jpeg" />
+            <input type="hidden" name="avatar_remove" id="avatar_remove" />
+        </label>
+        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Anuluj avatar">
+			@include('svg.trash', ['class' => 'svg-icon svg-icon-3'])
+		</span>
+        @if(auth()->user()->avatar_path)
+        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Usuń avatar">
+			@include('svg.trash', ['class' => 'svg-icon svg-icon-3'])
+		</span>
+        @endif
+    </div>
+    <div class="form-text">Dozwolone pliki: png, jpg, jpeg.</div>
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Imię">
                 <input class="form-control form-control-lg form-control-solid" type="text" name="first_name" id="first_name" value="{{ $user->first_name }}" placeholder="Wpisz Imię">
