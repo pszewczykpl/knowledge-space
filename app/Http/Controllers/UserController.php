@@ -132,17 +132,13 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $user->update($request->except('avatar_remove'));
+        $user->update($request->all());
 
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
         } else if ($request->avatar_remove) {
             $user->avatar_path = null;
-        }
-
-        if($request->new_password) {
-            $user->password = Hash::make($request->new_password);
         }
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
