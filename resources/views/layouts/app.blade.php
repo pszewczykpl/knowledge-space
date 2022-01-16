@@ -10,7 +10,7 @@
 			@if($dark_mode) dark-mode @endif
 			header-fixed header-tablet-and-mobile-fixed aside-enabled
 			aside-fixed 
-			page-loading-enabled page-loading
+{{--			page-loading-enabled page-loading--}}
 		">
 
 		<div class="page-loader">
