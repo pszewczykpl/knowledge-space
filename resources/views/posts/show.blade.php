@@ -25,7 +25,7 @@
 									<div class="ps-lg-6">
 										<div class="d-flex align-items-center mb-4">
 											<div class="d-flex flex-column">
-												<h1 class="text-gray-800 fw-bold">{{ $post->title }}</h1>
+												<h1 class="text-dark text-hover-primary fs-2 fw-bolder">{{ $post->title }}</h1>
 												<div class="">
 													<span class="fw-bold text-muted me-6">Kategoria:
 														<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}" class="fw-bolder text-muted text-hover-primary">{{ $post->postCategory->name }}</a></span>
@@ -38,7 +38,7 @@
 										</div>
 										<style>.show-post p { margin-top: 0; margin-bottom: 0; }</style>
 										<div class="mt-5">
-											<div class="show-post fw-normal fs-5 mt-4 text-dark" style="font-family: Poppins, Helvetica, sans-serif;">
+											<div class="show-post fs-5 text-gray-800" style="font-family: Poppins, Helvetica, sans-serif;">
 												{!! $post->content !!}
 											</div>
 										</div>
@@ -59,7 +59,7 @@
 							{{--								</div>--}}
 							{{--							</div>--}}
 							<div class="mb-16">
-								<h4 class="text-black mb-7">Kategorie Artykułów</h4>
+								<h4 class="text-dark mb-7">Kategorie Artykułów</h4>
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
 									<a href="{{ route('posts.index') }}" class="text-muted text-hover-primary pe-2">Wszystkie</a>
 									<div class="m-0">{{ App\Models\Post::count() }}</div>

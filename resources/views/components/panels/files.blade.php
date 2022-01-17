@@ -54,7 +54,7 @@
                                         <a href="{{ route('files.show', $file->id) }}" target="_blank"><img src="{{ asset('/images/files/' . $file->extension . '.svg') }}" style="width: 35px;" alt="{{ $file->name }}"></a>
                                     </div>
                                     <div class="d-flex flex-column flex-grow-1">
-                                        <a href="{{ route('files.show', $file->id) }}" class="fs-7 fw-normal text-dark mt-auto" target="_blank">
+                                        <a href="{{ route('files.show', $file->id) }}" class="fs-7 fw-normal text-gray-800 mt-auto" target="_blank">
                                             {{ $file->name }}
                                         </a>
                                         <a href="{{ route('files.show', $file->id) }}" class="fs-7 fw-normal text-gray-400 mt-auto" target="_blank">

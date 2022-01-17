@@ -120,7 +120,7 @@
 				</div>
 			</div>
 			@else
-				<a href="{{ route('login') }}" class="btn btn-outline btn-outline-dashed card-rounded btn-outline-default">Zaloguj się</a>
+				<a href="{{ route('login') }}" class="btn btn-flex flex-center @if($dark_mode) btn-color-gray-600 btn-active-secondary btn-active-color-primary @else btn-bg-white btn-text-gray-500 btn-active-color-primary @endif w-40px w-md-auto h-40px px-0 px-md-6 card-rounded">Zaloguj się</a>
 			@endauth
 
 		</div>

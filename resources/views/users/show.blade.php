@@ -84,7 +84,7 @@
 								<div class="row">
 									<div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3 col align-self-end">
 										<div class="d-flex justify-content-between w-100 mt-auto mb-2">
-											<span class="fw-bold fs-6 text-gray-400">Ukończenie profilu</span>
+											<span class="fw-bold fs-6 text-gray-600">Ukończenie profilu</span>
 											<span class="fw-bolder fs-6">{{ $user->profileProgressValue() }}%</span>
 										</div>
 										<div class="h-5px mx-3 w-100 bg-light mb-3">
@@ -116,17 +116,18 @@
 			@endif
 			@endauth
 			@if($user->news->count() == 0)
-				<div class="alert alert-custom alert-white shadow-sm fade show text-center" role="alert">
+					<div class="card ard-rounded card-shadow mb-3">
+						<div class="card-body text-center p-4">
 					@auth
 					@if($user->id == Auth::user()->id)
-						<div class="alert-text">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
+						<div class="text-gray-600">Nie posiadasz żadnych aktualności... Napisz swoją pierwszą!</div>
 					@else
-						<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+						<div class="text-gray-600">Użytkownik nie posiada żadnych aktualności...</div>
 					@endif
 					@else
-						<div class="alert-text">Użytkownik nie posiada żadnych aktualności...</div>
+						<div class="text-gray-600">Użytkownik nie posiada żadnych aktualności...</div>
 						@endauth
-				</div>
+						</div></div>
 			@else
 				@foreach($user->news->sortByDesc('created_at')->take(20) as $new)
 					<x-cards.news :news="$new" />
