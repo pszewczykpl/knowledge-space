@@ -13,7 +13,7 @@
         {!! Form::token() !!}
         
             <x-pages.form-card title="Dane podstawowe">
-                <x-pages.form-card-row label="Nazwa">
+                <x-pages.form-card-row label="Nazwa" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Wpisz Nazwę">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Prefix">

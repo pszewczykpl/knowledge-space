@@ -23,8 +23,8 @@
 								@foreach($posts as $post)
 									<div class="ps-lg-6 mb-8 @if(!$loop->first) mt-8 @endif">
 										<div class="mb-6">
-											<a href="{{ route('posts.show', $post->id) }}" class="fw-bold text-dark mb-4 fs-3 lh-base text-hover-primary">{{ $post->title }}</a>
-											<div class="fw-normal fs-5 mt-4 text-dark">{{  substr(strip_tags($post->content), 0, 350)  }}... <a class="text-primary font-weight-bold" href="{{ route('posts.show', $post->id) }}">Czytaj dalej</a></div>
+											<a href="{{ route('posts.show', $post->id) }}" class="fs-2 text-dark fw-bolder text-hover-primary text-dark lh-base">{{ $post->title }}</a>
+											<div class="fw-bold fs-5 text-gray-600 text-dark mt-4">{{  substr(strip_tags($post->content), 0, 450)  }}... <a class="text-primary fs-5 font-weight-bold" href="{{ route('posts.show', $post->id) }}">Czytaj dalej</a></div>
 										</div>
 										<div class="d-flex flex-stack flex-wrap">
 											<div class="d-flex align-items-center pe-2">
@@ -35,7 +35,7 @@
 												</a>
 												<div class="fs-5 fw-bolder">
 													<a href="{{ route('users.show', $post->user) }}" class="text-gray-700 text-hover-primary">{{ $post->user->fullname}}</a>
-													<span class="text-muted"> dodał w dniu {{ date_format($post->created_at, 'Y-m-d') }}</span>
+													<span class="text-muted"> dnia {{ date_format($post->created_at, 'Y-m-d') }}</span>
 												</div>
 											</div>
 											<a href="{{ route('posts.index', ['category' => $post->postCategory->id]) }}"><span class="badge badge-light-primary fw-bolder my-2 card-rounded">{{ $post->postCategory->name }}</span></a>
@@ -62,7 +62,7 @@
 {{--								</div>--}}
 {{--							</div>--}}
 							<div class="mb-16">
-								<h4 class="text-black mb-7">Kategorie Artykułów</h4>
+								<h4 class="text-dark mb-7">Kategorie Artykułów</h4>
 								<div class="d-flex flex-stack fw-bold fs-5 text-muted my-2">
 									<a href="{{ route('posts.index') }}" class="@if(request()->get('category') === null) text-primary @else text-muted text-hover-primary @endif pe-2">Wszystkie</a>
 									<div class="m-0">{{ App\Models\Post::count() }}</div>

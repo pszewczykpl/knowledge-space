@@ -6,16 +6,16 @@ use Illuminate\View\Component;
 
 class FormCardRow extends Component
 {
-    public $label;
-    
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $label)
+    public function __construct(
+        public string $label,
+        public bool $required = false)
     {
-        $this->label = $label;
+        //
     }
 
     /**

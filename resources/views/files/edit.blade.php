@@ -13,19 +13,19 @@
         {!! Form::token() !!}
         
             <x-pages.form-card title="Dane dokumentu">
-                <x-pages.form-card-row label="Nazwa wyświetlana">
+                <x-pages.form-card-row label="Nazwa wyświetlana" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $file->name }}" placeholder="Wpisz Nazwa wyświetlana">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Kod dokumentu">
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ $file->code }}" placeholder="Wpisz Kod dokumentu w API">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Typ dokumentu">
+                <x-pages.form-card-row label="Typ dokumentu" required>
                     <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
                         <option value="P" @if($file->type == 'Produktowy') selected @endif>Produktowy</option>
                         <option value="I" @if($file->type == 'Pozostały') selected @endif>Pozostały</option>
                     </select>
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Kategoria dokumentu">
+                <x-pages.form-card-row label="Kategoria dokumentu" required>
                     <select class="form-control form-control-lg form-control-solid select2-single" name="file_category_id" id="file_category_id">
                         @foreach($fileCategories as $file_category)
                             <option value="{{ $file_category->id }}" @if($file->file_category_id == $file_category->id) selected @endif>{{ $file_category->name }}</option>

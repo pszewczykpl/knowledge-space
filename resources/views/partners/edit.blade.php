@@ -13,10 +13,10 @@
         {!! Form::token() !!}
         
             <x-pages.form-card title="Dane partnera">
-                <x-pages.form-card-row label="Nazwa">
+                <x-pages.form-card-row label="Nazwa" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $partner->name }}" placeholder="Wpisz Nazwę">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Kod">
+                <x-pages.form-card-row label="Kod" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ $partner->code }}" placeholder="Wpisz Kod">
                 </x-pages.form-card-row>
                 <x-pages.form-card-row label="Typ">

@@ -38,6 +38,13 @@ class Kernel extends ConsoleKernel
         $schedule
             ->command('queue:restart')
             ->hourly();
+
+        /**
+         * Restarting hourly queue:work to handle some issues/errors/bugs.
+         */
+        $schedule
+            ->command('cache:refresh')
+            ->daily();
     }
 
     /**

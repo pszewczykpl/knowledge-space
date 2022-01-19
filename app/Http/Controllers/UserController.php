@@ -137,10 +137,8 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
-        }
-
-        if($request->new_password) {
-            $user->password = Hash::make($request->new_password);
+        } else if ($request->avatar_remove) {
+            $user->avatar_path = null;
         }
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
@@ -148,7 +146,7 @@ class UserController extends Controller
         if(isset($request->permission_id)) {
             $user->permissions()->sync($request->permission_id);
         }
-        
+
         return redirect()->route('users.edit', $user->id)->with('notify_success', 'Dane pracownika zostały zaktualizowane!');
     }
 
