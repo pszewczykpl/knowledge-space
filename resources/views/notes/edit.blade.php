@@ -13,7 +13,7 @@
         {!! Form::token() !!}
         
             <x-pages.form-card title="Dane notatki">
-                <x-pages.form-card-row label="Treść notatki">
+                <x-pages.form-card-row label="Treść notatki" required>
                     <textarea class="form-control form-control-lg form-control-solid" name="content" id="content" rows="3" placeholder="Wpisz Treść notatki">{{ $note->content }}</textarea>
                 </x-pages.form-card-row>
             </x-pages.form-card>

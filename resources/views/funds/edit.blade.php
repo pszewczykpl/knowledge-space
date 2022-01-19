@@ -13,16 +13,16 @@
         {!! Form::token() !!}
         
             <x-pages.form-card title="Dane funduszu">
-                <x-pages.form-card-row label="Nazwa wyświetlana">
+                <x-pages.form-card-row label="Nazwa wyświetlana" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="name" id="name" value="{{ $fund->name }}" placeholder="Wpisz Nazwa wyświetlana">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Symbol funduszu">
+                <x-pages.form-card-row label="Symbol funduszu" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="code" id="code" value="{{ $fund->code }}" placeholder="Wpisz Symbol funduszu">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Waluta">
+                <x-pages.form-card-row label="Waluta" required>
                     <input class="form-control form-control-lg form-control-solid" type="text" name="currency" id="currency" value="{{ $fund->currency }}" placeholder="Wpisz Waluta">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Typ">
+                <x-pages.form-card-row label="Typ" required>
                     <select class="form-control form-control-lg form-control-solid select2-single" name="type" id="type">
                         <option value="Z" @if($fund->type == 'Inwestycyjny') selected @endif>Inwestycyjny</option>
                         <option value="D" @if($fund->type == 'Depozytowy') selected @endif>Depozytowy</option>
@@ -35,7 +35,7 @@
                 <x-pages.form-card-row label="Data udostępnienia">
                     <input class="form-control form-control-lg form-control-solid datepicker" type="text" name="start_date" id="start_date" value="{{ $fund->start_date }}" placeholder="Wybierz Datę udostępnienia funduszu">
                 </x-pages.form-card-row>
-                <x-pages.form-card-row label="Status">
+                <x-pages.form-card-row label="Status" required>
                     <select class="form-control form-control-lg form-control-solid select2-single" name="status" id="status">
                         <option value="A" @if($fund->status == 'Aktywny') selected @endif>Aktywny</option>
                         <option value="N" @if($fund->status == 'Nieaktywny') selected @endif>Nieaktywny</option>

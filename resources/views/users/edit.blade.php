@@ -33,13 +33,13 @@
     </div>
     <div class="form-text">Dozwolone pliki: png, jpg, jpeg.</div>
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="Imię">
+            <x-pages.form-card-row label="Imię" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="first_name" id="first_name" value="{{ $user->first_name }}" placeholder="Wpisz Imię">
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="Nazwisko">
+            <x-pages.form-card-row label="Nazwisko" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="last_name" id="last_name" value="{{ $user->last_name }}" placeholder="Wpisz Nazwisko">
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="E-mail">
+            <x-pages.form-card-row label="E-mail" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="email" id="email" value="{{ $user->email }}" placeholder="Wpisz E-mail">
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Telefon">
@@ -48,20 +48,20 @@
         </x-pages.form-card>
 
         <x-pages.form-card title="Praca">
-            <x-pages.form-card-row label="Nazwa firmy">
+            <x-pages.form-card-row label="Nazwa firmy" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="company" id="company" value="{{ $user->company }}" placeholder="Wpisz Nazwa firmy">
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="Lokalizacja firmy">
+            <x-pages.form-card-row label="Lokalizacja firmy" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="location" id="location" value="{{ $user->location }}" placeholder="Wpisz Lokalizacja firmy">
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="Departament">
+            <x-pages.form-card-row label="Departament" required>
                 <select class="form-control form-control-lg form-control-solid" name="department_id" id="department_id">
                     @foreach($departments as $department)
                         <option value="{{ $department->id }}" @if($user->department_id == $department->id) selected @endif>{{ $department->name }}</option>
                     @endforeach
                 </select>
             </x-pages.form-card-row>
-            <x-pages.form-card-row label="Stanowisko">
+            <x-pages.form-card-row label="Stanowisko" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="position" id="position" value="{{ $user->position }}" placeholder="Wpisz Stanowisko">
             </x-pages.form-card-row>
             <x-pages.form-card-row label="Opis stanowiska">
@@ -70,7 +70,7 @@
         </x-pages.form-card>
 
         <x-pages.form-card title="Konto">
-            <x-pages.form-card-row label="Login">
+            <x-pages.form-card-row label="Login" required>
                 <input class="form-control form-control-lg form-control-solid" type="text" name="username" id="username" value="{{ $user->username }}" placeholder="Wpisz Login">
             </x-pages.form-card-row>
             @can('update', App\Models\Permission::class)
