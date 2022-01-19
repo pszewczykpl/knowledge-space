@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +21,6 @@ class FileCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
 
     /**
@@ -50,16 +48,6 @@ class FileCategory extends Model
     }
 
     /**
-     * Get files attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getFilesAttribute()
-    {
-        return $this->getCachedRelation('files');
-    }
-
-    /**
      * Get all of the file category's events.
      */
     public function events()
@@ -68,31 +56,11 @@ class FileCategory extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
-    }
-
-    /**
      * Get the user that created the file category.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
     /**

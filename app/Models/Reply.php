@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +20,6 @@ class Reply extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
 
     /**
      * Set default with() method in query.
@@ -45,31 +43,11 @@ class Reply extends Model
     }
 
     /**
-     * Get news attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getNewsAttribute()
-    {
-        return $this->getCachedRelation('news');
-    }
-
-    /**
      * Get all of the reply's events.
      */
     public function events()
     {
         return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
     }
     
     /**
@@ -78,16 +56,6 @@ class Reply extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
 }

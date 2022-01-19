@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +21,6 @@ class PostCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
 
     /**
@@ -50,16 +48,6 @@ class PostCategory extends Model
     }
 
     /**
-     * Get posts attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getPostsAttribute()
-    {
-        return $this->getCachedRelation('posts');
-    }
-
-    /**
      * Get all of the post category's events.
      */
     public function events()
@@ -68,31 +56,11 @@ class PostCategory extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
-    }
-
-    /**
      * Get the user that created the post category.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
     /**

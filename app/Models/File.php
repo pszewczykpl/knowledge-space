@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +26,6 @@ class File extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
 
     /**
@@ -72,29 +70,9 @@ class File extends Model
         return $this->morphedByMany('App\Models\Investment', 'fileable')->withTimestamps();
     }
 
-    /**
-     * Get investments attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getInvestmentsAttribute()
-    {
-        return $this->getCachedRelation('investments');
-    }
-
     public function employees()
     {
         return $this->morphedByMany('App\Models\Employee', 'fileable')->withTimestamps();
-    }
-
-    /**
-     * Get employees attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEmployeesAttribute()
-    {
-        return $this->getCachedRelation('employees');
     }
 
     public function protectives()
@@ -102,44 +80,14 @@ class File extends Model
         return $this->morphedByMany('App\Models\Protective', 'fileable')->withTimestamps();
     }
 
-    /**
-     * Get protectives attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getProtectivesAttribute()
-    {
-        return $this->getCachedRelation('protectives');
-    }
-
     public function bancassurances()
     {
         return $this->morphedByMany('App\Models\Bancassurance', 'fileable')->withTimestamps();
     }
 
-    /**
-     * Get bancassurances attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getBancassurancesAttribute()
-    {
-        return $this->getCachedRelation('bancassurances');
-    }
-
     public function fileCategory()
     {
         return $this->belongsTo('App\Models\FileCategory');
-    }
-
-    /**
-     * Get fileCategory attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getFileCategoryAttribute()
-    {
-        return $this->getCachedRelation('fileCategory');
     }
 
     /**
@@ -151,31 +99,11 @@ class File extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
-    }
-
-    /**
      * Get the user that created the file.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
     /**
