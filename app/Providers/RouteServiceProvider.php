@@ -2,33 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\Bancassurance;
-use App\Models\Department;
-use App\Models\Employee;
-use App\Models\File;
-use App\Models\FileCategory;
-use App\Models\Fund;
-use App\Models\Investment;
-use App\Models\News;
-use App\Models\Note;
-use App\Models\Partner;
-use App\Models\Permission;
-use App\Models\Post;
-use App\Models\PostCategory;
-use App\Models\Protective;
-use App\Models\Reply;
-use App\Models\Risk;
-use App\Models\System;
-use App\Models\User;
-use App\Traits\CacheModels;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    use CacheModels;
-
     /**
      * This namespace is applied to your controller routes.
      *
