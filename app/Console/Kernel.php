@@ -25,21 +25,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         /**
-         * Running only one instance in background of queue:work to handle jobs.
-         */
-        $schedule
-            ->command('queue:work')
-            ->withoutOverlapping()
-            ->runInBackground();
-
-        /**
-         * Restarting hourly queue:work to handle some issues/errors/bugs.
-         */
-        $schedule
-            ->command('queue:restart')
-            ->hourly();
-
-        /**
          * Restarting hourly queue:work to handle some issues/errors/bugs.
          */
         $schedule
