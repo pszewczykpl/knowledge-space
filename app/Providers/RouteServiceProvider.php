@@ -97,16 +97,16 @@ class RouteServiceProvider extends ServiceProvider
             return $data;
         });
 
-        Route::bind('investment', function ($id) {
-            $data = Cache::remember("investments:$id", 60*60*12, function () use ($id) {
-                return \App\Models\Investment::withoutEvents(function () use ($id) {
-                    return \App\Models\Investment::find($id);
-                });
-            });
-            event("eloquent.retrieved: \App\Models\Investment", $data);
-
-            return $data;
-        });
+//        Route::bind('investment', function ($id) {
+//            $data = Cache::remember("investments:$id", 60*60*12, function () use ($id) {
+//                return \App\Models\Investment::withoutEvents(function () use ($id) {
+//                    return \App\Models\Investment::find($id);
+//                });
+//            });
+//            event("eloquent.retrieved: \App\Models\Investment", $data);
+//
+//            return $data;
+//        });
 
         Route::bind('news', function ($id) {
             $data = Cache::remember("news:$id", 60*60*12, function () use ($id) {

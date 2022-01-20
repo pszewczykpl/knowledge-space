@@ -94,6 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'department' => CacheRelation::class,
         'news' => CacheRelation::class,
+        'permissions' => CacheRelation::class,
     ];
 
     /**

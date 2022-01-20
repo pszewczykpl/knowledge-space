@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Casts\CacheRelation;
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @property int        $id
@@ -167,5 +167,35 @@ class Investment extends Model
             default => $this->attributes['type'],
         };
     }
+
+    /**
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     * @return Model|null
+     */
+//    public function resolveRouteBinding($value, $field = null)
+//    {
+//        $data = Cache::remember("investments:$value", 60*60*12, function () use ($value, $field) {
+//                return self::withoutEvents(function () use ($value, $field) {
+//                    return parent::resolveRouteBinding($value, $field);
+//                });
+//            });
+//        event("eloquent.retrieved: \App\Models\Investment", $data);
+//
+//        return $data;
+//    }
+//
+//    public function resolveSoftDeletableRouteBinding($value, $field = null) {
+//        $data = Cache::remember("investments:$value", 60*60*12, function () use ($value, $field) {
+//            return Investment::withoutEvents(function () use ($value, $field) {
+//                return parent::resolveSoftDeletableRouteBinding($value, $field);
+//            });
+//        });
+//        event("eloquent.retrieved: \App\Models\Investment", $data);
+//
+//        return $data;
+//    }
 
 }

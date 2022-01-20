@@ -85,8 +85,8 @@ Route::put('funds/{id}/restore', [FundController::class, 'restore'])->name('fund
 Route::get('funds/{fund}/duplicate', [FundController::class, 'duplicate'])->name('funds.duplicate');
 Route::resource('funds', FundController::class);
 
-Route::delete('investments/{id}/forcedestroy', [InvestmentController::class, 'force_destroy'])->name('investments.forceDestroy');
-Route::put('investments/{id}/restore', [InvestmentController::class, 'restore'])->name('investments.restore');
+Route::get('investments/{investment}/forcedestroy', [InvestmentController::class, 'force_destroy'])->withTrashed()->name('investments.forceDestroy');
+Route::put('investments/{investment}/restore', [InvestmentController::class, 'restore'])->withTrashed()->name('investments.restore');
 Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
 Route::resource('investments', InvestmentController::class);
 
