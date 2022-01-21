@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\DataTable\DataTable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         if($this->app->environment('production')) {
             \URL::forceScheme('https');
         }
+        $this->app->bind('datatable',function(){
+            return new DataTable();
+        });
     }
 
     /**
