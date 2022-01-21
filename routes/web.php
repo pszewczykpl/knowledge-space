@@ -15,6 +15,8 @@ use App\Http\Controllers\ProtectiveController;
 use App\Http\Controllers\BancassuranceController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RiskController;
+use App\Http\Controllers\SystemConfigurationController;
+use App\Http\Controllers\SystemPropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\TrashController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\SearchController;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Repositories\Facades\DataTable;
 use Illuminate\Http\Request;
 
 /*
@@ -143,14 +146,12 @@ Route::delete('posts/{id}/forcedestroy', [PostController::class, 'force_destroy'
 Route::put('posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
 Route::resource('posts', PostController::class);
 
-Route::resource('attachments', AttachmentController::class);
-
 Route::get('search/{scope}', [SearchController::class, 'search'])->name('search');
 
-Route::get('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'index'])->name('system-properties.index');
-Route::put('system-properties', [\App\Http\Controllers\SystemPropertyController::class, 'update'])->name('system-properties.update');
-Route::get('system-properties/update-app', [\App\Http\Controllers\SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
-Route::get('system-properties/maintenance/off', [\App\Http\Controllers\SystemPropertyController::class, 'maintenance_off'])->name('system-properties.maintenanceOff');
-Route::get('system-properties/maintenance/on', [\App\Http\Controllers\SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
+Route::get('system-properties', [SystemPropertyController::class, 'index'])->name('system-properties.index');
+Route::put('system-properties', [SystemPropertyController::class, 'update'])->name('system-properties.update');
+Route::get('system-properties/update-app', [SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
+Route::get('system-properties/maintenance/off', [SystemPropertyController::class, 'maintenance_off'])->name('system-properties.maintenanceOff');
+Route::get('system-properties/maintenance/on', [SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
 
-Route::get('system-configuration/dark-mode', [\App\Http\Controllers\SystemConfigurationController::class, 'switchDarkMode'])->name('system-configuration.dark-mode');
+Route::get('system-configuration/dark-mode', [SystemConfigurationController::class, 'switchDarkMode'])->name('system-configuration.dark-mode');
