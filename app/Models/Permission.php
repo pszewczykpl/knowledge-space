@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -19,6 +20,7 @@ class Permission extends Model
 {
     use HasFactory;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * The attributes that are mass assignable.

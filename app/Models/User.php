@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\CacheRelation;
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use Notifiable;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * The attributes that are mass assignable.

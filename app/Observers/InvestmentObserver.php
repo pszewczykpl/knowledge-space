@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Jobs\StoreEvent;
 use App\Models\Investment;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
@@ -10,17 +9,6 @@ use Illuminate\Support\Facades\Cache;
 
 class InvestmentObserver
 {
-    /**
-     * Handle the Investment "retrieved" event.
-     *
-     * @param Investment $investment
-     */
-    public function retrieved(Investment $investment)
-    {
-        StoreEvent::dispatch('retrieved', $investment);
-    }
-
-
     /**
      * Handle the Investment "saved" event.
      *

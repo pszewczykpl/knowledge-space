@@ -2,10 +2,47 @@
 
 namespace App\Providers;
 
+use App\Models\Bancassurance;
+use App\Models\Department;
+use App\Models\Employee;
+use App\Models\Event;
+use App\Models\File;
+use App\Models\FileCategory;
+use App\Models\Fund;
+use App\Models\Investment;
+use App\Models\News;
+use App\Models\Note;
+use App\Models\Partner;
+use App\Models\Permission;
+use App\Models\Post;
+use App\Models\PostCategory;
+use App\Models\Protective;
+use App\Models\Reply;
+use App\Models\Risk;
+use App\Models\System;
+use App\Models\User;
+use App\Observers\BancassuranceObserver;
+use App\Observers\DepartmentObserver;
+use App\Observers\EmployeeObserver;
+use App\Observers\EventObserver;
+use App\Observers\FileCategoryObserver;
+use App\Observers\FileObserver;
+use App\Observers\FundObserver;
+use App\Observers\InvestmentObserver;
+use App\Observers\NewsObserver;
+use App\Observers\NoteObserver;
+use App\Observers\PartnerObserver;
+use App\Observers\PermissionObserver;
+use App\Observers\PostCategoryObserver;
+use App\Observers\PostObserver;
+use App\Observers\ProtectiveObserver;
+use App\Observers\ReplyObserver;
+use App\Observers\RiskObserver;
+use App\Observers\SystemObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -41,24 +78,24 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        \App\Models\Bancassurance::observe(\App\Observers\BancassuranceObserver::class);
-        \App\Models\Department::observe(\App\Observers\DepartmentObserver::class);
-        \App\Models\Employee::observe(\App\Observers\EmployeeObserver::class);
-        \App\Models\Event::observe(\App\Observers\EventObserver::class);
-        \App\Models\FileCategory::observe(\App\Observers\FileCategoryObserver::class);
-        \App\Models\File::observe(\App\Observers\FileObserver::class);
-        \App\Models\Fund::observe(\App\Observers\FundObserver::class);
-        \App\Models\Investment::observe(\App\Observers\InvestmentObserver::class);
-        \App\Models\News::observe(\App\Observers\NewsObserver::class);
-        \App\Models\Note::observe(\App\Observers\NoteObserver::class);
-        \App\Models\Partner::observe(\App\Observers\PartnerObserver::class);
-        \App\Models\Permission::observe(\App\Observers\PermissionObserver::class);
-        \App\Models\PostCategory::observe(\App\Observers\PostCategoryObserver::class);
-        \App\Models\Post::observe(\App\Observers\PostObserver::class);
-        \App\Models\Protective::observe(\App\Observers\ProtectiveObserver::class);
-        \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
-        \App\Models\Risk::observe(\App\Observers\RiskObserver::class);
-        \App\Models\System::observe(\App\Observers\SystemObserver::class);
-        \App\Models\User::observe(\App\Observers\UserObserver::class);
+        Bancassurance::observe(BancassuranceObserver::class);
+        Department::observe(DepartmentObserver::class);
+        Employee::observe(EmployeeObserver::class);
+        Event::observe(EventObserver::class);
+        FileCategory::observe(FileCategoryObserver::class);
+        File::observe(FileObserver::class);
+        Fund::observe(FundObserver::class);
+        Investment::observe(InvestmentObserver::class);
+        News::observe(NewsObserver::class);
+        Note::observe(NoteObserver::class);
+        Partner::observe(PartnerObserver::class);
+        Permission::observe(PermissionObserver::class);
+        PostCategory::observe(PostCategoryObserver::class);
+        Post::observe(PostObserver::class);
+        Protective::observe(ProtectiveObserver::class);
+        Reply::observe(ReplyObserver::class);
+        Risk::observe(RiskObserver::class);
+        System::observe(SystemObserver::class);
+        User::observe(UserObserver::class);
     }
 }

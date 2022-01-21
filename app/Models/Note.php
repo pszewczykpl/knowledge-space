@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,7 @@ class Note extends Model
     use HasFactory;
     use SoftDeletes;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * Set default with() method in query.
