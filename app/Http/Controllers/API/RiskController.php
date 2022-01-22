@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Http\Request;
 
 class RiskController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -17,7 +16,7 @@ class RiskController extends Controller
      */
     public function datatables(Request $request)
     {
-        return $this->getJsonData($request, 'App\Models\Risk');
+        return DataTable::getJsonData($request, 'App\Models\Risk');
     }
 
 }

@@ -6,6 +6,7 @@ use App\Models\Investment;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\BinaryFileResponse as BinaryFileResponseAlias;
@@ -20,8 +21,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class FileController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -30,7 +29,7 @@ class FileController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\File', ['fileCategory']);
+        return DataTable::getJsonData($request, 'App\Models\File', ['fileCategory']);
     }
 
     /**
