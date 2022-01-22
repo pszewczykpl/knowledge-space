@@ -22,7 +22,7 @@ class NoteController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Note');
+        return DataTable::of(Note::class, $request)->get();
     }
 
 }

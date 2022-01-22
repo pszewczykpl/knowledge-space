@@ -22,7 +22,7 @@ class PermissionController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Permission');
+        return DataTable::of(Permission::class, $request)->get();
     }
 
 }

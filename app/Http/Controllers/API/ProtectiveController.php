@@ -18,7 +18,7 @@ class ProtectiveController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Protective');
+        return DataTable::of(Protective::class, $request)->get();
     }
 
     /**

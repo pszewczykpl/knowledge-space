@@ -22,7 +22,7 @@ class PartnerController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Partner');
+        return DataTable::of(Partner::class, $request)->get();
     }
 
 }

@@ -20,6 +20,7 @@ class InvestmentController extends Controller
     public function datatables(Request $request): array
     {
         return DataTable::of(Investment::class, $request)
+            ->setColumns(['name', 'code_toil', 'code', 'group', 'edit_date', 'id', 'status', 'dist', 'dist_short', 'code_owu', 'type'])
             ->get();
     }
 

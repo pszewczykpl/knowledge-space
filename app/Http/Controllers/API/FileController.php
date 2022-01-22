@@ -29,7 +29,7 @@ class FileController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\File', ['fileCategory']);
+        return DataTable::of(File::class, $request)->setWith('fileCategory')->get();
     }
 
     /**

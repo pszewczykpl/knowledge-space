@@ -22,7 +22,7 @@ class FileCategoryController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\FileCategory');
+        return DataTable::of(FileCategory::class, $request)->get();
     }
 
 }

@@ -22,7 +22,7 @@ class FundController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Fund');
+        return DataTable::of(Fund::class, $request)->get();
     }
 
 }

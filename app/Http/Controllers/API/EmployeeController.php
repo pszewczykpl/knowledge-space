@@ -29,7 +29,7 @@ class EmployeeController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, 'App\Models\Employee');
+        return DataTable::of(Employee::class, $request)->get();
     }
 
     /**

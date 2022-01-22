@@ -25,10 +25,10 @@ class DataTable
     }
 
     /**
-     * @param array $with
+     * @param array|string $with
      * @return DataTable
      */
-    public function setWith(array $with): static
+    public function setWith(array|string $with): static
     {
         $this->with = $with;
         return $this;

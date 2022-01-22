@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Risk;
 use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class RiskController extends Controller
      */
     public function datatables(Request $request)
     {
-        return DataTable::getJsonData($request, 'App\Models\Risk');
+        return DataTable::of(Risk::class, $request)->get();
     }
 
 }
