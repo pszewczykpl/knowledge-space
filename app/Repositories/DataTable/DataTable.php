@@ -88,9 +88,7 @@ class DataTable
              * Pagination
              */
             ->when(! $this->withoutLimit(), function ($query) {
-                return $query
-                    ->limit($this->limit())
-                    ->offset($this->offset());
+                return $query->limit($this->limit())->offset($this->offset());
             })->get();
 
         $records_total = Cache::tags([$this->of::getModel()->getTable()])->rememberForever($this->of::getModel()->getTable() . '_count', function () {
