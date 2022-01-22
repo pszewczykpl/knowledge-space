@@ -19,7 +19,8 @@ class InvestmentController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return DataTable::getJsonData($request, \App\Models\Investment::class);
+        return DataTable::of(Investment::class, $request)
+            ->get();
     }
 
     /**

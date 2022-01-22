@@ -3,9 +3,12 @@
 namespace App\Repositories\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Request;
 
 /**
- * @method static greet()
+ * @method static of(string $class, $request)
+ * @method static setRequest(Request $request)
+ * @method static get()
  */
 class DataTable extends Facade
 {
