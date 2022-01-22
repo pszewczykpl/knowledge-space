@@ -72,7 +72,7 @@ class Investment extends Model
             'id' => 'ID',
             'status' => 'Status',
             'dist' => 'Nazwa dystrybutora',
-            'dist_code' => 'Kod dystrybutora',
+            'dist_short' => 'Kod dystrybutora',
             'code_owu' => 'Kod OWU',
             'type' => 'Typ produktu'
         ],
