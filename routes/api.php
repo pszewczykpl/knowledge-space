@@ -60,10 +60,10 @@ Route::post('datatables/post-categories', [PostCategoryController::class, 'datat
 
 Route::get('files/zip', [FileController::class, 'zip'])->name('files.zip');
 
-Route::get('investments/{id}/files/zip', [InvestmentController::class, 'zip_files']);
-Route::get('protectives/{id}/files/zip', [ProtectiveController::class, 'zip_files']);
-Route::get('bancassurances/{id}/files/zip', [BancassuranceController::class, 'zip_files']);
-Route::get('employees/{id}/files/zip', [EmployeeController::class, 'zip_files']);
+Route::get('investments/{investment}/files/zip', [InvestmentController::class, 'zipFiles'])->name('investments.files.zip');
+Route::get('protectives/{protective}/files/zip', [ProtectiveController::class, 'zipFiles'])->name('protectives.files.zip');
+Route::get('bancassurances/{bancassurance}/files/zip', [BancassuranceController::class, 'zipFiles'])->name('bancassurances.files.zip');
+Route::get('employees/{employee}/files/zip', [EmployeeController::class, 'zipFiles'])->name('employees.files.zip');
 
 /* OLAF Controllers */
 Route::get('1/{file_code}/{code_toil}/{start_date}', [InvestmentByController::class, 'file_by_toil']);

@@ -2,6 +2,12 @@
 
 namespace App\View\Components\Panels;
 
+use App\Models\Bancassurance;
+use App\Models\Employee;
+use App\Models\Investment;
+use App\Models\Protective;
+use App\Traits\HasDatatables;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Route;
@@ -10,46 +16,27 @@ use App\Models\File;
 
 class Files extends Component
 {
-    /**
-     * Files
-     */
     public $files;
-
-    /**
-     * File Categories
-     */
     public $fileCategories;
 
-    /**
-     * ZIP filename
-     */
-    public string $name;
-    public $model;
-
-    public string $fileable_type;
-
-    public int $fileable_id;
+    public string $type;
+    public int $id;
+    public string $status;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($model)
+    public function __construct(Model $model)
     {
-        File::withoutEvents(function () use ($model) {
-            $this->files = $model->files;
-        });
-        $this->model = $model;
-        $this->name = str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $model->extended_name);
+        $fileCategories = FileCategory::all();
+        $this->fileCategories = $fileCategories->whereIn('id', $model->files->pluck('file_category_id')->toArray());
+        $this->files = $model->files;
 
-        $fileCategories = Cache::remember($model->getTable() . ':' . "$model->id:files::file_categories", 60*60*12, function () use ($model) {
-                return FileCategory::whereIn('id', $model->files->pluck('file_category_id')->toArray())->get();
-        });
-
-        $this->fileCategories = $fileCategories;
-        $this->fileable_type = $model->getTable();
-        $this->fileable_id = $model->id;
+        $this->type = $model->getTable();
+        $this->id = $model->id;
+        $this->status = $model->status;
     }
 
     /**

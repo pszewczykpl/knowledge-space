@@ -9,6 +9,7 @@ use App\Models\FileCategory;
 
 use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use ZipArchive;
 
@@ -33,19 +34,16 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Generate zip archive 
-     * 
-     * @param App\Employee $id
-     * @param array $extensions
-     * 
-     * @return redirect App\Http\Controllers\API\FilesController@zipFiles
+     * Generate zip archive
+     *
+     * @param $employee
+     * @return  RedirectResponse@zipFiles
      */
-    public function zip_files($id)
+    public function zipFiles(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $files = $employee->files->where('draft', false);
 
-        return rediresct()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $employee->extended_name)]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'filename' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $employee->extended_name)]);
     }
 
 }

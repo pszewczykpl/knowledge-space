@@ -6,6 +6,7 @@ use App\Models\Bancassurance;
 use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BancassuranceController extends Controller
@@ -22,19 +23,16 @@ class BancassuranceController extends Controller
     }
 
     /**
-     * Generate zip archive 
-     * 
-     * @param App\Bancassurance $id
-     * @param array $extensions
-     * 
-     * @return \Illuminate\Http\RedirectResponse App\Http\Controllers\API\FilesController@zipFiles
+     * Generate zip archive
+     *
+     * @param $bancassurance
+     * @return RedirectResponse App\Http\Controllers\API\FilesController@zipFiles
      */
-    public function zip_files($id)
+    public function zipFiles(Bancassurance $bancassurance)
     {
-        $bancassurance = Bancassurance::findOrFail($id);
         $files = $bancassurance->files->where('draft', false);
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $bancassurance->extended_name)]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'filename' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $bancassurance->extended_name)]);
     }
 
 }
