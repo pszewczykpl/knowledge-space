@@ -183,9 +183,8 @@ class FileController extends Controller
         $this->authorize('update', $file);
 
         $file->update($request->all());
-        
+        $file->draft = $request->boolean('draft_checkbox');
         $file->fileCategory()->associate($request->input('file_category_id'));
-        $file->draft = ($request->input('draft_checkbox') ?? null) ? 1 : 0;
 
         if ($request->hasFile('file')) {
             $path = $request->file->store('files');
