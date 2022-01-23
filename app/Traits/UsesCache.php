@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\Cache;
 trait UsesCache
 {
     /**
+     * Return cache tag to storing data associated with Model
+     *
+     * @return string
+     */
+    public function cacheTag(): string
+    {
+        return $this->getTable();
+    }
+
+    public function cacheKey(): string
+    {
+        return $this->getTable() . ':' . $this->{$this->getKeyName()};
+    }
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
