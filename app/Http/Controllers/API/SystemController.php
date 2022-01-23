@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\System;
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Http\Request;
 
 class SystemController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -18,7 +18,7 @@ class SystemController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\System');
+        return DataTable::of(System::class, $request)->get();
     }
 
 }

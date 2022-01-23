@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\File;
 use App\Models\FileCategory;
 
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Support\Facades\Cache;
 use ZipArchive;
@@ -20,8 +21,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -30,7 +29,7 @@ class EmployeeController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\Employee');
+        return DataTable::of(Employee::class, $request)->get();
     }
 
     /**

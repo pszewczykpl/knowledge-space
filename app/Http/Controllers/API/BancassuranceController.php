@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Bancassurance;
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BancassuranceController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -19,7 +18,7 @@ class BancassuranceController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\Bancassurance');
+        return DataTable::of(Bancassurance::class, $request)->get();
     }
 
     /**

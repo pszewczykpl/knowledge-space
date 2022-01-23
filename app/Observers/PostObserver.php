@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class PostObserver
 {
     /**
-     * Handle the Post "saved" event.
+     * Handle the Post "retrieved" event.
      *
      * @param Post $post
      * @return void
      */
-    public function saved(Post $post)
+    public function retrieved(Post $post)
     {
-        Cache::forget("posts:$post->id");
-        // Remove all items with "posts" tag
-        Cache::tags('posts')->flush();
+        Cache::add($post->cacheKey(), $post);
+    }
+
+    /**
+     * Handle the Post "created" event.
+     *
+     * @param Post $post
+     * @return void
+     */
+    public function created(Post $post)
+    {
+        Cache::put($post->cacheKey(), $post);
+        Cache::tags($post->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Post "updated" event.
+     *
+     * @param Post $post
+     * @return void
+     */
+    public function updated(Post $post)
+    {
+        Cache::put($post->cacheKey(), $post);
+        Cache::tags($post->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class PostObserver
      */
     public function deleted(Post $post)
     {
-        // Remove all items with "posts" tag
-        Cache::tags('posts')->flush();
+        Cache::forget($post->cacheKey());
+        Cache::tags($post->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class PostObserver
      */
     public function restored(Post $post)
     {
-        // Remove all items with "posts" tag
-        Cache::tags('posts')->flush();
+        Cache::put($post->cacheKey(), $post);
+        Cache::tags($post->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class PostObserver
      */
     public function forceDeleted(Post $post)
     {
-        // Remove all items with "posts" tag
-        Cache::tags('posts')->flush();
+        Cache::forget($post->cacheKey());
     }
 }

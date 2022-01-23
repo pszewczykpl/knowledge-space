@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Cache;
 
 /**
  * @property int $id
@@ -31,8 +30,8 @@ class Bancassurance extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * Set default with() method in query.
@@ -85,14 +84,6 @@ class Bancassurance extends Model
     }
 
     /**
-     * Get files attribute value from cached data.
-     */
-    public function getFilesAttribute()
-    {
-        return $this->getCachedRelation('files');
-    }
-
-    /**
      * Get all of the notes for the bancassurance.
      *
      * @return MorphToMany
@@ -103,27 +94,11 @@ class Bancassurance extends Model
     }
 
     /**
-     * Get notes attribute value from cached data.
-     */
-    public function getNotesAttribute()
-    {
-        return $this->getCachedRelation('notes');
-    }
-
-    /**
      * Get all of the bancassurance's events.
      */
     public function events()
     {
         return $this->morphMany('App\Models\Event', 'eventable')->withTimestamps();
-    }
-
-    /**
-     * Get events attribute value from cached data.
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
     }
 
     /**
@@ -157,13 +132,4 @@ class Bancassurance extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
-
-    /**
-     * Get user attribute value from cached data.
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
-    }
-
 }

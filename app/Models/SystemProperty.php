@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 class SystemProperty extends Model
 {
     use HasFactory;
-    use CacheModels;
+    use UsesCache;
 
     /**
      * The attributes that are mass assignable.

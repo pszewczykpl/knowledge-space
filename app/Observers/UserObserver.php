@@ -2,25 +2,44 @@
 
 namespace App\Observers;
 
-use App\Models\Event;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class UserObserver
 {
     /**
-     * Handle the User "saved" event.
+     * Handle the User "retrieved" event.
      *
      * @param User $user
      * @return void
      */
-    public function saved(User $user)
+    public function retrieved(User $user)
     {
-        Cache::forget("users:$user->id");
-        // Remove all items with "users" tag
-        Cache::tags('users')->flush();
+        Cache::add($user->cacheKey(), $user);
+    }
+
+    /**
+     * Handle the User "created" event.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function created(User $user)
+    {
+        Cache::put($user->cacheKey(), $user);
+        Cache::tags($user->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the User "updated" event.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function updated(User $user)
+    {
+        Cache::put($user->cacheKey(), $user);
+        Cache::tags($user->cacheTag())->flush();
     }
 
     /**
@@ -31,8 +50,8 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        // Remove all items with "users" tag
-        Cache::tags('users')->flush();
+        Cache::forget($user->cacheKey());
+        Cache::tags($user->cacheTag())->flush();
     }
 
     /**
@@ -43,8 +62,8 @@ class UserObserver
      */
     public function restored(User $user)
     {
-        // Remove all items with "users" tag
-        Cache::tags('users')->flush();
+        Cache::put($user->cacheKey(), $user);
+        Cache::tags($user->cacheTag())->flush();
     }
 
     /**
@@ -55,7 +74,6 @@ class UserObserver
      */
     public function forceDeleted(User $user)
     {
-        // Remove all items with "users" tag
-        Cache::tags('users')->flush();
+        Cache::forget($user->cacheKey());
     }
 }

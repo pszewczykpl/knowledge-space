@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class RiskObserver
 {
     /**
-     * Handle the Risk "saved" event.
+     * Handle the Risk "retrieved" event.
      *
      * @param Risk $risk
      * @return void
      */
-    public function saved(Risk $risk)
+    public function retrieved(Risk $risk)
     {
-        Cache::forget("risks:$risk->id");
-        // Remove all items with "risks" tag
-        Cache::tags('risks')->flush();
+        Cache::add($risk->cacheKey(), $risk);
+    }
+
+    /**
+     * Handle the Risk "created" event.
+     *
+     * @param Risk $risk
+     * @return void
+     */
+    public function created(Risk $risk)
+    {
+        Cache::put($risk->cacheKey(), $risk);
+        Cache::tags($risk->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Risk "updated" event.
+     *
+     * @param Risk $risk
+     * @return void
+     */
+    public function updated(Risk $risk)
+    {
+        Cache::put($risk->cacheKey(), $risk);
+        Cache::tags($risk->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class RiskObserver
      */
     public function deleted(Risk $risk)
     {
-        // Remove all items with "risks" tag
-        Cache::tags('risks')->flush();
+        Cache::forget($risk->cacheKey());
+        Cache::tags($risk->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class RiskObserver
      */
     public function restored(Risk $risk)
     {
-        // Remove all items with "risks" tag
-        Cache::tags('risks')->flush();
+        Cache::put($risk->cacheKey(), $risk);
+        Cache::tags($risk->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class RiskObserver
      */
     public function forceDeleted(Risk $risk)
     {
-        // Remove all items with "risks" tag
-        Cache::tags('risks')->flush();
+        Cache::forget($risk->cacheKey());
     }
 }

@@ -188,10 +188,8 @@ class InvestmentController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function restore($id)
+    public function restore(Investment $investment)
     {
-        $investment = Investment::withTrashed()->findOrFail($id);
-
         $this->authorize('restore', $investment);
         $investment->restore();
 
@@ -207,12 +205,9 @@ class InvestmentController extends Controller
      * @param  id  $id
      * @return Response
      */
-    public function force_destroy($id)
+    public function force_destroy(Investment $investment)
     {
-        $investment = Investment::withTrashed()->findOrFail($id);
-
         $this->authorize('forceDelete', $investment);
-        
         $investment->forceDelete();
 
         // Store event using job

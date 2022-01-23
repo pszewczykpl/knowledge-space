@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="card-body pt-0">
+                <div class="card-body pt-0 datatables-body" style="min-height: 800px">
                     <div class="mb-1">
                         <div class="collapse" id="kt_advanced_search_form">
                             <div class="row align-items-center">

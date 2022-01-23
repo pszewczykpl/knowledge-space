@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class NoteObserver
 {
     /**
-     * Handle the Note "saved" event.
+     * Handle the Note "retrieved" event.
      *
      * @param Note $note
      * @return void
      */
-    public function saved(Note $note)
+    public function retrieved(Note $note)
     {
-        Cache::forget("notes:$note->id");
-        // Remove all items with "notes" tag
-        Cache::tags('notes')->flush();
+        Cache::add($note->cacheKey(), $note);
+    }
+
+    /**
+     * Handle the Note "created" event.
+     *
+     * @param Note $note
+     * @return void
+     */
+    public function created(Note $note)
+    {
+        Cache::put($note->cacheKey(), $note);
+        Cache::tags($note->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Note "updated" event.
+     *
+     * @param Note $note
+     * @return void
+     */
+    public function updated(Note $note)
+    {
+        Cache::put($note->cacheKey(), $note);
+        Cache::tags($note->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class NoteObserver
      */
     public function deleted(Note $note)
     {
-        // Remove all items with "notes" tag
-        Cache::tags('notes')->flush();
+        Cache::forget($note->cacheKey());
+        Cache::tags($note->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class NoteObserver
      */
     public function restored(Note $note)
     {
-        // Remove all items with "notes" tag
-        Cache::tags('notes')->flush();
+        Cache::put($note->cacheKey(), $note);
+        Cache::tags($note->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class NoteObserver
      */
     public function forceDeleted(Note $note)
     {
-        // Remove all items with "notes" tag
-        Cache::tags('notes')->flush();
+        Cache::forget($note->cacheKey());
     }
 }

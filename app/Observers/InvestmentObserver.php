@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\StoreEvent;
 use App\Models\Investment;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
@@ -10,18 +11,38 @@ use Illuminate\Support\Facades\Cache;
 class InvestmentObserver
 {
     /**
-     * Handle the Investment "saved" event.
+     * Handle the Investment "retrieved" event.
      *
      * @param Investment $investment
      * @return void
      */
-    public function saved(Investment $investment)
+    public function retrieved(Investment $investment)
     {
-        // Deleting cached eloquent
-        Cache::forget("investments:$investment->id");
+        Cache::add($investment->cacheKey(), $investment);
+    }
 
-        // ... and deleting all items with "investments" tag
-        Cache::tags('investments')->flush();
+    /**
+     * Handle the Investment "created" event.
+     *
+     * @param Investment $investment
+     * @return void
+     */
+    public function created(Investment $investment)
+    {
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Investment "updated" event.
+     *
+     * @param Investment $investment
+     * @return void
+     */
+    public function updated(Investment $investment)
+    {
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -32,8 +53,8 @@ class InvestmentObserver
      */
     public function deleted(Investment $investment)
     {
-        // Remove all items with "investments" tag
-        Cache::tags('investments')->flush();
+        Cache::forget($investment->cacheKey());
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -44,8 +65,8 @@ class InvestmentObserver
      */
     public function restored(Investment $investment)
     {
-        // Remove all items with "investments" tag
-        Cache::tags('investments')->flush();
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -56,7 +77,6 @@ class InvestmentObserver
      */
     public function forceDeleted(Investment $investment)
     {
-        // Remove all items with "investments" tag
-        Cache::tags('investments')->flush();
+        Cache::forget($investment->cacheKey());
     }
 }

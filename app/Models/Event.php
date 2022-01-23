@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Cache;
 class Event extends Model
 {
     use HasFactory;
-    use CacheModels;
+    use UsesCache;
 
     /**
      * Set default with() method in query.
@@ -50,16 +50,6 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
 }

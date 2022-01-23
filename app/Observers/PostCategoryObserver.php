@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class PostCategoryObserver
 {
     /**
-     * Handle the PostCategory "saved" event.
+     * Handle the PostCategory "retrieved" event.
      *
      * @param PostCategory $postCategory
      * @return void
      */
-    public function saved(PostCategory $postCategory)
+    public function retrieved(PostCategory $postCategory)
     {
-        Cache::forget("post_categories:$postCategory->id");
-        // Remove all items with "post_categories" tag
-        Cache::tags('post_categories')->flush();
+        Cache::add($postCategory->cacheKey(), $postCategory);
+    }
+
+    /**
+     * Handle the PostCategory "created" event.
+     *
+     * @param PostCategory $postCategory
+     * @return void
+     */
+    public function created(PostCategory $postCategory)
+    {
+        Cache::put($postCategory->cacheKey(), $postCategory);
+        Cache::tags($postCategory->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the PostCategory "updated" event.
+     *
+     * @param PostCategory $postCategory
+     * @return void
+     */
+    public function updated(PostCategory $postCategory)
+    {
+        Cache::put($postCategory->cacheKey(), $postCategory);
+        Cache::tags($postCategory->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class PostCategoryObserver
      */
     public function deleted(PostCategory $postCategory)
     {
-        // Remove all items with "post_categories" tag
-        Cache::tags('post_categories')->flush();
+        Cache::forget($postCategory->cacheKey());
+        Cache::tags($postCategory->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class PostCategoryObserver
      */
     public function restored(PostCategory $postCategory)
     {
-        // Remove all items with "post_categories" tag
-        Cache::tags('post_categories')->flush();
+        Cache::put($postCategory->cacheKey(), $postCategory);
+        Cache::tags($postCategory->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class PostCategoryObserver
      */
     public function forceDeleted(PostCategory $postCategory)
     {
-        // Remove all items with "post_categories" tag
-        Cache::tags('post_categories')->flush();
+        Cache::forget($postCategory->cacheKey());
     }
 }

@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class ReplyObserver
 {
     /**
-     * Handle the Reply "saved" event.
+     * Handle the Reply "retrieved" event.
      *
      * @param Reply $reply
      * @return void
      */
-    public function saved(Reply $reply)
+    public function retrieved(Reply $reply)
     {
-        Cache::forget("replies:$reply->id");
-        // Remove all items with "replies" tag
-        Cache::tags('replies')->flush();
+        Cache::add($reply->cacheKey(), $reply);
+    }
+
+    /**
+     * Handle the Reply "created" event.
+     *
+     * @param Reply $reply
+     * @return void
+     */
+    public function created(Reply $reply)
+    {
+        Cache::put($reply->cacheKey(), $reply);
+        Cache::tags($reply->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Reply "updated" event.
+     *
+     * @param Reply $reply
+     * @return void
+     */
+    public function updated(Reply $reply)
+    {
+        Cache::put($reply->cacheKey(), $reply);
+        Cache::tags($reply->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class ReplyObserver
      */
     public function deleted(Reply $reply)
     {
-        // Remove all items with "replies" tag
-        Cache::tags('replies')->flush();
+        Cache::forget($reply->cacheKey());
+        Cache::tags($reply->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class ReplyObserver
      */
     public function restored(Reply $reply)
     {
-        // Remove all items with "replies" tag
-        Cache::tags('replies')->flush();
+        Cache::put($reply->cacheKey(), $reply);
+        Cache::tags($reply->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class ReplyObserver
      */
     public function forceDeleted(Reply $reply)
     {
-        // Remove all items with "replies" tag
-        Cache::tags('replies')->flush();
+        Cache::forget($reply->cacheKey());
     }
 }

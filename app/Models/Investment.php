@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
+use App\Casts\CacheRelation;
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @property int        $id
@@ -30,8 +33,8 @@ class Investment extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * Set default with() method in query.
@@ -58,7 +61,7 @@ class Investment extends Model
         'status',
     ];
 
-    static $datatables = [
+    public static array $datatables = [
         'columns' => [
             'name' => 'Nazwa produktu',
             'code_toil' => 'Kod TOiL',
@@ -69,12 +72,24 @@ class Investment extends Model
             'id' => 'ID',
             'status' => 'Status',
             'dist' => 'Nazwa dystrybutora',
-            'dist_code' => 'Kod dystrybutora',
+            'dist_short' => 'Kod dystrybutora',
             'code_owu' => 'Kod OWU',
             'type' => 'Typ produktu'
         ],
         'where' => [['status', '=', 'A']],
         'orderBy' => ['code', 'desc']
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+//        'files' => CacheRelation::class,
+//        'notes' => CacheRelation::class,
+//        'funds' => CacheRelation::class,
+//        'events' => CacheRelation::class,
     ];
 
     /**
@@ -86,31 +101,11 @@ class Investment extends Model
     }
 
     /**
-     * Get files attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getFilesAttribute()
-    {
-        return $this->getCachedRelation('files');
-    }
-
-    /**
      * Get all of the notes for the investment.
      */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
-    }
-
-    /**
-     * Get notes attribute value from cached data.
-     *
-     * @return void
-     */
-    public function getNotesAttribute()
-    {
-        return $this->getCachedRelation('notes');
     }
 
     /**
@@ -122,16 +117,6 @@ class Investment extends Model
     }
 
     /**
-     * Get funds attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getFundsAttribute()
-    {
-        return $this->getCachedRelation('funds');
-    }
-
-    /**
      * Get all of the investment's events.
      */
     public function events()
@@ -140,31 +125,11 @@ class Investment extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
-    }
-
-    /**
      * Get the user that created the investment.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
     /**
@@ -182,9 +147,9 @@ class Investment extends Model
      *
      * @return string
      */
-    public function getStatusAttribute(): string
+    public function getStatusAttribute($value): string
     {
-        return match ($this->attributes['status']) {
+        return match ($value) {
             'A' => 'Aktualny',
             'N' => 'Archiwalny',
             default => $this->attributes['status'],

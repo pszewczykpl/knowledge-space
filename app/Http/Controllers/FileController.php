@@ -183,9 +183,8 @@ class FileController extends Controller
         $this->authorize('update', $file);
 
         $file->update($request->all());
-        
+        $file->draft = $request->boolean('draft_checkbox');
         $file->fileCategory()->associate($request->input('file_category_id'));
-        $file->draft = ($request->input('draft_checkbox') ?? null) ? 1 : 0;
 
         if ($request->hasFile('file')) {
             $path = $request->file->store('files');
@@ -212,6 +211,7 @@ class FileController extends Controller
         $this->authorize('update', $file);
         
         $file->{$fileable_type}()->detach($fileable_id);
+        $file->save(); // Don't needed it, but must run update/updating event for flush cache
 
         $file->load('user');
         $clone = $file->replicate();
@@ -232,7 +232,7 @@ class FileController extends Controller
         $this->authorize('update', $file);
         
         $file->{$fileable_type}()->detach($fileable_id);
-        Cache::tags('files')->flush();
+        $file->save(); // Don't needed it, but must run update/updating event for flush cache
 
         return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
     }

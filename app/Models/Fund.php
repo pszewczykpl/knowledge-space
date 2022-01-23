@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,8 +28,8 @@ class Fund extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * The attributes that are mass assignable.
@@ -67,29 +67,9 @@ class Fund extends Model
         return $this->belongsToMany('App\Models\Investment')->withTimestamps();
     }
 
-    /**
-     * Get investments attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getInvestmentsAttribute()
-    {
-        return $this->getCachedRelation('investments');
-    }
-
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
-    }
-
-    /**
-     * Get notes attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getNotesAttribute()
-    {
-        return $this->getCachedRelation('notes');
     }
 
     /**
@@ -101,13 +81,11 @@ class Fund extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
+     * Get the user that created the fund.
      */
-    public function getEventsAttribute()
+    public function user()
     {
-        return $this->getCachedRelation('events');
+        return $this->belongsTo('App\Models\User');
     }
 
     /**
@@ -147,22 +125,4 @@ class Fund extends Model
         };
     }
 
-    /**
-     * Get the user that created the fund.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
-    }
-    
 }

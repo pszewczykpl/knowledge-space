@@ -26,7 +26,17 @@ var options = {
         paginate: { first: "<<", last: ">>", next: ">", previous: "<" },
     },
 };
-function filterGlobal(){$(".datatable").DataTable().search($("#global_filter").val()).draw()}function filterColumn(i){$(".datatable").DataTable().column(i).search($('#col'+i+'_filter').val(),$('#col'+i+'_regex').prop('checked'),$('#col'+i+'_smart').prop('checked')).draw()}
+$( ".datatables-body" ).click(function() {
+	$(".datatables-body").css("min-height","0px");
+});
+function filterGlobal(){
+	$(".datatables-body").css("min-height","0px");
+	$(".datatable").DataTable().search($("#global_filter").val()).draw();
+}
+function filterColumn(i){
+	$(".datatables-body").css("min-height","0px");
+	$(".datatable").DataTable().column(i).search($('#col'+i+'_filter').val(),$('#col'+i+'_regex').prop('checked'),$('#col'+i+'_smart').prop('checked')).draw();
+}
 function generateDatatableMenu( i ) {
 	var return_str = '';
 	i.forEach(element => {

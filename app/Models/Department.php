@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Traits\CacheModels;
 use App\Traits\HasDatatables;
+use App\Traits\UsesCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,8 +23,8 @@ class Department extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use CacheModels;
     use HasDatatables;
+    use UsesCache;
 
     /**
      * The attributes that are mass assignable.
@@ -54,16 +54,6 @@ class Department extends Model
     }
 
     /**
-     * Get users attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUsersAttribute()
-    {
-        return $this->getCachedRelation('users');
-    }
-
-    /**
      * Get all of the department's events.
      */
     public function events()
@@ -72,31 +62,11 @@ class Department extends Model
     }
 
     /**
-     * Get events attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getEventsAttribute()
-    {
-        return $this->getCachedRelation('events');
-    }
-
-    /**
      * Get the user that created the department.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    /**
-     * Get user attribute value from cached data.
-     *
-     * @return mixed
-     */
-    public function getUserAttribute()
-    {
-        return $this->getCachedRelation('user');
     }
 
     /**

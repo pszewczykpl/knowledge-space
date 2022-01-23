@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Permission;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,6 @@ use Illuminate\Support\Facades\Session;
 
 class PermissionController extends Controller
 {
-    use HasDatatables;
-
     /**
      * Display a listing of the resource for datatables.net plugin.
      *
@@ -23,7 +22,7 @@ class PermissionController extends Controller
      */
     public function datatables(Request $request): array
     {
-        return $this->getJsonData($request, 'App\Models\Permission');
+        return DataTable::of(Permission::class, $request)->get();
     }
 
 }

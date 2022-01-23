@@ -11,16 +11,38 @@ use Illuminate\Support\Facades\Cache;
 class NewsObserver
 {
     /**
-     * Handle the News "saved" event.
+     * Handle the News "retrieved" event.
      *
      * @param News $news
      * @return void
      */
-    public function saved(News $news)
+    public function retrieved(News $news)
     {
-        Cache::forget("news:$news->id");
-        // Remove all items with "news" tag
-        Cache::tags('news')->flush();
+        Cache::add($news->cacheKey(), $news);
+    }
+
+    /**
+     * Handle the News "created" event.
+     *
+     * @param News $news
+     * @return void
+     */
+    public function created(News $news)
+    {
+        Cache::put($news->cacheKey(), $news);
+        Cache::tags($news->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the News "updated" event.
+     *
+     * @param News $news
+     * @return void
+     */
+    public function updated(News $news)
+    {
+        Cache::put($news->cacheKey(), $news);
+        Cache::tags($news->cacheTag())->flush();
     }
 
     /**
@@ -31,8 +53,8 @@ class NewsObserver
      */
     public function deleted(News $news)
     {
-        // Remove all items with "news" tag
-        Cache::tags('news')->flush();
+        Cache::forget($news->cacheKey());
+        Cache::tags($news->cacheTag())->flush();
     }
 
     /**
@@ -43,8 +65,8 @@ class NewsObserver
      */
     public function restored(News $news)
     {
-        // Remove all items with "news" tag
-        Cache::tags('news')->flush();
+        Cache::put($news->cacheKey(), $news);
+        Cache::tags($news->cacheTag())->flush();
     }
 
     /**
@@ -55,7 +77,6 @@ class NewsObserver
      */
     public function forceDeleted(News $news)
     {
-        // Remove all items with "news" tag
-        Cache::tags('news')->flush();
+        Cache::forget($news->cacheKey());
     }
 }
