@@ -18,10 +18,7 @@ class InvestmentObserver
      */
     public function retrieved(Investment $investment)
     {
-        /**
-         * Put data into cache only if there is no such key
-         */
-        Cache::add("investments:$investment->id", $investment);
+        Cache::add($investment->cacheKey(), $investment);
     }
 
     /**
@@ -32,10 +29,8 @@ class InvestmentObserver
      */
     public function created(Investment $investment)
     {
-        /**
-         * Put newly created data into cache
-         */
-        Cache::put("investments:$investment->id", $investment);
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -46,10 +41,8 @@ class InvestmentObserver
      */
     public function updated(Investment $investment)
     {
-        /**
-         * Put updated data into cache
-         */
-        Cache::put("investments:$investment->id", $investment);
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -60,10 +53,8 @@ class InvestmentObserver
      */
     public function deleted(Investment $investment)
     {
-        /**
-         * Forget soft deleted data from cache
-         */
-        Cache::forget("investments:$investment->id");
+        Cache::forget($investment->cacheKey());
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -74,10 +65,8 @@ class InvestmentObserver
      */
     public function restored(Investment $investment)
     {
-        /**
-         * Put restored data into cache
-         */
-        Cache::put("investments:$investment->id", $investment);
+        Cache::put($investment->cacheKey(), $investment);
+        Cache::tags($investment->cacheTag())->flush();
     }
 
     /**
@@ -88,9 +77,6 @@ class InvestmentObserver
      */
     public function forceDeleted(Investment $investment)
     {
-        /**
-         * Forget force deleted data from cache
-         */
-        Cache::forget("investments:$investment->id");
+        Cache::forget($investment->cacheKey());
     }
 }

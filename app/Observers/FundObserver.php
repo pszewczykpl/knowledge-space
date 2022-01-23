@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class FundObserver
 {
     /**
-     * Handle the Fund "saved" event.
+     * Handle the Fund "retrieved" event.
      *
      * @param Fund $fund
      * @return void
      */
-    public function saved(Fund $fund)
+    public function retrieved(Fund $fund)
     {
-        Cache::forget("funds:$fund->id");
-        // Remove all items with "funds" tag
-        Cache::tags('funds')->flush();
+        Cache::add($fund->cacheKey(), $fund);
+    }
+
+    /**
+     * Handle the Fund "created" event.
+     *
+     * @param Fund $fund
+     * @return void
+     */
+    public function created(Fund $fund)
+    {
+        Cache::put($fund->cacheKey(), $fund);
+        Cache::tags($fund->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Fund "updated" event.
+     *
+     * @param Fund $fund
+     * @return void
+     */
+    public function updated(Fund $fund)
+    {
+        Cache::put($fund->cacheKey(), $fund);
+        Cache::tags($fund->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class FundObserver
      */
     public function deleted(Fund $fund)
     {
-        // Remove all items with "funds" tag
-        Cache::tags('funds')->flush();
+        Cache::forget($fund->cacheKey());
+        Cache::tags($fund->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class FundObserver
      */
     public function restored(Fund $fund)
     {
-        // Remove all items with "funds" tag
-        Cache::tags('funds')->flush();
+        Cache::put($fund->cacheKey(), $fund);
+        Cache::tags($fund->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class FundObserver
      */
     public function forceDeleted(Fund $fund)
     {
-        // Remove all items with "funds" tag
-        Cache::tags('funds')->flush();
+        Cache::forget($fund->cacheKey());
     }
 }

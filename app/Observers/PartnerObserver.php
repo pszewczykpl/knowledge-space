@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class PartnerObserver
 {
     /**
-     * Handle the Partner "saved" event.
+     * Handle the Partner "retrieved" event.
      *
      * @param Partner $partner
      * @return void
      */
-    public function saved(Partner $partner)
+    public function retrieved(Partner $partner)
     {
-        Cache::forget("partners:$partner->id");
-        // Remove all items with "partners" tag
-        Cache::tags('partners')->flush();
+        Cache::add($partner->cacheKey(), $partner);
+    }
+
+    /**
+     * Handle the Partner "created" event.
+     *
+     * @param Partner $partner
+     * @return void
+     */
+    public function created(Partner $partner)
+    {
+        Cache::put($partner->cacheKey(), $partner);
+        Cache::tags($partner->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Partner "updated" event.
+     *
+     * @param Partner $partner
+     * @return void
+     */
+    public function updated(Partner $partner)
+    {
+        Cache::put($partner->cacheKey(), $partner);
+        Cache::tags($partner->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class PartnerObserver
      */
     public function deleted(Partner $partner)
     {
-        // Remove all items with "partners" tag
-        Cache::tags('partners')->flush();
+        Cache::forget($partner->cacheKey());
+        Cache::tags($partner->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class PartnerObserver
      */
     public function restored(Partner $partner)
     {
-        // Remove all items with "partners" tag
-        Cache::tags('partners')->flush();
+        Cache::put($partner->cacheKey(), $partner);
+        Cache::tags($partner->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class PartnerObserver
      */
     public function forceDeleted(Partner $partner)
     {
-        // Remove all items with "partners" tag
-        Cache::tags('partners')->flush();
+        Cache::forget($partner->cacheKey());
     }
 }

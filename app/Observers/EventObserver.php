@@ -9,16 +9,38 @@ use Illuminate\Support\Facades\Cache;
 class EventObserver
 {
     /**
-     * Handle the Event "saved" event.
+     * Handle the Event "retrieved" event.
      *
      * @param Event $event
      * @return void
      */
-    public function saved(Event $event)
+    public function retrieved(Event $event)
     {
-        Cache::forget("events:$event->id");
-        // Remove all items with "events" tag
-        Cache::tags('events')->flush();
+        Cache::add($event->cacheKey(), $event);
+    }
+
+    /**
+     * Handle the Event "created" event.
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function created(Event $event)
+    {
+        Cache::put($event->cacheKey(), $event);
+        Cache::tags($event->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Event "updated" event.
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function updated(Event $event)
+    {
+        Cache::put($event->cacheKey(), $event);
+        Cache::tags($event->cacheTag())->flush();
     }
 
     /**
@@ -29,8 +51,8 @@ class EventObserver
      */
     public function deleted(Event $event)
     {
-        // Remove all items with "events" tag
-        Cache::tags('events')->flush();
+        Cache::forget($event->cacheKey());
+        Cache::tags($event->cacheTag())->flush();
     }
 
     /**
@@ -41,8 +63,8 @@ class EventObserver
      */
     public function restored(Event $event)
     {
-        // Remove all items with "events" tag
-        Cache::tags('events')->flush();
+        Cache::put($event->cacheKey(), $event);
+        Cache::tags($event->cacheTag())->flush();
     }
 
     /**
@@ -53,7 +75,6 @@ class EventObserver
      */
     public function forceDeleted(Event $event)
     {
-        // Remove all items with "events" tag
-        Cache::tags('events')->flush();
+        Cache::forget($event->cacheKey());
     }
 }

@@ -10,15 +10,37 @@ use Illuminate\Support\Facades\Cache;
 class PermissionObserver
 {
     /**
-     * Handle the Permission "saved" event.
+     * Handle the Permission "retrieved" event.
      *
      * @param Permission $permission
      * @return void
      */
-    public function saved(Permission $permission)
+    public function retrieved(Permission $permission)
     {
-        Cache::forget("permissions:$permission->id");
-        // Remove all items with "permissions" tag
-        Cache::tags('permissions')->flush();
+        Cache::add($permission->cacheKey(), $permission);
+    }
+
+    /**
+     * Handle the Permission "created" event.
+     *
+     * @param Permission $permission
+     * @return void
+     */
+    public function created(Permission $permission)
+    {
+        Cache::put($permission->cacheKey(), $permission);
+        Cache::tags($permission->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Permission "updated" event.
+     *
+     * @param Permission $permission
+     * @return void
+     */
+    public function updated(Permission $permission)
+    {
+        Cache::put($permission->cacheKey(), $permission);
+        Cache::tags($permission->cacheTag())->flush();
     }
 }

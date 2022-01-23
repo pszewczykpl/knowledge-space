@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class SystemObserver
 {
     /**
-     * Handle the System "saved" event.
+     * Handle the System "retrieved" event.
      *
      * @param System $system
      * @return void
      */
-    public function saved(System $system)
+    public function retrieved(System $system)
     {
-        Cache::forget("systems:$system->id");
-        // Remove all items with "systems" tag
-        Cache::tags('systems')->flush();
+        Cache::add($system->cacheKey(), $system);
+    }
+
+    /**
+     * Handle the System "created" event.
+     *
+     * @param System $system
+     * @return void
+     */
+    public function created(System $system)
+    {
+        Cache::put($system->cacheKey(), $system);
+        Cache::tags($system->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the System "updated" event.
+     *
+     * @param System $system
+     * @return void
+     */
+    public function updated(System $system)
+    {
+        Cache::put($system->cacheKey(), $system);
+        Cache::tags($system->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class SystemObserver
      */
     public function deleted(System $system)
     {
-        // Remove all items with "systems" tag
-        Cache::tags('systems')->flush();
+        Cache::forget($system->cacheKey());
+        Cache::tags($system->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class SystemObserver
      */
     public function restored(System $system)
     {
-        // Remove all items with "systems" tag
-        Cache::tags('systems')->flush();
+        Cache::put($system->cacheKey(), $system);
+        Cache::tags($system->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class SystemObserver
      */
     public function forceDeleted(System $system)
     {
-        // Remove all items with "systems" tag
-        Cache::tags('systems')->flush();
+        Cache::forget($system->cacheKey());
     }
 }

@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class DepartmentObserver
 {
     /**
-     * Handle the Department "saved" event.
+     * Handle the Department "retrieved" event.
      *
      * @param Department $department
      * @return void
      */
-    public function saved(Department $department)
+    public function retrieved(Department $department)
     {
-        Cache::forget("departments:$department->id");
-        // Remove all items with "departments" tag
-        Cache::tags('departments')->flush();
+        Cache::add($department->cacheKey(), $department);
+    }
+
+    /**
+     * Handle the Department "created" event.
+     *
+     * @param Department $department
+     * @return void
+     */
+    public function created(Department $department)
+    {
+        Cache::put($department->cacheKey(), $department);
+        Cache::tags($department->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Department "updated" event.
+     *
+     * @param Department $department
+     * @return void
+     */
+    public function updated(Department $department)
+    {
+        Cache::put($department->cacheKey(), $department);
+        Cache::tags($department->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class DepartmentObserver
      */
     public function deleted(Department $department)
     {
-        // Remove all items with "departments" tag
-        Cache::tags('departments')->flush();
+        Cache::forget($department->cacheKey());
+        Cache::tags($department->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class DepartmentObserver
      */
     public function restored(Department $department)
     {
-        // Remove all items with "departments" tag
-        Cache::tags('departments')->flush();
+        Cache::put($department->cacheKey(), $department);
+        Cache::tags($department->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class DepartmentObserver
      */
     public function forceDeleted(Department $department)
     {
-        // Remove all items with "departments" tag
-        Cache::tags('departments')->flush();
+        Cache::forget($department->cacheKey());
     }
 }

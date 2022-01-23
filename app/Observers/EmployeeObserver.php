@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class EmployeeObserver
 {
     /**
-     * Handle the Employee "saved" event.
+     * Handle the Employee "retrieved" event.
      *
      * @param Employee $employee
      * @return void
      */
-    public function saved(Employee $employee)
+    public function retrieved(Employee $employee)
     {
-        Cache::forget("employees:$employee->id");
-        // Remove all items with "employees" tag
-        Cache::tags('employees')->flush();
+        Cache::add($employee->cacheKey(), $employee);
+    }
+
+    /**
+     * Handle the Employee "created" event.
+     *
+     * @param Employee $employee
+     * @return void
+     */
+    public function created(Employee $employee)
+    {
+        Cache::put($employee->cacheKey(), $employee);
+        Cache::tags($employee->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Employee "updated" event.
+     *
+     * @param Employee $employee
+     * @return void
+     */
+    public function updated(Employee $employee)
+    {
+        Cache::put($employee->cacheKey(), $employee);
+        Cache::tags($employee->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class EmployeeObserver
      */
     public function deleted(Employee $employee)
     {
-        // Remove all items with "employees" tag
-        Cache::tags('employees')->flush();
+        Cache::forget($employee->cacheKey());
+        Cache::tags($employee->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class EmployeeObserver
      */
     public function restored(Employee $employee)
     {
-        // Remove all items with "employees" tag
-        Cache::tags('employees')->flush();
+        Cache::put($employee->cacheKey(), $employee);
+        Cache::tags($employee->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class EmployeeObserver
      */
     public function forceDeleted(Employee $employee)
     {
-        // Remove all items with "employees" tag
-        Cache::tags('employees')->flush();
+        Cache::forget($employee->cacheKey());
     }
 }

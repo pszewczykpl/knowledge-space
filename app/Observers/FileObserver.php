@@ -11,16 +11,38 @@ use Illuminate\Support\Facades\Auth;
 class FileObserver
 {
     /**
-     * Handle the File "saved" event.
+     * Handle the File "retrieved" event.
      *
      * @param File $file
      * @return void
      */
-    public function saved(File $file)
+    public function retrieved(File $file)
     {
-        Cache::forget("files:$file->id");
-        // Remove all items with "files" tag
-        Cache::tags('files')->flush();
+        Cache::add($file->cacheKey(), $file);
+    }
+
+    /**
+     * Handle the File "created" event.
+     *
+     * @param File $file
+     * @return void
+     */
+    public function created(File $file)
+    {
+        Cache::put($file->cacheKey(), $file);
+        Cache::tags($file->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the File "updated" event.
+     *
+     * @param File $file
+     * @return void
+     */
+    public function updated(File $file)
+    {
+        Cache::put($file->cacheKey(), $file);
+        Cache::tags($file->cacheTag())->flush();
     }
 
     /**
@@ -31,8 +53,8 @@ class FileObserver
      */
     public function deleted(File $file)
     {
-        // Remove all items with "files" tag
-        Cache::tags('files')->flush();
+        Cache::forget($file->cacheKey());
+        Cache::tags($file->cacheTag())->flush();
     }
 
     /**
@@ -43,8 +65,8 @@ class FileObserver
      */
     public function restored(File $file)
     {
-        // Remove all items with "files" tag
-        Cache::tags('files')->flush();
+        Cache::put($file->cacheKey(), $file);
+        Cache::tags($file->cacheTag())->flush();
     }
 
     /**
@@ -55,7 +77,6 @@ class FileObserver
      */
     public function forceDeleted(File $file)
     {
-        // Remove all items with "files" tag
-        Cache::tags('files')->flush();
+        Cache::forget($file->cacheKey());
     }
 }

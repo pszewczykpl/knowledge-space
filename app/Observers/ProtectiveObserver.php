@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Cache;
 class ProtectiveObserver
 {
     /**
-     * Handle the Protective "saved" event.
+     * Handle the Protective "retrieved" event.
      *
      * @param Protective $protective
      * @return void
      */
-    public function saved(Protective $protective)
+    public function retrieved(Protective $protective)
     {
-        Cache::forget("protectives:$protective->id");
-        // Remove all items with "protectives" tag
-        Cache::tags('protectives')->flush();
+        Cache::add($protective->cacheKey(), $protective);
+    }
+
+    /**
+     * Handle the Protective "created" event.
+     *
+     * @param Protective $protective
+     * @return void
+     */
+    public function created(Protective $protective)
+    {
+        Cache::put($protective->cacheKey(), $protective);
+        Cache::tags($protective->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Protective "updated" event.
+     *
+     * @param Protective $protective
+     * @return void
+     */
+    public function updated(Protective $protective)
+    {
+        Cache::put($protective->cacheKey(), $protective);
+        Cache::tags($protective->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class ProtectiveObserver
      */
     public function deleted(Protective $protective)
     {
-        // Remove all items with "protectives" tag
-        Cache::tags('protectives')->flush();
+        Cache::forget($protective->cacheKey());
+        Cache::tags($protective->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class ProtectiveObserver
      */
     public function restored(Protective $protective)
     {
-        // Remove all items with "protectives" tag
-        Cache::tags('protectives')->flush();
+        Cache::put($protective->cacheKey(), $protective);
+        Cache::tags($protective->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class ProtectiveObserver
      */
     public function forceDeleted(Protective $protective)
     {
-        // Remove all items with "protectives" tag
-        Cache::tags('protectives')->flush();
+        Cache::forget($protective->cacheKey());
     }
 }

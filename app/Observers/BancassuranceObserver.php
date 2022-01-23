@@ -11,16 +11,38 @@ use Illuminate\Support\Facades\Cache;
 class BancassuranceObserver
 {
     /**
-     * Handle the Bancassurance "saved" event.
+     * Handle the Bancassurance "retrieved" event.
      *
      * @param Bancassurance $bancassurance
      * @return void
      */
-    public function saved(Bancassurance $bancassurance)
+    public function retrieved(Bancassurance $bancassurance)
     {
-        Cache::forget("bancassurances:$bancassurance->id");
-        // Remove all items with "bancassurances" tag
-        Cache::tags('bancassurances')->flush();
+        Cache::add($bancassurance->cacheKey(), $bancassurance);
+    }
+
+    /**
+     * Handle the Bancassurance "created" event.
+     *
+     * @param Bancassurance $bancassurance
+     * @return void
+     */
+    public function created(Bancassurance $bancassurance)
+    {
+        Cache::put($bancassurance->cacheKey(), $bancassurance);
+        Cache::tags($bancassurance->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the Bancassurance "updated" event.
+     *
+     * @param Bancassurance $bancassurance
+     * @return void
+     */
+    public function updated(Bancassurance $bancassurance)
+    {
+        Cache::put($bancassurance->cacheKey(), $bancassurance);
+        Cache::tags($bancassurance->cacheTag())->flush();
     }
 
     /**
@@ -31,8 +53,8 @@ class BancassuranceObserver
      */
     public function deleted(Bancassurance $bancassurance)
     {
-        // Remove all items with "bancassurances" tag
-        Cache::tags('bancassurances')->flush();
+        Cache::forget($bancassurance->cacheKey());
+        Cache::tags($bancassurance->cacheTag())->flush();
     }
 
     /**
@@ -43,8 +65,8 @@ class BancassuranceObserver
      */
     public function restored(Bancassurance $bancassurance)
     {
-        // Remove all items with "bancassurances" tag
-        Cache::tags('bancassurances')->flush();
+        Cache::put($bancassurance->cacheKey(), $bancassurance);
+        Cache::tags($bancassurance->cacheTag())->flush();
     }
 
     /**
@@ -55,7 +77,6 @@ class BancassuranceObserver
      */
     public function forceDeleted(Bancassurance $bancassurance)
     {
-        // Remove all items with "bancassurances" tag
-        Cache::tags('bancassurances')->flush();
+        Cache::forget($bancassurance->cacheKey());
     }
 }

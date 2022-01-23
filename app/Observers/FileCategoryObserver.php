@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\Auth;
 class FileCategoryObserver
 {
     /**
-     * Handle the FileCategory "saved" event.
+     * Handle the FileCategory "retrieved" event.
      *
      * @param FileCategory $fileCategory
      * @return void
      */
-    public function saved(FileCategory $fileCategory)
+    public function retrieved(FileCategory $fileCategory)
     {
-        Cache::forget("file_categories:$fileCategory->id");
-        // Remove all items with "file_categories" tag
-        Cache::tags('file_categories')->flush();
+        Cache::add($fileCategory->cacheKey(), $fileCategory);
+    }
+
+    /**
+     * Handle the FileCategory "created" event.
+     *
+     * @param FileCategory $fileCategory
+     * @return void
+     */
+    public function created(FileCategory $fileCategory)
+    {
+        Cache::put($fileCategory->cacheKey(), $fileCategory);
+        Cache::tags($fileCategory->cacheTag())->flush();
+    }
+
+    /**
+     * Handle the FileCategory "updated" event.
+     *
+     * @param FileCategory $fileCategory
+     * @return void
+     */
+    public function updated(FileCategory $fileCategory)
+    {
+        Cache::put($fileCategory->cacheKey(), $fileCategory);
+        Cache::tags($fileCategory->cacheTag())->flush();
     }
 
     /**
@@ -30,8 +52,8 @@ class FileCategoryObserver
      */
     public function deleted(FileCategory $fileCategory)
     {
-        // Remove all items with "file_categories" tag
-        Cache::tags('file_categories')->flush();
+        Cache::forget($fileCategory->cacheKey());
+        Cache::tags($fileCategory->cacheTag())->flush();
     }
 
     /**
@@ -42,8 +64,8 @@ class FileCategoryObserver
      */
     public function restored(FileCategory $fileCategory)
     {
-        // Remove all items with "file_categories" tag
-        Cache::tags('file_categories')->flush();
+        Cache::put($fileCategory->cacheKey(), $fileCategory);
+        Cache::tags($fileCategory->cacheTag())->flush();
     }
 
     /**
@@ -54,7 +76,6 @@ class FileCategoryObserver
      */
     public function forceDeleted(FileCategory $fileCategory)
     {
-        // Remove all items with "file_categories" tag
-        Cache::tags('file_categories')->flush();
+        Cache::forget($fileCategory->cacheKey());
     }
 }
