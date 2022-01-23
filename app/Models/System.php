@@ -62,7 +62,7 @@ class System extends Model
      * @var array
      */
     protected $casts = [
-        'events' => CacheRelation::class,
+//        'events' => CacheRelation::class,
     ];
 
     /**

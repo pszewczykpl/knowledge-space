@@ -3,9 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Bancassurance;
-use App\Models\Event;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class BancassuranceObserver

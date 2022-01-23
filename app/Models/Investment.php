@@ -86,10 +86,10 @@ class Investment extends Model
      * @var array
      */
     protected $casts = [
-        'files' => CacheRelation::class,
-        'notes' => CacheRelation::class,
-        'funds' => CacheRelation::class,
-        'events' => CacheRelation::class,
+//        'files' => CacheRelation::class,
+//        'notes' => CacheRelation::class,
+//        'funds' => CacheRelation::class,
+//        'events' => CacheRelation::class,
     ];
 
     /**

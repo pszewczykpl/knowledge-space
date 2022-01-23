@@ -81,6 +81,14 @@ class Fund extends Model
     }
 
     /**
+     * Get the user that created the fund.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
      * Get unique name of the product.
      *
      * @return string
@@ -117,11 +125,4 @@ class Fund extends Model
         };
     }
 
-    /**
-     * Get the user that created the fund.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
 }
