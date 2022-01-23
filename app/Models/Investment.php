@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @property int        $id
@@ -28,6 +27,8 @@ use phpDocumentor\Reflection\Types\Integer;
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property mixed|null $deleted_at
+ * @property mixed files
+ * @property mixed extended_name
  */
 class Investment extends Model
 {

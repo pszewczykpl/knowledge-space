@@ -60,7 +60,7 @@ class FileController extends Controller
             $zip->close();
         }
 
-        return response()->download('storage/tmp.zip', $request->name . '.zip')->deleteFileAfterSend();
+        return response()->download('storage/tmp.zip', $request->filename . '.zip')->deleteFileAfterSend();
     }
 
 }

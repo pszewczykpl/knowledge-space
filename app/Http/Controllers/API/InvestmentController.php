@@ -7,6 +7,7 @@ use App\Repositories\Facades\DataTable;
 use App\Traits\HasDatatables;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class InvestmentController extends Controller
@@ -25,19 +26,16 @@ class InvestmentController extends Controller
     }
 
     /**
-     * Generate zip archive 
-     * 
-     * @param App\Investment $id
-     * @param array $extensions
-     * 
-     * @return \Illuminate\Http\RedirectResponse
+     * Generate zip archive
+     *
+     * @param $investment
+     * @return RedirectResponse
      */
-    public function zip_files($id)
+    public function zipFiles(Investment $investment): RedirectResponse
     {
-        $investment = Investment::findOrFail($id);
         $files = $investment->files->where('draft', false);
 
-        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'name' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $investment->extended_name)]);
+        return redirect()->route('files.zip', ['id' => $files->pluck('id')->toArray(), 'filename' => str_replace(['/', '\\', ':', '*', '<', '>', '?', '"', '|'], "_", $investment->extended_name)]);
     }
 
 }
