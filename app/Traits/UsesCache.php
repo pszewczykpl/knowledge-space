@@ -6,6 +6,12 @@ namespace App\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * Trait UsesCache
+ *
+ * @parent Model
+ * @package App\Traits
+ */
 trait UsesCache
 {
     /**
@@ -17,13 +23,9 @@ trait UsesCache
      */
     public function resolveRouteBinding($value, $field = null): ?Model
     {
-        $data = Cache::remember($this->getTable() . ":$value", 60*60*12, function () use ($value, $field) {
-            return self::withoutEvents(function () use ($value, $field) {
-                return parent::resolveRouteBinding($value, $field);
-            });
+        return Cache::remember($this->getTable() . ":$value", now()->addDays(7), function () use ($value, $field) {
+            return parent::resolveRouteBinding($value, $field);
         });
-        event('eloquent.retrieved: App\\Models\\' . class_basename($this), $data);
-        return $data;
     }
 
     /**
@@ -33,13 +35,8 @@ trait UsesCache
      */
     public function resolveSoftDeletableRouteBinding($value, $field = null): ?Model
     {
-        $data = Cache::remember($this->getTable() . ":$value", 60*60*12, function () use ($value, $field) {
-            return self::withoutEvents(function () use ($value, $field) {
-                return parent::resolveSoftDeletableRouteBinding($value, $field);
-            });
+        return Cache::remember($this->getTable() . ":$value", now()->addDays(7), function () use ($value, $field) {
+            return parent::resolveSoftDeletableRouteBinding($value, $field);
         });
-        event('eloquent.retrieved: App\\Models\\' . class_basename($this), $data);
-
-        return $data;
     }
 }
