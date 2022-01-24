@@ -41,12 +41,12 @@
 				</a>
 				<div class="menu menu-sub menu-sub-dropdown menu-column card-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-175px" data-kt-menu="true">
 					<div class="menu-item px-3 my-1">
-						<a @if($dark_mode) href="{{ route('system-configuration.dark-mode') }}" @endif class="menu-link card-rounded px-5 @if(!$dark_mode)active @endif">
+						<a @if($dark_mode) href="{{ route('system-properties.dark-mode') }}" @endif class="menu-link card-rounded px-5 @if(!$dark_mode)active @endif">
 							<span class="menu-title">Jasny motyw</span>
 						</a>
 					</div>
 					<div class="menu-item px-3 my-1">
-						<a @if(!$dark_mode) href="{{ route('system-configuration.dark-mode') }}" @endif class="menu-link card-rounded px-5 @if($dark_mode)active @endif">
+						<a @if(!$dark_mode) href="{{ route('system-properties.dark-mode') }}" @endif class="menu-link card-rounded px-5 @if($dark_mode)active @endif">
 							<span class="menu-title">Ciemny motyw</span>
 						</a>
 					</div>
