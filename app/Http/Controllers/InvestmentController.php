@@ -111,14 +111,9 @@ class InvestmentController extends Controller
      */
     public function show(Investment $investment): View
     {
-        $history = Cache::tags($investment->cacheTag())->remember($investment->cacheKey() . ":history", now()->addDays(7), function () use ($investment) {
-            return Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get();
-        });
-
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
-            'archive_investments' => $history,
         ]);
     }
 

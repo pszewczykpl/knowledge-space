@@ -44,7 +44,7 @@
 								<th class="min-w-100px"></th>
 							</x-slot>
 							<x-slot name="data">
-								@foreach($archive_employees as $archive_employee)
+								@foreach($employee->history() as $archive_employee)
 									<tr class="@if($archive_employee->id == $employee->id) bg-light @endif">
 										<td>{{ $archive_employee->name }}</td>
 										<td>{{ $archive_employee->code_owu }}</td>
