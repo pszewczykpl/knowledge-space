@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FileCategoryController;
@@ -22,12 +23,8 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\PostCategoryController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\SearchController;
-
 use App\Http\Controllers\Auth\LoginController;
-use App\Repositories\Facades\DataTable;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,113 +38,140 @@ use Illuminate\Http\Request;
 */
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
-
-Auth::routes();
-
+/**
+ * Home
+ */
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
+/**
+ * Users and authentication
+ */
+Auth::routes();
+
+Route::delete('users/{id}/forcedestroy', [UserController::class, 'force_destroy'])->name('users.forceDestroy');
+Route::put('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+
 Route::delete('departments/{id}/forcedestroy', [DepartmentController::class, 'force_destroy'])->name('departments.forceDestroy');
 Route::put('departments/{id}/restore', [DepartmentController::class, 'restore'])->name('departments.restore');
-Route::resource('departments', DepartmentController::class);
+
+Route::resource('permissions', PermissionController::class)->only(['index']);
+
+Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::resources([
+    'departments' => DepartmentController::class,
+    'users' => UserController::class,
+]);
+
+/**
+ * Products
+ */
+Route::delete('investments/{investment}/forcedestroy', [InvestmentController::class, 'force_destroy'])->withTrashed()->name('investments.forceDestroy');
+Route::put('investments/{investment}/restore', [InvestmentController::class, 'restore'])->withTrashed()->name('investments.restore');
+Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
 
 Route::delete('employees/{id}/forcedestroy', [EmployeeController::class, 'force_destroy'])->name('employees.forceDestroy');
 Route::put('employees/{id}/restore', [EmployeeController::class, 'restore'])->name('employees.restore');
 Route::get('employees/{employee}/duplicate', [EmployeeController::class, 'duplicate'])->name('employees.duplicate');
-Route::resource('employees', EmployeeController::class);
 
+Route::delete('protectives/{id}/forcedestroy', [ProtectiveController::class, 'force_destroy'])->name('protectives.forceDestroy');
+Route::put('protectives/{id}/restore', [ProtectiveController::class, 'restore'])->name('protectives.restore');
+Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
+
+Route::delete('bancassurances/{bancassurance}/forcedestroy', [BancassuranceController::class, 'force_destroy'])->name('bancassurances.forceDestroy');
+Route::put('bancassurances/{bancassurance}/restore', [BancassuranceController::class, 'restore'])->name('bancassurances.restore');
+Route::get('bancassurances/{bancassurance}/duplicate', [BancassuranceController::class, 'duplicate'])->name('bancassurances.duplicate');
+
+Route::resources([
+    'employees' => EmployeeController::class,
+    'investments' => InvestmentController::class,
+    'protectives' => ProtectiveController::class,
+    'bancassurances' => BancassuranceController::class,
+]);
+
+/**
+ * Files
+ */
 Route::delete('files/{id}/forcedestroy', [FileController::class, 'force_destroy'])->name('files.forceDestroy');
 Route::put('files/{id}/restore', [FileController::class, 'restore'])->name('files.restore');
 Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/detach', [FileController::class, 'detach'])->name('files.detach');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/replace', [FileController::class, 'replace'])->name('files.replace');
-Route::resource('files', FileController::class);
 
 Route::delete('file-categories/{id}/forcedestroy', [FileCategoryController::class, 'force_destroy'])->name('file-categories.forceDestroy');
 Route::put('file-categories/{id}/restore', [FileCategoryController::class, 'restore'])->name('file-categories.restore');
-Route::resource('file-categories', FileCategoryController::class);
 
-Route::delete('funds/{id}/forcedestroy', [FundController::class, 'force_destroy'])->name('funds.forceDestroy');
-Route::put('funds/{id}/restore', [FundController::class, 'restore'])->name('funds.restore');
-Route::get('funds/{fund}/duplicate', [FundController::class, 'duplicate'])->name('funds.duplicate');
-Route::resource('funds', FundController::class);
+Route::resources([
+    'files' => FileController::class,
+    'file-categories' => FileCategoryController::class,
+]);
 
-Route::delete('investments/{investment}/forcedestroy', [InvestmentController::class, 'force_destroy'])->withTrashed()->name('investments.forceDestroy');
-Route::put('investments/{investment}/restore', [InvestmentController::class, 'restore'])->withTrashed()->name('investments.restore');
-Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
-Route::resource('investments', InvestmentController::class);
-
+/**
+ * News, replies, notes and posts
+ */
 Route::delete('news/{id}/forcedestroy', [NewsController::class, 'force_destroy'])->name('news.forceDestroy');
 Route::put('news/{id}/restore', [NewsController::class, 'restore'])->name('news.restore');
-Route::resource('news', NewsController::class);
 
 Route::delete('notes/{id}/forcedestroy', [NoteController::class, 'force_destroy'])->name('notes.forceDestroy');
 Route::put('notes/{id}/restore', [NoteController::class, 'restore'])->name('notes.restore');
 Route::get('notes/{note}/{noteable_type}/{noteable_id}/detach', [NoteController::class, 'detach'])->name('notes.detach');
-Route::resource('notes', NoteController::class);
 
-Route::delete('partners/{id}/forcedestroy', [PartnerController::class, 'force_destroy'])->name('partners.forceDestroy');
-Route::put('partners/{id}/restore', [PartnerController::class, 'restore'])->name('partners.restore');
-Route::get('partners/{partner}/duplicate', [PartnerController::class, 'duplicate'])->name('partners.duplicate');
-Route::resource('partners', PartnerController::class);
+Route::delete('post-categories/{id}/forcedestroy', [PostCategoryController::class, 'force_destroy'])->name('post-categories.forceDestroy');
+Route::put('post-categories/{id}/restore', [PostCategoryController::class, 'restore'])->name('post-categories.restore');
 
-Route::resource('permissions', PermissionController::class)->only(['index']);
-
-Route::delete('protectives/{id}/forcedestroy', [ProtectiveController::class, 'force_destroy'])->name('protectives.forceDestroy');
-Route::put('protectives/{id}/restore', [ProtectiveController::class, 'restore'])->name('protectives.restore');
-Route::get('protectives/{protective}/duplicate', [ProtectiveController::class, 'duplicate'])->name('protectives.duplicate');
-Route::resource('protectives', ProtectiveController::class);
-
-Route::delete('bancassurances/{bancassurance}/forcedestroy', [BancassuranceController::class, 'force_destroy'])->name('bancassurances.forceDestroy');
-Route::put('bancassurances/{bancassurance}/restore', [BancassuranceController::class, 'restore'])->name('bancassurances.restore');
-Route::get('bancassurances/{bancassurance}/duplicate', [BancassuranceController::class, 'duplicate'])->name('bancassurances.duplicate');
-Route::resource('bancassurances', BancassuranceController::class);
+Route::delete('posts/{id}/forcedestroy', [PostController::class, 'force_destroy'])->name('posts.forceDestroy');
+Route::put('posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
 
 Route::delete('reply/{id}/forcedestroy', [ReplyController::class, 'force_destroy'])->name('replies.forceDestroy');
 Route::put('reply/{id}/restore', [ReplyController::class, 'restore'])->name('replies.restore');
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 
+Route::resources([
+    'news' => NewsController::class,
+    'notes' => NoteController::class,
+    'posts' => PostController::class,
+    'post-categories' => PostCategoryController::class,
+]);
+
+/**
+ * Dictionaries
+ */
+Route::delete('funds/{id}/forcedestroy', [FundController::class, 'force_destroy'])->name('funds.forceDestroy');
+Route::put('funds/{id}/restore', [FundController::class, 'restore'])->name('funds.restore');
+Route::get('funds/{fund}/duplicate', [FundController::class, 'duplicate'])->name('funds.duplicate');
+
+Route::delete('partners/{id}/forcedestroy', [PartnerController::class, 'force_destroy'])->name('partners.forceDestroy');
+Route::put('partners/{id}/restore', [PartnerController::class, 'restore'])->name('partners.restore');
+Route::get('partners/{partner}/duplicate', [PartnerController::class, 'duplicate'])->name('partners.duplicate');
+
 Route::delete('risks/{id}/forcedestroy', [RiskController::class, 'force_destroy'])->name('risks.forceDestroy');
 Route::put('risks/{id}/restore', [RiskController::class, 'restore'])->name('risks.restore');
 Route::get('risks/{risk}/duplicate', [RiskController::class, 'duplicate'])->name('risks.duplicate');
-Route::resource('risks', RiskController::class);
-
-Route::delete('users/{id}/forcedestroy', [UserController::class, 'force_destroy'])->name('users.forceDestroy');
-Route::put('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
-Route::resource('users', UserController::class);
 
 Route::delete('systems/{id}/forcedestroy', [SystemController::class, 'force_destroy'])->name('systems.forceDestroy');
 Route::put('systems/{id}/restore', [SystemController::class, 'restore'])->name('systems.restore');
-Route::resource('systems', SystemController::class);
 
-Route::get('trash/{model}', [TrashController::class, 'index'])->name('trash.index');
+Route::resources([
+    'funds' => FundController::class,
+    'partners' => PartnerController::class,
+    'risks' => RiskController::class,
+    'systems' => SystemController::class,
+]);
 
-Route::delete('post-categories/{id}/forcedestroy', [PostCategoryController::class, 'force_destroy'])->name('post-categories.forceDestroy');
-Route::put('post-categories/{id}/restore', [PostCategoryController::class, 'restore'])->name('post-categories.restore');
-Route::resource('post-categories', PostCategoryController::class);
-
-Route::delete('posts/{id}/forcedestroy', [PostController::class, 'force_destroy'])->name('posts.forceDestroy');
-Route::put('posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
-Route::resource('posts', PostController::class);
-
+/**
+ * Search
+ */
 Route::get('search/{scope}', [SearchController::class, 'search'])->name('search');
 
+/**
+ * System properties and configuration
+ */
 Route::get('system-properties', [SystemPropertyController::class, 'index'])->name('system-properties.index');
 Route::put('system-properties', [SystemPropertyController::class, 'update'])->name('system-properties.update');
 Route::get('system-properties/update-app', [SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
@@ -155,3 +179,8 @@ Route::get('system-properties/maintenance/off', [SystemPropertyController::class
 Route::get('system-properties/maintenance/on', [SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
 
 Route::get('system-configuration/dark-mode', [SystemConfigurationController::class, 'switchDarkMode'])->name('system-configuration.dark-mode');
+
+/**
+ * Trash
+ */
+Route::get('trash/{model}', [TrashController::class, 'index'])->name('trash.index');
