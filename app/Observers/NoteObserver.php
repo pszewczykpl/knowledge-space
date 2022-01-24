@@ -55,27 +55,4 @@ class NoteObserver
         Cache::forget($note->cacheKey());
         Cache::tags($note->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Note "restored" event.
-     *
-     * @param Note $note
-     * @return void
-     */
-    public function restored(Note $note)
-    {
-        Cache::put($note->cacheKey(), $note);
-        Cache::tags($note->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Note "force deleted" event.
-     *
-     * @param Note $note
-     * @return void
-     */
-    public function forceDeleted(Note $note)
-    {
-        Cache::forget($note->cacheKey());
-    }
 }

@@ -55,27 +55,4 @@ class PartnerObserver
         Cache::forget($partner->cacheKey());
         Cache::tags($partner->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Partner "restored" event.
-     *
-     * @param Partner $partner
-     * @return void
-     */
-    public function restored(Partner $partner)
-    {
-        Cache::put($partner->cacheKey(), $partner);
-        Cache::tags($partner->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Partner "force deleted" event.
-     *
-     * @param Partner $partner
-     * @return void
-     */
-    public function forceDeleted(Partner $partner)
-    {
-        Cache::forget($partner->cacheKey());
-    }
 }

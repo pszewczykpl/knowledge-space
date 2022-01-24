@@ -56,27 +56,4 @@ class FileObserver
         Cache::forget($file->cacheKey());
         Cache::tags($file->cacheTag())->flush();
     }
-
-    /**
-     * Handle the File "restored" event.
-     *
-     * @param File $file
-     * @return void
-     */
-    public function restored(File $file)
-    {
-        Cache::put($file->cacheKey(), $file);
-        Cache::tags($file->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the File "force deleted" event.
-     *
-     * @param File $file
-     * @return void
-     */
-    public function forceDeleted(File $file)
-    {
-        Cache::forget($file->cacheKey());
-    }
 }

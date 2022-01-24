@@ -55,27 +55,4 @@ class ReplyObserver
         Cache::forget($reply->cacheKey());
         Cache::tags($reply->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Reply "restored" event.
-     *
-     * @param Reply $reply
-     * @return void
-     */
-    public function restored(Reply $reply)
-    {
-        Cache::put($reply->cacheKey(), $reply);
-        Cache::tags($reply->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Reply "force deleted" event.
-     *
-     * @param Reply $reply
-     * @return void
-     */
-    public function forceDeleted(Reply $reply)
-    {
-        Cache::forget($reply->cacheKey());
-    }
 }

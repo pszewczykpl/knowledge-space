@@ -5,9 +5,6 @@
 	@can('create', App\Models\Note::class)
 		<x-layout.toolbar.button action="custom" svg="note" title="Dodaj Notatkę" href="{{ route('notes.create') }}" />
 	@endcan
-	@can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'notes']) }}" />
-	@endcan
 @stop
 
 @section('content')

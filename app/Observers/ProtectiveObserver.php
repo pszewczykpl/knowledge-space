@@ -55,27 +55,4 @@ class ProtectiveObserver
         Cache::forget($protective->cacheKey());
         Cache::tags($protective->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Protective "restored" event.
-     *
-     * @param Protective $protective
-     * @return void
-     */
-    public function restored(Protective $protective)
-    {
-        Cache::put($protective->cacheKey(), $protective);
-        Cache::tags($protective->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Protective "force deleted" event.
-     *
-     * @param Protective $protective
-     * @return void
-     */
-    public function forceDeleted(Protective $protective)
-    {
-        Cache::forget($protective->cacheKey());
-    }
 }

@@ -56,27 +56,4 @@ class NewsObserver
         Cache::forget($news->cacheKey());
         Cache::tags($news->cacheTag())->flush();
     }
-
-    /**
-     * Handle the News "restored" event.
-     *
-     * @param News $news
-     * @return void
-     */
-    public function restored(News $news)
-    {
-        Cache::put($news->cacheKey(), $news);
-        Cache::tags($news->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the News "force deleted" event.
-     *
-     * @param News $news
-     * @return void
-     */
-    public function forceDeleted(News $news)
-    {
-        Cache::forget($news->cacheKey());
-    }
 }

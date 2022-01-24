@@ -5,9 +5,6 @@
 	@can('create', App\Models\Risk::class)
 		<x-layout.toolbar.button action="custom" svg="risk" title="Dodaj Ryzyko Ubezpieczeniowe" href="{{ route('risks.create') }}" />
 	@endcan
-	@can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'risks']) }}" />
-	@endcan
 @stop
 
 

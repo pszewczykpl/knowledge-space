@@ -54,27 +54,4 @@ class EventObserver
         Cache::forget($event->cacheKey());
         Cache::tags($event->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Event "restored" event.
-     *
-     * @param Event $event
-     * @return void
-     */
-    public function restored(Event $event)
-    {
-        Cache::put($event->cacheKey(), $event);
-        Cache::tags($event->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Event "force deleted" event.
-     *
-     * @param Event $event
-     * @return void
-     */
-    public function forceDeleted(Event $event)
-    {
-        Cache::forget($event->cacheKey());
-    }
 }

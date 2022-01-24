@@ -53,27 +53,4 @@ class BancassuranceObserver
         Cache::forget($bancassurance->cacheKey());
         Cache::tags($bancassurance->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Bancassurance "restored" event.
-     *
-     * @param Bancassurance $bancassurance
-     * @return void
-     */
-    public function restored(Bancassurance $bancassurance)
-    {
-        Cache::put($bancassurance->cacheKey(), $bancassurance);
-        Cache::tags($bancassurance->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Bancassurance "force deleted" event.
-     *
-     * @param Bancassurance $bancassurance
-     * @return void
-     */
-    public function forceDeleted(Bancassurance $bancassurance)
-    {
-        Cache::forget($bancassurance->cacheKey());
-    }
 }
