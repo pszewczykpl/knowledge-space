@@ -53,27 +53,4 @@ class UserObserver
         Cache::forget($user->cacheKey());
         Cache::tags($user->cacheTag())->flush();
     }
-
-    /**
-     * Handle the User "restored" event.
-     *
-     * @param User $user
-     * @return void
-     */
-    public function restored(User $user)
-    {
-        Cache::put($user->cacheKey(), $user);
-        Cache::tags($user->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the User "force deleted" event.
-     *
-     * @param User $user
-     * @return void
-     */
-    public function forceDeleted(User $user)
-    {
-        Cache::forget($user->cacheKey());
-    }
 }

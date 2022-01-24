@@ -5,9 +5,6 @@
 	@can('create', App\Models\Partner::class)
 		<x-layout.toolbar.button action="custom" svg="partner" title="Dodaj Partnera" href="{{ route('partners.create') }}" />
 	@endcan
-	@can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'partners']) }}" />
-	@endcan
 @stop
 
 @section('content')

@@ -55,27 +55,4 @@ class RiskObserver
         Cache::forget($risk->cacheKey());
         Cache::tags($risk->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Risk "restored" event.
-     *
-     * @param Risk $risk
-     * @return void
-     */
-    public function restored(Risk $risk)
-    {
-        Cache::put($risk->cacheKey(), $risk);
-        Cache::tags($risk->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Risk "force deleted" event.
-     *
-     * @param Risk $risk
-     * @return void
-     */
-    public function forceDeleted(Risk $risk)
-    {
-        Cache::forget($risk->cacheKey());
-    }
 }

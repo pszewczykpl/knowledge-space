@@ -5,9 +5,6 @@
 	@can('create', App\Models\Department::class)
 		<x-layout.toolbar.button action="custom" svg="department" title="Dodaj Department" href="{{ route('departments.create') }}" />
 	@endcan
-	@can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'departments']) }}" />
-	@endcan
 @stop
 
 @section('content')

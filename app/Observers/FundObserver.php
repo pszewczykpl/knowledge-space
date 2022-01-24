@@ -55,27 +55,4 @@ class FundObserver
         Cache::forget($fund->cacheKey());
         Cache::tags($fund->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Fund "restored" event.
-     *
-     * @param Fund $fund
-     * @return void
-     */
-    public function restored(Fund $fund)
-    {
-        Cache::put($fund->cacheKey(), $fund);
-        Cache::tags($fund->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Fund "force deleted" event.
-     *
-     * @param Fund $fund
-     * @return void
-     */
-    public function forceDeleted(Fund $fund)
-    {
-        Cache::forget($fund->cacheKey());
-    }
 }

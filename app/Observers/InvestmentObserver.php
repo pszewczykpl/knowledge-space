@@ -56,27 +56,4 @@ class InvestmentObserver
         Cache::forget($investment->cacheKey());
         Cache::tags($investment->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Investment "restored" event.
-     *
-     * @param Investment $investment
-     * @return void
-     */
-    public function restored(Investment $investment)
-    {
-        Cache::put($investment->cacheKey(), $investment);
-        Cache::tags($investment->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Investment "force deleted" event.
-     *
-     * @param Investment $investment
-     * @return void
-     */
-    public function forceDeleted(Investment $investment)
-    {
-        Cache::forget($investment->cacheKey());
-    }
 }

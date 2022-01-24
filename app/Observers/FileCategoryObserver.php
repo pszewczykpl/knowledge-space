@@ -55,27 +55,4 @@ class FileCategoryObserver
         Cache::forget($fileCategory->cacheKey());
         Cache::tags($fileCategory->cacheTag())->flush();
     }
-
-    /**
-     * Handle the FileCategory "restored" event.
-     *
-     * @param FileCategory $fileCategory
-     * @return void
-     */
-    public function restored(FileCategory $fileCategory)
-    {
-        Cache::put($fileCategory->cacheKey(), $fileCategory);
-        Cache::tags($fileCategory->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the FileCategory "force deleted" event.
-     *
-     * @param FileCategory $fileCategory
-     * @return void
-     */
-    public function forceDeleted(FileCategory $fileCategory)
-    {
-        Cache::forget($fileCategory->cacheKey());
-    }
 }

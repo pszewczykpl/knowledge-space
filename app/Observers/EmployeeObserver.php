@@ -55,27 +55,4 @@ class EmployeeObserver
         Cache::forget($employee->cacheKey());
         Cache::tags($employee->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Employee "restored" event.
-     *
-     * @param Employee $employee
-     * @return void
-     */
-    public function restored(Employee $employee)
-    {
-        Cache::put($employee->cacheKey(), $employee);
-        Cache::tags($employee->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Employee "force deleted" event.
-     *
-     * @param Employee $employee
-     * @return void
-     */
-    public function forceDeleted(Employee $employee)
-    {
-        Cache::forget($employee->cacheKey());
-    }
 }

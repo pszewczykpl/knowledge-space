@@ -55,27 +55,4 @@ class SystemObserver
         Cache::forget($system->cacheKey());
         Cache::tags($system->cacheTag())->flush();
     }
-
-    /**
-     * Handle the System "restored" event.
-     *
-     * @param System $system
-     * @return void
-     */
-    public function restored(System $system)
-    {
-        Cache::put($system->cacheKey(), $system);
-        Cache::tags($system->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the System "force deleted" event.
-     *
-     * @param System $system
-     * @return void
-     */
-    public function forceDeleted(System $system)
-    {
-        Cache::forget($system->cacheKey());
-    }
 }

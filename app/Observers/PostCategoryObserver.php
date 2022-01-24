@@ -55,27 +55,4 @@ class PostCategoryObserver
         Cache::forget($postCategory->cacheKey());
         Cache::tags($postCategory->cacheTag())->flush();
     }
-
-    /**
-     * Handle the PostCategory "restored" event.
-     *
-     * @param PostCategory $postCategory
-     * @return void
-     */
-    public function restored(PostCategory $postCategory)
-    {
-        Cache::put($postCategory->cacheKey(), $postCategory);
-        Cache::tags($postCategory->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the PostCategory "force deleted" event.
-     *
-     * @param PostCategory $postCategory
-     * @return void
-     */
-    public function forceDeleted(PostCategory $postCategory)
-    {
-        Cache::forget($postCategory->cacheKey());
-    }
 }

@@ -55,27 +55,4 @@ class PostObserver
         Cache::forget($post->cacheKey());
         Cache::tags($post->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Post "restored" event.
-     *
-     * @param Post $post
-     * @return void
-     */
-    public function restored(Post $post)
-    {
-        Cache::put($post->cacheKey(), $post);
-        Cache::tags($post->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Post "force deleted" event.
-     *
-     * @param Post $post
-     * @return void
-     */
-    public function forceDeleted(Post $post)
-    {
-        Cache::forget($post->cacheKey());
-    }
 }

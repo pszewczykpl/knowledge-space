@@ -5,9 +5,6 @@
 	@can('create', App\Models\FileCategory::class)
 		<x-layout.toolbar.button action="custom" svg="file-category" title="Dodaj Kategorię" href="{{ route('file-categories.create') }}" />
 	@endcan
-	@can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'file-categories']) }}" />
-	@endcan
 @stop
 
 @section('content')

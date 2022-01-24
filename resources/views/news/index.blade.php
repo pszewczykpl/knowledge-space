@@ -2,9 +2,6 @@
 
 @section('toolbar')
 	<x-layout.toolbar.button action="back" href="{{ route('home.index') }}" />
-	{{-- @can('viewAny', App\Models\Trash::class)
-		<x-layout.toolbar.button action="custom" svg="trash" title="Elementy usunięte" color="danger" href="{{ route('trash.index', ['model' => 'news']) }}" />
-	@endcan --}}
 @stop
 
 @section('content')

@@ -55,27 +55,4 @@ class DepartmentObserver
         Cache::forget($department->cacheKey());
         Cache::tags($department->cacheTag())->flush();
     }
-
-    /**
-     * Handle the Department "restored" event.
-     *
-     * @param Department $department
-     * @return void
-     */
-    public function restored(Department $department)
-    {
-        Cache::put($department->cacheKey(), $department);
-        Cache::tags($department->cacheTag())->flush();
-    }
-
-    /**
-     * Handle the Department "force deleted" event.
-     *
-     * @param Department $department
-     * @return void
-     */
-    public function forceDeleted(Department $department)
-    {
-        Cache::forget($department->cacheKey());
-    }
 }
