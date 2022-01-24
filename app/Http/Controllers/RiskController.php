@@ -146,36 +146,4 @@ class RiskController extends Controller
 
         return redirect()->route('risks.index')->with('notify_danger', 'Ryzyko ubezpieczeniowe zostało usunięte!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $risk = Risk::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $risk);
-        $risk->restore();
-
-        return redirect()->route('risks.index')->with('notify_danger', 'Ryzyko zostało przywrócone!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $risk = Risk::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $risk);
-        $risk->forceDelete();
-
-        return redirect()->route('risks.index')->with('notify_danger', 'Ryzyko zostało trwale usunięte!');
-    }
 }

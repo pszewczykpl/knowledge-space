@@ -255,38 +255,4 @@ class FileController extends Controller
 
         return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function restore(int $id)
-    {
-        $file = File::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $file);
-
-        Storage::move('trash/' . $file->path, $file->path);
-        $file->restore();
-
-        return redirect()->route('files.index')->with('notify_danger', 'Dokument został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return RedirectResponse
-     */
-    public function force_destroy(int $id)
-    {
-        $file = File::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $file);
-        $file->forceDelete();
-
-        return redirect()->route('files.index')->with('notify_danger', 'Dokument został trwale usunięty!');
-    }
 }

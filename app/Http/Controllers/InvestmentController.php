@@ -181,38 +181,4 @@ class InvestmentController extends Controller
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function restore(Investment $investment)
-    {
-        $this->authorize('restore', $investment);
-        $investment->restore();
-
-        // Store event using job
-        StoreEvent::dispatch('restore', $investment);
-
-        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return Response
-     */
-    public function force_destroy(Investment $investment)
-    {
-        $this->authorize('forceDelete', $investment);
-        $investment->forceDelete();
-
-        // Store event using job
-        StoreEvent::dispatch('forceDelete', $investment);
-
-        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został trwale usunięty!');
-    }
 }

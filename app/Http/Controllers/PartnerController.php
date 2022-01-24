@@ -145,36 +145,4 @@ class PartnerController extends Controller
 
         return redirect()->route('partners.index')->with('notify_danger', 'Partner został usunięty!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $partner = Partner::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $partner);
-        $partner->restore();
-
-        return redirect()->route('partners.index')->with('notify_danger', 'Partner został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $partner = Partner::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $partner);
-        $partner->forceDelete();
-
-        return redirect()->route('partners.index')->with('notify_danger', 'Partner został trwale usunięty!');
-    }
 }
