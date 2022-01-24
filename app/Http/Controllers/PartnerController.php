@@ -8,7 +8,12 @@ use App\Http\Requests\StorePartner;
 use App\Http\Requests\UpdatePartner;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -22,14 +27,15 @@ class PartnerController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Partner::class, 'partner');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('partners.index', [
             'title' => 'Partnerzy',
@@ -40,41 +46,38 @@ class PartnerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', Partner::class);
-        
         return view('partners.create', [
             'title' => 'Nowy partner',
-            'description' => 'Uzupełnij dane partnera i kliknij Zapisz',
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePartner $request
+     * @return RedirectResponse
      */
-    public function store(StorePartner $request)
+    public function store(StorePartner $request): RedirectResponse
     {
-        $this->authorize('create', Partner::class);
-        
         $partner = new Partner($request->all());
         Auth::user()->partners()->save($partner);
 
-        return redirect()->route('partners.show', $partner->id)->with('notify_success', 'Nowy partner został dodany!');
+        return redirect()
+            ->route('partners.show', $partner)
+            ->with('notify_success', 'Nowy partner został dodany!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @param Partner $partner
+     * @return Application|Factory|View
      */
-    public function show(Partner $partner) 
+    public function show(Partner $partner): View|Factory|Application
     {
         return view('partners.show', [
             'title' => 'Szczegóły',
@@ -85,46 +88,45 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @param Partner $partner
+     * @return Application|Factory|View
      */
-    public function edit(Partner $partner)
+    public function edit(Partner $partner): View|Factory|Application
     {
-        $this->authorize('update', $partner);
-
         return view('partners.edit', [
             'title' => 'Edycja partnera',
-            'description' => 'Zaktualizuj dane partnera i kliknij Zapisz',
-            'partner' => Partner::findOrFail($partner->id),
+            'partner' => $partner,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @param UpdatePartner $request
+     * @param Partner $partner
+     * @return RedirectResponse
      */
-    public function update(UpdatePartner $request, Partner $partner)
+    public function update(UpdatePartner $request, Partner $partner): RedirectResponse
     {
-        $this->authorize('update', $partner);
         $partner->update($request->all());
 
-        return redirect()->route('partners.show', $partner->id)->with('notify_success', 'Dane partnera zostały zaktualizowane!');
+        return redirect()
+            ->route('partners.show', $partner)
+            ->with('notify_success', 'Dane partnera zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @param Partner $partner
+     * @return RedirectResponse
      */
-    public function destroy(Partner $partner)
+    public function destroy(Partner $partner): RedirectResponse
     {
-        $this->authorize('delete', $partner);
         $partner->delete();
 
-        return redirect()->route('partners.index')->with('notify_danger', 'Partner został usunięty!');
+        return redirect()
+            ->route('partners.index')
+            ->with('notify_danger', 'Partner został usunięty!');
     }
 }

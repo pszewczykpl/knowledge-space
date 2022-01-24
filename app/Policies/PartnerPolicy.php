@@ -11,6 +11,35 @@ class PartnerPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param ?User $user
+     * @return bool
+     */
+    public function viewAny(?User $user): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param Partner $partner
+     * @return bool
+     */
+    public function view(?User $user, Partner $partner): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user
@@ -43,29 +72,5 @@ class PartnerPolicy
     public function delete(User $user, Partner $partner): bool
     {
         return $user->hasPermission('partners-delete') or ($user->id === $partner->user_id);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param Partner $partner
-     * @return bool
-     */
-    public function restore(User $user, Partner $partner): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param Partner $partner
-     * @return bool
-     */
-    public function forceDelete(User $user, Partner $partner): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }

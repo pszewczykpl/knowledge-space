@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Http\Requests\StoreDepartment;
 use App\Http\Requests\UpdateDepartment;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -20,18 +19,16 @@ class DepartmentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Department::class, 'department');
     }
 
     /**
      * Display a listing of the resource.
      *
      * @return View
-     * @throws AuthorizationException
      */
     public function index(): View
     {
-        $this->authorize('viewAny', Department::class);
-        
         return view('departments.index', [
             'title' => 'Departamenty',
             'datatables' => Department::getDatatablesData()
@@ -42,15 +39,11 @@ class DepartmentController extends Controller
      * Show the form for creating a new resource.
      *
      * @return View
-     * @throws AuthorizationException
      */
     public function create(): View
     {
-        $this->authorize('create', Department::class);
-        
         return view('departments.create', [
             'title' => 'Nowy departament',
-            'description' => 'Uzupełnij dane departamentu i kliknij Zapisz',
         ]);
     }
 
@@ -59,16 +52,15 @@ class DepartmentController extends Controller
      *
      * @param StoreDepartment $request
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function store(StoreDepartment $request): RedirectResponse
     {
-        $this->authorize('create', Department::class);
-        
         $department = new Department($request->all());
         Auth::user()->departments()->save($department);
 
-        return redirect()->route('departments.show', $department->id)->with('notify_success', 'Nowy departament został dodany!');
+        return redirect()
+            ->route('departments.show', $department)
+            ->with('notify_success', 'Nowy departament został dodany!');
     }
 
     /**
@@ -90,15 +82,11 @@ class DepartmentController extends Controller
      *
      * @param Department $department
      * @return View
-     * @throws AuthorizationException
      */
-    public function edit(Department $department) : View
+    public function edit(Department $department): View
     {
-        $this->authorize('update', $department);
-
         return view('departments.edit', [
             'title' => 'Edycja departamentu',
-            'description' => 'Zaktualizuj dane departamentu i kliknij Zapisz',
             'department' => $department,
         ]);
     }
@@ -109,14 +97,14 @@ class DepartmentController extends Controller
      * @param UpdateDepartment $request
      * @param Department $department
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function update(UpdateDepartment $request, Department $department): RedirectResponse
     {
-        $this->authorize('update', $department);
         $department->update($request->all());
 
-        return redirect()->route('departments.show', $department->id)->with('notify_success', 'Dane departamentu zostały zaktualizowane!');
+        return redirect()
+            ->route('departments.show', $department)
+            ->with('notify_success', 'Dane departamentu zostały zaktualizowane!');
     }
 
     /**
@@ -124,13 +112,13 @@ class DepartmentController extends Controller
      *
      * @param Department $department
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function destroy(Department $department): RedirectResponse
     {
-        $this->authorize('delete', $department);
         $department->delete();
 
-        return redirect()->route('departments.index')->with('notify_danger', 'Departament został usunięty!');
+        return redirect()
+            ->route('departments.index')
+            ->with('notify_danger', 'Departament został usunięty!');
     }
 }

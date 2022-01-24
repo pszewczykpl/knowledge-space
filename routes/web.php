@@ -51,9 +51,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
  * Users and authentication
  */
 Auth::routes();
-
-Route::resource('permissions', PermissionController::class)->only(['index']);
-
 Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
@@ -62,6 +59,9 @@ Route::resources([
     'departments' => DepartmentController::class,
     'users' => UserController::class,
 ]);
+Route::resource(
+    'permissions', PermissionController::class
+)->only(['index']);
 
 /**
  * Products
@@ -94,7 +94,6 @@ Route::resources([
  * News, replies, notes and posts
  */
 Route::get('notes/{note}/{noteable_type}/{noteable_id}/detach', [NoteController::class, 'detach'])->name('notes.detach');
-Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
 
 Route::resources([
     'news' => NewsController::class,
@@ -102,6 +101,9 @@ Route::resources([
     'posts' => PostController::class,
     'post-categories' => PostCategoryController::class,
 ]);
+Route::resource(
+    'replies', ReplyController::class
+)->only(['store', 'destroy']);
 
 /**
  * Dictionaries

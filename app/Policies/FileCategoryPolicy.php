@@ -67,28 +67,4 @@ class FileCategoryPolicy
     {
         return $user->hasPermission('file-categories-delete') or ($user->id === $fileCategory->user_id);
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param FileCategory $fileCategory
-     * @return bool
-     */
-    public function restore(User $user, FileCategory $fileCategory): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param FileCategory $fileCategory
-     * @return bool
-     */
-    public function forceDelete(User $user, FileCategory $fileCategory): bool
-    {
-        return $user->hasPermission('force-delete');
-    }
 }

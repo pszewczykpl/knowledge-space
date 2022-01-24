@@ -21,12 +21,6 @@ class PermissionPolicy
         return $user->hasPermission('permissions-viewany');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param User $user
-     * @return bool
-     */
     public function update(User $user): bool
     {
         return $user->hasPermission('permissions-update');

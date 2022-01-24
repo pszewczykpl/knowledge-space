@@ -15,7 +15,13 @@ use App\Http\Requests\StoreNote;
 use App\Http\Requests\UpdateNote;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -30,17 +36,16 @@ class NoteController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['show']);
+        $this->authorizeResource(Note::class, 'note');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        $this->authorize('viewAny', Note::class);
-
         return view('notes.index', [
             'title' => 'Notatki',
             'datatables' => Note::getDatatablesData()
@@ -50,15 +55,12 @@ class NoteController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', Note::class);
-        
         return view('notes.create', [
             'title' => 'Nowa notatka',
-            'description' => 'Uzupełnij dane notatki i kliknij Zapisz',
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),
@@ -72,13 +74,11 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreNote $request
+     * @return RedirectResponse
      */
-    public function store(StoreNote $request)
+    public function store(StoreNote $request): RedirectResponse
     {
-        $this->authorize('create', Note::class);
-        
         $note = new Note($request->all());
         Auth::user()->notes()->save($note);
 
@@ -90,16 +90,18 @@ class NoteController extends Controller
         $note->risks()->attach($request->risk_id);
         $note->funds()->attach($request->fund_id);
 
-        return redirect()->back()->with('notify_success', 'Nowa notatka została dodana!');
+        return redirect()
+            ->back()
+            ->with('notify_success', 'Nowa notatka została dodana!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param Note $note
+     * @return Application|Factory|View
      */
-    public function show(Note $note)
+    public function show(Note $note): View|Factory|Application
     {
         return view('notes.show', [
             'title' => 'Szczegóły',
@@ -110,16 +112,13 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param Note $note
+     * @return Application|Factory|View
      */
-    public function edit(Note $note)
+    public function edit(Note $note): View|Factory|Application
     {
-        $this->authorize('update', $note);
-
         return view('notes.edit', [
             'title' => 'Edycja notatki',
-            'description' => 'Zaktualizuj dane notatki i kliknij Zapisz',
             'note' => $note,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
@@ -134,16 +133,13 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param UpdateNote $request
+     * @param Note $note
+     * @return RedirectResponse
      */
-    public function update(UpdateNote $request, Note $note)
+    public function update(UpdateNote $request, Note $note): RedirectResponse
     {
-        $this->authorize('update', $note);
-        
         $note->update($request->all());
-
         $note->investments()->sync($request->investment_id);
         $note->protectives()->sync($request->protective_id);
         $note->bancassurances()->sync($request->bancassurance_id);
@@ -152,36 +148,44 @@ class NoteController extends Controller
         $note->risks()->sync($request->risk_id);
         $note->funds()->sync($request->fund_id);
 
-        return redirect()->route('notes.show', $note->id)->with('notify_success', 'Dane notatki zostały zaktualizowane!');
+        return redirect()
+            ->route('notes.show', $note)
+            ->with('notify_success', 'Dane notatki zostały zaktualizowane!');
     }
 
     /**
      * Detach the specified resource from storage.
      *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param Note $note
+     * @param string $noteable_type
+     * @param string $noteable_id
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function detach(Note $note, $noteable_type, $noteable_id)
+    public function detach(Note $note, string $noteable_type, string $noteable_id): RedirectResponse
     {
         $this->authorize('update', $note);
-        
-        $note->{$noteable_type . 's'}()->detach($noteable_id);
-        Cache::tags('notes')->flush();
 
-        return redirect()->back()->with('notify_danger', 'Notatka została odpięta od produktu!');
+        $note->{$noteable_type . 's'}()->detach($noteable_id);
+        $note->save();
+
+        return redirect()
+            ->back()
+            ->with('notify_danger', 'Notatka została odpięta od produktu!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
+     * @param Note $note
+     * @return RedirectResponse
      */
-    public function destroy(Note $note)
+    public function destroy(Note $note): RedirectResponse
     {
-        $this->authorize('delete', $note);
         $note->delete();
 
-        return redirect()->route('notes.index')->with('notify_danger', 'Notatka została usunięta!');
+        return redirect()
+            ->route('notes.index')
+            ->with('notify_danger', 'Notatka została usunięta!');
     }
 }

@@ -8,7 +8,12 @@ use App\Http\Requests\StoreSystem;
 use App\Http\Requests\UpdateSystem;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -22,14 +27,15 @@ class SystemController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['show', 'index']);
+        $this->authorizeResource(System::class, 'system');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('systems.index', [
             'title' => 'Systemy Towarzystwa Ubezpieczeń',
@@ -40,41 +46,38 @@ class SystemController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', System::class);
-        
         return view('systems.create', [
             'title' => 'Nowy system Towarzystwa Ubezpieczeń',
-            'description' => 'Uzupełnij dane systemu i kliknij Zapisz',
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreSystem  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreSystem $request
+     * @return RedirectResponse
      */
-    public function store(StoreSystem $request)
+    public function store(StoreSystem $request): RedirectResponse
     {
-        $this->authorize('create', System::class);
-        
         $system = new System($request->all());
         Auth::user()->systems()->save($system);
 
-        return redirect()->route('systems.show', $system->id)->with('notify_success', 'Nowy system został dodany!');
+        return redirect()
+            ->route('systems.show', $system)
+            ->with('notify_success', 'Nowy system został dodany!');
     }
     
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\System  $system
-     * @return \Illuminate\Http\Response
+     * @param System $system
+     * @return Application|Factory|View
      */
-    public function show(System $system)
+    public function show(System $system): View|Factory|Application
     {
         return view('systems.show', [
             'title' => 'Szczegóły',
@@ -85,46 +88,45 @@ class SystemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\System  $system
-     * @return \Illuminate\Http\Response
+     * @param System $system
+     * @return Application|Factory|View
      */
-    public function edit(System $system)
+    public function edit(System $system): View|Factory|Application
     {
-        $this->authorize('update', $system);
-
         return view('systems.edit', [
             'title' => 'Edycja systemu Towarzystwa Ubezpieczeniowego',
-            'description' => 'Zaktualizuj dane systemu i kliknij Zapisz',
-            'system' => System::findOrFail($system->id),
+            'system' => $system,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateSystem  $request
-     * @param  \App\Models\System  $system
-     * @return \Illuminate\Http\Response
+     * @param UpdateSystem $request
+     * @param System $system
+     * @return RedirectResponse
      */
-    public function update(UpdateSystem $request, System $system)
+    public function update(UpdateSystem $request, System $system): RedirectResponse
     {
-        $this->authorize('update', $system);
         $system->update($request->all());
 
-        return redirect()->route('systems.show', $system->id)->with('notify_success', 'Dane systemu zostały zaktualizowane!');
+        return redirect()
+            ->route('systems.show', $system)
+            ->with('notify_success', 'Dane systemu zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\System  $system
-     * @return \Illuminate\Http\Response
+     * @param System $system
+     * @return RedirectResponse
      */
-    public function destroy(System $system)
+    public function destroy(System $system): RedirectResponse
     {
-        $this->authorize('delete', $system);
         $system->delete();
 
-        return redirect()->route('systems.index')->with('notify_danger', 'Dane systemu zostały usunięte!');
+        return redirect()
+            ->route('systems.index')
+            ->with('notify_danger', 'Dane systemu zostały usunięte!');
     }
 }

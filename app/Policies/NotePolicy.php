@@ -22,6 +22,21 @@ class NotePolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param Note $note
+     * @return bool
+     */
+    public function view(?User $user, Note $note): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user
@@ -54,29 +69,5 @@ class NotePolicy
     public function delete(User $user, Note $note): bool
     {
         return $user->hasPermission('notes-delete') or ($user->id === $note->user_id);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param Note $note
-     * @return bool
-     */
-    public function restore(User $user, Note $note): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param Note $note
-     * @return bool
-     */
-    public function forceDelete(User $user, Note $note): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }

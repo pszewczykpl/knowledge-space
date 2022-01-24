@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostCategory;
-
 use App\Http\Requests\StorePostCategory;
 use App\Http\Requests\UpdatePostCategory;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class PostCategoryController extends Controller
 {
@@ -23,17 +24,16 @@ class PostCategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(PostCategory::class, 'post_category');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        $this->authorize('viewAny', PostCategory::class);
-
         return view('post-categories.index', [
             'title' => 'Kategorie artykułów',
             'datatables' => PostCategory::getDatatablesData()
@@ -43,42 +43,38 @@ class PostCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', PostCategory::class);
-        
         return view('post-categories.create', [
             'title' => 'Nowa kategoria artykułów',
-            'description' => 'Uzupełnij dane kategorii artykułów i kliknij Zapisz',
-            'post_categories' => PostCategory::all()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePostCategory $request
+     * @return RedirectResponse
      */
-    public function store(StorePostCategory $request)
+    public function store(StorePostCategory $request): RedirectResponse
     {
-        $this->authorize('create', PostCategory::class);
-        
         $postCategory = new PostCategory($request->all());
         Auth::user()->postCategories()->save($postCategory);
 
-        return redirect()->route('post-categories.show', $postCategory->id)->with('notify_success', 'Nowa kategoria artykułów została dodana!');
+        return redirect()
+            ->route('post-categories.show', $postCategory)
+            ->with('notify_success', 'Nowa kategoria artykułów została dodana!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PostCategory  $postCategory
-     * @return \Illuminate\Http\Response
+     * @param PostCategory $postCategory
+     * @return Application|Factory|View
      */
-    public function show(PostCategory $postCategory)
+    public function show(PostCategory $postCategory): View|Factory|Application
     {
         return view('post-categories.show', [
             'title' => 'Szczegóły',
@@ -89,46 +85,45 @@ class PostCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PostCategory  $postCategory
-     * @return \Illuminate\Http\Response
+     * @param PostCategory $postCategory
+     * @return Application|Factory|View
      */
-    public function edit(PostCategory $postCategory)
+    public function edit(PostCategory $postCategory): View|Factory|Application
     {
-        $this->authorize('update', $postCategory);
-
         return view('post-categories.edit', [
             'title' => 'Edycja kategorii artykułów',
-            'description' => 'Zaktualizuj dane kategorii artykułów i kliknij Zapisz',
-            'postCategory' => PostCategory::findOrFail($postCategory->id),
+            'postCategory' => $postCategory,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostCategory  $postCategory
-     * @return \Illuminate\Http\Response
+     * @param UpdatePostCategory $request
+     * @param PostCategory $postCategory
+     * @return RedirectResponse
      */
-    public function update(UpdatePostCategory $request, PostCategory $postCategory)
+    public function update(UpdatePostCategory $request, PostCategory $postCategory): RedirectResponse
     {
-        $this->authorize('update', $postCategory);
         $postCategory->update($request->all());
 
-        return redirect()->route('post-categories.show', $postCategory->id)->with('notify_success', 'Dane kategrii artykułów zaktualizowane!');
+        return redirect()
+            ->route('post-categories.show', $postCategory)
+            ->with('notify_success', 'Dane kategrii artykułów zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PostCategory  $postCategory
-     * @return \Illuminate\Http\Response
+     * @param PostCategory $postCategory
+     * @return RedirectResponse
      */
-    public function destroy(PostCategory $postCategory)
+    public function destroy(PostCategory $postCategory): RedirectResponse
     {
-        $this->authorize('delete', $postCategory);
         $postCategory->delete();
 
-        return redirect()->route('post-categories.index')->with('notify_danger', 'Kategria artykułów usunięta!');
+        return redirect()
+            ->route('post-categories.index')
+            ->with('notify_danger', 'Kategria artykułów usunięta!');
     }
 }

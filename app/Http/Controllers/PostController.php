@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -25,17 +30,17 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Post::class, 'post');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Application|Factory|View
      */
-    public function index(Request $request)
+    public function index(Request $request): View|Factory|Application
     {
-        $user = Auth::user();
-
         if(($request->category ?? null) === null) {
             $posts = Post::orderBy('created_at', 'desc')->paginate(8);
         }
@@ -43,29 +48,22 @@ class PostController extends Controller
             $posts = Post::where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(8);
         }
 
-        $postCategories = Cache::tags(['post_categories'])->rememberForever('post_categories_all', function () {
-            return PostCategory::all();
-        });
-
         return view('posts.index', [
             'title' => 'Artykuły',
             'posts' => $posts,
-            'postCategories' => $postCategories,
+            'postCategories' => PostCategory::all(),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', Post::class);
-
         return view('posts.create', [
             'title' => 'Nowy Artykuł',
-            'description' => 'Uzupełnij dane artykułu i kliknij Zapisz',
             'postCategories' => PostCategory::all(),
         ]);
     }
@@ -73,27 +71,27 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StorePost  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePost $request
+     * @return RedirectResponse
      */
-    public function store(StorePost $request)
+    public function store(StorePost $request): RedirectResponse
     {
-        $this->authorize('create', Post::class);
-
         $post = new Post($request->all());
         $post->postCategory()->associate($request->post_category_id);
         Auth::user()->posts()->save($post);
 
-        return redirect()->route('posts.index')->with('notify_success', 'Nowy artykuł został dodany!');
+        return redirect()
+            ->route('posts.index')
+            ->with('notify_success', 'Nowy artykuł został dodany!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Application|Factory|View
      */
-    public function show(Post $post)
+    public function show(Post $post): View|Factory|Application
     {
         return view('posts.show', [
             'title' => 'Artykuł',
@@ -105,49 +103,48 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Application|Factory|View
      */
-    public function edit(Post $post)
+    public function edit(Post $post): View|Factory|Application
     {
-        $this->authorize('update', $post);
-
         return view('posts.edit', [
             'title' => 'Edycja artykułu',
-            'description' => 'Zaktualizuj dane artykułu i kliknij Zapisz',
             'postCategories' => PostCategory::all(),
-            'post' => Post::findOrFail($post->id),
+            'post' => $post,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdatePost  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param UpdatePost $request
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function update(UpdatePost $request, Post $post)
+    public function update(UpdatePost $request, Post $post): RedirectResponse
     {
-        $this->authorize('update', $post);
         $post->update($request->all());
         $post->postCategory()->associate($request->post_category_id);
         $post->save();
 
-        return redirect()->route('posts.show', $post->id)->with('notify_success', 'Dane artykułu zostały zaktualizowane!');
+        return redirect()
+            ->route('posts.show', $post)
+            ->with('notify_success', 'Dane artykułu zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
-        $this->authorize('delete', $post);
         $post->delete();
 
-        return redirect()->route('posts.index')->with('notify_danger', 'Artykuł został usunięty!');
+        return redirect()
+            ->route('posts.index')
+            ->with('notify_danger', 'Artykuł został usunięty!');
     }
 }

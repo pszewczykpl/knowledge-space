@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\News;
-use App\Models\Replies;
-
 use App\Http\Requests\StoreNews;
 use App\Http\Requests\UpdateNews;
 
@@ -24,16 +21,17 @@ class NewsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(News::class, 'news');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        $news = News::with('user')->orderBy('created_at', 'desc');
+        $news = News::with(['user', 'replies'])->orderBy('created_at', 'desc');
 
         return view('news.index', [
             'title' => 'Aktualności',
@@ -44,41 +42,38 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', News::class);
-
         return view('news.create', [
             'title' => 'Nowa aktualność',
-            'description' => 'Uzupełnij dane aktualności i kliknij Zapisz',
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreNews $request
+     * @return RedirectResponse
      */
-    public function store(StoreNews $request)
+    public function store(StoreNews $request): RedirectResponse
     {
-        $this->authorize('create', News::class);
-
         $news = new News($request->all());
         Auth::user()->news()->save($news);
 
-        return redirect()->back()->with('notify_success', 'Nowa aktualność została dodana!');
+        return redirect()
+            ->back()
+            ->with('notify_success', 'Nowa aktualność została dodana!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\News  $news
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param News $news
+     * @return Application|Factory|View
      */
-    public function show(News $news)
+    public function show(News $news): View|Factory|Application
     {
         return view('news.show', [
             'title' => 'Aktualność',
@@ -89,47 +84,45 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\News  $news
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @param News $news
+     * @return Application|Factory|View
      */
-    public function edit(News $news)
+    public function edit(News $news): View|Factory|Application
     {
-        $this->authorize('update', $news);
-
         return view('news.edit', [
             'title' => 'Edycja aktualności',
-            'description' => 'Zaktualizuj dane aktualności i kliknij Zapisz',
-            'news' => News::findOrFail($news->id),
+            'news' => $news,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\RedirectResponse
+     * @param UpdateNews $request
+     * @param News $news
+     * @return RedirectResponse
      */
-    public function update(UpdateNews $request, News $news)
+    public function update(UpdateNews $request, News $news): RedirectResponse
     {
-        $this->authorize('update', $news);
         $news->update($request->all());
 
-        return redirect()->route('news.show', $news->id)->with('notify_success', 'Dane aktualności zostały zaktualizowane!');
+        return redirect()
+            ->route('news.show', $news)
+            ->with('notify_success', 'Dane aktualności zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return RedirectResponse
      */
-    public function destroy(News $news)
+    public function destroy(News $news): RedirectResponse
     {
-        $this->authorize('delete', $news);
         $news->delete();
-        $news->replies()->delete();
 
-        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została usunięta!');
+        return redirect()
+            ->route('news.index')
+            ->with('notify_danger', 'Aktualność została usunięta!');
     }
 }

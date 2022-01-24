@@ -11,6 +11,35 @@ class SystemPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param ?User $user
+     * @return bool
+     */
+    public function viewAny(?User $user): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param System $system
+     * @return bool
+     */
+    public function view(?User $user, System $system): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user
@@ -43,29 +72,5 @@ class SystemPolicy
     public function delete(User $user, System $system): bool
     {
         return $user->hasPermission('systems-delete') or ($user->id === $system->user_id);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param System $system
-     * @return bool
-     */
-    public function restore(User $user, System $system): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param System $system
-     * @return bool
-     */
-    public function forceDelete(User $user, System $system): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }

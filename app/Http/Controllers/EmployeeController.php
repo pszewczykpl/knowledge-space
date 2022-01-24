@@ -22,6 +22,7 @@ class EmployeeController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Employee::class, 'employee');
     }
     
     /**
@@ -41,15 +42,11 @@ class EmployeeController extends Controller
      * Show the form for creating a new resource.
      *
      * @return View
-     * @throws AuthorizationException
      */
     public function create(): View
     {
-        $this->authorize('create', Employee::class);
-        
         return view('products.employees.create', [
             'title' => 'Nowy produkt pracowniczy',
-            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
 
@@ -58,16 +55,15 @@ class EmployeeController extends Controller
      *
      * @param StoreEmployee $request
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function store(StoreEmployee $request): RedirectResponse
     {
-        $this->authorize('create', Employee::class);
-        
         $employee = new Employee($request->all());
         Auth::user()->employees()->save($employee);
 
-        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Nowy produkt pracowniczy został dodany!');
+        return redirect()
+            ->route('employees.show', $employee)
+            ->with('notify_success', 'Nowy produkt pracowniczy został dodany!');
     }
 
     /**
@@ -81,13 +77,14 @@ class EmployeeController extends Controller
     {
         $this->authorize('create', Employee::class);
 
-        $employee->load('user');
-        $clone = $employee->replicate();
-        $clone->save();
-        $clone->files()->attach($employee->files);
-        $clone->notes()->attach($employee->notes);
+        $newEmployee = $employee->replicate();
+        $newEmployee->save();
+        $newEmployee->files()->attach($employee->files);
+        $newEmployee->notes()->attach($employee->notes);
 
-        return redirect()->route('employees.show', $clone->id)->with('notify_success', 'Nowy produkt pracowniczy został zduplikowany!');
+        return redirect()
+            ->route('employees.show', $newEmployee)
+            ->with('notify_success', 'Nowy produkt pracowniczy został zduplikowany!');
     }
 
     /**
@@ -103,7 +100,6 @@ class EmployeeController extends Controller
                 ->orderBy('edit_date', 'desc')->get();
         });
 
-        StoreEvent::dispatch('show', $employee);
         return view('products.employees.show', [
             'title' => 'Szczegóły',
             'employee' => $employee,
@@ -116,15 +112,11 @@ class EmployeeController extends Controller
      *
      * @param Employee $employee
      * @return View
-     * @throws AuthorizationException
      */
     public function edit(Employee $employee): View
     {
-        $this->authorize('update', $employee);
-
         return view('products.employees.edit', [
             'title' => 'Edycja produktu pracowniczego',
-            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
             'employee' => $employee,
         ]);
     }
@@ -135,14 +127,14 @@ class EmployeeController extends Controller
      * @param UpdateEmployee $request
      * @param Employee $employee
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function update(UpdateEmployee $request, Employee $employee): RedirectResponse
     {
-        $this->authorize('update', $employee);
         $employee->update($request->all());
 
-        return redirect()->route('employees.show', $employee->id)->with('notify_success', 'Dane produktu pracowniczego zostały zaktualizowane!');
+        return redirect()
+            ->route('employees.show', $employee)
+            ->with('notify_success', 'Dane produktu pracowniczego zostały zaktualizowane!');
     }
 
     /**
@@ -150,13 +142,13 @@ class EmployeeController extends Controller
      *
      * @param Employee $employee
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function destroy(Employee $employee): RedirectResponse
     {
-        $this->authorize('delete', $employee);
         $employee->delete();
 
-        return redirect()->route('employees.index')->with('notify_danger', 'Produkt pracowniczy został usunięty!');
+        return redirect()
+            ->route('employees.index')
+            ->with('notify_danger', 'Produkt pracowniczy został usunięty!');
     }
 }

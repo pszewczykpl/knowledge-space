@@ -33,14 +33,15 @@ class InvestmentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except(['index', 'show']);
+        $this->authorizeResource(Investment::class, 'investment');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('products.investments.index', [
             'title' => 'Ubezpieczenia Inwestycyjne',
@@ -51,94 +52,84 @@ class InvestmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
-    public function create() 
+    public function create(): View
     {
-        $this->authorize('create', Investment::class);
-
         return view('products.investments.create', [
             'title' => 'Nowy produkt inwestycyjny',
-            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreInvestment  $request
-     * @return Response
+     * @param StoreInvestment $request
+     * @return RedirectResponse
      */
-    public function store(StoreInvestment $request) 
+    public function store(StoreInvestment $request): RedirectResponse
     {
-        $this->authorize('create', Investment::class);
-
         $investment = new Investment($request->all());
         Auth::user()->investments()->save($investment);
 
-        // Store event using job
-        StoreEvent::dispatch('store', $investment);
-
-        return redirect()->route('investments.show', $investment->id)->with('notify_success', 'Nowy produkt inwestycyjny został dodany!');
+        return redirect()
+            ->route('investments.show', $investment)
+            ->with('notify_success', 'Nowy produkt inwestycyjny został dodany!');
     }
 
     /**
      * Duplicate
      *
-     * @param  \Illuminate\Http\StoreInvestment  $request
-     * @return Response
+     * @param Investment $investment
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function duplicate(Investment $investment)
+    public function duplicate(Investment $investment): RedirectResponse
     {
         $this->authorize('create', Investment::class);
 
-        $investment->load('user');
-        $clone = $investment->replicate();
-        $clone->edit_date = SystemProperty::select('value')->where('key', 'default_edit_date')->firstOrFail()->pluck('value')[0];
-        $clone->save();
-        $clone->files()->attach($investment->files);
-        $clone->notes()->attach($investment->notes);
-        $clone->funds()->attach($investment->funds);
+        $newInvestment = $investment->replicate();
+        $newInvestment->edit_date = SystemProperty::select('value')->where('key', 'default_edit_date')->firstOrFail()->pluck('value')[0];
+        $newInvestment->save();
+        $newInvestment->files()->attach($investment->files);
+        $newInvestment->notes()->attach($investment->notes);
+        $newInvestment->funds()->attach($investment->funds);
 
         $investment->status = 'N';
         $investment->save();
 
-        // Store event using job
-        StoreEvent::dispatch('duplicate', $investment);
-
-        return redirect()->route('investments.show', $clone->id)->with('notify_success', 'Nowy produkt inwestycyjny został zduplikowany!');
+        return redirect()
+            ->route('investments.show', $newInvestment)
+            ->with('notify_success', 'Nowy produkt inwestycyjny został zduplikowany!');
     }
 
     /**
      * Display the specified resource.
      *
      * @param Investment $investment
-     * @return Application|Factory|View
+     * @return View
      */
-    public function show(Investment $investment)
+    public function show(Investment $investment): View
     {
-        $history = Cache::remember("investments:$investment->id:history", 60*60*12, function () use ($investment) {
+        $history = Cache::tags($investment->cacheTag())->remember($investment->cacheKey() . ":history", now()->addDays(7), function () use ($investment) {
             return Investment::where('code_toil', '=', $investment->code_toil)->orderBy('edit_date', 'desc')->get();
         });
 
-        StoreEvent::dispatch('show', $investment);
         return view('products.investments.show', [
             'title' => 'Szczegóły',
             'investment' => $investment,
             'archive_investments' => $history,
         ]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Investment  $investment
-     * @return Response
+     * @param Investment $investment
+     * @return View
      */
-    public function edit(Investment $investment) 
+    public function edit(Investment $investment): View
     {
-        $this->authorize('update', $investment);
-
         return view('products.investments.edit', [
             'title' => 'Edycja produktu inwestycyjnego',
             'investment' => $investment,
@@ -151,33 +142,25 @@ class InvestmentController extends Controller
      * @param UpdateInvestment $request
      * @param Investment $investment
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
-    public function update(UpdateInvestment $request, Investment $investment) 
+    public function update(UpdateInvestment $request, Investment $investment): RedirectResponse
     {
-        $this->authorize('update', $investment);
-
         $investment->update($request->all());
 
-        // Store event using job
-        StoreEvent::dispatch('update', $investment);
-
-        return redirect()->route('investments.show', $investment)->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
+        return redirect()
+            ->route('investments.show', $investment)
+            ->with('notify_success', 'Dane produktu inwestycyjnego zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Investment  $investment
-     * @return Response
+     * @param Investment $investment
+     * @return RedirectResponse
      */
-    public function destroy(Investment $investment) 
+    public function destroy(Investment $investment): RedirectResponse
     {
-        $this->authorize('delete', $investment);
         $investment->delete();
-
-        // Store event using job
-        StoreEvent::dispatch('destroy', $investment);
 
         return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }

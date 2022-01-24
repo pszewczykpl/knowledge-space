@@ -21,6 +21,21 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param User $model
+     * @return bool
+     */
+    public function view(?User $user, User $model): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user
@@ -53,29 +68,5 @@ class UserPolicy
     public function delete(User $user, User $model): bool
     {
         return $user->hasPermission('users-delete');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function restore(User $user, User $model): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }
