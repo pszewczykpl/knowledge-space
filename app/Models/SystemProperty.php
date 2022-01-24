@@ -32,8 +32,8 @@ class SystemProperty extends Model
         'default_edit_date'
     ];
 
-    public static function getValue(string $key)
+    public static function find(string $key)
     {
-        return self::where('key', '=', $key)->firstOrFail()->value;
+        return self::where('key', '=', $key)->firstOrFail();
     }
 }

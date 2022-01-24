@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 
 class SystemPropertyController extends Controller
@@ -21,7 +20,7 @@ class SystemPropertyController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
-        $this->authorizeResource(SystemProperty::class, 'system_property');
+        $this->authorizeResource(SystemProperty::class, SystemProperty::class);
     }
 
     /**
@@ -33,7 +32,7 @@ class SystemPropertyController extends Controller
     {
         return view('properties.index', [
             'title' => 'Parametry systemu',
-            'default_edit_date' => SystemProperty::where('key', '=', 'default_edit_date')->firstOrFail()
+            'default_edit_date' => SystemProperty::find('default_edit_date'),
         ]);
     }
 
@@ -45,10 +44,10 @@ class SystemPropertyController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        foreach(SystemProperty::$properties as $property) {
-            $to_edit[$property] = SystemProperty::where('key', '=', $property)->firstOrFail();
-            $to_edit[$property]->value = $request->{$property};
-            $to_edit[$property]->save();
+        foreach(SystemProperty::$properties as $key) {
+            $systemProperty = SystemProperty::find($key);
+            $systemProperty->value = $request->{$key};
+            $systemProperty->save();
         }
 
         return redirect()
@@ -87,5 +86,19 @@ class SystemPropertyController extends Controller
         return redirect()
             ->route('system-properties.index')
             ->with('notify_success', 'Tryb Maintenance został wyłączony!');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function switchDarkMode(Request $request): RedirectResponse
+    {
+        $dark_mode = !session('dark_mode', config('view.default_dark_mode'));
+        session()->put('dark_mode', $dark_mode);
+
+        return redirect()
+            ->back()
+            ->with('notify_success', $dark_mode ? 'Tryb ciemny włączony' : 'Tryb ciemny wyłączony');
     }
 }

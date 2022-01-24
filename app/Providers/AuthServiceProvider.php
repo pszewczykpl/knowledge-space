@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\User::class => \App\Policies\UserPolicy::class,
         \App\Models\Post::class => \App\Policies\PostPolicy::class,
         \App\Models\PostCategory::class => \App\Policies\PostCategoryPolicy::class,
+        \App\Models\SystemProperty::class => \App\Policies\SystemPropertyPolicy::class,
     ];
 
     /**

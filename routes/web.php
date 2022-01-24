@@ -129,4 +129,4 @@ Route::get('system-properties/update-app', [SystemPropertyController::class, 'ge
 Route::get('system-properties/maintenance/off', [SystemPropertyController::class, 'maintenance_off'])->name('system-properties.maintenanceOff');
 Route::get('system-properties/maintenance/on', [SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
 
-Route::get('system-configuration/dark-mode', [SystemConfigurationController::class, 'switchDarkMode'])->name('system-configuration.dark-mode');
+Route::get('system-properties/dark-mode', [SystemPropertyController::class, 'switchDarkMode'])->name('system-properties.dark-mode');
