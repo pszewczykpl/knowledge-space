@@ -67,28 +67,4 @@ class PostCategoryPolicy
     {
         return $user->hasPermission('post-categories-delete') or ($user->id === $postCategory->user_id);
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param PostCategory $postCategory
-     * @return bool
-     */
-    public function restore(User $user, PostCategory $postCategory): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param PostCategory $postCategory
-     * @return bool
-     */
-    public function forceDelete(User $user, PostCategory $postCategory): bool
-    {
-        return $user->hasPermission('force-delete');
-    }
 }

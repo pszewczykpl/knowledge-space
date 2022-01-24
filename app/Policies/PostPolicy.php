@@ -11,13 +11,27 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param ?User $user
+     * @return bool
+     */
+    public function viewAny(?User $user): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param ?User $user
      * @param Post $post
      * @return bool
      */
-    public function view(User $user, Post $post): bool
+    public function view(?User $user, Post $post): bool
     {
         return true;
     }
@@ -55,29 +69,5 @@ class PostPolicy
     public function delete(User $user, Post $post): bool
     {
         return $user->hasPermission('posts-delete') or ($user->id === $post->user_id);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param Post $post
-     * @return bool
-     */
-    public function restore(User $user, Post $post): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param Post $post
-     * @return bool
-     */
-    public function forceDelete(User $user, Post $post): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }

@@ -33,6 +33,7 @@ class InvestmentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified'])->except(['index', 'show']);
+        $this->authorizeResource(Investment::class, 'investment');
     }
 
     /**
@@ -55,8 +56,6 @@ class InvestmentController extends Controller
      */
     public function create() 
     {
-        $this->authorize('create', Investment::class);
-
         return view('products.investments.create', [
             'title' => 'Nowy produkt inwestycyjny',
             'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
@@ -71,8 +70,6 @@ class InvestmentController extends Controller
      */
     public function store(StoreInvestment $request) 
     {
-        $this->authorize('create', Investment::class);
-
         $investment = new Investment($request->all());
         Auth::user()->investments()->save($investment);
 
@@ -137,8 +134,6 @@ class InvestmentController extends Controller
      */
     public function edit(Investment $investment) 
     {
-        $this->authorize('update', $investment);
-
         return view('products.investments.edit', [
             'title' => 'Edycja produktu inwestycyjnego',
             'investment' => $investment,
@@ -155,8 +150,6 @@ class InvestmentController extends Controller
      */
     public function update(UpdateInvestment $request, Investment $investment) 
     {
-        $this->authorize('update', $investment);
-
         $investment->update($request->all());
 
         // Store event using job
@@ -173,7 +166,6 @@ class InvestmentController extends Controller
      */
     public function destroy(Investment $investment) 
     {
-        $this->authorize('delete', $investment);
         $investment->delete();
 
         // Store event using job

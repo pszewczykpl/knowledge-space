@@ -67,28 +67,4 @@ class DepartmentPolicy
     {
         return $user->hasPermission('departments-delete') or ($user->id === $department->user_id);
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param Department $department
-     * @return bool
-     */
-    public function restore(User $user, Department $department): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param Department $department
-     * @return bool
-     */
-    public function forceDelete(User $user, Department $department): bool
-    {
-        return $user->hasPermission('force-delete');
-    }
 }

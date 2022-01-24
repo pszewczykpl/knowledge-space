@@ -11,6 +11,21 @@ class ReplyPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param Reply $reply
+     * @return bool
+     */
+    public function view(?User $user, Reply $reply): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user
@@ -31,29 +46,5 @@ class ReplyPolicy
     public function delete(User $user, Reply $reply): bool
     {
         return $user->hasPermission('replies-delete') or ($user->id === $reply->user_id);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param Reply $reply
-     * @return bool
-     */
-    public function restore(User $user, Reply $reply): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param Reply $reply
-     * @return bool
-     */
-    public function forceDelete(User $user, Reply $reply): bool
-    {
-        return $user->hasPermission('force-delete');
     }
 }

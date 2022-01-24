@@ -54,28 +54,4 @@ class UserPolicy
     {
         return $user->hasPermission('users-delete');
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function restore(User $user, User $model): bool
-    {
-        return $user->hasPermission('restore');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        return $user->hasPermission('force-delete');
-    }
 }
