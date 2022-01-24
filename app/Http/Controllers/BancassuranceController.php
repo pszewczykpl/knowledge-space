@@ -162,38 +162,4 @@ class BancassuranceController extends Controller
 
         return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został usunięty!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function restore(int $id): RedirectResponse
-    {
-        $bancassurance = Bancassurance::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $bancassurance);
-        $bancassurance->restore();
-
-        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function force_destroy(int $id): RedirectResponse
-    {
-        $bancassurance = Bancassurance::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $bancassurance);
-        $bancassurance->forceDelete();
-
-        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został trwale usunięty!');
-    }
 }

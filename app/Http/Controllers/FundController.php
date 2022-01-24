@@ -73,24 +73,6 @@ class FundController extends Controller
     }
 
     /**
-     * Duplicate a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Fund  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function duplicate(Fund $fund)
-    {
-        $this->authorize('create', Fund::class);
-
-        $fund->load('user');
-        $clone = $fund->replicate();
-        $clone->save();
-        $clone->notes()->attach($fund->notes);
-
-        return redirect()->route('funds.show', $clone->id)->with('notify_success', 'Nowy fundusz został zduplikowany!');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Fund  $fund
@@ -151,37 +133,5 @@ class FundController extends Controller
         $fund->delete();
 
         return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został usunięty!');
-    }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $fund = Fund::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $fund);
-        $fund->restore();
-
-        return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $fund = Fund::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $fund);
-        $fund->forceDelete();
-
-        return redirect()->route('funds.index')->with('notify_danger', 'Fundusz został trwale usunięty!');
     }
 }

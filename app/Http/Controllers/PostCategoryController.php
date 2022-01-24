@@ -131,36 +131,4 @@ class PostCategoryController extends Controller
 
         return redirect()->route('post-categories.index')->with('notify_danger', 'Kategria artykułów usunięta!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $postCategory = PostCategory::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $postCategory);
-        $postCategory->restore();
-
-        return redirect()->route('post-categories.index')->with('notify_danger', 'Kategoria artykułu został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $postCategory = PostCategory::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $postCategory);
-        $postCategory->forceDelete();
-
-        return redirect()->route('post-categories.index')->with('notify_danger', 'Kategoria artykułów została trwale usunięta!');
-    }
 }

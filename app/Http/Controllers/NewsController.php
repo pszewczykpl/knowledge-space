@@ -132,40 +132,4 @@ class NewsController extends Controller
 
         return redirect()->route('news.index')->with('notify_danger', 'Aktualność została usunięta!');
     }
-    
-    /**
-     * Restore the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $news = News::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $news);
-        
-        $news->restore();
-        $news->replies()->withTrashed()->restore();
-
-        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została przywrócona!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  \App\  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $news = News::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $news);
-        
-        $news->forceDelete();
-        $news->replies()->withTrashed()->forceDelete();
-
-        return redirect()->route('news.index')->with('notify_danger', 'Aktualność została trwale usunięta!');
-    }
 }

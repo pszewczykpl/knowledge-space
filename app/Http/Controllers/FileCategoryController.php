@@ -130,37 +130,4 @@ class FileCategoryController extends Controller
 
         return redirect()->route('file-categories.index')->with('notify_danger', 'Kategria dokumentów usunięta!');
     }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $fileCategory = FileCategory::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $fileCategory);
-        $fileCategory->restore();
-
-        return redirect()->route('file-categories.index')->with('notify_danger', 'Kategoria dokumentu został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $fileCategory = FileCategory::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $fileCategory);
-        
-        $fileCategory->forceDelete();
-
-        return redirect()->route('fileCategorys.index')->with('notify_danger', 'Kategoria dokumentów została trwale usunięta!');
-    }
 }

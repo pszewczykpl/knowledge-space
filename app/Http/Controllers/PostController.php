@@ -150,36 +150,4 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('notify_danger', 'Artykuł został usunięty!');
     }
-    
-    /**
-     * Restore the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $post = Post::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $post);
-        $post->restore();
-
-        return redirect()->route('posts.index')->with('notify_danger', 'Artykuł został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  \App\  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $post = Post::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $post);
-        $post->forceDelete();
-
-        return redirect()->route('posts.index')->with('notify_danger', 'Artykuł został trwale usunięty!');
-    }
 }

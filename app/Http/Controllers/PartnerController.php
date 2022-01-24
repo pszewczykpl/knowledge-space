@@ -69,24 +69,6 @@ class PartnerController extends Controller
     }
 
     /**
-     * Duplicate a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Partner  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function duplicate(Partner $partner)
-    {
-        $this->authorize('create', Partner::class);
-
-        $partner->load('user');
-        $clone = $partner->replicate();
-        $clone->save();
-        $clone->notes()->attach($partner->notes);
-
-        return redirect()->route('partners.show', $clone->id)->with('notify_success', 'Nowy partner został zduplikowany!');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Partner  $partner
@@ -144,37 +126,5 @@ class PartnerController extends Controller
         $partner->delete();
 
         return redirect()->route('partners.index')->with('notify_danger', 'Partner został usunięty!');
-    }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $partner = Partner::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $partner);
-        $partner->restore();
-
-        return redirect()->route('partners.index')->with('notify_danger', 'Partner został przywrócony!');
-    }
-
-    /**
-     * Force remove the specified resource from storage.
-     *
-     * @param  id  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function force_destroy($id)
-    {
-        $partner = Partner::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $partner);
-        $partner->forceDelete();
-
-        return redirect()->route('partners.index')->with('notify_danger', 'Partner został trwale usunięty!');
     }
 }

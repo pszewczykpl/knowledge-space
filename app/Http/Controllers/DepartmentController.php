@@ -133,38 +133,4 @@ class DepartmentController extends Controller
 
         return redirect()->route('departments.index')->with('notify_danger', 'Departament został usunięty!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function restore(int $id): RedirectResponse
-    {
-        $department = Department::withTrashed()->findOrFail($id);
-
-        $this->authorize('restore', $department);
-        $department->restore();
-
-        return redirect()->route('departments.index')->with('notify_danger', 'Departament został przywrócony!');
-    }
-
-    /**
-     * Force destroy the specified resource from storage.
-     *
-     * @param int $id $id
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function force_destroy(int $id): RedirectResponse
-    {
-        $department = Department::withTrashed()->findOrFail($id);
-
-        $this->authorize('forceDelete', $department);
-        $department->forceDelete();
-
-        return redirect()->route('departments.index')->with('notify_danger', 'Departament został trwale usunięty!');
-    }
 }
