@@ -136,6 +136,16 @@ class Investment extends Model
     }
 
     /**
+     * @return array|mixed
+     */
+    public function history()
+    {
+        return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {
+            return Investment::where('code_toil', '=', $this->code_toil)->orderBy('edit_date', 'desc')->get();
+        });
+    }
+
+    /**
      * Get unique name of the product.
      *
      * @return string

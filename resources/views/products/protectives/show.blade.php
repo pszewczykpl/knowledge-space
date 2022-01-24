@@ -48,7 +48,7 @@
 								<th class="min-w-100px"></th>
 							</x-slot>
 							<x-slot name="data">
-								@foreach($archive_protectives as $archive_protective)
+								@foreach($protective->history() as $archive_protective)
 									<tr class="@if($archive_protective->id == $protective->id) bg-light @endif">
 										<td>{{ $archive_protective->name }}</td>
 										<td>{{ $archive_protective->dist_short }}</td>

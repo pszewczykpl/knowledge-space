@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @property int $id
@@ -104,6 +105,27 @@ class Bancassurance extends Model
     }
 
     /**
+     * Get the user that created the bancassurance.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function history()
+    {
+        return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {
+            return Bancassurance::where('code', '=', $this->code)
+                ->where('dist_short', '=', $this->dist_short)
+                ->where('code_owu', '=', $this->code_owu)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+    }
+
+    /**
      * Get unique name of the product.
      *
      * @return string
@@ -125,13 +147,5 @@ class Bancassurance extends Model
             'N' => 'Archiwalny',
             default => $this->attributes['status'],
         };
-    }
-
-    /**
-     * Get the user that created the bancassurance.
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\User');
     }
 }

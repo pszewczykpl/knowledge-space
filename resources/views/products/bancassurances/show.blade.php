@@ -48,7 +48,7 @@
 								<th class="min-w-100px"></th>
 							</x-slot>
 							<x-slot name="data">
-								@foreach($archive_bancassurances as $archive_bancassurance)
+								@foreach($bancassurance->history() as $archive_bancassurance)
 									<tr class="@if($archive_bancassurance->id == $bancassurance->id) bg-light @endif">
 										<td>{{ $archive_bancassurance->name }}</td>
 										<td>{{ $archive_bancassurance->dist_short }}</td>

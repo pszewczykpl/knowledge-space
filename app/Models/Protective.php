@@ -124,4 +124,14 @@ class Protective extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function history()
+    {
+        return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {
+            return Protective::where('code', '=', $this->code)
+                ->where('dist_short', '=', $this->dist_short)
+                ->where('code_owu', '=', $this->code_owu)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+    }
+
 }

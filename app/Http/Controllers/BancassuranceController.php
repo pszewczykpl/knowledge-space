@@ -97,17 +97,9 @@ class BancassuranceController extends Controller
      */
     public function show(Bancassurance $bancassurance): View
     {
-        $history = Cache::tags($bancassurance->cacheTag())->remember("bancassurances:$bancassurance->id:history", 60*60*12, function () use ($bancassurance) {
-            return Bancassurance::where('code', '=', $bancassurance->code)
-                ->where('dist_short', '=', $bancassurance->dist_short)
-                ->where('code_owu', '=', $bancassurance->code_owu)
-                ->orderBy('edit_date', 'desc')->get();
-        });
-
         return view('products.bancassurances.show', [
             'title' => 'Szczegóły',
             'bancassurance' => $bancassurance,
-            'archive_bancassurances' => $history,
         ]);
     }
 

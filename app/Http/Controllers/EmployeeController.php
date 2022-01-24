@@ -95,15 +95,9 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee): View
     {
-        $history = Cache::remember("employees:$employee->id:history", 60*60*12, function () use ($employee) {
-            return Employee::where('name', '=', $employee->name)
-                ->orderBy('edit_date', 'desc')->get();
-        });
-
         return view('products.employees.show', [
             'title' => 'Szczegóły',
             'employee' => $employee,
-            'archive_employees' => $history,
         ]);
     }
 

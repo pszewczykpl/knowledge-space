@@ -83,6 +83,22 @@ class Employee extends Model
     }
 
     /**
+     * Get the user that created the employee.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function history()
+    {
+        return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {
+            return Employee::where('name', '=', $this->name)
+                ->orderBy('edit_date', 'desc')->get();
+        });
+    }
+
+    /**
      * Get unique name of the product.
      *
      * @return string
@@ -104,14 +120,6 @@ class Employee extends Model
             'N' => 'Archiwalny',
             default => $this->attributes['status'],
         };
-    }
-
-    /**
-     * Get the user that created the employee.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
     }
 
 }

@@ -55,7 +55,7 @@
 								<th class="min-w-100px"></th>
 							</x-slot>
 							<x-slot name="data">
-								@foreach($archive_investments as $archive_investment)
+								@foreach($investment->history() as $archive_investment)
 									<tr class="@if($archive_investment->id == $investment->id) bg-light @endif">
 										<td>{{ $archive_investment->name }}</td>
 										<td>{{ $archive_investment->code_toil }}</td>
