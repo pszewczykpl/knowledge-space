@@ -8,7 +8,9 @@ use App\Models\News;
 use App\Http\Requests\StoreReply;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -22,36 +24,38 @@ class ReplyController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Reply::class, 'reply');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreReply $request
+     * @return RedirectResponse
      */
-    public function store(StoreReply $request)
+    public function store(StoreReply $request): RedirectResponse
     {
-        $this->authorize('create', Reply::class);
-        
         $reply = new Reply($request->all());
         $reply->news()->associate(News::find($request->news_id));
         Auth::user()->replies()->save($reply);
 
-        return redirect()->back()->with('notify_success', 'Nowy odpowiedź została dodana!');
+        return redirect()
+            ->back()
+            ->with('notify_success', 'Nowy odpowiedź została dodana!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Reply  $reply
-     * @return \Illuminate\Http\Response
+     * @param Reply $reply
+     * @return RedirectResponse
      */
-    public function destroy(Reply $reply)
+    public function destroy(Reply $reply): RedirectResponse
     {
-        $this->authorize('delete', $reply);
         $reply->delete();
 
-        return redirect()->back()->with('notify_danger', 'Odpowiedź została usunięta!');
+        return redirect()
+            ->back()
+            ->with('notify_danger', 'Odpowiedź została usunięta!');
     }
 }

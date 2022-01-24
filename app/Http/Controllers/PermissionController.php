@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -19,14 +22,15 @@ class PermissionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Permission::class, 'permission');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('permissions.index', [
             'title' => 'Uprawnienia systemowe',

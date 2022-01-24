@@ -20,4 +20,9 @@ class PermissionPolicy
     {
         return $user->hasPermission('permissions-viewany');
     }
+
+    public function update(User $user): bool
+    {
+        return $user->hasPermission('permissions-update');
+    }
 }

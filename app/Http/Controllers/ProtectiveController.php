@@ -9,7 +9,13 @@ use App\Http\Requests\StoreProtective;
 use App\Http\Requests\UpdateProtective;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -24,14 +30,15 @@ class ProtectiveController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Protective::class, 'protective');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('products.protectives.index', [
             'title' => 'Ubezpieczenia Ochronne',
@@ -42,60 +49,59 @@ class ProtectiveController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', Protective::class);
-        
         return view('products.protectives.create', [
             'title' => 'Nowy produkt ochronny',
-            'description' => 'Uzupełnij dane produktu i kliknij Zapisz',
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProtective $request
+     * @return RedirectResponse
      */
-    public function store(StoreProtective $request)
+    public function store(StoreProtective $request): RedirectResponse
     {
-        $this->authorize('create', Protective::class);
-        
         $protective = new Protective($request->all());
         Auth::user()->protectives()->save($protective);
 
-        return redirect()->route('protectives.show', $protective->id)->with('notify_success', 'Nowy produkt ochronny został dodany!');
+        return redirect()
+            ->route('protectives.show', $protective)
+            ->with('notify_success', 'Nowy produkt ochronny został dodany!');
     }
 
     /**
      * Duplicate a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreProtective  $request
-     * @return \Illuminate\Http\Response
+     * @param Protective $protective
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function duplicate(Protective $protective)
+    public function duplicate(Protective $protective): RedirectResponse
     {
         $this->authorize('create', Protective::class);
 
-        $protective->load('user');
-        $clone = $protective->replicate();
-        $clone->save();
-        $clone->files()->attach($protective->files);
-        $clone->notes()->attach($protective->notes);
+        $newProtective = $protective->replicate();
+        $newProtective->save();
+        $newProtective->files()->attach($protective->files);
+        $newProtective->notes()->attach($protective->notes);
 
-        return redirect()->route('protectives.show', $clone->id)->with('notify_success', 'Nowy produkt ochronny został zduplikowany!');
+        return redirect()
+            ->route('protectives.show', $newProtective)
+            ->with('notify_success', 'Nowy produkt ochronny został zduplikowany!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Protective  $protective
-     * @return \Illuminate\Http\Response
+     * @param Protective $protective
+     * @return Application|Factory|View
      */
-    public function show(Protective $protective)
+    public function show(Protective $protective): View|Factory|Application
     {
         $history = Cache::remember("protectives:$protective->id:history", 60*60*12, function () use ($protective) {
             return Protective::where('code', '=', $protective->code)
@@ -104,7 +110,6 @@ class ProtectiveController extends Controller
                 ->orderBy('edit_date', 'desc')->get();
         });
 
-        StoreEvent::dispatch('show', $protective);
         return view('products.protectives.show', [
             'title' => 'Szczegóły',
             'protective' => $protective,
@@ -115,46 +120,45 @@ class ProtectiveController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Protective  $protective
-     * @return \Illuminate\Http\Response
+     * @param Protective $protective
+     * @return Application|Factory|View
      */
-    public function edit(Protective $protective)
+    public function edit(Protective $protective): View|Factory|Application
     {
-        $this->authorize('update', $protective);
-
         return view('products.protectives.edit', [
             'title' => 'Edycja produktu ochronnego',
-            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
-            'protective' => Protective::findOrFail($protective->id),
+            'protective' => $protective,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Protective  $protective
-     * @return \Illuminate\Http\Response
+     * @param UpdateProtective $request
+     * @param Protective $protective
+     * @return RedirectResponse
      */
-    public function update(UpdateProtective $request, Protective $protective)
+    public function update(UpdateProtective $request, Protective $protective): RedirectResponse
     {
-        $this->authorize('update', $protective);
         $protective->update($request->all());
 
-        return redirect()->route('protectives.show', $protective->id)->with('notify_success', 'Dane produktu ochronnego zostały zaktualizowane!');
+        return redirect()
+            ->route('protectives.show', $protective)
+            ->with('notify_success', 'Dane produktu ochronnego zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Protective  $protective
-     * @return \Illuminate\Http\Response
+     * @param Protective $protective
+     * @return RedirectResponse
      */
-    public function destroy(Protective $protective)
+    public function destroy(Protective $protective): RedirectResponse
     {
-        $this->authorize('delete', $protective);
         $protective->delete();
 
-        return redirect()->route('protectives.index')->with('notify_danger', 'Produkt ochronny został usunięty!');
+        return redirect()
+            ->route('protectives.index')
+            ->with('notify_danger', 'Produkt ochronny został usunięty!');
     }
 }

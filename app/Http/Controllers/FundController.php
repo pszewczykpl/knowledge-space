@@ -9,7 +9,12 @@ use App\Http\Requests\StoreFund;
 use App\Http\Requests\UpdateFund;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -23,14 +28,15 @@ class FundController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Fund::class, 'fund');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         return view('funds.index', [
             'title' => 'Ubezpieczeniowe Fundusze Kapitałowe',
@@ -41,15 +47,12 @@ class FundController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
-        $this->authorize('create', Fund::class);
-        
         return view('funds.create', [
             'title' => 'Nowy fundusz UFK',
-            'description' => 'Uzupełnij dane funduszu i kliknij Zapisz',
             'investments' => Investment::all(),
         ]);
     }
@@ -57,28 +60,27 @@ class FundController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreFund $request
+     * @return RedirectResponse
      */
-    public function store(StoreFund $request)
+    public function store(StoreFund $request): RedirectResponse
     {
-        $this->authorize('create', Fund::class);
-        
         $fund = new Fund($request->all());
         Auth::user()->funds()->save($fund);
-
         $fund->investments()->attach($request->investment_id);
 
-        return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Nowy fundusz UFK został dodany!');
+        return redirect()
+            ->route('funds.show', $fund)
+            ->with('notify_success', 'Nowy fundusz UFK został dodany!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Fund  $fund
-     * @return \Illuminate\Http\Response
+     * @param Fund $fund
+     * @return Application|Factory|View
      */
-    public function show(Fund $fund)
+    public function show(Fund $fund): View|Factory|Application
     {
         return view('funds.show', [
             'title' => 'Szczegóły',
@@ -89,17 +91,14 @@ class FundController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Fund  $fund
-     * @return \Illuminate\Http\Response
+     * @param Fund $fund
+     * @return View
      */
-    public function edit(Fund $fund)
+    public function edit(Fund $fund): View
     {
-        $this->authorize('update', $fund);
-
         return view('funds.edit', [
             'title' => 'Edycja funduszu UFK',
-            'description' => 'Zaktualizuj dane funduszu i kliknij Zapisz',
-            'fund' => Fund::findOrFail($fund->id),
+            'fund' => $fund,
             'investments' => Investment::all(),
         ]);
     }
@@ -107,31 +106,32 @@ class FundController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Fund  $fund
-     * @return \Illuminate\Http\Response
+     * @param UpdateFund $request
+     * @param Fund $fund
+     * @return RedirectResponse
      */
-    public function update(UpdateFund $request, Fund $fund)
+    public function update(UpdateFund $request, Fund $fund): RedirectResponse
     {
-        $this->authorize('update', $fund);
         $fund->update($request->all());
-
         $fund->investments()->sync($request->investment_id);
 
-        return redirect()->route('funds.show', $fund->id)->with('notify_success', 'Dane funduszu UFK zostały zaktualizowane!');
+        return redirect()
+            ->route('funds.show', $fund)
+            ->with('notify_success', 'Dane funduszu UFK zostały zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Fund  $fund
-     * @return \Illuminate\Http\Response
+     * @param Fund $fund
+     * @return RedirectResponse
      */
-    public function destroy(Fund $fund)
+    public function destroy(Fund $fund): RedirectResponse
     {
-        $this->authorize('delete', $fund);
         $fund->delete();
 
-        return redirect()->route('funds.index')->with('notify_danger', 'Fundusz UFK został usunięty!');
+        return redirect()
+            ->route('funds.index')
+            ->with('notify_danger', 'Fundusz UFK został usunięty!');
     }
 }

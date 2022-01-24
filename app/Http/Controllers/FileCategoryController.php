@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\FileCategory;
-
 use App\Http\Requests\StoreFileCategory;
 use App\Http\Requests\UpdateFileCategory;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class FileCategoryController extends Controller
 {
@@ -22,17 +19,16 @@ class FileCategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(FileCategory::class, 'file_category');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        $this->authorize('viewAny', FileCategory::class);
-
         return view('file-categories.index', [
             'title' => 'Kategorie dokumentów',
             'datatables' => FileCategory::getDatatablesData()
@@ -42,42 +38,38 @@ class FileCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        $this->authorize('create', FileCategory::class);
-        
         return view('file-categories.create', [
             'title' => 'Nowa kategoria dokumentów',
-            'description' => 'Uzupełnij dane kategorii dokumentów i kliknij Zapisz',
-            'fileCategories' => FileCategory::all()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreFileCategory $request
+     * @return RedirectResponse
      */
-    public function store(StoreFileCategory $request)
+    public function store(StoreFileCategory $request): RedirectResponse
     {
-        $this->authorize('create', FileCategory::class);
-        
         $fileCategory = new FileCategory($request->all());
         Auth::user()->fileCategories()->save($fileCategory);
 
-        return redirect()->route('file-categories.show', $fileCategory->id)->with('notify_success', 'Nowa kategoria dokumentów została dodana!');
+        return redirect()
+            ->route('file-categories.show', $fileCategory)
+            ->with('notify_success', 'Nowa kategoria dokumentów została dodana!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\FileCategory  $fileCategory
-     * @return \Illuminate\Http\Response
+     * @param FileCategory $fileCategory
+     * @return View
      */
-    public function show(FileCategory $fileCategory)
+    public function show(FileCategory $fileCategory): View
     {
         return view('file-categories.show', [
             'title' => 'Szczegóły',
@@ -88,46 +80,45 @@ class FileCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\FileCategory  $fileCategory
-     * @return \Illuminate\Http\Response
+     * @param FileCategory $fileCategory
+     * @return View
      */
-    public function edit(FileCategory $fileCategory)
+    public function edit(FileCategory $fileCategory): View
     {
-        $this->authorize('update', $fileCategory);
-
         return view('file-categories.edit', [
             'title' => 'Edycja kategorii dokumentów',
-            'description' => 'Zaktualizuj dane kategorii dokumentów i kliknij Zapisz',
-            'fileCategory' => FileCategory::findOrFail($fileCategory->id)
+            'fileCategory' => $fileCategory
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FileCategory  $fileCategory
-     * @return \Illuminate\Http\Response
+     * @param UpdateFileCategory $request
+     * @param FileCategory $fileCategory
+     * @return RedirectResponse
      */
-    public function update(UpdateFileCategory $request, FileCategory $fileCategory)
+    public function update(UpdateFileCategory $request, FileCategory $fileCategory): RedirectResponse
     {
-        $this->authorize('update', $fileCategory);
         $fileCategory->update($request->all());
 
-        return redirect()->route('file-categories.show', $fileCategory->id)->with('notify_success', 'Dane kategrii dokumentów zaktualizowane!');
+        return redirect()
+            ->route('file-categories.show', $fileCategory)
+            ->with('notify_success', 'Dane kategrii dokumentów zaktualizowane!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FileCategory  $fileCategory
-     * @return \Illuminate\Http\Response
+     * @param FileCategory $fileCategory
+     * @return RedirectResponse
      */
-    public function destroy(FileCategory $fileCategory)
+    public function destroy(FileCategory $fileCategory): RedirectResponse
     {
-        $this->authorize('delete', $fileCategory);
         $fileCategory->delete();
 
-        return redirect()->route('file-categories.index')->with('notify_danger', 'Kategria dokumentów usunięta!');
+        return redirect()
+            ->route('file-categories.index')
+            ->with('notify_danger', 'Kategria dokumentów usunięta!');
     }
 }

@@ -27,8 +27,10 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property mixed|null $deleted_at
- * @property mixed files
  * @property mixed extended_name
+ * @property mixed files
+ * @property mixed notes
+ * @property mixed funds
  */
 class Investment extends Model
 {

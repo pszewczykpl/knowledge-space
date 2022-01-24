@@ -21,6 +21,21 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param ?User $user
+     * @param User $model
+     * @return bool
+     */
+    public function view(?User $user, User $model): bool
+    {
+        /**
+         * Anyone can view any models.
+         */
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param User $user

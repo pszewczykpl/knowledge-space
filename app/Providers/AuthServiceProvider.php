@@ -27,7 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\Reply::class => \App\Policies\ReplyPolicy::class,
         \App\Models\Risk::class => \App\Policies\RiskPolicy::class,
         \App\Models\System::class => \App\Policies\SystemPolicy::class,
-        Trash::class => \App\Policies\TrashPolicy::class,
         \App\Models\User::class => \App\Policies\UserPolicy::class,
         \App\Models\Post::class => \App\Policies\PostPolicy::class,
         \App\Models\PostCategory::class => \App\Policies\PostCategoryPolicy::class,

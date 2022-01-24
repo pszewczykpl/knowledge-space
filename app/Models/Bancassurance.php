@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed|null $created_at
  * @property mixed|null $updated_at
  * @property mixed|null $deleted_at
+ * @property mixed files
+ * @property mixed notes
  * @method static find($id)
  */
 class Bancassurance extends Model

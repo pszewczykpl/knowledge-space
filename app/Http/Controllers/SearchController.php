@@ -16,7 +16,10 @@ use App\Http\Requests\Search;
 
 class SearchController extends Controller
 {
-    private $searchModels = [
+    /**
+     * @var array|array[]
+     */
+    private array $searchModels = [
         '\App\Models\Investment' => [
             'route' => 'investments',
             'icon' => 'investment',

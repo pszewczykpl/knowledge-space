@@ -24,6 +24,7 @@ class BancassuranceController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Bancassurance::class, 'bancassurance');
     }
     
     /**
@@ -43,12 +44,9 @@ class BancassuranceController extends Controller
      * Show the form for creating a new resource.
      *
      * @return View
-     * @throws AuthorizationException
      */
     public function create(): View
     {
-        $this->authorize('create', Bancassurance::class);
-
         return view('products.bancassurances.create', [
             'title' => 'Nowy produkt bancassurance',
         ]);
@@ -59,16 +57,15 @@ class BancassuranceController extends Controller
      *
      * @param StoreBancassurance $request
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function store(StoreBancassurance $request): RedirectResponse
     {
-        $this->authorize('create', Bancassurance::class);
-        
         $bancassurance = new Bancassurance($request->all());
         Auth::user()->bancassurances()->save($bancassurance);
 
-        return redirect()->route('bancassurances.show', $bancassurance->id)->with('notify_success', 'Nowy produkt bancassurance został dodany!');
+        return redirect()
+            ->route('bancassurances.show', $bancassurance)
+            ->with('notify_success', 'Nowy produkt bancassurance został dodany!');
     }
 
     /**
@@ -82,13 +79,14 @@ class BancassuranceController extends Controller
     {
         $this->authorize('create', Bancassurance::class);
 
-        $bancassurance->load('user');
-        $clone = $bancassurance->replicate();
-        $clone->save();
-        $clone->files()->attach($bancassurance->files);
-        $clone->notes()->attach($bancassurance->notes);
+        $newBancassurance = $bancassurance->replicate();
+        $newBancassurance->save();
+        $newBancassurance->files()->attach($bancassurance->files);
+        $newBancassurance->notes()->attach($bancassurance->notes);
 
-        return redirect()->route('bancassurances.show', $clone)->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
+        return redirect()
+            ->route('bancassurances.show', $newBancassurance)
+            ->with('notify_success', 'Nowy produkt bancassurance został zduplikowany!');
     }
 
     /**
@@ -99,14 +97,13 @@ class BancassuranceController extends Controller
      */
     public function show(Bancassurance $bancassurance): View
     {
-        $history = Cache::remember("bancassurances:$bancassurance->id:history", 60*60*12, function () use ($bancassurance) {
+        $history = Cache::tags($bancassurance->cacheTag())->remember("bancassurances:$bancassurance->id:history", 60*60*12, function () use ($bancassurance) {
             return Bancassurance::where('code', '=', $bancassurance->code)
                 ->where('dist_short', '=', $bancassurance->dist_short)
                 ->where('code_owu', '=', $bancassurance->code_owu)
                 ->orderBy('edit_date', 'desc')->get();
         });
 
-        StoreEvent::dispatch('show', $bancassurance);
         return view('products.bancassurances.show', [
             'title' => 'Szczegóły',
             'bancassurance' => $bancassurance,
@@ -119,15 +116,11 @@ class BancassuranceController extends Controller
      *
      * @param Bancassurance $bancassurance
      * @return View
-     * @throws AuthorizationException
      */
     public function edit(Bancassurance $bancassurance): View
     {
-        $this->authorize('update', $bancassurance);
-
         return view('products.bancassurances.edit', [
             'title' => 'Edycja produktu bancassurance',
-            'description' => 'Zaktualizuj dane produktu i kliknij Zapisz',
             'bancassurance' => $bancassurance,
         ]);
     }
@@ -138,14 +131,14 @@ class BancassuranceController extends Controller
      * @param UpdateBancassurance $request
      * @param Bancassurance $bancassurance
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function update(UpdateBancassurance $request, Bancassurance $bancassurance): RedirectResponse
     {
-        $this->authorize('update', $bancassurance);
         $bancassurance->update($request->all());
 
-        return redirect()->route('bancassurances.show', $bancassurance)->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
+        return redirect()
+            ->route('bancassurances.show', $bancassurance)
+            ->with('notify_success', 'Dane produktu bancassurance zostały zaktualizowane!');
     }
 
     /**
@@ -153,13 +146,13 @@ class BancassuranceController extends Controller
      *
      * @param Bancassurance $bancassurance
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function destroy(Bancassurance $bancassurance): RedirectResponse
     {
-        $this->authorize('delete', $bancassurance);
         $bancassurance->delete();
 
-        return redirect()->route('bancassurances.index')->with('notify_danger', 'Produkt bancassurance został usunięty!');
+        return redirect()
+            ->route('bancassurances.index')
+            ->with('notify_danger', 'Produkt bancassurance został usunięty!');
     }
 }

@@ -35,14 +35,15 @@ class FileController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show', 'download']);
+        $this->authorizeResource(File::class, 'file');
     }
     
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('files.index', [
             'title' => 'Dokumenty',
@@ -54,13 +55,11 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
-     * @throws AuthorizationException
+     * @param Request $request
+     * @return View
      */
-    public function create(Request $request, ?Model $model = null)
+    public function create(Request $request): View
     {
-        $this->authorize('create', File::class);
-
         return view('files.create', [
             'title' => 'Nowy dokument',
             'description' => 'Uzupełnij dane dokumentu i kliknij Zapisz',
@@ -79,12 +78,9 @@ class FileController extends Controller
      *
      * @param StoreFile $request
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
-    public function store(StoreFile $request)
+    public function store(StoreFile $request): RedirectResponse
     {
-        $this->authorize('create', File::class);
-
         $file = new File($request->all());
 
         if ($request->hasFile('file')) {
@@ -96,13 +92,7 @@ class FileController extends Controller
             $file->path = 'files/deleted.pdf';
             $file->extension = 'pdf';
         }
-        
-        if(($request->draft_checkbox ?? null)) {
-            $file->draft = 1;
-        } else {
-            $file->draft = 0;
-        }
-
+        $file->draft = $request->boolean('draft_checkbox');
         $file->fileCategory()->associate($request->file_category_id);
         Auth::user()->files()->save($file);
         
@@ -110,7 +100,9 @@ class FileController extends Controller
         $file->protectives()->attach($request->protective_id);
         $file->employees()->attach($request->employee_id);
 
-        return redirect()->route('files.index')->with('notify_success', 'Nowy dokument został dodany!');
+        return redirect()
+            ->route('files.index')
+            ->with('notify_success', 'Nowy dokument został dodany!');
     }
 
     /**
@@ -119,7 +111,7 @@ class FileController extends Controller
      * @param File $file
      * @return RedirectResponse|StreamedResponse
      */
-    public function show(File $file)
+    public function show(File $file): StreamedResponse|RedirectResponse
     {
         if($file->extension == 'pdf') {
             return Storage::download(
@@ -134,7 +126,8 @@ class FileController extends Controller
             );
         }
         
-        return redirect()->route('files.download', $file->id);
+        return redirect()
+            ->route('files.download', $file);
     }
 
     /**
@@ -143,7 +136,7 @@ class FileController extends Controller
      * @param File $file
      * @return StreamedResponse
      */
-    public function download(File $file) 
+    public function download(File $file): StreamedResponse
     {
         return Storage::download($file->path, $file->name . '.' . $file->extension);
     }
@@ -152,17 +145,13 @@ class FileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param File $file
-     * @return Application|Factory|View
-     * @throws AuthorizationException
+     * @return View
      */
-    public function edit(File $file)
+    public function edit(File $file): View
     {
-        $this->authorize('update', $file);
-
         return view('files.edit', [
             'title' => 'Edycja dokumentu',
-            'description' => 'Zaktualizuj dane dokumentu i kliknij Zapisz',
-            'file' => File::findOrFail($file->id),
+            'file' => $file,
             'investments' => Investment::all(),
             'protectives' => Protective::all(),
             'bancassurances' => Bancassurance::all(),
@@ -177,12 +166,9 @@ class FileController extends Controller
      * @param UpdateFile $request
      * @param File $file
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
-    public function update(UpdateFile $request, File $file)
+    public function update(UpdateFile $request, File $file): RedirectResponse
     {
-        $this->authorize('update', $file);
-
         $file->update($request->all());
         $file->draft = $request->boolean('draft_checkbox');
         $file->fileCategory()->associate($request->input('file_category_id'));
@@ -198,44 +184,55 @@ class FileController extends Controller
         $file->protectives()->sync($request->protective_id);
         $file->employees()->sync($request->employee_id);
 
-        return redirect()->route('files.index')->with('notify_success', 'Dokument został zaktualizowany!');
+        return redirect()
+            ->route('files.index')
+            ->with('notify_success', 'Dokument został zaktualizowany!');
     }
 
     /**
      * Replicate the specified resource from storage.
      *
-     * @param  \App\File  $file
+     * @param File $file
+     * @param string $fileable_type
+     * @param string $fileable_id
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function replace(File $file, $fileable_type, $fileable_id)
+    public function replace(File $file, string $fileable_type, string $fileable_id): RedirectResponse
     {
         $this->authorize('update', $file);
-        
+
         $file->{$fileable_type}()->detach($fileable_id);
         $file->save(); // Don't needed it, but must run update/updating event for flush cache
 
-        $file->load('user');
-        $clone = $file->replicate();
-        $clone->save();
-        $clone->{$fileable_type}()->attach($fileable_id);
+        $newFile = $file->replicate();
+        $newFile->save();
+        $newFile->{$fileable_type}()->attach($fileable_id);
 
-        return redirect()->route('files.edit', $clone)->with('notify_success', 'Dokument został zastąpiony!');
+        return redirect()
+            ->route('files.edit', $newFile)
+            ->with('notify_success', 'Dokument został zastąpiony!');
     }
 
     /**
      * Detach the specified resource from storage.
      *
-     * @param  \App\File  $file
+     * @param File $file
+     * @param string $fileable_type
+     * @param string $fileable_id
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function detach(File $file, $fileable_type, $fileable_id)
+    public function detach(File $file, string $fileable_type, string $fileable_id): RedirectResponse
     {
         $this->authorize('update', $file);
         
         $file->{$fileable_type}()->detach($fileable_id);
         $file->save(); // Don't needed it, but must run update/updating event for flush cache
 
-        return redirect()->back()->with('notify_danger', 'Dokument został odpięty od produktu!');
+        return redirect()
+            ->back()
+            ->with('notify_danger', 'Dokument został odpięty od produktu!');
     }
 
     /**
@@ -244,15 +241,15 @@ class FileController extends Controller
      * @param File $file
      * @return RedirectResponse
      */
-    public function destroy(File $file)
+    public function destroy(File $file): RedirectResponse
     {
-        $this->authorize('delete', $file);
-
         if($file->path !== 'files/deleted.pdf') {
             Storage::move($file->path, 'trash/' . $file->path);
         }
         $file->delete();
 
-        return redirect()->back()->with('notify_danger', 'Dokument został usunięty!');
+        return redirect()
+            ->back()
+            ->with('notify_danger', 'Dokument został usunięty!');
     }
 }
