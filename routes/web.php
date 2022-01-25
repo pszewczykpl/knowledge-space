@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
@@ -44,17 +45,17 @@ use Illuminate\Support\Facades\Route;
 /**
  * Home
  */
-Route::get('/', [LoginController::class, 'showLoginForm']);
+Route::get('/', [AuthenticatedSessionController::class, 'create']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 /**
- * Users and authentication
+ * Authentication
  */
-Auth::routes();
-Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
+require __DIR__.'/auth.php';
 
+/**
+ * Users, departments and permissions
+ */
 Route::resources([
     'departments' => DepartmentController::class,
     'users' => UserController::class,
@@ -130,3 +131,5 @@ Route::get('system-properties/maintenance/off', [SystemPropertyController::class
 Route::get('system-properties/maintenance/on', [SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
 
 Route::get('system-properties/dark-mode', [SystemPropertyController::class, 'switchDarkMode'])->name('system-properties.dark-mode');
+
+

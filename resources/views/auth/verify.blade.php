@@ -23,8 +23,6 @@
 {{--    </div>--}}
 {{--</div>--}}
 
-
-
 @extends('layouts.auth')
 
 @section('content')
