@@ -22,7 +22,8 @@ return [
     | Dark mode
     |--------------------------------------------------------------------------
     |
-    | ??
+    | Users can change dark mode on application. However, you can set
+    | default dark mode to all users.
     |
     */
     'default_dark_mode' => false,
