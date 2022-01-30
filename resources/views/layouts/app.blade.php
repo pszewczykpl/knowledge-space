@@ -41,7 +41,7 @@
 
 <body
         id="kt_body"
-        {{--		data-kt-aside-minimize="on"--}}
+        		data-kt-aside-minimize="on"
         class="
 			@if($dark_mode) dark-mode @endif
                 header-fixed header-tablet-and-mobile-fixed aside-enabled
