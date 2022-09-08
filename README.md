@@ -30,11 +30,12 @@ Link wkrótce :-)
 ## Instalacja
 git clone https://github.com/pszewczykpl/knowledge-space.git
 cd knowledge-space
-composer install --no-dev
+copy .env.example .env
+touch database/database.sqlite
+composer install
 php artisan key:generate
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan migrate --seed
+php artisan server
 
 ## Licencja
 Knowledge Space jest systemem open-source opartym o licencję MIT.
