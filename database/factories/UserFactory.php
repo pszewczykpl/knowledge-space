@@ -24,7 +24,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('pl_PL');
 
         return [
             'first_name' => $faker->firstName,
@@ -36,8 +36,8 @@ class UserFactory extends Factory
             'company' => $faker->company,
             'department_id' => Department::all()->random(),
             'position' => $faker->jobTitle,
-            'description' => $faker->catchPhrase,
-            'location' => $faker->country,
+            'description' => 'dscript',
+            'location' => $faker->city,
         ];
     }
 }

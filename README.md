@@ -23,7 +23,7 @@ System udostępnia jako open-source back-end aplikacji. Front-end (katalog /view
 ## Demo
 Dane do zalogowania jako użytkownik:
 E-mail: admin@admin.pl
-Hasło: admin123
+Hasło: admin
 
 Link wkrótce :-)
 

@@ -17,23 +17,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * Create admin account first.
+         */
         $user = User::create([
             'first_name' => 'Piotr',
             'last_name' => 'Szewczyk',
             'username' => 'admin',
             'email' => 'admin@admin.pl',
-            'phone' => '+481234567893',
+            'phone' => '+48123456789',
             'password' => bcrypt('admin'),
             'department_id' => Department::all()->random()->id,
             'position' => 'PHP Developer',
-            'company' => 'Open Life TU Życie S.A.',
+            'company' => 'Tu może znaleźć się Twoja firma ;-)',
             'location' => 'Warszawa',
-            'description' => 'Tworzenie oprogramowania opartego o nowoczesne rozwiazania w języki PHP takie jak Laravel, Symphony czy Vue.js',
+            'description' => 'Tworzenie oprogramowania opartego o nowoczesne rozwiazania takie jak Laravel, Symphony czy Vue.js',
         ]);
         $user->permissions()->attach(Permission::all());
-        
-    //    User::factory()
-    //    ->times(23)
-    //    ->create();
+
+        /**
+         * Create another standard users.
+         */
+        User::factory()
+        ->times(8)
+        ->create();
     }
 }
