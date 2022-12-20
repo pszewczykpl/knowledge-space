@@ -29,7 +29,7 @@ class SystemController extends Controller
         $this->middleware('auth')->except(['show', 'index']);
         $this->authorizeResource(System::class, 'system');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +70,7 @@ class SystemController extends Controller
             ->route('systems.show', $system)
             ->with('notify_success', 'Nowy system został dodany!');
     }
-    
+
     /**
      * Display the specified resource.
      *
