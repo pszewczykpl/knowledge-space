@@ -85,14 +85,6 @@ class Protective extends Model
     }
 
     /**
-     * Get all of the protective's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get unique name of the product.
      *
      * @return string

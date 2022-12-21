@@ -64,14 +64,6 @@ class System extends Model
     protected $casts = [
 //        'events' => CacheRelation::class,
     ];
-
-    /**
-     * Get all of the system's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
     
     /**
      * Get the user that created the system.

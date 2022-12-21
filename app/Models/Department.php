@@ -37,6 +37,9 @@ class Department extends Model
         'description',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -51,14 +54,6 @@ class Department extends Model
     public function users()
     {
         return $this->hasMany('App\Models\User');
-    }
-
-    /**
-     * Get all of the department's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
     }
 
     /**

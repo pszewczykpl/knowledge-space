@@ -70,14 +70,6 @@ class Partner extends Model
     }
 
     /**
-     * Get all of the partner's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the partner.
      */
     public function user()

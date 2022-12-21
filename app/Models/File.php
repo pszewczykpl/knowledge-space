@@ -93,14 +93,6 @@ class File extends Model
     }
 
     /**
-     * Get all of the file's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the file.
      */
     public function user()

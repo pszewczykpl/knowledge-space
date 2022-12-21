@@ -5,9 +5,6 @@
 	@can('update', $risk)
 		<x-layout.toolbar.button action="edit" href="{{ route('risks.edit', $risk) }}" />
 	@endcan
-	@can('create', $risk)
-		<x-layout.toolbar.button action="duplicate" href="{{ route('risks.duplicate', $risk) }}" />
-	@endcan
 	@can('delete', $risk)
 		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('risks_destroy_{{ $risk->id }}').submit();" />
 		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'risks.destroy', $risk ], 'id' => 'risks_destroy_' . $risk->id ]) }}{{ Form::close() }}

@@ -84,14 +84,6 @@ class Note extends Model
     }
 
     /**
-     * Get all of the note's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the note.
      */
     public function user()

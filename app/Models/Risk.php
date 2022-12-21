@@ -65,14 +65,6 @@ class Risk extends Model
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
     }
-
-    /**
-     * Get all of the risk's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
     
     /**
      * Get the user that created the risk.

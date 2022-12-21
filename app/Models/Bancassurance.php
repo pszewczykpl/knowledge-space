@@ -59,6 +59,9 @@ class Bancassurance extends Model
         'status',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa produktu',
@@ -94,14 +97,6 @@ class Bancassurance extends Model
     public function notes(): MorphToMany
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
-    }
-
-    /**
-     * Get all of the bancassurance's events.
-     */
-    public function events()
-    {
-        return $this->morphMany('App\Models\Event', 'eventable')->withTimestamps();
     }
 
     /**
