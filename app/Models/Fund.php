@@ -73,14 +73,6 @@ class Fund extends Model
     }
 
     /**
-     * Get all of the fund's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the fund.
      */
     public function user()

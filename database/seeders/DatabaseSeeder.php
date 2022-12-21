@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             DepartmentSeeder::class,
             UserSeeder::class,
+            
+            // Hide these seeders.
+
             // FileCategorySeeder::class,
             // FileSeeder::class,
             // EmployeeSeeder::class,

@@ -50,14 +50,6 @@ class PostCategory extends Model
     }
 
     /**
-     * Get all of the post category's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the post category.
      */
     public function user()

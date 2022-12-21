@@ -44,14 +44,6 @@ class News extends Model
     }
 
     /**
-     * Get all of the news's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the news.
      */
     public function user()

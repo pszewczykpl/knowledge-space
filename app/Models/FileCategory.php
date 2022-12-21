@@ -50,14 +50,6 @@ class FileCategory extends Model
     }
 
     /**
-     * Get all of the file category's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Get the user that created the file category.
      */
     public function user()

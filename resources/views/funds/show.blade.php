@@ -5,9 +5,6 @@
 	@can('update', $fund)
 		<x-layout.toolbar.button action="edit" href="{{ route('funds.edit', $fund) }}" />
 	@endcan
-	@can('create', $fund)
-		<x-layout.toolbar.button action="duplicate" href="{{ route('funds.duplicate', $fund) }}" />
-	@endcan
 	@can('delete', $fund)
 		<x-layout.toolbar.button action="destroy" onclick="document.getElementById('funds_destroy_{{ $fund->id }}').submit();" />
 		{{ Form::open([ 'method'  => 'delete', 'route' => [ 'funds.destroy', $fund ], 'id' => 'funds_destroy_' . $fund->id ]) }}{{ Form::close() }}

@@ -43,14 +43,6 @@ class Reply extends Model
     {
         return $this->belongsTo('App\Models\News');
     }
-
-    /**
-     * Get all of the reply's events.
-     */
-    public function events()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
     
     /**
      * Get the user that created the reply.

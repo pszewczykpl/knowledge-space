@@ -72,7 +72,6 @@ class EventServiceProvider extends ServiceProvider
         Bancassurance::observe(BancassuranceObserver::class);
         Department::observe(DepartmentObserver::class);
         Employee::observe(EmployeeObserver::class);
-        Event::observe(EventObserver::class);
         FileCategory::observe(FileCategoryObserver::class);
         File::observe(FileObserver::class);
         Fund::observe(FundObserver::class);

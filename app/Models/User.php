@@ -244,22 +244,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get all of the user's events.
-     */
-    public function events()
-    {
-        return $this->hasMany('App\Models\Event');
-    }
-
-    /**
-     * Get all of the user's events.
-     */
-    public function eventable()
-    {
-        return $this->morphMany(Event::class, 'eventable');
-    }
-
-    /**
      * Check if user has the permission (by code).
      *
      * @param string $code
