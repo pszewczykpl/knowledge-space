@@ -89,8 +89,10 @@ class InvestmentController extends Controller
         $this->authorize('create', Investment::class);
 
         $newInvestment = $investment->replicate();
+        // We set edit_date to default value (from system properties).
         $newInvestment->edit_date = SystemProperty::select('value')->where('key', 'default_edit_date')->firstOrFail()->pluck('value')[0];
         $newInvestment->save();
+
         $newInvestment->files()->attach($investment->files);
         $newInvestment->notes()->attach($investment->notes);
         $newInvestment->funds()->attach($investment->funds);
@@ -157,6 +159,8 @@ class InvestmentController extends Controller
     {
         $investment->delete();
 
-        return redirect()->route('investments.index')->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
+        return redirect()
+            ->route('investments.index')
+            ->with('notify_danger', 'Produkt inwestycyjny został usunięty!');
     }
 }

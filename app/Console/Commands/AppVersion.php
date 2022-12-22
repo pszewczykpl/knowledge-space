@@ -38,7 +38,7 @@ class AppVersion extends Command
      */
     public function handle()
     {
-        // Return app name and version
+        // Return the application version.
         $this->info(config('app.name') . ' ' . config('app.version'));
     }
 }

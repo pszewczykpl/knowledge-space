@@ -38,9 +38,9 @@ use Illuminate\Database\Eloquent\Builder;
 |
 */
 
-/*
-| Datatables.net POST controllers
-*/
+/**
+ * API routes for datatables.net (https://datatables.net/manual/server-side)
+ */
 Route::post('datatables/departments', [DepartmentController::class, 'datatables']);
 Route::post('datatables/employees', [EmployeeController::class, 'datatables']);
 Route::post('datatables/files', [FileController::class, 'datatables']);
@@ -58,15 +58,27 @@ Route::post('datatables/users', [UserController::class, 'datatables']);
 Route::post('datatables/systems', [SystemController::class, 'datatables']);
 Route::post('datatables/post-categories', [PostCategoryController::class, 'datatables']);
 
+/**
+ * Generating a zip file with files.
+ */
 Route::get('files/zip', [FileController::class, 'zip'])->name('files.zip');
 
+/**
+ * Generating a zip file with files by product.
+ */
 Route::get('investments/{investment}/files/zip', [InvestmentController::class, 'zipFiles'])->name('investments.files.zip');
 Route::get('protectives/{protective}/files/zip', [ProtectiveController::class, 'zipFiles'])->name('protectives.files.zip');
 Route::get('bancassurances/{bancassurance}/files/zip', [BancassuranceController::class, 'zipFiles'])->name('bancassurances.files.zip');
 Route::get('employees/{employee}/files/zip', [EmployeeController::class, 'zipFiles'])->name('employees.files.zip');
 
-/* OLAF Controllers */
+/**
+ * Get file by: file_code, code_toil, start_date and other parameters.
+ */
 Route::get('1/{file_code}/{code_toil}/{start_date}', [InvestmentByController::class, 'file_by_toil']);
 Route::get('2/{file_code}/{code}/{dist_short}/{start_date}', [ProtectiveByController::class, 'file_by_code']);
+
+/**
+ * Get files like a zip file by: file_code, code_toil, start_date and other parameters.
+ */
 Route::get('4/{category_id}/{code_toil}/{start_date}/zip', [InvestmentByController::class, 'files_category_by_toil_zip']);
 Route::get('5/{category_id}/{code}/{dist_short}/{start_date}/zip', [ProtectiveByController::class, 'files_category_by_code_zip']);

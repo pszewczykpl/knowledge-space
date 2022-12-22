@@ -51,6 +51,9 @@ class File extends Model
         'type',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -67,26 +70,41 @@ class File extends Model
         'orderBy' => ['name', 'asc']
     ];
 
+    /**
+     * Get the file's clients.
+     */
     public function investments()
     {
         return $this->morphedByMany('App\Models\Investment', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get all of the file's clients.
+     */
     public function employees()
     {
         return $this->morphedByMany('App\Models\Employee', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get all of the file's protectives.
+     */
     public function protectives()
     {
         return $this->morphedByMany('App\Models\Protective', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get all of the file's bancassurances.
+     */
     public function bancassurances()
     {
         return $this->morphedByMany('App\Models\Bancassurance', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get the file category that owns the file.
+     */
     public function fileCategory()
     {
         return $this->belongsTo('App\Models\FileCategory');
@@ -101,7 +119,7 @@ class File extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */
@@ -110,6 +128,9 @@ class File extends Model
         return $this->attributes['name'];
     }
 
+    /**
+     * Get file type name.
+     */
     public function getTypeAttribute()
     {
         return match ($this->attributes['type']) {

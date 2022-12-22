@@ -1,41 +1,34 @@
+# Knowledge Space (Baza Wiedzy)
 <p align="center">
-    <img src="https://serwer2077449.home.pl/knowledgespace.png" height="92" />
+<span style="font-size: 16px; color: #702afb; ">Ostatnia stabilna wersja: <b>8.5</b></span>
 </p>
 
-<p align="center">
-<span style="font-size: 16px; color: #702afb; padding-right: 15px">Strona projektu</span>
-<span style="font-size: 16px; color: #702afb; ">Ostatnia stabilna wersja: <b>0.3</b></span>
-</p>
-
-## Czym jest Knowledge Space?
-Knowledge Space to Intranet dla Towarzystw Ubezpieczeniowych. Aplikacja pozwala na utworzenie repozytorium dokumentów dla ubezpieczeń inwestycyjnych, ochronnych oraz pracowniczych. W łatwy i szybko sposób można wyszukiwać dokumenty związane z produktami ubezpieczeniowymi Towarzystwa Ubezpieczeniowego.
+## O aplikacji
+Knowledge Space (Baza Wiedzy) to aplikacja webowa służąca do przechowywania archiwum dokumentów produktowych dla Towarzystw Ubezpieczeniowych oraz posiadająca dodatkowe funkcjonalności służące do przeglądania informacji i danych na temat np.: produktów ubezpieczeniowych, ryzyk ubezpieczeniowych, funduszy inwestycyjnych. Aplikacja posiada system aktualności, zarządzania użytkownikami oraz administrację.
 
 W obecnej wersji aplikacji dostępne są następujące funkcjonalności:
-- Użytkownicy (Rejestracja/logowanie/własne profile)
-- Repozytorium produktowe dla ubezpieczeń: Inwestycyjnych, Ochronnych oraz Pracowniczych
-- Możliwość określenia kategorii dla dokumentów oraz elastycznego powiązania dokumentu z ubezpieczeniami
-- Aktualności
-- Słownik partnerów/dystrybutorów Towarzystwa Ubezpieczeń
-- Słownik ryzyk ubezpieczeniowych
+- Autoryzacja / Użytkownicy / Uprawnienia
+- Repozytorium produktów ubezpieczeniowych: Ubezpieczenia Inwestycyjne, Ochronne, Bancassurance, Pracownicze
+- Dokumenty (produktowe oraz inne)
+- System aktualności
+- Artykuły
+- Lista partnerów Towarzystwa Ubezpieczeniowego
+- Lista systemów używanych przez spółkę
+- Lista ryzyk ubezpieczeniowych
+- Lista funduszy
 
-System udostępnia jako open-source back-end aplikacji. Front-end (katalog /views oraz /public/css i /public/js nie są udostępnione w całości). W przypadku chęci uruchomienia/wykorzystania obecnej wersji aplikacji należy zaprogramować własny front-end aplikacji.
-
-## Demo
-Dane do zalogowania jako użytkownik:
-E-mail: admin@admin.pl
-Hasło: admin
-
-Link wkrótce :-)
+## Demo aplikacji
+Zapraszam do zapoznania się z aplikacją pod URL https://knowledge-space.pszewczyk.pl/<br>
+Istnieje możliwość rejestracji oraz przeglądania obecnych funkcjonalności systemu.
 
 ## Instalacja
-git clone https://github.com/pszewczykpl/knowledge-space.git
-cd knowledge-space
-copy .env.example .env
-touch database/database.sqlite
-composer install
-php artisan key:generate
-php artisan migrate --seed
-php artisan server
+W związku 
 
+
+Technologie użyte do realizacji to: PHP, Laravel, MySQL, Redis, Git.
 ## Licencja
-Knowledge Space jest systemem open-source opartym o licencję MIT.
+### Backend
+MIT
+
+### Frontend
+Kod HTML / CSS / JS objęty jest *prawami autorskimi* oraz **nie** jest udostępniany na GitHub.

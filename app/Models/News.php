@@ -38,6 +38,9 @@ class News extends Model
         'content',
     ];
 
+    /**
+     * Get the replies for the news.
+     */
     public function replies()
     {
         return $this->hasMany('App\Models\Reply');

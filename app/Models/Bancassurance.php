@@ -108,6 +108,8 @@ class Bancassurance extends Model
     }
 
     /**
+     * Get the history of the bancassurance product.
+     * 
      * @return array|mixed
      */
     public function history()
@@ -121,7 +123,7 @@ class Bancassurance extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the bancassurance product.
      *
      * @return string
      */

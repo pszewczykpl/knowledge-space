@@ -68,6 +68,9 @@ class FileController extends Controller
             'bancassurances' => Bancassurance::all(),
             'employees' => Employee::all(),
             'fileCategories' => FileCategory::all(),
+            /**
+             * If the file is being created from a specific model
+             */
             'fileable_type' => $request->fileable_type ?? null,
             'fileable_id' => $request->fileable_id ?? null,
         ]);
@@ -82,20 +85,23 @@ class FileController extends Controller
     public function store(StoreFile $request): RedirectResponse
     {
         $file = new File($request->all());
+        $file->draft = $request->boolean('draft_checkbox');
 
+        /**
+         * Store the file in the storage.
+         */
         if ($request->hasFile('file')) {
             $path = $request->file->store('files');
             $file->path = $path;
             $file->extension = $request->file('file')->extension();
         }
-        else {
-            $file->path = 'files/deleted.pdf';
-            $file->extension = 'pdf';
-        }
-        $file->draft = $request->boolean('draft_checkbox');
+        
         $file->fileCategory()->associate($request->file_category_id);
         Auth::user()->files()->save($file);
         
+        /**
+         * Attach the file to the models.
+         */
         $file->investments()->attach($request->investment_id);
         $file->protectives()->attach($request->protective_id);
         $file->employees()->attach($request->employee_id);
@@ -113,10 +119,16 @@ class FileController extends Controller
      */
     public function show(File $file): StreamedResponse|RedirectResponse
     {
+        /**
+         * If the file is a PDF, then display it in the browser.
+         */
         if($file->extension == 'pdf') {
             return Storage::download(
                 $file->path, 
                 $file->name . '.' . $file->extension, 
+                /**
+                 * Headers to display the PDF in the browser.
+                 */
                 [
                     'Content-type' => 'application/pdf',
                     'Content-Disposition' => 'inline; filename="'. $file->name . '.' . $file->extension .'"',
@@ -126,6 +138,9 @@ class FileController extends Controller
             );
         }
         
+        /**
+         * If the file is not a PDF, then redirect to the download method.
+         */
         return redirect()
             ->route('files.download', $file);
     }
@@ -171,15 +186,22 @@ class FileController extends Controller
     {
         $file->update($request->all());
         $file->draft = $request->boolean('draft_checkbox');
-        $file->fileCategory()->associate($request->input('file_category_id'));
 
+        /**
+         * Store the file in the storage.
+         */
         if ($request->hasFile('file')) {
             $path = $request->file->store('files');
             $file->path = $path;
             $file->extension = $request->file('file')->extension();
         }
+
+        $file->fileCategory()->associate($request->file_category_id);
         $file->save();
 
+        /**
+         * Sync the file with the models.
+         */
         $file->investments()->sync($request->investment_id);
         $file->protectives()->sync($request->protective_id);
         $file->employees()->sync($request->employee_id);
@@ -243,6 +265,7 @@ class FileController extends Controller
      */
     public function destroy(File $file): RedirectResponse
     {
+        // Move the file to the trash folder (except deleted.pdf).
         if($file->path !== 'files/deleted.pdf') {
             Storage::move($file->path, 'trash/' . $file->path);
         }

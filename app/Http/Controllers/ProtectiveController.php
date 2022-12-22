@@ -87,6 +87,7 @@ class ProtectiveController extends Controller
 
         $newProtective = $protective->replicate();
         $newProtective->save();
+        
         $newProtective->files()->attach($protective->files);
         $newProtective->notes()->attach($protective->notes);
 

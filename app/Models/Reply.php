@@ -39,6 +39,9 @@ class Reply extends Model
         'content',
     ];
 
+    /**
+     * Get the news that owns the reply.
+     */
     public function news()
     {
         return $this->belongsTo('App\Models\News');

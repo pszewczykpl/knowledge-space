@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /**
- * Home
+ * Home.
  */
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
@@ -54,7 +54,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 require __DIR__.'/auth.php';
 
 /**
- * Users, departments and permissions
+ * User authentication modules.
  */
 Route::resources([
     'departments' => DepartmentController::class,
@@ -65,7 +65,7 @@ Route::resource(
 )->only(['index']);
 
 /**
- * Products
+ * Products modules.
  */
 Route::get('investments/{investment}/duplicate', [InvestmentController::class, 'duplicate'])->name('investments.duplicate');
 Route::get('employees/{employee}/duplicate', [EmployeeController::class, 'duplicate'])->name('employees.duplicate');
@@ -80,7 +80,7 @@ Route::resources([
 ]);
 
 /**
- * Files
+ * Files and file categories modules.
  */
 Route::get('files/{file}/download', [FileController::class, 'download'])->name('files.download');
 Route::get('files/{file}/{fileable_type}/{fileable_id}/detach', [FileController::class, 'detach'])->name('files.detach');
@@ -92,7 +92,7 @@ Route::resources([
 ]);
 
 /**
- * News, replies, notes and posts
+ * News, replies, notes and posts modules.
  */
 Route::get('notes/{note}/{noteable_type}/{noteable_id}/detach', [NoteController::class, 'detach'])->name('notes.detach');
 
@@ -107,7 +107,7 @@ Route::resource(
 )->only(['store', 'destroy']);
 
 /**
- * Dictionaries
+ * Dictionaries modules.
  */
 Route::resources([
     'funds' => FundController::class,
@@ -117,19 +117,15 @@ Route::resources([
 ]);
 
 /**
- * Search
+ * Search module.
  */
 Route::get('search/{scope}', [SearchController::class, 'search'])->name('search');
 
 /**
- * System properties and configuration
+ * System properties and configuration module.
  */
 Route::get('system-properties', [SystemPropertyController::class, 'index'])->name('system-properties.index');
 Route::put('system-properties', [SystemPropertyController::class, 'update'])->name('system-properties.update');
-Route::get('system-properties/update-app', [SystemPropertyController::class, 'getNewAppVersionFromGit'])->name('system-properties.getNewAppVersionFromGit');
 Route::get('system-properties/maintenance/off', [SystemPropertyController::class, 'maintenance_off'])->name('system-properties.maintenanceOff');
 Route::get('system-properties/maintenance/on', [SystemPropertyController::class, 'maintenance_on'])->name('system-properties.maintenanceOn');
-
 Route::get('system-properties/dark-mode', [SystemPropertyController::class, 'switchDarkMode'])->name('system-properties.dark-mode');
-
-

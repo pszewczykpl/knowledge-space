@@ -102,15 +102,20 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
+        // Update avatar if new file is uploaded.
         if ($request->hasFile('avatar')) {
             $path = $request->avatar->store('avatars');
             $user->avatar_path = $path;
-        } else if ($request->avatar_remove) {
+        }
+        // Remove avatar if checkbox is checked.
+        else if ($request->avatar_remove) {
             $user->avatar_path = null;
         }
+
         $user->department()->associate(Department::find($request->department_id));
         $user->save();
 
+        // Sync permissions.
         if(isset($request->permission_id)) {
             $user->permissions()->sync($request->permission_id);
         }

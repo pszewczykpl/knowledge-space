@@ -28,10 +28,16 @@ class SystemProperty extends Model
         'value',
     ];
 
+    /**
+     * Properties that can be edited by user.
+     */
     public static $properties = [
         'default_edit_date'
     ];
 
+    /**
+     * Find property by key.
+     */
     public static function find(string $key)
     {
         return self::where('key', '=', $key)->firstOrFail();

@@ -50,6 +50,9 @@ class Partner extends Model
         'type'
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -64,6 +67,9 @@ class Partner extends Model
         'orderBy' => ['code', 'asc']
     ];
 
+    /**
+     * Get the notes for the partner.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
@@ -78,7 +84,7 @@ class Partner extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

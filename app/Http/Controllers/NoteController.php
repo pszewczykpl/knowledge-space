@@ -140,6 +140,7 @@ class NoteController extends Controller
     public function update(UpdateNote $request, Note $note): RedirectResponse
     {
         $note->update($request->all());
+        
         $note->investments()->sync($request->investment_id);
         $note->protectives()->sync($request->protective_id);
         $note->bancassurances()->sync($request->bancassurance_id);

@@ -47,6 +47,9 @@ class Fund extends Model
         'cancel_reason'
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'code' => 'Symbol',
@@ -62,11 +65,17 @@ class Fund extends Model
         'orderBy' => ['start_date', 'desc']
     ];
 
+    /**
+     * Get the investments for the fund.
+     */
     public function investments()
     {
         return $this->belongsToMany('App\Models\Investment')->withTimestamps();
     }
 
+    /**
+     * Get the notes for the fund.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
@@ -81,7 +90,7 @@ class Fund extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */
@@ -90,6 +99,9 @@ class Fund extends Model
         return $this->attributes['name'];
     }
 
+    /**
+     * Get fund type.
+     */
     public function getTypeAttribute()
     {
         return match ($this->attributes['type']) {

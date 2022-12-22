@@ -54,6 +54,9 @@ class Protective extends Model
         'status',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa produktu',
@@ -79,13 +82,16 @@ class Protective extends Model
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get all of the notes for the protective.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */
@@ -116,6 +122,9 @@ class Protective extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    /**
+     * Get the history of the protective.
+     */
     public function history()
     {
         return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {

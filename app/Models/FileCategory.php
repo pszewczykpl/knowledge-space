@@ -35,6 +35,9 @@ class FileCategory extends Model
         'prefix',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -44,6 +47,9 @@ class FileCategory extends Model
         'orderBy' => ['name', 'asc']
     ];
 
+    /**
+     * Get the files for the file category.
+     */
     public function files()
     {
         return $this->hasMany('App\Models\File');
@@ -58,7 +64,7 @@ class FileCategory extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

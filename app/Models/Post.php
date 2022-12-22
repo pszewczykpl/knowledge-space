@@ -41,6 +41,9 @@ class Post extends Model
         'content',
     ];
 
+    /**
+     * Get the post category that owns the post.
+     */
     public function postCategory()
     {
         return $this->belongsTo('App\Models\PostCategory');
@@ -55,7 +58,7 @@ class Post extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

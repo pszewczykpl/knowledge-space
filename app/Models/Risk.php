@@ -48,6 +48,9 @@ class Risk extends Model
         'grace_period',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'code' => 'Symbol',
@@ -61,6 +64,9 @@ class Risk extends Model
         'orderBy' => ['code', 'asc']
     ];
 
+    /**
+     * Get the notes for the risk.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
@@ -75,7 +81,7 @@ class Risk extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

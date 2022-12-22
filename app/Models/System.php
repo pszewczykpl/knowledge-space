@@ -45,6 +45,9 @@ class System extends Model
         'description',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -74,7 +77,7 @@ class System extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

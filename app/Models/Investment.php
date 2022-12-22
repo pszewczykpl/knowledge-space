@@ -64,6 +64,9 @@ class Investment extends Model
         'status',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     public static array $datatables = [
         'columns' => [
             'name' => 'Nazwa produktu',
@@ -128,7 +131,7 @@ class Investment extends Model
     }
 
     /**
-     * @return array|mixed
+     * Get history of the investment.
      */
     public function history()
     {
@@ -138,7 +141,7 @@ class Investment extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

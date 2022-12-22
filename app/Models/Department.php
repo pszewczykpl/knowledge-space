@@ -51,6 +51,9 @@ class Department extends Model
         'orderBy' => ['code', 'asc']
     ];
 
+    /**
+     * Get the users for the department.
+     */
     public function users()
     {
         return $this->hasMany('App\Models\User');
@@ -65,7 +68,7 @@ class Department extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the department.
      *
      * @return string
      */

@@ -39,6 +39,9 @@ class Note extends Model
         'content',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'content' => 'Treść',
@@ -48,36 +51,57 @@ class Note extends Model
         'orderBy' => ['content', 'asc']
     ];
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function investments()
     {
         return $this->morphedByMany('App\Models\Investment', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function protectives()
     {
         return $this->morphedByMany('App\Models\Protective', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function bancassurances()
     {
         return $this->morphedByMany('App\Models\Bancassurance', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function employees()
     {
         return $this->morphedByMany('App\Models\Employee', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function funds()
     {
         return $this->morphedByMany('App\Models\Fund', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all of the owning noteable models.
+     */
     public function partners()
     {
         return $this->morphedByMany('App\Models\Partner', 'noteable')->withTimestamps();
     }
 
+    /**
+     * Get all the risks that are assigned to the note.
+     */
     public function risks()
     {
         return $this->morphedByMany('App\Models\Risk', 'noteable')->withTimestamps();

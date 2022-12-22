@@ -36,6 +36,7 @@ class ReplyController extends Controller
     public function store(StoreReply $request): RedirectResponse
     {
         $reply = new Reply($request->all());
+        
         $reply->news()->associate(News::find($request->news_id));
         Auth::user()->replies()->save($reply);
 

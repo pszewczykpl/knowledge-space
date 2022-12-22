@@ -33,6 +33,9 @@ class Permission extends Model
         'description', 
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -43,6 +46,9 @@ class Permission extends Model
         'orderBy' => ['code', 'asc']
     ];
 
+    /**
+     * Get the users for the permission.
+     */
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'user_permission')->withTimestamps();

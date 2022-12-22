@@ -41,21 +41,20 @@ class FileController extends Controller
      */
     public function zip(Request $request)
     {
-        if($request->id == null) {
-            abort(404);
-        }
+        // Abort if no files selected.
+        if($request->id == null) abort(404);
         
+        // Get files from database.
         $files = File::whereIn('id', $request->id)->get();
 
+        // Create ZIP archive.
         $zip = new ZipArchive;
         if ($zip->open('storage/tmp.zip', ZipArchive::CREATE) === TRUE) {
             foreach($files as $file) {
-                
                 $zip->addFile(
                     'storage/' . $file->path,
                     ($file->fileCategory->prefix ?? "") . $file->name . '.' . $file->extension
                 );
-                
             }
             $zip->close();
         }

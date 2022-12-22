@@ -35,6 +35,9 @@ class PostCategory extends Model
         'description',
     ];
 
+    /**
+     * Define columns and filters for datatables.net plugin.
+     */
     static $datatables = [
         'columns' => [
             'name' => 'Nazwa',
@@ -44,6 +47,9 @@ class PostCategory extends Model
         'orderBy' => ['name', 'asc']
     ];
 
+    /**
+     * Get the posts for the post category.
+     */
     public function posts()
     {
         return $this->hasMany('App\Models\Post');
@@ -58,7 +64,7 @@ class PostCategory extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

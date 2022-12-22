@@ -113,26 +113,6 @@ class SearchController extends Controller
                 ]
             ]
         ],
-//        '\App\Models\News' => [
-//            'route' => 'news',
-//            'columns' => ['content'],
-//        ],
-//        '\App\Models\Partner' => [
-//            'route' => 'partners',
-//            'columns' => ['name', 'nip', 'regon', 'numer_rau'],
-//        ],
-//        '\App\Models\System' => [
-//            'route' => 'systems',
-//            'columns' => ['name', 'url'],
-//        ],
-//        '\App\Models\File' => [
-//            'route' => 'files',
-//            'columns' => ['name'],
-//        ],
-//        '\App\Models\Department' => [
-//            'route' => 'departments',
-//            'columns' => ['name'],
-//        ],
     ];
 
     /**

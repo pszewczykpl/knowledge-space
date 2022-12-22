@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 trait UsesCache
 {
     /**
-     * Return cache tag to storing data associated with Model
+     * Return cache tag to storing data associated with Model.
      *
      * @return string
      */
@@ -24,6 +24,9 @@ trait UsesCache
         return $this->getTable();
     }
 
+    /**
+     * Return cache key to storing data associated with Model.
+     */
     public function cacheKey(): string
     {
         return $this->getTable() . ':' . $this->{$this->getKeyName()};
@@ -44,6 +47,8 @@ trait UsesCache
     }
 
     /**
+     * Retrieve the model for a bound value.
+     * 
      * @param $value
      * @param null $field
      * @return ?Model

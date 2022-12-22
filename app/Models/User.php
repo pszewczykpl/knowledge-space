@@ -32,10 +32,6 @@ use Illuminate\Support\Facades\Cache;
  * @property mixed|null $deleted_at
  *
  * @property string $full_name Added using getFullNameAttribute() method
- *
- * @property bool $v_rounded --- TO DELETE ---
- * @property bool $v_aside_toggled --- TO DELETE ---
- * @property bool $v_dark_mode --- TO DELETE ---
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -254,11 +250,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return in_array($code, $this->permissions->pluck('code')->toArray());
     }
 
+    /**
+     * Full name attribute.
+     */
     public function getFullNameAttribute(): string
     {
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    /**
+     * Profile progress value.
+     */
     public function profileProgressValue(): int
     {
         $sum = 0;

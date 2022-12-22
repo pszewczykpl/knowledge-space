@@ -14,6 +14,8 @@ class DataTable
     private $columns = '*';
 
     /**
+     * DataTable constructor.
+     * 
      * @param $model
      * @return $this
      */
@@ -25,6 +27,8 @@ class DataTable
     }
 
     /**
+     * Set with() method in query.
+     * 
      * @param array|string $with
      * @return DataTable
      */
@@ -35,6 +39,8 @@ class DataTable
     }
 
     /**
+     * Set columns in query.
+     * 
      * @param array $columns
      * @return $this
      */
@@ -45,6 +51,8 @@ class DataTable
     }
 
     /**
+     * Get data from database to DataTable.net plugin (https://datatables.net/).
+     * 
      * @return array
      */
     public function get(): array
@@ -104,6 +112,8 @@ class DataTable
     }
 
     /**
+     * Get columns from request.
+     * 
      * @return array
      */
     private function columns(): array
@@ -112,6 +122,8 @@ class DataTable
     }
 
     /**
+     * Get search value from request.
+     * 
      * @return string|null
      */
     private function searchValue(): ?string
@@ -120,6 +132,8 @@ class DataTable
     }
 
     /**
+     * Get draw value from request.
+     * 
      * @return string
      */
     private function draw(): string

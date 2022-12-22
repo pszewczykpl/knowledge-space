@@ -72,6 +72,9 @@ class Employee extends Model
         return $this->morphToMany('App\Models\File', 'fileable')->withTimestamps();
     }
 
+    /**
+     * Get all of the notes for the employee.
+     */
     public function notes()
     {
         return $this->morphToMany('App\Models\Note', 'noteable')->withTimestamps();
@@ -85,6 +88,9 @@ class Employee extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    /**
+     * Get the history of the employee product.
+     */
     public function history()
     {
         return Cache::tags($this->cacheTag())->remember($this->cacheKey() . ":history", now()->addDays(7), function () {
@@ -94,7 +100,7 @@ class Employee extends Model
     }
 
     /**
-     * Get unique name of the product.
+     * Get unique name of the model.
      *
      * @return string
      */

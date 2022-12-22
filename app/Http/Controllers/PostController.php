@@ -41,10 +41,10 @@ class PostController extends Controller
      */
     public function index(Request $request): View|Factory|Application
     {
+        // If category is not set, show all posts. If category is set, show posts from that category.
         if(($request->category ?? null) === null) {
             $posts = Post::orderBy('created_at', 'desc')->paginate(8);
-        }
-        else {
+        } else {
             $posts = Post::where('post_category_id', $request->category)->orderBy('created_at', 'desc')->paginate(8);
         }
 
@@ -77,6 +77,7 @@ class PostController extends Controller
     public function store(StorePost $request): RedirectResponse
     {
         $post = new Post($request->all());
+
         $post->postCategory()->associate($request->post_category_id);
         Auth::user()->posts()->save($post);
 
@@ -125,6 +126,7 @@ class PostController extends Controller
     public function update(UpdatePost $request, Post $post): RedirectResponse
     {
         $post->update($request->all());
+        
         $post->postCategory()->associate($request->post_category_id);
         $post->save();
 

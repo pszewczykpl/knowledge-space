@@ -14,7 +14,9 @@ trait HasDatatables {
      */
     public static function datatablesDeferData()
     {
+        // Get data from cache.
         return Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_datatable_index', function () {
+            // Get data from database.
             return self::where(self::$datatables['where'] ?? [])->orderBy(self::$datatables['orderBy'][0] ?? 'id', self::$datatables['orderBy'][1] ?? 'desc')->orderBy('id', 'desc')->take(15)->get();
         });
     }
@@ -24,7 +26,9 @@ trait HasDatatables {
      */
     public static function getDatatablesData(): array
     {
+        // Get records count from cache.
         $records_total = Cache::tags([self::getModel()->getTable()])->rememberForever(self::getModel()->getTable() . '_start_count', function () {
+            // Get records count from database.
             return self::where(self::$datatables['where'] ?? [])->count();
         });
 
