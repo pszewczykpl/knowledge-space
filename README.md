@@ -21,11 +21,8 @@ W obecnej wersji aplikacji dostępne są następujące funkcjonalności:
 Zapraszam do zapoznania się z aplikacją pod URL https://knowledge-space.pszewczyk.pl/<br>
 Istnieje możliwość rejestracji oraz przeglądania obecnych funkcjonalności systemu.
 
-## Instalacja
-W związku 
-
-
-Technologie użyte do realizacji to: PHP, Laravel, MySQL, Redis, Git.
+## Wymagane technologie
+PHP, Laravel, MySQL (ew. SQLite lub PostgreSQL), Redis, Composer oraz Git.
 ## Licencja
 ### Backend
 MIT
