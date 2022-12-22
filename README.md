@@ -19,6 +19,8 @@ W obecnej wersji aplikacji dostępne są następujące funkcjonalności:
 
 ## Demo aplikacji
 Zapraszam do zapoznania się z aplikacją pod URL https://knowledge-space.pszewczyk.pl/<br>
+**Login:** admin@admin.pl<br>
+**Hasło:** admin<br>
 Istnieje możliwość rejestracji oraz przeglądania obecnych funkcjonalności systemu.
 
 ## Wymagane technologie
