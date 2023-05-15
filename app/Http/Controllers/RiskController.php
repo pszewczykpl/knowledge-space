@@ -13,13 +13,21 @@ use Symfony\Component\HttpFoundation\Response;
 class RiskController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store', 'update', 'destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return RiskCollection
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        return new RiskCollection(Risk::all());
+        return RiskResource::collection(Risk::all());
     }
 
     /**

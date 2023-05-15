@@ -16,7 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Baza Wiedzy'),
-    'version' => env('APP_VERSION', '10.0'),
+    'version' => env('APP_VERSION', '10.0-x-dev'),
 
     /*
     |--------------------------------------------------------------------------

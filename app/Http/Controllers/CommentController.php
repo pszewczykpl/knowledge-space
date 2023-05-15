@@ -8,18 +8,26 @@ use App\Http\Resources\CommentCollection;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store', 'update', 'destroy');
+    }
+    /**
      * Display a listing of the resource.
      *
-     * @return CommentCollection
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        return new CommentCollection(Comment::all());
+        return CommentResource::collection(Comment::all());
     }
 
     /**

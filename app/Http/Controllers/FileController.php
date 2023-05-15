@@ -17,6 +17,14 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class FileController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store', 'update', 'destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return AnonymousResourceCollection

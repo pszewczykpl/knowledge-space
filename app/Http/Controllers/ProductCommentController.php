@@ -7,19 +7,29 @@ use App\Http\Resources\CommentCollection;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductCommentController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param  Product  $product
-     * @return CommentCollection
+     * @return AnonymousResourceCollection
      */
     public function index(Product $product)
     {
-        return new CommentCollection($product->comments);
+        return CommentResource::collection($product->comments);
     }
 
     /**
@@ -27,9 +37,9 @@ class ProductCommentController extends Controller
      *
      * @param  StoreCommentRequest  $request
      * @param  Product  $product
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function store(StoreCommentRequest $request, Product $product): \Illuminate\Http\JsonResponse
+    public function store(StoreCommentRequest $request, Product $product): JsonResponse
     {
         $comment = $product->comments()->create([
             'content' => $request->input('content'),

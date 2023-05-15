@@ -16,6 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('update');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return AnonymousResourceCollection

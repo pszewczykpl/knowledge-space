@@ -10,8 +10,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductFileController
+class ProductFileController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store');
+    }
+
     /**
      * Display a listing of the resource.
      *

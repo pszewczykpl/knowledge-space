@@ -13,13 +13,21 @@ use Symfony\Component\HttpFoundation\Response;
 class FundController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store', 'update', 'destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return FundCollection
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        return new FundCollection(Fund::all());
+        return FundResource::collection(Fund::all());
     }
 
     /**

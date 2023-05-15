@@ -18,13 +18,21 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store', 'update', 'destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return JsonResource
      */
     public function index(): JsonResource
     {
-        return ProductIndexResource::collection(Product::all());
+        return ProductIndexResource::collection(Product::where('is_archived', false)->get());
     }
 
     /**
