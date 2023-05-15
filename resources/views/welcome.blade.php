@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('/splash-screen.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" />
     <title>Baza Wiedzy</title>
-    <script type="module" crossorigin src="{{ asset('/assets/index.9d87a49a.js') }}"></script>
+    <script type="module" crossorigin src="{{ asset('/assets/index.3bc8ff3c.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/assets/index.735c10f3.css') }}">
 </head>
 <body class="page-loading">
