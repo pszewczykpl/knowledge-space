@@ -50,4 +50,9 @@ class ProductResource extends JsonResource
             'updated_at' => $this->updated_at,
         ];
     }
+
+    public function withResponse($request, $response)
+    {
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+    }
 }

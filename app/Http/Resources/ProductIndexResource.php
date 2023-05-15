@@ -30,4 +30,9 @@ class ProductIndexResource extends JsonResource
             'kind' => $this->kind->label(),
         ];
     }
+
+    public function withResponse($request, $response)
+    {
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+    }
 }
