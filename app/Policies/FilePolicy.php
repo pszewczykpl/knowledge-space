@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\File;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FilePolicy
 {
@@ -13,64 +13,82 @@ class FilePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param ?User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(?User $user): bool
+    public function viewAny(User $user)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param ?User $user
-     * @param File $file
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(?User $user, File $file): bool
+    public function view(User $user, File $file)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return $user->hasPermission('files-create');
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param File $file
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, File $file): bool
+    public function update(User $user, File $file)
     {
-        return $user->hasPermission('files-update') or ($user->id === $file->user_id);
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param File $file
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, File $file): bool
+    public function delete(User $user, File $file)
     {
-        return $user->hasPermission('files-delete') or ($user->id === $file->user_id);
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, File $file)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\File  $file
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, File $file)
+    {
+        //
     }
 }

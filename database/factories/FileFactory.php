@@ -3,37 +3,27 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Factory as Faker;
 
-use App\Models\File;
-use App\Models\FileCategory;
-use App\Models\User;
-
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\File>
+ */
 class FileFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = File::class;
-
-    /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function definition()
     {
-        $faker = Faker::create();
-
         return [
+            'name' => fake()->word(),
+            'code' => fake()->word(),
             'path' => 'files/deleted.pdf',
-            'name' => $faker->name,
-            'extension' => $faker->randomElement($array = array ('pdf', 'docx', 'xlsx', 'pptx')),
-            'draft' => $faker->randomElement($array = array (0, 1)),
-            'file_category_id' => FileCategory::all()->random(),
-            'user_id' => User::all()->random(),
+            'extension' => 'pdf',
+            'draft' => fake()->boolean(20),
+            'type' => fake()->word(),
+            'file_category_id' => fake()->numberBetween(1, 5),
         ];
     }
 }

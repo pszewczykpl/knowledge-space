@@ -2,41 +2,26 @@
 
 namespace App\Providers;
 
-use App\Repositories\DataTable\DataTable;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        /**
-         * Force HTTPS in production.
-         */
-        if($this->app->environment('production')) {
-            \URL::forceScheme('https');
-        }
-
-        /**
-         * Bind DataTable to the container.
-         */
-        $this->app->bind('datatable',function(){
-            return new DataTable();
-        });
+        //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Paginator::useBootstrap();
+        JsonResource::withoutWrapping();
+
+        //
     }
 }

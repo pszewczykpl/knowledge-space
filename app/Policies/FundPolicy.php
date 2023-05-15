@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\Fund;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FundPolicy
 {
@@ -13,64 +13,82 @@ class FundPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param ?User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(?User $user): bool
+    public function viewAny(User $user)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param ?User $user
-     * @param Fund $fund
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Fund  $fund
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(?User $user, Fund $fund): bool
+    public function view(User $user, Fund $fund)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return $user->hasPermission('funds-create');
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param Fund $fund
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Fund  $fund
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Fund $fund): bool
+    public function update(User $user, Fund $fund)
     {
-        return $user->hasPermission('funds-update') or ($user->id === $fund->user_id);
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param Fund $fund
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Fund  $fund
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Fund $fund): bool
+    public function delete(User $user, Fund $fund)
     {
-        return $user->hasPermission('funds-delete') or ($user->id === $fund->user_id);
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Fund  $fund
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Fund $fund)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Fund  $fund
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Fund $fund)
+    {
+        //
     }
 }

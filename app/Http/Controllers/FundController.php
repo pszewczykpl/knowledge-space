@@ -2,136 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFundRequest;
+use App\Http\Requests\UpdateFundRequest;
+use App\Http\Resources\FundCollection;
+use App\Http\Resources\FundResource;
 use App\Models\Fund;
-use App\Models\Investment;
-
-use App\Http\Requests\StoreFund;
-use App\Http\Requests\UpdateFund;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class FundController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show']);
-        $this->authorizeResource(Fund::class, 'fund');
-    }
-    
-    /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return FundCollection
      */
-    public function index(): View|Factory|Application
+    public function index()
     {
-        return view('funds.index', [
-            'title' => 'Ubezpieczeniowe Fundusze Kapitałowe',
-            'datatables' => Fund::getDatatablesData()
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create(): View|Factory|Application
-    {
-        return view('funds.create', [
-            'title' => 'Nowy fundusz UFK',
-            'investments' => Investment::all(),
-        ]);
+        return new FundCollection(Fund::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreFund $request
-     * @return RedirectResponse
+     * @param  StoreFundRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreFund $request): RedirectResponse
+    public function store(StoreFundRequest $request)
     {
-        $fund = new Fund($request->all());
-        Auth::user()->funds()->save($fund);
-        $fund->investments()->attach($request->investment_id);
+        $fund = Fund::create($request->validated());
 
-        return redirect()
-            ->route('funds.show', $fund)
-            ->with('notify_success', 'Nowy fundusz UFK został dodany!');
+        return response()->json([
+            'message' => 'Successfully created.',
+            'data' => new FundResource($fund),
+        ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Fund $fund
-     * @return Application|Factory|View
+     * @param  Fund  $fund
+     * @return FundResource
      */
-    public function show(Fund $fund): View|Factory|Application
+    public function show(Fund $fund)
     {
-        return view('funds.show', [
-            'title' => 'Szczegóły',
-            'fund' => $fund,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Fund $fund
-     * @return View
-     */
-    public function edit(Fund $fund): View
-    {
-        return view('funds.edit', [
-            'title' => 'Edycja funduszu UFK',
-            'fund' => $fund,
-            'investments' => Investment::all(),
-        ]);
+        return new FundResource($fund);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateFund $request
-     * @param Fund $fund
-     * @return RedirectResponse
+     * @param  UpdateFundRequest  $request
+     * @param  Fund  $fund
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateFund $request, Fund $fund): RedirectResponse
+    public function update(UpdateFundRequest $request, Fund $fund)
     {
-        $fund->update($request->all());
-        $fund->investments()->sync($request->investment_id);
+        $fund->update($request->validated());
 
-        return redirect()
-            ->route('funds.show', $fund)
-            ->with('notify_success', 'Dane funduszu UFK zostały zaktualizowane!');
+        return response()->json([
+            'message' => 'Successfully updated.',
+            'data' => new FundResource($fund),
+        ], Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Fund $fund
-     * @return RedirectResponse
+     * @param  Fund  $fund
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Fund $fund): RedirectResponse
+    public function destroy(Fund $fund)
     {
         $fund->delete();
 
-        return redirect()
-            ->route('funds.index')
-            ->with('notify_danger', 'Fundusz UFK został usunięty!');
+        return response()->json([
+            'message' => 'Successfully deleted.',
+        ], Response::HTTP_OK);
     }
 }

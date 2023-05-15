@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\FileCategory;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FileCategoryPolicy
 {
@@ -13,58 +13,82 @@ class FileCategoryPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user)
     {
-        return $user->hasPermission('file-categories-viewany');
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
-     * @param FileCategory $fileCategory
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, FileCategory $fileCategory): bool
+    public function view(User $user, FileCategory $fileCategory)
     {
-        return $user->hasPermission('file-categories-view');
+        //
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return $user->hasPermission('file-categories-create');
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param FileCategory $fileCategory
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, FileCategory $fileCategory): bool
+    public function update(User $user, FileCategory $fileCategory)
     {
-        return $user->hasPermission('file-categories-update') or ($user->id === $fileCategory->user_id);
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param FileCategory $fileCategory
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, FileCategory $fileCategory): bool
+    public function delete(User $user, FileCategory $fileCategory)
     {
-        return $user->hasPermission('file-categories-delete') or ($user->id === $fileCategory->user_id);
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, FileCategory $fileCategory)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\FileCategory  $fileCategory
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, FileCategory $fileCategory)
+    {
+        //
     }
 }

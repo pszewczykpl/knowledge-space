@@ -2,123 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFileCategoryRequest;
+use App\Http\Requests\UpdateFileCategoryRequest;
+use App\Http\Resources\FileCategoryCollection;
+use App\Http\Resources\FileCategoryResource;
 use App\Models\FileCategory;
-use App\Http\Requests\StoreFileCategory;
-use App\Http\Requests\UpdateFileCategory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class FileCategoryController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->authorizeResource(FileCategory::class, 'file_category');
-    }
-    
-    /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return AnonymousResourceCollection
      */
-    public function index(): View
+    public function index()
     {
-        return view('file-categories.index', [
-            'title' => 'Kategorie dokumentów',
-            'datatables' => FileCategory::getDatatablesData()
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
-    public function create(): View
-    {
-        return view('file-categories.create', [
-            'title' => 'Nowa kategoria dokumentów',
-        ]);
+        return FileCategoryResource::collection(FileCategory::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreFileCategory $request
-     * @return RedirectResponse
+     * @param  StoreFileCategoryRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreFileCategory $request): RedirectResponse
+    public function store(StoreFileCategoryRequest $request)
     {
-        $fileCategory = new FileCategory($request->all());
-        Auth::user()->fileCategories()->save($fileCategory);
+        $fileCategory = FileCategory::create($request->validated());
 
-        return redirect()
-            ->route('file-categories.show', $fileCategory)
-            ->with('notify_success', 'Nowa kategoria dokumentów została dodana!');
+        return response()->json([
+            'message' => 'Successfully created.',
+            'data' => new FileCategoryResource($fileCategory),
+        ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param FileCategory $fileCategory
-     * @return View
+     * @param  FileCategory  $fileCategory
+     * @return FileCategoryResource
      */
-    public function show(FileCategory $fileCategory): View
+    public function show(FileCategory $fileCategory)
     {
-        return view('file-categories.show', [
-            'title' => 'Szczegóły',
-            'fileCategory' => $fileCategory,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param FileCategory $fileCategory
-     * @return View
-     */
-    public function edit(FileCategory $fileCategory): View
-    {
-        return view('file-categories.edit', [
-            'title' => 'Edycja kategorii dokumentów',
-            'fileCategory' => $fileCategory
-        ]);
+        return new FileCategoryResource($fileCategory);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateFileCategory $request
-     * @param FileCategory $fileCategory
-     * @return RedirectResponse
+     * @param  UpdateFileCategoryRequest  $request
+     * @param  FileCategory  $fileCategory
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateFileCategory $request, FileCategory $fileCategory): RedirectResponse
+    public function update(UpdateFileCategoryRequest $request, FileCategory $fileCategory)
     {
-        $fileCategory->update($request->all());
+        $fileCategory->update($request->validated());
 
-        return redirect()
-            ->route('file-categories.show', $fileCategory)
-            ->with('notify_success', 'Dane kategrii dokumentów zaktualizowane!');
+        return response()->json([
+            'message' => 'Successfully updated.',
+            'data' => new FileCategoryResource($fileCategory),
+        ], Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param FileCategory $fileCategory
-     * @return RedirectResponse
+     * @param  FileCategory  $fileCategory
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(FileCategory $fileCategory): RedirectResponse
+    public function destroy(FileCategory $fileCategory)
     {
         $fileCategory->delete();
 
-        return redirect()
-            ->route('file-categories.index')
-            ->with('notify_danger', 'Kategria dokumentów usunięta!');
+        return response()->json([
+            'message' => 'Successfully deleted.',
+        ], Response::HTTP_OK);
     }
 }

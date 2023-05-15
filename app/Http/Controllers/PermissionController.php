@@ -4,37 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-
 class PermissionController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->authorizeResource(Permission::class, 'permission');
-    }
-    
-    /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(): View|Factory|Application
+    public function index()
     {
-        return view('permissions.index', [
-            'title' => 'Uprawnienia systemowe',
-            'datatables' => Permission::getDatatablesData()
-        ]);
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Permission  $permission
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Permission $permission)
+    {
+        //
     }
 }

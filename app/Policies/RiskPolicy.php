@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\Risk;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RiskPolicy
 {
@@ -13,64 +13,82 @@ class RiskPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param ?User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(?User $user): bool
+    public function viewAny(User $user)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param ?User $user
-     * @param Risk $risk
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(?User $user, Risk $risk): bool
+    public function view(User $user, Risk $risk)
     {
-        /**
-         * Anyone can view any models.
-         */
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param User $user
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return $user->hasPermission('risks-create');
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
-     * @param Risk $risk
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Risk $risk): bool
+    public function update(User $user, Risk $risk)
     {
-        return $user->hasPermission('risks-update') or ($user->id === $risk->user_id);
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
-     * @param Risk $risk
-     * @return bool
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Risk $risk): bool
+    public function delete(User $user, Risk $risk)
     {
-        return $user->hasPermission('risks-delete') or ($user->id === $risk->user_id);
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Risk $risk)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Risk  $risk
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Risk $risk)
+    {
+        //
     }
 }

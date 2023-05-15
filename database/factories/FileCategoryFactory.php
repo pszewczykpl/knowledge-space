@@ -3,33 +3,22 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Factory as Faker;
 
-use App\Models\FileCategory;
-use App\Models\User;
-
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FileCategory>
+ */
 class FileCategoryFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = FileCategory::class;
-
-    /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function definition()
     {
-        $faker = Faker::create();
-
         return [
-            'prefix' => '',
-            'name' => $faker->name,
-            'user_id' => User::all()->random(),
+            'name' => fake()->word(),
+            'prefix' => null,
         ];
     }
 }

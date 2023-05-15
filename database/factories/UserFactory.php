@@ -2,42 +2,45 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Factory as Faker;
-
-use App\Models\User;
 use App\Models\Department;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
 class UserFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = User::class;
-
-    /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        $faker = Faker::create('pl_PL');
-
         return [
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
-            'username' => $faker->unique()->userName,
-            'email' => $faker->unique()->safeEmail,
-            'phone' => $faker->unique()->e164PhoneNumber,
-            'password' => bcrypt('admin'),
-            'company' => $faker->company,
-            'department_id' => Department::all()->random(),
-            'position' => $faker->jobTitle,
-            'description' => 'dscript',
-            'location' => $faker->city,
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->unique()->phoneNumber(),
+            'position' => fake()->jobTitle(),
+            'description' => fake()->text(),
+            'avatar_path' => fake()->imageUrl(),
+            'email_verified_at' => now(),
+            'password' => bcrypt('admin123'),
+            'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return $this
+     */
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
     }
 }

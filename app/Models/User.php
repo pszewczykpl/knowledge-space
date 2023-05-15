@@ -2,274 +2,92 @@
 
 namespace App\Models;
 
-use App\Casts\CacheRelation;
-use App\Traits\HasDatatables;
-use App\Traits\UsesCache;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Cache;
+use Laravel\Sanctum\HasApiTokens;
 
-/**
- * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property string $username
- * @property string $email
- * @property string|null $phone
- * @property string $password
- * @property string $company
- * @property int $department_id
- * @property string $position
- * @property string|null $description
- * @property string $location
- * @property string|null $avatar_path
- * @property string|null $remember_token
- * @property mixed|null $created_at
- * @property mixed|null $updated_at
- * @property mixed|null $deleted_at
- *
- * @property string $full_name Added using getFullNameAttribute() method
- */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasFactory;
-    use SoftDeletes;
-    use Notifiable;
-    use HasDatatables;
-    use UsesCache;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'first_name',
         'last_name',
-        'username',
         'email',
         'phone',
-        'company',
+        'department_id',
+        'avatar_path',
         'position',
         'description',
-        'location',
-        'avatar_path'
-    ];
-
-    static $datatables = [
-        'columns' => [
-            'fullname' => 'Imię i Nazwisko',
-            'email' => 'E-mail',
-            'phone' => 'Telefon',
-            'actions' => 'Akcje',
-            'id' => 'ID',
-            'first_name' => 'Imię',
-            'last_name' => 'Nazwisko',
-            'username' => 'Login',
-            'position' => 'Stanowisko',
-        ],
-        'orderBy' => ['email', 'asc']
+        'password',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-//        'department' => CacheRelation::class,
-//        'news' => CacheRelation::class,
-//        'permissions' => CacheRelation::class,
     ];
 
-    /**
-     * Get the department that owns the user.
-     */
-    public function department()
+    public function files(): HasMany
     {
-        return $this->belongsTo('App\Models\Department');
+        return $this->hasMany(File::class, 'created_by');
     }
 
-    /**
-     * Get all of the departments created by the user.
-     */
-    public function departments()
+    public function funds(): HasMany
     {
-        return $this->hasMany('App\Models\Department');
+        return $this->hasMany(Fund::class, 'created_by');
     }
 
-    /**
-     * Get all of the employees created by the user.
-     */
-    public function employees()
+    public function risks(): HasMany
     {
-        return $this->hasMany('App\Models\Employee');
+        return $this->hasMany(Risk::class, 'created_by');
     }
 
-    /**
-     * Get all of the files created by the user.
-     */
-    public function files()
+    public function links(): HasMany
     {
-        return $this->hasMany('App\Models\File');
+        return $this->hasMany(Link::class, 'created_by');
     }
 
-    /**
-     * Get all of the file categories created by the user.
-     */
-    public function fileCategories()
+    public function comments(): HasMany
     {
-        return $this->hasMany('App\Models\FileCategory');
+        return $this->hasMany(Comment::class, 'created_by');
     }
 
-    /**
-     * Get all of the funds created by the user.
-     */
-    public function funds()
+    public function fileCategories(): HasMany
     {
-        return $this->hasMany('App\Models\Fund');
+        return $this->hasMany(FileCategory::class, 'created_by');
     }
 
-    /**
-     * Get all of the investments created by the user.
-     */
-    public function investments()
+    public function products(): HasMany
     {
-        return $this->hasMany('App\Models\Investment');
+        return $this->hasMany(Product::class, 'created_by');
     }
 
-    /**
-     * Get all of the news created by the user.
-     */
-    public function news()
+    public function roles(): BelongsToMany
     {
-        return $this->hasMany('App\Models\News');
+        return $this->belongsToMany(Role::class, 'user_roles');
     }
-
-    /**
-     * Get all of the notes created by the user.
-     */
-    public function notes()
-    {
-        return $this->hasMany('App\Models\Note');
-    }
-
-    /**
-     * Get all of the partners created by the user.
-     */
-    public function partners()
-    {
-        return $this->hasMany('App\Models\Partner');
-    }
-
-    /**
-     * The permissions that belong to the user.
-     */
-    public function permissions()
-    {
-        return $this->belongsToMany('App\Models\Permission', 'user_permission')->withTimestamps();
-    }
-
-    /**
-     * Get all of the protectives created by the user.
-     */
-    public function protectives()
-    {
-        return $this->hasMany('App\Models\Protective');
-    }
-    
-    /**
-     * Get all of the bancassurances created by the user.
-     */
-    public function bancassurances()
-    {
-        return $this->hasMany('App\Models\Bancassurance');
-    }
-
-    /**
-     * Get all of the replies created by the user.
-     */
-    public function replies()
-    {
-        return $this->hasMany('App\Models\Reply');
-    }
-
-    /**
-     * Get all of the risks created by the user.
-     */
-    public function risks()
-    {
-        return $this->hasMany('App\Models\Risk');
-    }
-
-    /**
-     * Get all of the systems created by the user.
-     */
-    public function systems()
-    {
-        return $this->hasMany('App\Models\System');
-    }
-
-    /**
-     * Get all of the posts created by the user.
-     */
-    public function posts()
-    {
-        return $this->hasMany('App\Models\Post');
-    }
-
-    /**
-     * Get all of the post categories created by the user.
-     */
-    public function postCategories()
-    {
-        return $this->hasMany('App\Models\PostCategory');
-    }
-
-    /**
-     * Check if user has the permission (by code).
-     *
-     * @param string $code
-     * @return bool
-     */
-    public function hasPermission(string $code): bool
-    {
-        return in_array($code, $this->permissions->pluck('code')->toArray());
-    }
-
-    /**
-     * Full name attribute.
-     */
-    public function getFullNameAttribute(): string
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
-
-    /**
-     * Profile progress value.
-     */
-    public function profileProgressValue(): int
-    {
-        $sum = 0;
-        foreach($this->fillable as $column) {
-            if(! is_null($this->{$column}))
-                $sum++;
-        }
-
-        return $sum*100/count($this->fillable);
-    }
-
 }

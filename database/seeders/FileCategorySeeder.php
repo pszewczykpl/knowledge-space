@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\FileCategory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class FileCategorySeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class FileCategorySeeder extends Seeder
     public function run()
     {
         FileCategory::factory()
-            ->times(5)
+            ->count(5)
             ->create();
     }
 }
