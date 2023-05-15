@@ -58,9 +58,9 @@ class ProductController extends Controller
      * @param  Product  $product
      * @return JsonResource
      */
-    public function show(Product $product): JsonResource
+    public function show(Product $product)
     {
-        return new ProductResource($product);
+        return response()->json($product, Response::HTTP_OK, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
