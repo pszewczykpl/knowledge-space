@@ -169,7 +169,6 @@ import * as Yup from "yup";
 import store from "@/store";
 import { useRouter } from "vue-router";
 import { PasswordMeterComponent } from "@/assets/ts/components";
-import Swal from "sweetalert2";
 
 const router = useRouter();
 
@@ -200,15 +199,6 @@ function onSubmitRegister(values) {
         router.push({ name: "home" });
       })
       .catch((err) => {
-        Swal.fire({
-          text: err.response.data.message,
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: "Spróbuj ponownie!",
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-danger",
-          },
-        });
         submitButton.value?.removeAttribute("data-kt-indicator");
         submitButton.value!.disabled = false;
       });

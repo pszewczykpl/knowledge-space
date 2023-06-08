@@ -113,7 +113,6 @@ import {defineComponent, onMounted, ref} from "vue";
   import { ErrorMessage, Field, Form } from "vee-validate";
   import store from "@/store";
   import { useRouter } from "vue-router";
-  import Swal from "sweetalert2";
   import * as Yup from "yup";
 import NotificationService from "@/core/services/NotificationService.ts";
 
@@ -150,15 +149,6 @@ function onSubmit(values) {
         })
         .then(() => router.push("/login"))
         .catch((err) => {
-            Swal.fire({
-                text: err.response?.data?.message || "Coś poszło nie tak.",
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: "Spróbuj ponownie!",
-                customClass: {
-                    confirmButton: "btn fw-bold btn-light-danger",
-                },
-            });
             if (submitButton.value) {
                 submitButton.value.removeAttribute("data-kt-indicator");
                 submitButton.value.disabled = false;

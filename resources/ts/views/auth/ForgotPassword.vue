@@ -78,7 +78,6 @@
   import { ErrorMessage, Field, Form } from "vee-validate";
   import store from "@/store";
   import { useRouter } from "vue-router";
-  import Swal from "sweetalert2";
   import * as Yup from "yup";
   import {submitButtonProcess} from "@/core/services/SubmitHelper.ts";
   import NotificationService from "@/core/services/NotificationService.ts";

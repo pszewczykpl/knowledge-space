@@ -38,7 +38,6 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import * as Yup from "yup";
 import store from "@/store";
 import { useRoute, useRouter } from "vue-router";
-import Swal from "sweetalert2";
 import FormPanel from "@/components/form/FormPanel.vue";
 import ErrorMsg from "@/components/form/ErrorMsg.vue";
 import FormRow from "@/components/form/FormRow.vue";
@@ -77,16 +76,6 @@ async function saveFileCategory() {
         const res = await store.dispatch("fileCategories/saveFileCategory", fileCategory.value);
         router.push({name: "FileCategories"});
     } catch (err) {
-        Swal.fire({
-            text: err.response.data.message,
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Spróbuj ponownie!",
-            customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-            },
-        });
-
         if (submitButton.value) {
             submitButton.value.removeAttribute("data-kt-indicator");
             submitButton.value.disabled = false;

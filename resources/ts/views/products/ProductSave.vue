@@ -185,7 +185,6 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import * as Yup from "yup";
 import store from "@/store";
 import { useRoute, useRouter } from "vue-router";
-import Swal from "sweetalert2";
 
 import FormPanel from "@/components/form/FormPanel.vue";
 import ErrorMsg from "@/components/form/ErrorMsg.vue";
@@ -268,15 +267,6 @@ async function saveProduct() {
         const res = await store.dispatch("products/saveProduct", product.value);
         router.push({ name: "ProductView", params: { id: res.data.data.id } });
     } catch(err) {
-        Swal.fire({
-            text: err.response.data.message,
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Spróbuj ponownie!",
-            customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-            },
-        });
 
         if (submitButton.value) {
             submitButton.value.removeAttribute("data-kt-indicator");

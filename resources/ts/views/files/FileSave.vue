@@ -199,7 +199,6 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import * as Yup from "yup";
 import store from "@/store";
 import { useRoute, useRouter } from "vue-router";
-import Swal from "sweetalert2";
 
 const route = useRoute();
 const router = useRouter();
@@ -238,15 +237,6 @@ function saveFile() {
         alert('Zapisano!');
       })
       .catch((err) => {
-        Swal.fire({
-          text: err.response.data.message,
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: "Spróbuj ponownie!",
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-danger",
-          },
-        });
         submitButton.value?.removeAttribute("data-kt-indicator");
         submitButton.value!.disabled = false;
       });
