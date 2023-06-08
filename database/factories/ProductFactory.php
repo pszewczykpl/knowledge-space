@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\ProductPremiumType;
 use App\Enums\ProductKind;
+use App\Enums\ProductPremiumType;
 use App\Enums\ProductType;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;

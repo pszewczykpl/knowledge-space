@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use function Symfony\Component\Translation\t;
 
-/**
- * @property mixed $path
- */
 class File extends Model
 {
     use HasFactory;
@@ -40,5 +39,10 @@ class File extends Model
     public function scopeNotProduct($query)
     {
         return $query->where('type', '!=', 'P');
+    }
+
+    public function deleteFromDisk(): bool
+    {
+        return Storage::delete($this->path);
     }
 }

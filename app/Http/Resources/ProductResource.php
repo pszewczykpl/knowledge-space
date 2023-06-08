@@ -2,21 +2,17 @@
 
 namespace App\Http\Resources;
 
-use App\Enums\ProductType;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use JsonSerializable;
 
 class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param Request $request
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
@@ -44,15 +40,10 @@ class ProductResource extends JsonResource
             'system_status' => $this->system_status,
             'system_name' => $this->system_name,
             'published_at' => $this->published_at,
-            'is_archived' => (int)$this->is_archived,
+            'is_archived' => (int) $this->is_archived,
             'created_by' => new UserResource($this->user),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
-    }
-
-    public function withResponse($request, $response)
-    {
-        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 }

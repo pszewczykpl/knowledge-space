@@ -1,18 +1,42 @@
-/.phpunit.cache
+# Vendors
 /node_modules
+/vendor
+
+# Logs
+/logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+/.phpunit.cache
+
+# Build
 /public/build
 /public/hot
 /public/storage
-/storage/*.key
-/vendor
+/dist
+/dist-ssr
+
+# IDE
+/.idea
+/.vscode
+
+# OS
 .env
 .env.backup
 .env.production
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
 auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
-/.idea
-/.vscode
+
+# Other
+*.local
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

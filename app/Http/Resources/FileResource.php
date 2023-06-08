@@ -10,8 +10,7 @@ class FileResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param Request $request
-     * @return array
+     * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
@@ -21,7 +20,7 @@ class FileResource extends JsonResource
             'code' => $this->code,
             'path' => $this->path,
             'extension' => $this->extension,
-            'draft' => (int)$this->draft,
+            'draft' => (int) $this->draft,
             'file_category' => new FileCategoryResource($this->fileCategory),
             'created_by' => new UserResource($this->user),
             'created_at' => $this->created_at,
