@@ -2,16 +2,15 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -19,15 +18,16 @@ class StoreFileRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
             'code' => 'nullable|string|max:255',
             'draft' => 'required|boolean',
             'type' => 'required|string|max:1',
+            'file' => 'required|file',
             'file_category_id' => 'required|numeric',
             'product_id' => 'nullable',
         ];
